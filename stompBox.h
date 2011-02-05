@@ -97,19 +97,13 @@ public slots:
     void setDisplayToFxName();
     void pathSwitchSignal(bool value);
     void updateStompPath();
-    void ch_mode_ButtonSignal(bool value);
-    void preamp1_ButtonSignal(bool value);
-    void preamp2_ButtonSignal(bool value);
-    void distortion_ButtonSignal(bool value);
-    void compressor_ButtonSignal(bool value);
+    void amp_ButtonSignal(bool value);
     void ns1_ButtonSignal(bool value);
-    void ns2_ButtonSignal(bool value);
     void mod_ButtonSignal(bool value);
     void mfx_ButtonSignal(bool value);
     void reverb_ButtonSignal(bool value);
     void delay_ButtonSignal(bool value);
     void chorus_ButtonSignal(bool value);
-    void sendreturn_ButtonSignal(bool value);
     void eq_ButtonSignal(bool value);
     void pedal_ButtonSignal(bool value);
 

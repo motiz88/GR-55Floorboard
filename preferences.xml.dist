@@ -2,7 +2,7 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="20110130"/>
+		<Application version="20110201"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
@@ -15,7 +15,7 @@
     <Locale select="0"/>
   </Language>
 	<Midi>
-	  <BulkFinish patch="200"/>
+	  <BulkFinish patch="297"/>
 	  <BulkStart patch="1"/>
 		<DBug bool="false"/>
 		<Delay set="30"/>

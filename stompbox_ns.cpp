@@ -26,34 +26,33 @@
 stompbox_ns::stompbox_ns(QWidget *parent)
     : stompBox(parent)
 {
-	/* ns */
-	setImage(":/images/ns.png");
-        setLSB("00", "00");
-        setKnob1("00", "00", "00");
-        setKnob2("00", "00", "00");
-        setButton("00", "00", "00");
-        //editDetails()->patchPos(2928, 8, "0A", "71");
-	setEditPages();
+    /* ns */
+    setImage(":/images/ns.png");
+    setLSB("03", "00");
+    setKnob1("03", "00", "04");
+    setKnob2("03", "00", "05");
+    setButton("03", "00", "30");
+    //editDetails()->patchPos(2928, 8, "0A", "71");
+    setEditPages();
 };
 
 void stompbox_ns::updateSignal()
 {
-  updateKnob1("00", "00", "00");
-  updateKnob2("00", "00", "00");
-  updateButton("00", "00", "00");
+    updateKnob1("03", "00", "04");
+    updateKnob2("03", "00", "05");
+    updateButton("03", "00", "03");
 };
 
 void stompbox_ns::setEditPages()
 {
-  editDetails()->page()->newGroupBox("Effect");
-/*editDetails()->page()->addSwitch(0, 0, 1, 1, "0A", "00", "71", "middle", Qt::AlignCenter);
-	editDetails()->page()->addComboBox(1, 0, 1, 1, "0A", "00", "74");
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Effect");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "03", "00", "03", "middle", Qt::AlignCenter);
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-	editDetails()->page()->newGroupBox("Noise Suppressor");
-	editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "72");
-        editDetails()->page()->addKnob(0, 1, 1, 1, "0A", "00", "73");*/
-	editDetails()->page()->addGroupBox(0, 1, 1, 1);
-	editDetails()->addPage();	
-	 
+    editDetails()->page()->newGroupBox("Noise Suppressor");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "04");
+    editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "05");
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->addPage();
+
 };

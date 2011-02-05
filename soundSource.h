@@ -1,3 +1,4 @@
+
 /****************************************************************************
 **
 ** Copyright (C) 2007~2010 Colin Willcocks.
@@ -34,6 +35,7 @@
 #include "customSlider.h"
 #include "customSwitch.h"
 #include "customComboBox.h"
+#include "customDisplay.h"
 #include "editPage.h"
 
 class soundSource : public QWidget
@@ -53,7 +55,7 @@ public:
 
 
     void setComboBox(QString hex1, QString hex2, QString hex3,
-                     QRect geometry = QRect(180, 55, 70, 15));
+                     QRect geometry = QRect(180, 54, 70, 15));
     void setKnob1(QString hex1, QString hex2, QString hex3);
     void setKnob2(QString hex1, QString hex2, QString hex3);
     void setButton(QString hex1, QString hex2, QString hex3);
@@ -86,10 +88,10 @@ public slots:
     virtual void updateSignal() {}
     void setDisplayToFxName();
     void updateStompPath();
-    void ch_mode_ButtonSignal(bool value);
-    void preamp1_ButtonSignal(bool value);
-    void preamp2_ButtonSignal(bool value);
-    void distortion_ButtonSignal(bool value);
+    void modeling_ButtonSignal(bool value);
+    void synth1_ButtonSignal(bool value);
+    void synth2_ButtonSignal(bool value);
+
 
 signals:
     void valueChanged(QString fxName, QString valueName, QString valueStr);
@@ -127,6 +129,7 @@ private:
     customSwitch3way *switch3way;
     customSwitch *switchbutton;
     customComboBox *stompComboBox;
+    customDisplay *stompDisplay;
 
     QString hex1;
     QString hex2;

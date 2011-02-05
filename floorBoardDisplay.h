@@ -103,10 +103,10 @@ private:
         customButton *system_midi_Button;
         customButton *system_Button;
         customButton *master_Button;
-        customButton *ch_mode_Button;
-        customButton *preamp1_Button;
-        customButton *preamp2_Button;
-        customButton *distortion_Button;
+        customButton *modeling_Button;
+        customButton *synth1_Button;
+        customButton *synth2_Button;
+        customButton *amp_Button;
         customButton *compressor_Button;
         customButton *ns1_Button;
         customButton *ns2_Button;

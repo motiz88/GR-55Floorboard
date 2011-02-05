@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include "soundsource_synth_a.h"
+#include "soundSource_synth_a.h"
 
 soundsource_synth_a::soundsource_synth_a(QWidget *parent)
     : soundSource(parent)
