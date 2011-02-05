@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include "soundsource_analogPU.h"
+#include "soundSource_analogPU.h"
 
 soundsource_analogPU::soundsource_analogPU(QWidget *parent)
     : soundSource(parent)

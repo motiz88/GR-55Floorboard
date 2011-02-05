@@ -45,6 +45,7 @@
 #include "menuPage_assign8.h"
 #include "menuPage_system.h"
 #include "menuPage_master.h"
+#include "menuPage_pdl.h"
 
 #include "soundSource_synth_a.h"
 #include "soundSource_synth_b.h"
@@ -52,7 +53,6 @@
 #include "soundSource_analogPU.h"
 #include "stompbox_amp.h"
 #include "stompbox_mod.h"
-#include "stompbox_pdl.h"
 #include "stompbox_eq.h"
 #include "stompbox_mfx.h"
 #include "stompbox_dd.h"
@@ -89,8 +89,6 @@ floorBoard::floorBoard(QWidget *parent,
     bankTreeList *bankList = new bankTreeList(this);
 
     setFloorBoard();
-
-
     floorBoardDisplay *display = new floorBoardDisplay(this);
     display->setPos(displayPos);
 
@@ -104,6 +102,7 @@ floorBoard::floorBoard(QWidget *parent,
     initSoundSource();
     initStomps();
     initMenuPages();
+
     this->editDialog = new editWindow(this);
     this->editDialog->hide();
     this->oldDialog = this->editDialog;
@@ -365,9 +364,18 @@ void floorBoard::setWidth(int dist)
 void floorBoard::initSoundSource()
 {
 
-    QVector<soundSource *> initSoundSources(10);
+    QVector<soundSource *> initSoundSources(5);
     this->soundSources = initSoundSources.toList();;
 
+    //Analog Pick Up
+    soundSource *analogPU = new soundsource_analogPU(this);
+    analogPU->setId(0);
+    analogPU->setPos(QPoint(offset+20, 440));
+
+    //Modeling
+    soundSource *modeling = new soundsource_modeling(this);
+    modeling->setId(1);
+    modeling->setPos(QPoint(offset+20, 330));
     //Synth A
     soundSource *synth_a = new soundsource_synth_a(this);
     synth_a->setId(2);
@@ -378,16 +386,6 @@ void floorBoard::initSoundSource()
     synth_b->setId(3);
     synth_b->setPos(QPoint(offset+20, 220));
 
-    //Modeling
-    soundSource *modeling = new soundsource_modeling(this);
-    modeling->setId(16);
-    modeling->setPos(QPoint(offset+20, 330));
-
-    //Analog Pick Up
-    soundSource *analogPU = new soundsource_analogPU(this);
-    analogPU->setId(15);
-    analogPU->setPos(QPoint(offset+20, 440));
-
 };
 
 void floorBoard::initStomps()
@@ -396,39 +394,26 @@ void floorBoard::initStomps()
     QList<signed int> fx;
     fx << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10;
     this->fx = fx;
-    //offset = 300;
-
-
-
-    //Pedal GK
-    //stompBox *pdl = new stompbox_pdl(this);
-    //pdl->setId(1);
-    //pdl->setPos(QPoint(offset + 400, 250));
-
-    //MFX
-    stompBox *mfx = new stompbox_mfx(this);
-    mfx->setId(6);
-    mfx->setPos(QPoint(offset + 370, 155));
 
     //Amp
     stompBox *amp = new stompbox_amp(this);
-    amp->setId(1);
+    amp->setId(4);
     amp->setPos(QPoint(offset + 370, 370));
 
     //Noise suppressor
     stompBox *ns = new stompbox_ns(this);
-    ns->setId(12);
+    ns->setId(5);
     ns->setPos(QPoint(offset + 480, 370));
 
     //MOD
     stompBox *mod = new stompbox_mod(this);
-    mod->setId(5);
+    mod->setId(6);
     mod->setPos(QPoint(offset + 590, 370));
 
-    // Delay
-    stompBox *dd = new stompbox_dd(this);
-    dd->setId(7);
-    dd->setPos(QPoint(offset + 650, 140));
+    //MFX
+    stompBox *mfx = new stompbox_mfx(this);
+    mfx->setId(7);
+    mfx->setPos(QPoint(offset + 370, 155));
 
     //Chorus
     stompBox *ce = new stompbox_ce(this);
@@ -440,9 +425,14 @@ void floorBoard::initStomps()
     rv->setId(9);
     rv->setPos(QPoint(offset + 870, 140));
 
+    // Delay
+    stompBox *dd = new stompbox_dd(this);
+    dd->setId(10);
+    dd->setPos(QPoint(offset + 650, 140));
+
     //Equalizer
     stompBox *eq = new stompbox_eq(this);
-    eq->setId(4);
+    eq->setId(11);
     eq->setPos(QPoint(offset + 870, 360));
 
 };
@@ -473,7 +463,7 @@ void floorBoard::setEditDialog(editWindow* editDialog)
 #ifdef Q_OS_WIN
     /* This set the floorboard default style to the "plastique" style,
            as it comes the nearest what the stylesheet uses. */
-    //fxsBoard->setStyle(QStyleFactory::create("plastique"));
+    this->setStyle(QStyleFactory::create("plastique"));
     if(QFile(":qss/windows.qss").exists())
     {
         QFile file(":qss/windows.qss");
@@ -484,7 +474,7 @@ void floorBoard::setEditDialog(editWindow* editDialog)
 #endif
 
 #ifdef Q_WS_X11
-    //fxsBoard->setStyle(QStyleFactory::create("plastique"));
+    this->setStyle(QStyleFactory::create("plastique"));
     if(QFile(":qss/linux.qss").exists())
     {
         QFile file(":qss/linux.qss");
@@ -494,7 +484,7 @@ void floorBoard::setEditDialog(editWindow* editDialog)
 #endif
 
 #ifdef Q_WS_MAC
-    fxsBoard->setStyle(QStyleFactory::create("plastique"));
+    this->setStyle(QStyleFactory::create("plastique"));
     if(QFile(":qss/macosx.qss").exists())
     {
         QFile file(":qss/macosx.qss");
@@ -537,40 +527,44 @@ void floorBoard::initMenuPages()
 
 
 
-    int assignButtonVerticalPos = 84;
-    int assignButtonHorizonalOffset = offset;
+    //int assignButtonVerticalPos = 84;
+    //int assignButtonHorizonalOffset = offset;
     menuPage *assign8 = new menuPage_assign8(this);
-    assign8->setId(28);
-    assign8->setPos(QPoint(assignButtonHorizonalOffset + 640, assignButtonVerticalPos));
+    assign8->setId(22);
+    //assign8->setPos(QPoint(assignButtonHorizonalOffset + 640, assignButtonVerticalPos));
     menuPage *assign7 = new menuPage_assign7(this);
-    assign7->setId(27);
-    assign7->setPos(QPoint(assignButtonHorizonalOffset + 550, assignButtonVerticalPos));
+    assign7->setId(21);
+    //assign7->setPos(QPoint(assignButtonHorizonalOffset + 550, assignButtonVerticalPos));
     menuPage *assign6 = new menuPage_assign6(this);
-    assign6->setId(26);
-    assign6->setPos(QPoint(assignButtonHorizonalOffset + 460, assignButtonVerticalPos));
+    assign6->setId(20);
+    //assign6->setPos(QPoint(assignButtonHorizonalOffset + 460, assignButtonVerticalPos));
     menuPage *assign5 = new menuPage_assign5(this);
-    assign5->setId(25);
-    assign5->setPos(QPoint(assignButtonHorizonalOffset + 370, assignButtonVerticalPos));
+    assign5->setId(19);
+    //assign5->setPos(QPoint(assignButtonHorizonalOffset + 370, assignButtonVerticalPos));
     menuPage *assign4 = new menuPage_assign4(this);
-    assign4->setId(24);
-    assign4->setPos(QPoint(assignButtonHorizonalOffset + 280, assignButtonVerticalPos));
+    assign4->setId(18);
+    //assign4->setPos(QPoint(assignButtonHorizonalOffset + 280, assignButtonVerticalPos));
     menuPage *assign3 = new menuPage_assign3(this);
-    assign3->setId(23);
-    assign3->setPos(QPoint(assignButtonHorizonalOffset + 190, assignButtonVerticalPos));
+    assign3->setId(17);
+    //assign3->setPos(QPoint(assignButtonHorizonalOffset + 190, assignButtonVerticalPos));
     menuPage *assign2 = new menuPage_assign2(this);
-    assign2->setId(22);
-    assign2->setPos(QPoint(assignButtonHorizonalOffset + 100, assignButtonVerticalPos));
+    assign2->setId(16);
+    //assign2->setPos(QPoint(assignButtonHorizonalOffset + 100, assignButtonVerticalPos));
     menuPage *assign1 = new menuPage_assign1(this);
-    assign1->setId(21);
-    assign1->setPos(QPoint(assignButtonHorizonalOffset + 10, assignButtonVerticalPos));
+    assign1->setId(15);
+    //assign1->setPos(QPoint(assignButtonHorizonalOffset + 10, assignButtonVerticalPos));
+
+    menuPage *pdl = new menuPage_pdl(this);
+    pdl->setId(12);
+    //pdl->setPos(QPoint(offset + 400, 250));
 
     menuPage *master = new menuPage_master(this);
-    master->setId(20);
-    master->setPos(QPoint(offset + 566, 24));
+    master->setId(13);
+    //master->setPos(QPoint(offset + 566, 24));
 
     menuPage *system = new menuPage_system(this);
-    system->setId(18);
-    system->setPos(QPoint(offset + 744, 5));
+    system->setId(14);
+    //system->setPos(QPoint(offset + 744, 5));
     
 
 };

@@ -71,10 +71,10 @@ signals:
     void hideDragBar();
     void updateSignal();
     void pathUpdateSignal();
-    void ch_mode_buttonSignal(bool value);
-    void preamp1_buttonSignal(bool value);
-    void preamp2_buttonSignal(bool value);
-    void distortion_buttonSignal(bool value);
+    void modeling_buttonSignal(bool value);
+    void synth1_buttonSignal(bool value);
+    void synth2_buttonSignal(bool value);
+    void amp_buttonSignal(bool value);
     void compressor_buttonSignal(bool value);
     void ns1_buttonSignal(bool value);
     void ns2_buttonSignal(bool value);
@@ -86,6 +86,16 @@ signals:
     void sendreturn_buttonSignal(bool value);
     void eq_buttonSignal(bool value);
     void pedal_buttonSignal(bool value);
+    void master_buttonSignal(bool value);
+    void system_buttonSignal(bool value);
+    void assign1_buttonSignal(bool value);
+    void assign2_buttonSignal(bool value);
+    void assign3_buttonSignal(bool value);
+    void assign4_buttonSignal(bool value);
+    void assign5_buttonSignal(bool value);
+    void assign6_buttonSignal(bool value);
+    void assign7_buttonSignal(bool value);
+    void assign8_buttonSignal(bool value);
 
 protected:
     void paintEvent(QPaintEvent *event);

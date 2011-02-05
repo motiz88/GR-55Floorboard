@@ -78,6 +78,7 @@ HEADERS += ./editPage.h \
     ./menuPage_assign7.h \
     ./menuPage_assign8.h \
     ./menuPage_master.h \
+    ./menuPage_pdl.h \
     ./menuPage_system.h \
     ./renameDialog.h \
     ./renameWidget.h \
@@ -95,8 +96,7 @@ HEADERS += ./editPage.h \
     ./stompbox_eq.h \
     ./stompbox_mod.h \
     ./stompbox_mfx.h \
-    ./stompbox_ns.h \
-    ./stompbox_pdl.h \
+    ./stompbox_ns.h \   
     ./stompbox_rv.h \
     ./midiIO.h \
     ./MidiTable.h \
@@ -172,6 +172,7 @@ SOURCES += ./editPage.cpp \
     ./menuPage_assign7.cpp \
     ./menuPage_assign8.cpp \
     ./menuPage_master.cpp \
+    ./menuPage_pdl.cpp \
     ./menuPage_system.cpp \
     ./renameDialog.cpp \
     ./renameWidget.cpp \
@@ -190,7 +191,6 @@ SOURCES += ./editPage.cpp \
     ./stompbox_mod.cpp \
     ./stompbox_mfx.cpp \
     ./stompbox_ns.cpp \
-    ./stompbox_pdl.cpp \
     ./stompbox_rv.cpp \ 
     ./summaryDialog.cpp \
     ./summaryDialogPatchList.cpp \

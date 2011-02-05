@@ -68,7 +68,7 @@ void customDisplay::paintEvent(QPaintEvent *)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 	painter.setPen(border);
-    painter.setBrush(QColor(0,1,62));
+    painter.setBrush(QColor(0,0,0));
 	//painter.drawRoundRect(QRectF(0.0, 0.0, geometry.width()-1, geometry.height()-1), 8, 8);
 	//painter.drawRect(QRect(0.0, 0.0, geometry.width()-1, geometry.height()-1));
 

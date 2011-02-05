@@ -125,20 +125,16 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->master_Button = new customButton(tr("Master"), false, QPoint(569, patchDisplayRowOffset+19), this, ":/images/pushbutton.png");
     this->master_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
-    this->ch_mode_Button = new customButton(tr("Modeling"), false, QPoint(10, editButtonRowOffset), this, ":/images/pushbutton.png");
-    this->ch_mode_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->preamp1_Button = new customButton(tr("Synth A"), false, QPoint(100, editButtonRowOffset), this, ":/images/pushbutton.png");
-    this->preamp1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->preamp2_Button = new customButton(tr("Synth B"), false, QPoint(100, editButtonRowOffset+18), this, ":/images/pushbutton.png");
-    this->preamp2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->distortion_Button = new customButton(tr("Amp/Spkr"), false, QPoint(190,editButtonRowOffset), this, ":/images/pushbutton.png");
-    this->distortion_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    //this->compressor_Button = new customButton(tr("Compressor"), false, QPoint(190,editButtonRowOffset+18), this, ":/images/pushbutton.png");
-    //this->compressor_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
+    this->modeling_Button = new customButton(tr("Modeling"), false, QPoint(10, editButtonRowOffset), this, ":/images/pushbutton.png");
+    this->modeling_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
+    this->synth1_Button = new customButton(tr("Synth A"), false, QPoint(100, editButtonRowOffset), this, ":/images/pushbutton.png");
+    this->synth1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
+    this->synth2_Button = new customButton(tr("Synth B"), false, QPoint(100, editButtonRowOffset+18), this, ":/images/pushbutton.png");
+    this->synth2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
+    this->amp_Button = new customButton(tr("Amp/Spkr"), false, QPoint(190,editButtonRowOffset), this, ":/images/pushbutton.png");
+    this->amp_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->ns1_Button = new customButton(tr("NS"), false, QPoint(280, editButtonRowOffset), this, ":/images/pushbutton.png");
     this->ns1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    //this->ns2_Button = new customButton(tr("NS 2"), false, QPoint(280, editButtonRowOffset+18), this, ":/images/pushbutton.png");
-    //this->ns2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->mod_Button = new customButton(tr("MOD"), false, QPoint(370, editButtonRowOffset), this, ":/images/pushbutton.png");
     this->mod_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->mfx_Button = new customButton(tr("MFX"), false, QPoint(370, editButtonRowOffset+18), this, ":/images/pushbutton.png");
@@ -149,8 +145,6 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->delay_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->chorus_Button = new customButton(tr("Chorus"), false, QPoint(550, editButtonRowOffset), this, ":/images/pushbutton.png");
     this->chorus_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    //this->sendreturn_Button = new customButton(tr("Send/Return"), false, QPoint(550, editButtonRowOffset+18), this, ":/images/pushbutton.png");
-    //this->sendreturn_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->eq_Button = new customButton(tr("Equalizer"), false, QPoint(640, editButtonRowOffset), this, ":/images/pushbutton.png");
     this->eq_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->pedal_Button = new customButton(tr("Pedal/GK"), false, QPoint(640, editButtonRowOffset+18), this, ":/images/pushbutton.png");
@@ -208,10 +202,10 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->connectButton, SIGNAL(valueChanged(bool)), this, SLOT(connectSignal(bool)));
     QObject::connect(this->writeButton, SIGNAL(valueChanged(bool)), this, SLOT(writeSignal(bool)));
 
-    QObject::connect(this->ch_mode_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ch_mode_buttonSignal(bool)));
-    QObject::connect(this->preamp1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(preamp1_buttonSignal(bool)));
-    QObject::connect(this->preamp2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(preamp2_buttonSignal(bool)));
-    QObject::connect(this->distortion_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(distortion_buttonSignal(bool)));
+    QObject::connect(this->modeling_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(modeling_buttonSignal(bool)));
+    QObject::connect(this->synth1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(synth1_buttonSignal(bool)));
+    QObject::connect(this->synth2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(synth2_buttonSignal(bool)));
+    QObject::connect(this->amp_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(amp_buttonSignal(bool)));
     //QObject::connect(this->compressor_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(compressor_buttonSignal(bool)));
     QObject::connect(this->ns1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ns1_buttonSignal(bool)));
     //QObject::connect(this->ns2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ns2_buttonSignal(bool)));
@@ -223,6 +217,16 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     //QObject::connect(this->sendreturn_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(sendreturn_buttonSignal(bool)));
     QObject::connect(this->eq_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(eq_buttonSignal(bool)));
     QObject::connect(this->pedal_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(pedal_buttonSignal(bool)));
+    QObject::connect(this->master_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(master_buttonSignal(bool)));
+    QObject::connect(this->system_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(system_buttonSignal(bool)));
+    QObject::connect(this->assign1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign1_buttonSignal(bool)));
+    QObject::connect(this->assign2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign2_buttonSignal(bool)));
+    QObject::connect(this->assign3_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign3_buttonSignal(bool)));
+    QObject::connect(this->assign4_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign4_buttonSignal(bool)));
+    QObject::connect(this->assign5_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign5_buttonSignal(bool)));
+    QObject::connect(this->assign6_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign6_buttonSignal(bool)));
+    QObject::connect(this->assign7_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign7_buttonSignal(bool)));
+    QObject::connect(this->assign8_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign8_buttonSignal(bool)));
 
     QObject::connect(this->temp1_copy_Button, SIGNAL(valueChanged(bool)),  this, SLOT(temp1_copy(bool)));
     QObject::connect(this->temp1_paste_Button, SIGNAL(valueChanged(bool)), this, SLOT(temp1_paste(bool)));
