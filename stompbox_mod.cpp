@@ -29,8 +29,8 @@ stompbox_mod::stompbox_mod(QWidget *parent)
     /* MOD */
     setImage(":/images/mod.png");
     setLSB("03", "00");
-    setComboBox("03", "00", "02", QRect(8, 30, 79, 13));
-    setButton("03", "00", "00");
+    setComboBox("03", "00", "02");
+    setSwitch("03", "00", "00");
     //editDetails()->patchPos(586, 1018, "02", "00");
     setEditPages();
 };
@@ -38,7 +38,7 @@ stompbox_mod::stompbox_mod(QWidget *parent)
 void stompbox_mod::updateSignal()
 {
     updateComboBox("03", "00", "02");
-    updateButton("03", "00", "00");
+    updateSwitch("03", "00", "00");
 };
 
 void stompbox_mod::setEditPages()

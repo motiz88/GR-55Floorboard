@@ -15,10 +15,8 @@
         <file>images/analogPU.png</file>
         <file>images/modeling.png</file>
         <file>images/copy.png</file>
-        <file>images/cs.png</file>
         <file>images/dd.png</file>
         <file>images/donate.png</file>
-        <file>images/dgt.png</file>
         <file>images/downarrow.png</file>
         <file>images/dragbar.png</file>
         <file>images/dropdown.png</file>
@@ -29,7 +27,6 @@
         <file>images/fileopen.png</file>
         <file>images/filesave.png</file>
         <file>images/floor.png</file>
-        <file>images/fv.png</file>
         <file>images/mod.png</file>
         <file>images/mfx.png</file>
         <file>images/general.png</file>
@@ -44,17 +41,12 @@
         <file>images/led.png</file>
         <file>images/ledbutton.png</file>
         <file>images/licence.png</file>
-        <file>images/lp.png</file>
         <file>images/manual.png</file>
-        <file>images/menu_pushbutton.png</file>
         <file>images/menuPage_stomp.png</file>
         <file>images/midi.png</file>
         <file>images/ns.png</file>
-        <file>images/od.png</file>
         <file>images/panelbar.png</file>
         <file>images/panelbarbutton.png</file>
-        <file>images/pathswitch.png</file>
-        <file>images/pedal.png</file>
         <file>images/preferences.png</file>
         <file>images/pushbutton.png</file>
         <file>images/pushbutton_dark.png</file>
@@ -71,7 +63,6 @@
         <file>images/stompknob.png</file>
         <file>images/switch.png</file>
         <file>images/uparrow.png</file>
-        <file>images/pdl.png</file>
         <file>images/upload.png</file>
         <file>images/window.png</file>
         <file>images/windowicon.png</file>
@@ -90,5 +81,6 @@
         <file>images/amp.png</file>
         <file>images/switch3way.png</file>
         <file>images/sourceBG.png</file>
+        <file>images/switch_invert.png</file>
     </qresource>
 </RCC>

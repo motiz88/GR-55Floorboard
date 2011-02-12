@@ -30,7 +30,7 @@ soundsource_analogPU::soundsource_analogPU(QWidget *parent)
 	this->setImage(":/images/analogPU.png");
         setLSB("00", "00");
         setComboBox("00", "routeSwitch", "23");
-	//setComboBox2("01", "00", "02", QRect(8, 98, 79, 13));
+        setKnob2("10", "00", "03");
         setSwitch("00", "00", "12");
 	//editDetails()->patchPos(304, 10, "01", "00"); 
 	setEditPages();
@@ -39,7 +39,7 @@ soundsource_analogPU::soundsource_analogPU(QWidget *parent)
 void soundsource_analogPU::updateSignal()
 {
         updateComboBox("00", "routeSwitch", "23");
-	//updateComboBox2("01", "00", "02");
+        updateKnob2("10", "00", "03");
         updateSwitch("00", "00", "12");
 };
 

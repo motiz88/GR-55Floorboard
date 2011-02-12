@@ -125,13 +125,19 @@ void customControlListMenu::setComboBox()
         this->hex1 = hex1;
         this->hex2 = hex2;
         this->hex3 = hex3;
-
+        QString longestItem = "";
+        int itemcount;
         MidiTable *midiTable = MidiTable::Instance();
+        if(midiTable->isData(this->area, hex1, hex2, hex3))
+        {
+            QApplication::beep();
+        }
+        else
+        {
         Midi items;
         items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
 
-        QString longestItem = "";
-        int itemcount;
+
         for(itemcount=0;itemcount<items.level.size();itemcount++ )
         {
                 QString item;
@@ -147,6 +153,7 @@ void customControlListMenu::setComboBox()
                 };
                 if(longestItem.size() < item.size()) longestItem = item;
                 this->controlListComboBox->addItem(item);
+        };
         };
         int maxWidth = QFontMetrics( this->font() ).width( longestItem );
         if(maxWidth < 20) { maxWidth = 20; };

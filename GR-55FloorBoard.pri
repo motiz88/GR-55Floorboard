@@ -52,6 +52,7 @@ HEADERS += ./editPage.h \
     ./customLabelDisplay.h \
     ./customLed.h \
     ./customMasterEQGraph.h \
+    ./customPanelButton.h \
     ./customRangeDial.h \
     ./customRenameDialog.h \
     ./customRenameWidget.h \
@@ -146,6 +147,7 @@ SOURCES += ./editPage.cpp \
     ./customLabelDisplay.cpp \
     ./customLed.cpp \
     ./customMasterEQGraph.cpp \
+    ./customPanelButton.cpp \
     ./customRangeDial.cpp \
     ./customRenameDialog.cpp \
     ./customRenameWidget.cpp \

@@ -26,365 +26,409 @@
 soundsource_modeling::soundsource_modeling(QWidget *parent)
     : soundSource(parent)
 {
-        /* MODELING */
-	this->setImage(":/images/modeling.png");
-        setLSB("10", "00");
-        setSwitch("10", "00", "00");
-        setComboBox("00", "routeSwitch", "22");
-        setKnob1("10", "00", "01");
-        setKnob2("10", "00", "03");
-        //editDetails()->patchPos(400, 58, "01", "30");
-	setEditPages();
+    /* MODELING */
+    this->setImage(":/images/modeling.png");
+    setLSB("10", "00");
+    setSwitch("10", "INVERT", "0A");
+    setComboBox("00", "routeSwitch", "22");
+    setKnob1("10", "00", "00");
+    setKnob2("10", "00", "09");
+    //editDetails()->patchPos(400, 58, "01", "30");
+    setEditPages();
 };
 
 void soundsource_modeling::updateSignal()
 {
-    updateSwitch("10", "00", "00");
+    updateSwitch("10", "00", "0A");
     updateComboBox("00", "routeSwitch", "22");
-    updateKnob1("10", "00", "01");
-    updateKnob2("10", "00", "03");
+    updateKnob1("10", "00", "00");
+    updateKnob2("10", "00", "09");
 };
 
 void soundsource_modeling::setEditPages()
 {
     editDetails()->page()->newGroupBox("Modeling");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "00", "middle", Qt::AlignCenter);
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "0A", "invert", Qt::AlignCenter);
     editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addComboBox(0, 1, 1, 1, "10", "00", "01"); // guitar select
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "10", "00", "00"); // guitar select
     editDetails()->page()->addStackControl();
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "03");  //level
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "04");  //string 1
-    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "05");  //2
-    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "06");  //3
-    editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "07");  //4
-    editDetails()->page()->addKnob(0, 7, 1, 1, "10", "00", "08");  //5
-    editDetails()->page()->addKnob(0, 8, 1, 1, "10", "00", "09");  //6
-    editDetails()->page()->addKnob(0, 9, 1, 1, "10", "00", "0A");  //pitch
-    editDetails()->page()->addKnob(0, 10, 1, 1, "10", "00", "0B");  //pitch fine
-    editDetails()->page()->addSwitch(0, 11, 1, 1, "10", "00", "0C", "middle", Qt::AlignCenter); // 12 str sw
-    editDetails()->page()->addKnob(0, 12, 1, 1, "10", "00", "0D");  // direct level
-    editDetails()->page()->addKnob(1, 0, 1, 1, "10", "00", "0F");  //12 string shift 1
-    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "11");  //2
-    editDetails()->page()->addKnob(1, 2, 1, 1, "10", "00", "13");  //3
-    editDetails()->page()->addKnob(1, 3, 1, 1, "10", "00", "15");  //4
-    editDetails()->page()->addKnob(1, 4, 1, 1, "10", "00", "17");  //5
-    editDetails()->page()->addKnob(1, 5, 1, 1, "10", "00", "19");  //6
-    editDetails()->page()->addKnob(1, 6, 1, 1, "10", "00", "0E");  //12 string shift fine 1
-    editDetails()->page()->addKnob(1, 7, 1, 1, "10", "00", "10");  //2
-    editDetails()->page()->addKnob(1, 8, 1, 1, "10", "00", "12");  //3
-    editDetails()->page()->addKnob(1, 9, 1, 1, "10", "00", "14");  //4
-    editDetails()->page()->addKnob(1, 10, 1, 1, "10", "00", "16");  //5
-    editDetails()->page()->addKnob(1, 11, 1, 1, "10", "00", "18");  //6
+
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "09");  //level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->insertStackField(0, 1, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Pitch");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "11");  //pitch
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "12");  //pitch fine
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->newGroupBox("12 String");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // 12 str sw
+    editDetails()->page()->addKnob(1, 0, 1, 1, "10", "00", "1E");  // direct level
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1F");  //12 string shift 1
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "21");  //2
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "23");  //3
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "25");  //4
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "27");  //5
+    editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "29");  //6
+    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "20");  //12 string shift fine 1
+    editDetails()->page()->addKnob(1, 2, 1, 1, "10", "00", "22");  //2
+    editDetails()->page()->addKnob(1, 3, 1, 1, "10", "00", "24");  //3
+    editDetails()->page()->addKnob(1, 4, 1, 1, "10", "00", "26");  //4
+    editDetails()->page()->addKnob(1, 5, 1, 1, "10", "00", "28");  //5
+    editDetails()->page()->addKnob(1, 6, 1, 1, "10", "00", "2A");  //6
+    editDetails()->page()->addGroupBox(0, 2, 2, 1);
+    editDetails()->page()->newGroupBox("String Level");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "0B");  //string 1
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "0C");  //2
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "0D");  //3
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "0E");  //4
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "0F");  //5
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "10");  //6  
+    editDetails()->page()->addGroupBox(1, 0, 1, 2);
+    editDetails()->page()->insertStackField(0, 2, 0, 1, 4);
+
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackControl(1);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "01"); // guitar select
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(1, 1, 0, 1, 1);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackControl(2);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "02"); // acoustic select
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(2, 1, 0, 1, 1);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackControl(3);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "03"); // E.bass select
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(3, 1, 0, 1, 1);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+     editDetails()->page()->newStackControl(4);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "04"); // synth select
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(4, 1, 0, 1, 1);
+    editDetails()->page()->addStackField();
 
     // CLA ST
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Fender Classic Strat");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "1A"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1B");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1C");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2F"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
     editDetails()->page()->addStackField();
 
     // MOD ST
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Fender Modern Strat");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "1A"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1B");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1C");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2F"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // H+H ST
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Fender Humbucker Strat");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // TELE
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Fender Telecaster");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // LP
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Gibson Les Paul");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // P90
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Gibson Les Paul P90");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // LIPS
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Danelectro 56-U3");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "23"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "24");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "25");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "30"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // RICK
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Rickenbacker 360");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // 335
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Gibson ES-335");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // L4
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Gibson L4-CES");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "20"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "21");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "22");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2E"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "31");  //volume
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "32");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // STEEL
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("Acoustic Steel");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "26"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "27");  //volume
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "28");  //tone
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "33"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "34");  //body
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "35");  //tone - steel
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // NYLON
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("Acoustic Nylon");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "29");  //body
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2A");  //attack
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2B");  //tone
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "36");  //body
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "37");  //attack
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "38");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // Sitar
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("Sitar");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "2C"); //PU select
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2D");  //sens
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2E");  //body
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "2F");
-    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "30");
-    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "31");
-    editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "32");
-    editDetails()->page()->addKnob(0, 7, 1, 1, "10", "00", "33");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "39"); //PU select
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "3A");  //sens
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "3B");  //body
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "3C");   //color
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "3D");   //decay
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "3E");   //buzz
+    editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "3F");   //attack level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // Banjo
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("Banjo");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "34");  //attack
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "35");  //reso
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "36");  //tone
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "41");  //attack
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "42");  //reso
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "43");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // Reso
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("dobro Resonator");
     editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "34");  //sustain
     editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "35");  //reso
     editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "36");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // Jazz Bass
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(3);
     editDetails()->page()->newGroupBox("Fender Jazz Bass");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "3A");  //front Vol
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "3B");  //rear Vol
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "3C");  //Volume
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "3D");  //Tone
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "47");  //front Vol
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "48");  //rear Vol
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "49");  //Volume
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "4A");  //Tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // P Bass
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(3);
     editDetails()->page()->newGroupBox("Fender P Bass");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "3E");  //volume
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "3F");  //tone
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "49");  //volume
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "4A");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "1D", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "1E");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "1F");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     // Analog GR
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Analog GR");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "54"); //mode
-    editDetails()->page()->addSwitch(0, 1, 1, 1, "10", "00", "55", "middle", Qt::AlignCenter); //comp
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "56");  //filter cutoff
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "57");  //filter reso
-    editDetails()->page()->addComboBox(0, 4, 1, 1, "10", "00", "58"); //env mod sw
-    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "59");  //env mod sens
-    editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "5A");  //env mod attack
-    editDetails()->page()->addComboBox(0, 7, 1, 1, "10", "00", "5B"); //pitch sw
-    editDetails()->page()->addKnob(0, 8, 1, 1, "10", "00", "5C");  //pitch A/B
-    editDetails()->page()->addKnob(0, 9, 1, 1, "10", "00", "5D");  //pitch A/B fine
-    editDetails()->page()->addSwitch(0, 10, 1, 1, "10", "00", "5E", "middle", Qt::AlignCenter); //duet
-    editDetails()->page()->addSwitch(0, 11, 1, 1, "10", "00", "5F", "middle", Qt::AlignCenter); //pitch sweep
-    editDetails()->page()->addKnob(0, 12, 1, 1, "10", "00", "60");  //pitch sweep rise
-    editDetails()->page()->addKnob(0, 13, 1, 1, "10", "00", "61");  //pitch sweep fall
-    editDetails()->page()->addSwitch(0, 14, 1, 1, "10", "00", "62", "middle", Qt::AlignCenter); //vibrato sw
-    editDetails()->page()->addKnob(0, 15, 1, 1, "10", "00", "63");  //vibrato rate
-    editDetails()->page()->addKnob(0, 16, 1, 1, "10", "00", "64");  //vibrato depth
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "4B"); //mode
+    editDetails()->page()->addSwitch(1, 0, 1, 1, "10", "00", "4C", "middle", Qt::AlignCenter); //comp
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Filter");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "4D");  //filter cutoff
+    editDetails()->page()->addKnob(1, 0, 1, 1, "10", "00", "4E");  //filter reso
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->newGroupBox("Envelope");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "4F"); //env mod sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "50");  //env mod sens
+    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "51");  //env mod attack
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    editDetails()->page()->newGroupBox("Pitch");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "52"); //pitch sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "53");  //pitch A
+    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "54");  //pitch A fine
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "55");  //pitch B
+    editDetails()->page()->addKnob(1, 2, 1, 1, "10", "00", "56");  //pitch B fine
+    editDetails()->page()->addSwitch(0, 3, 1, 1, "10", "00", "57", "middle", Qt::AlignCenter); //duet
+    editDetails()->page()->addSwitch(1, 3, 1, 1, "10", "00", "58", "middle", Qt::AlignCenter); //pitch sweep
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "59");  //pitch sweep rise
+    editDetails()->page()->addKnob(1, 4, 1, 1, "10", "00", "5A");  //pitch sweep fall
+    editDetails()->page()->addGroupBox(0, 3, 1, 1);
+    editDetails()->page()->newGroupBox("Vibrato");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "5B", "middle", Qt::AlignCenter); //vibrato sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "5C");  //vibrato rate
+    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "5D");  //vibrato depth
+    editDetails()->page()->addGroupBox(0, 4, 1, 1);
     editDetails()->page()->addStackField();
 
     //wave synth
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Wave Synth");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "65"); //type
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "66");  //colour
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "5E"); //type
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "5F");  //colour
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // filter bass
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Filter Bass");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "67");  //filter cutoff
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "68");  //filter reso
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "69");  //filter decay
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "6A");  //touch sens
-    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "6B");  //colour
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "60");  //filter cutoff
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "61");  //filter reso
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "62");  //filter decay
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "63");  //touch sens
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "64");  //colour
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // crystal
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Crystal");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "6C");  //attack length
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "6D");  //mod tune
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "6E");  //mod depth
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "6F");  //attack level
-    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "70");  //body level
-    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "71");  //sustain
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "65");  //attack length
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "66");  //mod tune
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "67");  //mod depth
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "68");  //attack level
+    editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "69");  //body level
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "6A");  //sustain
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // organ
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Organ");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "72");  //feet16
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "73");  //feet8
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "74");  //feet4
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "75");  //sustain
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "6B");  //feet16
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "6C");  //feet8
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "6D");  //feet4
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "6E");  //sustain
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     // brass
-    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Brass");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "76");  //filter cutoff
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "77");  //filter reso
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "78");  //touch sens
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "79");  //sustain
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "6F");  //filter cutoff
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "70");  //filter reso
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "71");  //touch sens
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "72");  //sustain
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 
-
-editDetails()->addPage();
+    editDetails()->addPage();
 };

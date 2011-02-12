@@ -67,11 +67,11 @@ void customSwitch3way::setValue(int value)
 	}
 	else if(active == 1)
 	{
-		setOffset(1);
+                setOffset(2);
 	}
 	else
 	{
-                setOffset(2);
+                setOffset(1);
 	};
 };
 

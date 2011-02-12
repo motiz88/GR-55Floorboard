@@ -30,7 +30,7 @@ stompbox_mfx::stompbox_mfx(QWidget *parent)
     setImage(":/images/mfx.png");
     setLSB("00", "00");
     //setComboBox("06", "00", "01", QRect(8, 31, 79, 13));
-    setButton("00", "00", "12");
+    setSwitch("00", "00", "12");
     //editDetails()->patchPos(1630, 1046, "06", "00");
     setEditPages();
 };
@@ -38,7 +38,7 @@ stompbox_mfx::stompbox_mfx(QWidget *parent)
 void stompbox_mfx::updateSignal()
 {
     //updateComboBox("06", "00", "01");
-    updateButton("00", "00", "12");
+    updateSwitch("00", "00", "12");
 };
 
 void stompbox_mfx::setEditPages()

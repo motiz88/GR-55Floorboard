@@ -513,39 +513,37 @@ void bankTreeList::updatePatch(QString replyMsg)
     QString isPatch = "false";
 
     replyMsg = replyMsg.remove(" ").toUpper();       /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
-    if (replyMsg.size()/2 == 1294){
+    if (replyMsg.size()/2 == patchReplySize){
         QString header = "F0411000005312";
         QString footer ="00F7";
         QString addressMsb = replyMsg.mid(14,4);    //  copy patch address MSB.
         QString part1 = replyMsg.mid(22, 256);      //  copy 128 bytes of address 00 data .
         part1.prepend("0000").prepend(addressMsb).prepend(header).append(footer);   //add LSB + MSB address, header and footer.
-        QString part2 = replyMsg.mid(278, 228);     // copy 114 bytes of address 01 data.
-        QString part2B = replyMsg.mid(532, 28);     // copy 14 bytes of address 01 data.
-        part2.prepend("0100").prepend(addressMsb).prepend(header).append(part2B).append(footer); //add LSB + MSB address, header and footer.
-        QString part3 = replyMsg.mid(560, 156);     //  copy 78 bytes of address 02 data .
+        QString part2 = replyMsg.mid(278, 256);     // copy 114 bytes of address 01 data.
+        part2.prepend("0100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part3 = replyMsg.mid(534, 156);     //  copy 78 bytes of address 02 data .
         part3.prepend("0200").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
-        QString part4 = replyMsg.mid(742, 256);    //  copy 128 bytes of address 03 data .
+        QString part4 = replyMsg.mid(716, 256);    //  copy 128 bytes of address 03 data .
         part4.prepend("0300").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
-        QString part5 = replyMsg.mid(998, 228);    // copy 114 bytes of address 04 data.
-        QString part5B = replyMsg.mid(1252, 28);   // copy 14 bytes of address 04 data.
+        QString part5 = replyMsg.mid(972, 256);    // copy 114 bytes of address 04 data.
         part5.prepend("0400").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part6 = replyMsg.mid(1280, 36);    // copy 18 bytes of address 05 data.
+        QString part6 = replyMsg.mid(1228, 36);    // copy 18 bytes of address 05 data.
         part6.prepend("0500").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part7 = replyMsg.mid(1342, 60);    // copy 30 bytes of address 06 data.
+        QString part7 = replyMsg.mid(1290, 60);    // copy 30 bytes of address 06 data.
         part7.prepend("0600").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part8 = replyMsg.mid(1428, 250);   //  copy 125 bytes of address 07 data .
+        QString part8 = replyMsg.mid(1376, 250);   //  copy 125 bytes of address 07 data .
         part8.prepend("0700").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part9 = replyMsg.mid(1704, 256);   //  copy 128 bytes of address 10 data .
+        QString part9 = replyMsg.mid(1652, 256);   //  copy 128 bytes of address 10 data .
         part9.prepend("1000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part10 = replyMsg.mid(1960,172);   //  copy 86 bytes of address 11 data . 
+        QString part10 = replyMsg.mid(1908,172);   //  copy 86 bytes of address 11 data .
         part10.prepend("1100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part11 = replyMsg.mid(2158, 70);    //  copy 35 bytes of address 20 data . 
+        QString part11 = replyMsg.mid(2106, 70);    //  copy 35 bytes of address 20 data .
         part11.prepend("2000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part12 = replyMsg.mid(2254, 70);    //  copy 35 bytes of address 21 data . 
+        QString part12 = replyMsg.mid(2202, 70);    //  copy 35 bytes of address 21 data .
         part12.prepend("2100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
-        QString part13 = replyMsg.mid(2350, 104);   //  copy 52 bytes of address 30 data . 
+        QString part13 = replyMsg.mid(2298, 104);   //  copy 52 bytes of address 30 data .
         part13.prepend("3000").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
-        QString part14 = replyMsg.mid(2480, 104);   //  copy 52 bytes of address 31 data . 
+        QString part14 = replyMsg.mid(2428, 104);   //  copy 52 bytes of address 31 data .
         part14.prepend("3100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
         
         replyMsg = "";
@@ -580,10 +578,7 @@ void bankTreeList::updatePatch(QString replyMsg)
             };
         };
         replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
-        isPatch = "true";
-    } else if (replyMsg.size() == 1333 ) { isPatch = "true"; };
-    if (isPatch == "true")
-    {
+
         emit setStatusMessage(tr("Ready"));
         QString area = "Structure";
         sysxIO->setFileSource(area, replyMsg);		// Set the source to the data received.
@@ -633,8 +628,8 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgBox->exec();
         /* END WARNING */
     };
-    /*
-        Preferences *preferences = Preferences::Instance(); // Load the preferences.
+
+      /*  Preferences *preferences = Preferences::Instance(); // Load the preferences.
         if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
         {
         if (replyMsg.size() > 0){
@@ -661,7 +656,7 @@ void bankTreeList::updatePatch(QString replyMsg)
                         msgBox->setStandardButtons(QMessageBox::Ok);
                         msgBox->exec();
                         };
-                };	      */
+                };*/
     emit setStatusProgress(0);
 };
 

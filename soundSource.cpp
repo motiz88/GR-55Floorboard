@@ -65,19 +65,20 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
     QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this, SLOT(modeling_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(modeling_statusSignal(bool)), this->parent(), SIGNAL(modeling_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(synth1_buttonSignal(bool)), this, SLOT(synth1_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(synth1_statusSignal(bool)), this->parent(), SIGNAL(synth1_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(synth1_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this, SLOT(synth2_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(synth2_statusSignal(bool)), this->parent(), SIGNAL(synth2_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 };
 
 void soundSource::paintEvent(QPaintEvent *)
 {
-    //QRectF target(0.0, 0.0, stompSize.width(), stompSize.height());
-    //QRectF source(0.0, 0.0, stompSize.width(), stompSize.height());
     setImage(imagePath);
     QPixmap image(imagePath);
     QRectF target(0.0, 0.0, image.width(), image.height());
@@ -97,7 +98,8 @@ editWindow* soundSource::editDetails()
 
 void soundSource::mousePressEvent(QMouseEvent *event)
 {
-
+    this->editDialog->setWindow(this->fxName);
+    emit setEditDialog(this->editDialog);
 };
 
 
@@ -244,8 +246,8 @@ void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob1 = new customDial(0, 0, range, 1, 10, QPoint(24, 13), this, hex1, hex2, hex3);
-    stompDisplay = new customDisplay(QRect(72, 30, 120, 20), this);
+    //knob1 = new customDial(0, 0, range, 1, 10, QPoint(24, 13), this, hex1, hex2, hex3);
+    stompDisplay = new customDisplay(QRect(17, 42, 120, 20), this);
     this->stompDisplay->setAllColor(QColor(185,224,243));
 };
 
@@ -253,12 +255,12 @@ void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob2 = new customDial(0, 0, range, 1, 10, QPoint(197, 13), this, hex1, hex2, hex3);
+    knob2 = new customDial(0, 0, range, 1, 10, QPoint(213, 13), this, hex1, hex2, hex3);
 };
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3)
 {
-    button = new customButton(false, QPoint(4, 105), this, hex1, hex2, hex3);
+    button = new customButton(false, QPoint(4, 102), this, hex1, hex2, hex3);
     led = new customLed(false, QPoint(41, 4), this);
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
@@ -277,7 +279,7 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos
 void soundSource::setSwitch(QString hex1, QString hex2, QString hex3)
 {
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
-    switchbutton->move(QPoint(28, 49));
+    switchbutton->move(QPoint(16, 17));
 };
 
 
@@ -305,7 +307,7 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
     QString area;
     int index = sysxIO->getSourceValue(area, hex1, hex2, hex3);
 
-    knob1->setValue(index);
+    //knob1->setValue(index);
 
 
     MidiTable *midiTable = MidiTable::Instance();
@@ -329,16 +331,21 @@ void soundSource::updateButton(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     led->setValue((value==1)?true:false);
     button->setValue((value==1)?true:false);
+
 };
 
 void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
 {
+
     SysxIO *sysxIO = SysxIO::Instance();
     QString area;
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switchbutton->setValue((value==1)?true:false);
-    //emit switchSignal();
-    //QApplication::beep();
+    bool set = false;
+    if (value == 1) {set = true; };
+    if(this->id == 1) { emit modeling_statusSignal(set); };
+    if(this->id == 2) { emit synth1_statusSignal(set); };
+    if(this->id == 3) { emit synth2_statusSignal(set); };
 };
 
 void soundSource::updateSwitch3way(QString hex1, QString hex2, QString hex3)

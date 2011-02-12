@@ -39,9 +39,6 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     this->editDialog = new editWindow();
     this->setWhatsThis(tr("StompBox effect<br>a double mouse click will open the effect edit page."));
 
-    this->pathSwitch = new customButton(tr(""), false, QPoint(60, 60), this, ":/images/pathswitch.png");
-    this->pathSwitch->hide();
-
     QObject::connect(this, SIGNAL( valueChanged(QString, QString, QString) ), this->parent(), SIGNAL( valueChanged(QString, QString, QString) ));
 
     QObject::connect(this->parent(), SIGNAL( updateStompOffset(signed int) ), this, SLOT( updatePos(signed int) ));
@@ -58,8 +55,6 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    QObject::connect(this->pathSwitch, SIGNAL( valueChanged(bool)), this, SLOT( pathSwitchSignal(bool) ));
-
     QObject::connect(this->parent(), SIGNAL( pathUpdateSignal() ), this, SIGNAL( pathUpdateSignal() ));
 
     QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
@@ -69,31 +64,36 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->parent(), SIGNAL(amp_buttonSignal(bool)), this, SLOT(amp_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(amp_statusSignal(bool)), this->parent(), SIGNAL(amp_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(amp_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(ns1_buttonSignal(bool)), this, SLOT(ns1_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(ns1_statusSignal(bool)), this->parent(), SIGNAL(ns1_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(ns1_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(mod_buttonSignal(bool)), this, SLOT(mod_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(mod_statusSignal(bool)), this->parent(), SIGNAL(mod_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(mod_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(mfx_buttonSignal(bool)), this, SLOT(mfx_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(mfx_statusSignal(bool)), this->parent(), SIGNAL(mfx_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(mfx_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(reverb_buttonSignal(bool)), this, SLOT(reverb_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(reverb_statusSignal(bool)), this->parent(), SIGNAL(reverb_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(reverb_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(delay_buttonSignal(bool)), this, SLOT(delay_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(delay_statusSignal(bool)), this->parent(), SIGNAL(delay_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(delay_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(chorus_buttonSignal(bool)), this, SLOT(chorus_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(chorus_statusSignal(bool)), this->parent(), SIGNAL(chorus_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(chorus_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(eq_buttonSignal(bool)), this, SLOT(eq_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(eq_statusSignal(bool)), this->parent(), SIGNAL(eq_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(eq_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
-
-    QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this, SLOT(pedal_ButtonSignal(bool) ));
-    QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 };
 
 void stompBox::paintEvent(QPaintEvent *)
@@ -119,17 +119,8 @@ editWindow* stompBox::editDetails()
 
 void stompBox::mousePressEvent(QMouseEvent *event)
 {
-    /*     emitValueChanged(this->hex1, this->hex2, "00", "void");
-
-        if (event->button() == Qt::LeftButton)
-        {
-                this->dragStartPosition = event->pos();
-        }
-        else if (event->button() == Qt::RightButton)
-        {
-                this->editDialog->setWindow(this->fxName);
-                emit setEditDialog(this->editDialog);
-        };*/
+    this->editDialog->setWindow(this->fxName);
+    emit setEditDialog(this->editDialog);
 };
 
 
@@ -227,20 +218,6 @@ void stompBox::eq_ButtonSignal(bool value)
     };
 };
 
-void stompBox::pedal_ButtonSignal(bool value)
-{
-    if (this->id == 12)
-    {
-        emitValueChanged(this->hex1, this->hex2, "00", "void");
-        this->editDialog->setWindow(this->fxName);
-        emit setEditDialog(this->editDialog);
-    };
-};
-
-void stompBox::pathSwitchSignal(bool value)
-{
-
-};
 
 void stompBox::setPos(QPoint newPos)
 {
@@ -334,49 +311,49 @@ void stompBox::setKnob1(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob1 = new customDial(0, 0, range, 1, 10, QPoint(6, 9), this, hex1, hex2, hex3);
+    knob1 = new customDial(0, 0, range, 1, 10, QPoint(19, 69), this, hex1, hex2, hex3);
 };
 
 void stompBox::setKnob2(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob2 = new customDial(0, 0, range, 1, 10, QPoint(53, 9), this, hex1, hex2, hex3);
+    knob2 = new customDial(0, 0, range, 1, 10, QPoint(71, 69), this, hex1, hex2, hex3);
 };
 
 void stompBox::setSlider1(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider1 = new customSlider(0, 0, range, 1, 10, QPoint(8, 17), this, hex1, hex2, hex3);
+    slider1 = new customSlider(0, 0, range, 1, 10, QPoint(15, 70), this, hex1, hex2, hex3);
 };
 
 void stompBox::setSlider2(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider2 = new customSlider(0, 0, range, 1, 10, QPoint(24, 17), this, hex1, hex2, hex3);
+    slider2 = new customSlider(0, 0, range, 1, 10, QPoint(35, 70), this, hex1, hex2, hex3);
 };
 
 void stompBox::setSlider3(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider3 = new customSlider(0, 0, range, 1, 10, QPoint(40, 17), this, hex1, hex2, hex3);
+    slider3 = new customSlider(0, 0, range, 1, 10, QPoint(55, 70), this, hex1, hex2, hex3);
 };
 
 void stompBox::setSlider4(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider4 = new customSlider(0, 0, range, 1, 10, QPoint(56, 17), this, hex1, hex2, hex3);
+    slider4 = new customSlider(0, 0, range, 1, 10, QPoint(75, 70), this, hex1, hex2, hex3);
 };
 
 void stompBox::setSlider5(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider5 = new customSlider(0, 0, range, 1, 10, QPoint(79, 17), this, hex1, hex2, hex3);
+    slider5 = new customSlider(0, 0, range, 1, 10, QPoint(103, 70), this, hex1, hex2, hex3);
 };
 
 void stompBox::setButton(QString hex1, QString hex2, QString hex3)
@@ -400,7 +377,7 @@ void stompBox::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, Q
 void stompBox::setSwitch(QString hex1, QString hex2, QString hex3)
 {
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
-    switchbutton->move(QPoint(15, 45));
+    switchbutton->move(QPoint(10, 11));
 };
 
 void stompBox::updateComboBox(QString hex1, QString hex2, QString hex3)
@@ -480,8 +457,16 @@ void stompBox::updateSwitch(QString hex1, QString hex2, QString hex3)
     QString area;
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switchbutton->setValue((value==1)?true:false);
-    //emit switchSignal();
-    //QApplication::beep();
+    bool set = false;
+    if (value == 1) {set = true; };
+    if (this->id == 4) { emit amp_statusSignal(set); };
+    if (this->id == 5){ emit ns1_statusSignal(set); };
+    if (this->id == 6) { emit mod_statusSignal(set); };
+    if (this->id == 7) { emit mfx_statusSignal(set); };
+    if (this->id == 8) { emit chorus_statusSignal(set); };
+    if (this->id == 9) { emit reverb_statusSignal(set); };
+    if (this->id == 10) { emit delay_statusSignal(set); };
+    if (this->id == 11) { emit eq_statusSignal(set); };
 };
 
 void stompBox::valueChanged(int value, QString hex1, QString hex2, QString hex3)

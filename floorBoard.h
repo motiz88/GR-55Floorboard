@@ -58,6 +58,7 @@ public slots:
     void setEditDialog(editWindow* editDialog);
     void menuButtonSignal();
     //void stompbox_button(bool value);
+    void beep();
 
 signals:
     void valueChanged(QString fxName, QString valueName, QString value);
@@ -96,6 +97,31 @@ signals:
     void assign6_buttonSignal(bool value);
     void assign7_buttonSignal(bool value);
     void assign8_buttonSignal(bool value);
+    void modeling_statusSignal(bool value);
+    void synth1_statusSignal(bool value);
+    void synth2_statusSignal(bool value);
+    void amp_statusSignal(bool value);
+    void compressor_statusSignal(bool value);
+    void ns1_statusSignal(bool value);
+    void ns2_statusSignal(bool value);
+    void mod_statusSignal(bool value);
+    void mfx_statusSignal(bool value);
+    void reverb_statusSignal(bool value);
+    void delay_statusSignal(bool value);
+    void chorus_statusSignal(bool value);
+    void sendreturn_statusSignal(bool value);
+    void eq_statusSignal(bool value);
+    void pedal_statusSignal(bool value);
+    void master_statusSignal(bool value);
+    void system_statusSignal(bool value);
+    void assign1_statusSignal(bool value);
+    void assign2_statusSignal(bool value);
+    void assign3_statusSignal(bool value);
+    void assign4_statusSignal(bool value);
+    void assign5_statusSignal(bool value);
+    void assign6_statusSignal(bool value);
+    void assign7_statusSignal(bool value);
+    void assign8_statusSignal(bool value);
 
 protected:
     void paintEvent(QPaintEvent *event);

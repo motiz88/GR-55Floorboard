@@ -34,7 +34,7 @@ stompbox_eq::stompbox_eq(QWidget *parent)
     setSlider3("06", "00", "19");
     setSlider4("06", "00", "1B");
     setSlider5("06", "00", "1C");
-    setButton("06", "00", "11");
+    setSwitch("06", "00", "11");
     editDetails()->patchPos(1428, 26, "06", "11");
     setEditPages();
 };
@@ -46,7 +46,7 @@ void stompbox_eq::updateSignal()
     updateSlider3("06", "00", "19");
     updateSlider4("06", "00", "1B");
     updateSlider5("06", "00", "1C");
-    updateButton("06", "00", "11");
+    updateSwitch("06", "00", "11");
 };
 
 void stompbox_eq::setEditPages()

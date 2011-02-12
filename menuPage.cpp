@@ -77,27 +77,35 @@ menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     QObject::connect(this->parent(), SIGNAL(system_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign1_buttonSignal(bool)), this, SLOT(assign1_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign1_statusSignal(bool)), this->parent(), SIGNAL(assign1_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign1_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign2_buttonSignal(bool)), this, SLOT(assign2_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign2_statusSignal(bool)), this->parent(), SIGNAL(assign2_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign2_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign3_buttonSignal(bool)), this, SLOT(assign3_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign3_statusSignal(bool)), this->parent(), SIGNAL(assign3_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign3_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign4_buttonSignal(bool)), this, SLOT(assign4_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign4_statusSignal(bool)), this->parent(), SIGNAL(assign4_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign4_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign5_buttonSignal(bool)), this, SLOT(assign5_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign5_statusSignal(bool)), this->parent(), SIGNAL(assign5_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign5_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign6_buttonSignal(bool)), this, SLOT(assign6_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign6_statusSignal(bool)), this->parent(), SIGNAL(assign6_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign6_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign7_buttonSignal(bool)), this, SLOT(assign7_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign7_statusSignal(bool)), this->parent(), SIGNAL(assign7_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign7_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(assign8_buttonSignal(bool)), this, SLOT(assign8_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(assign8_statusSignal(bool)), this->parent(), SIGNAL(assign8_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(assign8_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     SysxIO *sysxIO = SysxIO::Instance();
@@ -152,6 +160,40 @@ void menuPage::system_ButtonSignal(bool value)
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
+    };
+    SysxIO *sysxIO = SysxIO::Instance();
+    if((this->id == 14) && sysxIO->deviceReady())
+    {
+        emit setStatusMessage(tr("Opening Page..."));
+        emit setStatusSymbol(3);
+        QString replyMsg;
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
+        this->editDialog->setWindow(this->fxName);
+        emit setEditDialog(this->editDialog);
+        if (sysxIO->isConnected())
+        {
+            sysxIO->setDeviceReady(false); // Reserve the device for interaction.
+            QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)));
+            QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(systemReply(QString)));
+            emit setStatusProgress(100);
+            emit setStatusSymbol(2);
+            emit setStatusMessage(tr("Request System data"));
+            sysxIO->sendSysx(systemRequest); // GR-55 System area data Request.
+        }
+        else
+        {
+            QString snork = tr("Ensure connection is active and retry<br>");
+            snork.append(tr("System data not transfered, current settings are to be used<br>"));
+            QMessageBox *msgBox = new QMessageBox();
+            msgBox->setWindowTitle(deviceType + tr(" midi connection not found!!"));
+            msgBox->setIcon(QMessageBox::Information);
+            msgBox->setText(snork);
+            msgBox->setStandardButtons(QMessageBox::Ok);
+            msgBox->exec();
+            emit setStatusMessage(tr("Not Connected"));
+            emit setStatusSymbol(0);
+
+        };
     };
 };
 
@@ -243,40 +285,7 @@ void menuPage::menuButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-    SysxIO *sysxIO = SysxIO::Instance();
-    if((this->id == 14) && sysxIO->deviceReady())
-    {
-        emit setStatusMessage(tr("Opening Page..."));
-        emit setStatusSymbol(3);
-        QString replyMsg;
-        emitValueChanged(this->hex1, this->hex2, "00", "void");
-        this->editDialog->setWindow(this->fxName);
-        emit setEditDialog(this->editDialog);
-        if (sysxIO->isConnected())
-        {
-            sysxIO->setDeviceReady(false); // Reserve the device for interaction.
-            QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)));
-            QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(systemReply(QString)));
-            emit setStatusProgress(100);
-            emit setStatusSymbol(2);
-            emit setStatusMessage(tr("Request System data"));
-            sysxIO->sendSysx(systemRequest); // GR-55 System area data Request.
-        }
-        else
-        {
-            QString snork = tr("Ensure connection is active and retry<br>");
-            snork.append(tr("System data not transfered, current settings are to be used<br>"));
-            QMessageBox *msgBox = new QMessageBox();
-            msgBox->setWindowTitle(deviceType + tr(" midi connection not found!!"));
-            msgBox->setIcon(QMessageBox::Information);
-            msgBox->setText(snork);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            emit setStatusMessage(tr("Not Connected"));
-            emit setStatusSymbol(0);
 
-        };
-    };
 };
 
 void menuPage::systemReply(QString replyMsg)
@@ -434,6 +443,23 @@ void menuPage::setLSB(QString hex1, QString hex2)
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->editDialog->setLSB(hex1, hex2);
+};
+
+void menuPage::updateSwitch(QString hex1, QString hex2, QString hex3)
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    QString area;
+    int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
+    bool set = false;
+    if (value == 1) {set = true; };
+    if(this->id == 15) { emit assign1_statusSignal(set); };
+    if(this->id == 16) { emit assign2_statusSignal(set); };
+    if(this->id == 17) { emit assign3_statusSignal(set); };
+    if(this->id == 18) { emit assign4_statusSignal(set); };
+    if(this->id == 19) { emit assign5_statusSignal(set); };
+    if(this->id == 20) { emit assign6_statusSignal(set); };
+    if(this->id == 21) { emit assign7_statusSignal(set); };
+    if(this->id == 22) { emit assign8_statusSignal(set); };
 };
 
 void menuPage::valueChanged(int value, QString hex1, QString hex2, QString hex3)

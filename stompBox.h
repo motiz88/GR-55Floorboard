@@ -52,7 +52,7 @@ public:
 
 
     void setComboBox(QString hex1, QString hex2, QString hex3,
-                     QRect geometry = QRect(7, 79, 80, 13));
+                     QRect geometry = QRect(11, 37, 105, 15));
     void setComboBox2(QString hex1, QString hex2, QString hex3,
                       QRect geometry = QRect(7, 99, 80, 13));
     void setKnob1(QString hex1, QString hex2, QString hex3);
@@ -95,7 +95,6 @@ public slots:
     //void valueChanged2(int index);
     virtual void updateSignal() {}
     void setDisplayToFxName();
-    void pathSwitchSignal(bool value);
     void updateStompPath();
     void amp_ButtonSignal(bool value);
     void ns1_ButtonSignal(bool value);
@@ -105,7 +104,6 @@ public slots:
     void delay_ButtonSignal(bool value);
     void chorus_ButtonSignal(bool value);
     void eq_ButtonSignal(bool value);
-    void pedal_ButtonSignal(bool value);
 
 signals:
     void valueChanged(QString fxName, QString valueName, QString valueStr);
@@ -113,10 +111,17 @@ signals:
     void dialogUpdateSignal();
     void setEditDialog(editWindow* editDialog);
     void notConnectedSignal();
-    void pathSwitchSignal();
     void pathUpdateSignal();
     void updateStompBoxes();
     void switchSignal();
+    void amp_statusSignal(bool value);
+    void ns1_statusSignal(bool value);
+    void mod_statusSignal(bool value);
+    void mfx_statusSignal(bool value);
+    void chorus_statusSignal(bool value);
+    void reverb_statusSignal(bool value);
+    void delay_statusSignal(bool value);
+    void eq_statusSignal(bool value);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -151,8 +156,6 @@ private:
     QString hex1;
     QString hex2;
     QString hex3;
-    customButton *pathSwitch;
-    bool pathSwitchActive;
     QString fxName;
     QList<QString> stompOrderName;
     QString stompOrderHex;

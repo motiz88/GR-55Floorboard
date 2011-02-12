@@ -517,7 +517,7 @@ QString MidiTable::dataChange(QString area, QString hex1, QString hex2, QString 
 		if (area != "System")
     {
       area = "Structure"; 
-      sysxMsg.append("60");
+      sysxMsg.append(tempDataWrite);
       sysxMsg.append("00");
 
 	    sysxMsg.append(hex1);
@@ -551,7 +551,7 @@ QString MidiTable::dataChange(QString area, QString hex1, QString hex2, QString 
 	if (area != "System")
     {
       area = "Structure"; 
-      sysxMsg.append("60");
+      sysxMsg.append(tempDataWrite);
       sysxMsg.append("00");
 
 	    sysxMsg.append(hex1);
@@ -602,7 +602,7 @@ QString MidiTable::nameRequest(int bank, int patch)
 	}
     else
 	{
-        addr1 = "60";//tempDataWrite;
+        addr1 = tempDataWrite;
 	addr2 = "00";
 	};
 	QString hex1 = "00";
@@ -648,7 +648,7 @@ QString MidiTable::patchRequest(int bank, int patch)
 	}
          else
 	{
-                addr1 = "60";//tempDataWrite;
+                addr1 = tempDataWrite;
 		addr2 = "00";
 	};
   if (addr1.length() < 2) addr1.prepend("0");

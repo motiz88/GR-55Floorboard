@@ -37,7 +37,7 @@
 /* General Parameters */
 const QString deviceType = "GR-55";
 const QString idRequestString = "F07E100601F7";		// Indentity Request (GR-55).
-const QString idReplyPatern = "F07E100602";			// part of Returned device id message must contain/match this (QRegExp or a string without spaces and all caps).
+const QString idReplyPatern = "F07E100602415302000000000000F7";			// part of Returned device id message must contain/match this (QRegExp or a string without spaces and all caps).
 const int buttonBlinkInterval = 250;				// The interval (ms) the led on buttons blink.
 
 /* Sysex Message Parameters */
@@ -54,13 +54,13 @@ const int patchPerBank = 3;			// Number of patches in a bank.
 const int bankSize = 100;       // Number of patches in a midi bank before bank change message is required. 
 
 /* Midi Send & Receive */
-const int patchReplySize = 1294;    // size of bytes in a patch before trimming.
+const int patchReplySize = 1268;    // size of bytes in a patch before trimming.
 const int patchSize = 1333;    // size of bytes in a patch after trimming.
 const int fullPatchSize = 1333;    // size of bytes in a patch with user text data.
-const int systemSize = 2236;    // size of bytes for system data.
+const int systemSize = 1173;    // size of bytes for system data.
 const int nameReplySize = 29;    // size of bytes for name data.
 const QString patchRequestDataSize = "00003134";
-const QString systemRequest = "F0410000002F11000000000002090075F7";
+const QString systemRequest = "F04110000053110100000001000E0075F7";
 
 //const int maxWait = 40;			 // Maximum times we loop through the receive handle before we give up waiting.(for whole patch) tempory used by midi prefs
 //const int minWait = 5;			 // Minimum times we loop through the receive handle before we give up waiting.(for small data)   "      "       "       "
@@ -71,9 +71,8 @@ const int sellectionBlinks = 5;				// Times we blink to indicate we have sellect
 const int sellectionBlinkInterval = 500;	// Interval (ms) the item blinks.
 
 /* Patch addresses */
-const QString chainAddress = "0B";
 const QString nameAddress = "00";
-const QString tempBulkWrite = "60";
-//const QString tempDataWrite = "60";
+const QString tempBulkWrite = "18";
+const QString tempDataWrite = "18";
 
 #endif // GLOBALVARIABLES_H

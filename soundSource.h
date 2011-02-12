@@ -55,7 +55,7 @@ public:
 
 
     void setComboBox(QString hex1, QString hex2, QString hex3,
-                     QRect geometry = QRect(180, 54, 70, 15));
+                     QRect geometry = QRect(143, 42, 70, 20));
     void setKnob1(QString hex1, QString hex2, QString hex3);
     void setKnob2(QString hex1, QString hex2, QString hex3);
     void setButton(QString hex1, QString hex2, QString hex3);
@@ -103,6 +103,9 @@ signals:
     void pathUpdateSignal();
     void updateStompBoxes();
     void switchSignal();
+    void modeling_statusSignal(bool value);
+    void synth1_statusSignal(bool value);
+    void synth2_statusSignal(bool value);
 
 protected:
     void paintEvent(QPaintEvent *event);
