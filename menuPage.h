@@ -48,7 +48,7 @@ public:
 
     void setLSB(QString hex1, QString hex2);
     unsigned int getId();
-
+    void updateSwitch(QString hex1, QString hex2, QString hex3);
     virtual void setEditPages() {}
     editWindow* editDetails();
 
@@ -83,6 +83,14 @@ signals:
     void setStatusProgress(int value);
     void setStatusMessage(QString message);
     void systemUpdateSignal();
+    void assign1_statusSignal(bool value);
+    void assign2_statusSignal(bool value);
+    void assign3_statusSignal(bool value);
+    void assign4_statusSignal(bool value);
+    void assign5_statusSignal(bool value);
+    void assign6_statusSignal(bool value);
+    void assign7_statusSignal(bool value);
+    void assign8_statusSignal(bool value);
 
 protected:
     void paintEvent(QPaintEvent *event);

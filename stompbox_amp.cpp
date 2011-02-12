@@ -32,7 +32,7 @@ stompbox_amp::stompbox_amp(QWidget *parent)
     setKnob1("07", "00", "02");
     setKnob2("07", "00", "03");
     setComboBox("07", "00", "01");
-    setButton("07", "00", "00");
+    setSwitch("07", "00", "00");
     editDetails()->patchPos(1480, 34, "07", "00");
     setEditPages();
 };
@@ -42,7 +42,7 @@ void stompbox_amp::updateSignal()
     updateKnob1("07", "00", "02");
     updateKnob2("07", "00", "03");
     updateComboBox("07", "00", "01");
-    updateButton("07", "00", "00");
+    updateSwitch("07", "00", "00");
 };
 
 void stompbox_amp::setEditPages()

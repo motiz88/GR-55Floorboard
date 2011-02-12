@@ -28,6 +28,7 @@
 #include <QWidget>
 #include <QTimer>
 #include "customButton.h"
+#include "customPanelButton.h"
 #include "customControlListMenu.h"
 #include "customDisplay.h"
 #include "customLabelDisplay.h"
@@ -99,33 +100,31 @@ private:
         customControlListMenu *catagory;
         customButton *connectButton;
         customButton *writeButton;
-        //customButton *assign_Button;
-        customButton *system_midi_Button;
-        customButton *system_Button;
-        customButton *master_Button;
-        customButton *modeling_Button;
-        customButton *synth1_Button;
-        customButton *synth2_Button;
-        customButton *amp_Button;
-        customButton *compressor_Button;
-        customButton *ns1_Button;
-        customButton *ns2_Button;
-        customButton *mod_Button;
-        customButton *mfx_Button;
-        customButton *reverb_Button;
-        customButton *delay_Button;
-        customButton *chorus_Button;
-        customButton *sendreturn_Button;
-        customButton *eq_Button;
-        customButton *pedal_Button;
-        customButton *assign1_Button;
-        customButton *assign2_Button;
-        customButton *assign3_Button;
-        customButton *assign4_Button;
-        customButton *assign5_Button;
-        customButton *assign6_Button;
-        customButton *assign7_Button;
-        customButton *assign8_Button;
+        customPanelButton *system_Button;
+        customPanelButton *master_Button;
+        customPanelButton *modeling_Button;
+        customPanelButton *synth1_Button;
+        customPanelButton *synth2_Button;
+        customPanelButton *amp_Button;
+        customPanelButton *compressor_Button;
+        customPanelButton *ns1_Button;
+        customPanelButton *ns2_Button;
+        customPanelButton *mod_Button;
+        customPanelButton *mfx_Button;
+        customPanelButton *reverb_Button;
+        customPanelButton *delay_Button;
+        customPanelButton *chorus_Button;
+        customPanelButton *sendreturn_Button;
+        customPanelButton *eq_Button;
+        customPanelButton *pedal_Button;
+        customPanelButton *assign1_Button;
+        customPanelButton *assign2_Button;
+        customPanelButton *assign3_Button;
+        customPanelButton *assign4_Button;
+        customPanelButton *assign5_Button;
+        customPanelButton *assign6_Button;
+        customPanelButton *assign7_Button;
+        customPanelButton *assign8_Button;
         customButton *temp1_copy_Button;
         customButton *temp1_paste_Button;
         customButton *temp2_copy_Button;

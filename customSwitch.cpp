@@ -25,72 +25,79 @@
 #include "customSwitch.h"
 
 customSwitch::customSwitch(bool active, QWidget *parent, QString hex1, QString hex2, QString hex3,
-						   QString imagePath)
-    : QWidget(parent)
+                           QString imagePath)
+                               : QWidget(parent)
 {
-	this->hex1 = hex1;
-	this->hex2 = hex2;
-	this->hex3 = hex3;
-	this->active = active;
-	this->imagePath = imagePath;
-	QSize imageSize = QPixmap(imagePath).size();
-	this->switchSize = QSize(imageSize.width(), imageSize.height()/2);
-	this->imageRange = 1;
-	this->switchPos = switchPos;
-	this->setOffset(0);
+    this->hex1 = hex1;
+    if(hex2 == "INVERT") {
+        this->hex2 = "00";
+        this->imagePath = ":/images/switch_invert.png";
+    } else {
+        this->hex2 = hex2;
+        this->imagePath = imagePath;
+    };
+
+    this->hex3 = hex3;
+    this->active = active;
+
+    QSize imageSize = QPixmap(imagePath).size();
+    this->switchSize = QSize(imageSize.width(), imageSize.height()/2);
+    this->imageRange = 1;
+    this->switchPos = switchPos;
+    this->setOffset(0);
     this->setFixedSize(switchSize);
 
-	QObject::connect(this, SIGNAL( valueChanged(bool, QString, QString, QString) ),
-                this->parent(), SLOT( valueChanged(bool, QString, QString, QString) ));
+    QObject::connect(this, SIGNAL( valueChanged(bool, QString, QString, QString) ),
+                     this->parent(), SLOT( valueChanged(bool, QString, QString, QString) ));
 };
 
 void customSwitch::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, switchSize.width(), switchSize.height());
-	QRectF source(0.0, yOffset, switchSize.width(), switchSize.height());
-	QPixmap image(imagePath);
+    QRectF target(0.0 , 0.0, switchSize.width(), switchSize.height());
+    QRectF source(0.0, yOffset, switchSize.width(), switchSize.height());
+    QPixmap image(imagePath);
 
-	QPainter painter(this);
-	painter.drawPixmap(target, image, source);
+    QPainter painter(this);
+    painter.drawPixmap(target, image, source);
 };
 
 void customSwitch::setOffset(signed int imageNr)
 {
-	this->yOffset = imageNr*switchSize.height();
-	this->update();
+    this->yOffset = imageNr*switchSize.height();
+    this->update();
 };
 
 void customSwitch::mousePressEvent(QMouseEvent *event)
 {
-	if ( event->button() == Qt::LeftButton )
-	{	
-		this->dragStartPosition = event->pos();
-		setFocus();
-	};
+    if ( event->button() == Qt::LeftButton )
+    {
+        this->dragStartPosition = event->pos();
+        setFocus();
+    };
 };
 
 void customSwitch::mouseReleaseEvent(QMouseEvent *event)
 {
-	if ( event->button() == Qt::LeftButton )
-	{	
-		if(active)
-		{
-			setOffset(0);
-			emitValue(false);
-		}
-		else
-		{
-			setOffset(1);
-			emitValue(true);
-		};
-		clearFocus();
-	};
+    if ( event->button() == Qt::LeftButton )
+    {
+        if(active)
+        {
+            setOffset(0);
+            emitValue(false);
+        }
+        else
+        {
+            setOffset(1);
+            emitValue(true);
+        };
+        clearFocus();
+    };
 };
 
 void customSwitch::emitValue(bool value)
 {
     this->active = value;
-	if (value != m_value) {
+    if (value != m_value) {
         this->m_value = value;
         emit valueChanged((bool)value, this->hex1, this->hex2, this->hex3);
     };
@@ -99,21 +106,21 @@ void customSwitch::emitValue(bool value)
 void customSwitch::mouseMoveEvent(QMouseEvent *event)
 {
     if (!(event->buttons() == Qt::LeftButton) && (event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance())
-	{
+    {
         return;
-	};
+    };
 };
 
 void customSwitch::setValue(bool value)
 {
-	this->active = value;
-	if(active)
-	{
-		setOffset(1);
-	}
-	else
-	{
-		setOffset(0);
-	};
-	clearFocus();
+    this->active = value;
+    if(active)
+    {
+        setOffset(1);
+    }
+    else
+    {
+        setOffset(0);
+    };
+    clearFocus();
 };

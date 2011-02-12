@@ -223,7 +223,14 @@ QLabel#button {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(250,250,255);
+}
+
+QLabel#panelButton {
+font-family: Arial;
+font-size: 9px;
+font-weight: bold;
+color: rgb(255,255,255);
 }
 
 /* CUSTOM GROUPBOX STYLE */

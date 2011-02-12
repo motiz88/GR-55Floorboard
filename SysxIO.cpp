@@ -1130,7 +1130,7 @@ void SysxIO::systemReply(QString replyMsg)
 
     if(noError())
     {
-        if(replyMsg.size()/2 == 2236)
+        if(replyMsg.size()/2 == systemSize)
         {
             /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
             QString header = "F0410000002F12";
@@ -1252,7 +1252,7 @@ void SysxIO::writeToBuffer()
     emit setStatusSymbol(2);
     emit setStatusMessage(tr("Sync to ")+deviceType);
 
-    QString addr1 = "60"; // temp address
+    QString addr1 = tempDataWrite;
     QString addr2 = "00";
 
     for(int i=0;i<patchData.size();++i)

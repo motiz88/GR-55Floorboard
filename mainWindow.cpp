@@ -759,18 +759,18 @@ void mainWindow::upload()
 
 void mainWindow::summaryPage()
 {
-   summaryDialog *summary = new summaryDialog();
-   summary->setMinimumWidth(800);
-   summary->setMinimumHeight(650);
-   summary->show();
+   //summaryDialog *summary = new summaryDialog();
+   //summary->setMinimumWidth(800);
+   //summary->setMinimumHeight(650);
+   //summary->show();
 };
 
 void mainWindow::summarySystemPage()
 {
-   summaryDialogSystem *summarySystem = new summaryDialogSystem();
-   summarySystem->setMinimumWidth(800);
-   summarySystem->setMinimumHeight(650);
-   summarySystem->show();
+  // summaryDialogSystem *summarySystem = new summaryDialogSystem();
+   //summarySystem->setMinimumWidth(800);
+  // summarySystem->setMinimumHeight(650);
+   //summarySystem->show();
 };
 
 void mainWindow::summaryPatchList()

@@ -33,7 +33,7 @@ menuPage_assign4::menuPage_assign4(QWidget *parent)
 
 void menuPage_assign4::updateSignal()
 {
-
+    updateSwitch("01", "00", "46");
 };
 
 void menuPage_assign4::setEditPages()

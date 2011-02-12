@@ -100,8 +100,8 @@ floorBoard::floorBoard(QWidget *parent,
     bar->setDragBarMinOffset(2, 8);
     bar->setDragBarMaxOffset(offset - panelBarOffset + 5);
     initSoundSource();
-    initStomps();
-    initMenuPages();
+    //initStomps();
+    //initMenuPages();
 
     this->editDialog = new editWindow(this);
     this->editDialog->hide();
@@ -123,6 +123,7 @@ floorBoard::floorBoard(QWidget *parent,
 
     QObject::connect(panelBar, SIGNAL(showDragBar(QPoint)), this, SIGNAL(showDragBar(QPoint)));
     QObject::connect(panelBar, SIGNAL(hideDragBar()), this, SIGNAL(hideDragBar()));
+    //QObject::connect(this, SIGNAL(modeling_buttonSignal(bool)), this, SLOT(beep()));
 
 
     bool ok;
@@ -201,7 +202,7 @@ void floorBoard::setFloorBoard() {
     this->minSize = QSize(imageInfoBar.width() + borderWidth + panelBarOffset, imageFloor.height());
 
     // Draw InfoBar
-    QRectF sourceInfoBar(0.0, 0.0, imageInfoBar.width(), imageInfoBar.height());
+   /* QRectF sourceInfoBar(0.0, 0.0, imageInfoBar.width(), imageInfoBar.height());
     QRectF targetInfoBar(offset, 0.0, imageInfoBar.width(), imageInfoBar.height());
     QRectF targetInfoBar2(offset, imageInfoBar.height()-4, imageInfoBar.width(), imageInfoBar.height());
     QRectF targetInfoBar3(offset, (imageInfoBar.height()*2)-8, imageInfoBar.width(), imageInfoBar.height()/2);
@@ -214,7 +215,7 @@ void floorBoard::setFloorBoard() {
     QRectF targetLiberianBar(offset, (imageFloor.height() - imageInfoBar.height()) - 2, imageInfoBar.width(), imageInfoBar.height());
 
     painter.drawPixmap(targetLiberianBar, imageInfoBar, sourceLiberianBar);
-
+*/
 
     // Draw stomp boxes background
     /* QRectF source(0.0, 0.0, imagestompBG.width(), imagestompBG.height());
@@ -370,21 +371,21 @@ void floorBoard::initSoundSource()
     //Analog Pick Up
     soundSource *analogPU = new soundsource_analogPU(this);
     analogPU->setId(0);
-    analogPU->setPos(QPoint(offset+20, 440));
+    analogPU->setPos(QPoint(offset+20, 480));
 
     //Modeling
     soundSource *modeling = new soundsource_modeling(this);
     modeling->setId(1);
-    modeling->setPos(QPoint(offset+20, 330));
+    modeling->setPos(QPoint(offset+20, 370));
     //Synth A
     soundSource *synth_a = new soundsource_synth_a(this);
     synth_a->setId(2);
-    synth_a->setPos(QPoint(offset+20, 110));
+    synth_a->setPos(QPoint(offset+20, 150));
 
     //Synth B
     soundSource *synth_b = new soundsource_synth_b(this);
     synth_b->setId(3);
-    synth_b->setPos(QPoint(offset+20, 220));
+    synth_b->setPos(QPoint(offset+20, 260));
 
 };
 
@@ -398,42 +399,42 @@ void floorBoard::initStomps()
     //Amp
     stompBox *amp = new stompbox_amp(this);
     amp->setId(4);
-    amp->setPos(QPoint(offset + 370, 370));
+    amp->setPos(QPoint(offset + 370, 410));
 
     //Noise suppressor
     stompBox *ns = new stompbox_ns(this);
     ns->setId(5);
-    ns->setPos(QPoint(offset + 480, 370));
+    ns->setPos(QPoint(offset + 516, 410));
 
     //MOD
     stompBox *mod = new stompbox_mod(this);
     mod->setId(6);
-    mod->setPos(QPoint(offset + 590, 370));
+    mod->setPos(QPoint(offset + 663, 410));
 
     //MFX
     stompBox *mfx = new stompbox_mfx(this);
     mfx->setId(7);
-    mfx->setPos(QPoint(offset + 370, 155));
+    mfx->setPos(QPoint(offset + 370, 180));
 
     //Chorus
     stompBox *ce = new stompbox_ce(this);
     ce->setId(8);
-    ce->setPos(QPoint(offset + 760, 140));
+    ce->setPos(QPoint(offset + 695, 180));
 
     //Reverb
     stompBox *rv = new stompbox_rv(this);
     rv->setId(9);
-    rv->setPos(QPoint(offset + 870, 140));
+    rv->setPos(QPoint(offset + 840, 180));
 
     // Delay
     stompBox *dd = new stompbox_dd(this);
     dd->setId(10);
-    dd->setPos(QPoint(offset + 650, 140));
+    dd->setPos(QPoint(offset + 550, 180));
 
     //Equalizer
     stompBox *eq = new stompbox_eq(this);
     eq->setId(11);
-    eq->setPos(QPoint(offset + 870, 360));
+    eq->setPos(QPoint(offset + 840, 410));
 
 };
 
@@ -513,7 +514,7 @@ void floorBoard::centerEditDialog()
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
 	int x = this->displayPos.x() + (((this->floorSize.width() - this->displayPos.x()) - this->editDialog->width()) / 2);
-	int y = this->pos.y() + (((this->floorSize.height() + this->infoBarHeight/2) - this->editDialog->height()) / 2);
+        int y = this->pos.y() + (((this->floorSize.height() +40) - this->editDialog->height()) / 2);
         this->editDialog->move(x, y);
     };
 };
@@ -577,4 +578,8 @@ void floorBoard::menuButtonSignal()
     this->editDialog->show();
 };
 
+void floorBoard::beep()
+{
+    QApplication::beep();
 
+};

@@ -31,7 +31,7 @@ stompbox_ns::stompbox_ns(QWidget *parent)
     setLSB("03", "00");
     setKnob1("03", "00", "04");
     setKnob2("03", "00", "05");
-    setButton("03", "00", "30");
+    setSwitch("03", "00", "03");
     //editDetails()->patchPos(2928, 8, "0A", "71");
     setEditPages();
 };
@@ -40,7 +40,7 @@ void stompbox_ns::updateSignal()
 {
     updateKnob1("03", "00", "04");
     updateKnob2("03", "00", "05");
-    updateButton("03", "00", "03");
+    updateSwitch("03", "00", "03");
 };
 
 void stompbox_ns::setEditPages()

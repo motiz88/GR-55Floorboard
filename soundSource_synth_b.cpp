@@ -28,11 +28,11 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
 {
 	/* PRE */
 	setImage(":/images/ch_b.png");
-        setLSB("00", "00");
-        setSwitch("00", "00", "12");
+        setLSB("21", "00");
+        setSwitch("21", "00", "03");
         setComboBox("00", "routeSwitch", "20");
-        setKnob1("21", "00", "02");
-        setKnob2("21", "00", "00");
+        setKnob1("21", "00", "01");
+        setKnob2("21", "00", "04");
         //editDetails()->patchPos(400, 58, "01", "30");
 	setEditPages();
 
@@ -40,30 +40,30 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
 
 void soundsource_synth_b::updateSignal()
 {
-        updateSwitch("00", "00", "12");
+        updateSwitch("21", "00", "03");
         updateComboBox("00", "routeSwitch", "20");
-        updateKnob1("21", "00", "02");
-        updateKnob2("21", "00", "00");
+        updateKnob1("21", "00", "01");
+        updateKnob2("21", "00", "04");
 };
 
 void soundsource_synth_b::setEditPages()
 {
         editDetails()->page()->newGroupBox("Effect");
-        editDetails()->page()->addSwitch(0, 0, 1, 1, "00", "00", "12");   // off/on effect
+        editDetails()->page()->addSwitch(0, 0, 1, 1, "21", "00", "03");   // off/on effect
         editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-	
+
 	// CHANNEL B 
 	
         editDetails()->page()->newGroupBox(tr("Synth B"));
 
         /*editDetails()->page()->newGroupBox(tr("Pre Amp"));
         editDetails()->page()->newStackControl(0);*/
-        editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "20");  // pre type
+        editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "20");  // route
         //editDetails()->page()->addStackControl();
         //editDetails()->page()->addComboBox(0, 1, 1, 1, "01", "00", "38", "bottom", Qt::AlignLeft); // gain sw
-        editDetails()->page()->addKnob(0, 2, 1, 1, "21", "00", "02", "normal","right", 120);  //gain
-        editDetails()->page()->addKnob(0, 3, 1, 1, "21", "00", "00");            // bass
+        editDetails()->page()->addKnob(0, 2, 1, 1, "21", "00", "01", "normal","right", 120);  //gain
+        editDetails()->page()->addKnob(0, 3, 1, 1, "21", "00", "04");            // bass
         /*editDetails()->page()->addKnob(0, 4, 1, 1, "01", "00", "33");           // mid
 	editDetails()->page()->addKnob(0, 5, 1, 1, "01", "00", "34");           // treble
 	editDetails()->page()->addKnob(0, 6, 1, 1, "01", "00", "35");           //presence
