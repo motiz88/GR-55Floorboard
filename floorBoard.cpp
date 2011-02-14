@@ -100,7 +100,7 @@ floorBoard::floorBoard(QWidget *parent,
     bar->setDragBarMinOffset(2, 8);
     bar->setDragBarMaxOffset(offset - panelBarOffset + 5);
     initSoundSource();
-    //initStomps();
+    initStomps();
     //initMenuPages();
 
     this->editDialog = new editWindow(this);

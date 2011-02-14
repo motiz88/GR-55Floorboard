@@ -29,8 +29,8 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
 	/* PRE */
 	setImage(":/images/ch_b.png");
         setLSB("21", "00");
-        setSwitch("21", "00", "03");
-        setComboBox("00", "routeSwitch", "20");
+        setSwitch("21", "INVERT", "03");
+        setComboBox("21", "routeSwitch", "16");
         setKnob1("21", "00", "01");
         setKnob2("21", "00", "04");
         //editDetails()->patchPos(400, 58, "01", "30");
@@ -41,7 +41,7 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
 void soundsource_synth_b::updateSignal()
 {
         updateSwitch("21", "00", "03");
-        updateComboBox("00", "routeSwitch", "20");
+        updateComboBox("21", "routeSwitch", "16");
         updateKnob1("21", "00", "01");
         updateKnob2("21", "00", "04");
 };
@@ -49,7 +49,7 @@ void soundsource_synth_b::updateSignal()
 void soundsource_synth_b::setEditPages()
 {
         editDetails()->page()->newGroupBox("Effect");
-        editDetails()->page()->addSwitch(0, 0, 1, 1, "21", "00", "03");   // off/on effect
+        editDetails()->page()->addSwitch(0, 0, 1, 1, "21", "00", "03", "invert", Qt::AlignCenter);   // off/on effect
         editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
 
@@ -59,7 +59,7 @@ void soundsource_synth_b::setEditPages()
 
         /*editDetails()->page()->newGroupBox(tr("Pre Amp"));
         editDetails()->page()->newStackControl(0);*/
-        editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "20");  // route
+        editDetails()->page()->addComboBox(0, 0, 1, 1, "21", "00", "16");  // route
         //editDetails()->page()->addStackControl();
         //editDetails()->page()->addComboBox(0, 1, 1, 1, "01", "00", "38", "bottom", Qt::AlignLeft); // gain sw
         editDetails()->page()->addKnob(0, 2, 1, 1, "21", "00", "01", "normal","right", 120);  //gain
