@@ -310,8 +310,14 @@ void stompBox::setComboBoxCurrentIndex(int index)
 void stompBox::setKnob1(QString hex1, QString hex2, QString hex3)
 {
     MidiTable *midiTable = MidiTable::Instance();
-    int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob1 = new customDial(0, 0, range, 1, 10, QPoint(19, 69), this, hex1, hex2, hex3);
+    if(hex2 == "CENTER") {
+        hex2 = "00";
+        int range = midiTable->getRange("Structure", hex1, hex2, hex3);
+        knob1 = new customDial(0, 0, range, 1, 10, QPoint(47, 69), this, hex1, hex2, hex3);
+    } else {
+        int range = midiTable->getRange("Structure", hex1, hex2, hex3);
+        knob1 = new customDial(0, 0, range, 1, 10, QPoint(19, 69), this, hex1, hex2, hex3);
+    };
 };
 
 void stompBox::setKnob2(QString hex1, QString hex2, QString hex3)

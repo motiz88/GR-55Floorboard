@@ -22,65 +22,49 @@
 ****************************************************************************/
 
 #include "stompbox_rv.h"
- 
+
 stompbox_rv::stompbox_rv(QWidget *parent)
     : stompBox(parent)
 {
-	/* REVERB */
-	setImage(":/images/rv.png");
-        setLSB("00", "00");
-        setKnob1("00", "00", "00");
-        setKnob2("00", "00", "00");
-        setComboBox("00", "00", "00");
-        setSwitch("00", "00", "00");
-        //editDetails()->patchPos(2798, 22, "0A", "30");
-	setEditPages();
+    /* REVERB */
+    setImage(":/images/rv.png");
+    setLSB("06", "00");
+    setKnob1("06", "00", "0E");
+    setKnob2("06", "00", "10");
+    setComboBox("06", "00", "0D");
+    setSwitch("06", "00", "0C");
+    //editDetails()->patchPos(2798, 22, "0A", "30");
+    setEditPages();
 };
 
 void stompbox_rv::updateSignal()
 {
-        updateKnob1("00", "00", "00");
-        updateKnob2("00", "00", "00");
-        updateComboBox("00", "00", "00");
-        updateSwitch("00", "00", "00");
+    updateKnob1("06", "00", "0E");
+    updateKnob2("06", "00", "10");
+    updateComboBox("06", "00", "0D");
+    updateSwitch("06", "00", "0C");
 };
 
 void stompbox_rv::setEditPages()
 {
-	editDetails()->page()->newGroupBox("Effect");
-/*	editDetails()->page()->addSwitch(0, 0, 1, 1, "0A", "00", "30", "middle", Qt::AlignCenter);
-	editDetails()->page()->newStackControl(0);
-	editDetails()->page()->addComboBox(1, 0, 1, 1, "0A", "00", "31");
-	editDetails()->page()->addStackControl();      */
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Effect");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "0C", "middle", Qt::AlignCenter); //sw
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "06", "00", "0D");   //type
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-	editDetails()->page()->newGroupBox("Reverb");
-/*	editDetails()->page()->addKnob(0, 2, 1, 1, "0A", "00", "32");
-	editDetails()->page()->addKnob(0, 3, 1, 1, "0A", "00", "36");
-	editDetails()->page()->insertStackField(0, 0, 5, 1, 1);
-	editDetails()->page()->addKnob(0, 6, 1, 1, "0A", "00", "3A");  */
-	editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->newGroupBox("Reverb");
+    editDetails()->page()->addKnob(0, 1, 1, 1, "06", "00", "0E");  //time
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
 
-	editDetails()->page()->newGroupBox("Filter");
-/*	editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "34");
-	editDetails()->page()->addKnob(0, 1, 1, 1, "0A", "00", "35");  */
-	editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    editDetails()->page()->newGroupBox("Filter");
+    editDetails()->page()->addKnob(0, 1, 1, 1, "06", "00", "0F");
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
 
-	editDetails()->page()->newGroupBox("Level");
-/*	editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "37");
-	editDetails()->page()->addKnob(0, 1, 1, 1, "0A", "00", "38");    */
-	editDetails()->page()->addGroupBox(0, 3, 1, 1);
+    editDetails()->page()->newGroupBox("Level");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "10");
+    editDetails()->page()->addGroupBox(0, 3, 1, 1);
 
-	editDetails()->addPage();
-	
-/*	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);
-	editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "39"); // spring sensitivity
-	editDetails()->page()->addStackField();
-	editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();     */
+    editDetails()->addPage();
+
+
 };
-

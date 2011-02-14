@@ -21,38 +21,23 @@
 **
 ****************************************************************************/
 
-#include "stompbox_ns.h"
+#ifndef MENUPAGE_PDL_H
+#define MENUPAGE_PDL_H
 
-stompbox_ns::stompbox_ns(QWidget *parent)
-    : stompBox(parent)
+#include <QtGui>
+#include <QWidget>
+#include "menuPage.h"
+
+class menuPage_pdl : public menuPage
 {
-    /* ns */
-    setImage(":/images/ns.png");
-    setLSB("07", "00");
-    setKnob1("07", "00", "5B");
-    setKnob2("07", "00", "5C");
-    setSwitch("07", "00", "5A");
-    //editDetails()->patchPos(2928, 8, "0A", "71");
-    setEditPages();
+    Q_OBJECT
+
+public:
+	menuPage_pdl(QWidget *parent);
+	void setEditPages();
+
+public slots:
+	void updateSignal();
 };
 
-void stompbox_ns::updateSignal()
-{
-    updateKnob1("07", "00", "5B");
-    updateKnob2("07", "00", "5C");
-    updateSwitch("07", "00", "5A");
-};
-
-void stompbox_ns::setEditPages()
-{
-    editDetails()->page()->newGroupBox("Effect");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "5A", "middle", Qt::AlignCenter);
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
-
-    editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "5B");
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "5C");
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->addPage();
-
-};
+#endif // MENUPAGE_PDL_H

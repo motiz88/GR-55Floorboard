@@ -30,7 +30,7 @@ soundsource_modeling::soundsource_modeling(QWidget *parent)
     this->setImage(":/images/modeling.png");
     setLSB("10", "00");
     setSwitch("10", "INVERT", "0A");
-    setComboBox("00", "routeSwitch", "22");
+    setComboBox("02", "routeSwitch", "2D");
     setKnob1("10", "00", "00");
     setKnob2("10", "00", "09");
     //editDetails()->patchPos(400, 58, "01", "30");
@@ -40,7 +40,7 @@ soundsource_modeling::soundsource_modeling(QWidget *parent)
 void soundsource_modeling::updateSignal()
 {
     updateSwitch("10", "00", "0A");
-    updateComboBox("00", "routeSwitch", "22");
+    updateComboBox("02", "routeSwitch", "2D");
     updateKnob1("10", "00", "00");
     updateKnob2("10", "00", "09");
 };
@@ -49,11 +49,11 @@ void soundsource_modeling::setEditPages()
 {
     editDetails()->page()->newGroupBox("Modeling");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "0A", "invert", Qt::AlignCenter);
+     editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "2D"); //route switch
     editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addComboBox(0, 1, 1, 1, "10", "00", "00"); // guitar select
-    editDetails()->page()->addStackControl();
-
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "09");  //level
+    editDetails()->page()->addComboBox(0, 2, 1, 1, "10", "00", "00"); // guitar select
+    editDetails()->page()->addStackControl();  
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "09");  //level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
     editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "11");  //pitch

@@ -26,61 +26,36 @@
 soundsource_analogPU::soundsource_analogPU(QWidget *parent)
     : soundSource(parent)
 {
-        /* ANALOG PICKUP */
-	this->setImage(":/images/analogPU.png");
-        setLSB("00", "00");
-        setComboBox("00", "routeSwitch", "23");
-        setKnob2("10", "00", "03");
-        setSwitch("00", "00", "12");
-	//editDetails()->patchPos(304, 10, "01", "00"); 
-	setEditPages();
+    /* ANALOG PICKUP */
+    this->setImage(":/images/analogPU.png");
+    setLSB("00", "00");
+    setComboBox("02", "routeSwitch", "2E");
+    setKnob2("02", "00", "33");
+    setSwitch("02", "INVERT", "32");
+    //editDetails()->patchPos(304, 10, "01", "00");
+    setEditPages();
 };
 
 void soundsource_analogPU::updateSignal()
 {
-        updateComboBox("00", "routeSwitch", "23");
-        updateKnob2("10", "00", "03");
-        updateSwitch("00", "00", "12");
+    updateComboBox("02", "routeSwitch", "2E");
+    updateKnob2("02", "00", "33");
+    updateSwitch("02", "00", "32");
 };
 
 void soundsource_analogPU::setEditPages()
 {
-  editDetails()->page()->newGroupBox(tr("PreAmp Effect"));
-        editDetails()->page()->addSwitch(0, 0, 1, 1, "00", "00", "12", "middle", Qt::AlignCenter);   // off/on effect
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
-	
-  editDetails()->page()->newGroupBox(tr("Channel"));
-	//editDetails()->page()->newStackControl(0);
-        editDetails()->page()->addComboBox(2, 0, 1, 1, "00", "00", "23");   //mode
-	//editDetails()->page()->addStackControl();
-	editDetails()->page()->addGroupBox(1, 0, 1, 1);
+    editDetails()->page()->newGroupBox(tr("Tone"));
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "02", "00", "32", "invert", Qt::AlignCenter);   // off/on effect
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-	// TYPE SETTINGS 
-	/*editDetails()->page()->insertStackField(0, 2, 0, 1, 1);
+    editDetails()->page()->newGroupBox(tr("Routing Selection"));
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "2E");   //route
+    editDetails()->page()->addGroupBox(1, 0, 1, 1);
 
-	editDetails()->page()->newStackField(0);
-	editDetails()->page()->newGroupBox(tr("Channel select"));
-	editDetails()->page()->addComboBox(1, 0, 1, 1, "01", "00", "02"); // channel select
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
-	editDetails()->page()->addStackField();
-	
-	editDetails()->page()->newStackField(0, Qt::AlignCenter);
-	editDetails()->page()->newGroupBox(tr("Channel Delay"));
-	editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "03");
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
-	editDetails()->page()->addStackField();
-
-	editDetails()->page()->newStackField(0, Qt::AlignCenter);
-	editDetails()->page()->newGroupBox(tr("Channel Delay"));
-	editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "03");
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
-	editDetails()->page()->addStackField();
-
-	editDetails()->page()->newStackField(0, Qt::AlignCenter);
-	editDetails()->page()->newGroupBox(tr("Dynamic switching"));
-	editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "04");
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
-	editDetails()->page()->addStackField();         */
+    editDetails()->page()->newGroupBox(tr("Level"));
+    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "33");  //level
+    editDetails()->page()->addGroupBox(0, 1, 2, 1);
     
-	editDetails()->addPage();	
+    editDetails()->addPage();
 };

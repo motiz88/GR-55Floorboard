@@ -118,7 +118,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
     this->connectButton = new customButton(tr("Connect"), false, QPoint(390, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
     this->connectButton->setWhatsThis(tr("Connect Button<br>used to establish a continuous midi connection<br>when lit green, the connection is valid"));
-    this->writeButton = new customButton(tr("Write"), false, QPoint(478, patchDisplayRowOffset), this, ":/images/ledbutton.png");
+    this->writeButton = new customButton(tr("Write"), false, QPoint(476, patchDisplayRowOffset), this, ":/images/ledbutton.png");
     this->writeButton->setWhatsThis(tr("Write Button<br>if the patch number displays [temp buffer]<br>the current patch is sent to the GT temporary memory only<br>or else the patch will be written to the displayed patch memory location."));
     this->system_Button = new customPanelButton(tr("System"), false, QPoint(580, patchDisplayRowOffset+18), this, ":/images/switch.png");
     this->system_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
@@ -129,9 +129,9 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
     this->modeling_Button = new customPanelButton(tr("Modeling"), false, QPoint(100, editButtonRowOffset), this,  ":/images/switch_invert.png");
     this->modeling_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->synth1_Button = new customPanelButton(tr("Synth A"), false, QPoint(160, editButtonRowOffset), this, ":/images/switch.png");
+    this->synth1_Button = new customPanelButton(tr("Synth A"), false, QPoint(160, editButtonRowOffset), this, ":/images/switch_invert.png");
     this->synth1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->synth2_Button = new customPanelButton(tr("Synth B"), false, QPoint(220, editButtonRowOffset), this, ":/images/switch.png");
+    this->synth2_Button = new customPanelButton(tr("Synth B"), false, QPoint(220, editButtonRowOffset), this, ":/images/switch_invert.png");
     this->synth2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->amp_Button = new customPanelButton(tr("Amp"), false, QPoint(280,editButtonRowOffset), this, ":/images/switch.png");
     this->amp_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
