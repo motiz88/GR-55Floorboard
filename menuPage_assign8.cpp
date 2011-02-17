@@ -26,30 +26,30 @@
 menuPage_assign8::menuPage_assign8(QWidget *parent)
     : menuPage(parent)
 {
-    setLSB("02", "12");
-    editDetails()->patchPos(622, 36, "02", "12");    //sysx file offset and data length of parameters x 2,
+   // setLSB("02", "12");
+    //editDetails()->patchPos(622, 36, "02", "12");    //sysx file offset and data length of parameters x 2,
     setEditPages();
 };
 
 void menuPage_assign8::updateSignal()
 {
-    updateSwitch("02", "00", "12");
+  //  updateSwitch("02", "00", "12");
 };
 
 void menuPage_assign8::setEditPages()
 {
     editDetails()->page()->newGroupBox(tr("Assign 8"));
     editDetails()->page()->newGroupBox(tr(""));
-    editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "02", "00", "12", "middle", Qt::AlignCenter);
-    editDetails()->page()->addStackControl();
+//    editDetails()->page()->newStackControl(0);
+   // editDetails()->page()->addSwitch(0, 0, 1, 1, "02", "00", "12", "middle", Qt::AlignCenter);
+  //  editDetails()->page()->addStackControl();
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
+  //  editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
     editDetails()->addPage();
 
-    editDetails()->page()->newStackField(0);
+ /*   editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 8 Target");
     editDetails()->page()->addTarget(0, 0, 1, 3, "02", "00", "13", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
@@ -82,5 +82,5 @@ void menuPage_assign8::setEditPages()
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(1);
-    editDetails()->page()->addStackField();
+    editDetails()->page()->addStackField();*/
 };

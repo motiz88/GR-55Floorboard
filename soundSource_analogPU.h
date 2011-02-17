@@ -34,10 +34,10 @@ class soundsource_analogPU : public soundSource
 
 public:
 	soundsource_analogPU(QWidget *parent);
-	void setEditPages();
+        void setEditPages();
 	
 	public slots:
-	void updateSignal();
+        void updateSignal();
 };
 
 #endif // SOUNDSOURCE_analogPU_H

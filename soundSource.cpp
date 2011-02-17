@@ -39,8 +39,8 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
     this->editDialog = new editWindow();
     this->setWhatsThis(tr("StompBox effect<br>a double mouse click will open the effect edit page."));
 
-    this->pathSwitch = new customButton(tr(""), false, QPoint(60, 60), this, ":/images/pathswitch.png");
-    this->pathSwitch->hide();
+   // this->pathSwitch = new customButton(tr(""), false, QPoint(60, 60), this, ":/images/pathswitch.png");
+   // this->pathSwitch->hide();
 
     QObject::connect(this, SIGNAL( valueChanged(QString, QString, QString) ), this->parent(), SIGNAL( valueChanged(QString, QString, QString) ));
 
@@ -58,11 +58,11 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
+    //QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
 
     QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
 
-    QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
+   // QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this, SLOT(modeling_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(modeling_statusSignal(bool)), this->parent(), SIGNAL(modeling_statusSignal(bool)));
@@ -163,7 +163,7 @@ void soundSource::updatePos(signed int offsetDif)
 void soundSource::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-    this->update();
+    //this->update();
 };
 
 void soundSource::setSize(QSize newSize)

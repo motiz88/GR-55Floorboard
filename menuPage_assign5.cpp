@@ -33,12 +33,12 @@ menuPage_assign5::menuPage_assign5(QWidget *parent)
 
 void menuPage_assign5::updateSignal()
 {
-    updateSwitch("01", "00", "59");
+   // updateSwitch("01", "00", "59");
 };
 
 void menuPage_assign5::setEditPages()
 {
-    editDetails()->page()->newGroupBox(tr("Assign 5"));
+ /*   editDetails()->page()->newGroupBox(tr("Assign 5"));
     editDetails()->page()->newGroupBox(tr(""));
     editDetails()->page()->newStackControl(0);
     editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "59", "middle", Qt::AlignCenter);
@@ -83,5 +83,5 @@ void menuPage_assign5::setEditPages()
     editDetails()->page()->newStackField(1);
     editDetails()->page()->addStackField();
 
-
+*/
 };

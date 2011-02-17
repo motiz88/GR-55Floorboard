@@ -33,32 +33,32 @@ menuPage_assign1::menuPage_assign1(QWidget *parent)
 
 void menuPage_assign1::updateSignal()
 {
-    updateSwitch("01", "00", "0D");
+   // updateSwitch("01", "00", "0D");
 };
 
 void menuPage_assign1::setEditPages()
 {
     editDetails()->page()->newGroupBox(tr("Assign 1"));
     editDetails()->page()->newGroupBox(tr(""));
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "0D", "middle", Qt::AlignCenter);
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "0C", "middle", Qt::AlignCenter);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0E", "target","target", 120); // Target
+   // editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Source");
-    editDetails()->page()->newStackControl(0);
+    //editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "01", "00", "16");                    // Source
-    editDetails()->page()->addStackControl();
+    //editDetails()->page()->addStackControl();
     editDetails()->page()->addComboBox(0, 1, 1, 1, "01", "00", "17");                    // Source Mode
     editDetails()->page()->addRange(0, 2, 1, 2, "01", "00", "18", "Structure");         // min/max range widget
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
-    editDetails()->page()->insertStackField(0, 1, 1, 1, 2);
+    //editDetails()->page()->insertStackField(0, 1, 1, 1, 2);
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
     editDetails()->addPage();
 
 
-    editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
+  /*  editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
@@ -77,5 +77,5 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);
      editDetails()->page()->addStackField();
-
+*/
 };

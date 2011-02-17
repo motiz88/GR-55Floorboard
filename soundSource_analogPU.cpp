@@ -56,6 +56,6 @@ void soundsource_analogPU::setEditPages()
     editDetails()->page()->newGroupBox(tr("Level"));
     editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "33");  //level
     editDetails()->page()->addGroupBox(0, 1, 2, 1);
-    
+
     editDetails()->addPage();
 };
