@@ -54,11 +54,11 @@ void stompbox_dd::setEditPages()
 
     editDetails()->page()->newGroupBox("Delay");
     editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "09", "normal","right", 105); // 3 byte time
-    editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "0A");  //feedback
+    editDetails()->page()->addKnob(0, 1, 1, 1, "06", "00", "0A");  //feedback
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
 
     editDetails()->page()->newGroupBox("Level");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "0B"); //level
+    editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "0B", "turbo"); //level
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
 
     editDetails()->addPage();

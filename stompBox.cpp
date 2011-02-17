@@ -237,7 +237,7 @@ void stompBox::updatePos(signed int offsetDif)
 void stompBox::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-    this->update();
+   // this->update();
 };
 
 void stompBox::setSize(QSize newSize)

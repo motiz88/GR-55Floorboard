@@ -70,7 +70,7 @@ public slots:
     void assign6_ButtonSignal(bool value);
     void assign7_ButtonSignal(bool value);
     void assign8_ButtonSignal(bool value);
-    void menuButtonSignal(bool value);
+    //void menuButtonSignal(bool value);
     void systemReply(QString);
 
 signals:

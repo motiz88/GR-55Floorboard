@@ -63,9 +63,9 @@ menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint s
 
     QObject::connect(this, SIGNAL( setEditDialog(editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this, SLOT(menuButtonSignal(bool)));
+    //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this, SLOT(menuButtonSignal(bool)));
 
-    QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this->parent(), SLOT(menuButtonSignal()));
+    //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this, SLOT(pedal_ButtonSignal(bool) ));
     QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
@@ -277,7 +277,7 @@ void menuPage::assign8_ButtonSignal(bool value)
     };
 };
 
-void menuPage::menuButtonSignal(bool value)
+/*void menuPage::menuButtonSignal(bool value)
 {
     if(this->id == 14)
     {
@@ -286,7 +286,7 @@ void menuPage::menuButtonSignal(bool value)
         emit setEditDialog(this->editDialog);
     };
 
-};
+};*/
 
 void menuPage::systemReply(QString replyMsg)
 {
@@ -419,7 +419,7 @@ void menuPage::updatePos(signed int offsetDif)
 void menuPage::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-    this->update();
+   // this->update();
 };
 
 void menuPage::setSize(QSize newSize)

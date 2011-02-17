@@ -33,23 +33,23 @@ menuPage_assign2::menuPage_assign2(QWidget *parent)
 
 void menuPage_assign2::updateSignal()
 {
-    updateSwitch("01", "00", "20");
+   // updateSwitch("01", "00", "20");
 };
 
 void menuPage_assign2::setEditPages()
 {
     editDetails()->page()->newGroupBox(tr("Assign 2"));
     editDetails()->page()->newGroupBox(tr(""));
-    editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "20", "middle", Qt::AlignCenter);
-    editDetails()->page()->addStackControl();
+  //  editDetails()->page()->newStackControl(0);
+   // editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "20", "middle", Qt::AlignCenter);
+  //  editDetails()->page()->addStackControl();
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
+   // editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->addPage();
 
-    editDetails()->page()->newStackField(0);
+ /*  editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 2 Target");
     editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "21", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
@@ -82,5 +82,5 @@ void menuPage_assign2::setEditPages()
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
     editDetails()->page()->addStackField();
-
+*/
 };
