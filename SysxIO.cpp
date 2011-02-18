@@ -355,7 +355,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
         };
         this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
 	
-        sysxMsg = "F04110000053126000";
+        sysxMsg = "F04110000053121800";
         sysxMsg.append(hex1);
         sysxMsg.append(hex3);
     }
@@ -715,7 +715,7 @@ QString SysxIO::getRequestName()
 QString SysxIO::getPatchChangeMsg(int bank, int patch)
 {
     int bankOffset = ((bank - 1) * patchPerBank) + (patch - 1);
-    int bankSize = 100; // Size of items that go in a bank ( != patch address wich equals 127 ).
+    int bankSize = 128; // Size of items that go in a bank ( != patch address which equals 127 ).
     int bankMsbNum = (int)(bankOffset / bankSize);
     int programChangeNum = bankOffset - (bankSize * bankMsbNum);
     QString bankMsb = QString::number(bankMsbNum, 16);

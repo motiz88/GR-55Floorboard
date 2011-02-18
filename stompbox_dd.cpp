@@ -61,5 +61,11 @@ void stompbox_dd::setEditPages()
     editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "0B", "turbo"); //level
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
 
+    editDetails()->page()->newGroupBox(tr("Send Levels"));
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "12");           //MOD
+    editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "01");           //MFX
+    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "3F");           //bypass
+    editDetails()->page()->addGroupBox(2, 0, 1, 4);
+
     editDetails()->addPage();
 };

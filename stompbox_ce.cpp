@@ -61,6 +61,12 @@ void stompbox_ce::setEditPages()
         editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "04");
 	editDetails()->page()->addGroupBox(0, 3, 2, 1);
 
+        editDetails()->page()->newGroupBox(tr("Send Levels"));
+        editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "11");           //MOD
+        editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "00");           //MFX
+        editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "3E");           //bypass
+        editDetails()->page()->addGroupBox(2, 0, 1, 4);
+
 	editDetails()->addPage();
   	
 };

@@ -341,7 +341,7 @@ QTreeWidget* bankTreeList::newTreeList()
         a += 8;
     };
     user->addChildren(userBankRanges);
-
+/*
     QTreeWidgetItem *preset = new QTreeWidgetItem(newTreeList);
     preset->setText(0, "Preset");
     preset->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
@@ -371,7 +371,7 @@ QTreeWidget* bankTreeList::newTreeList()
     };
     preset->addChildren(presetBankRanges);
 
-
+*/
     newTreeList->setExpanded(newTreeList->model()->index(1, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(2, 0), true);
     return newTreeList;
@@ -684,14 +684,9 @@ void bankTreeList::connectedSignal()
         this->currentPatchTreeItems = this->openPatchTreeItems;
         qSort(this->currentPatchTreeItems);
         this->updatePatchNames("");
-    };
-
-    if(!sysxIO->deviceReady()) {SLEEP(2000); };
-    if(!sysxIO->deviceReady()) {SLEEP(2000); };
-    if(!sysxIO->deviceReady()) {SLEEP(2000); };
-    if(!sysxIO->deviceReady()) { SLEEP(2000); };
-    if(sysxIO->deviceReady()) { requestPatch(); };
-
+    }
+    else if (sysxIO->deviceReady() && sysxIO->isConnected())
+    { requestPatch(); };
 };
 
 /********************************** updateTree() ********************************
