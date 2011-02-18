@@ -26,8 +26,8 @@
 menuPage_assign3::menuPage_assign3(QWidget *parent)
     : menuPage(parent)
 {
-    setLSB("01", "33");
-    editDetails()->patchPos(406, 36, "01", "33");    //sysx file offset and data length of parameters x 2.
+    setLSB("01", "32");
+    editDetails()->patchPos(406, 36, "01", "32");    //sysx file offset and data length of parameters x 2.
     setEditPages();
 };
 
@@ -40,18 +40,18 @@ void menuPage_assign3::setEditPages()
 {
     editDetails()->page()->newGroupBox(tr("Assign 3"));
     editDetails()->page()->newGroupBox(tr(""));
-  //  editDetails()->page()->newStackControl(0);
-  //  editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "33", "middle", Qt::AlignCenter);
-  //  editDetails()->page()->addStackControl();
+    editDetails()->page()->newStackControl(0);
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "32", "middle", Qt::AlignCenter);
+    editDetails()->page()->addStackControl();
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-  //  editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
+    editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
     editDetails()->addPage();
-/*
+
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 3 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "34", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "34", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 3 Source");
     editDetails()->page()->newStackControl(1);
@@ -71,15 +71,15 @@ void menuPage_assign3::setEditPages()
     editDetails()->page()->newGroupBox("Assign 3 Internal Pedal");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "01", "00", "40");                    // Internal Pedal Trigger
     editDetails()->page()->addKnob(0, 1, 1, 1, "01", "00", "41");                        // Internal Pedal Time
-    editDetails()->page()->addComboBox(0, 2, 1, 1, "01", "00", "43");                    // Internal Pedal Curve
+    editDetails()->page()->addComboBox(0, 2, 1, 1, "01", "00", "42");                    // Internal Pedal Curve
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(1);
     editDetails()->page()->newGroupBox("Assign 3 Wave Pedal");
-    editDetails()->page()->addKnob(1, 0, 1, 1, "01", "00", "44", "normal","right", 105);// Wave Form Rate
-    editDetails()->page()->addComboBox(1, 1, 1, 1, "01", "00", "45");                    // Wave Form
+    editDetails()->page()->addKnob(1, 0, 1, 1, "01", "00", "43", "normal","right", 105);// Wave Form Rate
+    editDetails()->page()->addComboBox(1, 1, 1, 1, "01", "00", "44");                    // Wave Form
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(1);
-    editDetails()->page()->addStackField();*/
+    editDetails()->page()->addStackField();
 };

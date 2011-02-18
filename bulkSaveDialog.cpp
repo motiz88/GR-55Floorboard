@@ -58,15 +58,13 @@ bulkSaveDialog::bulkSaveDialog()
 		
 	this->startRangeSpinBox = startRangeSpinBox;
 	startRangeSpinBox->setValue(1);
-	startRangeSpinBox->setRange(1, 50);
+        startRangeSpinBox->setRange(1, 99);
 	startRangeSpinBox->setPrefix(tr("Start at U"));
-	startRangeSpinBox->setSuffix("-1");
 
 	this->finishRangeSpinBox = finishRangeSpinBox;
-	finishRangeSpinBox->setValue(50);    
-	finishRangeSpinBox->setRange(1, 50);
+        finishRangeSpinBox->setValue(99);
+        finishRangeSpinBox->setRange(1, 99);
 	finishRangeSpinBox->setPrefix(tr("Finish at U"));
-	finishRangeSpinBox->setSuffix("-4");
 
 	QVBoxLayout *rangeLabelLayout = new QVBoxLayout;
 	rangeLabelLayout->addSpacing(12);
@@ -177,12 +175,12 @@ void bulkSaveDialog::backup()
   this->bankStart = this->startRangeSpinBox->value();
   this->bankFinish = this->finishRangeSpinBox->value();
   if (bankFinish<bankStart) {bankFinish = bankStart; this->finishRangeSpinBox->setValue(bankStart); };
-  this->bank=bankStart*4;
+  this->bank=bankStart*3;
 	bulk.clear();
 	this->progress = 0;
 	this->patch = 1;
-	range = 200/(bankFinish-bankStart+1);
-	requestPatch(bank/4, patch);  
+        range = 297/(bankFinish-bankStart+1);
+        requestPatch(bank/3, patch);
 };
 
 void bulkSaveDialog::requestPatch(int bank, int patch) 
@@ -204,43 +202,42 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
 	
 	replyMsg = replyMsg.remove(" ").toUpper();       // TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks 
 		if (replyMsg.size()/2 == patchReplySize){
-        QString header = "F0411000005312";
-	QString footer ="00F7";
-	QString addressMsb = replyMsg.mid(14,4);
-	QString part1 = replyMsg.mid(22, 256); 
-  part1.prepend("0000").prepend(addressMsb).prepend(header).append(footer);    
-	QString part2 = replyMsg.mid(278, 228);
-	QString part2B = replyMsg.mid(532, 28);
-	part2.prepend("0100").prepend(addressMsb).prepend(header).append(part2B).append(footer); 
-	QString part3 = replyMsg.mid(560, 256);
-	part3.prepend("0200").prepend(addressMsb).prepend(header).append(footer);
-	QString part4 = replyMsg.mid(816, 200);
-	QString part4B = replyMsg.mid(1042, 56);
-	part4.prepend("0300").prepend(addressMsb).prepend(header).append(part4B).append(footer); 
-	QString part5 = replyMsg.mid(1098, 256);
-	part5.prepend("0400").prepend(addressMsb).prepend(header).append(footer);   
-	QString part6 = replyMsg.mid(1354, 172);   //
-	part6.prepend("0500").prepend(addressMsb).prepend(header).append(footer);   
-	QString part7 = replyMsg.mid(1552, 256);   // 0x308+128
-	part7.prepend("0600").prepend(addressMsb).prepend(header).append(footer);   
-	QString part8 = replyMsg.mid(1808, 228);  // 0x388+114
-	QString part8B = replyMsg.mid(2062, 28);   // 
-	part8.prepend("0700").prepend(addressMsb).prepend(header).append(part8B).append(footer); 
-	QString part9 = replyMsg.mid(2090, 256);
-	part9.prepend("0800").prepend(addressMsb).prepend(header).append(footer);
-	QString part10 = replyMsg.mid(2346,200);    //
-	part10.prepend("0900").prepend(addressMsb).prepend(header).append(footer);
-	QString part11 = replyMsg.mid(2572, 256);
-	part11.prepend("0A00").prepend(addressMsb).prepend(header).append(footer);
-	QString part12 = replyMsg.mid(2828, 226);   //
-	QString part12B = replyMsg.mid(3080, 30); 
-	part12.prepend("0B00").prepend(addressMsb).prepend(header).append(part12B).append(footer);
-	QString part13 = replyMsg.mid(3110, 256);
-	part13.prepend("0C00").prepend(addressMsb).prepend(header).append(footer);
-	
-	replyMsg = "";
-	replyMsg.append(part1).append(part2).append(part3).append(part4).append(part5).append(part6)
-  .append(part7).append(part8).append(part9).append(part10).append(part11).append(part12).append(part13);
+                    QString header = "F0411000005312";
+                    QString footer ="00F7";
+                    QString addressMsb = replyMsg.mid(14,4);    //  copy patch address MSB.
+                    QString part1 = replyMsg.mid(22, 256);      //  copy 128 bytes of address 00 data .
+                    part1.prepend("0000").prepend(addressMsb).prepend(header).append(footer);   //add LSB + MSB address, header and footer.
+                    QString part2 = replyMsg.mid(278, 256);     // copy 114 bytes of address 01 data.
+                    part2.prepend("0100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part3 = replyMsg.mid(534, 156);     //  copy 78 bytes of address 02 data .
+                    part3.prepend("0200").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+                    QString part4 = replyMsg.mid(716, 256);    //  copy 128 bytes of address 03 data .
+                    part4.prepend("0300").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+                    QString part5 = replyMsg.mid(972, 256);    // copy 114 bytes of address 04 data.
+                    part5.prepend("0400").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part6 = replyMsg.mid(1228, 36);    // copy 18 bytes of address 05 data.
+                    part6.prepend("0500").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part7 = replyMsg.mid(1290, 60);    // copy 30 bytes of address 06 data.
+                    part7.prepend("0600").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part8 = replyMsg.mid(1376, 250);   //  copy 125 bytes of address 07 data .
+                    part8.prepend("0700").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part9 = replyMsg.mid(1652, 256);   //  copy 128 bytes of address 10 data .
+                    part9.prepend("1000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part10 = replyMsg.mid(1908,172);   //  copy 86 bytes of address 11 data .
+                    part10.prepend("1100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part11 = replyMsg.mid(2106, 70);    //  copy 35 bytes of address 20 data .
+                    part11.prepend("2000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part12 = replyMsg.mid(2202, 70);    //  copy 35 bytes of address 21 data .
+                    part12.prepend("2100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+                    QString part13 = replyMsg.mid(2298, 104);   //  copy 52 bytes of address 30 data .
+                    part13.prepend("3000").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+                    QString part14 = replyMsg.mid(2428, 104);   //  copy 52 bytes of address 31 data .
+                    part14.prepend("3100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+
+                    replyMsg = "";
+                    replyMsg.append(part1).append(part2).append(part3).append(part4).append(part5).append(part6).append(part7)
+                            .append(part8).append(part9).append(part10).append(part11).append(part12).append(part13).append(part14);
+
   /*QByteArray data;
   QFile file(":default.syx");   // Read the default GR-55 sysx file so we don't start empty handed.
     if (file.open(QIODevice::ReadOnly))
@@ -290,20 +287,20 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
 	bulk.append(replyMsg); 	                                           // add patch to the bulk string.
 	}; 	       
 	      ++patch; 
-        if(patch>4) {patch=1; bank=bank+4;};	                      // increment patch.
+        if(patch>3) {patch=1; bank=bank+3;};	                      // increment patch.
         progress=progress+range;
         bulkStatusProgress(this->progress);                         // advance the progressbar.
-        int bf = (bankFinish+1)*4 -2;
+        int bf = (bankFinish+1)*3 -2;
   if (bank >= bf) 
       {                                                            // check if nearly finished.
         this->completedButton->show();        
         this->progressLabel->setText(tr("Bulk data transfer completed!!"));              
       };              
-  if (bank<(bankFinish+1)*4 )
+  if (bank<(bankFinish+1)*3 )
   {      
         bool ok;
         QString patchText;
-        QString name = replyMsg.mid(22, 32);                       // get name from loaded patch. 
+        QString name = replyMsg.mid(24, 32);                       // get name from loaded patch.
         QList<QString> x;        
         for (int b=0;b<16;b++)
         {
@@ -315,7 +312,7 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
 		      patchText.append( (char)(hexStr.toInt(&ok, 16)) );      // convert name to readable text characters.
         };
         
-  QString patchNumber = QString::number(bank/4, 10).toUpper();
+  QString patchNumber = QString::number(bank/3, 10).toUpper();
   if (patchNumber.size()<2) { patchNumber.prepend("0"); };
   patchNumber.prepend(tr("User Patch U"));
   patchNumber.append("-");

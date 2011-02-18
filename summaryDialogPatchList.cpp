@@ -128,7 +128,7 @@ QString text;
                         text.append(name);       // Set the patch name of the item in the list. 
                         patch = patch+1;
                         count = count+1;
-                        if (patch == 5) 
+                        if (patch == 4)
                         {
                           patch = 1;
                           bank = bank+1;
@@ -137,7 +137,7 @@ QString text;
                         textDialog->setText(text);                      
                 };
 
-                if(count < 200) // As long as we have items in the list we continue, duh! :)
+                if(count < 297) // As long as we have items in the list we continue, duh! :)
                 {
                   sysxIO->requestPatchName(bank, patch); // The patch name request.
                   emit setStatusSymbol(3);
