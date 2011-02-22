@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -189,7 +189,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Delay");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "45"); //type
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "48", "normal","right", 105);       //time
+    editDetails()->page()->addDataKnob(0, 1, 1, 1, "07", "00", "46", "DELAY","right", 105);       //time
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "49");       //feedback
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "4A");       //level
     editDetails()->page()->addGroupBox(0, 1, 1, 1);

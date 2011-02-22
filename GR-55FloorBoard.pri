@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## Copyright (C) 2007~2010 Colin Willcocks.
+## Copyright (C) 2007~2011 Colin Willcocks.
 ## Copyright (C) 2005~2007 Uco Mesdag. 
 ## All rights reserved.
 ##
@@ -36,6 +36,7 @@ HEADERS += ./editPage.h \
     ./customControlParaEQ.h \
     ./customControlGraphicEQ.h \
     ./customControlKnob.h \
+    ./customControlDataKnob.h \
     ./customControlRange.h \
     ./customControlLabel.h \
     ./customControlMasterEQ.h \
@@ -47,6 +48,7 @@ HEADERS += ./editPage.h \
     ./customParaEQGraph.h \
     ./customGraphicEQGraph.h \
     ./customKnob.h \
+    ./customDataKnob.h \
     ./customKnobTarget.h \
     ./customKnobRange.h \
     ./customLabelDisplay.h \
@@ -131,6 +133,7 @@ SOURCES += ./editPage.cpp \
     ./customControlParaEQ.cpp \
     ./customControlGraphicEQ.cpp \
     ./customControlKnob.cpp \
+    ./customControlDataKnob.cpp \
     ./customControlLabel.cpp \
     ./customControlListMenu.cpp \
     ./customControlMasterEQ.cpp \
@@ -142,6 +145,7 @@ SOURCES += ./editPage.cpp \
     ./customParaEQGraph.cpp \
     ./customGraphicEQGraph.cpp \
     ./customKnob.cpp \
+    ./customDataKnob.cpp \
     ./customKnobTarget.cpp \
     ./customKnobRange.cpp \
     ./customLabelDisplay.cpp \

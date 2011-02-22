@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -110,10 +110,10 @@ void stompbox_mfx::setEditPages()
 
 
     editDetails()->page()->newStackField(1);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "1A", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "1A", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(1);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "1B", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "1B", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Phaser
@@ -143,10 +143,10 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(2);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "22", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "22", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(2);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "23", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "23", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Step Phaser
@@ -180,17 +180,17 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(3);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "2F", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "2F", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(3);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "30", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "30", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(4);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "36", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "36", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(4);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "37", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "37", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Ring Modulator
@@ -228,10 +228,10 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(5);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "45", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "45", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(5);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "46", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "46", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
 
@@ -254,10 +254,10 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(6);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "4D", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "4D", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(6);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "4E", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "4E", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Slicer
@@ -279,10 +279,10 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(7);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "55", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "55", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(7);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "56", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "56", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // VK Rotary
@@ -319,37 +319,37 @@ void stompbox_mfx::setEditPages()
     // Hexa chorus
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Hexa-Chorus");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6B", "normal","right", 105);    //predelay
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6B", "normal","right", 60);    //predelay
     editDetails()->page()->newStackControl(8);
     editDetails()->page()->addComboBox(0, 1, 1, 1, "03", "00", "6C");  //Rate type
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(8, 0, 2, 1, 1);
     editDetails()->page()->addKnob(0, 3, 1, 1, "03", "00", "6F");  //depth
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 0, 1, 2);
 
     editDetails()->page()->newGroupBox("Deviation");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "70");    //pre del dev
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "70", "normal","right", 60);    //pre del dev
     editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "71");    //depth dev
     editDetails()->page()->addKnob(0, 2, 1, 1, "03", "00", "72");    //pan dev
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->addGroupBox(1, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Output");
     editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "73");    //balance
     editDetails()->page()->addKnob(0, 2, 1, 1, "03", "00", "74");    //output
-    editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    editDetails()->page()->addGroupBox(1, 1, 1, 1);
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(8);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6D", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6D", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(8);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6E", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "6E", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Space-D
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Space-D");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "75", "normal","right", 105);    //predelay
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "75", "normal","right", 60);    //predelay
     editDetails()->page()->newStackControl(9);
     editDetails()->page()->addComboBox(0, 1, 1, 1, "03", "00", "76");  //Rate type
     editDetails()->page()->addStackControl();
@@ -362,15 +362,15 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "7B");    //low gain
     editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "7C");    //high gain
     editDetails()->page()->addKnob(0, 2, 1, 1, "03", "00", "7D");    //balance
-    editDetails()->page()->addKnob(0, 2, 1, 1, "03", "00", "7E");    //level
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->addKnob(0, 3, 1, 1, "03", "00", "7E");    //level
+    editDetails()->page()->addGroupBox(1, 0, 1, 1);
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(9);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "77", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "77", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(9);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "78", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "78", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
 
@@ -379,14 +379,14 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->newGroupBox("Flanger");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "03", "00", "7F");// filter type
     editDetails()->page()->addKnob(1, 0, 1, 1, "04", "00", "00");  // cutoff freq
-    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "01", "normal","right", 80);    //predelay
+    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "01", "normal","right", 60);    //predelay
     editDetails()->page()->newStackControl(10);
     editDetails()->page()->addComboBox(0, 2, 1, 1, "04", "00", "02");  //Rate type
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(10, 0, 3, 1, 1);
-    editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "05");
-    editDetails()->page()->addKnob(0, 5, 1, 1, "04", "00", "06");
-    editDetails()->page()->addKnob(0, 6, 1, 1, "04", "00", "07");
+    editDetails()->page()->addKnob(1, 1, 1, 1, "04", "00", "05");
+    editDetails()->page()->addKnob(1, 2, 1, 1, "04", "00", "06");
+    editDetails()->page()->addKnob(1, 3, 1, 1, "04", "00", "07");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Level");
@@ -398,10 +398,10 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(10);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "03", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "03", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(10);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "04", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "04", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     // Step Flanger
@@ -409,14 +409,14 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->newGroupBox("Step Flanger");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "04", "00", "0C");// filter type
     editDetails()->page()->addKnob(1, 0, 1, 1, "04", "00", "0D");  // cutoff freq
-    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "0E", "normal","right", 80);    //predelay
+    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "0E", "normal","right", 60);    //predelay
     editDetails()->page()->newStackControl(11);
     editDetails()->page()->addComboBox(0, 2, 1, 1, "04", "00", "0F");  //Rate type
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(11, 0, 3, 1, 1);
-    editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "12"); //depth
-    editDetails()->page()->addKnob(0, 5, 1, 1, "04", "00", "13"); //phase
-    editDetails()->page()->addKnob(0, 6, 1, 1, "04", "00", "14"); //feedback
+    editDetails()->page()->addKnob(1, 1, 1, 1, "04", "00", "12"); //depth
+    editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "13"); //phase
+    editDetails()->page()->addKnob(1, 4, 1, 1, "04", "00", "14"); //feedback
     editDetails()->page()->newStackControl(12);
     editDetails()->page()->addComboBox(1, 2, 1, 1, "04", "00", "15");  //step Rate type
     editDetails()->page()->addStackControl();
@@ -432,17 +432,17 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(11);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "10", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "10", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(11);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "11", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "11", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(12);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "16", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "16", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(12);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "17", "normal","right", 105);   // rate
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "17", "normal","right", 120);   // rate
     editDetails()->page()->addStackField();
 
 
@@ -534,31 +534,72 @@ void stompbox_mfx::setEditPages()
 
     // 3Tap pan delay
     editDetails()->page()->newStackField(0);
-    editDetails()->page()->newGroupBox("3Tap Pan Delay", Qt::AlignTop | Qt::AlignHCenter);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "3C", "normal","right", 105);   // left time
-    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "46", "normal","right", 105);   // center time
-    editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "41", "normal","right", 105);   // right time
-    editDetails()->page()->addKnob(1, 0, 1, 1, "04", "00", "4B");   //left level
-    editDetails()->page()->addKnob(1, 1, 1, 1, "04", "00", "4D");   //center level
-    editDetails()->page()->addKnob(1, 2, 1, 1, "04", "00", "49");   //center fback
-    editDetails()->page()->addKnob(1, 3, 1, 1, "04", "00", "4C");    //right level
+    editDetails()->page()->newGroupBox("3Tap Pan Delay Left", Qt::AlignTop | Qt::AlignHCenter);
+    editDetails()->page()->newStackControl(14);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "04", "00", "3A");// left type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(14, 1, 0, 1, 1);
+    editDetails()->page()->addKnob(3, 0, 1, 1, "04", "00", "4B");   //left level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("3Tap Pan Delay Center", Qt::AlignTop | Qt::AlignHCenter);
+    editDetails()->page()->newStackControl(15);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "04", "00", "44");// center type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(15, 1, 0, 1, 1);
+    editDetails()->page()->addKnob(2, 0, 1, 1, "04", "00", "49");   //center fback
+    editDetails()->page()->addKnob(3, 0, 1, 1, "04", "00", "4D");   //center level
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->newGroupBox("3Tap Pan Delay Right", Qt::AlignTop | Qt::AlignHCenter);
+    editDetails()->page()->newStackControl(16);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "04", "00", "3F");// right type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(16, 1, 0, 1, 1);
+    editDetails()->page()->addKnob(3, 0, 1, 1, "04", "00", "4C");    //right level
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
     editDetails()->page()->newGroupBox("Level");
     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "4A");   //hf damp
     editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "4E");   // low gain
     editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "4F");   // high gain
     editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "50");   //balance
     editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "51");   //level
-    editDetails()->page()->addGroupBox(1, 0, 1, 1);
+    editDetails()->page()->addGroupBox(1, 0, 1, 3);
     editDetails()->page()->addStackField();
+
+
+     editDetails()->page()->newStackField(14);
+     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "3B", "DELAY2600", "right", 120); // left time
+     editDetails()->page()->addStackField();
+
+     editDetails()->page()->newStackField(14);
+     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "3E", "normal", "right", 120);   // left Rate
+     editDetails()->page()->addStackField();
+
+     editDetails()->page()->newStackField(15);
+     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "45", "DELAY2600", "right", 120); // center time
+     editDetails()->page()->addStackField();
+
+     editDetails()->page()->newStackField(15);
+     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "48", "normal", "right", 120);   // center Rate
+     editDetails()->page()->addStackField();
+
+     editDetails()->page()->newStackField(16);
+     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "40", "DELAY2600", "right", 120); // right time
+     editDetails()->page()->addStackField();
+
+     editDetails()->page()->newStackField(16);
+     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "43", "normal", "right", 120);   // right Rate
+     editDetails()->page()->addStackField();
 
     // Time CTRL delay
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Time Based Delay", Qt::AlignTop | Qt::AlignHCenter);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "54", "normal","right", 105);   // time
-    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "57");   //acceleration
-    editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "58");   //feedback
-    editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "59");   //hf damp
+    editDetails()->page()->newStackControl(17);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "04", "00", "52");// time type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(17, 0, 1, 1, 1);
+    editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "57");   //acceleration
+    editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "58");   //feedback
+    editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "59");   //hf damp
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Level");
     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "5A");   // low gain
@@ -566,6 +607,14 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "5C");   //balance
     editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "5D");   //level
     editDetails()->page()->addGroupBox(1, 0, 1, 1);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(17);
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "53", "DELAY2600", "right", 120); // time
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(17);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "56", "normal", "right", 120);   // Rate
     editDetails()->page()->addStackField();
 
     // LoFi Compressor
@@ -589,7 +638,7 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->newGroupBox("Pitch Shifter", Qt::AlignTop | Qt::AlignHCenter);
     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "66");   //pitch coarse
     editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "67");   //pitch fine
-    editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "6A", "normal","right", 105);   // time
+    //editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "6A", "normal","right", 105);   // time
     editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "6D");   //feedback
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Level");

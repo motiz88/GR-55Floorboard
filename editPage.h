@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -60,6 +60,14 @@ public:
                       int lenght = 45,
                       Qt::Alignment alignment = 0);
     void addKnob(int row, int column, int rowSpan, int columnSpan,
+                 QString hex1 = "void",
+                 QString hex2 = "void",
+                 QString hex3 = "void",
+                 QString background = "normal",
+                 QString direction = "bottom",
+                 int lenght = 45,
+                 Qt::Alignment alignment = 0);
+    void addDataKnob(int row, int column, int rowSpan, int columnSpan,
                  QString hex1 = "void",
                  QString hex2 = "void",
                  QString hex3 = "void",

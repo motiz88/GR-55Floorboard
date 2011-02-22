@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -51,7 +51,7 @@ void menuPage_assign6::setEditPages()
 
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 6 Target");
-    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "6C", "target","target", 120); // Target
+    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "6C", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 6 Source");
     editDetails()->page()->newStackControl(1);

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -24,6 +24,7 @@
 #include <QtGui>
 #include "customTargetDial.h"
 #include "MidiTable.h"
+#include "SysxIO.h"
 
 customTargetDial::customTargetDial(double value, double min, double max, double single, double page, 
 					   QPoint dialPos, QWidget *parent, QString hex1, QString hex2, QString hex3, 
@@ -212,8 +213,8 @@ void customTargetDial::knobSignal(QString hex1, QString hex2, QString hex3)
 {
 if (this->background != "target")
   {
-    MidiTable *midiTable = MidiTable::Instance();
-    this->max = midiTable->getRange("Structure", hex1, hex2, hex3); 
-    this->min = midiTable->getRangeMinimum("Structure", hex1, hex2, hex3); 
+    //MidiTable *midiTable = MidiTable::Instance();
+    //this->max = midiTable->getRange("Structure", "hex1", "hex2", "hex3");
+    //this->min = midiTable->getRangeMinimum("Structure", "hex1", "hex2", "hex3");
   };
 };

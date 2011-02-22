@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -49,16 +49,16 @@ void soundsource_synth_a::setEditPages()
 {
     editDetails()->page()->newGroupBox("Effect");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "20", "00", "03", "invert", Qt::AlignCenter);   // off/on effect
-    editDetails()->page()->addKnob(0, 1, 1, 1, "20", "00", "04");            // tone level
-    editDetails()->page()->addKnob(0, 2, 1, 1, "20", "00", "05");  //octave
-    editDetails()->page()->addSwitch(0, 3, 1, 1, "20", "00", "06");   //chromatic
-    editDetails()->page()->addSwitch(0, 4, 1, 1, "20", "00", "07");   //legato
-    editDetails()->page()->addSwitch(0, 5, 1, 1, "20", "00", "08");   //nuance
-    editDetails()->page()->addKnob(0, 6, 1, 1, "20", "00", "09");            // pan
-    editDetails()->page()->addKnob(0, 7, 1, 1, "20", "00", "0A");            // pitch shift
-    editDetails()->page()->addKnob(0, 8, 1, 1, "20", "00", "0B");            // pitch fine
+    editDetails()->page()->addKnob(0, 1, 1, 1, "20", "00", "04");               // tone level
+    editDetails()->page()->addKnob(0, 2, 1, 1, "20", "00", "05");               //octave
+    editDetails()->page()->addSwitch(0, 3, 1, 1, "20", "00", "06");             //chromatic
+    editDetails()->page()->addSwitch(0, 4, 1, 1, "20", "00", "07");             //legato
+    editDetails()->page()->addSwitch(0, 5, 1, 1, "20", "00", "08");             //nuance
+    editDetails()->page()->addKnob(0, 6, 1, 1, "20", "00", "09");               // pan
+    editDetails()->page()->addKnob(0, 7, 1, 1, "20", "00", "0A");               // pitch shift
+    editDetails()->page()->addKnob(0, 8, 1, 1, "20", "00", "0B");               // pitch fine
     editDetails()->page()->addComboBox(0, 9, 1, 1, "20", "00", "0C", "bottom", Qt::AlignLeft); //portamento sw
-    //editDetails()->page()->addKnob(0, 10, 1, 1, "20", "00", "0D");            // portamento time
+    editDetails()->page()->addDataKnob(0, 10, 1, 1, "20", "00", "0D", "0~100");        // portamento time
     editDetails()->page()->addGroupBox(0, 0, 1, 2);
 
     // SYNTH A
@@ -117,7 +117,7 @@ void soundsource_synth_a::setEditPages()
     editDetails()->page()->addGroupBox(4, 1, 1, 1);
 
     editDetails()->page()->newGroupBox(tr("LFO 1"));
-    //editDetails()->page()->addKnob(0, 0, 1, 1, "30", "00", "1C");            //Rate
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "1C", "RATE","right", 90); //Rate
     editDetails()->page()->addKnob(0, 1, 1, 1, "30", "00", "1E");            //pitch depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "30", "00", "1F");            //TVF depth
     editDetails()->page()->addKnob(0, 3, 1, 1, "30", "00", "20");            //TVA depth
@@ -125,7 +125,7 @@ void soundsource_synth_a::setEditPages()
     editDetails()->page()->addGroupBox(5, 0, 1, 1);
 
     editDetails()->page()->newGroupBox(tr("LFO 2"));
-    //editDetails()->page()->addKnob(0, 0, 1, 1, "30", "00", "22");            //Rate
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "22", "RATE","right", 90); //Rate
     editDetails()->page()->addKnob(0, 1, 1, 1, "30", "00", "24");            //pitch depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "30", "00", "25");            //TVF depth
     editDetails()->page()->addKnob(0, 3, 1, 1, "30", "00", "26");            //TVA depth
