@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -87,31 +87,39 @@ void soundsource_modeling::setEditPages()
 
 
     editDetails()->page()->newStackField(0);
+    editDetails()->page()->newGroupBox("");
     editDetails()->page()->newStackControl(1);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "01"); // guitar select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(1, 1, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 0, 1, 4);
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
+    editDetails()->page()->newGroupBox("");
     editDetails()->page()->newStackControl(2);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "02"); // acoustic select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(2, 1, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 0, 1, 4);
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
+    editDetails()->page()->newGroupBox("");
     editDetails()->page()->newStackControl(3);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "03"); // E.bass select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(3, 1, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 0, 1, 4);
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
+    editDetails()->page()->newGroupBox("");
      editDetails()->page()->newStackControl(4);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "04"); // synth select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(4, 1, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 0, 1, 4);
     editDetails()->page()->addStackField();
 
     // CLA ST

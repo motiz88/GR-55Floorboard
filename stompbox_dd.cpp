@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -29,7 +29,7 @@ stompbox_dd::stompbox_dd(QWidget *parent)
     /* DELAY */
     setImage(":/images/dd.png");
     setLSB("06", "00");
-    setKnob1("06", "00", "09");
+    //setKnob1("06", "00", "09");
     setKnob2("06", "00", "0A");
     setComboBox("06", "00", "06");
     setSwitch("06", "00", "05");
@@ -39,7 +39,7 @@ stompbox_dd::stompbox_dd(QWidget *parent)
 
 void stompbox_dd::updateSignal()
 {
-    updateKnob1("06", "00", "09");
+    //updateKnob1("06", "00", "09");
     updateKnob2("06", "00", "0A");
     updateComboBox("06", "00", "06");
     updateSwitch("06", "00", "05");
@@ -53,7 +53,7 @@ void stompbox_dd::setEditPages()
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Delay");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "09", "normal","right", 105); // 3 byte time
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "06", "00", "07", "DELAY","right", 105); // 3 byte time
     editDetails()->page()->addKnob(0, 1, 1, 1, "06", "00", "0A");  //feedback
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
 

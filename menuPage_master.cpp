@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -26,10 +26,10 @@
 menuPage_master::menuPage_master(QWidget *parent)
     : menuPage(parent)
 {
-  //setImage(":/images/master_pushbutton.png");
- // setLSB("0A", "00");
- // editDetails()->patchPos(2894, 20, "0A", "60");    
-	setEditPages();
+    //setImage(":/images/master_pushbutton.png");
+    setLSB("02", "00");
+    // editDetails()->patchPos(2894, 20, "0A", "60");
+    setEditPages();
 };
 
 void menuPage_master::updateSignal()
@@ -39,26 +39,87 @@ void menuPage_master::updateSignal()
 
 void menuPage_master::setEditPages()
 {
-  
-	editDetails()->page()->newGroupBox("Master");
-  // editDetails()->page()->addMasterEQ(0, 1, 2, 4, "0A", "00", "60");
-    /*editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "61");                        // master low
-    editDetails()->page()->addKnob(0, 1, 1, 1, "0A", "00", "62");                        // master mid gain
-    editDetails()->page()->addKnob(1, 1, 1, 1, "0A", "00", "63");                        // master mid Q
-    editDetails()->page()->addKnob(2, 1, 1, 1, "0A", "00", "64");                        // master mid freq
-    editDetails()->page()->addKnob(0, 2, 1, 1, "0A", "00", "65");                        // master high
-    editDetails()->page()->addKnob(0, 3, 1, 1, "0A", "00", "60");  */                      // master gain
-                       // master gain
-	editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-  editDetails()->page()->newGroupBox("Master");
- // editDetails()->page()->addKnob(0, 0, 1, 1, "0A", "00", "66");                         // master BPM
- // editDetails()->page()->addComboBox(1, 0, 1, 1, "0A", "00", "68");                     // master key
-	editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->newGroupBox("Patch Level");
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "02", "00", "30", "0~100"); // patch level
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
-  editDetails()->page()->newGroupBox("Amp Control Jack");
-  //editDetails()->page()->addComboBox(0, 0, 1, 1, "0A", "00", "69");                     // amp control
-	editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    editDetails()->page()->newGroupBox("Patch Tempo");
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "02", "00", "3C", "BPM"); // master BPM
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
 
-	editDetails()->addPage();      
+    editDetails()->page()->newGroupBox("Guitar Out Jack");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "25");    // guitar out
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
+
+    editDetails()->page()->newGroupBox("GK SET Select");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "24");    // guitar out
+    editDetails()->page()->addGroupBox(0, 3, 1, 1);
+
+    editDetails()->page()->newGroupBox(tr("ALTERNATE TUNING"));
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "02", "00", "34", "middle", Qt::AlignCenter);  //sw
+    editDetails()->page()->newStackControl(0);
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "35");    //type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(0, 0, 2, 1, 6);
+    editDetails()->page()->addGroupBox(1, 0, 1, 4);
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->newGroupBox("User Tuning");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "36");    //String H
+    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "37");    //String 1
+    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "38");    //String 2
+    editDetails()->page()->addKnob(0, 3, 1, 1, "02", "00", "39");    //String 3
+    editDetails()->page()->addKnob(0, 4, 1, 1, "02", "00", "3A");    //String 4
+    editDetails()->page()->addKnob(0, 5, 1, 1, "02", "00", "3B");    //String L
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newGroupBox("V-LINK");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "26");       // palette
+    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "27");       //clip
+    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "28");       //note clip change
+    editDetails()->page()->addKnob(0, 3, 1, 1, "02", "00", "29", "normal","right", 80);       //EXP
+    editDetails()->page()->addKnob(0, 4, 1, 1, "02", "00", "2A", "normal","right", 80);       //EXP ON
+    editDetails()->page()->addKnob(0, 5, 1, 1, "02", "00", "2B", "normal","right", 80);       //GK VOL
+    editDetails()->page()->addGroupBox(2, 0, 1, 4);
+
+    editDetails()->addPage();
 };

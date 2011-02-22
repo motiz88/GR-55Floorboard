@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -28,6 +28,7 @@
 #include "customControlGraphicEQ.h"
 #include "customControlMasterEQ.h"
 #include "customControlKnob.h"
+#include "customControlDataKnob.h"
 #include "customControlTarget.h"
 #include "customControlRange.h"
 #include "customControlLabel.h"
@@ -148,6 +149,26 @@ void editPage::addKnob(int row, int column, int rowSpan, int columnSpan,
 	{
 		this->layout->addWidget(knob, row, column, rowSpan, columnSpan, alignment);
 	};
+};
+
+void editPage::addDataKnob(int row, int column, int rowSpan, int columnSpan,
+                                           QString hex1, QString hex2, QString hex3,
+                                           QString background, QString direction, int lenght,
+                                           Qt::Alignment alignment)
+{
+        customControlDataKnob *knob = new customControlDataKnob(this, hex1, hex2, hex3, background, direction, lenght);
+        if(this->groupBoxMode)
+        {
+                this->groupBoxLayout->addWidget(knob, row, column, rowSpan, columnSpan, alignment);
+        }
+        else if(this->stackFieldMode)
+        {
+                this->stackField->addWidget(knob, row, column, rowSpan, columnSpan, alignment);
+        }
+        else
+        {
+                this->layout->addWidget(knob, row, column, rowSpan, columnSpan, alignment);
+        };
 };
 
 void editPage::addTarget(int row, int column, int rowSpan, int columnSpan,

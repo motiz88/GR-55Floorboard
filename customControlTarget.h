@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2010 Colin Willcocks.
+** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -83,6 +83,8 @@ private:
         QString hexTemp1;
         QString hexTemp2;
         QString direction;
+        QString hex3_msb;
+        QString hex3_lsb;
 };
 
 #endif // customControlTarget_H
