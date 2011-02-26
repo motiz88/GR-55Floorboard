@@ -124,16 +124,16 @@ void SysxIO::setFileSource(QString area, QByteArray data)
 
             if(getCheckSum(dataSize) != checksum)
             {
-				QString errorString;
-				errorString.append(tr("Address") + ": ");
-				errorString.append(sysxBuffer.at(sysxAddressOffset) + " ");
-				errorString.append(sysxBuffer.at(sysxAddressOffset + 1) + " ");
-				errorString.append(sysxBuffer.at(sysxAddressOffset + 2) + " ");
-				errorString.append(sysxBuffer.at(sysxAddressOffset + 3) + " - ");
-				errorString.append(tr("checksum") + " (" + checksum + ") ");
-				errorString.append(tr("should have been") + " (" + getCheckSum(dataSize) + ")");
-				errorString.append("\n");
-				errorList.append(errorString);
+                QString errorString;
+                errorString.append(tr("Address") + ": ");
+                errorString.append(sysxBuffer.at(sysxAddressOffset) + " ");
+                errorString.append(sysxBuffer.at(sysxAddressOffset + 1) + " ");
+                errorString.append(sysxBuffer.at(sysxAddressOffset + 2) + " ");
+                errorString.append(sysxBuffer.at(sysxAddressOffset + 3) + " - ");
+                errorString.append(tr("checksum") + " (" + checksum + ") ");
+                errorString.append(tr("should have been") + " (" + getCheckSum(dataSize) + ")");
+                errorString.append("\n");
+                errorList.append(errorString);
 
                 sysxBuffer = correctSysxMsg(sysxBuffer);
             };
@@ -157,9 +157,34 @@ void SysxIO::setFileSource(QString area, QByteArray data)
             offset = 0;
         };
     };
+  /*  QString snork;
+    snork.append("<font size='-1'>");
+    snork.append(tr("{ size="));
+    snork.append(QString::number(data.size(), 10));
+    snork.append("}");
+    snork.append(tr("<br> midi data received"));
+    for(int i=0;i<data.size();++i)
+    {
+        unsigned char byte = (char)data[i];
+        unsigned int n = (int)byte;
+        QString hex = QString::number(n, 16).toUpper();
+        if (hex.length() < 2) hex.prepend("0");
+        snork.append(hex);
+        snork.append(" ");
+    };
+    snork.replace("F7", "F7 } <br>");
+    snork.replace("F0", "{ F0");
+
+
+    QMessageBox *msgBox = new QMessageBox();
+    msgBox->setWindowTitle(tr("dBug Result for re-formatted GR-55 patch data"));
+    msgBox->setIcon(QMessageBox::Information);
+    msgBox->setText(snork);
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->exec();*/
     if(!errorList.isEmpty())
     {
-        QMessageBox *msgBox = new QMessageBox();
+     /*   QMessageBox *msgBox = new QMessageBox();
         //msgBox->setWindowTitle(tr("GR-55 FloorBoard - Checksum Error"));
         msgBox->setWindowTitle(tr("GR-55 FloorBoard"));
         msgBox->setIcon(QMessageBox::Warning);
@@ -174,7 +199,7 @@ void SysxIO::setFileSource(QString area, QByteArray data)
         msgBox->setInformativeText(tr("Be aware of possible inconsistencies in this patch!"));
         msgBox->setDetailedText(errorList);
         msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
+        msgBox->exec();*/
     };
 };
 
@@ -548,50 +573,50 @@ QList<QString> SysxIO::correctSysxMsg(QList<QString> sysxMsg)
 
     bool ok;
 
-    for(int i=sysxDataOffset;i<sysxMsg.size() - 3;i++)
+   /* for(int i=sysxDataOffset;i<sysxMsg.size() - 2;i++)
     {
-        if(i==sysxDataOffset + 1) i++; // is reserved memmory address on the GR-55 so we skip it.
+        //if(i==sysxDataOffset + 1) i++; // is reserved memmory address on the GR-55 so we skip it.
 
         QString address3 = QString::number(i - sysxDataOffset, 16).toUpper();
         if(address3.length()<2) address3.prepend("0");
         //
         MidiTable *midiTable = MidiTable::Instance();
-		int range = midiTable->getRange("Structure", address1, address2, address3);
+        int range = midiTable->getRange("Structure", address1, address2, address3);
 
-		if(midiTable->isData("Structure", address1, address2, address3))
-		{	
-			int maxRange = QString("7F").toInt(&ok, 16) + 1; // index starts at 0 -> 0-127 = 128 entry's.
-			int value1 = sysxMsg.at(i).toInt(&ok, 16);
-			int value2 = sysxMsg.at(i + 1).toInt(&ok, 16);
-			int value = (value1 * maxRange) + value2;
-			
-			if(value > range)
-			{
-				value = 0;//(int)(range / 2);
-				int dif = (int)(value/maxRange);
-				QString valueHex1 = QString::number(dif, 16).toUpper();
-				if(valueHex1.length() < 2) valueHex1.prepend("0");
-				QString valueHex2 = QString::number(value - (dif * maxRange), 16).toUpper();
-				if(valueHex2.length() < 2) valueHex2.prepend("0");
-				
-				sysxMsg.replace(i, valueHex1);
-				sysxMsg.replace(i + 1, valueHex2);
-			};
+        if(midiTable->isData("Structure", address1, address2, address3))
+        {
+            int maxRange = QString("7F").toInt(&ok, 16) + 1; // index starts at 0 -> 0-127 = 128 entry's.
+            int value1 = sysxMsg.at(i).toInt(&ok, 16);
+            int value2 = sysxMsg.at(i + 1).toInt(&ok, 16);
+            int value = (value1 * maxRange) + value2;
 
-			i++;
-		}
-		else
-		{
-			if(sysxMsg.at(i).toInt(&ok, 16) > range)
-			{
-				int value = 0;//(int)(range / 2);
-				QString valueHex = QString::number(value, 16).toUpper();
-				if(valueHex.length() < 2) valueHex.prepend("0");
-				sysxMsg.replace(i, valueHex);
-			};
-                };  //
+            if(value > range)
+            {
+                value = 0;//(int)(range / 2);
+                int dif = (int)(value/maxRange);
+                QString valueHex1 = QString::number(dif, 16).toUpper();
+                if(valueHex1.length() < 2) valueHex1.prepend("0");
+                QString valueHex2 = QString::number(value - (dif * maxRange), 16).toUpper();
+                if(valueHex2.length() < 2) valueHex2.prepend("0");
+
+                sysxMsg.replace(i, valueHex1);
+                sysxMsg.replace(i + 1, valueHex2);
+            };
+
+            i++;
+        }
+        else
+        {
+            if(sysxMsg.at(i).toInt(&ok, 16) > range)
+            {
+                int value = 0;//(int)(range / 2);
+                QString valueHex = QString::number(value, 16).toUpper();
+                if(valueHex.length() < 2) valueHex.prepend("0");
+                sysxMsg.replace(i, valueHex);
+            };
+        };
     };
-
+*/
     int dataSize = 0;
     for(int i=sysxMsg.size() - 1; i>=checksumOffset;i--)
     {
