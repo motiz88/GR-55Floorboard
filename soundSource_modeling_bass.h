@@ -21,38 +21,23 @@
 **
 ****************************************************************************/
 
-#include "stompbox_ns.h"
+#ifndef STOMPBOX_MODELING_BASS_H
+#define STOMPBOX_MODELING_BASS_H
 
-stompbox_ns::stompbox_ns(QWidget *parent)
-    : stompBox(parent)
+#include <QtGui>
+#include <QWidget>
+#include "soundSource.h"
+
+class soundsource_modeling_bass : public soundSource
 {
-    /* ns */
-    setImage(":/images/ns.png");
-    setLSB("07", "5A");
-    setKnob1("07", "00", "5B");
-    setKnob2("07", "00", "5C");
-    setSwitch("07", "00", "5A");
-    //editDetails()->patchPos(2928, 8, "07", "5A");
-    setEditPages();
+    Q_OBJECT
+
+public:
+        soundsource_modeling_bass(QWidget *parent);
+	void setEditPages();
+	
+	public slots:
+	void updateSignal();
 };
 
-void stompbox_ns::updateSignal()
-{
-    updateKnob1("07", "00", "5B");
-    updateKnob2("07", "00", "5C");
-    updateSwitch("07", "00", "5A");
-};
-
-void stompbox_ns::setEditPages()
-{
-    editDetails()->page()->newGroupBox("Effect");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "5A", "middle", Qt::AlignCenter);
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
-
-    editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "5B");
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "5C");
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->addPage();
-
-};
+#endif // SOUNDSOURCE_MODELING_BASS_H

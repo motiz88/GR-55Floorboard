@@ -45,8 +45,8 @@ customKnobTarget::customKnobTarget(QWidget *parent,
     QLabel *newBackGround = new QLabel(this);
     if (this->background == "target")
     {
-        this->range = midiTable->getRange("Tables", "00", "00", "00");
-        this->rangeMin = midiTable->getRangeMinimum("Tables", "00", "00", "00");
+        this->range = 536;//midiTable->getRange("Tables", "00", "00", "00");
+        this->rangeMin = 0;//midiTable->getRangeMinimum("Tables", "00", "00", "00");
     }
     else
     {
@@ -124,8 +124,8 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
     MidiTable *midiTable = MidiTable::Instance();
 
     QString valueHex = QString::number(value, 16).toUpper();
-    if(valueHex.length() < 3) { valueHex.prepend("0"); }
-    else if(valueHex.length() < 2) { valueHex.prepend("00"); };
+    if(valueHex.length() < 2) { valueHex.prepend("00"); }
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
 
     QList<QString> valueString;
     QString lsb = valueHex.at(0);
@@ -171,7 +171,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
 
         valueStr = midiTable->getValue("Tables", "00", "00", "00", valueHex);           // lookup the target values
 
-        int maxRange = QString("7F").toInt(&ok, 16) + 1;
+        int maxRange = 256;
         value = valueHex.toInt(&ok, 16);
         int dif = value/maxRange;
         QString valueHex1 = QString::number(dif, 16).toUpper();

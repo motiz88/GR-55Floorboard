@@ -49,7 +49,7 @@
 
 #include "soundSource_synth_a.h"
 #include "soundSource_synth_b.h"
-#include "soundSource_modeling.h"
+
 #include "soundSource_analogPU.h"
 #include "stompbox_amp.h"
 #include "stompbox_mod.h"
@@ -60,12 +60,9 @@
 #include "stompbox_rv.h"
 #include "stompbox_ns.h"
 
-
-
 floorBoard::floorBoard(QWidget *parent,
                        QString imagePathFloor,
                        QString imagePathStompBG,
-                       QString imagePathInfoBar,
                        unsigned int marginStompBoxesTop,
                        unsigned int marginStompBoxesBottom,
                        unsigned int marginStompBoxesWidth,
@@ -77,7 +74,6 @@ floorBoard::floorBoard(QWidget *parent,
 
     this->imagePathFloor = imagePathFloor;
     this->imagePathStompBG = imagePathStompBG;
-    this->imagePathInfoBar = imagePathInfoBar;
 
     this->marginStompBoxesTop = marginStompBoxesTop;
     this->marginStompBoxesBottom = marginStompBoxesBottom;
@@ -99,6 +95,7 @@ floorBoard::floorBoard(QWidget *parent,
     bar->setDragBarSize(QSize(4, panelBar->height() ));
     bar->setDragBarMinOffset(2, 8);
     bar->setDragBarMaxOffset(offset - panelBarOffset + 5);
+
     initSoundSource();
     initStomps();
     initMenuPages();
@@ -106,7 +103,6 @@ floorBoard::floorBoard(QWidget *parent,
     this->editDialog = new editWindow(this);
     this->editDialog->hide();
     this->oldDialog = this->editDialog;
-
 
     QObject::connect(this, SIGNAL( resizeSignal(QRect) ), bankList, SLOT( updateSize(QRect) ) );
     QObject::connect(display, SIGNAL(connectedSignal()), bankList, SLOT(connectedSignal()));
@@ -118,12 +114,11 @@ floorBoard::floorBoard(QWidget *parent,
     QObject::connect(this, SIGNAL(setFloorPanelBarPos(QPoint)), panelBar, SLOT(setPos(QPoint)));
     QObject::connect(this->parent(), SIGNAL(updateSignal()), this, SIGNAL(updateSignal()));
     QObject::connect(this, SIGNAL(updateSignal()), this, SLOT(updateStompBoxes()));
+    QObject::connect(this, SIGNAL(updateSignal()), this, SLOT(update_structure()));
     QObject::connect(bankList, SIGNAL(patchSelectSignal(int, int)), display, SLOT(patchSelectSignal(int, int)));
     QObject::connect(bankList, SIGNAL(patchLoadSignal(int, int)), display, SLOT(patchLoadSignal(int, int)));
-
     QObject::connect(panelBar, SIGNAL(showDragBar(QPoint)), this, SIGNAL(showDragBar(QPoint)));
     QObject::connect(panelBar, SIGNAL(hideDragBar()), this, SIGNAL(hideDragBar()));
-    //QObject::connect(this, SIGNAL(modeling_buttonSignal(bool)), this, SLOT(beep()));
 
 
     bool ok;
@@ -188,44 +183,25 @@ void floorBoard::paintEvent(QPaintEvent *)
 void floorBoard::setFloorBoard() {
     QPixmap imageFloor(imagePathFloor);
     QPixmap imagestompBG(imagePathStompBG);
-    QPixmap imageInfoBar(imagePathInfoBar);
     QPixmap buffer = imageFloor;
     QPainter painter(&buffer);
 
-    this->offset = imageFloor.width() - imageInfoBar.width();
-    this->infoBarWidth = imageInfoBar.width();
+    this->offset = imageFloor.width() - 997;
+    this->structureWidth = 997;
     this->stompSize = imagestompBG.size();
-    this->infoBarHeight = imageInfoBar.height();
+    this->structureHeight = 44;
 
     initSize(imageFloor.size());
     this->maxSize = floorSize;
-    this->minSize = QSize(imageInfoBar.width() + borderWidth + panelBarOffset, imageFloor.height());
+    this->minSize = QSize(997 + borderWidth + panelBarOffset, imageFloor.height());
 
-    // Draw InfoBar
-   /* QRectF sourceInfoBar(0.0, 0.0, imageInfoBar.width(), imageInfoBar.height());
-    QRectF targetInfoBar(offset, 0.0, imageInfoBar.width(), imageInfoBar.height());
-    QRectF targetInfoBar2(offset, imageInfoBar.height()-4, imageInfoBar.width(), imageInfoBar.height());
-    QRectF targetInfoBar3(offset, (imageInfoBar.height()*2)-8, imageInfoBar.width(), imageInfoBar.height()/2);
-    painter.drawPixmap(targetInfoBar, imageInfoBar, sourceInfoBar);
-    painter.drawPixmap(targetInfoBar2, imageInfoBar, sourceInfoBar);
-    painter.drawPixmap(targetInfoBar3, imageInfoBar, sourceInfoBar);
+    // Draw Structure 2
+    structure_state = false;
+    this->structure_2 = new customStructure(structure_state, QPoint(0, 0), this);
+    this->structure_2->move(634, 144);
+    QObject::connect(this, SIGNAL( structure_buttonSignal(bool)), this, SLOT( structure(bool) ) );
 
-    // Draw LiberianBar
-    QRectF sourceLiberianBar(0.0, 0.0, imageInfoBar.width(), imageInfoBar.height());
-    QRectF targetLiberianBar(offset, (imageFloor.height() - imageInfoBar.height()) - 2, imageInfoBar.width(), imageInfoBar.height());
-
-    painter.drawPixmap(targetLiberianBar, imageInfoBar, sourceLiberianBar);
-*/
-
-    // Draw stomp boxes background
-    /* QRectF source(0.0, 0.0, imagestompBG.width(), imagestompBG.height());
-        for(int i=0;i<fxPos.size();i++)
-        {
-                QRectF target(fxPos.at(i).x(), fxPos.at(i).y(), imagestompBG.width(), imagestompBG.height());
-                painter.drawPixmap(target, imagestompBG, source);
-        };
-        painter.end();
-        */
+    painter.end();
 
     this->baseImage = buffer;
     this->image = buffer;
@@ -237,26 +213,8 @@ void floorBoard::setFloorBoard() {
     QPoint newDisplayPos = QPoint(offset, 0);
     this->displayPos = newDisplayPos;
 
-    QPoint newLiberainPos = QPoint(offset, floorHeight);
-    this->liberainPos = newLiberainPos;
-
     QRect newBankListRect = QRect(borderWidth, borderWidth, offset - panelBarOffset - (borderWidth*2), floorHeight - (borderWidth*2));
     emit resizeSignal(newBankListRect);
-};
-
-void floorBoard::dragEnterEvent(QDragEnterEvent *event)
-{
-
-};
-
-void floorBoard::dragMoveEvent(QDragMoveEvent *event)
-{
-
-};
-
-void floorBoard::dropEvent(QDropEvent *event)
-{
-
 };
 
 void floorBoard::initSize(QSize floorSize)
@@ -292,7 +250,7 @@ void floorBoard::setCollapse()
 void floorBoard::setSize(QSize newSize)
 {
     unsigned int oldOffset = offset;
-    this->offset = newSize.width() - infoBarWidth;
+    this->offset = newSize.width() - 997;
     QSize oldFloorSize = this->floorSize;
     this->floorSize = newSize;
 
@@ -317,11 +275,6 @@ void floorBoard::setSize(QSize newSize)
     QRectF source(maxSize.width() - floorSize.width(), 0.0, floorSize.width(), floorSize.height());
     QRectF target(0.0, 0.0, floorSize.width(), floorSize.height());
     painter.drawPixmap(target, baseImage, source);
-
-    // Redraw clipped border
-    /*QRectF sourceBorder(0.0, 0.0, borderWidth, floorSize.height());
-        QRectF targetBorder(0.0, 0.0, borderWidth, floorSize.height());
-        painter.drawPixmap(sourceBorder, baseImage, targetBorder);*/
 
     painter.end();
 
@@ -373,10 +326,17 @@ void floorBoard::initSoundSource()
     analogPU->setId(0);
     analogPU->setPos(QPoint(offset+20, 480));
 
-    //Modeling
-    soundSource *modeling = new soundsource_modeling(this);
+    //Guitar Modeling
+    /*soundSource **/this->modeling = new soundsource_modeling(this);
     modeling->setId(1);
     modeling->setPos(QPoint(offset+20, 370));
+
+    //Bass Modeling
+    /*soundSource **/this->modeling_bass = new soundsource_modeling_bass(this);
+    modeling_bass->setId(25);
+    modeling_bass->setPos(QPoint(offset+20, 370));
+    modeling_bass->hide();
+
     //Synth A
     soundSource *synth_a = new soundsource_synth_a(this);
     synth_a->setId(2);
@@ -525,48 +485,38 @@ void floorBoard::initMenuPages()
     this->menuPages = initMenuPages.toList();;
 
     /* MENU_PAGES */
-
-
-
-    //int assignButtonVerticalPos = 84;
-    //int assignButtonHorizonalOffset = offset;
     menuPage *assign8 = new menuPage_assign8(this);
     assign8->setId(22);
-    //assign8->setPos(QPoint(assignButtonHorizonalOffset + 640, assignButtonVerticalPos));
+
     menuPage *assign7 = new menuPage_assign7(this);
     assign7->setId(21);
-    //assign7->setPos(QPoint(assignButtonHorizonalOffset + 550, assignButtonVerticalPos));
+
     menuPage *assign6 = new menuPage_assign6(this);
     assign6->setId(20);
-    //assign6->setPos(QPoint(assignButtonHorizonalOffset + 460, assignButtonVerticalPos));
+
     menuPage *assign5 = new menuPage_assign5(this);
     assign5->setId(19);
-    //assign5->setPos(QPoint(assignButtonHorizonalOffset + 370, assignButtonVerticalPos));
+
     menuPage *assign4 = new menuPage_assign4(this);
     assign4->setId(18);
-    //assign4->setPos(QPoint(assignButtonHorizonalOffset + 280, assignButtonVerticalPos));
+
     menuPage *assign3 = new menuPage_assign3(this);
     assign3->setId(17);
-    //assign3->setPos(QPoint(assignButtonHorizonalOffset + 190, assignButtonVerticalPos));
+
     menuPage *assign2 = new menuPage_assign2(this);
     assign2->setId(16);
-    //assign2->setPos(QPoint(assignButtonHorizonalOffset + 100, assignButtonVerticalPos));
+
     menuPage *assign1 = new menuPage_assign1(this);
     assign1->setId(15);
-    //assign1->setPos(QPoint(assignButtonHorizonalOffset + 10, assignButtonVerticalPos));
 
     menuPage *pdl = new menuPage_pdl(this);
     pdl->setId(12);
-    //pdl->setPos(QPoint(offset + 400, 250));
 
     menuPage *master = new menuPage_master(this);
     master->setId(13);
-    //master->setPos(QPoint(offset + 566, 24));
 
     menuPage *system = new menuPage_system(this);
     system->setId(14);
-    //system->setPos(QPoint(offset + 744, 5));
-    
 
 };
 
@@ -575,7 +525,47 @@ void floorBoard::menuButtonSignal()
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     { this->oldDialog->hide(); };
-    this->editDialog->show();
+};
+
+void floorBoard::structure(bool value)
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+        if(structure_state == false)
+        { sysxIO->setFileSource("Structure", "02", "00", "2C", "01");
+            structure_state = true;
+            emit valueChanged("Structure", "Structure", "2");
+            emit structure_statusSignal(true);
+        }
+        else
+        {sysxIO->setFileSource("Structure", "02", "00", "2C", "00");
+            structure_state = false;
+            emit valueChanged("Structure", "Structure", "1");
+            emit structure_statusSignal(false);
+        };
+   update_structure();
+};
+
+void floorBoard::update_structure()
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    int value2 = sysxIO->getSourceValue("Structure", "02", "00", "2C");
+    this->structure_2->changeValue((value2==1)?true:false);
+    emit structure_statusSignal((value2==1)?true:false);
+    value2 = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    if(value2 == 0)
+    {
+    emit valueChanged("Modeling", "Mode", "Guitar");
+    modeling_bass->setId(25);
+    modeling->setId(1);
+    modeling_bass->hide();
+    modeling->show();
+    } else {
+    emit valueChanged("Modeling", "Mode", "Bass");
+    modeling_bass->setId(1);
+    modeling->setId(25);
+    modeling_bass->show();
+    modeling->hide();
+    };
 };
 
 void floorBoard::beep()

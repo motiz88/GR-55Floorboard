@@ -126,13 +126,9 @@ void customTargetListMenu::setComboBox()
     Midi item_0;
     Midi item_1;
     Midi item_2;
-    Midi item_3;
-    Midi item_4;
     item_0 = midiTable->getMidiMap("Tables", "00", "00", "00", "00");
     item_1 = midiTable->getMidiMap("Tables", "00", "00", "00", "01");
     item_2 = midiTable->getMidiMap("Tables", "00", "00", "00", "02");
-    item_3 = midiTable->getMidiMap("Tables", "00", "00", "00", "03");
-    item_4 = midiTable->getMidiMap("Tables", "00", "00", "00", "04");
     items = item_0;
 
     QString longestItem = "";
@@ -193,45 +189,7 @@ void customTargetListMenu::setComboBox()
         this->controlListComboBox->addItem(item);
     };
 
-    itemTotal = itemTotal + itemcount;
-    items = item_3;
-    itemSize = items.level.size();
-    for(itemcount=0;itemcount<itemSize;itemcount++ )
-    {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->controlListComboBox->addItem(item);
-    };
-
-    itemTotal = itemTotal + itemcount;
-    items = item_4;
-    itemSize = items.level.size();
-    for(itemcount=0;itemcount<itemSize;itemcount++ )
-    {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->controlListComboBox->addItem(item);
-    };
-
-    itemTotal = itemTotal + itemcount;
+     itemTotal = itemTotal + itemcount;
     this->controlListComboBox->setFixedWidth(200);
     this->controlListComboBox->setFixedHeight(17);
     this->controlListComboBox->setEditable(false);
@@ -274,9 +232,8 @@ void customTargetListMenu::valueChanged(int index)
     //emit updateDisplay(valueStr);
     MidiTable *midiTable = MidiTable::Instance();
 
-    QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);            // lookup the target values
-    //bool ok;
-    int maxRange = QString("7F").toInt(&ok, 16) + 1;
+    //QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);            // lookup the target values
+    int maxRange = 256;
     value = valueHex.toInt(&ok, 16);
     int dif = value/maxRange;
     QString valueHex1 = QString::number(dif, 16).toUpper();
@@ -284,8 +241,7 @@ void customTargetListMenu::valueChanged(int index)
     QString valueHex2 = QString::number(value - (dif * maxRange), 16).toUpper();
     if(valueHex2.length() < 2) valueHex2.prepend("0");
     QString hex4 = valueHex1;
-    QString hex5 = valueHex2;
-    //convert valueStr to 7-bit hex4, hex5
+    QString hex5 = valueHex2;    //convert valueStr to 7-bit hex4, hex5
     Midi items = midiTable->getMidiMap("Tables", "00", "00", "00", hex4, hex5);
     this->hexMsb = items.desc;
     this->hexLsb = items.customdesc;
@@ -299,11 +255,8 @@ void customTargetListMenu::valueChanged(int index)
 void customTargetListMenu::dialogUpdateSignal(QString valueStr)
 {
     bool ok;
-    //SysxIO *sysxIO = SysxIO::Instance();
     int index = valueStr.toInt(&ok, 16);
-    //int index = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, this->hex3);
     this->controlListComboBox->setCurrentIndex(index);
-    //emit updateSignal();
     this->valueChanged(index);
 }
 
@@ -325,9 +278,6 @@ void customTargetListMenu::comboUpdateSignal()
     valueHex.append(QString::number(value, 16).toUpper());
 
     int index = valueHex.toInt(&ok, 16);
-    //int index = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, this->hex3);
     this->controlListComboBox->setCurrentIndex(index);
-
-
 }
 

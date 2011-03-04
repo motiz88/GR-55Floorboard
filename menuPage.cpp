@@ -451,7 +451,7 @@ void menuPage::updateSwitch(QString hex1, QString hex2, QString hex3)
     QString area;
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     bool set = false;
-    if (value == 1) {set = true; };
+    if (value >= 1) {set = true; };
     if(this->id == 15) { emit assign1_statusSignal(set); };
     if(this->id == 16) { emit assign2_statusSignal(set); };
     if(this->id == 17) { emit assign3_statusSignal(set); };

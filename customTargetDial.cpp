@@ -201,7 +201,7 @@ void customTargetDial::emitValue(double value)
     if (value != m_value) {                                          // continuous update
         this->m_value = value;
     };
-	emit valueChanged((int)value, this->hex1, this->hex2, this->hex3); 
+        emit valueChanged((int)value, this->hex1, this->hex2, this->hex3);
 };
 
 void customTargetDial::setValue(int value)
@@ -213,8 +213,8 @@ void customTargetDial::knobSignal(QString hex1, QString hex2, QString hex3)
 {
 if (this->background != "target")
   {
-    MidiTable *midiTable = MidiTable::Instance();
-    this->max = 1;//midiTable->getRange("Structure", "hex1", "hex2", "hex3");
-    this->min = 0;//= midiTable->getRangeMinimum("Structure", "hex1", "hex2", "hex3");
+    //MidiTable *midiTable = MidiTable::Instance();
+    //this->max = 1;//midiTable->getRange("Structure", "hex1", "hex2", "hex3");
+    //this->min = 0;//= midiTable->getRangeMinimum("Structure", "hex1", "hex2", "hex3");
   };
 };

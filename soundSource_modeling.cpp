@@ -47,7 +47,7 @@ void soundsource_modeling::updateSignal()
 
 void soundsource_modeling::setEditPages()
 {
-    editDetails()->page()->newGroupBox("Modeling");
+    editDetails()->page()->newGroupBox("Guitar Mode Modeling");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "0A", "invert", Qt::AlignCenter);
      editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "2D"); //route switch
     editDetails()->page()->newStackControl(0);

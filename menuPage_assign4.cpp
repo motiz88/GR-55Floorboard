@@ -33,7 +33,7 @@ menuPage_assign4::menuPage_assign4(QWidget *parent)
 
 void menuPage_assign4::updateSignal()
 {
-   // updateSwitch("01", "00", "45");
+    updateSwitch("01", "00", "45");
 };
 
 void menuPage_assign4::setEditPages()
@@ -51,7 +51,7 @@ void menuPage_assign4::setEditPages()
 
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 4 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "46", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "46", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 4 Source");
     editDetails()->page()->newStackControl(1);

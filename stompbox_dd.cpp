@@ -29,7 +29,7 @@ stompbox_dd::stompbox_dd(QWidget *parent)
     /* DELAY */
     setImage(":/images/dd.png");
     setLSB("06", "00");
-    //setKnob1("06", "00", "09");
+    setKnob1("06", "00", "0B");
     setKnob2("06", "00", "0A");
     setComboBox("06", "00", "06");
     setSwitch("06", "00", "05");
@@ -39,7 +39,7 @@ stompbox_dd::stompbox_dd(QWidget *parent)
 
 void stompbox_dd::updateSignal()
 {
-    //updateKnob1("06", "00", "09");
+    updateKnob1("06", "00", "0B");
     updateKnob2("06", "00", "0A");
     updateComboBox("06", "00", "06");
     updateSwitch("06", "00", "05");

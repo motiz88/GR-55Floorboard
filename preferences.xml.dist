@@ -2,14 +2,14 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="20110225"/>
+		<Application version="20110304"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
 		<Language code="en"/>
 		<Manual url="GR-55FloorBoard_Operation_Manual.pdf"/>
-		<Upload url="http://sourceforge.net/projects/me-edit/"/>
-		<Webpage url="http://sourceforge.net/projects/me-edit/"/>
+		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
+		<Webpage url="http://sourceforge.net/projects/grfloorboard/"/>
 	</General>
 	<Language>
     <Locale select="0"/>

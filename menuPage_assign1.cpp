@@ -33,7 +33,7 @@ menuPage_assign1::menuPage_assign1(QWidget *parent)
 
 void menuPage_assign1::updateSignal()
 {
-   // updateSwitch("01", "00", "0D");
+    updateSwitch("01", "00", "0C");
 };
 
 void menuPage_assign1::setEditPages()
@@ -41,10 +41,9 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->newGroupBox(tr("Assign 1"));
     editDetails()->page()->newGroupBox(tr(""));
     editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "0C", "middle", Qt::AlignCenter);
-    editDetails()->page()->addSwitch(1, 0, 1, 1, "02", "00", "2C", "middle", Qt::AlignCenter); //structure temporary
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Source");
     editDetails()->page()->newStackControl(0);

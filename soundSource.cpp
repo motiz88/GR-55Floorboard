@@ -455,9 +455,10 @@ void soundSource::setDisplayToFxName()
 void soundSource::updateStompPath()
 {
     if (this->id == 0) {this->fxName = tr("Analog PickUp");};
-    if (this->id == 1) {this->fxName = tr("Modeling");};
+    if (this->id == 1) {this->fxName = tr("Guitar Mode Modeling");};
     if (this->id == 2) {this->fxName = tr("PCM Synth A");};
     if (this->id == 3) {this->fxName = tr("PCM Synth B");};
+    if (this->id == 25) {this->fxName = tr("Bass Mode Modeling");};
 };
 
 void soundSource::getStompOrder()

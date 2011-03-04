@@ -27,13 +27,13 @@ menuPage_assign2::menuPage_assign2(QWidget *parent)
     : menuPage(parent)
 {
     setLSB("01", "1F");
-    editDetails()->patchPos(368, 36, "01", "20");    //sysx file offset and data length of parameters x2,
+    editDetails()->patchPos(368, 36, "01", "1F");    //sysx file offset and data length of parameters x2,
     setEditPages();
 };
 
 void menuPage_assign2::updateSignal()
 {
-    // updateSwitch("01", "00", "20");
+     updateSwitch("01", "00", "1F");
 };
 
 void menuPage_assign2::setEditPages()
@@ -51,7 +51,7 @@ void menuPage_assign2::setEditPages()
 
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 2 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "20", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "20", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 2 Source");
     editDetails()->page()->newStackControl(1);

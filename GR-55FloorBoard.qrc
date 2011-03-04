@@ -82,5 +82,6 @@
         <file>images/switch3way.png</file>
         <file>images/sourceBG.png</file>
         <file>images/switch_invert.png</file>
+        <file>images/structure_2.png</file>
     </qresource>
 </RCC>

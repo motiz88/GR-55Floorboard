@@ -127,6 +127,8 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->pedal_Button = new customPanelButton(tr("Pedal/GK"), false, QPoint(700, patchDisplayRowOffset+18), this, ":/images/switch.png");
     this->pedal_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
+    this->structure_Button = new customPanelButton(tr("Structure"), false, QPoint(40, editButtonRowOffset), this,  ":/images/switch.png");
+    this->structure_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->modeling_Button = new customPanelButton(tr("Modeling"), false, QPoint(100, editButtonRowOffset), this,  ":/images/switch_invert.png");
     this->modeling_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->synth1_Button = new customPanelButton(tr("Synth A"), false, QPoint(160, editButtonRowOffset), this, ":/images/switch_invert.png");
@@ -202,13 +204,12 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->connectButton, SIGNAL(valueChanged(bool)), this, SLOT(connectSignal(bool)));
     QObject::connect(this->writeButton, SIGNAL(valueChanged(bool)), this, SLOT(writeSignal(bool)));
 
+    QObject::connect(this->structure_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(structure_buttonSignal(bool)));
     QObject::connect(this->modeling_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(modeling_buttonSignal(bool)));
     QObject::connect(this->synth1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(synth1_buttonSignal(bool)));
     QObject::connect(this->synth2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(synth2_buttonSignal(bool)));
     QObject::connect(this->amp_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(amp_buttonSignal(bool)));
-    //QObject::connect(this->compressor_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(compressor_buttonSignal(bool)));
     QObject::connect(this->ns1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ns1_buttonSignal(bool)));
-    //QObject::connect(this->ns2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ns2_buttonSignal(bool)));
     QObject::connect(this->mod_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(mod_buttonSignal(bool)));
     QObject::connect(this->mfx_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(mfx_buttonSignal(bool)));
     QObject::connect(this->reverb_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(reverb_buttonSignal(bool)));
@@ -228,9 +229,18 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->assign7_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign7_buttonSignal(bool)));
     QObject::connect(this->assign8_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign8_buttonSignal(bool)));
 
+    QObject::connect(this->parent(), SIGNAL(structure_statusSignal(bool)), this->structure_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(modeling_statusSignal(bool)), this->modeling_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(synth1_statusSignal(bool)), this->synth1_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(synth2_statusSignal(bool)), this->synth2_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(amp_statusSignal(bool)), this->amp_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(ns1_statusSignal(bool)), this->ns1_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(mod_statusSignal(bool)), this->mod_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(mfx_statusSignal(bool)), this->mfx_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(reverb_statusSignal(bool)), this->reverb_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(delay_statusSignal(bool)), this->delay_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(chorus_statusSignal(bool)), this->chorus_Button, SLOT(setValue(bool)));
+    QObject::connect(this->parent(), SIGNAL(eq_statusSignal(bool)), this->eq_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(assign1_statusSignal(bool)), this->assign1_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(assign2_statusSignal(bool)), this->assign2_Button, SLOT(setValue(bool)));
     QObject::connect(this->parent(), SIGNAL(assign3_statusSignal(bool)), this->assign3_Button, SLOT(setValue(bool)));
