@@ -74,7 +74,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     MidiTable *midiTable = MidiTable::Instance();
     QString valueStr = midiTable->getValue("Tables", "00", "00", "00", valueHex);               // lookup the target values
 
-    int maxRange = 128;
+    int maxRange = 256;
     value = valueStr.toInt(&ok, 16);
     int dif = value/maxRange;
     QString valueHex1 = QString::number(dif, 16).toUpper();
@@ -153,9 +153,6 @@ customControlTarget::customControlTarget(QWidget *parent,
     QObject::connect(this, SIGNAL( updateSignal() ),
                      this->parent(), SIGNAL( updateSignal() ));
 
-    //QObject::connect(this, SIGNAL( updateDisplayTarget(QString) ),
-    //this->display, SLOT( setText(QString) ));
-
     QObject::connect(this, SIGNAL( updateDisplayTarget(QString) ),
                      this, SIGNAL( updateSignal() ));
 
@@ -230,13 +227,13 @@ void customControlTarget::dialogUpdateSignal()
     bool ok;
     value = valueHex.toInt(&ok, 16);
     this->knobTarget->setValue(value);                                                        // initial value only is displayed under knob
-    if(valueHex.length() < 3) { valueHex.prepend("0"); }
-    else if(valueHex.length() < 2) { valueHex.prepend("00"); };
+    if(valueHex.length() < 2) { valueHex.prepend("00"); }
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
 
     MidiTable *midiTable = MidiTable::Instance();
     QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);          // lookup the target values
     emit updateDisplayTarget(valueStr);
-    int maxRange = QString("7F").toInt(&ok, 16) + 1;
+    int maxRange = 256;
     value = valueHex.toInt(&ok, 16);
     int dif = value/maxRange;
     QString valueHex1 = QString::number(dif, 16).toUpper();

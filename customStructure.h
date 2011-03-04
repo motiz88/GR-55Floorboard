@@ -21,38 +21,37 @@
 **
 ****************************************************************************/
 
-#include "stompbox_ns.h"
+#ifndef CUSTOMSTRUCTURE_H
+#define CUSTOMSTRUCTURE_H
 
-stompbox_ns::stompbox_ns(QWidget *parent)
-    : stompBox(parent)
+#include <QWidget>
+
+class customStructure : public QWidget
 {
-    /* ns */
-    setImage(":/images/ns.png");
-    setLSB("07", "5A");
-    setKnob1("07", "00", "5B");
-    setKnob2("07", "00", "5C");
-    setSwitch("07", "00", "5A");
-    //editDetails()->patchPos(2928, 8, "07", "5A");
-    setEditPages();
+    Q_OBJECT
+
+public:
+    customStructure(
+		bool active = false,
+		QPoint ledPos = QPoint(0, 0), 
+		QWidget *parent = 0,
+                QString imagePath = ":/images/structure_2.png");
+	void setValue(bool value);
+
+public slots:
+	void changeValue(bool value);
+
+protected:
+   void paintEvent(QPaintEvent *event);
+
+private:
+	void setOffset(signed int imageNr);
+
+	bool active;
+	QString imagePath;
+	QSize ledSize;
+	QPoint ledPos; 
+	signed int yOffset;
 };
 
-void stompbox_ns::updateSignal()
-{
-    updateKnob1("07", "00", "5B");
-    updateKnob2("07", "00", "5C");
-    updateSwitch("07", "00", "5A");
-};
-
-void stompbox_ns::setEditPages()
-{
-    editDetails()->page()->newGroupBox("Effect");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "5A", "middle", Qt::AlignCenter);
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
-
-    editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "5B");
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "5C");
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->addPage();
-
-};
+#endif // CUSTOMSTRUCTURE_H

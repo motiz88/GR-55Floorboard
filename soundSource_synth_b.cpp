@@ -67,7 +67,7 @@ void soundsource_synth_b::setEditPages()
 
     editDetails()->page()->newGroupBox(tr("Synth A"));
     editDetails()->page()->addComboBox(0, 0, 1, 1, "21", "00", "16");        //line route
-    editDetails()->page()->addKnob(0, 1, 1, 1, "21", "00", "01", "normal","right", 120);   // PCM Tone
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "21", "00", "01");        // PCM tone
     editDetails()->page()->addComboBox(0, 2, 1, 1, "21", "00", "0F");        //TVA release mode
     editDetails()->page()->addKnob(0, 3, 1, 1, "21", "00", "10");            //string level 1
     editDetails()->page()->addKnob(0, 4, 1, 1, "21", "00", "11");            //string level 2

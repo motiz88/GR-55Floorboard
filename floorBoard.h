@@ -30,6 +30,9 @@
 #include "stompBox.h"
 #include "menuPage.h"
 #include "editWindow.h"
+#include "customStructure.h"
+#include "soundSource_modeling.h"
+#include "soundSource_modeling_bass.h"
 
 class floorBoard : public QWidget
 {
@@ -40,7 +43,6 @@ public:
             QWidget *parent = 0,
             QString imagePathFloor = ":/images/floor.png",
             QString imagePathStompBG = ":/images/stompbg.png",
-            QString imagePathInfoBar = ":/images/infobar.png",
             unsigned int marginStompBoxesTop = 135,
             unsigned int marginStompBoxesBottom = 72,
             unsigned int marginStompBoxesWidth = 25,
@@ -57,7 +59,8 @@ public slots:
     void updateStompBoxes();
     void setEditDialog(editWindow* editDialog);
     void menuButtonSignal();
-    //void stompbox_button(bool value);
+    void structure(bool value);
+    void update_structure();
     void beep();
 
 signals:
@@ -72,6 +75,7 @@ signals:
     void hideDragBar();
     void updateSignal();
     void pathUpdateSignal();
+    void structure_buttonSignal(bool value);
     void modeling_buttonSignal(bool value);
     void synth1_buttonSignal(bool value);
     void synth2_buttonSignal(bool value);
@@ -97,6 +101,7 @@ signals:
     void assign6_buttonSignal(bool value);
     void assign7_buttonSignal(bool value);
     void assign8_buttonSignal(bool value);
+    void structure_statusSignal(bool value);
     void modeling_statusSignal(bool value);
     void synth1_statusSignal(bool value);
     void synth2_statusSignal(bool value);
@@ -125,9 +130,6 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
 
 private:
     void initSize(QSize floorSize);
@@ -142,10 +144,9 @@ private:
     void centerEditDialog();
     QString imagePathFloor;
     QString imagePathStompBG;
-    QString imagePathInfoBar;
     unsigned int offset;
-    unsigned int infoBarWidth;
-    unsigned int infoBarHeight;
+    unsigned int structureWidth;
+    unsigned int structureHeight;
     unsigned int panelBarOffset;
     unsigned int borderWidth;
     unsigned int floorHeight;
@@ -174,6 +175,10 @@ private:
     editWindow* editDialog;
     editWindow* oldDialog;
     int pageOffset;
+    customStructure* structure_2;
+    bool structure_state;
+    soundsource_modeling *modeling;
+    soundsource_modeling_bass *modeling_bass;
 };
 
 #endif // FLOORBOARD_H

@@ -26,8 +26,7 @@
 #include "SysxIO.h"
 
 customControlListMenu::customControlListMenu(QWidget *parent,
-                                                                         QString hex1, QString hex2, QString hex3,
-                                                                         QString direction)
+                            QString hex1, QString hex2, QString hex3, QString direction)
         : QWidget(parent)
 {
         this->label = new customControlLabel(this);
@@ -130,7 +129,184 @@ void customControlListMenu::setComboBox()
         MidiTable *midiTable = MidiTable::Instance();
         if(midiTable->isData(this->area, hex1, hex2, hex3))
         {
-            QApplication::beep();
+           // QApplication::beep();
+            MidiTable *midiTable = MidiTable::Instance();
+            Midi items;
+            Midi item_0;
+            Midi item_1;
+            Midi item_2;
+            Midi item_3;
+            Midi item_4;
+            Midi item_5;
+            Midi item_6;
+            Midi item_7;
+            item_0 = midiTable->getMidiMap("Structure", "20", "00", "01", "00");
+            item_1 = midiTable->getMidiMap("Structure", "20", "00", "01", "01");
+            item_2 = midiTable->getMidiMap("Structure", "20", "00", "01", "02");
+            item_3 = midiTable->getMidiMap("Structure", "20", "00", "01", "03");
+            item_4 = midiTable->getMidiMap("Structure", "20", "00", "01", "04");
+            item_5 = midiTable->getMidiMap("Structure", "20", "00", "01", "05");
+            item_6 = midiTable->getMidiMap("Structure", "20", "00", "01", "06");
+            item_7 = midiTable->getMidiMap("Structure", "20", "00", "01", "07");
+
+            items = item_0;
+            int itemSize = items.level.size();
+            int itemTotal = 0;
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+
+            itemTotal = itemTotal + itemcount;
+            items = item_1;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+
+            itemTotal = itemTotal + itemcount;
+            items = item_2;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+
+            itemTotal = itemTotal + itemcount;
+            items = item_3;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+
+            itemTotal = itemTotal + itemcount;
+            items = item_4;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+            itemTotal = itemTotal + itemcount;
+            items = item_5;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+            itemTotal = itemTotal + itemcount;
+            items = item_6;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+            itemTotal = itemTotal + itemcount;
+            items = item_7;
+            itemSize = items.level.size();
+            for(itemcount=0;itemcount<itemSize;itemcount++ )
+            {
+                QString item;
+                QString desc = items.level.at(itemcount).name;
+                if(!desc.isEmpty())
+                {
+                    desc.prepend("[" + items.level.at(itemcount).customdesc + "]  ");
+                    item = desc;
+                }
+                else
+                {
+                    item = "Out of Range";
+                };
+                if(longestItem.size() < item.size()) longestItem = item;
+                this->controlListComboBox->addItem(item);
+            };
+            this->controlListComboBox->setFixedHeight(20);
+            this->controlListComboBox->setMaxVisibleItems(910);
         }
         else
         {
@@ -154,15 +330,15 @@ void customControlListMenu::setComboBox()
                 if(longestItem.size() < item.size()) longestItem = item;
                 this->controlListComboBox->addItem(item);
         };
+        this->controlListComboBox->setFixedHeight(15);
+        this->controlListComboBox->setMaxVisibleItems(itemcount);
         };
         int maxWidth = QFontMetrics( this->font() ).width( longestItem );
         if(maxWidth < 20) { maxWidth = 20; };
-
         this->controlListComboBox->setFixedWidth(maxWidth + 25);
-        this->controlListComboBox->setFixedHeight(15);
         this->controlListComboBox->setEditable(false);
         this->controlListComboBox->setFrame(false);
-        this->controlListComboBox->setMaxVisibleItems(itemcount);
+
 }
 
 void customControlListMenu::valueChanged(int index)

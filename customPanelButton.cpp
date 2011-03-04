@@ -112,9 +112,9 @@ void customPanelButton::mousePressEvent(QMouseEvent *event)
 
 void customPanelButton::mouseReleaseEvent(QMouseEvent *event)
 {
-    /*if ( event->button() == Qt::LeftButton )
+    if ( event->button() == Qt::LeftButton )
 	{	
-		if(active)
+                /*if(active)
 		{
 			setOffset(0);
 			setBlink(false);
@@ -124,9 +124,9 @@ void customPanelButton::mouseReleaseEvent(QMouseEvent *event)
 		{
                         setOffset(1);
 			emitValue(true);
-		};
+                };*/
 		clearFocus();
-        };*/
+        };
 };
 
 void customPanelButton::emitValue(bool value)

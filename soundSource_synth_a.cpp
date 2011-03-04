@@ -66,7 +66,7 @@ void soundsource_synth_a::setEditPages()
 
     editDetails()->page()->newGroupBox(tr("Synth A"));
     editDetails()->page()->addComboBox(0, 0, 1, 1, "20", "00", "16");        //line route
-    editDetails()->page()->addKnob(0, 1, 1, 1, "20", "00", "01", "normal","right", 120);   // PCM Tone
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "20", "00", "01");        // PCM tone
     editDetails()->page()->addComboBox(0, 2, 1, 1, "20", "00", "0F");        //TVA release mode
     editDetails()->page()->addKnob(0, 3, 1, 1, "20", "00", "10");            //string level 1
     editDetails()->page()->addKnob(0, 4, 1, 1, "20", "00", "11");            //string level 2
@@ -117,7 +117,7 @@ void soundsource_synth_a::setEditPages()
     editDetails()->page()->addGroupBox(4, 1, 1, 1);
 
     editDetails()->page()->newGroupBox(tr("LFO 1"));
-    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "1C", "RATE","right", 90); //Rate
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "1C", "RATE","right", 120); //Rate
     editDetails()->page()->addKnob(0, 1, 1, 1, "30", "00", "1E");            //pitch depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "30", "00", "1F");            //TVF depth
     editDetails()->page()->addKnob(0, 3, 1, 1, "30", "00", "20");            //TVA depth
@@ -125,7 +125,7 @@ void soundsource_synth_a::setEditPages()
     editDetails()->page()->addGroupBox(5, 0, 1, 1);
 
     editDetails()->page()->newGroupBox(tr("LFO 2"));
-    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "22", "RATE","right", 90); //Rate
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "30", "00", "22", "RATE","right", 120); //Rate
     editDetails()->page()->addKnob(0, 1, 1, 1, "30", "00", "24");            //pitch depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "30", "00", "25");            //TVF depth
     editDetails()->page()->addKnob(0, 3, 1, 1, "30", "00", "26");            //TVA depth

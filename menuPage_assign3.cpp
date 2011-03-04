@@ -33,7 +33,7 @@ menuPage_assign3::menuPage_assign3(QWidget *parent)
 
 void menuPage_assign3::updateSignal()
 {
-    //updateSwitch("01", "00", "33");
+    updateSwitch("01", "00", "32");
 };
 
 void menuPage_assign3::setEditPages()
@@ -51,7 +51,7 @@ void menuPage_assign3::setEditPages()
 
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 3 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "34", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "34", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 3 Source");
     editDetails()->page()->newStackControl(1);

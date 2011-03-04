@@ -33,7 +33,7 @@ menuPage_assign6::menuPage_assign6(QWidget *parent)
 
 void menuPage_assign6::updateSignal()
 {
-   // updateSwitch("01", "00", "6B");
+    updateSwitch("01", "00", "6B");
 };
 
 void menuPage_assign6::setEditPages()
@@ -51,7 +51,7 @@ void menuPage_assign6::setEditPages()
 
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 6 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "6C", "target","target", 120); // Target
+    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "6C", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 6 Source");
     editDetails()->page()->newStackControl(1);

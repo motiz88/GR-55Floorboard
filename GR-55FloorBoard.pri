@@ -60,6 +60,7 @@ HEADERS += ./editPage.h \
     ./customRenameWidget.h \
     ./customSlider.h \
     ./customSplashScreen.h \
+    ./customStructure.h \
     ./customSwitch.h \ 
     ./customSwitch3way.h \ 
     ./customTargetDial.h \
@@ -90,6 +91,7 @@ HEADERS += ./editPage.h \
     ./soundSource.h \
     ./soundSource_analogPU.h \
     ./soundSource_modeling.h \
+    ./soundSource_modeling_bass.h \
     ./soundSource_synth_a.h \
     ./soundSource_synth_b.h \
     ./stompBox.h \
@@ -157,6 +159,7 @@ SOURCES += ./editPage.cpp \
     ./customRenameWidget.cpp \
     ./customSlider.cpp \
     ./customSplashScreen.cpp \
+    ./customStructure.cpp \
     ./customSwitch.cpp \
      ./customSwitch3way.cpp \
     ./customTargetDial.cpp \
@@ -187,6 +190,7 @@ SOURCES += ./editPage.cpp \
     ./soundSource.cpp \
     ./soundSource_analogPU.cpp \
     ./soundSource_modeling.cpp \
+    ./soundSource_modeling_bass.cpp \
     ./soundSource_synth_a.cpp \
     ./soundSource_synth_b.cpp \
     ./stompBox.cpp \
