@@ -45,8 +45,8 @@ customKnobTarget::customKnobTarget(QWidget *parent,
     QLabel *newBackGround = new QLabel(this);
     if (this->background == "target")
     {
-        this->range = 536;//midiTable->getRange("Tables", "00", "00", "00");
-        this->rangeMin = 0;//midiTable->getRangeMinimum("Tables", "00", "00", "00");
+        this->range = midiTable->getRange("Tables", "00", "00", "00");
+        this->rangeMin = midiTable->getRangeMinimum("Tables", "00", "00", "00");
     }
     else
     {
@@ -151,7 +151,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         valueStr = midiTable->getValue("Structure", hexMsb, hex2, hexLsb, valueHex);
         emit updateDisplayMax(valueStr);
     };                                                  // updates display values
-    emit updateSignal();
+   // emit updateSignal();
 
     if (this->background == "target")                                                   // get the currently selected target value & set min/max address
     {

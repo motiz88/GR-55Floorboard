@@ -198,7 +198,7 @@ void floorBoard::setFloorBoard() {
     // Draw Structure 2
     structure_state = false;
     this->structure_2 = new customStructure(structure_state, QPoint(0, 0), this);
-    this->structure_2->move(634, 144);
+    this->structure_2->move(offset + 132, 144);
     QObject::connect(this, SIGNAL( structure_buttonSignal(bool)), this, SLOT( structure(bool) ) );
 
     painter.end();
@@ -327,12 +327,12 @@ void floorBoard::initSoundSource()
     analogPU->setPos(QPoint(offset+20, 480));
 
     //Guitar Modeling
-    /*soundSource **/this->modeling = new soundsource_modeling(this);
+    this->modeling = new soundsource_modeling(this);
     modeling->setId(1);
     modeling->setPos(QPoint(offset+20, 370));
 
     //Bass Modeling
-    /*soundSource **/this->modeling_bass = new soundsource_modeling_bass(this);
+    this->modeling_bass = new soundsource_modeling_bass(this);
     modeling_bass->setId(25);
     modeling_bass->setPos(QPoint(offset+20, 370));
     modeling_bass->hide();
@@ -353,7 +353,7 @@ void floorBoard::initStomps()
 {
 
     QList<signed int> fx;
-    fx << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10;
+    fx << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7;
     this->fx = fx;
 
     //Amp
@@ -481,7 +481,7 @@ void floorBoard::centerEditDialog()
 
 void floorBoard::initMenuPages()
 {
-    QVector<menuPage *> initMenuPages(10);
+    QVector<menuPage *> initMenuPages(11);
     this->menuPages = initMenuPages.toList();;
 
     /* MENU_PAGES */
@@ -547,6 +547,7 @@ void floorBoard::structure(bool value)
 
 void floorBoard::update_structure()
 {
+    this->structure_2->move(offset + 421, 144);
     SysxIO *sysxIO = SysxIO::Instance();
     int value2 = sysxIO->getSourceValue("Structure", "02", "00", "2C");
     this->structure_2->changeValue((value2==1)?true:false);

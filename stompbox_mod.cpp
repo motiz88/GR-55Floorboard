@@ -28,11 +28,11 @@ stompbox_mod::stompbox_mod(QWidget *parent)
 {
     /* MOD */
     setImage(":/images/mod.png");
-    setLSB("07", "00");
+    setLSB("07", "15");
     setComboBox("07", "00", "16");
     setKnob1("07", "CENTER", "17");
     setSwitch("07", "00", "15");
-    //editDetails()->patchPos(586, 1018, "02", "00");
+    editDetails()->patchPos(1522, 138, "07", "15"); //correct
     setEditPages();
 };
 
@@ -189,7 +189,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Delay");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "45"); //type
-    editDetails()->page()->addDataKnob(0, 1, 1, 1, "07", "00", "46", "DELAY","right", 105);       //time
+    editDetails()->page()->addDataKnob(0, 1, 1, 1, "07", "00", "46", "DELAY3400","right", 105);       //time
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "49");       //feedback
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "4A");       //level
     editDetails()->page()->addGroupBox(0, 1, 1, 1);

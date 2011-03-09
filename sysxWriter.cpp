@@ -76,7 +76,7 @@ bool sysxWriter::readFile()
         if (data.contains(G5L_header)){isG5L = true; };             // see if file is a G5L type and set isG5L flag.
         bool isSMF = false;
         if (data.contains(SMF_header)) {isSMF = true; };
-        if((data.size() == 2340  || data.size() == 2261)/* && isHeader == true*/){         // if GR-55 system file size is correct- load file.
+        if((data.size() == 1173  || data.size() == 1186)/* && isHeader == true*/){         // if GR-55 system file size is correct- load file.
             SysxIO *sysxIO = SysxIO::Instance();
             QString area = "System";
             sysxIO->setFileSource(area, data);
@@ -251,9 +251,11 @@ bool sysxWriter::readFile()
             QByteArray temp;
             temp = data.mid(a, 128);
             default_data.replace(11, 128, temp);      //address "00"
-            temp = data.mid(a+128, 128);
-            default_data.replace(152, 128, temp);     //address "01"
-            temp = data.mid(a+256, 78);
+            temp = data.mid(a+128, 114);
+            default_data.replace(152, 114, temp);     //address "01"
+            temp = data.mid(a+250, 6);
+            default_data.replace(266, 6, temp);     //address "01"
+            temp = data.mid(a+264, 78);
             default_data.replace(293, 78, temp);     //address "02" +
             temp = data.mid(a+350, 128);
             default_data.replace(384, 128, temp);     //address "03" +
@@ -567,14 +569,13 @@ void sysxWriter::writeG5L(QString fileName)
         if (G5Lfile.open(QIODevice::ReadOnly))
         { G5L_default = G5Lfile.readAll(); };
         temp = out.mid(11, 128);
-        temp = out.mid(11, 128);
         G5L_default.replace(a, 128, temp);         //address "00" +
-        temp = out.mid(152, 128);
-        G5L_default.replace(a+128, 128, temp);     //address "01" +
-        //temp = out.mid(293, 15);
-        //G5L_default.replace(a+264, 15, temp);     //address "02" +
-        temp = out.mid(298, 73);
-        G5L_default.replace(a+261, 73, temp);     //address "02" + part 2
+        temp = out.mid(152, 114);
+        G5L_default.replace(a+128, 114, temp);     //address "01" +
+        temp = out.mid(266, 6);
+        G5L_default.replace(a+250, 6, temp);     //address "01 B" +
+        temp = out.mid(293, 78);
+        G5L_default.replace(a+264, 78, temp);     //address "02" +
         temp = out.mid(384, 128);
         G5L_default.replace(a+350, 128, temp);     //address "03" +
         temp = out.mid(525, 128);

@@ -27,8 +27,8 @@ menuPage_master::menuPage_master(QWidget *parent)
     : menuPage(parent)
 {
     //setImage(":/images/master_pushbutton.png");
-    setLSB("02", "00");
-    // editDetails()->patchPos(2894, 20, "0A", "60");
+    setLSB("02", "24");
+    editDetails()->patchPos(660, 50, "02", "24"); //correct
     setEditPages();
 };
 

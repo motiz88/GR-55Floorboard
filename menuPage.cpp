@@ -296,10 +296,10 @@ void menuPage::systemReply(QString replyMsg)
 
     if(sysxIO->noError())
     {
-        if(replyMsg.size()/2 == 2236)
+        if(replyMsg.size()/2 == systemSize)
         {
             /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
-            QString header = "F0410000002F12";
+          /*  QString header = "F0410000002F12";
             QString footer ="00F7";
             QString addressMsb = replyMsg.mid(14,4); // read  MSb word at bits 7 & 8 from sysxReply (which is "0000")
             QString part1 = replyMsg.mid(22, 256); //from 11, copy 128 bits (values are doubled for QString)
@@ -349,7 +349,7 @@ void menuPage::systemReply(QString replyMsg)
                     .append(part6).append(part7).append(part8).append(part10).append(part11)
                     .append(part12).append(part13).append(part14).append(part15).append(part16).append(part17).append(part18);
 
-            QString reBuild = "";       /* Add correct checksum to patch strings */
+            QString reBuild = "";       // Add correct checksum to patch strings
             QString sysxEOF = "";
             QString hex = "";
             int msgLength = replyMsg.length()/2;
@@ -375,10 +375,9 @@ void menuPage::systemReply(QString replyMsg)
                     i=i+2;
                 };
             };
-            replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
+            replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" "); */
             QString area = "System";
             sysxIO->setFileSource(area, replyMsg);		// Set the source to the data received.
-            //sysxIO->setFileSource(area, sysxMsg.getSystemSource());
             sysxIO->setFileName(tr("System Data from ") + deviceType);	// Set the file name to GR-55B system for the display.
             sysxIO->setDevice(true);				// Patch received from the device so this is set to true.
             sysxIO->setSyncStatus(true);			// We can't be more in sync than right now! :)
@@ -503,8 +502,8 @@ void menuPage::valueChanged(bool value, QString hex1, QString hex2, QString hex3
     if(this->id == 14) {area = "System";} else {area = "Structure";};
     sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
 
-
     emitValueChanged(hex1, hex2, hex3, valueHex);
+    emit updateSignal();
 };
 
 
@@ -520,9 +519,7 @@ void menuPage::emitValueChanged(QString hex1, QString hex2, QString hex3, QStrin
         {
             Midi items = midiTable->getMidiMap(area, hex1, hex2, hex3);
             valueName = items.desc;
-            //this->fxName = midiTable->getMidiMap("Structure", hex1, hex2, hex3).name;
-            valueStr = midiTable->getValue(area, hex1, hex2, hex3, valueHex);
-            emit dialogUpdateSignal();
+            valueStr = midiTable->getValue(area, hex1, hex2, hex3, valueHex);         
         }
         else
         {

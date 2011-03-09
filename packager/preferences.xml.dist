@@ -2,20 +2,20 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="20110118"/>
+		<Application version="20110309"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
 		<Language code="en"/>
 		<Manual url="GR-55FloorBoard_Operation_Manual.pdf"/>
-		<Upload url="http://sourceforge.net/projects/me-edit/"/>
-		<Webpage url="http://sourceforge.net/projects/me-edit/"/>
+		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
+		<Webpage url="http://sourceforge.net/projects/grfloorboard/"/>
 	</General>
 	<Language>
     <Locale select="0"/>
   </Language>
 	<Midi>
-	  <BulkFinish patch="200"/>
+	  <BulkFinish patch="297"/>
 	  <BulkStart patch="1"/>
 		<DBug bool="false"/>
 		<Delay set="30"/>

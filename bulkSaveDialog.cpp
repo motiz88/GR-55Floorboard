@@ -381,10 +381,12 @@ void bulkSaveDialog::writeG5L()         // ************************************ 
                 int a = 172;          // distance from start of single *.g5l file to patch data start.
                 temp = out.mid(b+11, 128);
                 G5L_default.replace(a, 128, temp);         //address "00" +
-                temp = out.mid(b+152, 128);
-                G5L_default.replace(a+128, 128, temp);     //address "01" +
-                temp = out.mid(b+298, 73);
-                G5L_default.replace(a+261, 73, temp);     //address "02" +
+                temp = out.mid(b+152, 114);
+                G5L_default.replace(a+128, 114, temp);     //address "01" +
+                temp = out.mid(b+266, 6);
+                G5L_default.replace(a+250, 6, temp);     //address "01 B" +
+                temp = out.mid(b+293, 78);
+                G5L_default.replace(a+264, 78, temp);     //address "02" +
                 temp = out.mid(b+384, 128);
                 G5L_default.replace(a+350, 128, temp);     //address "03" +
                 temp = out.mid(b+525, 128);
@@ -416,8 +418,7 @@ void bulkSaveDialog::writeG5L()         // ************************************ 
 
                 b=b+patchSize;                                  // increment point to next *.syx patch in bulk.
                 bulkFile.append(G5L_default.mid(160, 1239)); // copy most of the patch + index except for 4 text chars on end.
-                //bulkFile.append(G5L_default.mid(80, 4));     // copy 4 bytes of "00" from no-where special.
-            };
+              };
             QString hex = QString::number(patchCount, 16).toUpper();     // convert integer to QString.
             if (hex.length() < 2) { hex.prepend("00"); }
             QByteArray count;

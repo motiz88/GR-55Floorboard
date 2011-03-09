@@ -26,8 +26,8 @@
 menuPage_assign1::menuPage_assign1(QWidget *parent)
     : menuPage(parent)
 {
-    setLSB("01", "0D");
-    editDetails()->patchPos(330, 36, "01", "0D");    //sysx file offset and data length of parameters x2,
+    setLSB("01", "0C");
+    editDetails()->patchPos(328, 38, "01", "0C");    //sysx file offset and data length of parameters x2,
     setEditPages();
 };
 
@@ -43,7 +43,7 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "0C", "middle", Qt::AlignCenter);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Target");
-    //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
+    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Source");
     editDetails()->page()->newStackControl(0);

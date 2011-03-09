@@ -31,9 +31,9 @@ soundsource_modeling_bass::soundsource_modeling_bass(QWidget *parent)
     setLSB("10", "00");
     setSwitch("10", "INVERT", "0A");
     setComboBox("02", "routeSwitch", "2D");
-    setKnob1("10", "00", "00");
+    setKnob1("10", "00", "05");
     setKnob2("10", "00", "09");
-    //editDetails()->patchPos(400, 58, "01", "30");
+    editDetails()->patchPos(1756, 454, "10", "00");
     setEditPages();
 };
 
@@ -41,7 +41,7 @@ void soundsource_modeling_bass::updateSignal()
 {
     updateSwitch("10", "00", "0A");
     updateComboBox("02", "routeSwitch", "2D");
-    updateKnob1("10", "00", "00");
+    updateKnob1("10", "00", "05");
     updateKnob2("10", "00", "09");
 };
 

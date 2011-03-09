@@ -27,7 +27,7 @@ menuPage_assign3::menuPage_assign3(QWidget *parent)
     : menuPage(parent)
 {
     setLSB("01", "32");
-    editDetails()->patchPos(406, 36, "01", "32");    //sysx file offset and data length of parameters x 2.
+    editDetails()->patchPos(404, 38, "01", "32");    //sysx file offset and data length of parameters x 2.
     setEditPages();
 };
 

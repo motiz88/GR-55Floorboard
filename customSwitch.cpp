@@ -99,8 +99,9 @@ void customSwitch::emitValue(bool value)
     this->active = value;
     if (value != m_value) {
         this->m_value = value;
-        emit valueChanged((bool)value, this->hex1, this->hex2, this->hex3);
+        //moved emit value from here
     };
+     emit valueChanged((bool)value, this->hex1, this->hex2, this->hex3);
 };
 
 void customSwitch::mouseMoveEvent(QMouseEvent *event)

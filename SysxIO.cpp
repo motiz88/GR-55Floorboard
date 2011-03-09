@@ -30,16 +30,16 @@
 #include "sysxWriter.h"
 #include "MidiTable.h"
 #include "globalVariables.h"
+#include <QThread>
 
 // Platform-dependent sleep routines.
 #ifdef Q_OS_WIN
-#include <windows.h>
-#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
-#else // Unix variants
-#include <unistd.h>
-#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+  #include <windows.h>
+  #define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
+#else // Unix variants & Mac
+  #include <unistd.h>
+  #define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
 #endif
-
 
 SysxIO::SysxIO() 
 {
@@ -77,7 +77,7 @@ SysxIO* SysxIO::Instance()
 
 void SysxIO::setFileSource(QString area, SysxData fileSource)
 { 
-    if (area == "System")
+    if (area.contains("System"))
     {
 	this->systemSource = fileSource;
     }
@@ -89,7 +89,7 @@ void SysxIO::setFileSource(QString area, SysxData fileSource)
 
 void SysxIO::setFileSource(QString area, QByteArray data)
 {
-    if (area == "System")
+    if (area.contains("System"))
     {
         this->systemSource.address.clear();
         this->systemSource.hex.clear();
@@ -142,10 +142,16 @@ void SysxIO::setFileSource(QString area, QByteArray data)
 
         if(hex == "F7")
         {
-            if (area == "System")
+            if (area.contains("System"))
             {
-                this->systemSource.address.append( sysxBuffer.at(sysxAddressOffset + 1) + sysxBuffer.at(sysxAddressOffset + 2) );
+                this->systemSource.address.append( sysxBuffer.at(sysxAddressOffset) + sysxBuffer.at(sysxAddressOffset + 2));
                 this->systemSource.hex.append(sysxBuffer);
+               /* QString address = (  sysxBuffer.at(sysxAddressOffset) + sysxBuffer.at(sysxAddressOffset + 2));
+                QMessageBox *msgBox = new QMessageBox();
+                msgBox->setWindowTitle(QObject::tr("deBug"));
+                msgBox->setText(address);
+                msgBox->setStandardButtons(QMessageBox::Ok);
+                msgBox->exec();*/
             }
             else
             {
@@ -205,7 +211,7 @@ void SysxIO::setFileSource(QString area, QByteArray data)
 
 void SysxIO::setFileSource(QString area, QString data)
 {
-    if (area == "System")
+    if (area.contains("System"))
     {
     	this->systemSource.address.clear();
         this->systemSource.hex.clear();
@@ -225,9 +231,9 @@ void SysxIO::setFileSource(QString area, QString data)
 
         if(hex == "F7")
         {
-            if (area == "System")
+            if (area.contains("System"))
             {
-                this->systemSource.address.append( sysxBuffer.at(sysxAddressOffset + 1) + sysxBuffer.at(sysxAddressOffset + 2) );
+                this->systemSource.address.append( sysxBuffer.at(sysxAddressOffset) + sysxBuffer.at(sysxAddressOffset + 2) );
                 this->systemSource.hex.append(sysxBuffer);
             }
             else
@@ -253,7 +259,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     address.append(sourceHex1);
     address.append(hex2);
     QList<QString> sysxList;
-    if(area == "System")
+    if(area.contains("System"))
     {
         sysxList = this->systemSource.hex.at(this->systemSource.address.indexOf(address));
     }
@@ -270,7 +276,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     };
     sysxList.replace(sysxList.size() - 2, getCheckSum(dataSize));
 
-    if(area == "System")
+    if(area.contains("System"))
     {
   	this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
     }
@@ -312,7 +318,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     address.append(hex2);
 
     QList<QString> sysxList;
-    if (area == "System")
+    if (area.contains("System"))
     {
         sysxList = this->systemSource.hex.at(this->systemSource.address.indexOf(address));
     }
@@ -331,7 +337,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     };
     sysxList.replace(sysxList.size() - 2, getCheckSum(dataSize));
 
-    if (area == "System")
+    if (area.contains("System"))
     {
 	this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
     }
@@ -394,8 +400,9 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
         };
         this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
 	
-        sysxMsg = "F041100000531200";
+        sysxMsg = "F0411000005312";
         sysxMsg.append(hex1);
+        sysxMsg.append("00");
         sysxMsg.append(hex2);
         sysxMsg.append(hex3);
     };
@@ -529,7 +536,7 @@ QList<QString> SysxIO::getFileSource(QString area, QString hex1, QString hex2)
     address.append(hex1);
     address.append(hex2);
     QList<QString> sysxMsg;
-    if (area == "System")
+    if (area.contains("System"))
     {
 	if(this->systemSource.address.indexOf(address) == -1)
 	{
@@ -768,9 +775,9 @@ void SysxIO::sendMidi(QString midiMsg)
 
         midiIO *midi = new midiIO();
         QList<QString> midiOutDevices = midi->getMidiOutDevices();
-        if ( midiOutDevices.contains("ROLAND GR-55") )
+        if ( midiOutDevices.contains("GR-55") )
         {
-            midiOutPort = midiOutDevices.indexOf("ROLAND GR-55");
+            midiOutPort = midiOutDevices.indexOf("GR-55");
         };
 
         midi->sendMidi(midiMsg, midiOutPort);
@@ -886,13 +893,13 @@ void SysxIO::sendSysx(QString sysxMsg)
     midiIO *midi = new midiIO();
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
-    if ( midiInDevices.contains("ROLAND GR-55") )
+    if ( midiInDevices.contains("GR-55") )
     {
-        midiInPort = midiInDevices.indexOf("ROLAND GR-55");
+        midiInPort = midiInDevices.indexOf("GR-55");
     };
-    if ( midiOutDevices.contains("ROLAND GR-55") )
+    if ( midiOutDevices.contains("GR-55") )
     {
-        midiOutPort = midiOutDevices.indexOf("ROLAND GR-55");
+        midiOutPort = midiOutDevices.indexOf("GR-55");
     };  
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
     /*DeBugGING OUTPUT */
@@ -1158,7 +1165,7 @@ void SysxIO::systemReply(QString replyMsg)
         if(replyMsg.size()/2 == systemSize)
         {
             /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
-            QString header = "F0410000002F12";
+         /*   QString header = "F0411000005312";
             QString footer ="00F7";
             QString addressMsb = replyMsg.mid(14,4); // read  MSb word at bits 7 & 8 from sysxReply (which is "0000")
             QString part1 = replyMsg.mid(22, 256); //from 11, copy 128 bits (values are doubled for QString)
@@ -1208,7 +1215,7 @@ void SysxIO::systemReply(QString replyMsg)
                     .append(part6).append(part7).append(part8).append(part10).append(part11)
                     .append(part12).append(part13).append(part14).append(part15).append(part16).append(part17).append(part18);
 
-            QString reBuild = "";       /* Add correct checksum to patch strings */
+            QString reBuild = "";       // Add correct checksum to patch strings
             QString sysxEOF = "";
             QString hex = "";
             int msgLength = replyMsg.length()/2;
@@ -1235,7 +1242,7 @@ void SysxIO::systemReply(QString replyMsg)
                     i=i+2;
                 };
             };
-            replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
+            replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" "); */
 
             QString area = "System";
             setFileSource(area, replyMsg);		// Set the source to the data received.

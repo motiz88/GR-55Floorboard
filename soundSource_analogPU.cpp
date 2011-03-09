@@ -28,11 +28,11 @@ soundsource_analogPU::soundsource_analogPU(QWidget *parent)
 {
     /* ANALOG PICKUP */
     this->setImage(":/images/analogPU.png");
-    setLSB("00", "00");
+    setLSB("02", "32");
     setComboBox("02", "routeSwitch", "2E");
     setKnob2("02", "00", "33");
     setSwitch("02", "INVERT", "32");
-    //editDetails()->patchPos(304, 10, "01", "00");
+    editDetails()->patchPos(686, 4, "02", "32");
     setEditPages();
 };
 

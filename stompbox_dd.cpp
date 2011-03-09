@@ -28,12 +28,12 @@ stompbox_dd::stompbox_dd(QWidget *parent)
 {
     /* DELAY */
     setImage(":/images/dd.png");
-    setLSB("06", "00");
+    setLSB("06", "05");
     setKnob1("06", "00", "0B");
     setKnob2("06", "00", "0A");
     setComboBox("06", "00", "06");
     setSwitch("06", "00", "05");
-    // editDetails()->patchPos(2702, 50, "0A", "00");
+    editDetails()->patchPos(1404, 14, "06", "05"); //correct
     setEditPages();
 };
 
@@ -53,7 +53,7 @@ void stompbox_dd::setEditPages()
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Delay");
-    editDetails()->page()->addDataKnob(0, 0, 1, 1, "06", "00", "07", "DELAY","right", 105); // 3 byte time
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "06", "00", "07", "DELAY3400", "right", 120); // 3 byte time
     editDetails()->page()->addKnob(0, 1, 1, 1, "06", "00", "0A");  //feedback
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
 

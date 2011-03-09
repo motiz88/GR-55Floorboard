@@ -83,5 +83,7 @@
         <file>images/sourceBG.png</file>
         <file>images/switch_invert.png</file>
         <file>images/structure_2.png</file>
+        <file>images/bass_icon.png</file>
+        <file>images/guitar_icon.png</file>
     </qresource>
 </RCC>

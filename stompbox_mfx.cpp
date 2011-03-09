@@ -28,11 +28,11 @@ stompbox_mfx::stompbox_mfx(QWidget *parent)
 {
     /* MFX */
     setImage(":/images/mfx.png");
-    setLSB("03", "00");
+    setLSB("03", "04");
     setComboBox("03", "00", "05");
     setSwitch("03", "00", "04");
     setKnob1("03", "CENTER", "06");
-    //editDetails()->patchPos(1630, 1046, "03", "00");
+    editDetails()->patchPos(776, 530, "03", "04"); //correct
     setEditPages();
 };
 
@@ -610,7 +610,7 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(17);
-    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "53", "DELAY2600", "right", 120); // time
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "53", "DELAY1300", "right", 120); // time
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(17);
@@ -638,8 +638,11 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->newGroupBox("Pitch Shifter", Qt::AlignTop | Qt::AlignHCenter);
     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "66");   //pitch coarse
     editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "67");   //pitch fine
-    //editDetails()->page()->addKnob(0, 2, 1, 1, "04", "00", "6A", "normal","right", 105);   // time
-    editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "6D");   //feedback
+    editDetails()->page()->newStackControl(18);
+    editDetails()->page()->addComboBox(0, 2, 1, 1, "04", "00", "68");// time type
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(18, 0, 3, 1, 1);
+    editDetails()->page()->addKnob(0, 4, 1, 1, "04", "00", "6D");   //feedback
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Level");
     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "6E");   // low gain
@@ -648,6 +651,15 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addKnob(0, 3, 1, 1, "04", "00", "71");   //level
     editDetails()->page()->addGroupBox(1, 0, 1, 1);
     editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(18);
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "69", "DELAY1300", "right", 120); // time
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(18);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "6C", "normal", "right", 120);   // Rate
+    editDetails()->page()->addStackField();
+
 
     editDetails()->addPage();
 };

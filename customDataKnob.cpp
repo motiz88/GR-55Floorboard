@@ -38,8 +38,9 @@ customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QStr
     this->dataRange = 1;
     MidiTable *midiTable = MidiTable::Instance();
     if (this->area != "System"){ this->area = "Structure"; };
-    if (background == "DELAY") { this->hex_c = "04"; };
-    if (background == "DELAY2600") { this->hex_c = "09"; dataRange = 2;};
+    if (background == "DELAY3400") { this->hex_c = "04"; };
+    if (background == "DELAY2600") { this->hex_c = "09"; };
+    if (background == "DELAY1300") { this->hex_c = "0B"; };
     if (background == "BPM") { this->hex_c = "06"; this->byteSize == "2"; };
     if (background == "0~100") {this->hex_c = "07"; this->byteSize = "2"; };
     if (background == "RATE") {this->hex_c = "08"; this->byteSize = "2"; };
@@ -51,30 +52,13 @@ customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QStr
     QPoint knobPos = QPoint(5, 4); // Correction needed y+1 x-1.
 
     QLabel *newBackGround = new QLabel(this);
-    if (background == "normal" || background == "System")
-    {
-        newBackGround->setPixmap(QPixmap(":/images/knobbgn.png"));
-    }
-    else if (background == "turbo")
-    {
-        newBackGround->setPixmap(QPixmap(":/images/knobbgt.png"));
-    }
-    else if (background == "slider")
-    {
-        newBackGround->setPixmap(QPixmap(":/images/slider_knobbg.png"));
-    }
-    else
-    {
-        newBackGround->setPixmap(QPixmap(":/images/knobbg.png"));
-    };
+    newBackGround->setPixmap(QPixmap(":/images/knobbgn.png"));
+
     newBackGround->move(bgPos);
-    QString imagePath_slider(":/images/slider_knob.png");
     QString imagePath_knob(":/images/knob.png");
 
     unsigned int imageRange = 100;
-    if (background == "slider") {
-        this->knob = new customDial(0, rangeMin, range, 1, 10, knobPos, this, hex1, hex2, hex3, imagePath_slider, imageRange);
-    } else {this->knob = new customDial(0, rangeMin, range, 1, 10, knobPos, this, hex1, hex2, hex3, imagePath_knob, imageRange);};
+    this->knob = new customDial(0, rangeMin, range, 1, 10, knobPos, this, hex1, hex2, hex3, imagePath_knob, imageRange);
     this->setFixedSize(newBackGround->pixmap()->size() - QSize(0, 4)); // Correction needed h-4.
 
     QObject::connect(this, SIGNAL( updateSignal() ),
@@ -103,12 +87,11 @@ void customDataKnob::setValue(int value)
 
 void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
-    int valueHalf = value/2;
     MidiTable *midiTable = MidiTable::Instance();
     QString valueHex = QString::number(value, 16).toUpper();
     if (this->byteSize == "3") {
-        if(valueHex.length() < 3) { valueHex.prepend("0"); }
-        else if(valueHex.length() < 2) { valueHex.prepend("00"); };
+        if(valueHex.length() < 2) { valueHex.prepend("00"); }
+        else if(valueHex.length() < 3) { valueHex.prepend("0"); };
     } else { if(valueHex.length() < 2) { valueHex.prepend("0"); }; };
 
     QList<QString> valueString;
@@ -124,7 +107,6 @@ void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString
 
     SysxIO *sysxIO = SysxIO::Instance();
     sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);;
-    if (this->hex_c == "09") { valueHex = QString::number(valueHalf, 16).toUpper(); };
     QString valueStr = midiTable->getValue("Tables", hex_a, hex_b, hex_c, valueHex);
 
     emit updateDisplay(valueStr);

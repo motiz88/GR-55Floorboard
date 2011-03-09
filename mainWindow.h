@@ -59,6 +59,8 @@ public slots:
         void bulkSave();
         void bulkLoad();
         void settings();
+        void guitarMode();
+        void bassMode();
         void upload();
         void summaryPage();       
         void summarySystemPage();
@@ -79,6 +81,8 @@ private:
         //QStatusBar *statusBar;
         QMenu *fileMenu;
         QMenu *toolsMenu;
+        QMenu *settingsMenu;
+        QMenu *modeMenu;
         QMenu *helpMenu;
         QAction *openAct;
         QAction *saveAct;
@@ -93,6 +97,8 @@ private:
         QAction *bulkSaveAct;
         QAction *exitAct;
         QAction *settingsAct;
+        QAction *guitarModeAct;
+        QAction *bassModeAct;
         QAction *uploadAct;
         QAction *summaryAct;       
         QAction *summarySystemAct;

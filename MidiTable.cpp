@@ -236,7 +236,8 @@ int MidiTable::getRange(QString root, QString hex1, QString hex2, QString hex3)
 	}
 	else if(range.level.last().type.contains("DATA"))
 	{
-		int maxRange = QString("7F").toInt(&ok, 16) + 1; // index starts at 0 -> 0-127 = 128 entry's.
+                int maxRange = 128; // index starts at 0 -> 0-127 = 128 entry's.
+                if (root == "Tables" && hex3 == "00") { maxRange = 256; };
 		int lastIndex1 = range.level.last().value.toInt(&ok, 16);
 		int lastIndex2 = range.level.last().level.last().value.toInt(&ok, 16);
 		lastIndex = (lastIndex1 * maxRange) + lastIndex2;
@@ -297,7 +298,8 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
 	QString valueStr; bool ok;
 	if(range.level.last().type.contains("DATA"))
 	{
-		int maxRange = QString("7F").toInt(&ok, 16) + 1;
+            int maxRange = 128; // index starts at 0 -> 0-127 = 128 entry's.
+            if (root == "Tables" && hex3 == "00") { maxRange = 256; };
 		int value = hex4.toInt(&ok, 16);
 		int dif = value/maxRange;
 		QString index1 = QString::number(dif, 16).toUpper();
@@ -318,7 +320,7 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
 QString MidiTable::rangeToValue(Midi range, QString hex)
 {
 	QString valueStr;
-	if(!range.id.contains(hex) /*&& range.id.contains("range")*/)
+        if(!range.id.contains(hex) /*&& range.id.contains("range")*/)
 	{
 		int i = 0; bool ok;
 		while(range.id.indexOf("range", i) != -1)
@@ -356,6 +358,7 @@ QString MidiTable::rangeToValue(Midi range, QString hex)
 	else
 	{
 		valueStr = range.level.at(range.id.indexOf(hex)).name;
+                if (valueStr.isEmpty()){ valueStr = "fuck";};//range.level.at(range.id.indexOf(hex)).desc; };
 	};
 	return valueStr;
 };
@@ -526,8 +529,8 @@ QString MidiTable::dataChange(QString area, QString hex1, QString hex2, QString 
     else
     {
        area = "System";
-      sysxMsg.append("00");
 	    sysxMsg.append(hex1);
+	    sysxMsg.append("00");
 	    sysxMsg.append(hex2);
 	    sysxMsg.append(hex3);
     };
@@ -559,9 +562,9 @@ QString MidiTable::dataChange(QString area, QString hex1, QString hex2, QString 
     } 
     else
     {
-      area = "System";
-      sysxMsg.append("00");
+      area = "System"; 
 	    sysxMsg.append(hex1);
+	    sysxMsg.append("00");
 	    sysxMsg.append(hex2);
 	    sysxMsg.append(hex3);
     };

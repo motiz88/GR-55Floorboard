@@ -200,8 +200,8 @@ void customTargetListMenu::setComboBox()
 void customTargetListMenu::valueChanged(int index)
 {
     QString valueHex = QString::number(index, 16).toUpper();
-    if(valueHex.length() < 3) { valueHex.prepend("00"); }
-    else if(valueHex.length() < 2) { valueHex.prepend("0"); };
+    if(valueHex.length() < 2) { valueHex.prepend("00"); }
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
     QList<QString> valueString;
     QString lsb = valueHex.at(0);
     lsb.prepend("0");

@@ -27,8 +27,8 @@ menuPage_pdl::menuPage_pdl(QWidget *parent)
     : menuPage(parent)
 {
     /* PDL */
-    setLSB("00", "00");
-    // editDetails()->patchPos(2830, 60, "0A", "40");
+    setLSB("00", "11");
+    editDetails()->patchPos(56, 272, "00", "11"); //correct
     setEditPages();
 };
 
