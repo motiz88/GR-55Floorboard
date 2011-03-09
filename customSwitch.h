@@ -43,6 +43,7 @@ public:
 signals:
 	void valueChanged(bool newValue, QString hex1, QString hex2, QString hex3);
 
+
 protected:
 	void paintEvent(QPaintEvent *event);
 	void mousePressEvent(QMouseEvent *event);

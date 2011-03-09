@@ -32,14 +32,6 @@
 #include "SysxIO.h"
 #include "globalVariables.h"
 
-// Platform-dependent sleep routines.
-#ifdef Q_OS_WIN
-#include <windows.h>
-#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
-#else // Unix variants
-#include <unistd.h>
-#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
-#endif
 
 bankTreeList::bankTreeList(QWidget *parent)
     : QWidget(parent)

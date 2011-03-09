@@ -28,6 +28,7 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
+//#include <QTest>
 
 class midiIO: public QThread
 {

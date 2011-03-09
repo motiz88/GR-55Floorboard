@@ -33,7 +33,7 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
         setComboBox("21", "routeSwitch", "16");
         setKnob1("21", "00", "01");
         setKnob2("21", "00", "04");
-        //editDetails()->patchPos(400, 58, "01", "30");
+        editDetails()->patchPos(2332, 70, "21", "00");
 	setEditPages();
 
 };

@@ -55,13 +55,13 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    QObject::connect(this->parent(), SIGNAL( pathUpdateSignal() ), this, SIGNAL( pathUpdateSignal() ));
+    //QObject::connect(this->parent(), SIGNAL( pathUpdateSignal() ), this, SIGNAL( pathUpdateSignal() ));
 
-    QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
+    //QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
 
-    QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
+    //QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
 
-    QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
+    //QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->parent(), SIGNAL(amp_buttonSignal(bool)), this, SLOT(amp_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(amp_statusSignal(bool)), this->parent(), SIGNAL(amp_statusSignal(bool)));
@@ -145,7 +145,7 @@ void stompBox::amp_ButtonSignal(bool value)
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
-    };
+ };
 };
 
 void stompBox::ns1_ButtonSignal(bool value)
@@ -161,7 +161,7 @@ void stompBox::ns1_ButtonSignal(bool value)
 void stompBox::mod_ButtonSignal(bool value)
 {
     if (this->id == 6)
-    {
+   {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
@@ -402,8 +402,7 @@ void stompBox::updateComboBox(QString hex1, QString hex2, QString hex3)
 void stompBox::updateKnob1(QString hex1, QString hex2, QString hex3)
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    QString area;
-    knob1->setValue(sysxIO->getSourceValue(area, hex1, hex2, hex3));
+    knob1->setValue(sysxIO->getSourceValue("Structure", hex1, hex2, hex3));
 };
 
 void stompBox::updateKnob2(QString hex1, QString hex2, QString hex3)
@@ -464,7 +463,7 @@ void stompBox::updateSwitch(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switchbutton->setValue((value==1)?true:false);
     bool set = false;
-    if (value == 1) {set = true; };
+    if (value != 0) {set = true; };
     if (this->id == 4) { emit amp_statusSignal(set); };
     if (this->id == 5){ emit ns1_statusSignal(set); };
     if (this->id == 6) { emit mod_statusSignal(set); };
@@ -517,6 +516,7 @@ void stompBox::valueChanged(bool value, QString hex1, QString hex2, QString hex3
     sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
+    emit updateSignal();
 };
 
 void stompBox::valueChanged(int index)
@@ -555,9 +555,7 @@ void stompBox::emitValueChanged(QString hex1, QString hex2, QString hex3, QStrin
             Midi items = midiTable->getMidiMap("Structure", hex1, hex2, hex3);
             valueName = items.desc;
             valueName.append(" " + items.customdesc);
-            //this->fxName = midiTable->getMidiMap("Structure", hex1, hex2, hex3).name;
             valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
-            emit dialogUpdateSignal();
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);
@@ -578,7 +576,7 @@ void stompBox::updateStompPath()
     if (this->id == 9) {this->fxName = tr("Reverb");};
     if (this->id == 10) {this->fxName = tr("Delay");};
     if (this->id == 11) {this->fxName = tr("Equalizer");};
-    if (this->id == 12){this->fxName = tr("Pedal/GK");};
+    //if (this->id == 12){this->fxName = tr("Pedal/GK");};
 };
 
 void stompBox::getStompOrder()

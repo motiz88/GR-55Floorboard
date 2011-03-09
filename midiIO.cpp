@@ -36,14 +36,6 @@ bool midiIO::dataReceive = false;
 QString midiIO::sysxBuffer;
 QString midiIO::msgType = "name";
 
-// Platform-dependent sleep routines.
-#ifdef Q_OS_WIN
-#include <windows.h>
-#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
-#else // Unix variants & Mac
-#include <unistd.h>
-#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
-#endif
 
 midiIO::midiIO()
 {
@@ -167,7 +159,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     const std::string clientName = "FloorBoard";
     midiMsgOut = new RtMidiOut(clientName);
     QString hex;
-    int wait = 0;
+    int wait_time = 0;
     int close = 20;
     int s = sysxOutMsg.size()/100;
     int p=0;
@@ -190,9 +182,9 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
             n = hex.toInt(&ok, 16);
             *ptr = (char)n;
             message.push_back(*ptr);		// insert the char* string into a std::vector
-            wait = wait + 1;
+            wait_time = wait_time + 1;
             p=p+s;
-            emit setStatusProgress(wait);
+            emit setStatusProgress(wait_time);
             /* if(hex == "F7")
              {
                 midiMsgOut->sendMessage(&message);  // send the midi data as a std::vector
@@ -209,7 +201,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     }
     catch (RtError &error)
     {
-        SLEEP(100);
+        msleep(100);
         retryCount = retryCount + 1;
         if (retryCount < 10) { goto RETRY; };
         error.printMessage();
@@ -218,7 +210,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     };
     /* Clean up */
     cleanup:
-    SLEEP(close);						// wait as long as the message is sending.
+    msleep(close);						// wait as long as the message is sending.
     midiMsgOut->closePort();
     delete midiMsgOut;
 };
@@ -317,7 +309,8 @@ void midiIO::receiveMsg(QString sysxInMsg, int midiInPort)
         unsigned int t = 1;
         while (x<loopCount && sysxBuffer.size()/2 < count)  // wait until exact bytes received or timeout
         {
-            SLEEP(5);
+            //SLEEP(5);
+            msleep(5);
             s = (this->sysxBuffer.size()*50)/count;
             t = (x*200)/loopCount;
             if (s>t) {t=s;};
@@ -377,15 +370,15 @@ void midiIO::run()
         };
         emit setStatusSymbol(2);
         emit setStatusProgress(33); // time wasting sinusidal statusbar progress animation
-        SLEEP(40);
+        msleep(40);
         emit setStatusProgress(66);
-        SLEEP(100);
+        msleep(100);
         emit setStatusProgress(100);
-        SLEEP(100);
+        msleep(100);
         emit setStatusProgress(75);
-        SLEEP(100);
+        msleep(100);
         emit setStatusProgress(42);
-        SLEEP(150);
+        msleep(150);
         emit setStatusProgress(0);
         emit midiFinished(); // We are finished so we send a signal to free the device.
     }
@@ -414,7 +407,7 @@ void midiIO::run()
             {
                 bytesTotal = patchReplySize;     // progressbar scaled to patch size
             }
-            else if (sizeChunk == "00020900")
+            else if (sizeChunk == "01010000")
             {
                 bytesTotal = systemSize;
             };
@@ -438,13 +431,13 @@ void midiIO::run()
             Preferences *preferences = Preferences::Instance(); bool ok;// Load the preferences.
             const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
             emit setStatusProgress(33);  // do the statusbar progress thing
-            SLEEP((100/minWait)*2);		// and wait predetermined time before being able to send more again.
+            msleep((100/minWait)*2);		// and wait predetermined time before being able to send more again.
             emit setStatusProgress(75);
-            SLEEP((100/minWait)*3);
+            msleep((100/minWait)*3);
             emit setStatusProgress(100);
-            SLEEP((100/minWait)*3);
+            msleep((100/minWait)*3);
             emit setStatusProgress(66);
-            SLEEP((100/minWait)*2);
+            msleep((100/minWait)*2);
             emit midiFinished(); // We are finished so we send a signal to free the device.
         };
         this->sysxInMsg = sysxInMsg;

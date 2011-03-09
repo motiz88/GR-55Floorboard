@@ -82,7 +82,6 @@ signals:
     void amp_buttonSignal(bool value);
     void compressor_buttonSignal(bool value);
     void ns1_buttonSignal(bool value);
-    void ns2_buttonSignal(bool value);
     void mod_buttonSignal(bool value);
     void mfx_buttonSignal(bool value);
     void reverb_buttonSignal(bool value);
@@ -108,7 +107,6 @@ signals:
     void amp_statusSignal(bool value);
     void compressor_statusSignal(bool value);
     void ns1_statusSignal(bool value);
-    void ns2_statusSignal(bool value);
     void mod_statusSignal(bool value);
     void mfx_statusSignal(bool value);
     void reverb_statusSignal(bool value);

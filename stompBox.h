@@ -75,7 +75,6 @@ public:
     void updateSlider4(QString hex1, QString hex2, QString hex3);
     void updateSlider5(QString hex1, QString hex2, QString hex3);
     void updateComboBox(QString hex1, QString hex2, QString hex3);
-    //void updateComboBox2(QString hex1, QString hex2, QString hex3);
     void updateButton(QString hex1, QString hex2, QString hex3);
     void updateSwitch(QString hex1, QString hex2, QString hex3);
 
@@ -92,7 +91,6 @@ public slots:
     void valueChanged(int value, QString hex1, QString hex2, QString hex3);
     void valueChanged(bool value, QString hex1, QString hex2, QString hex3);
     void valueChanged(int index);
-    //void valueChanged2(int index);
     virtual void updateSignal() {}
     void setDisplayToFxName();
     void updateStompPath();

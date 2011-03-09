@@ -31,7 +31,7 @@ customControlTarget::customControlTarget(QWidget *parent,
                                              : QWidget(parent)
 {
 
-    this->displayCombo = new customTargetListMenu(this, hex1, hex2, hex3, hexMsb, hexLsb);
+
     this->displayMin = new QLineEdit(this);
     this->displayMax = new QLineEdit(this);
     this->label = new customControlLabel(this);
@@ -70,7 +70,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3_lsb);        // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
 
-
+    this->displayCombo = new customTargetListMenu(this, hex1, hex2, hex3, hexMsb, hexLsb);
     MidiTable *midiTable = MidiTable::Instance();
     QString valueStr = midiTable->getValue("Tables", "00", "00", "00", valueHex);               // lookup the target values
 

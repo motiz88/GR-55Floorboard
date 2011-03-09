@@ -26,14 +26,14 @@
 stompbox_amp::stompbox_amp(QWidget *parent)
     : stompBox(parent)
 {
-    /* LOOP */
+    /* AMP */
     setImage(":/images/amp.png");
     setLSB("07", "00");
     setKnob1("07", "00", "02");
     setKnob2("07", "00", "03");
     setComboBox("07", "00", "01");
     setSwitch("07", "00", "00");
-    editDetails()->patchPos(1480, 34, "07", "00");
+    editDetails()->patchPos(1480, 34, "07", "00");  //correct
     setEditPages();
 };
 
@@ -51,7 +51,7 @@ void stompbox_amp::setEditPages()
     editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "00");   // off/on effect
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
-    // CHANNEL A
+    //AMP
 
 
     //editDetails()->page()->newGroupBox(tr("Amp/Spkr"));

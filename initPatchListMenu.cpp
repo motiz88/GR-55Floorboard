@@ -83,7 +83,7 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 	if(initPatchesDir.exists())
 	{	/* If the "Init Pathces" directory exists. */
 		QStringList filters;
-		filters << "*.syx" << "*.syx2";
+                filters << "*.g5l" << "*.syx";
 		QStringList initPatchesList = initPatchesDir.entryList(filters);
 
 		if (initPatchesList.size() != 0)
@@ -100,7 +100,7 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 				this->initPatches.append(path);
 				QString item = initPatchesList.at(itemcount);	// Start formatting the item name.
 				item.remove(QRegExp("^[0-9_]+"));
-				item.remove(QRegExp(".{1}(syx|syx2)"));
+                                item.remove(QRegExp(".{1}(g5l|syx)"));
 				if(!item.contains("INIT_"))
 				{
 					item.prepend(tr("(My INIT) "));

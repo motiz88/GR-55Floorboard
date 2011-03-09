@@ -280,7 +280,8 @@ void bulkLoadDialog::sendData()
     QString replyMsg;
     for (int a=startList;a<(finishList+1);a++)
     {
-        if (z>128) {z=z-128; addrMSB = "21"; };          // next address range when > 20 7F.
+        if (z>128 && addrMSB == "20") {z=z-128; addrMSB = "21"; }          // next address range when > 20 7F.
+        else if (z>128 && addrMSB == "21") {z=z-128; addrMSB = "22"; }
         address = QString::number(z-1, 16).toUpper();
         if (address.size()<2){ address.prepend("0"); };
         int b = a*patchSize;                                // multiples of patch size.
@@ -472,9 +473,11 @@ void bulkLoadDialog::loadG5L()         // ************************************ G
     {
         QByteArray temp;
         temp = data.mid(a, 128);
-        default_data.replace(11, 128, temp);      //address "00"
-        temp = data.mid(a+128, 128);
-        default_data.replace(152, 128, temp);     //address "01"
+        default_data.replace(11, 128, temp);      //address "00"      
+        temp = data.mid(a+128, 114);
+        default_data.replace(152, 114, temp);     //address "01"
+        temp = data.mid(a+250, 6);
+        default_data.replace(266, 6, temp);     //address "01"
         temp = data.mid(a+256, 78);
         default_data.replace(293, 78, temp);     //address "02" +
         temp = data.mid(a+350, 128);

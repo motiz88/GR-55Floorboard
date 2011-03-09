@@ -33,17 +33,6 @@
 #include "globalVariables.h"
 
 
-
-// Platform-dependent sleep routines.
-#ifdef Q_OS_WIN
-#include <windows.h>
-#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
-#else // Unix variants
-#include <unistd.h>
-#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
-#endif
-
-
 floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     : QWidget(parent)
 {
@@ -215,7 +204,6 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->reverb_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(reverb_buttonSignal(bool)));
     QObject::connect(this->delay_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(delay_buttonSignal(bool)));
     QObject::connect(this->chorus_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(chorus_buttonSignal(bool)));
-    //QObject::connect(this->sendreturn_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(sendreturn_buttonSignal(bool)));
     QObject::connect(this->eq_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(eq_buttonSignal(bool)));
     QObject::connect(this->pedal_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(pedal_buttonSignal(bool)));
     QObject::connect(this->master_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(master_buttonSignal(bool)));
@@ -1137,7 +1125,7 @@ void floorBoardDisplay::writeSignal(bool)
                     msgBox->setTextFormat(Qt::RichText);
                     QString msgText;
                     msgText.append("<font size='+1'><b>");
-                    msgText.append(tr("You have chosen to write the patch permanently into ") + deviceType + (" memory."));
+                    msgText.append(tr("You have chosen to write the patch into ") + deviceType + (" memory."));
                     msgText.append("<b></font><br>");
                     msgText.append(tr("This will overwrite the patch currently stored at patch location<br>"));
                     msgText.append("<font size='+2'><b>");
@@ -1254,18 +1242,18 @@ void floorBoardDisplay::resetDevice(QString replyMsg)
         sysxIO->setLoadedPatch(sysxIO->getPatch());
     };
 
-    emit setStatusProgress(33); // time wasting sinusidal statusbar progress
-    SLEEP(100);
+   /* emit setStatusProgress(33); // time wasting sinusidal statusbar progress
+    msleep(100);
     emit setStatusProgress(66);
-    SLEEP(100);
+    msleep(100);
     emit setStatusProgress(100);
-    SLEEP(100);
+    msleep(100);
     emit setStatusProgress(75);
-    SLEEP(100);
+    msleep(100);
     emit setStatusProgress(42);
-    SLEEP(100);
+    msleep(100);
     emit setStatusProgress(25);
-    SLEEP(100);
+    msleep(100);*/
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
     emit connectedSignal();			// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
 };

@@ -200,7 +200,8 @@ void bulkEditDialog::sendSequence(QString value)
    QString msg = partialData;
    QString v;
    QString replyMsg;
-    if (patchRange>=128) {patchRange=patchRange-128; addrMSB = "21"; };          // next address range when > 20 7F.
+    if (patchRange>=128 && addrMSB == "20") {patchRange=patchRange-128; addrMSB = "21"; }          // next address range when > 20 7F.
+    else if (patchRange>=128 && addrMSB == "21") {patchRange=patchRange-128; addrMSB = "22"; };
     address = QString::number(patchRange, 16).toUpper();
     if (address.size()<2){ address.prepend("0"); };
       

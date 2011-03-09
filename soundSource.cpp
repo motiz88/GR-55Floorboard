@@ -244,9 +244,6 @@ void soundSource::setComboBoxCurrentIndex(int index)
 
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
-    MidiTable *midiTable = MidiTable::Instance();
-    int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    //knob1 = new customDial(0, 0, range, 1, 10, QPoint(24, 13), this, hex1, hex2, hex3);
     stompDisplay = new customDisplay(QRect(17, 42, 120, 20), this);
     this->stompDisplay->setAllColor(QColor(185,224,243));
 };
@@ -304,12 +301,11 @@ void soundSource::updateComboBox(QString hex1, QString hex2, QString hex3)
 void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    QString area;
-    int index = sysxIO->getSourceValue(area, hex1, hex2, hex3);
+    int index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
+    /*if (this->id == 1)
+    {
 
-    //knob1->setValue(index);
-
-
+    };*/
     MidiTable *midiTable = MidiTable::Instance();
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
@@ -331,7 +327,6 @@ void soundSource::updateButton(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     led->setValue((value==1)?true:false);
     button->setValue((value==1)?true:false);
-
 };
 
 void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
@@ -342,7 +337,7 @@ void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switchbutton->setValue((value==1)?true:false);
     bool set = false;
-    if (value == 1) {set = true; };
+    if (value >= 1) {set = true; };
     if(this->id == 1) { emit modeling_statusSignal(set); };
     if(this->id == 2) { emit synth1_statusSignal(set); };
     if(this->id == 3) { emit synth2_statusSignal(set); };
@@ -354,8 +349,6 @@ void soundSource::updateSwitch3way(QString hex1, QString hex2, QString hex3)
     QString area;
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switch3way->setValue(value);
-    //emit switchSignal();
-    //QApplication::beep();
 };
 
 void soundSource::valueChanged(int value, QString hex1, QString hex2, QString hex3)
@@ -400,6 +393,7 @@ void soundSource::valueChanged(bool value, QString hex1, QString hex2, QString h
     sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
+    emit updateSignal();
 };
 
 void soundSource::valueChanged(int index)
@@ -441,7 +435,7 @@ void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QSt
             valueName.append(" " + items.customdesc);
             //this->fxName = midiTable->getMidiMap("Structure", hex1, hex2, hex3).name;
             valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
-            emit dialogUpdateSignal();
+
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);

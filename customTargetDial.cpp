@@ -213,8 +213,8 @@ void customTargetDial::knobSignal(QString hex1, QString hex2, QString hex3)
 {
 if (this->background != "target")
   {
-    //MidiTable *midiTable = MidiTable::Instance();
-    //this->max = 1;//midiTable->getRange("Structure", "hex1", "hex2", "hex3");
-    //this->min = 0;//= midiTable->getRangeMinimum("Structure", "hex1", "hex2", "hex3");
+    MidiTable *midiTable = MidiTable::Instance();
+    this->max = midiTable->getRange("Structure", hex1, hex2, hex3);
+    this->min = midiTable->getRangeMinimum("Structure", hex1, hex2, hex3);
   };
 };

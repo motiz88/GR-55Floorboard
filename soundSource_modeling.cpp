@@ -33,7 +33,7 @@ soundsource_modeling::soundsource_modeling(QWidget *parent)
     setComboBox("02", "routeSwitch", "2D");
     setKnob1("10", "00", "00");
     setKnob2("10", "00", "09");
-    //editDetails()->patchPos(400, 58, "01", "30");
+    editDetails()->patchPos(1756, 454, "10", "00");
     setEditPages();
 };
 
