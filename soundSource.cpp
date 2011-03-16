@@ -58,11 +58,7 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    //QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
-
     QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
-
-   // QObject::connect(this, SIGNAL( switchSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this, SLOT(modeling_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(modeling_statusSignal(bool)), this->parent(), SIGNAL(modeling_statusSignal(bool)));
@@ -163,7 +159,6 @@ void soundSource::updatePos(signed int offsetDif)
 void soundSource::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-    //this->update();
 };
 
 void soundSource::setSize(QSize newSize)
@@ -244,7 +239,7 @@ void soundSource::setComboBoxCurrentIndex(int index)
 
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
-    stompDisplay = new customDisplay(QRect(17, 42, 120, 20), this);
+    stompDisplay = new customDisplay(QRect(17, 41, 120, 25), this);
     this->stompDisplay->setAllColor(QColor(185,224,243));
 };
 
@@ -302,15 +297,18 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
 {
     SysxIO *sysxIO = SysxIO::Instance();
     int index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
-    /*if (this->id == 1)
-    {
 
-    };*/
+    if (this->id == 1)
+    {
+        bool ok;
+        hex3 = "0" + QString::number(QString(hex3).toInt(&ok, 16) + index + 1, 16).toUpper();
+        index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
+    };
     MidiTable *midiTable = MidiTable::Instance();
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
-    this->stompDisplay->setMainText(valueStr);
+    this->stompDisplay->setMainText(valueStr, Qt::AlignTop);
 };
 
 void soundSource::updateKnob2(QString hex1, QString hex2, QString hex3)

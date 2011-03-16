@@ -121,14 +121,19 @@ void customTargetListMenu::setComboBox()
     this->hex2 = hex2;
     this->hex3 = hex3;
 
+    SysxIO *sysxIO = SysxIO::Instance();
+    QString mode_hex = "00";
+    this->mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    if(this->mode_value != 0) {mode_hex = "0D"; };
+
     MidiTable *midiTable = MidiTable::Instance();
     Midi items;
     Midi item_0;
     Midi item_1;
     Midi item_2;
-    item_0 = midiTable->getMidiMap("Tables", "00", "00", "00", "00");
-    item_1 = midiTable->getMidiMap("Tables", "00", "00", "00", "01");
-    item_2 = midiTable->getMidiMap("Tables", "00", "00", "00", "02");
+    item_0 = midiTable->getMidiMap("Tables", "00", "00", mode_hex, "00");
+    item_1 = midiTable->getMidiMap("Tables", "00", "00", mode_hex, "01");
+    item_2 = midiTable->getMidiMap("Tables", "00", "00", mode_hex, "02");
     items = item_0;
 
     QString longestItem = "";
@@ -189,8 +194,8 @@ void customTargetListMenu::setComboBox()
         this->controlListComboBox->addItem(item);
     };
 
-     itemTotal = itemTotal + itemcount;
-    this->controlListComboBox->setFixedWidth(200);
+    itemTotal = itemTotal + itemcount;
+    this->controlListComboBox->setFixedWidth(250);
     this->controlListComboBox->setFixedHeight(17);
     this->controlListComboBox->setEditable(false);
     this->controlListComboBox->setFrame(false);
@@ -199,6 +204,20 @@ void customTargetListMenu::setComboBox()
 
 void customTargetListMenu::valueChanged(int index)
 {
+    SysxIO *sysxIO = SysxIO::Instance();
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    if (mode_check != this->mode_value)
+    {
+        this->mode_value = mode_check;
+        int x = this->controlListComboBox->count()+1;
+        for(int y=0; y<x; ++y)
+        {
+        this->controlListComboBox->removeItem(1);
+    };
+        setComboBox();
+        this->controlListComboBox->removeItem(1);
+        emit updateSignal();
+    };
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) { valueHex.prepend("00"); }
     else if(valueHex.length() < 3) { valueHex.prepend("0"); };
@@ -213,7 +232,6 @@ void customTargetListMenu::valueChanged(int index)
     lsb.prepend("0");
     valueString.append(lsb);
 
-    SysxIO *sysxIO = SysxIO::Instance();
     sysxIO->setFileSource(this->area, hex1, hex2, hex3, valueString);
 
     bool ok;
@@ -242,12 +260,15 @@ void customTargetListMenu::valueChanged(int index)
     if(valueHex2.length() < 2) valueHex2.prepend("0");
     QString hex4 = valueHex1;
     QString hex5 = valueHex2;    //convert valueStr to 7-bit hex4, hex5
-    Midi items = midiTable->getMidiMap("Tables", "00", "00", "00", hex4, hex5);
+
+    QString mode_hex = "00";
+    if(this->mode_value != 0) {mode_hex = "0D"; };
+    Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
     this->hexMsb = items.desc;
     this->hexLsb = items.customdesc;
 
     emit updateTarget(hexMsb, hex2, hexLsb);                                                    // hexMsb & hexLsb are lookup address for label value
-    emit updateTarget(hexMsb, hex2, hexLsb);
+    //emit updateTarget(hexMsb, hex2, hexLsb);
     //emit updateSignal();
 
 }

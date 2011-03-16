@@ -66,6 +66,7 @@ private:
 	QString hexLsb;
 	QString area;
 	int comboWidth;
+        int mode_value;
 };
 
 #endif // CUSTOMTARGETLISTMENU_H

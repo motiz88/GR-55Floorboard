@@ -72,14 +72,15 @@ summaryDialog::summaryDialog(QWidget *parent)
   QString patchName = sysxIO->getCurrentPatchName();
   text = "<br><b><u>Patch name = </u>" + patchName + "</b>";
 
-  text.append("<br><br><b>Patch Mode Output Select = </b>");
-  int value = sysxIO->getSourceValue("Structure", "00", "00", "11");
+  text.append("<br><br><b>Patch Mode = </b>");
+  int value = sysxIO->getSourceValue("Structure", "00", "00", "00");
   QString valueHex = QString::number(value, 16).toUpper();
   if(valueHex.length() < 2) {valueHex.prepend("0"); };
-  text.append(midiTable->getValue("Structure", "00", "00", "11", valueHex) );
+  text.append(midiTable->getValue("Structure", "00", "00", "00", valueHex) );
 
-
-
+  small_text.append(text);
+  large_text.append(text);
+/*
   QList<QString> fxChain = sysxIO->getFileSource("Structure", "0B", "00");
 
   QString chainText = "<br><br><b><u>**********Signal Chain**********</u></b><br>Input = -> ";
@@ -423,7 +424,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   finish = 28;
   makeList();
   large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
+  if(effect == "on") { small_text.append(text); };*/
    
   text = "<br><br><b><u>**********Patch Data***********</b></u><br>";
   text.append(sysxMsg);

@@ -124,7 +124,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Phaser");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "2B");
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "2C", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "2C", "normal","right", 120);
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "2D");
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "2E");
     editDetails()->page()->addKnob(0, 4, 1, 1, "07", "00", "2F");
@@ -134,7 +134,7 @@ void stompbox_mod::setEditPages()
     // Flanger
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Flanger");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "30", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "30", "normal","right", 120);
     editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "31");
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "32");
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "33");
@@ -146,7 +146,7 @@ void stompbox_mod::setEditPages()
     // Tremolo
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Tremolo");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "35", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "35", "normal","right", 120);
     editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "36");
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "37");
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "38");
@@ -156,8 +156,8 @@ void stompbox_mod::setEditPages()
     // Rotary
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Rotary");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "39", "normal","right", 105);
-    editDetails()->page()->addKnob(1, 0, 1, 1, "07", "00", "3A", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "39", "normal","right", 120);
+    editDetails()->page()->addKnob(1, 0, 1, 1, "07", "00", "3A", "normal","right", 120);
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "3B");
     editDetails()->page()->addComboBox(0, 3, 1, 1, "07", "00", "3C");
     editDetails()->page()->addKnob(0, 4, 1, 1, "07", "00", "3D");
@@ -167,7 +167,7 @@ void stompbox_mod::setEditPages()
     // Uni V
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Uni-Vibe");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "3E", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "3E", "normal","right", 120);
     editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "3F");
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "40");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
@@ -177,7 +177,7 @@ void stompbox_mod::setEditPages()
     // Panner
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Panner");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "41", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "41", "normal","right", 120);
     editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "42");
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "43");
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "44");
@@ -189,7 +189,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Delay");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "45"); //type
-    editDetails()->page()->addDataKnob(0, 1, 1, 1, "07", "00", "46", "DELAY3400","right", 105);       //time
+    editDetails()->page()->addDataKnob(0, 1, 1, 1, "07", "00", "46", "DELAY3400","right", 120);       //time
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "49");       //feedback
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "4A");       //level
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
@@ -199,7 +199,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Chorus");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "4B");;
-    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "4C", "normal","right", 105);
+    editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "4C", "normal","right", 120);
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "4D");
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "4E");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);

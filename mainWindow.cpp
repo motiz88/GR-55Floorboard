@@ -789,10 +789,10 @@ void mainWindow::upload()
 
 void mainWindow::summaryPage()
 {
-    //summaryDialog *summary = new summaryDialog();
-    //summary->setMinimumWidth(800);
-    //summary->setMinimumHeight(650);
-    //summary->show();
+    summaryDialog *summary = new summaryDialog();
+    summary->setMinimumWidth(800);
+    summary->setMinimumHeight(650);
+    summary->show();
 };
 
 void mainWindow::summarySystemPage()
