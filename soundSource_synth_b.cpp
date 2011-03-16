@@ -59,7 +59,8 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addKnob(0, 7, 1, 1, "21", "00", "0A");            // pitch shift
     editDetails()->page()->addKnob(0, 8, 1, 1, "21", "00", "0B");            // pitch fine
     editDetails()->page()->addComboBox(0, 9, 1, 1, "21", "00", "0C", "bottom", Qt::AlignLeft); //portamento sw
-    editDetails()->page()->addDataKnob(0, 10, 1, 1, "21", "00", "0D", "0~100");            // portamento time
+    editDetails()->page()->addComboBox(0, 10, 1, 1, "31", "00", "1B");        //portamento type
+    editDetails()->page()->addDataKnob(0, 11, 1, 1, "21", "00", "0D", "PORTAMENTO");            // portamento time
     editDetails()->page()->addGroupBox(0, 0, 1, 2);
 
     // SYNTH A
@@ -114,7 +115,6 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addKnob(0, 1, 1, 1, "31", "00", "18");            //env depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "31", "00", "19");            //attack time
     editDetails()->page()->addKnob(0, 3, 1, 1, "31", "00", "1A");            //decay time
-    editDetails()->page()->addComboBox(0, 4, 1, 1, "31", "00", "1B");        //portamento type
     editDetails()->page()->addGroupBox(4, 1, 1, 1);
 
     editDetails()->page()->newGroupBox(tr("LFO 1"));

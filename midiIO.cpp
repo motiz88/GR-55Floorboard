@@ -196,7 +196,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
             ptr++; i++;
 
         };
-         midiMsgOut->sendMessage(&message);
+        midiMsgOut->sendMessage(&message);
         goto cleanup;
     }
     catch (RtError &error)

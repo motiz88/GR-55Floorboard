@@ -295,6 +295,7 @@ void soundsource_modeling::setEditPages()
     editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "3D");   //decay
     editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "3E");   //buzz
     editDetails()->page()->addKnob(0, 6, 1, 1, "10", "00", "3F");   //attack level
+    editDetails()->page()->addKnob(0, 7, 1, 1, "10", "00", "40");   //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 

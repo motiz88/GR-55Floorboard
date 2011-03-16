@@ -38,6 +38,11 @@ customKnobTarget::customKnobTarget(QWidget *parent,
     this->hexLsb = hexLsb;
     this->background = background;
 
+    SysxIO *sysxIO = SysxIO::Instance();
+    QString mode_hex = "00";
+    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    if(mode_value != 0) {mode_hex = "0D"; };
+
     MidiTable *midiTable = MidiTable::Instance();
 
     QPoint bgPos = QPoint(0, -3); // Correction needed y-3.
@@ -45,8 +50,8 @@ customKnobTarget::customKnobTarget(QWidget *parent,
     QLabel *newBackGround = new QLabel(this);
     if (this->background == "target")
     {
-        this->range = midiTable->getRange("Tables", "00", "00", "00");
-        this->rangeMin = midiTable->getRangeMinimum("Tables", "00", "00", "00");
+        this->range = midiTable->getRange("Tables", "00", "00", mode_hex);
+        this->rangeMin = midiTable->getRangeMinimum("Tables", "00", "00", mode_hex);
     }
     else
     {
@@ -114,35 +119,38 @@ void customKnobTarget::setValue(int value)
 
 void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
-    if (background != "target")
-    {    
-        this->knobSignal(hexMsb, hex2, hexLsb);
-        this->hexMsb = hexMsb;
-        this->hex2 = hex2;
-        this->hexLsb = hexLsb;
-    };
+
     MidiTable *midiTable = MidiTable::Instance();
 
     QString valueHex = QString::number(value, 16).toUpper();
+    QString valueBigHex = QString::number(value + 1024, 16).toUpper();
     if(valueHex.length() < 2) { valueHex.prepend("00"); }
     else if(valueHex.length() < 3) { valueHex.prepend("0"); };
+    if(valueBigHex.length() < 2) { valueBigHex.prepend("00"); }
+    else if(valueBigHex.length() < 3) { valueBigHex.prepend("0"); };
+
+    if(background == "target"){ valueBigHex = valueHex; };
 
     QList<QString> valueString;
-    QString lsb = valueHex.at(0);
+    QString lsb = valueBigHex.at(0);
     lsb.prepend("0");
     valueString.append(lsb);
-    lsb = valueHex.at(1);
+    lsb = valueBigHex.at(1);
     lsb.prepend("0");
     valueString.append(lsb);
-    lsb = valueHex.at(2);
+    lsb = valueBigHex.at(2);
     lsb.prepend("0");
     valueString.append(lsb);
 
     SysxIO *sysxIO = SysxIO::Instance();
     sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
+    QString mode_hex = "00";
+    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    if(mode_value != 0) {mode_hex = "0D"; };
 
     QString valueStr;
-    if (this->background == "target") {valueStr = midiTable->getValue("Tables", "00", "00", "00", valueHex);
+    if (this->background == "target") {
+        valueStr = midiTable->getValue("Tables", "00", "00", mode_hex, valueHex);
         emit updateDisplayTarget(valueStr);                                                       // updates display values
     } else if (this->background == "min") {
         valueStr = midiTable->getValue("Structure", hexMsb, hex2, hexLsb, valueHex);
@@ -169,7 +177,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_lsb);        // read target value as integer from sysx.
         valueHex.append(QString::number(value, 16).toUpper());
 
-        valueStr = midiTable->getValue("Tables", "00", "00", "00", valueHex);           // lookup the target values
+        valueStr = midiTable->getValue("Tables", "00", "00", mode_hex, valueHex);           // lookup the target values
 
         int maxRange = 256;
         value = valueHex.toInt(&ok, 16);
@@ -180,13 +188,13 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         if(valueHex2.length() < 2) valueHex2.prepend("0");
         QString hex4 = valueHex1;
         QString hex5 = valueHex2;                                                       //convert valueStr to 7bit hex4, hex5
-        Midi items = midiTable->getMidiMap("Tables", "00", "00", "00", hex4, hex5);
+        Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
 	this->hexMsb = items.desc;
 	this->hexLsb = items.customdesc;  
 
         emit updateTarget(hexMsb, hex2, hexLsb);                                        // hexMsb & hexLsb are lookup address for label value
-        //emit updateTarget(hexMsb, hex2, hexLsb);
+        emit updateTarget(hexMsb, hex2, hexLsb);
 
     };                                                            // updates on knob value change
-};
+ };
 

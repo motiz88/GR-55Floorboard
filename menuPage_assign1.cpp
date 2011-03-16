@@ -43,7 +43,7 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "0C", "middle", Qt::AlignCenter);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Target");
-    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 120); // Target
+    editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "0D", "target","target", 140); // Target
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("Assign 1 Source");
     editDetails()->page()->newStackControl(0);

@@ -46,60 +46,85 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "00", "System"); //guitar mode GK Set
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(0, 0, 2, 1, 1);
-    /*editDetails()->page()->addLabel(0, 1, 1, 1, "     ");
-	editDetails()->page()->addComboBox(0, 2, 1, 1, "00", "00", "10", "System"); // preamp mode
-	editDetails()->page()->addLabel(0, 3, 1, 1, "     ");
-	editDetails()->page()->addComboBox(0, 4, 1, 1, "00", "00", "17", "System"); //exp hold
-	editDetails()->page()->addLabel(0, 5, 1, 1, "     ");
-	editDetails()->page()->addComboBox(0, 6, 1, 1, "00", "00", "18", "System"); //exp indication
-	editDetails()->page()->addLabel(0, 7, 1, 1, "     ");
-	editDetails()->page()->addComboBox(0, 8, 1, 1, "00", "00", "70", "System"); // sys num pdl ctrl
-	editDetails()->page()->addLabel(0, 9, 1, 1, "     ");
-        editDetails()->page()->addComboBox(0, 10, 1, 1, "00", "00", "71", "System"); // dial function    */
-	editDetails()->page()->addGroupBox(1, 0, 1, 2);
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "04", "00", "System", "8"); //GK catagory #1
-        editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "04", "08", "System"); // PU select
-        editDetails()->page()->addStackField();
+    editDetails()->page()->addComboBox(0, 3, 1, 1, "02", "00", "01", "System"); // output select
+    editDetails()->page()->addComboBox(0, 4, 1, 1, "02", "00", "16", "System"); // guitar out source
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "02", "00", "17", "System"); //master tune
+    editDetails()->page()->addKnob(1, 1, 1, 1, "02", "00", "1B", "System");     //player level
+    editDetails()->page()->addComboBox(1, 2, 1, 1, "02", "00", "03", "System"); // midi patch channel
+    editDetails()->page()->addComboBox(1, 3, 1, 1, "02", "00", "04", "System"); // PC RX Sw
+    editDetails()->page()->addComboBox(1, 4, 1, 1, "02", "00", "05", "System"); // PC TX Sw
+    editDetails()->page()->addComboBox(1, 5, 1, 1, "02", "00", "06", "System"); // VLINK TX Channel
+    editDetails()->page()->addComboBox(2, 0, 1, 1, "02", "00", "02", "System"); // Assign Hold
+    editDetails()->page()->addKnob(2, 1, 1, 1, "02", "00", "1D", "System");     //USB input level
+    editDetails()->page()->addKnob(2, 2, 1, 1, "02", "00", "1F", "System");     //USB output level
+    editDetails()->page()->addComboBox(2, 3, 1, 1, "02", "00", "15", "System"); // monitor direct
+    editDetails()->page()->addComboBox(2, 4, 1, 1, "02", "00", "07", "System"); // guitar midi out
+    editDetails()->page()->addComboBox(2, 5, 1, 1, "02", "00", "08", "System"); // poly mode
+    editDetails()->page()->addComboBox(2, 6, 1, 1, "02", "00", "09", "System"); // chromatic
+    editDetails()->page()->addComboBox(3, 0, 1, 1, "02", "00", "0A", "System"); // string channel
+    editDetails()->page()->addComboBox(3, 1, 1, 1, "02", "00", "0B", "System"); // data thin
+    editDetails()->page()->addComboBox(3, 2, 1, 1, "02", "00", "0C", "System"); // CTL cc#
+    editDetails()->page()->addComboBox(3, 3, 1, 1, "02", "00", "0D", "System"); // EXP cc#
+    editDetails()->page()->addComboBox(3, 4, 1, 1, "02", "00", "0E", "System"); // EXP PDL Bend range
+    editDetails()->page()->addComboBox(3, 5, 1, 1, "02", "00", "0F", "System"); //GK VOL cc#
+    editDetails()->page()->addComboBox(3, 6, 1, 1, "02", "00", "10", "System"); //GK S1 cc#
+    editDetails()->page()->addComboBox(3, 7, 1, 1, "02", "00", "11", "System"); //GK S2 cc#
+    editDetails()->page()->addComboBox(4, 0, 1, 1, "02", "00", "12", "System"); //midi map
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "05", "00", "System", "8"); //GK catagory #2
-        editDetails()->page()->addStackField();
+    editDetails()->page()->addGroupBox(1, 0, 1, 2);
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "06", "00", "System", "8"); //GK catagory #3
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "04", "00", "System", "8"); //GK catagory #1
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "04", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "07", "00", "System", "8"); //GK catagory #4
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "05", "00", "System", "8"); //GK catagory #2
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "05", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "08", "00", "System", "8"); //GK catagory #5
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "06", "00", "System", "8"); //GK catagory #3
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "06", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "09", "00", "System", "8"); //GK catagory #6
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "07", "00", "System", "8"); //GK catagory #4
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "07", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0A", "00", "System", "8"); //GK catagory #7
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "08", "00", "System", "8"); //GK catagory #5
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "08", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0B", "00", "System", "8"); //GK catagory #8
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "09", "00", "System", "8"); //GK catagory #6
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "09", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0C", "00", "System", "8"); //GK catagory #8
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0A", "00", "System", "8"); //GK catagory #7
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "0A", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        editDetails()->page()->newStackField(0);
-        editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0D", "00", "System", "8"); //GK catagory #10
-        editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0B", "00", "System", "8"); //GK catagory #8
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "0B", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
 
-        /*editDetails()->page()->newGroupBox("USB settings");
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0C", "00", "System", "8"); //GK catagory #9
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "0C", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
+
+    editDetails()->page()->newStackField(0);
+    editDetails()->page()->addNameEdit(0, 0, 1, 1, "02", "0D", "00", "System", "8"); //GK catagory #10
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "0D", "08", "System"); // PU select
+    editDetails()->page()->addStackField();
+
+    /*editDetails()->page()->newGroupBox("USB settings");
 	editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "20", "System"); //usb driver mode
 	editDetails()->page()->addLabel(0, 1, 1, 1, "     ");
 	editDetails()->page()->addComboBox(0, 2, 1, 1, "00", "00", "21", "System"); //usb monitor cmd
@@ -311,6 +336,6 @@ void menuPage_system::setEditPages()
 
   */
 
-        editDetails()->addPage();
+    editDetails()->addPage();
 
-    };
+};
