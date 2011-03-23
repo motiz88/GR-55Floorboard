@@ -100,7 +100,7 @@ signals:
     void setEditDialog(editWindow* editDialog);
     void notConnectedSignal();
     void pathSwitchSignal();
-    void pathUpdateSignal();
+    void pageUpdateSignal();
     void updateStompBoxes();
     void switchSignal();
     void modeling_statusSignal(bool value);

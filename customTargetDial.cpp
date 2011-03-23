@@ -97,7 +97,7 @@ void customTargetDial::mousePressEvent(QMouseEvent *event)
 		this->_lastpos = event->pos();
 		this->_startpos = event->pos();
 		this->_lastValue = value;
-		setFocus();
+                //setFocus();
 		emitValue(value);
 	};
 };
@@ -214,7 +214,7 @@ void customTargetDial::knobSignal(QString hex1, QString hex2, QString hex3)
 if (this->background != "target")
   {
     MidiTable *midiTable = MidiTable::Instance();
-    this->max = midiTable->getRange("Structure", hex1, hex2, hex3);
-    this->min = midiTable->getRangeMinimum("Structure", hex1, hex2, hex3);
+    this->max = midiTable->getRange("Tables", "00", "00", hex3);
+    this->min = midiTable->getRangeMinimum("Tables", "00", "00", hex3);
   };
 };

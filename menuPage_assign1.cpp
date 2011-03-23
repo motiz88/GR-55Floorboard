@@ -51,8 +51,8 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->addStackControl();
     editDetails()->page()->addComboBox(0, 1, 1, 1, "01", "00", "17");                    // Source Mode
     editDetails()->page()->addRange(0, 2, 1, 2, "01", "00", "18", "Structure");         // min/max range widget
-    editDetails()->page()->addGroupBox(0, 2, 1, 1);
-    editDetails()->page()->insertStackField(0, 1, 1, 1, 2);
+    editDetails()->page()->addGroupBox(1, 0, 1, 2);
+    editDetails()->page()->insertStackField(0, 2, 1, 1, 2);
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
     editDetails()->addPage();
@@ -65,13 +65,13 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 1 Internal Pedal");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "01", "00", "1A");                    // Internal Pedal Trigger
-    editDetails()->page()->addKnob(0, 1, 1, 1, "01", "00", "1B");                        // Internal Pedal Time
+    editDetails()->page()->addKnob(0, 1, 1, 1, "01", "00", "1B", "normal", "right", 60); // Internal Pedal Time
     editDetails()->page()->addComboBox(0, 2, 1, 1, "01", "00", "1C");                    // Internal Pedal Curve
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 1 Wave Pedal");
-    editDetails()->page()->addKnob(1, 0, 1, 1, "01", "00", "1D", "normal","right", 105);// Wave Form Rate
+    editDetails()->page()->addKnob(1, 0, 1, 1, "01", "00", "1D", "normal", "right", 120);// Wave Form Rate
     editDetails()->page()->addComboBox(1, 1, 1, 1, "01", "00", "1E");                    // Wave Form
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();

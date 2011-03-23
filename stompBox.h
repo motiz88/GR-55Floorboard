@@ -109,7 +109,7 @@ signals:
     void dialogUpdateSignal();
     void setEditDialog(editWindow* editDialog);
     void notConnectedSignal();
-    void pathUpdateSignal();
+    void pageUpdateSignal();
     void updateStompBoxes();
     void switchSignal();
     void amp_statusSignal(bool value);

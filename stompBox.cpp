@@ -55,7 +55,7 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    //QObject::connect(this->parent(), SIGNAL( pathUpdateSignal() ), this, SIGNAL( pathUpdateSignal() ));
+    QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  dialogUpdateSignal() ));
 
     //QObject::connect(this, SIGNAL( pathUpdateSignal() ), this, SLOT( updateStompPath() ));
 
@@ -553,12 +553,13 @@ void stompBox::emitValueChanged(QString hex1, QString hex2, QString hex3, QStrin
         if(valueHex != "void")
         {
             Midi items = midiTable->getMidiMap("Structure", hex1, hex2, hex3);
-            valueName = items.desc;
-            valueName.append(" " + items.customdesc);
+            valueName = items.customdesc;
+            //valueName.append(" " + items.customdesc);
             valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);
+    emit pageUpdateSignal();
 };
 
 void stompBox::setDisplayToFxName()

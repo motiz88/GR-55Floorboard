@@ -199,7 +199,7 @@ void mainWindow::createActions()
 
     settingsAct = new QAction(QIcon(":/images/preferences.png"), tr("&Preferences"), this);
     settingsAct->setShortcut(tr("Ctrl+P"));
-    settingsAct->setWhatsThis(tr("FxFloorBoard Preferences<br>Select midi device, language,splash, directories"));
+    settingsAct->setWhatsThis(tr("GR-55FloorBoard Preferences<br>Select midi device, language,splash, directories"));
     connect(settingsAct, SIGNAL(triggered()), this, SLOT(settings()));
 
     guitarModeAct = new QAction(QIcon(":/images/guitar_icon.png"), tr("&Forced Guitar Mode"), this);
@@ -240,7 +240,7 @@ void mainWindow::createActions()
     connect(whatsThisAct, SIGNAL(triggered()), this, SLOT(whatsThis()));
 
     homepageAct = new QAction(QIcon(":/images/GR-55FloorBoard.png"), tr("GR-55 FloorBoard &Webpage"), this);
-    homepageAct->setWhatsThis(tr("download Webpage for FxFloorBoard<br>find if the latest version is available."));
+    homepageAct->setWhatsThis(tr("download Webpage for GR-55FloorBoard<br>find if the latest version is available."));
     connect(homepageAct, SIGNAL(triggered()), this, SLOT(homepage()));
 
     donationAct = new QAction(QIcon(":/images/donate.png"), tr("Donate towards GR-55 test equipment"), this);
@@ -255,7 +255,7 @@ void mainWindow::createActions()
     licenseAct->setWhatsThis(tr("licence agreement which you<br>have accepted by installing this software."));
     connect(licenseAct, SIGNAL(triggered()), this, SLOT(license()));
 
-    aboutAct = new QAction(QIcon(":/images/GR-55FloorBoard.png"), tr("&About FxFloorBoard"), this);
+    aboutAct = new QAction(QIcon(":/images/GR-55FloorBoard.png"), tr("&About GR-55FloorBoard"), this);
     aboutAct->setWhatsThis(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 

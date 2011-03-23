@@ -40,47 +40,41 @@ void menuPage_assign7::setEditPages()
 {
     editDetails()->page()->newGroupBox(tr("Assign 7"));
     editDetails()->page()->newGroupBox(tr(""));
-    editDetails()->page()->newStackControl(0);
     editDetails()->page()->addSwitch(0, 0, 1, 1, "01", "00", "7E", "middle", Qt::AlignCenter);
-    editDetails()->page()->addStackControl();
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->insertStackField(0, 0, 1, 2, 1);
-    editDetails()->page()->addGroupBox(0, 0, 2, 1);
-
-    editDetails()->addPage();
-
-    editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 7 Target");
     //editDetails()->page()->addTarget(0, 0, 1, 3, "01", "00", "7F", "target","target", 120); // Target
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("Assign 7 Source");
-    editDetails()->page()->newStackControl(1);
+    editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(1, 0, 1, 1, "02", "00", "08");                    // Source
     editDetails()->page()->addStackControl();
     editDetails()->page()->addComboBox(1, 1, 1, 1, "02", "00", "09");                    // Source Mode
     editDetails()->page()->addRange(1, 2, 1, 2, "02", "00", "0A", "Structure");         // min/max range widget
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->page()->insertStackField(1, 1, 0, 1, 2);
-    editDetails()->page()->addStackField();
+    editDetails()->page()->addGroupBox(1, 0, 1, 2);
+    editDetails()->page()->insertStackField(0, 2, 0, 1, 2);
+    editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
-    editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);
+    editDetails()->addPage();
+
+    editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 7 Internal Pedal");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "0C");                    // Internal Pedal Trigger
-    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "0D");                        // Internal Pedal Time
+    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "0D", "normal", "right", 60); // Internal Pedal Time
     editDetails()->page()->addComboBox(0, 2, 1, 1, "02", "00", "0E");                    // Internal Pedal Curve
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);
+    editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Assign 7 Wave Pedal");
-    editDetails()->page()->addKnob(1, 0, 1, 1, "02", "00", "0F", "normal","right", 105);// Wave Form Rate
+    editDetails()->page()->addKnob(1, 0, 1, 1, "02", "00", "0F", "normal", "right", 120);// Wave Form Rate
     editDetails()->page()->addComboBox(1, 1, 1, 1, "02", "00", "10");                    // Wave Form
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
-    editDetails()->page()->newStackField(1);
+    editDetails()->page()->newStackField(0);
     editDetails()->page()->addStackField();
 
 };
