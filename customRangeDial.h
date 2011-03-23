@@ -34,7 +34,7 @@ public:
     customRangeDial(
 		double value = 50, 
 		double min = 0, 
-		double max = 100, 
+                double max = 127,
 		double single = 1, 
 		double page = 10,
                 QPoint dialPos = QPoint(0, 0),
@@ -45,7 +45,7 @@ public:
 		QString hex3 = "void",
 		QString type = "Min",
 		QString imagePath = ":/images/stompknob.png",
-		unsigned int imageRange = 62);
+                unsigned int imageRange = 100);
 	void setValue(int value);
 	
 public slots:

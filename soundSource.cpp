@@ -60,6 +60,8 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
     QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
 
+    QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  dialogUpdateSignal() ));
+
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this, SLOT(modeling_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(modeling_statusSignal(bool)), this->parent(), SIGNAL(modeling_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
@@ -437,6 +439,7 @@ void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QSt
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);
+    emit pageUpdateSignal();
 };
 
 void soundSource::setDisplayToFxName()

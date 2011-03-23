@@ -254,7 +254,7 @@ int MidiTable::getRangeMinimum(QString root, QString hex1, QString hex2, QString
     Midi range;
 
     /* When FX has alot off settings (more than ) it's spanned over more then one entry in the
-	midi.xml, so when out of range we jump to the next entry and start from 00. */
+        midi.xml, so when out of range we jump to the next entry and start from 00. */
     bool ok;
 
     range = getMidiMap(root, hex1, hex2, hex3);
@@ -279,7 +279,7 @@ bool MidiTable::isData(QString root, QString hex1, QString hex2, QString hex3)
     Midi range;
 
     /* When FX has alot off settings (more than ) it's spanned over more then one entry in the
-	midi.xml, so when out of range we jump to the next entry and start from 00. */
+        midi.xml, so when out of range we jump to the next entry and start from 00. */
 
     range = getMidiMap(root, hex1, hex2, hex3);
     if(range.level.last().type.contains("DATA"))
@@ -298,15 +298,16 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
     QString valueStr; bool ok;
     if(range.level.last().type.contains("DATA"))
     {
-        int maxRange = 128; // index starts at 0 -> 0-127 = 128 entry's.
-        if (root == "Tables" && hex3 == "00") { maxRange = 256; };
+        int rangeStart=range.level.last().customdesc.toInt(&ok, 16);
+        if(rangeStart != 0) {rangeStart = range.level.last().customdesc.toInt(&ok, 16); };
+        int maxRange = 128;
+        if ((root == "Tables" && hex3 == "00") || (root == "Tables" && hex3 == "0D")) { maxRange = 256; };
         int value = hex4.toInt(&ok, 16);
         int dif = value/maxRange;
         QString index1 = QString::number(dif, 16).toUpper();
         if(index1.length() < 2) index1.prepend("0");
         QString index2 = QString::number(value - (dif * maxRange), 16).toUpper();
         if(index2.length() < 2) index2.prepend("0");
-
         Midi dataRange = range.level.at(range.id.indexOf(index1));
         valueStr = rangeToValue(dataRange, index2);
     }
@@ -320,7 +321,7 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
 QString MidiTable::rangeToValue(Midi range, QString hex)
 {
     QString valueStr;
-    if(!range.id.contains(hex) && range.id.contains("range"))
+    if(/*!range.id.contains(hex) &&*/ range.id.contains("range"))
     {
         int i = 0; bool ok;
         while(range.id.indexOf("range", i) != -1)

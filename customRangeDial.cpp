@@ -69,7 +69,7 @@ void customRangeDial::paintEvent(QPaintEvent *)
 void customRangeDial::setOffset(double _newValue)
 {  
 
-	double result = _newValue/2 - 1;
+        double result = _newValue/1.3 - 1;
 	
 	int imageNr = (int)(result + 0.5);
 	if(imageNr < 0)
@@ -82,7 +82,7 @@ void customRangeDial::setOffset(double _newValue)
 	};
 	
 	this->value = _newValue;	
-	this->xOffset = imageNr*dialSize.width();	
+        this->xOffset = imageNr*dialSize.width();
 	this->update();
 };
 
