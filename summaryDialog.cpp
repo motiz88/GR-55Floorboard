@@ -80,351 +80,260 @@ summaryDialog::summaryDialog(QWidget *parent)
 
   small_text.append(text);
   large_text.append(text);
-/*
-  QList<QString> fxChain = sysxIO->getFileSource("Structure", "0B", "00");
 
-  QString chainText = "<br><br><b><u>**********Signal Chain**********</u></b><br>Input = -> ";
-  QString chainData;
-  QString chain;
-  for(int i= sysxDataOffset;i< (sysxDataOffset + 18);i++ )
-  {
-     chainData.append(fxChain.at(i));
-     chain.append(" [");
-     chain.append( midiTable->getMidiMap("Structure", "0B", "00", "00", fxChain.at(i)).name );
-     chain.append("]");
-  };
-  QString part;
-  for(int x=0;x<chainData.size();x++)
-  {
-    part.append(chainData.at(x));
-    ++x;
-  };
-  int i = part.indexOf("4")+sysxDataOffset;
-  QString g = ( midiTable->getMidiMap("Structure", "0B", "00", "00", fxChain.at(i)).name );
-  chain.replace("["+g, "<br>Channel B = ["+g);
-  chain.replace("CH_B", "PreAmp B");
-  chain.replace("[analogPU]", "[A/B Split]<br>Channel A = ");
-  chain.replace("[modeling]", "<br>Output = [A/B Merge]");
-  chain.replace("CH_A", "PreAmp A");
-  chain.replace("LP", "Send/Return");
-  chain.replace("CS", "Comp");
-  chain.replace("PDL", "PDL/WAH");
-  chain.replace("OD", "Dist/ODrive");
-  chain.replace("ns", "N.Supp 1");
-  chain.replace("NS_2", "N.Supp 2");
-  chain.replace("FV", "Foot Vol");
-  chain.replace("DD", "Delay");
-  chain.replace("RV", "Reverb");
-  chain.replace("CE", "Chorus");
-  chain.replace("DGT", "DGT/USB");
-  
-  text.append(chainText);
-  text.append(chain + " ->");
-  small_text.append(text);
-  large_text.append(text);
-  
-  this->effect = "off";
-  text = "<br><br><b><u>**********PreAmp/Channel Control***********</b></u>";
+  int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+  if(mode_value == 0) {text = "<br><br><b><u>****Structure Type = [1]****</b></u>"; }
+  else {text = "<br><br><b><u>****Structure Type = [2]****</b></u>"; };
   text2 = text;
-  address= "01";
+
+
+  text.append("<br><br><b><u>**********Pre Amp***********</b></u>");
+  text2.append("<br><br><b><u>**********Pre Amp***********</b></u>");
+  address= "07";
+  start = 0;
+  finish = 17;
+  makeList();  
+  large_text.append(text2);
+  if(effect == "on") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********Noise Suppressor***********</b></u>";
+  address= "07";
+  start = 90;
+  finish = 93;
+  makeList();
+  large_text.append(text);
+  if(effect == "on") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********Chorus***********</b></u>";
+  address= "06";
   start = 0;
   finish = 5;
   makeList();
-
-  text.append("<br><br><b><u>**********Pre Amp A***********</b></u>");
-  text2.append("<br><br><b><u>**********Pre Amp A***********</b></u>");
-  address= "01";
-  start = 16;
-  finish = 45;
-  makeList();
-
-  text.append("<br><br><b><u>**********Pre Amp B***********</b></u>");
-  text2.append("<br><br><b><u>**********Pre Amp B***********</b></u>");
-  address= "01";
-  start = 48;
-  finish = 77;
-  makeList();
-  
-  large_text.append(text2);
+  large_text.append(text);
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Compressor***********</b></u>";
-  address= "00";
-  start = 64;
+  text = "<br><br><b><u>**********Delay***********</b></u>";
+  address= "06";
+  start = 5;
+  finish = 12;
+  makeList();
+  large_text.append(text);
+  if(effect == "on") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********Reverb***********</b></u>";
+  address= "06";
+  start = 12;
+  finish = 17;
+  makeList();
+  large_text.append(text);
+  if(effect == "on") { small_text.append(text); };
+
+   this->effect = "off";
+  text = "<br><br><b><u>**********Equalizer***********</b></u>";
+  address= "06";
+  start = 17;
+  finish = 30;
+  makeList();
+  large_text.append(text);
+  if(effect == "on") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********PCM Synth A***********</b></u>";
+  address= "20";
+  start = 1;
+  finish =23;
+  makeList();
+  address= "30";
+  start = 0;
+  finish =40;
+  makeList();
+  large_text.append(text);
+  if(effect == "off") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********PCM Synth B***********</b></u>";
+  address= "21";
+  start = 1;
+  finish =23;
+  makeList();
+  address= "31";
+  start = 0;
+  finish =40;
+  makeList();
+  large_text.append(text);
+  if(effect == "off") { small_text.append(text); };
+
+  this->effect = "off";
+  mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+  if(mode_value != 0) {
+      text = "<br><br><b><u>**********Bass Mode Modeling***********</b></u>";
+      address= "10";
+      start = 9;
+      finish = 46;
+      makeList();
+      address = "10";
+      start = 5;
+      finish = 9;
+      makeList();
+      address = "11";
+      start = 16;
+      finish = 74;
+      makeList();
+    } else {
+      text = "<br><br><b><u>**********Guitar Mode Modeling***********</b></u>";
+      address= "10";
+      start = 9;
+      finish = 46;
+      makeList();
+      address = "10";
+      start = 0;
+      finish = 5;
+      makeList();
+      address = "10";
+      start = 46;
+      finish = 115;
+      makeList();  };
+
+  large_text.append(text);
+  if(effect == "on") { small_text.append(text); };
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********MOD***********</b></u>";
+  text2 = text;
+  address= "07";
+  start = 21;
+  finish = 90;
+  makeList();
+  address= "07";
+  start = 17;
+  finish = 20;
+  makeList();
+  large_text.append(text2);
+  if(effect == "on") { small_text.append(text); };
+  this->filter = "off";
+
+  this->effect = "off";
+  text = "<br><br><b><u>**********MFX***********</b></u>";
+  text2 = text;
+  address= "03";
+  start = 4;
+  finish = 128;
+  makeList();
+  address= "04";
+  start = 0;
+  finish = 114;
+  makeList();
+  address= "03";
+  start = 0;
+  finish = 3;
+  makeList();
+  large_text.append(text2);
+  if(effect == "on") { small_text.append(text); };
+  this->filter = "off";
+
+  this->effect = "on";
+  text = "<br><br><b><u>**********Master***********</b></u>";
+  address= "02";
+  start = 36;
   finish = 72;
   makeList();
   large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
+  small_text.append(text);
+
   this->effect = "off";
-  text = "<br><br><b><u>**********Distortion***********</b></u>";
+  text = "<br><br><b><u>**********Pedal/GK***********</b></u>";
   address= "00";
-  start = 112;
-  finish = 126;
+  start = 17;
+  finish = 128;
   makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Equalizer***********</b></u>";
   address= "01";
-  start = 112;
-  finish = 124;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Delay***********</b></u>";
-  address= "0A";
   start = 0;
-  finish = 25;
+  finish = 12;
   makeList();
   large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Chorus***********</b></u>";
-  address= "0A";
-  start = 32;
-  finish = 40;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Reverb***********</b></u>";
-  address= "0A";
-  start = 48;
-  finish = 60;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Pedal FX***********</b></u>";
-  address= "0A";
-  start = 64;
-  finish = 94;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Misc Settings***********</b></u>";
-  address= "0C";
-  start = 32;
-  finish = 35;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "on";
-  text = "<br><br><b><u>**********Master***********</b></u>";
-  address= "0A";
-  start = 96;
-  finish = 106;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Noise Suppressor 1***********</b></u>";
-  address= "0A";
-  start = 113;
-  finish = 117;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Noise Suppressor 2***********</b></u>";
-  address= "0A";
-  start = 117;
-  finish = 121;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********Send/Return***********</b></u>";
-  address= "0A";
-  start = 121;
-  finish = 125;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-1***********</b></u>";
-  text2 = text;
-  address= "02";
-  start = 0;
-  finish = 110;
-  makeList();
-  address= "03";
-  start = 6;
-  finish = 92;
-  makeList();
-  address= "05";
-  start = 29;
-  finish = 65;
-  makeList();
-  large_text.append(text2);
-  if(effect == "on") { small_text.append(text); };
-  this->filter = "off";
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-2***********</b></u>";
-  text2 = text;
-  address= "06";
-  start = 0;
-  finish = 110;
-  makeList();
-  address= "07";
-  start = 6;
-  finish = 92;
-  makeList();
-  address= "09";
-  start = 29;
-  finish = 65;
-  makeList();
-  large_text.append(text2);
-  if(effect == "on") { small_text.append(text); };
-  this->filter = "off";
- 
+  //small_text.append(text);
+
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 1***********</b></u>";
-  address= "0B";
-  start = 32;
-  finish = 48;
+  address= "01";
+  start = 12;
+  finish = 31;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 2***********</b></u>";
-  address= "0B";
-  start = 48;
-  finish = 64;
+  address= "01";
+  start = 31;
+  finish = 50;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 3***********</b></u>";
-  address= "0B";
-  start = 64;
-  finish = 80;
+  address= "01";
+  start = 50;
+  finish = 69;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 4***********</b></u>";
-  address= "0B";
-  start = 80;
-  finish = 96;
+  address= "01";
+  start = 69;
+  finish = 88;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 5***********</b></u>";
-  address= "0B";
-  start = 96;
-  finish = 112;
+  address= "01";
+  start = 88;
+  finish = 107;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 6***********</b></u>";
-  address= "0B";
-  start = 112;
-  finish = 128;
+  address= "01";
+  start = 107;
+  finish = 126;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 7***********</b></u>";
-  address= "0C";
+  address= "01";
+  start = 126;
+  finish = 128;
+  makeList();
+  address= "02";
   start = 0;
-  finish = 16;
+  finish = 17;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
   text = "<br><br><b><u>**********Assign 8***********</b></u>";
-  address= "0C";
-  start = 16;
-  finish = 32;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-1 Harmonist User***********</b></u>";
   address= "02";
-  start = 110;
-  finish = 128;
-  makeList();
-  address= "03";
-  start = 0;
-  finish = 6;
+  start = 17;
+  finish = 36;
   makeList();
   large_text.append(text);
   if(effect == "on") { small_text.append(text); };
  
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-2 Harmonist User***********</b></u>";
-  address= "06";
-  start = 110;
-  finish = 128;
-  makeList();
-  address= "07";
-  start = 0;
-  finish = 6;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
- 
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-1 AutoRiff User Scales***********</b></u>";
-  address= "03";
-  start = 92;
-  finish = 128;
-  makeList();
-  address= "04";
-  start = 0;
-  finish = 128;
-  makeList();
-  address= "05";
-  start = 0;
-  finish = 28;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };
 
-  this->effect = "off";
-  text = "<br><br><b><u>**********FX-2 AutoRiff User Scales***********</b></u>";
-  address= "07";
-  start = 92;
-  finish = 128;
-  makeList();
-  address= "08";
-  start = 0;
-  finish = 128;
-  makeList();
-  address= "09";
-  start = 0;
-  finish = 28;
-  makeList();
-  large_text.append(text);
-  if(effect == "on") { small_text.append(text); };*/
    
   text = "<br><br><b><u>**********Patch Data***********</b></u><br>";
   text.append(sysxMsg);
@@ -502,14 +411,14 @@ void summaryDialog::makeList()
          temp.append(txt);
          temp.append("] = ");
          QString x = midiTable->getValue("Structure", address, "00", pos, valueHex);
-         {temp.append(x); };
+         temp.append(x);
          text2.append(temp);        
          
           if (this->filter != "off") 
           {
             if (pretxt == this->filter) { text.append(temp); };
           } else if(!pretxt.contains("Custom:")){text.append(temp); };
-          if(i == start && x == "On") { this->effect = "on"; }; // first byte is usually the effect on/off switch
+          if((i == start || i == start+1 || i == start+2) && x == "On") { this->effect = "on"; }; // first byte is usually the effect on/off switch
          if((pretxt == "MOD:" || pretxt == "MFX:") && (txt == "Type"))
           {this->filter = midiTable->getMidiMap("Structure", address, "00", pos, valueHex).desc;};
         };

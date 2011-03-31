@@ -123,7 +123,7 @@ void customTargetListMenu::setComboBox()
 
     SysxIO *sysxIO = SysxIO::Instance();
     QString mode_hex = "00";
-    this->mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    this->mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
     if(this->mode_value != 0) {mode_hex = "0D"; };
 
     MidiTable *midiTable = MidiTable::Instance();
@@ -205,7 +205,7 @@ void customTargetListMenu::setComboBox()
 void customTargetListMenu::valueChanged(int index)
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
     if (mode_check != this->mode_value)
     {
         this->mode_value = mode_check;
@@ -220,19 +220,24 @@ void customTargetListMenu::valueChanged(int index)
     };
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) { valueHex.prepend("00"); }
-    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };  // check string size is 3
     QList<QString> valueString;
-    QString lsb = valueHex.at(0);
-    lsb.prepend("0");
-    valueString.append(lsb);
-    lsb = valueHex.at(1);
-    lsb.prepend("0");
-    valueString.append(lsb);
-    lsb = valueHex.at(2);
-    lsb.prepend("0");
-    valueString.append(lsb);
+    QString lsb_a = valueHex.at(0);
+    lsb_a.prepend("0");
+    valueString.append(lsb_a);
+    QString lsb_b = valueHex.at(1);
+    lsb_b.prepend("0");
+    valueString.append(lsb_b);
+    QString lsb_c = valueHex.at(2);
+    lsb_c.prepend("0");
+    valueString.append(lsb_c);
+    if(this->hex3 == "7F") {
+        sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString);
+        //sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, lsb_a);
+        //sysxIO->setFileSource(this->area, "02", "00", "00", lsb_b);
+        //sysxIO->setFileSource(this->area, "02", "00", "01", lsb_c);
 
-    sysxIO->setFileSource(this->area, hex1, hex2, hex3, valueString);
+    } else { sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString); };
 
     bool ok;
     QString hex3_msb = QString::number((hex3.toInt(&ok, 16) + 1), 16).toUpper();                // go forward 1 to select target MSB address
@@ -240,17 +245,17 @@ void customTargetListMenu::valueChanged(int index)
 
     QString hex3_lsb = QString::number((hex3.toInt(&ok, 16) + 2), 16).toUpper();                // go forward 2 to select target LSB address
     if(hex3_lsb.length() < 2) hex3_lsb.prepend("0");                                            // prepend with "0" if single digit.
-
+    QString hex_a = this->hex1;
+    if(this->hex3 == "7F") {hex_a = "02"; hex3_msb = "00"; hex3_lsb = "01"; };
     int value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
     valueHex = QString::number(value, 16).toUpper();                                            // convert to hex qstring.
-    value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_msb);              // read target value as integer from sysx.
+    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_msb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-    value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_lsb);              // read target value as integer from sysx.
+    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
     //emit updateDisplay(valueStr);
     MidiTable *midiTable = MidiTable::Instance();
 
-    //QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);            // lookup the target values
     int maxRange = 256;
     value = valueHex.toInt(&ok, 16);
     int dif = value/maxRange;
@@ -262,7 +267,7 @@ void customTargetListMenu::valueChanged(int index)
     QString hex5 = valueHex2;    //convert valueStr to 7-bit hex4, hex5
 
     QString mode_hex = "00";
-    if(this->mode_value != 0) {mode_hex = "0D"; };
+    if(this->mode_value != 0) {mode_hex = "0D"; };                                             // check for guitar mode
     Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
     this->hexMsb = items.desc;
     this->hexLsb = items.customdesc;
@@ -291,11 +296,13 @@ void customTargetListMenu::comboUpdateSignal()
     QString hex3_lsb = QString::number((hex3.toInt(&ok, 16) + 2), 16).toUpper();                // go forward 2 to select target LSB address
     if(hex3_lsb.length() < 2) hex3_lsb.prepend("0");                                            // prepend with "0" if single digit.
 
+    QString hex_a = this->hex1;
+    if(this->hex3 == "7F") {hex_a = "02"; hex3_msb = "00"; hex3_lsb = "01"; };
     int value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
     QString valueHex = QString::number(value, 16).toUpper();                                            // convert to hex qstring.
-    value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_msb);              // read target value as integer from sysx.
+    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_msb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-    value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_lsb);              // read target value as integer from sysx.
+    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
 
     int index = valueHex.toInt(&ok, 16);

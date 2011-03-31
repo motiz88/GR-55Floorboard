@@ -97,7 +97,7 @@ void customTargetDial::mousePressEvent(QMouseEvent *event)
 		this->_lastpos = event->pos();
 		this->_startpos = event->pos();
 		this->_lastValue = value;
-                //setFocus();
+                setFocus();
 		emitValue(value);
 	};
 };

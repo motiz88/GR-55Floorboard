@@ -236,8 +236,8 @@ int MidiTable::getRange(QString root, QString hex1, QString hex2, QString hex3)
     }
     else if(range.level.last().type.contains("DATA"))
     {
-        int maxRange = 128; // index starts at 0 -> 0-127 = 128 entry's.
-        if (root == "Tables" && hex3 == "00") { maxRange = 256; };
+        int maxRange = 128;
+        if (root == "Tables" && (hex3 == "00" || hex3 == "0D")) { maxRange = 256; };
         int lastIndex1 = range.level.last().value.toInt(&ok, 16);
         int lastIndex2 = range.level.last().level.last().value.toInt(&ok, 16);
         lastIndex = (lastIndex1 * maxRange) + lastIndex2;
@@ -292,6 +292,20 @@ bool MidiTable::isData(QString root, QString hex1, QString hex2, QString hex3)
     };
 };
 
+bool MidiTable::isRange(QString root, QString hex1, QString hex2, QString hex3)
+{
+    Midi range;
+    range = getMidiMap(root, hex1, hex2, hex3);
+    if(range.id.contains("range"))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    };
+};
+
 QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString hex3, QString hex4)
 {
     Midi range = getMidiMap(root, hex1, hex2, hex3);
@@ -301,7 +315,7 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
         int rangeStart=range.level.last().customdesc.toInt(&ok, 16);
         if(rangeStart != 0) {rangeStart = range.level.last().customdesc.toInt(&ok, 16); };
         int maxRange = 128;
-        if ((root == "Tables" && hex3 == "00") || (root == "Tables" && hex3 == "0D")) { maxRange = 256; };
+        if (root == "Tables" && (hex3 == "00" || hex3 == "0D")) { maxRange = 256; };
         int value = hex4.toInt(&ok, 16);
         int dif = value/maxRange;
         QString index1 = QString::number(dif, 16).toUpper();
@@ -321,7 +335,7 @@ QString MidiTable::getValue(QString root, QString hex1, QString hex2, QString he
 QString MidiTable::rangeToValue(Midi range, QString hex)
 {
     QString valueStr;
-    if(/*!range.id.contains(hex) &&*/ range.id.contains("range"))
+    if(!range.id.contains(hex) && range.id.contains("range"))
     {
         int i = 0; bool ok;
         while(range.id.indexOf("range", i) != -1)

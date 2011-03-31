@@ -40,7 +40,7 @@ customKnobTarget::customKnobTarget(QWidget *parent,
 
     SysxIO *sysxIO = SysxIO::Instance();
     QString mode_hex = "00";
-    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");   //check for guitar mode
     if(mode_value != 0) {mode_hex = "0D"; };
 
     MidiTable *midiTable = MidiTable::Instance();
@@ -127,26 +127,31 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
     else if(valueHex.length() < 3) { valueHex.prepend("0"); };
 
     QList<QString> valueString;
-    QString lsb = valueHex.at(0);
-    lsb.prepend("0");
-    valueString.append(lsb);
-    lsb = valueHex.at(1);
-    lsb.prepend("0");
-    valueString.append(lsb);
-    lsb = valueHex.at(2);
-    lsb.prepend("0");
-    valueString.append(lsb);
+    QString lsb_a = valueHex.at(0);
+    lsb_a.prepend("0");
+    valueString.append(lsb_a);
+    QString lsb_b = valueHex.at(1);
+    lsb_b.prepend("0");
+    valueString.append(lsb_b);
+    QString lsb_c = valueHex.at(2);
+    lsb_c.prepend("0");
+    valueString.append(lsb_c);
 
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
+    if(hex3 == "7F") {
+        sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
+        sysxIO->setFileSource("Structure", hex1, hex2, hex3, lsb_a);
+        sysxIO->setFileSource("Structure", "02", hex2, "00", lsb_b);
+        sysxIO->setFileSource("Structure", "02", hex2, "01", lsb_c);
+    } else { sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString); };
     QString mode_hex = "00";
-    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");    //check for guitar mode
     if(mode_value != 0) {mode_hex = "0D"; };
 
     QString valueStr;
     if (this->background == "target") {
         valueStr = midiTable->getValue("Tables", "00", "00", mode_hex, valueHex);
-        emit updateDisplayTarget(valueStr);                                                       // updates display values
+        emit updateDisplayTarget(valueStr);                                          // updates display values
     } else if (this->background == "min") {
         valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
         emit updateDisplayMin(valueStr);
@@ -186,7 +191,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         QString hex4 = valueHex1;
         QString hex5 = valueHex2;                                                       //convert valueStr to 7bit hex4, hex5
         Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
-        //this->hexMsb = items.desc;
+        this->hexMsb = items.desc;
 	this->hexLsb = items.customdesc;  
 
         emit updateTarget(hexMsb, hex2, hexLsb);                                        // hexMsb & hexLsb are lookup address for label value
