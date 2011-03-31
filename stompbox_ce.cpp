@@ -53,7 +53,7 @@ void stompbox_ce::setEditPages()
 	editDetails()->page()->addGroupBox(0, 0, 2, 1);
 
 	editDetails()->page()->newGroupBox(tr("Chorus"));
-        editDetails()->page()->addKnob(0, 0, 1, 3, "06", "00", "02", "normal","right", 105);//rate
+        editDetails()->page()->addKnob(0, 0, 1, 3, "06", "00", "02", "normal","right", 120);//rate
         editDetails()->page()->addKnob(1, 0, 1, 1, "06", "00", "03");                       //depth
 	editDetails()->page()->addGroupBox(0, 1, 2, 1);
 
