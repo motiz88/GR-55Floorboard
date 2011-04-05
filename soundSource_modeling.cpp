@@ -53,7 +53,8 @@ void soundsource_modeling::setEditPages()
     editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(0, 2, 1, 1, "10", "00", "00"); // guitar select
     editDetails()->page()->addStackControl();  
-    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "09");  //level
+    editDetails()->page()->insertStackField(0, 1, 2, 1, 1);
+    editDetails()->page()->addKnob(0, 3, 1, 2, "10", "00", "09");  //level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
     editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "11");  //pitch
@@ -359,32 +360,30 @@ void soundsource_modeling::setEditPages()
     editDetails()->page()->newStackField(4);
     editDetails()->page()->newGroupBox("Analog GR");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "4B"); //mode
-    editDetails()->page()->addSwitch(1, 0, 1, 1, "10", "00", "4C", "middle", Qt::AlignCenter); //comp
+    editDetails()->page()->addSwitch(0, 1, 1, 1, "10", "00", "4C", "middle", Qt::AlignCenter); //comp
+    editDetails()->page()->addKnob(1, 0, 1, 1, "10", "00", "4D");  //filter cutoff
+    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "4E");  //filter reso
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->newGroupBox("Filter");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "4D");  //filter cutoff
-    editDetails()->page()->addKnob(1, 0, 1, 1, "10", "00", "4E");  //filter reso
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->page()->newGroupBox("Envelope");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "4F"); //env mod sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "50");  //env mod sens
-    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "51");  //env mod attack
+    editDetails()->page()->newGroupBox("Envelope Modulation");
+    editDetails()->page()->addComboBox(1, 0, 1, 2, "10", "00", "4F"); //env mod sw
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "50");  //env mod sens
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "51");  //env mod attack
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "52"); //pitch sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "53");  //pitch A
-    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "54");  //pitch A fine
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "53");  //pitch A
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "54");  //pitch A fine
     editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "55");  //pitch B
-    editDetails()->page()->addKnob(1, 2, 1, 1, "10", "00", "56");  //pitch B fine
-    editDetails()->page()->addSwitch(0, 3, 1, 1, "10", "00", "57", "middle", Qt::AlignCenter); //duet
-    editDetails()->page()->addSwitch(1, 3, 1, 1, "10", "00", "58", "middle", Qt::AlignCenter); //pitch sweep
+    editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "56");  //pitch B fine
     editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "59");  //pitch sweep rise
-    editDetails()->page()->addKnob(1, 4, 1, 1, "10", "00", "5A");  //pitch sweep fall
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "5A");  //pitch sweep fall
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "10", "00", "52"); //pitch sw
+    editDetails()->page()->addSwitch(1, 2, 1, 2, "10", "00", "57", "middle", Qt::AlignCenter); //duet
+    editDetails()->page()->addSwitch(1, 4, 1, 2, "10", "00", "58", "middle", Qt::AlignCenter); //pitch sweep
     editDetails()->page()->addGroupBox(0, 3, 1, 1);
     editDetails()->page()->newGroupBox("Vibrato");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "5B", "middle", Qt::AlignCenter); //vibrato sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "5C");  //vibrato rate
-    editDetails()->page()->addKnob(1, 1, 1, 1, "10", "00", "5D");  //vibrato depth
+    editDetails()->page()->addSwitch(1, 0, 1, 2, "10", "00", "5B", "middle", Qt::AlignCenter); //vibrato sw
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "5C");  //vibrato rate
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "5D");  //vibrato depth
     editDetails()->page()->addGroupBox(0, 4, 1, 1);
     editDetails()->page()->addStackField();
 

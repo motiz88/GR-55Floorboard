@@ -61,7 +61,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     this->hex3_lsb = QString::number((hex3.toInt(&ok, 16) + 2), 16).toUpper();           // go forward 2 to select target LSB address
     if(this->hex3_lsb.length() < 2) this->hex3_lsb.prepend("0");
     QString hex_a = this->hex1;
-    if(hex3 == "7F") { this->hexMin = "03"; this->hexMax = "06";                        // check if assign 7 which crosses page boundry
+    if(hex3 == "7F") { this->hexMin = "02"; this->hexMax = "05";                        // check if assign 7 which crosses page boundry
         this->hex3_msb = "00"; this->hex3_lsb = "01"; hex_a = "02"; };
 
     SysxIO *sysxIO = SysxIO::Instance();

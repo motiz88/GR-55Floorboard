@@ -46,6 +46,8 @@ customControlKnob::customControlKnob(QWidget *parent,
 	this->label->setUpperCase(true);
 	
 	this->knob = new customKnob(this, hex1, hex2, hex3, background, this->area);
+        this->knob->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
+                                 + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 
 	this->display->setObjectName("editdisplay");
 	this->display->setFixedWidth(lenght);
@@ -115,9 +117,9 @@ customControlKnob::customControlKnob(QWidget *parent,
 		mainLayout->addWidget(this->display, 0, Qt::AlignCenter);
 		mainLayout->addStretch(0);
 
+
 		this->setLayout(mainLayout);
                 this->setFixedHeight(this->knob->height() + 16 + 12);
-		//this->area = "System";
 	};
 
 
@@ -129,6 +131,9 @@ customControlKnob::customControlKnob(QWidget *parent,
 
 	QObject::connect(this, SIGNAL( updateDisplay(QString) ),
                 this->display, SLOT( setText(QString) ));
+
+       // QObject::connect(this, SIGNAL( updateDisplay(QString) ),
+                //this->parent(), SLOT( updateDisplay(QString) ));
 };
 
 void customControlKnob::paintEvent(QPaintEvent *)

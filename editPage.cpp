@@ -41,8 +41,8 @@ editPage::editPage(QWidget *parent)
 {
 	this->layout = new QGridLayout;
 	//this->layout->setAlignment(Qt::AlignCenter);
-	this->layout->setMargin(5);	
-	this->layout->setSpacing(5);
+        this->layout->setMargin(5);
+        this->layout->setSpacing(5);
 	this->layout->setRowStretch(0, 0);
 	this->layout->setRowStretch(1, 1);
 	this->layout->setRowStretch(2, 2);
@@ -52,11 +52,10 @@ editPage::editPage(QWidget *parent)
 	this->stackControlMode = false;
 	this->stackFieldMode = false;
 
-	/*QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
-                this, SIGNAL( dialogUpdateSignal() ));
+        //QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
+                //this, SIGNAL( dialogUpdateSignal() ));
 
-	QObject::connect(this, SIGNAL( updateSignal() ),
-                this->parent(), SIGNAL( updateSignal() ));*/
+       // QObject::connect(this, SIGNAL( updateDisplay(QString) ), this->parent(), SIGNAL( updateDisplay(QString) ));
 };
 
 void editPage::paintEvent(QPaintEvent *)
@@ -169,6 +168,8 @@ void editPage::addDataKnob(int row, int column, int rowSpan, int columnSpan,
         {
                 this->layout->addWidget(knob, row, column, rowSpan, columnSpan, alignment);
         };
+        knob->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
+                                 + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 };
 
 void editPage::addTarget(int row, int column, int rowSpan, int columnSpan,
@@ -189,6 +190,9 @@ void editPage::addTarget(int row, int column, int rowSpan, int columnSpan,
 	{
 		this->layout->addWidget(target, row, column, rowSpan, columnSpan, alignment);
 	};
+        target->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment or")
+                              + "<br>" + tr("press arrow to open list box and click on an item to select")
+                                 + "<br>" + tr(" or use scroll wheel or up/down arrow keys for fine adjustment"));
 };
 
 void editPage::addRange(int row, int column, int rowSpan, int columnSpan,
@@ -209,6 +213,8 @@ void editPage::addRange(int row, int column, int rowSpan, int columnSpan,
 	{
 		this->layout->addWidget(range, row, column, rowSpan, columnSpan, alignment);
 	};
+        range->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
+                                 + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 };
 
 void editPage::addSwitch(int row, int column, int rowSpan, int columnSpan,
@@ -231,6 +237,8 @@ void editPage::addSwitch(int row, int column, int rowSpan, int columnSpan,
 	{
 		this->layout->addWidget(switchbutton, row, column, rowSpan, columnSpan, alignment);
 	};
+        switchbutton->setWhatsThis(tr("press with mouse button to toggle switch state")
+                                 + "<br>" + tr("a lit button indicates and effect is ON"));
 };
 
 void editPage::addComboBox(int row, int column, int rowSpan, int columnSpan,
@@ -260,6 +268,8 @@ void editPage::addComboBox(int row, int column, int rowSpan, int columnSpan,
 	{
 		this->layout->addWidget(combobox, row, column, rowSpan, columnSpan, alignment);
 	};
+        combobox->setWhatsThis(tr("press arrow to open selection box and click on item to select")
+                                 + "<br>" + tr("also use scroll wheel or up/down arrow keys to change selection"));
 };
 
 void editPage::addNameEdit(int row, int column, int rowSpan, int columnSpan,
@@ -309,8 +319,9 @@ void editPage::valueChanged(bool value, QString hex1, QString hex2, QString hex3
 {
 	value = value;
 	hex1 = hex1;
-  hex2 = hex2;
+        hex2 = hex2;
 	hex3 = hex3;
+         QApplication::beep();
 }; 
 
 void editPage::newGroupBox(QString title, Qt::Alignment alignment)
@@ -447,7 +458,7 @@ void editPage::newStackField(int id, Qt::Alignment alignment)
 	this->stackField->setRowStretch(2, 2);
 	this->stackField->setRowStretch(3, 3);
 	this->stackField->setMargin(0);
-	this->stackField->setSpacing(5);
+        //this->stackField->setSpacing(5);
 	this->stackField->setAlignment(alignment);
 };
 
@@ -465,4 +476,9 @@ void editPage::updateDialog(int index)
 {
 	index = index;
 	emit dialogUpdateSignal();
+};
+
+void editPage::updateDisplay(QString text)
+{
+    //QApplication::beep();
 };

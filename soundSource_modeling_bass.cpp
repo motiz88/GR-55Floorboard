@@ -255,32 +255,30 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("Analog GR");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "11", "00", "22"); //mode
-    editDetails()->page()->addSwitch(1, 0, 1, 1, "11", "00", "23", "middle", Qt::AlignCenter); //comp
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
-    editDetails()->page()->newGroupBox("Filter");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "11", "00", "24");  //filter cutoff
-    editDetails()->page()->addKnob(1, 0, 1, 1, "11", "00", "25");  //filter reso
+    editDetails()->page()->addSwitch(0, 1, 1, 1, "11", "00", "23", "middle", Qt::AlignCenter); //comp
+    editDetails()->page()->addKnob(1, 0, 1, 1, "11", "00", "24");  //filter cutoff
+    editDetails()->page()->addKnob(1, 1, 1, 1, "11", "00", "25");  //filter reso
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->page()->newGroupBox("Envelope");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "11", "00", "26"); //env mod sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "27");  //env mod sens
-    editDetails()->page()->addKnob(1, 1, 1, 1, "11", "00", "28");  //env mod attack
+    editDetails()->page()->newGroupBox("Envelope Modulation");
+    editDetails()->page()->addComboBox(1, 0, 1, 2, "11", "00", "26"); //env mod sw
+    editDetails()->page()->addKnob(0, 0, 1, 1, "11", "00", "27");  //env mod sens
+    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "28");  //env mod attack
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "11", "00", "29"); //pitch sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "2A");  //pitch A
-    editDetails()->page()->addKnob(1, 1, 1, 1, "11", "00", "2B");  //pitch A fine
+    editDetails()->page()->addKnob(0, 0, 1, 1, "11", "00", "2A");  //pitch A
+    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "2B");  //pitch A fine
     editDetails()->page()->addKnob(0, 2, 1, 1, "11", "00", "2C");  //pitch B
-    editDetails()->page()->addKnob(1, 2, 1, 1, "11", "00", "2D");  //pitch B fine
-    editDetails()->page()->addSwitch(0, 3, 1, 1, "11", "00", "2E", "middle", Qt::AlignCenter); //duet
-    editDetails()->page()->addSwitch(1, 3, 1, 1, "11", "00", "2F", "middle", Qt::AlignCenter); //pitch sweep
+    editDetails()->page()->addKnob(0, 3, 1, 1, "11", "00", "2D");  //pitch B fine
     editDetails()->page()->addKnob(0, 4, 1, 1, "11", "00", "30");  //pitch sweep rise
-    editDetails()->page()->addKnob(1, 4, 1, 1, "11", "00", "31");  //pitch sweep fall
+    editDetails()->page()->addKnob(0, 5, 1, 1, "11", "00", "31");  //pitch sweep fall
+     editDetails()->page()->addComboBox(1, 0, 1, 2, "11", "00", "29"); //pitch sw
+    editDetails()->page()->addSwitch(1, 2, 1, 2, "11", "00", "2E", "middle", Qt::AlignCenter); //duet
+    editDetails()->page()->addSwitch(1, 4, 1, 2, "11", "00", "2F", "middle", Qt::AlignCenter); //pitch sweep
     editDetails()->page()->addGroupBox(0, 3, 1, 1);
     editDetails()->page()->newGroupBox("Vibrato");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "11", "00", "32", "middle", Qt::AlignCenter); //vibrato sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "33");  //vibrato rate
-    editDetails()->page()->addKnob(1, 1, 1, 1, "11", "00", "34");  //vibrato depth
+    editDetails()->page()->addSwitch(1, 0, 1, 2, "11", "00", "32", "middle", Qt::AlignCenter); //vibrato sw
+    editDetails()->page()->addKnob(0, 0, 1, 1, "11", "00", "33");  //vibrato rate
+    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "34");  //vibrato depth
     editDetails()->page()->addGroupBox(0, 4, 1, 1);
     editDetails()->page()->addStackField();
 

@@ -102,6 +102,7 @@ public slots:
     void delay_ButtonSignal(bool value);
     void chorus_ButtonSignal(bool value);
     void eq_ButtonSignal(bool value);
+    void updateDisplay(QString text);
 
 signals:
     void valueChanged(QString fxName, QString valueName, QString valueStr);
@@ -151,15 +152,15 @@ private:
     customSwitch *switchbutton;
     customComboBox *stompComboBox;
 
-    QString hex1;
-    QString hex2;
-    QString hex3;
+    QString combo_hex1;
+    QString combo_hex2;
+    QString combo_hex3;
     QString fxName;
-    QList<QString> stompOrderName;
-    QString stompOrderHex;
-    QString hexdata_A;
-    QString hexdata_B;
-    QString namedata;
+    //QList<QString> stompOrderName;
+    //QString stompOrderHex;
+    //QString hexdata_A;
+    //QString hexdata_B;
+    //QString namedata;
 };
 
 #endif // STOMPBOX_H

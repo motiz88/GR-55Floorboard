@@ -89,7 +89,7 @@ void menuPage_pdl::setEditPages()
 
 
 
-    editDetails()->page()->newGroupBox("EXP Pedal");
+    editDetails()->page()->newGroupBox("EXP Pedal (while EXP Pedal Switch is 'OFF')");
     editDetails()->page()->newStackControl(1);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "1F");
     editDetails()->page()->addStackControl();
@@ -150,7 +150,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "43");
     editDetails()->page()->addStackField();
 
-    editDetails()->page()->newGroupBox("EXP Pedal while EXP Pedal Switch is 'ON'");
+    editDetails()->page()->newGroupBox("EXP Pedal (while EXP Pedal Switch is 'ON')");
     editDetails()->page()->newStackControl(2);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "36");
     editDetails()->page()->addStackControl();

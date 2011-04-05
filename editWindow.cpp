@@ -40,7 +40,6 @@ editWindow::editWindow(QWidget *parent)
     {
         this->image = QPixmap(":images/editwindow.png");
         this->setFixedSize(image.width(), image.height());
-
         this->setWindowFlags(Qt::WindowStaysOnTopHint);
     } else { this->image = QPixmap(":images/meshWindow.png"); };
 
@@ -143,7 +142,7 @@ editWindow::editWindow(QWidget *parent)
     //mainLayout->addLayout(sellectLayout);
     mainLayout->addLayout(pagesLayout);
     mainLayout->addStretch();
-    mainLayout->addSpacing(16);
+    //mainLayout->addSpacing(16);
     setLayout(mainLayout);
 
     this->tempPage = new editPage;
@@ -168,6 +167,8 @@ editWindow::editWindow(QWidget *parent)
 
     QObject::connect(this->pageComboBox, SIGNAL(activated(int)), this, SLOT(valueChanged(int)));
 
+    //QObject::connect(this, SIGNAL( updateDisplay(QString)), this->parent(), SLOT( updateDisplay(QString)));
+
 };
 
 void editWindow::paintEvent(QPaintEvent *)
@@ -186,8 +187,8 @@ editWindow::~editWindow()
 
 void editWindow::setLSB(QString hex1, QString hex2)
 {
-    //this->hex1 = hex1;
-    //this->hex2 = hex2;
+    this->hex1 = hex1;
+    this->hex2 = hex2;
 };
 
 void editWindow::setWindow(QString title)
@@ -284,23 +285,24 @@ void editWindow::valueChanged(int index)
 
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueHex);
-        //QApplication::beep;
+
         //emit updateDisplay(valueHex);
         //emit updateSignal();
     };
 };
 
 void editWindow::pageUpdateSignal()
-{ /*
+{
         if(this->pages > 1 && hex1 != "void" && hex2 != "void")
         {
                 SysxIO *sysxIO = SysxIO::Instance();
-                int index = sysxIO->getSourceValue(this->hex1, this->hex2, this->hex3);
+                int index = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
                 this->pageComboBox->setCurrentIndex(index);
                 this->pagesWidget->setCurrentIndex(index);
                 //this->valueChanged(index);
 
-        }; */
+        };
+    //emit updateSignal();
 };
 
 editPage* editWindow::page()

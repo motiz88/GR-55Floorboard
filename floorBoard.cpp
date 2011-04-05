@@ -103,6 +103,7 @@ floorBoard::floorBoard(QWidget *parent,
     this->editDialog = new editWindow(this);
     this->editDialog->hide();
     this->oldDialog = this->editDialog;
+    //QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  update() ));
 
     QObject::connect(this, SIGNAL( resizeSignal(QRect) ), bankList, SLOT( updateSize(QRect) ) );
     QObject::connect(display, SIGNAL(connectedSignal()), bankList, SLOT(connectedSignal()));

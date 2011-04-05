@@ -39,9 +39,6 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
     this->editDialog = new editWindow();
     this->setWhatsThis(tr("StompBox effect<br>a double mouse click will open the effect edit page."));
 
-   // this->pathSwitch = new customButton(tr(""), false, QPoint(60, 60), this, ":/images/pathswitch.png");
-   // this->pathSwitch->hide();
-
     QObject::connect(this, SIGNAL( valueChanged(QString, QString, QString) ), this->parent(), SIGNAL( valueChanged(QString, QString, QString) ));
 
     QObject::connect(this->parent(), SIGNAL( updateStompOffset(signed int) ), this, SLOT( updatePos(signed int) ));
@@ -250,6 +247,8 @@ void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
     knob2 = new customDial(0, 0, range, 1, 10, QPoint(213, 13), this, hex1, hex2, hex3);
+    this->knob2->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
+                             + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 };
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3)
@@ -259,6 +258,7 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3)
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
+    this->button->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
 };
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, QString imagePath)
@@ -268,12 +268,14 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
+    this->button->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
 };
 
 void soundSource::setSwitch(QString hex1, QString hex2, QString hex3)
 {
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
     switchbutton->move(QPoint(16, 17));
+    this->switchbutton->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
 };
 
 
@@ -371,10 +373,14 @@ void soundSource::valueChanged(int value, QString hex1, QString hex2, QString he
 
         QString area;
         sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex1, valueHex2);
+        emit pageUpdateSignal();
+        sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex1, valueHex2);
     }
     else
     {
         QString area;
+        sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
+        emit pageUpdateSignal();
         sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
     };
 
@@ -389,11 +395,11 @@ void soundSource::valueChanged(bool value, QString hex1, QString hex2, QString h
     if(valueHex.length() < 2) valueHex.prepend("0");
 
     SysxIO *sysxIO = SysxIO::Instance();
-    QString area;
-    sysxIO->setFileSource(area, hex1, hex2, hex3, valueHex);
+    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueHex);
+    emit pageUpdateSignal();
+    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueHex);
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
-    emit updateSignal();
 };
 
 void soundSource::valueChanged(int index)
@@ -403,6 +409,8 @@ void soundSource::valueChanged(int index)
 
     SysxIO *sysxIO = SysxIO::Instance();
     QString area;
+    sysxIO->setFileSource(area, this->hex1, this->hex2, this->hex3, valueHex);
+    emit pageUpdateSignal();
     sysxIO->setFileSource(area, this->hex1, this->hex2, this->hex3, valueHex);
 
     emitValueChanged(this->hex1, this->hex2, this->hex3, valueHex);
@@ -433,26 +441,24 @@ void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QSt
             Midi items = midiTable->getMidiMap("Structure", hex1, hex2, hex3);
             valueName = items.desc;
             valueName.append(" " + items.customdesc);
-            //this->fxName = midiTable->getMidiMap("Structure", hex1, hex2, hex3).name;
             valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
 
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);
-    emit pageUpdateSignal();
 };
 
 void soundSource::setDisplayToFxName()
 {
-    //emit valueChanged(this->fxName, "", "");
+    emit valueChanged(this->fxName, "", "");
 };
 
 void soundSource::updateStompPath()
 {
-    if (this->id == 0) {this->fxName = tr("Analog PickUp");};
+    if (this->id == 0) {this->fxName = tr("Normal PickUp");};
     if (this->id == 1) {this->fxName = tr("Guitar Mode Modeling");};
-    if (this->id == 2) {this->fxName = tr("PCM Synth A");};
-    if (this->id == 3) {this->fxName = tr("PCM Synth B");};
+    if (this->id == 2) {this->fxName = tr("PCM Synth 1");};
+    if (this->id == 3) {this->fxName = tr("PCM Synth 2");};
     if (this->id == 25) {this->fxName = tr("Bass Mode Modeling");};
 };
 

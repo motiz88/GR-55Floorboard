@@ -38,10 +38,10 @@ customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QStr
     this->dataRange = 1;
     MidiTable *midiTable = MidiTable::Instance();
     if (this->area != "System"){ this->area = "Structure"; };
-    if (background == "DELAY3400") { this->hex_c = "04"; };
-    if (background == "DELAY2600") { this->hex_c = "09"; };
-    if (background == "DELAY1300") { this->hex_c = "0B"; };
-    if (background == "BPM") { this->hex_c = "06"; this->byteSize == "2"; };
+    if (background == "DELAY3400") { this->hex_c = "04"; this->byteSize = "3";};
+    if (background == "DELAY2600") { this->hex_c = "09"; this->byteSize = "3";};
+    if (background == "DELAY1300") { this->hex_c = "0B"; this->byteSize = "3";};
+    if (background == "BPM") { this->hex_c = "06"; this->byteSize = "2"; };
     if (background == "0~100") {this->hex_c = "07"; this->byteSize = "2"; };
     if (background == "RATE") {this->hex_c = "08"; this->byteSize = "2"; };
     if (background == "PORTAMENTO") {this->hex_c = "11"; this->byteSize = "2"; };
@@ -102,9 +102,12 @@ void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString
     lsb = valueHex.at(1);
     lsb.prepend("0");
     valueString.append(lsb);
-    if (this->byteSize == "3") { lsb = valueHex.at(2);
-    lsb.prepend("0");
-    valueString.append(lsb); };
+    if (this->byteSize == "3")
+    {
+        lsb = valueHex.at(2);
+        lsb.prepend("0");
+        valueString.append(lsb);
+    };
 
     SysxIO *sysxIO = SysxIO::Instance();
     sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);;
