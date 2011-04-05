@@ -278,12 +278,12 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
 
         if(maxExpandedItems == 0)
         {
-            openBankTreeItems.first()->setExpanded(false);
+            openBankTreeItems.first()->setExpanded(true);//false);
             maxExpandedItems = 1;
         };
         if(c > maxExpandedItems)
         {
-            openPatchTreeItems.first()->setExpanded(false);
+            openPatchTreeItems.first()->setExpanded(true);//false);
         };
     };
 };
@@ -700,7 +700,7 @@ void bankTreeList::updateTree(QTreeWidgetItem *item)
         QObject::connect(sysxIO, SIGNAL(patchName(QString)),
                          this, SLOT(updatePatchNames(QString)));
 
-        //this->currentPatchTreeItems.append(item);  //3 lines of mods added below
+        this->currentPatchTreeItems.append(item);  //3 lines of mods added below
         this->currentPatchTreeItems.clear();
         this->currentPatchTreeItems = this->openPatchTreeItems;
         qSort(this->currentPatchTreeItems);
@@ -708,7 +708,7 @@ void bankTreeList::updateTree(QTreeWidgetItem *item)
     }
     else
     {
-        //this->currentPatchTreeItems.append(item);
+        this->currentPatchTreeItems.append(item);
     };
 };
 

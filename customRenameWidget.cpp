@@ -37,8 +37,8 @@ customRenameWidget::customRenameWidget(QWidget *parent, QString hex1, QString he
     this->hex3 = hex3;
     this->area = area;
     this->length = length;
-    this->catagoryDisplay = new QLineEdit(this);
     this->label = new customControlLabel(this);
+    this->catagoryDisplay = new QLineEdit(this);
     
 	  this->catagoryDisplay->setObjectName("catalogdisplay");
 	  if (this->length == "80")
@@ -62,8 +62,8 @@ customRenameWidget::customRenameWidget(QWidget *parent, QString hex1, QString he
 	  QVBoxLayout *Layout = new QVBoxLayout;
 		Layout->setMargin(0);
 		Layout->setSpacing(0);
-		Layout->addWidget(this->catagoryDisplay, 0, Qt::AlignCenter);
-		Layout->addWidget(this->label, 0, Qt::AlignCenter);
+                Layout->addWidget(this->label, 0, Qt::AlignCenter);
+		Layout->addWidget(this->catagoryDisplay, 0, Qt::AlignCenter);	
 		Layout->addStretch(0);
 		
 		this->setLayout(Layout);

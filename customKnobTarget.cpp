@@ -139,7 +139,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
 
     SysxIO *sysxIO = SysxIO::Instance();
     if(hex3 == "7F") {
-        sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
+        //sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
         sysxIO->setFileSource("Structure", hex1, hex2, hex3, lsb_a);
         sysxIO->setFileSource("Structure", "02", hex2, "00", lsb_b);
         sysxIO->setFileSource("Structure", "02", hex2, "01", lsb_c);

@@ -74,7 +74,7 @@ signals:
     void showDragBar(QPoint newpos);
     void hideDragBar();
     void updateSignal();
-    void pathUpdateSignal();
+    void pageUpdateSignal();
     void structure_buttonSignal(bool value);
     void modeling_buttonSignal(bool value);
     void synth1_buttonSignal(bool value);

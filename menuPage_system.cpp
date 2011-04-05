@@ -41,36 +41,59 @@ void menuPage_system::setEditPages()
     QString text = tr("***CAUTION*** Settings changes are automatically written to GR-55 when changed");
     editDetails()->page()->addLabel(0, 0, 1, 1, text);
     editDetails()->page()->newGroupBox("settings");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "00", "System", "right", 120); //current patch
-    editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "00", "System"); //guitar mode GK Set
-    editDetails()->page()->addStackControl();
-    editDetails()->page()->insertStackField(0, 0, 2, 1, 1);
 
-    editDetails()->page()->addComboBox(0, 3, 1, 1, "02", "00", "01", "System"); // output select
-    editDetails()->page()->addComboBox(0, 4, 1, 1, "02", "00", "16", "System"); // guitar out source
-    editDetails()->page()->addComboBox(1, 0, 1, 1, "02", "00", "17", "System"); //master tune
-    editDetails()->page()->addKnob(1, 1, 1, 1, "02", "00", "1B", "System");     //player level
-    editDetails()->page()->addComboBox(1, 2, 1, 1, "02", "00", "03", "System"); // midi patch channel
-    editDetails()->page()->addComboBox(1, 3, 1, 1, "02", "00", "04", "System"); // PC RX Sw
-    editDetails()->page()->addComboBox(1, 4, 1, 1, "02", "00", "05", "System"); // PC TX Sw
-    editDetails()->page()->addComboBox(1, 5, 1, 1, "02", "00", "06", "System"); // VLINK TX Channel
-    editDetails()->page()->addComboBox(2, 0, 1, 1, "02", "00", "02", "System"); // Assign Hold
-    editDetails()->page()->addKnob(2, 1, 1, 1, "02", "00", "1D", "System");     //USB input level
-    editDetails()->page()->addKnob(2, 2, 1, 1, "02", "00", "1F", "System");     //USB output level
-    editDetails()->page()->addComboBox(2, 3, 1, 1, "02", "00", "15", "System"); // monitor direct
-    editDetails()->page()->addComboBox(2, 4, 1, 1, "02", "00", "07", "System"); // guitar midi out
-    editDetails()->page()->addComboBox(2, 5, 1, 1, "02", "00", "08", "System"); // poly mode
-    editDetails()->page()->addComboBox(2, 6, 1, 1, "02", "00", "09", "System"); // chromatic
-    editDetails()->page()->addComboBox(3, 0, 1, 1, "02", "00", "0A", "System"); // string channel
-    editDetails()->page()->addComboBox(3, 1, 1, 1, "02", "00", "0B", "System"); // data thin
-    editDetails()->page()->addComboBox(3, 2, 1, 1, "02", "00", "0C", "System"); // CTL cc#
-    editDetails()->page()->addComboBox(3, 3, 1, 1, "02", "00", "0D", "System"); // EXP cc#
-    editDetails()->page()->addComboBox(3, 4, 1, 1, "02", "00", "0E", "System"); // EXP PDL Bend range
-    editDetails()->page()->addComboBox(3, 5, 1, 1, "02", "00", "0F", "System"); //GK VOL cc#
-    editDetails()->page()->addComboBox(3, 6, 1, 1, "02", "00", "10", "System"); //GK S1 cc#
-    editDetails()->page()->addComboBox(3, 7, 1, 1, "02", "00", "11", "System"); //GK S2 cc#
-    editDetails()->page()->addComboBox(4, 0, 1, 1, "02", "00", "12", "System"); //midi map
+    editDetails()->page()->newGroupBox("Patch");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "00", "System", "right", 120); //current patch
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+
+    editDetails()->page()->newGroupBox("Guitar Mode - GK setup");
+    editDetails()->page()->newStackControl(0);
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "00", "System"); //guitar mode GK Set
+    editDetails()->page()->addStackControl();
+    editDetails()->page()->insertStackField(0, 0, 1, 1, 2);
+    editDetails()->page()->addGroupBox(0, 1, 1, 3);
+
+    editDetails()->page()->newGroupBox("Output Select");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "01", "System"); // output select
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "16", "System"); // guitar out source
+    editDetails()->page()->addGroupBox(0, 4, 1, 2);
+
+    editDetails()->page()->newGroupBox("System");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "17", "System"); //master tune
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "02", "00", "02", "System"); // Assign Hold
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "0E", "System"); // EXP PDL Bend range
+    editDetails()->page()->addComboBox(1, 1, 1, 1, "02", "00", "15", "System"); // monitor direct
+    editDetails()->page()->addGroupBox(1, 0, 1, 1);
+
+    editDetails()->page()->newGroupBox("Midi");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "03", "System"); // midi patch channel
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "02", "00", "04", "System"); // PC RX Sw
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "05", "System"); // PC TX Sw
+    editDetails()->page()->addComboBox(1, 1, 1, 1, "02", "00", "06", "System"); // VLINK TX Channel
+    editDetails()->page()->addGroupBox(1, 1, 1, 2);
+
+    editDetails()->page()->newGroupBox("I/O levels");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "1D", "System");     //USB input level
+    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "1F", "System");     //USB output level
+    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "1B", "System");     //player level
+    editDetails()->page()->addGroupBox(1, 3, 1, 3);
+
+    editDetails()->page()->newGroupBox("Midi");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "07", "System"); // guitar midi out
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "08", "System"); // poly mode
+    editDetails()->page()->addComboBox(0, 2, 1, 1, "02", "00", "09", "System"); // chromatic
+    editDetails()->page()->addComboBox(0, 3, 1, 1, "02", "00", "0A", "System"); // string channel
+    editDetails()->page()->addComboBox(0, 4, 1, 1, "02", "00", "0B", "System"); // data thin
+    editDetails()->page()->addComboBox(0, 5, 1, 1, "02", "00", "12", "System"); //midi map
+    editDetails()->page()->addGroupBox(2, 0, 1, 6);
+
+    editDetails()->page()->newGroupBox("Pedal Control Data");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "0C", "System"); // CTL cc#
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "0D", "System"); // EXP cc#
+    editDetails()->page()->addComboBox(0, 2, 1, 1, "02", "00", "0F", "System"); //GK VOL cc#
+    editDetails()->page()->addComboBox(0, 3, 1, 1, "02", "00", "10", "System"); //GK S1 cc#
+    editDetails()->page()->addComboBox(0, 4, 1, 1, "02", "00", "11", "System"); //GK S2 cc#
+    editDetails()->page()->addGroupBox(3, 0, 1, 6);
 
     editDetails()->page()->addGroupBox(1, 0, 1, 2);
 

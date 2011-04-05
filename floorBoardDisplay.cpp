@@ -108,7 +108,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->connectButton = new customButton(tr("Connect"), false, QPoint(390, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
     this->connectButton->setWhatsThis(tr("Connect Button<br>used to establish a continuous midi connection<br>when lit green, the connection is valid"));
     this->writeButton = new customButton(tr("Write"), false, QPoint(476, patchDisplayRowOffset), this, ":/images/ledbutton.png");
-    this->writeButton->setWhatsThis(tr("Write Button<br>if the patch number displays [temp buffer]<br>the current patch is sent to the GT temporary memory only<br>or else the patch will be written to the displayed patch memory location."));
+    this->writeButton->setWhatsThis(tr("Write Button<br>if the patch number displays [temp buffer]<br>the current patch is sent to the GR-55 temporary memory only<br>or else the patch will be written to the displayed patch memory location."));
     this->system_Button = new customPanelButton(tr("System"), false, QPoint(580, patchDisplayRowOffset+18), this, ":/images/switch.png");
     this->system_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->master_Button = new customPanelButton(tr("Master"), false, QPoint(640, patchDisplayRowOffset+18), this, ":/images/switch.png");
@@ -651,7 +651,7 @@ void floorBoardDisplay::temp1_copy(bool value)
 
     QString sysxMsg;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
+    //QList<QString> patchAddress = sysxIO->getFileSource().address;
     QString addr1 = tempBulkWrite;  // temp address
     QString addr2 = QString::number(0, 16).toUpper();
 
@@ -708,7 +708,7 @@ void floorBoardDisplay::temp2_copy(bool value)
 
     QString sysxMsg;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
+    //QList<QString> patchAddress = sysxIO->getFileSource().address;
     QString addr1 = tempBulkWrite;  // temp address
     QString addr2 = QString::number(0, 16).toUpper();
 
@@ -764,7 +764,7 @@ void floorBoardDisplay::temp3_copy(bool value)
 
     QString sysxMsg;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
+    //QList<QString> patchAddress = sysxIO->getFileSource().address;
     QString addr1 = tempBulkWrite;  // temp address
     QString addr2 = QString::number(0, 16).toUpper();
 
@@ -820,7 +820,7 @@ void floorBoardDisplay::temp4_copy(bool value)
 
     QString sysxMsg;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
+    //QList<QString> patchAddress = sysxIO->getFileSource().address;
     QString addr1 = tempBulkWrite;  // temp address
     QString addr2 = QString::number(0, 16).toUpper();
 
@@ -876,7 +876,7 @@ void floorBoardDisplay::temp5_copy(bool value)
 
     QString sysxMsg;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
+    //QList<QString> patchAddress = sysxIO->getFileSource().address;
     QString addr1 = tempBulkWrite;  // temp address
     QString addr2 = QString::number(0, 16).toUpper();
 
