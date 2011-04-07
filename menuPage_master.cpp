@@ -41,7 +41,7 @@ void menuPage_master::setEditPages()
 {
 
     editDetails()->page()->newGroupBox("Patch Level");
-    editDetails()->page()->addDataKnob(0, 0, 1, 1, "02", "00", "30", "0~100"); // patch level
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "02", "00", "30", "0~200"); // patch level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Patch Tempo");
