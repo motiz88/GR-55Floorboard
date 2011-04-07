@@ -48,10 +48,12 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
     if (background == "DELAY1300") { this->hex_c = "0B"; };
     if (background == "BPM")       { this->hex_c = "06";   this->byteSize = "2"; };
     if (background == "0~100")     { this->hex_c = "07";   this->byteSize = "2"; };
+    if (background == "0~200")     { this->hex_c = "14";   this->byteSize = "2"; };
     if (background == "RATE")      { this->hex_c = "08";   this->byteSize = "2"; };
     if (background == "PORTAMENTO") {this->hex_c = "11";   this->byteSize = "2"; };
+    if (background == "SCALE") {this->hex_c = "15";   this->byteSize = "2"; this->area = "System"; };
 
-    Midi items = midiTable->getMidiMap("Structure", hex1, hex2, hex3);
+    Midi items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
 
     this->label->setText(items.customdesc);
     this->label->setUpperCase(true);
@@ -164,11 +166,11 @@ void customControlDataKnob::dialogUpdateSignal()
     if (this->byteSize == "3") { hex3_lsb = QString::number((hex3.toInt(&ok, 16) + 2), 16).toUpper();           // go forward 2 to select target LSB address
         if(hex3_lsb.length() < 2) hex3_lsb.prepend("0");   };                                   // prepend with "0" if single digit.
 
-    int value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
+    int value = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
     QString valueHex = QString::number(value, 16).toUpper();                                    // convert to hex qstring.
-    value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_msb);              // read target value as integer from sysx.
+    value = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, hex3_msb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-    if (this->byteSize == "3") { value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, hex3_lsb);  // read target value as integer from sysx.
+    if (this->byteSize == "3") { value = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, hex3_lsb);  // read target value as integer from sysx.
         valueHex.append(QString::number(value, 16).toUpper());  };
 
     value = valueHex.toInt(&ok, 16);

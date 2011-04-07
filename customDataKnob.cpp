@@ -43,8 +43,10 @@ customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QStr
     if (background == "DELAY1300") { this->hex_c = "0B"; this->byteSize = "3";};
     if (background == "BPM") { this->hex_c = "06"; this->byteSize = "2"; };
     if (background == "0~100") {this->hex_c = "07"; this->byteSize = "2"; };
+    if (background == "0~200") {this->hex_c = "14"; this->byteSize = "2"; };
     if (background == "RATE") {this->hex_c = "08"; this->byteSize = "2"; };
     if (background == "PORTAMENTO") {this->hex_c = "11"; this->byteSize = "2"; };
+    if (background == "SCALE") {this->hex_c = "15";   this->byteSize = "2"; this->area = "System"; };
 
     int range = midiTable->getRange("Tables", hex_a, hex_b, hex_c);
     int rangeMin = midiTable->getRangeMinimum("Tables", hex_a, hex_b, hex_c);
@@ -110,7 +112,7 @@ void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString
     };
 
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);;
+    sysxIO->setFileSource(this->area, hex1, hex2, hex3, valueString);;
     QString valueStr = midiTable->getValue("Tables", hex_a, hex_b, hex_c, valueHex);
 
     emit updateDisplay(valueStr);
