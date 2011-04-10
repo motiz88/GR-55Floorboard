@@ -288,7 +288,7 @@ void midiIO::receiveMsg(QString sysxInMsg, int midiInPort)
 #endif
 
     if (msgType == "patch"){ loopCount = x*300; count = patchReplySize; }
-    else if(msgType == "system"){ loopCount = x*600; count = systemSize; } // native gt system size, then trimmed later.
+    else if(msgType == "system"){ loopCount = x*600; count = 1173; }
     else if (msgType == "name") { loopCount = x*100; count = 29; }
     else if (msgType == "identity") { loopCount = x*100; count = 15; }
     else  { loopCount = x*10; count = 0; };

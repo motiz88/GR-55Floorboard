@@ -52,6 +52,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
     if (background == "RATE")      { this->hex_c = "08";   this->byteSize = "2"; };
     if (background == "PORTAMENTO") {this->hex_c = "11";   this->byteSize = "2"; };
     if (background == "SCALE") {this->hex_c = "15";   this->byteSize = "2"; this->area = "System"; };
+    if (background == "SCALE_BASS") {this->hex_c = "16";   this->byteSize = "2"; this->area = "System"; };
 
     Midi items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
 
