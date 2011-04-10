@@ -208,8 +208,6 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
     this->hex2 = hex2;
     this->hex3 = hex3;
     this->area = area;
-
-    if (!area.contains("System")){this->area = "Structure";};
     this->tempPage->setGridLayout();
     this->editPages.append(this->tempPage);
     this->pagesWidget->addWidget(editPages.last());

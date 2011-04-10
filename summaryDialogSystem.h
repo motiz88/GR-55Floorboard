@@ -49,6 +49,7 @@ public:
   QPushButton *cancelButton;
   QPushButton *printButton;
   QPushButton *saveAsButton;
+  void do_the_list();
 
 public slots:
   void systemReply(QString replyMsg);

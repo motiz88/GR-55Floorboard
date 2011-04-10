@@ -797,10 +797,10 @@ void mainWindow::summaryPage()
 
 void mainWindow::summarySystemPage()
 {
-    // summaryDialogSystem *summarySystem = new summaryDialogSystem();
-    //summarySystem->setMinimumWidth(800);
-    // summarySystem->setMinimumHeight(650);
-    //summarySystem->show();
+    summaryDialogSystem *summarySystem = new summaryDialogSystem();
+    summarySystem->setMinimumWidth(800);
+    summarySystem->setMinimumHeight(650);
+    summarySystem->show();
 };
 
 void mainWindow::summaryPatchList()

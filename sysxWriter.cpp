@@ -76,7 +76,7 @@ bool sysxWriter::readFile()
         if (data.contains(G5L_header)){isG5L = true; };             // see if file is a G5L type and set isG5L flag.
         bool isSMF = false;
         if (data.contains(SMF_header)) {isSMF = true; };
-        if((data.size() == 1173  || data.size() == 1186)/* && isHeader == true*/){         // if GR-55 system file size is correct- load file.
+        if(data.size() == 1186 && isHeader == true){         // if GR-55 system file size is correct- load file.
             SysxIO *sysxIO = SysxIO::Instance();
             QString area = "System";
             sysxIO->setFileSource(area, data);

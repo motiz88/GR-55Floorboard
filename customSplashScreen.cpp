@@ -22,6 +22,7 @@
 ****************************************************************************/
 
 #include "customSplashScreen.h"
+#include "Preferences.h"
 
 customSplashScreen::customSplashScreen(const QPixmap& pixmap)
 {
@@ -42,7 +43,9 @@ void customSplashScreen::drawContents(QPainter *painter)
 
 void customSplashScreen::showStatusMessage(const QString &message, const QColor &color)
 {
-    this->message = message;
+    Preferences *preferences = Preferences::Instance();
+    QString version = preferences->getPreferences("General", "Application", "version");
+    this->message = "version " + version + " " + message;
         this->color = color;
         this->showMessage(this->message, this->alignement, this->color);
 };
