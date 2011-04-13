@@ -102,13 +102,13 @@ void menuPage_master::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
-    editDetails()->page()->newGroupBox("User Tuning");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "36");    //String H
-    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "37");    //String 1
-    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "38");    //String 2
-    editDetails()->page()->addKnob(0, 3, 1, 1, "02", "00", "39");    //String 3
-    editDetails()->page()->addKnob(0, 4, 1, 1, "02", "00", "3A");    //String 4
-    editDetails()->page()->addKnob(0, 5, 1, 1, "02", "00", "3B");    //String L
+    editDetails()->page()->newGroupBox("User Tuning Shift");
+    editDetails()->page()->addKnob(0, 0, 1, 1, "02", "00", "36");    //String 1
+    editDetails()->page()->addKnob(0, 1, 1, 1, "02", "00", "37");    //String 2
+    editDetails()->page()->addKnob(0, 2, 1, 1, "02", "00", "38");    //String 3
+    editDetails()->page()->addKnob(0, 3, 1, 1, "02", "00", "39");    //String 4
+    editDetails()->page()->addKnob(0, 4, 1, 1, "02", "00", "3A");    //String 5
+    editDetails()->page()->addKnob(0, 5, 1, 1, "02", "00", "3B");    //String 6
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->addStackField();
 

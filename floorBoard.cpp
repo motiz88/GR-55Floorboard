@@ -200,7 +200,8 @@ void floorBoard::setFloorBoard() {
     structure_state = false;
     this->structure_2 = new customStructure(structure_state, QPoint(0, 0), this);
     this->structure_2->move(offset + 132, 144);
-    QObject::connect(this, SIGNAL( structure_buttonSignal(bool)), this, SLOT( structure(bool) ) );
+    QObject::connect(this, SIGNAL( structure_1_buttonSignal(bool)), this, SLOT( structure(bool) ) );
+    QObject::connect(this, SIGNAL( structure_2_buttonSignal(bool)), this, SLOT( structure(bool) ) );
 
     painter.end();
 
@@ -535,13 +536,15 @@ void floorBoard::structure(bool value)
         { sysxIO->setFileSource("Structure", "02", "00", "2C", "01");
             structure_state = true;
             emit valueChanged("Structure", "Structure", "2");
-            emit structure_statusSignal(true);
+            emit structure_2_statusSignal(true);
+            emit structure_1_statusSignal(false);
         }
         else
         {sysxIO->setFileSource("Structure", "02", "00", "2C", "00");
             structure_state = false;
             emit valueChanged("Structure", "Structure", "1");
-            emit structure_statusSignal(false);
+            emit structure_1_statusSignal(true);
+            emit structure_2_statusSignal(false);
         };
    update_structure();
 };
@@ -552,7 +555,8 @@ void floorBoard::update_structure()
     SysxIO *sysxIO = SysxIO::Instance();
     int value2 = sysxIO->getSourceValue("Structure", "02", "00", "2C");
     this->structure_2->changeValue((value2==1)?true:false);
-    emit structure_statusSignal((value2==1)?true:false);
+    emit structure_1_statusSignal((value2==1)?true:false);
+    emit structure_2_statusSignal((value2==1)?false:true);
     value2 = sysxIO->getSourceValue("Structure", "00", "00", "00");
     if(value2 == 0)
     {

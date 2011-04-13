@@ -88,6 +88,7 @@ public slots:
     virtual void updateSignal() {}
     void setDisplayToFxName();
     void updateStompPath();
+    void normal_PU_ButtonSignal(bool value);
     void modeling_ButtonSignal(bool value);
     void synth1_ButtonSignal(bool value);
     void synth2_ButtonSignal(bool value);
@@ -103,6 +104,7 @@ signals:
     void pageUpdateSignal();
     void updateStompBoxes();
     void switchSignal();
+    void normal_PU_statusSignal(bool value);
     void modeling_statusSignal(bool value);
     void synth1_statusSignal(bool value);
     void synth2_statusSignal(bool value);

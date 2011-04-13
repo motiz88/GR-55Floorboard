@@ -29,25 +29,26 @@ stompbox_eq::stompbox_eq(QWidget *parent)
     /* EQ */
     setImage(":/images/eq.png");
     setLSB("06", "11");
-    setSwitch("06", "00", "11");
     setSlider1("06", "00", "13");
     setSlider2("06", "00", "16");
     setSlider3("06", "00", "19");
     setSlider4("06", "00", "1B");
     setSlider5("06", "00", "1C");
-
+    setComboBox("06", "00", "1D");
+    setSwitch("06", "00", "11");
     editDetails()->patchPos(1428, 26, "06", "11"); //correct
     setEditPages();
 };
 
 void stompbox_eq::updateSignal()
 {
-    updateSwitch("06", "00", "11");
     updateSlider1("06", "00", "13");
     updateSlider2("06", "00", "16");
     updateSlider3("06", "00", "19");
     updateSlider4("06", "00", "1B");
     updateSlider5("06", "00", "1C");
+    updateComboBox("06", "00", "1D");
+    updateSwitch("06", "00", "11");
 };
 
 void stompbox_eq::setEditPages()
