@@ -59,6 +59,10 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
     QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  dialogUpdateSignal() ));
 
+    QObject::connect(this->parent(), SIGNAL(normal_PU_buttonSignal(bool)), this, SLOT(normal_PU_ButtonSignal(bool) ));
+    QObject::connect(this, SIGNAL(normal_PU_statusSignal(bool)), this->parent(), SIGNAL(normal_PU_statusSignal(bool)));
+    QObject::connect(this->parent(), SIGNAL(normal_PU_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
+
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this, SLOT(modeling_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(modeling_statusSignal(bool)), this->parent(), SIGNAL(modeling_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(modeling_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
@@ -108,6 +112,16 @@ void soundSource::mouseDoubleClickEvent(QMouseEvent *event)
 void soundSource::mouseMoveEvent(QMouseEvent *event)
 {
 
+};
+
+void soundSource::normal_PU_ButtonSignal(bool value)
+{
+    if (this->id == 0)
+    {
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
+        this->editDialog->setWindow(this->fxName);
+        emit setEditDialog(this->editDialog);
+    };
 };
 
 void soundSource::modeling_ButtonSignal(bool value)
@@ -274,7 +288,7 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos
 void soundSource::setSwitch(QString hex1, QString hex2, QString hex3)
 {
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
-    switchbutton->move(QPoint(16, 17));
+    switchbutton->move(QPoint(17, 16));
     this->switchbutton->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
 };
 
@@ -339,7 +353,9 @@ void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switchbutton->setValue((value==1)?true:false);
     bool set = false;
-    if (value >= 1) {set = true; };
+    bool inv_set = true;
+    if (value >= 1) {set = true; inv_set = false;};
+    if(this->id == 0) { emit normal_PU_statusSignal(inv_set); };
     if(this->id == 1) { emit modeling_statusSignal(set); };
     if(this->id == 2) { emit synth1_statusSignal(set); };
     if(this->id == 3) { emit synth2_statusSignal(set); };

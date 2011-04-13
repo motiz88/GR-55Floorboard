@@ -102,7 +102,9 @@ private:
         customButton *writeButton;
         customPanelButton *system_Button;
         customPanelButton *master_Button;
-        customPanelButton *structure_Button;
+        customPanelButton *normal_PU_Button;
+        customPanelButton *structure_1_Button;
+        customPanelButton *structure_2_Button;
         customPanelButton *modeling_Button;
         customPanelButton *synth1_Button;
         customPanelButton *synth2_Button;

@@ -156,11 +156,6 @@ private:
     QString combo_hex2;
     QString combo_hex3;
     QString fxName;
-    //QList<QString> stompOrderName;
-    //QString stompOrderHex;
-    //QString hexdata_A;
-    //QString hexdata_B;
-    //QString namedata;
 };
 
 #endif // STOMPBOX_H

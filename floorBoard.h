@@ -75,7 +75,9 @@ signals:
     void hideDragBar();
     void updateSignal();
     void pageUpdateSignal();
-    void structure_buttonSignal(bool value);
+    void normal_PU_buttonSignal(bool value);
+    void structure_1_buttonSignal(bool value);
+    void structure_2_buttonSignal(bool value);
     void modeling_buttonSignal(bool value);
     void synth1_buttonSignal(bool value);
     void synth2_buttonSignal(bool value);
@@ -100,7 +102,9 @@ signals:
     void assign6_buttonSignal(bool value);
     void assign7_buttonSignal(bool value);
     void assign8_buttonSignal(bool value);
-    void structure_statusSignal(bool value);
+    void normal_PU_statusSignal(bool value);
+    void structure_1_statusSignal(bool value);
+    void structure_2_statusSignal(bool value);
     void modeling_statusSignal(bool value);
     void synth1_statusSignal(bool value);
     void synth2_statusSignal(bool value);

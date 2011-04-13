@@ -31,7 +31,7 @@ floorPanelBar::floorPanelBar(QWidget *parent, QString imagePathPanelBar, QSize p
 	this->image = QPixmap(imagePathPanelBar);
 
 	int yPos =  panelBarSize.height()/2;
-	floorPanelBarButton *button = new floorPanelBarButton(false, QPoint(0, yPos - 22), this);
+        floorPanelBarButton *button = new floorPanelBarButton(false, QPoint(0, yPos - 35), this);
   button = button;
 
 	this->setFixedSize(panelBarSize);

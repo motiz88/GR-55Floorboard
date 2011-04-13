@@ -43,13 +43,18 @@ void menuPage_system::setEditPages()
     editDetails()->page()->newGroupBox("settings");
 
     editDetails()->page()->newGroupBox("Patch");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "00", "System", "right", 120); //current patch
+    editDetails()->page()->addKnob(0, 0, 1, 1, "01", "00", "00", "System", "right", 300); //current patch
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Output Select");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "01", "System",  Qt::AlignCenter); // output select
     editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "16", "System"); // guitar out source
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
+
+    editDetails()->page()->newGroupBox("Mode on next Startup");
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "1A", "System",  Qt::AlignCenter); // Mode select
+    //editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "19", "System",  Qt::AlignCenter); // test
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);
 
     editDetails()->page()->newGroupBox("System");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "17", "System"); //master tune
