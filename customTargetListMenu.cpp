@@ -273,9 +273,7 @@ void customTargetListMenu::valueChanged(int index)
     this->hexLsb = items.customdesc;
 
     emit updateTarget(hexMsb, hex2, hexLsb);                                                    // hexMsb & hexLsb are lookup address for label value
-    //emit updateTarget(hexMsb, hex2, hexLsb);
-    //emit updateSignal();
-
+    emit updateTarget(hexMsb, hex2, hexLsb);
 }
 
 void customTargetListMenu::dialogUpdateSignal(QString valueStr)
@@ -304,7 +302,7 @@ void customTargetListMenu::comboUpdateSignal()
     valueHex.append(QString::number(value, 16).toUpper());
     value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-
+    //dialogUpdateSignal(valueHex);
     int index = valueHex.toInt(&ok, 16);
     this->controlListComboBox->setCurrentIndex(index);
 }

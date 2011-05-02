@@ -24,9 +24,9 @@
 #include "editPage.h"
 #include <QLabel>
 #include "customSwitch.h"
-#include "customControlParaEQ.h"
-#include "customControlGraphicEQ.h"
-#include "customControlMasterEQ.h"
+//#include "customControlParaEQ.h"
+//#include "customControlGraphicEQ.h"
+//#include "customControlMasterEQ.h"
 #include "customControlKnob.h"
 #include "customControlDataKnob.h"
 #include "customControlTarget.h"
@@ -70,7 +70,7 @@ void editPage::paintEvent(QPaintEvent *)
 	painter.drawPixmap(target, image, source);*/
 };
 
-void editPage::addGraphicEQ(int row, int column, int rowSpan, int columnSpan,
+/*void editPage::addGraphicEQ(int row, int column, int rowSpan, int columnSpan,
 					   QString hex1, QString hex2, QString hex3, 
 					   QString background, QString direction, int lenght, 
 					   Qt::Alignment alignment)
@@ -128,7 +128,7 @@ void editPage::addMasterEQ(int row, int column, int rowSpan, int columnSpan,
         {
                 this->layout->addWidget(MasterEQ, row, column, rowSpan, columnSpan, alignment);
         };
-};
+};*/
 
 void editPage::addKnob(int row, int column, int rowSpan, int columnSpan,
 					   QString hex1, QString hex2, QString hex3, 

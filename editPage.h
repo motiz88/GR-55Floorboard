@@ -34,7 +34,7 @@ class editPage : public QWidget
 public:
     editPage(QWidget *parent = 0);
     
-    void addParaEQ(int row, int column, int rowSpan, int columnSpan,
+   /* void addParaEQ(int row, int column, int rowSpan, int columnSpan,
                    QString hex1 = "void",
                    QString hex2 = "void",
                    QString hex3 = "void",
@@ -58,7 +58,7 @@ public:
                       QString background = "normal",
                       QString direction = "bottom",
                       int lenght = 45,
-                      Qt::Alignment alignment = 0);
+                      Qt::Alignment alignment = 0);*/
     void addKnob(int row, int column, int rowSpan, int columnSpan,
                  QString hex1 = "void",
                  QString hex2 = "void",

@@ -40,6 +40,7 @@ public:
 	MidiPage* midiSettings;
 	WindowPage* windowSettings;
 	LanguagePage* languageSettings;
+        StylePage* styleSettings;
 
 public slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);

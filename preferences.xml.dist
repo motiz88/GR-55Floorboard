@@ -2,7 +2,7 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="Alpha 20110414"/>
+		<Application version="Alpha 20110502"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
@@ -23,6 +23,10 @@
 		<MidiOut device=""/>
 		<Time set="80"/>		
 	</Midi>
+	<Scheme>
+	  <Style select="0"/>
+	  <Colour select="0"/>
+	</Scheme>
 	<Window>
     <Collapsed bool="true" defaultwidth="1210" width="1210"/>
     <Position x="" y=""/>

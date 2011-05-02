@@ -190,7 +190,7 @@ void customControlTarget::paintEvent(QPaintEvent *)
 void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLsb)
 {
     QString hex_a = this->hex1;
-    if(this->hex3 == "7F") { hex_a = "02"; };
+    if(this->hex3 == "7F") { hex_a = "02"; }; // assign 7 crosses the page boundry
     SysxIO *sysxIO = SysxIO::Instance();
     int value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
     QString valueHex = QString::number(value, 16).toUpper();                                    // convert to hex qstring.
@@ -241,7 +241,7 @@ void customControlTarget::dialogUpdateSignal()
 
     MidiTable *midiTable = MidiTable::Instance();
     QString mode_hex = "00";
-    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
+    int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");                     // check Mode setting.
     if(mode_value != 0) {mode_hex = "0D"; };
     QString valueStr = midiTable->getValue("Tables", "00", "00", mode_hex, valueHex);          // lookup the target values
     emit updateDisplayTarget(valueStr);

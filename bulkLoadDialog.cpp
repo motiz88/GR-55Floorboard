@@ -473,12 +473,12 @@ void bulkLoadDialog::loadG5L()         // ************************************ G
     {
         QByteArray temp;
         temp = data.mid(a, 128);
-        default_data.replace(11, 128, temp);      //address "00"      
+        default_data.replace(11, 128, temp);      //address "00"
         temp = data.mid(a+128, 114);
         default_data.replace(152, 114, temp);     //address "01"
         temp = data.mid(a+250, 6);
         default_data.replace(266, 6, temp);     //address "01"
-        temp = data.mid(a+256, 78);
+        temp = data.mid(a+264, 78);
         default_data.replace(293, 78, temp);     //address "02" +
         temp = data.mid(a+350, 128);
         default_data.replace(384, 128, temp);     //address "03" +

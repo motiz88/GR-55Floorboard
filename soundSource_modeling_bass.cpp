@@ -341,9 +341,9 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->addKnob(0, 2, 1, 1, "11", "00", "13");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "11", "00", "2B", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "2C");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "11", "00", "2D");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
     editDetails()->page()->addStackField();
 
@@ -355,9 +355,9 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->addKnob(0, 2, 1, 1, "11", "00", "13");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
-    editDetails()->page()->addSwitch(0, 0, 1, 1, "11", "00", "2B", "middle", Qt::AlignCenter); // NS sw
-    editDetails()->page()->addKnob(0, 1, 1, 1, "11", "00", "2C");  //thresh
-    editDetails()->page()->addKnob(0, 2, 1, 1, "11", "00", "2D");  //release
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "2C");  //thresh
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "2D");  //release
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->addStackField();
 

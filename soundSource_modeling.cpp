@@ -317,9 +317,9 @@ void soundsource_modeling::setEditPages()
     // Reso
     editDetails()->page()->newStackField(2);
     editDetails()->page()->newGroupBox("dobro Resonator");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "34");  //sustain
-    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "35");  //reso
-    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "36");  //tone
+    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "44");  //sustain
+    editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "45");  //reso
+    editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "46");  //tone
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Noise Suppressor");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "2B", "middle", Qt::AlignCenter); // NS sw

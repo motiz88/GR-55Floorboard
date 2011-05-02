@@ -775,10 +775,10 @@ void SysxIO::sendMidi(QString midiMsg)
 
         midiIO *midi = new midiIO();
         QList<QString> midiOutDevices = midi->getMidiOutDevices();
-        if ( midiOutDevices.contains("GR-55") )
+        /*if ( midiOutDevices.contains("GR-55") )
         {
             midiOutPort = midiOutDevices.indexOf("GR-55");
-        };
+        };*/
 
         midi->sendMidi(midiMsg, midiOutPort);
         /*DeBugGING OUTPUT */
@@ -893,14 +893,14 @@ void SysxIO::sendSysx(QString sysxMsg)
     midiIO *midi = new midiIO();
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
-    if ( midiInDevices.contains("GR-55") )
+  /*  if ( midiInDevices.contains("GR-55") )
     {
         midiInPort = midiInDevices.indexOf("GR-55");
     };
     if ( midiOutDevices.contains("GR-55") )
     {
         midiOutPort = midiOutDevices.indexOf("GR-55");
-    };  
+    };  */
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
     /*DeBugGING OUTPUT */
     if(preferences->getPreferences("Midi", "DBug", "bool")=="true")

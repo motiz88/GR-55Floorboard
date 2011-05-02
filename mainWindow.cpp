@@ -38,64 +38,40 @@
 
 mainWindow::mainWindow()
 {
-    createActions();
-    createMenus();
+
     floorBoard *fxsBoard = new floorBoard(this);
+    Preferences *preferences = Preferences::Instance();
+    QString setting = preferences->getPreferences("Scheme", "Style", "select");
+    bool ok;
+    int choice = setting.toInt(&ok, 16);
+    QString style;
+    if(choice == 3) {style = "motif"; }
+    else if(choice == 2) {style = "cde"; }
+    else if(choice == 1) {style = "plastique"; }
+    else style = "";
 
-
-
+    setting = preferences->getPreferences("Scheme", "Colour", "select");
+    choice = setting.toInt(&ok, 16);
+    QString colour;
+    if(choice == 4) {colour = ""; }
+    else if(choice == 3) {colour = ":qss/green.qss"; }
+    else if(choice == 2) {colour = ":qss/blue.qss"; }
+    else if(choice == 1) {colour = ":qss/white.qss"; }
+    else colour = ":qss/black.qss";
     /* Loads the stylesheet for the current platform if present */
-#ifdef Q_OS_WIN
-    /* This set the floorboard default style to the "plastique" style,
-           as it comes the nearest what the stylesheet uses. */
-    //fxsBoard->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/windows.qss").exists())
+    QApplication::setStyle(QStyleFactory::create(style));
+    if(QFile(colour).exists())
     {
-        QFile file(":qss/windows.qss");
+        QFile file(colour);
         file.open(QFile::ReadOnly);
         QString styleSheet = QLatin1String(file.readAll());
         fxsBoard->setStyleSheet(styleSheet);
     };
-#endif
-
-#ifdef Q_WS_X11
-    fxsBoard->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/linux.qss").exists())
-    {
-        QFile file(":qss/linux.qss");
-        file.open(QFile::ReadOnly);
-        QString styleSheet = QLatin1String(file.readAll());
-        fxsBoard->setStyleSheet(styleSheet);
-    };
-#endif
-
-#ifdef Q_WS_MAC
-    fxsBoard->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/macosx.qss").exists())
-    {
-        QFile file(":qss/macosx.qss");
-        file.open(QFile::ReadOnly);
-        QString styleSheet = QLatin1String(file.readAll());
-        fxsBoard->setStyleSheet(styleSheet);
-    };
-#endif
-
 
     setWindowTitle(deviceType + tr(" FloorBoard"));
-
-
-
+    createActions();
+    createMenus();
     createStatusBar();
-
-
-
-    //QVBoxLayout *mainLayout = new QVBoxLayout;
-    //mainLayout->setMenuBar(menuBar);
-    //mainLayout->addWidget(fxsBoard);
-    //mainLayout->addWidget(statusBar);
-    //mainLayout->setMargin(0);
-    //mainLayout->setSpacing(0);
-    //setLayout(mainLayout);
     setCentralWidget(fxsBoard);
     statusBar()->setWhatsThis("StatusBar<br>midi activity is displayed here<br>and some status messages are displayed.");
 
@@ -202,12 +178,12 @@ void mainWindow::createActions()
     settingsAct->setWhatsThis(tr("GR-55FloorBoard Preferences<br>Select midi device, language,splash, directories"));
     connect(settingsAct, SIGNAL(triggered()), this, SLOT(settings()));
 
-    guitarModeAct = new QAction(QIcon(":/images/guitar_icon.png"), tr("&Forced Guitar Mode"), this);
+    guitarModeAct = new QAction(QIcon(":/images/guitar_icon.png"), tr("&Change Patch to Guitar Mode"), this);
     guitarModeAct->setShortcut(tr("Shift+G"));
     guitarModeAct->setWhatsThis(tr("Force to Guitar Mode<br>Force editor to Guitar mode modeling to edit/convert Bass mode patches"));
     connect(guitarModeAct, SIGNAL(triggered()), this, SLOT(guitarMode()));
 
-    bassModeAct = new QAction(QIcon(":/images/bass_icon.png"), tr("&Forced Bass Mode"), this);
+    bassModeAct = new QAction(QIcon(":/images/bass_icon.png"), tr("&Change Patch to Bass Mode"), this);
     bassModeAct->setShortcut(tr("Shift+B"));
     bassModeAct->setWhatsThis(tr("Force to Bass Mode<br>Force editor to Bass Mode modeling to edit/convert Guitar mode patches"));
     connect(bassModeAct, SIGNAL(triggered()), this, SLOT(bassMode()));
@@ -735,6 +711,18 @@ void mainWindow::settings()
         else if (dialog->languageSettings->frenchButton->isChecked() ) {lang="1"; }
         else {lang="0"; };
         preferences->setPreferences("Language", "Locale", "select", lang);
+        QString choice;
+        if (dialog->styleSettings->motifButton->isChecked() ) {choice="3"; }
+        else if (dialog->styleSettings->cdeButton->isChecked() ) {choice="2"; }
+        else if (dialog->styleSettings->plastiqueButton->isChecked() ) {choice="1"; }
+        else {choice="0"; };
+        preferences->setPreferences("Scheme", "Style", "select", choice);
+        if (dialog->styleSettings->systemButton->isChecked() ) {choice="4"; }
+        else if (dialog->styleSettings->greenButton->isChecked() ) {choice="3"; }
+        else if (dialog->styleSettings->blueButton->isChecked() ) {choice="2"; }
+        else if (dialog->styleSettings->whiteButton->isChecked() ) {choice="1"; }
+        else {choice="0"; };
+        preferences->setPreferences("Scheme", "Colour", "select", choice);
 
         if(midiIn=="-1") { midiIn = ""; };
         if(midiOut=="-1") {	midiOut = ""; };
@@ -757,15 +745,54 @@ void mainWindow::settings()
 void mainWindow::guitarMode()
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->setFileSource("Structure", "00", "00", "00", "00");
-    emit updateSignal();
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+    if(mode_check > 0)
+    {
+        sysxIO->setFileSource("Structure", "00", "00", "00", "00");
+        emit updateSignal();
+        QString snork = tr("Ensure GR-55 mode matches the patch mode or else Modeling and Assigns realtime control will not work correctly");
+        QMessageBox *msgBox = new QMessageBox();
+        msgBox->setWindowTitle(tr("Patch Mode changed !!"));
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText(snork);
+        msgBox->setStandardButtons(QMessageBox::Ok);
+        msgBox->exec();
+    } else {
+        QString snork = tr("Patch is already set to Guitar Mode, Patch Mode change not required");
+        QMessageBox *msgBox = new QMessageBox();
+        msgBox->setWindowTitle(tr("Patch Mode change not required !!"));
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText(snork);
+        msgBox->setStandardButtons(QMessageBox::Ok);
+        msgBox->exec();
+    };
+
 };
 
 void mainWindow::bassMode()
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->setFileSource("Structure", "00", "00", "00", "01");
-    emit updateSignal();
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+    if(mode_check < 1)
+    {
+        sysxIO->setFileSource("Structure", "00", "00", "00", "01");
+        emit updateSignal();
+        QString snork = tr("Ensure GR-55 mode matches the patch mode or else Modeling and Assigns realtime control will not work correctly");
+        QMessageBox *msgBox = new QMessageBox();
+        msgBox->setWindowTitle(tr("Patch Mode changed !!"));
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText(snork);
+        msgBox->setStandardButtons(QMessageBox::Ok);
+        msgBox->exec();
+    } else {
+        QString snork = tr("Patch is already set to Bass Mode, Patch Mode change is not required");
+        QMessageBox *msgBox = new QMessageBox();
+        msgBox->setWindowTitle(tr("Patch Mode change not required !!"));
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText(snork);
+        msgBox->setStandardButtons(QMessageBox::Ok);
+        msgBox->exec();
+    };
 };
 
 /* HELP MENU */

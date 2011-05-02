@@ -33,27 +33,27 @@ HEADERS += ./editPage.h \
     ./bulkSaveDialog.h \
     ./customButton.h \
     ./customComboBox.h \
-    ./customControlParaEQ.h \
-    ./customControlGraphicEQ.h \
+    #./customControlParaEQ.h \
+    #./customControlGraphicEQ.h \
     ./customControlKnob.h \
     ./customControlDataKnob.h \
     ./customControlRange.h \
     ./customControlLabel.h \
-    ./customControlMasterEQ.h \
+    #./customControlMasterEQ.h \
     ./customControlListMenu.h \
     ./customControlSwitch.h \
     ./customControlTarget.h \
     ./customDial.h \
     ./customDisplay.h \
-    ./customParaEQGraph.h \
-    ./customGraphicEQGraph.h \
+    #./customParaEQGraph.h \
+    #./customGraphicEQGraph.h \
     ./customKnob.h \
     ./customDataKnob.h \
     ./customKnobTarget.h \
     ./customKnobRange.h \
     ./customLabelDisplay.h \
     ./customLed.h \
-    ./customMasterEQGraph.h \
+    #./customMasterEQGraph.h \
     ./customPanelButton.h \
     ./customRangeDial.h \
     ./customRenameDialog.h \
@@ -132,27 +132,27 @@ SOURCES += ./editPage.cpp \
     ./bulkSaveDialog.cpp \
     ./customButton.cpp \
     ./customComboBox.cpp \
-    ./customControlParaEQ.cpp \
-    ./customControlGraphicEQ.cpp \
+    #./customControlParaEQ.cpp \
+    #./customControlGraphicEQ.cpp \
     ./customControlKnob.cpp \
     ./customControlDataKnob.cpp \
     ./customControlLabel.cpp \
     ./customControlListMenu.cpp \
-    ./customControlMasterEQ.cpp \
+    #./customControlMasterEQ.cpp \
     ./customControlRange.cpp \
     ./customControlSwitch.cpp \
     ./customControlTarget.cpp \
     ./customDial.cpp \
     ./customDisplay.cpp \
-    ./customParaEQGraph.cpp \
-    ./customGraphicEQGraph.cpp \
+    #./customParaEQGraph.cpp \
+    #./customGraphicEQGraph.cpp \
     ./customKnob.cpp \
     ./customDataKnob.cpp \
     ./customKnobTarget.cpp \
     ./customKnobRange.cpp \
     ./customLabelDisplay.cpp \
     ./customLed.cpp \
-    ./customMasterEQGraph.cpp \
+    #./customMasterEQGraph.cpp \
     ./customPanelButton.cpp \
     ./customRangeDial.cpp \
     ./customRenameDialog.cpp \
