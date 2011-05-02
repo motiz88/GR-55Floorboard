@@ -85,5 +85,10 @@
         <file>images/structure_2.png</file>
         <file>images/bass_icon.png</file>
         <file>images/guitar_icon.png</file>
+        <file>images/style.png</file>
+        <file>qss/black.qss</file>
+        <file>qss/blue.qss</file>
+        <file>qss/green.qss</file>
+        <file>qss/white.qss</file>
     </qresource>
 </RCC>

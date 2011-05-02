@@ -31,46 +31,61 @@
 
 class GeneralPage : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	GeneralPage(QWidget *parent = 0);
-	QLineEdit* dirEdit;
+    GeneralPage(QWidget *parent = 0);
+    QLineEdit* dirEdit;
 
 public slots:
-	void browseDir();
+    void browseDir();
 };
 
 class MidiPage : public QWidget
 {
 public:
-	MidiPage(QWidget *parent = 0);
-	QComboBox* midiInCombo;
-	QComboBox* midiOutCombo;
-	QCheckBox* dBugCheckBox;
-	QSpinBox* midiTimeSpinBox;
-	QSpinBox* midiDelaySpinBox;
+    MidiPage(QWidget *parent = 0);
+    QComboBox* midiInCombo;
+    QComboBox* midiOutCombo;
+    QCheckBox* dBugCheckBox;
+    QSpinBox* midiTimeSpinBox;
+    QSpinBox* midiDelaySpinBox;
 };
 
 class WindowPage : public QWidget
 {
 public:
-	WindowPage(QWidget *parent = 0);
-	QCheckBox* windowCheckBox;
-	QCheckBox* sidepanelCheckBox;
-	QCheckBox* singleWindowCheckBox;
-  QCheckBox* widgetsCheckBox;
-	QCheckBox* splashCheckBox;
+    WindowPage(QWidget *parent = 0);
+    QCheckBox* windowCheckBox;
+    QCheckBox* sidepanelCheckBox;
+    QCheckBox* singleWindowCheckBox;
+    QCheckBox* widgetsCheckBox;
+    QCheckBox* splashCheckBox;
 };
 
 class LanguagePage : public QWidget
 {
 public:
-	LanguagePage(QWidget *parent = 0);
-	QRadioButton* englishButton;
-	QRadioButton* frenchButton;
-	QRadioButton* germanButton;
-	QRadioButton* chineseButton;
+    LanguagePage(QWidget *parent = 0);
+    QRadioButton* englishButton;
+    QRadioButton* frenchButton;
+    QRadioButton* germanButton;
+    QRadioButton* chineseButton;
+};
+
+class StylePage : public QWidget
+{
+public:
+    StylePage(QWidget *parent = 0);
+    QRadioButton* standardButton;
+    QRadioButton* plastiqueButton;
+    QRadioButton* cdeButton;
+    QRadioButton* motifButton;
+    QRadioButton* blackButton;
+    QRadioButton* whiteButton;
+    QRadioButton* blueButton;
+    QRadioButton* greenButton;
+    QRadioButton* systemButton;
 };
 
 #endif // PREFERENCESPAGES_H

@@ -33,24 +33,27 @@ preferencesDialog::preferencesDialog()
 	contentsWidget->setIconSize(QSize(45, 40));
 	contentsWidget->setMovement(QListView::Static);
 	contentsWidget->setSpacing(10);
-	contentsWidget->setFixedHeight(330);
+        contentsWidget->setFixedHeight(370);
 	contentsWidget->setFixedWidth(85); 
 
 	GeneralPage *generalSettings = new GeneralPage;
 	MidiPage *midiSettings = new MidiPage;
 	WindowPage *windowSettings = new WindowPage;
 	LanguagePage *languageSettings = new LanguagePage;
+        StylePage *styleSettings = new StylePage;
 
 	this->generalSettings = generalSettings;
 	this->midiSettings = midiSettings;
 	this->windowSettings = windowSettings;
 	this->languageSettings = languageSettings;
+        this->styleSettings = styleSettings;
 
 	pagesWidget = new QStackedWidget;
 	pagesWidget->addWidget(generalSettings);
 	pagesWidget->addWidget(midiSettings);
 	pagesWidget->addWidget(windowSettings);
 	pagesWidget->addWidget(languageSettings);
+        pagesWidget->addWidget(styleSettings);
 	
 	QPushButton *okButton = new QPushButton(tr("Ok"));
 	QPushButton *cancelButton = new QPushButton(tr("Cancel"));
@@ -105,6 +108,12 @@ void preferencesDialog::createIcons()
 	languageButton->setText(tr("Language"));
 	languageButton->setTextAlignment(Qt::AlignHCenter);
 	languageButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
+        QListWidgetItem *styleButton = new QListWidgetItem(contentsWidget);
+        styleButton->setIcon(QIcon(":images/style.png"));
+        styleButton->setText(tr("Look/Style"));
+        styleButton->setTextAlignment(Qt::AlignHCenter);
+        styleButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
 	connect(contentsWidget,
 		SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),

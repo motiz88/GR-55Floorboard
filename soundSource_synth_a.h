@@ -34,7 +34,7 @@ class soundsource_synth_a : public soundSource
 
 public:
 	soundsource_synth_a(QWidget *parent);
-	void setEditPages();
+        void setEditPages();
 
 public slots:
 	void updateSignal();

@@ -422,40 +422,6 @@ void floorBoard::updateStompBoxes()
 
 void floorBoard::setEditDialog(editWindow* editDialog)
 {
-    QString styleSheet;
-#ifdef Q_OS_WIN
-    /* This set the floorboard default style to the "plastique" style,
-           as it comes the nearest what the stylesheet uses. */
-    this->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/windows.qss").exists())
-    {
-        QFile file(":qss/windows.qss");
-        file.open(QFile::ReadOnly);
-        styleSheet = QLatin1String(file.readAll());
-
-    };
-#endif
-
-#ifdef Q_WS_X11
-    this->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/linux.qss").exists())
-    {
-        QFile file(":qss/linux.qss");
-        file.open(QFile::ReadOnly);
-        styleSheet = QLatin1String(file.readAll());
-    };
-#endif
-
-#ifdef Q_WS_MAC
-    this->setStyle(QStyleFactory::create("plastique"));
-    if(QFile(":qss/macosx.qss").exists())
-    {
-        QFile file(":qss/macosx.qss");
-        file.open(QFile::ReadOnly);
-        styleSheet = QLatin1String(file.readAll());
-    };
-#endif
-
     this->oldDialog = this->editDialog;
     this->editDialog = editDialog;
     this->editDialog->setParent(this);
@@ -463,7 +429,7 @@ void floorBoard::setEditDialog(editWindow* editDialog)
     if(preferences->getPreferences("Window", "Single", "bool")!="true")
     {
         this->editDialog->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-        this->editDialog->setStyleSheet(styleSheet);
+        //this->editDialog->setStyleSheet(styleSheet);
     };
     this->centerEditDialog();
     this->editDialog->pageUpdateSignal();

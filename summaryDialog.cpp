@@ -70,7 +70,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   
 
   QString patchName = sysxIO->getCurrentPatchName();
-  text = "<br><b><u>Patch name = </u>" + patchName + "</b>";
+  text = "<br><b>Patch name = " + patchName + "</b>";
 
   text.append("<br><br><b>Patch Mode = </b>");
   int value = sysxIO->getSourceValue("Structure", "00", "00", "00");
@@ -78,26 +78,23 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(valueHex.length() < 2) {valueHex.prepend("0"); };
   text.append(midiTable->getValue("Structure", "00", "00", "00", valueHex) );
 
+  int mode_value = sysxIO->getSourceValue("Structure", "02", "00", "2C");
+  if(mode_value == 0) {text.append("<br><br><b>Structure Type = </b>[1]"); }
+  else {text.append("<br><br><b><u>Structure Type = [2]</b></u>"); };
+
   small_text.append(text);
   large_text.append(text);
 
-  int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
-  if(mode_value == 0) {text = "<br><br><b><u>****Structure Type = [1]****</b></u>"; }
-  else {text = "<br><br><b><u>****Structure Type = [2]****</b></u>"; };
-  text2 = text;
-
-
-  text.append("<br><br><b><u>**********Pre Amp***********</b></u>");
-  text2.append("<br><br><b><u>**********Pre Amp***********</b></u>");
+  text = "<br><br><b><u>Pre Amp***********</b></u>";
   address= "07";
   start = 0;
   finish = 17;
   makeList();  
-  large_text.append(text2);
+  large_text.append(text);
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Noise Suppressor***********</b></u>";
+  text = "<br><br><b><u>Noise Suppressor***********</b></u>";
   address= "07";
   start = 90;
   finish = 93;
@@ -106,7 +103,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Chorus***********</b></u>";
+  text = "<br><br><b><u>Chorus***********</b></u>";
   address= "06";
   start = 0;
   finish = 5;
@@ -115,7 +112,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Delay***********</b></u>";
+  text = "<br><br><b><u>Delay***********</b></u>";
   address= "06";
   start = 5;
   finish = 12;
@@ -124,7 +121,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Reverb***********</b></u>";
+  text = "<br><br><b><u>Reverb***********</b></u>";
   address= "06";
   start = 12;
   finish = 17;
@@ -133,7 +130,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
    this->effect = "off";
-  text = "<br><br><b><u>**********Equalizer***********</b></u>";
+  text = "<br><br><b><u>Equalizer***********</b></u>";
   address= "06";
   start = 17;
   finish = 30;
@@ -142,7 +139,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********PCM Synth A***********</b></u>";
+  text = "<br><br><b><u>PCM Synth A***********</b></u>";
   address= "20";
   start = 1;
   finish =23;
@@ -155,7 +152,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "off") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********PCM Synth B***********</b></u>";
+  text = "<br><br><b><u>PCM Synth B***********</b></u>";
   address= "21";
   start = 1;
   finish =23;
@@ -170,7 +167,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   this->effect = "off";
   mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");
   if(mode_value != 0) {
-      text = "<br><br><b><u>**********Bass Mode Modeling***********</b></u>";
+      text = "<br><br><b><u>Bass Mode Modeling***********</b></u>";
       address= "10";
       start = 9;
       finish = 46;
@@ -184,7 +181,7 @@ summaryDialog::summaryDialog(QWidget *parent)
       finish = 74;
       makeList();
     } else {
-      text = "<br><br><b><u>**********Guitar Mode Modeling***********</b></u>";
+      text = "<br><br><b><u>Guitar Mode Modeling***********</b></u>";
       address= "10";
       start = 9;
       finish = 46;
@@ -202,7 +199,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********MOD***********</b></u>";
+  text = "<br><br><b><u>MOD***********</b></u>";
   text2 = text;
   address= "07";
   start = 21;
@@ -217,7 +214,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   this->filter = "off";
 
   this->effect = "off";
-  text = "<br><br><b><u>**********MFX***********</b></u>";
+  text = "<br><br><b><u>MFX***********</b></u>";
   text2 = text;
   address= "03";
   start = 4;
@@ -236,7 +233,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   this->filter = "off";
 
   this->effect = "on";
-  text = "<br><br><b><u>**********Master***********</b></u>";
+  text = "<br><br><b><u>Master***********</b></u>";
   address= "02";
   start = 36;
   finish = 72;
@@ -245,7 +242,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   small_text.append(text);
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Pedal/GK***********</b></u>";
+  text = "<br><br><b><u>Pedal/GK***********</b></u>";
   address= "00";
   start = 17;
   finish = 128;
@@ -258,7 +255,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   //small_text.append(text);
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 1***********</b></u>";
+  text = "<br><br><b><u>Assign 1***********</b></u>";
   address= "01";
   start = 12;
   finish = 31;
@@ -267,7 +264,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 2***********</b></u>";
+  text = "<br><br><b><u>Assign 2***********</b></u>";
   address= "01";
   start = 31;
   finish = 50;
@@ -276,7 +273,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 3***********</b></u>";
+  text = "<br><br><b><u>Assign 3***********</b></u>";
   address= "01";
   start = 50;
   finish = 69;
@@ -285,7 +282,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 4***********</b></u>";
+  text = "<br><br><b><u>Assign 4***********</b></u>";
   address= "01";
   start = 69;
   finish = 88;
@@ -294,7 +291,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 5***********</b></u>";
+  text = "<br><br><b><u>Assign 5***********</b></u>";
   address= "01";
   start = 88;
   finish = 107;
@@ -303,7 +300,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 6***********</b></u>";
+  text = "<br><br><b><u>Assign 6***********</b></u>";
   address= "01";
   start = 107;
   finish = 126;
@@ -312,7 +309,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
  
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 7***********</b></u>";
+  text = "<br><br><b><u>Assign 7***********</b></u>";
   address= "01";
   start = 126;
   finish = 128;
@@ -325,7 +322,7 @@ summaryDialog::summaryDialog(QWidget *parent)
   if(effect == "on") { small_text.append(text); };
 
   this->effect = "off";
-  text = "<br><br><b><u>**********Assign 8***********</b></u>";
+  text = "<br><br><b><u>Assign 8***********</b></u>";
   address= "02";
   start = 17;
   finish = 36;
@@ -335,7 +332,7 @@ summaryDialog::summaryDialog(QWidget *parent)
  
 
    
-  text = "<br><br><b><u>**********Patch Data***********</b></u><br>";
+  text = "<br><br><b><u>Patch Data***********</b></u><br>";
   text.append(sysxMsg);
   large_text.append(text);
 
