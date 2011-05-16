@@ -23,16 +23,16 @@
  
 /* CUSTOM QTREEWIDGET STYLE */
 bankTreeList#banklist{
-background-color rgb(0,0,0);
+background-color rgb(0,20,0);
 }
 QTreeWidget#banklist {
 font-family: Arial;
 font-size: 10px;
 font-weight: bold;
 color: rgb(185,224,243);
-background-color: rgba(0,0,0,255);
+background-color: rgba(0,20,0,255);
 selection-color: rgb(185,255,204);
-selection-background-color: rgb(0,0,0);
+selection-background-color: rgb(0,100,0);
 border-style: solid;
 border-radius: 10px;
 border-width: 1px;
@@ -47,7 +47,7 @@ border-style: solid;
 border-radius: 3px;
 border-width: 1px;
 border-color: rgba(150,150,150,255);
-background-color: rgb(0,0,0);
+background-color: rgb(0,20,0);
 
 color: rgb(185,224,243);
 }
@@ -73,7 +73,7 @@ font-size: 10px;
 font-weight: bold;
 /*font-stretch: 110;*/
 color: rgb(185,224,243);
-background-color: rgb(0,0,0);
+background-color: rgb(0,20,0);
 border-style: solid;
 border-width: 1px;
 border-radius: 3px;
@@ -94,7 +94,7 @@ font-family: Arial;
 font-size: 10px;
 font-weight: bold;
 color: rgb(185,224,243);
-background-color: rgb(0,0,0);
+background-color: rgb(0,20,0);
 border-style: solid;
 border-width: 1px;
 border-radius: 3px;
@@ -108,7 +108,7 @@ padding-right: 0px;
 
 QComboBox#smallcombo QScrollBar:vertical {
 border: none;
-background: rgb(0,0,0);
+background: rgb(0,60,0);
 width: 9px;
 margin: 10px 0px 10px 0px;
 }
@@ -122,13 +122,13 @@ min-height: 40px;
 max-height: 40px;
 }
 QComboBox#smallcombo QScrollBar::add-line:vertical {
-background: rgb(0,0,0);
+background: rgb(0,20,0);
 height: 9px;
 subcontrol-position: bottom;
 subcontrol-origin: margin;
 }
 QComboBox#smallcombo QScrollBar::sub-line:vertical {
-background: rgb(0,0,0);
+background: rgb(0,20,0);
 height: 9px;
 subcontrol-position: top;
 subcontrol-origin: margin;
@@ -153,7 +153,7 @@ background: none;
 /* CUSTOM DISPLAY STYLE */
 
 #display {
-background-color: rgb(0,0,0); 
+background-color: rgb(0,20,0); 
 border-style: solid;
 border-width: 10px;
 border-radius: 3px;
@@ -202,19 +202,19 @@ QLabel#display {
 font-family: Arial;
 font-size: 12px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(155,255,155);
 }
 QLabel#title {
 font-family: Arial;
 font-size: 20px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(155,255,155);
 }
 QLabel#selectlabel {
 font-family: Arial;
 font-size: 11px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(155,255,155);
 }
 
 /* CUSTOM BUTTON STYLE */
@@ -223,14 +223,14 @@ QLabel#button {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(250,250,255);
+color: rgb(100,255,100);
 }
 
 QLabel#panelButton {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(155,255,155);
 }
 
 /* CUSTOM GROUPBOX STYLE */
@@ -255,7 +255,7 @@ border-color:  rgb(255,255,255);
 border-radius: 5px;
 margin-top: 8px;
 padding: 2px;
-background-color: rgb(1,35,182);
+background-color: rgb(0,100,0);
 }
  
 /* CUSTOM CONTROLLABEL STYLE */
@@ -264,7 +264,7 @@ QLabel#customlabel {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(155,255,155);
 }
 
 /* CUSTOM CONTROLKNOB STYLE  */
@@ -273,8 +273,8 @@ QLineEdit#editdisplay {
 font-family: Arial;
 font-size: 12px;    
 font-weight: normal;
-color: rgb(185,224,243);
-background-color: rgb(0,0,0);
+color: rgb(185,254,143);
+background-color: rgb(0,20,0);
 border-style: solid;
 border-width: 1px;
 border-radius: 3px;
@@ -290,8 +290,8 @@ QLineEdit#targetdisplay {
 font-family: Arial;
 font-size:11px;
 font-weight: normal;
-color: rgb(185,224,243);
-background-color: rgb(0,0,0);
+color: rgb(185,254,143);
+background-color: rgb(0,20,0);
 border-style: solid;
 border-width: 1px;
 border-radius: 3px;
@@ -307,8 +307,8 @@ QLineEdit#catalogdisplay {
 font-family: Arial;
 font-size: 12px;
 font-weight: normal;
-color: rgb(185,224,243);
-background-color: rgb(0,0,0);
+color: rgb(185,254,143);
+background-color: rgb(0,60,0);
 border-style: solid;
 border-width: 1px;
 border-radius: 3px;

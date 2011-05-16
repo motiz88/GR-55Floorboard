@@ -53,7 +53,7 @@ mainWindow::mainWindow()
     setting = preferences->getPreferences("Scheme", "Colour", "select");
     choice = setting.toInt(&ok, 16);
     QString colour;
-    if(choice == 4) {colour = ""; }
+    if(choice == 4) {colour = ":qss/system.qss"; }
     else if(choice == 3) {colour = ":qss/green.qss"; }
     else if(choice == 2) {colour = ":qss/blue.qss"; }
     else if(choice == 1) {colour = ":qss/white.qss"; }

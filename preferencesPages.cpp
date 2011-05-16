@@ -346,12 +346,12 @@ StylePage::StylePage(QWidget *parent)
     choice = setting.toInt(&ok, 16);
     QGroupBox *colourGroup = new QGroupBox(QObject::tr("Colour Scheme Selection"));
 
-    QRadioButton *blackButton = new QRadioButton(QObject::tr("Black"));
+    QRadioButton *blackButton = new QRadioButton(QObject::tr("Black (default)"));
     this->blackButton = blackButton;
     this->whiteButton = new QRadioButton(QObject::tr("White"));
     this->blueButton = new QRadioButton(QObject::tr("Blue"));
     this->greenButton = new QRadioButton(QObject::tr("Green"));
-    this->systemButton = new QRadioButton(QObject::tr("System default"));
+    this->systemButton = new QRadioButton(QObject::tr("System"));
     if (choice == 4) {systemButton->setChecked(true); }
     else if (choice == 3) {greenButton->setChecked(true); }
     else if (choice == 2) {blueButton->setChecked(true); }

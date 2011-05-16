@@ -427,18 +427,36 @@ void sysxWriter::writeSMF(QString fileName)
         if (hexfile.open(QIODevice::ReadOnly))
         {	Qhex = hexfile.readAll(); };
 
-        temp = Qhex.mid((288), 30);
-        out.remove(1763, 282);       //remove user text from end
-        out.prepend(temp);          // insert midi timing header
-        out.remove(30, 11);         // remove address "00 00" header
-        temp = Qhex.mid((320), 13);
-        out.insert(30, temp);       // insert new address "00 00" header
-        out.remove(171, 13);        // remove address "01 00" header
-        temp = Qhex.mid((336), 16);
-        out.insert(285, temp);      // insert new address "01 72" header
-        out.remove(315, 13);        // remove address "02 00" header
-        out.remove(443, 13);        // remove address "03 00" header
-        temp = Qhex.mid((352), 16);
+        out.remove(0, 11);           // remove address "00 00" header
+        out.remove(128, 13);         // remove address "01 00" header
+        out.remove(256, 13);         // remove address "02 00" header
+        out.remove(334, 13);         // remove address "03 00" header
+        out.remove(462, 13);         // remove address "04 00" header
+        out.remove(592, 13);         // remove address "05 00" header
+        out.remove(608, 13);         // remove address "06 00" header
+        out.remove(638, 13);         // remove address "07 00" header
+        out.remove(768, 13);         // remove address "10 00" header
+        out.remove(891, 13);         // remove address "11 00" header
+        out.remove(977, 13);         // remove address "20 00" header
+        out.remove(1012, 13);        // remove address "21 00" header
+        out.remove(1047, 13);        // remove address "30 00" header
+        out.remove(1099, 13);        // remove address "31 00" header
+        out.remove(1151, 2);         // remove footer
+
+
+        temp = Qhex.mid((320), 13);  // insert new address "00 00" header
+        out.prepend(temp);
+        temp = Qhex.mid((288), 23);
+        out.prepend(temp);           // insert midi timing header
+        temp = Qhex.mid((336), 15); // copy "01 72" header
+        out.insert(278, temp);      // insert new address "01 72" header
+        temp = Qhex.mid((353), 16); // copy "03 00" header
+        out.insert(385, temp);      // insert new address "03 00" header
+        temp = Qhex.mid((368), 15); // copy "04 72" header
+        out.insert(643, temp);      // insert new address "04 72" header
+
+
+      /*  temp = Qhex.mid((352), 16);
         out.insert(543, temp);      // insert new address "03 64" header
         out.remove(587, 13);        // remove address "04 00" header
         out.remove(715, 13);        // remove address "05 00" header
@@ -467,7 +485,7 @@ void sysxWriter::writeSMF(QString fileName)
         temp = Qhex.mid((432), 3);
         out.insert(1832, temp);      // insert new file footer (part of)
         out.remove(0, 29);           // remove header again for checksum calcs
-        out.remove(1835, 70);
+        out.remove(1835, 70); */
 
         this->fileSource.address.clear();
         this->fileSource.hex.clear();
@@ -598,22 +616,6 @@ void sysxWriter::writeG5L(QString fileName)
         G5L_default.replace(a+1115, 52, temp);    //address "30" +
         temp = out.mid(1279, 52);
         G5L_default.replace(a+1171, 52, temp);    //address "31" +
-        // copy user text, first two sections only, section terminated by "00"
-        //QByteArray marker = G5L_default.mid(32, 1);     //copy "00" for position marker.
-        //int z = a+1701;
-        //int y = G5L_default.indexOf( marker, (a+1701));
-
-        //temp = out.mid(1774, 128 );   // copy first text section from patch
-        //G5L_default.replace(a+1701, (y-z), temp);       // paste text 1
-        //G5L_default.replace(a+1701, 128, temp);       // paste text 1
-
-        //int x = G5L_default.indexOf( marker, (y+1));
-        //int w = G5L_default.indexOf( marker, (x+1));
-
-        //temp = out.mid(1915, 32 );     // copy second text section from patch
-        //G5L_default.replace(x+1, (w-x), temp);          // paste text 2
-        //G5L_default.replace(a+1830, 32, temp);          // paste text 2
-
         file.write(G5L_default);
     };
 };

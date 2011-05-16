@@ -379,10 +379,19 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     if (area != "System")
     {
 	QList<QString> sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
-
+        int x = 0;
         for(int i=0; i<hexData.size();++i)
         {
-            sysxList.replace(i + (sysxDataOffset + pointerOffset2), hexData.at(i));
+            if((i + sysxDataOffset + pointerOffset2) > (sysxDataOffset + 127))  // if data string crosses page boundry limit >127
+              {
+                pointerOffset2 = 0;
+                x=0;
+                this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
+                address = "0200";                         // save the data and start a sysxList with a new address
+                sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
+              };
+            sysxList.replace(x + (sysxDataOffset + pointerOffset2), hexData.at(i));
+            x=x+1;
         };
         this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
 	
@@ -411,7 +420,6 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
         sysxMsg.append(hexData.at(i));
     };
     int dataSize = 0;
-    QString temp;
     for(int i=checksumOffset; i<sysxMsg.size()-1;i++)
     {dataSize += sysxMsg.mid(i*2, 2).toInt(&ok, 16); };
     sysxMsg.append(getCheckSum(dataSize));

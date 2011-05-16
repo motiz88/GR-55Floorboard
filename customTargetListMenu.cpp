@@ -89,8 +89,6 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
 
     };
 
-    //QObject::connect(this->parent(), SIGNAL( updateDisplayTarget(QString) ), this, SLOT( dialogUpdateSignal(QString) ));
-
     QObject::connect(this, SIGNAL( updateSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
@@ -212,8 +210,8 @@ void customTargetListMenu::valueChanged(int index)
         int x = this->controlListComboBox->count()+1;
         for(int y=0; y<x; ++y)
         {
-        this->controlListComboBox->removeItem(1);
-    };
+            this->controlListComboBox->removeItem(1);
+        };
         setComboBox();
         this->controlListComboBox->removeItem(1);
         emit updateSignal();
@@ -231,13 +229,7 @@ void customTargetListMenu::valueChanged(int index)
     QString lsb_c = valueHex.at(2);
     lsb_c.prepend("0");
     valueString.append(lsb_c);
-    if(this->hex3 == "7F") {
-        sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString);
-        //sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, lsb_a);
-        //sysxIO->setFileSource(this->area, "02", "00", "00", lsb_b);
-        //sysxIO->setFileSource(this->area, "02", "00", "01", lsb_c);
-
-    } else { sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString); };
+    sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString);
 
     bool ok;
     QString hex3_msb = QString::number((hex3.toInt(&ok, 16) + 1), 16).toUpper();                // go forward 1 to select target MSB address
@@ -253,7 +245,6 @@ void customTargetListMenu::valueChanged(int index)
     valueHex.append(QString::number(value, 16).toUpper());
     value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-    //emit updateDisplay(valueStr);
     MidiTable *midiTable = MidiTable::Instance();
 
     int maxRange = 256;
@@ -302,7 +293,6 @@ void customTargetListMenu::comboUpdateSignal()
     valueHex.append(QString::number(value, 16).toUpper());
     value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
     valueHex.append(QString::number(value, 16).toUpper());
-    //dialogUpdateSignal(valueHex);
     int index = valueHex.toInt(&ok, 16);
     this->controlListComboBox->setCurrentIndex(index);
 }

@@ -57,6 +57,9 @@ private:
 	QLabel *mainLabel;
 	QLabel *subLabelLeft;
 	QLabel *subLabelRight;
+        int r;
+        int g;
+        int b;
 };
 
 #endif // CUSTOMDISPLAY_H

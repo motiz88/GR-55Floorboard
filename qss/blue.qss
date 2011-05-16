@@ -202,24 +202,31 @@ QLabel#display {
 font-family: Arial;
 font-size: 12px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(0,0,0);
 }
 QLabel#title {
 font-family: Arial;
 font-size: 20px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(0,0,0);
 }
 QLabel#selectlabel {
 font-family: Arial;
 font-size: 11px;
 font-weight: bold;
-color: rgb(255,255,255);
+color: rgb(0,0,0);
 }
 
 /* CUSTOM BUTTON STYLE */
 
 QLabel#button {
+font-family: Arial;
+font-size: 9px;
+font-weight: bold;
+color: rgb(0,0,0);
+}
+
+QLabel#panelButton {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
@@ -248,7 +255,7 @@ border-color:  rgb(255,255,255);
 border-radius: 5px;
 margin-top: 8px;
 padding: 2px;
-background-color: rgb(1,35,182);
+background-color: rgb(1,35,100);
 }
  
 /* CUSTOM CONTROLLABEL STYLE */
@@ -264,7 +271,7 @@ color: rgb(255,255,255);
 
 QLineEdit#editdisplay {
 font-family: Arial;
-font-size: 10px;
+font-size: 12px;
 font-weight: normal;
 color: rgb(0,255,204);
 background-color: rgb(0,1,62);
