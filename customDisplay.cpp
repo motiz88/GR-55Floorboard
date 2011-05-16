@@ -23,6 +23,7 @@
 
 #include <QPainter>
 #include "customDisplay.h"
+#include "Preferences.h"
 
 customDisplay::customDisplay(QRect geometry, QWidget *parent)
     : QWidget(parent)
@@ -31,6 +32,7 @@ customDisplay::customDisplay(QRect geometry, QWidget *parent)
     this->font.setFamily("void");
     this->setGeometry(geometry);
     this->setLabelPosition();
+    r=0;
 };
 
 void customDisplay::paintEvent(QPaintEvent *)
@@ -68,10 +70,17 @@ void customDisplay::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(border);
-    painter.setBrush(QColor(0,0,0));
-    //painter.drawRoundRect(QRectF(0.0, 0.0, geometry.width()-1, geometry.height()-1), 8, 8);
-    //painter.drawRect(QRect(0.0, 0.0, geometry.width()-1, geometry.height()-1));
 
+
+    Preferences *preferences = Preferences::Instance();
+    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+    bool ok;
+    int choice = setting.toInt(&ok, 16);
+    if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //system
+    else if(choice == 3) {painter.setBrush(QColor(0,62,5)); }   // green
+    else if(choice == 2) {painter.setBrush(QColor(0,1,62)); }   //blue
+    else if(choice == 1) {painter.setBrush(QColor(255,255,255)); } //white
+    else {painter.setBrush(QColor(0,0,0)); }; //black
 
     /* Draw a custom path. This to have a constant border
            radius independant of the rectangle size. */

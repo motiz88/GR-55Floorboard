@@ -1034,7 +1034,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
             msgBox->setTextFormat(Qt::RichText);
             QString msgText;
             msgText.append("<font size='+1'><b>");
-            msgText.append(tr("The device connected is not a ROLAND ") + deviceType + tr(" Effects Processor."));
+            msgText.append(tr("The device connected is not a ROLAND ") + deviceType + tr(" Guitar Synthesizer."));
             if (sysxMsg.contains(idRequestString))
             {msgText.append(tr("<br>Midi loopback detected, ensure midi device 'thru' is switched off.")); };
             msgText.append("<b></font>");

@@ -138,12 +138,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
     valueString.append(lsb_c);
 
     SysxIO *sysxIO = SysxIO::Instance();
-    if(hex3 == "7F") {
-        //sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
-        sysxIO->setFileSource("Structure", hex1, hex2, hex3, lsb_a);
-        sysxIO->setFileSource("Structure", "02", hex2, "00", lsb_b);
-        sysxIO->setFileSource("Structure", "02", hex2, "01", lsb_c);
-    } else { sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString); };
+    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
     QString mode_hex = "00";
     int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");    //check for guitar mode
     if(mode_value != 0) {mode_hex = "0D"; };
@@ -159,7 +154,6 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
         emit updateDisplayMax(valueStr);
     };                                                  // updates display values
-    //emit updateSignal();
 
     if (this->background == "target")                                                   // get the currently selected target value & set min/max address
     {
@@ -197,5 +191,5 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         emit updateTarget(hexMsb, hex2, hexLsb);                                        // hexMsb & hexLsb are lookup address for label value
         emit updateTarget(hexMsb, hex2, hexLsb);
     };                                                            // updates on knob value change
- };
+};
 

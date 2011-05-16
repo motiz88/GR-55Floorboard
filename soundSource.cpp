@@ -27,6 +27,7 @@
 #include "globalVariables.h"
 #include "floorBoardDisplay.h"
 #include "floorBoard.h"
+#include "Preferences.h"
 
 soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QPoint stompPos)
     : QWidget(parent)
@@ -253,7 +254,15 @@ void soundSource::setComboBoxCurrentIndex(int index)
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
     stompDisplay = new customDisplay(QRect(17, 41, 120, 25), this);
-    this->stompDisplay->setAllColor(QColor(185,224,243));
+    Preferences *preferences = Preferences::Instance();
+    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+    bool ok;
+    int choice = setting.toInt(&ok, 16);
+    if(choice == 4) { this->stompDisplay->setAllColor(QColor(0,0,0)); } //system
+    else if(choice == 3) {this->stompDisplay->setAllColor(QColor(185,224,243)); }   // green
+    else if(choice == 2) {this->stompDisplay->setAllColor(QColor(0,255,204)); }   //blue
+    else if(choice == 1) {this->stompDisplay->setAllColor(QColor(0,0,0)); } //white
+    else {this->stompDisplay->setAllColor(QColor(185,224,243)); }; //black
 };
 
 void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)

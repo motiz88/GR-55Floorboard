@@ -161,7 +161,7 @@ border-width: 10px;
 border-radius: 3px;
 border-color: rgb(150,150,150);
 }
-QLabel#bankMain {
+QLabel#bankMain { 
 font-family: Arial;
 font-size: 12px;
 font-weight: bold;
@@ -204,19 +204,19 @@ QLabel#display {
 font-family: Arial;
 font-size: 12px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(255,255,255);
 }
 QLabel#title {
 font-family: Arial;
 font-size: 20px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(255,255,255);
 }
 QLabel#selectlabel {
 font-family: Arial;
 font-size: 11px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(255,255,255);
 }
 
 /* CUSTOM BUTTON STYLE */
@@ -232,7 +232,7 @@ QLabel#panelButton {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(100,100,255);
 }
 
 /* CUSTOM GROUPBOX STYLE */
@@ -257,7 +257,7 @@ border-color:  rgb(0,0,0);
 border-radius: 5px;
 margin-top: 8px;
 padding: 2px;
-background-color: rgb(100,135,255);
+background-color: rgb(235,235,255);
 }
  
 /* CUSTOM CONTROLLABEL STYLE */
@@ -266,7 +266,7 @@ QLabel#customlabel {
 font-family: Arial;
 font-size: 9px;
 font-weight: bold;
-color: rgb(0,0,0);
+color: rgb(125,125,125);
 }
 
 /* CUSTOM CONTROLKNOB STYLE  */
