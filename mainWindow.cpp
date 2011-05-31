@@ -223,7 +223,7 @@ void mainWindow::createActions()
     donationAct->setWhatsThis(tr("Even though the software is free,<br>an occassional donation is very much appreciated<br>i am not paid for this work."));
     connect(donationAct, SIGNAL(triggered()), this, SLOT(donate()));
 
-    manualAct = new QAction(QIcon(":/images/manual.png"), tr("User Manual PDF"), this);
+    manualAct = new QAction(QIcon(":/images/manual.png"), tr("Owner's Manual"), this);
     manualAct->setWhatsThis(tr("........"));
     connect(manualAct, SIGNAL(triggered()), this, SLOT(manual()));
 
@@ -706,7 +706,9 @@ void mainWindow::settings()
         QString midiTimeSet =QString::number(dialog->midiSettings->midiTimeSpinBox->value());
         QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
-        if (dialog->languageSettings->chineseButton->isChecked() ) {lang="3"; }
+        if (dialog->languageSettings->chineseButton->isChecked() ) {lang="5"; }
+        else if (dialog->languageSettings->japaneseButton->isChecked() ) {lang="4"; }
+        else if (dialog->languageSettings->spanishButton->isChecked() ) {lang="3"; }
         else if (dialog->languageSettings->germanButton->isChecked() ) {lang="2"; }
         else if (dialog->languageSettings->frenchButton->isChecked() ) {lang="1"; }
         else {lang="0"; };

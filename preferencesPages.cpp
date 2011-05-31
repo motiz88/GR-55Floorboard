@@ -289,8 +289,12 @@ LanguagePage::LanguagePage(QWidget *parent)
     this->englishButton = englishButton;
     this->frenchButton = new QRadioButton(QObject::tr("French"));
     this->germanButton = new QRadioButton(QObject::tr("German"));
+    this->spanishButton = new QRadioButton(QObject::tr("Spanish"));
+    this->japaneseButton = new QRadioButton(QObject::tr("Japanese"));
     this->chineseButton = new QRadioButton(QObject::tr("Chinese (simplified)"));
-    if (choice == 3) {chineseButton->setChecked(true); }
+    if (choice == 5) {chineseButton->setChecked(true); }
+    else if (choice == 4) {japaneseButton->setChecked(true); }
+    else if (choice == 3) {spanishButton->setChecked(true); }
     else if (choice == 2) {germanButton->setChecked(true); }
     else if (choice == 1) {frenchButton->setChecked(true); }
     else {englishButton->setChecked(true); };
@@ -299,6 +303,8 @@ LanguagePage::LanguagePage(QWidget *parent)
     languageLayout->addWidget(englishButton);
     languageLayout->addWidget(frenchButton);
     languageLayout->addWidget(germanButton);
+    languageLayout->addWidget(spanishButton);
+    languageLayout->addWidget(japaneseButton);
     languageLayout->addWidget(chineseButton);
 
     languageGroup->setLayout(languageLayout);
