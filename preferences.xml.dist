@@ -7,7 +7,7 @@
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
 		<Language code="en"/>
-		<Manual url="GR-55FloorBoard_Operation_Manual.pdf"/>
+		<Manual url="http://www.roland.com/products/en/_support/om.cfm?PRODUCT=GR-55"/>
 		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
 		<Webpage url="http://sourceforge.net/projects/grfloorboard/"/>
 	</General>

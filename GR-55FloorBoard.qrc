@@ -88,5 +88,7 @@
         <file>qss/green.qss</file>
         <file>qss/white.qss</file>
         <file>qss/system.qss</file>
+        <file>language_es.qm</file>
+        <file>language_jp.qm</file>
     </qresource>
 </RCC>

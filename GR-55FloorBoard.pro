@@ -43,7 +43,9 @@ INCLUDEPATH += ./generatedfiles \
     
 TRANSLATIONS = language_fr.ts \
                language_ge.ts \
-               language_ch.ts
+               language_ch.ts \
+               language_es.ts \
+               language_jp.ts
                
 CODECFORTR = UTF-8
 

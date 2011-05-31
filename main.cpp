@@ -40,7 +40,9 @@ int main(int argc, char **argv)
  /* Loading translation */
 	QTranslator translator;
 	
-	if (choice == 3) {translator.load(":language_ch.qm");  }
+        if (choice == 5) {translator.load(":language_ch.qm");  }
+        else if (choice ==4) {translator.load(":language_jp.qm"); }
+        else if (choice ==3) {translator.load(":language_es.qm"); }
 	else if (choice ==2) {translator.load(":language_ge.qm"); }
 	else if (choice ==1) {translator.load(":language_fr.qm"); }
 	else {translator.load(":language_en.qm"); };
