@@ -90,5 +90,6 @@
         <file>qss/system.qss</file>
         <file>language_es.qm</file>
         <file>language_jp.qm</file>
+        <file>language_pt.qm</file>
     </qresource>
 </RCC>

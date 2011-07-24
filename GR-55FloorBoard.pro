@@ -45,7 +45,9 @@ TRANSLATIONS = language_fr.ts \
                language_ge.ts \
                language_ch.ts \
                language_es.ts \
-               language_jp.ts
+               language_jp.ts \
+               language_pt.ts \
+               language_pl.ts
                
 CODECFORTR = UTF-8
 
@@ -54,12 +56,12 @@ QT += xml
 
 #Platform dependent file(s)
 win32 {
-        exists("C:/Progra~1/MS_SDKs/Windows/v6.1/Lib/WinMM.Lib") {	# <-- Change the path to WinMM.Lib here!
-                LIBS += C:/Progra~1/MS_SDKs/Windows/v6.1/Lib/WinMM.Lib	# <-- Change the path here also!
-    } else { 
+        exists("C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/WinMM.Lib") {	# <-- Change the path to WinMM.Lib here!
+                LIBS += C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/WinMM.Lib	# <-- Change the path here also!
+    } else {
         exists("c:/PROGRA~1/MICROS~3/VC/PLATFO~1/Lib/WinMM.Lib") { # Path vs2005 (Vista)
-        	LIBS += c:/PROGRA~1/MICROS~3/VC/PLATFO~1/Lib/WinMM.Lib
-        } else { 
+                LIBS += c:/PROGRA~1/MICROS~3/VC/PLATFO~1/Lib/WinMM.Lib
+        } else {
             LIBS += .\WinMM.Lib
             message("WINMM.LIB IS REQUIRED. IF NOT INSTALLED THEN")
             message("PLEASE DOWNLOAD AND INSTALL THE LATEST PLATFORM SDK")

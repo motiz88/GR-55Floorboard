@@ -93,17 +93,6 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     renameWidget *nameEdit = new renameWidget(this);
     nameEdit->setGeometry(70, patchDisplayRowOffset, 150, 34);
     nameEdit->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));
-    //customRenameWidget *userDialog = new customRenameWidget(this, "0E", "00", "00", "Structure", "20");
-    //userDialog->setGeometry(728, editButtonRowOffset+5, 262, 25);
-    //userDialog->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));
-    //customRenameWidget *patchDialog = new customRenameWidget(this, "0D", "00", "00", "Structure", "80");
-    //patchDialog->setGeometry(10, bottomOffset, 980, 25);
-    //patchDialog->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));
-    //this->output = new customControlListMenu(this, "00", "00", "11", "right");
-    //output->setGeometry(833, patchDisplayRowOffset, 160, 30);
-    //output->setWhatsThis(tr("This is the Patch Mode setting of Output Select<br>this is only active if the SYSTEM setting<br>is set to Patch Mode."));
-    //this->catagory = new customControlListMenu(this, "00", "00", "10", "right");
-    //catagory->setGeometry(833, patchDisplayRowOffset+19, 280, 30);
 
     this->connectButton = new customButton(tr("Connect"), false, QPoint(390, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
     this->connectButton->setWhatsThis(tr("Connect Button<br>used to establish a continuous midi connection<br>when lit green, the connection is valid"));
@@ -434,13 +423,9 @@ void floorBoardDisplay::updateDisplay()
     else
     {
         patchNumDisplay->clearAll();
-        this->writeButton->setBlink(false);   //cjw
+        this->writeButton->setBlink(false);
         this->writeButton->setValue(false);
-    };  // to here
-    //int index = sysxIO->getSourceValue("Structure", "00", "00", "11");
-    //this->output->controlListComboBox->setCurrentIndex(index);
-    // index = sysxIO->getSourceValue("Structure", "00", "00", "10");
-    // this->catagory->controlListComboBox->setCurrentIndex(index);
+    };
 };
 
 void floorBoardDisplay::autoconnect()
@@ -460,7 +445,7 @@ void floorBoardDisplay::autoconnect()
         QObject::connect(sysxIO, SIGNAL(sysxReply(QString)),
                          this, SLOT(autoConnectionResult(QString)));
 
-        sysxIO->sendSysx(idRequestString); // GR-55B Identity Request.
+        sysxIO->sendSysx(idRequestString); // GR-55 Identity Request.
     }
     else
     {
@@ -1250,18 +1235,7 @@ void floorBoardDisplay::resetDevice(QString replyMsg)
         sysxIO->setLoadedPatch(sysxIO->getPatch());
     };
 
-   /* emit setStatusProgress(33); // time wasting sinusidal statusbar progress
-    msleep(100);
-    emit setStatusProgress(66);
-    msleep(100);
-    emit setStatusProgress(100);
-    msleep(100);
-    emit setStatusProgress(75);
-    msleep(100);
-    emit setStatusProgress(42);
-    msleep(100);
-    emit setStatusProgress(25);
-    msleep(100);*/
+
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
     emit connectedSignal();			// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
 };

@@ -56,7 +56,7 @@ void stompbox_amp::setEditPages()
 
     //editDetails()->page()->newGroupBox(tr("Amp/Spkr"));
 
-    editDetails()->page()->newGroupBox(tr("Pre Amp"));
+    editDetails()->page()->newGroupBox(tr("PreAmp"));
     editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "01");        //pre type
     editDetails()->page()->addStackControl();

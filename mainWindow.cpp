@@ -483,7 +483,7 @@ void mainWindow::openG5L()
             this,
             tr("Choose a file"),
             dir,
-            tr("ROLAND Librarian File (*.g5l *.g5l)"));
+            tr("ROLAND Librarian File (*.g5l)"));
     if (!fileName.isEmpty())
     {
         file.setFile(fileName);
@@ -511,7 +511,7 @@ void mainWindow::saveG5L()
 
     QString fileName = QFileDialog::getSaveFileName(
             this,
-            tr("Save Patch *.G5L"),
+            tr("Save Patch *.g5l"),
             dir,
             tr("ROLAND Librarian File (*.g5l)"));
     if (!fileName.isEmpty())
@@ -571,7 +571,7 @@ void mainWindow::systemLoad()
                 msgText.append("<b></font><br>");
                 msgText.append(tr("This will overwrite the SYSTEM DATA currently stored in the ")+ deviceType);
                 msgText.append(tr ("<br> and can't be undone.<br>"));
-                msgText.append(tr("Select 'NO' to only update the Editor - Select 'YES' to update the GT System<br>"));
+                msgText.append(tr("Select 'NO' to only update the Editor - Select 'YES' to update the GR-55 System<br>"));
 
 
                 msgBox->setInformativeText(tr("Are you sure you want to write to the ")+ deviceType);
@@ -706,9 +706,10 @@ void mainWindow::settings()
         QString midiTimeSet =QString::number(dialog->midiSettings->midiTimeSpinBox->value());
         QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
-        if (dialog->languageSettings->chineseButton->isChecked() ) {lang="5"; }
-        else if (dialog->languageSettings->japaneseButton->isChecked() ) {lang="4"; }
-        else if (dialog->languageSettings->spanishButton->isChecked() ) {lang="3"; }
+        if (dialog->languageSettings->chineseButton->isChecked() ) {lang="6"; }
+        else if (dialog->languageSettings->japaneseButton->isChecked() ) {lang="5"; }
+        else if (dialog->languageSettings->spanishButton->isChecked() ) {lang="4"; }
+        else if (dialog->languageSettings->portugueseButton->isChecked() ) {lang="3"; }
         else if (dialog->languageSettings->germanButton->isChecked() ) {lang="2"; }
         else if (dialog->languageSettings->frenchButton->isChecked() ) {lang="1"; }
         else {lang="0"; };

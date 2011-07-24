@@ -301,7 +301,7 @@ QTreeWidget* bankTreeList::newTreeList()
 
     QTreeWidgetItem *temp = new QTreeWidgetItem(newTreeList);
     temp->setText(0, "Temp");
-    temp->setWhatsThis(0, tr("Temporary Buffer.<br>a single mouse click will set the Write/Sync button to send to the buffer only,<br>a double click will load the current GT patch data."));
+    temp->setWhatsThis(0, tr("Temporary Buffer.<br>a single mouse click will set the Write/Sync button to send to the buffer only,<br>a double click will load the current GR-55 patch data."));
 
     QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList);
     user->setText(0, "User");
@@ -326,7 +326,7 @@ QTreeWidget* bankTreeList::newTreeList()
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
                 patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
-                patch->setWhatsThis(0, tr("User Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GT."));
+                patch->setWhatsThis(0, tr("User Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             };
         };
         userBankRanges << bankRange;
@@ -355,7 +355,7 @@ QTreeWidget* bankTreeList::newTreeList()
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
                 patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
-                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GT."));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             };
         };
         presetBankRanges << bankRange;

@@ -33,8 +33,8 @@ preferencesDialog::preferencesDialog()
 	contentsWidget->setIconSize(QSize(45, 40));
 	contentsWidget->setMovement(QListView::Static);
 	contentsWidget->setSpacing(10);
-        contentsWidget->setFixedHeight(380);
-        contentsWidget->setFixedWidth(90);
+        //contentsWidget->setFixedHeight(380);
+        //contentsWidget->setFixedWidth(90);
 
 	GeneralPage *generalSettings = new GeneralPage;
 	MidiPage *midiSettings = new MidiPage;

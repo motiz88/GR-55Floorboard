@@ -137,7 +137,7 @@ void menuPage::pedal_ButtonSignal(bool value)
 {
     if (this->id == 12)
     {
-       // emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -147,7 +147,7 @@ void menuPage::master_ButtonSignal(bool value)
 {
     if (this->id == 13)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -167,7 +167,7 @@ void menuPage::system_ButtonSignal(bool value)
         emit setStatusMessage(tr("Opening Page..."));
         emit setStatusSymbol(3);
         QString replyMsg;
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
         if (sysxIO->isConnected())
@@ -183,7 +183,7 @@ void menuPage::system_ButtonSignal(bool value)
         else
         {
             QString snork = tr("Ensure connection is active and retry<br>");
-            snork.append(tr("System data not transfered, current settings are to be used<br>"));
+            snork.append(tr("System data not transferred, current settings are to be used<br>"));
             QMessageBox *msgBox = new QMessageBox();
             msgBox->setWindowTitle(deviceType + tr(" midi connection not found!!"));
             msgBox->setIcon(QMessageBox::Information);
@@ -201,7 +201,7 @@ void menuPage::assign1_ButtonSignal(bool value)
 {
     if (this->id == 15)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -211,7 +211,7 @@ void menuPage::assign2_ButtonSignal(bool value)
 {
     if (this->id == 16)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -221,7 +221,7 @@ void menuPage::assign3_ButtonSignal(bool value)
 {
     if (this->id == 17)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -231,7 +231,7 @@ void menuPage::assign4_ButtonSignal(bool value)
 {
     if (this->id == 18)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -241,7 +241,7 @@ void menuPage::assign5_ButtonSignal(bool value)
 {
     if (this->id == 19)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -251,7 +251,7 @@ void menuPage::assign6_ButtonSignal(bool value)
 {
     if (this->id == 20)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -261,7 +261,7 @@ void menuPage::assign7_ButtonSignal(bool value)
 {
     if (this->id == 21)
     {
-        //emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -271,7 +271,7 @@ void menuPage::assign8_ButtonSignal(bool value)
 {
     if (this->id == 22)
     {
-       // emitValueChanged(this->hex1, this->hex2, "00", "void");
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
@@ -364,7 +364,7 @@ void menuPage::systemReply(QString replyMsg)
             msgBox->setTextFormat(Qt::RichText);
             QString msgText;
             msgText.append("<font size='+1'><b>");
-            msgText.append(tr("The Roland ") + deviceType + tr(" System data was not transfered !!."));
+            msgText.append(tr("The Roland ") + deviceType + tr(" System data was not transferred !!."));
             msgText.append("<b></font><br>");
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
@@ -498,7 +498,7 @@ void menuPage::emitValueChanged(QString hex1, QString hex2, QString hex3, QStrin
         {
             if (this->id == 12){this->fxName = tr("Pedal/GK");          this->area_mode = "Structure";};
             if (this->id == 13){this->fxName = tr("Master");            this->area_mode = "Structure";};
-            if (this->id == 14){this->fxName = tr("System/Midi");       this->area_mode = "System";   };
+            if (this->id == 14){this->fxName = tr("System/Global");     this->area_mode = "System";   };
             if (this->id == 15){this->fxName = tr("Assign 1");          this->area_mode = "Structure";};
             if (this->id == 16){this->fxName = tr("Assign 2");          this->area_mode = "Structure";};
             if (this->id == 17){this->fxName = tr("Assign 3");          this->area_mode = "Structure";};

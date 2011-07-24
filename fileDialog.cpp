@@ -37,7 +37,7 @@ fileDialog::fileDialog(QString fileName, QList<QString> patchList, QByteArray fi
   QComboBox *patchCombo = new QComboBox;
   patchCombo->setMaxVisibleItems(297);
   patchCombo->addItems(patchList);
-  patchCombo->setWhatsThis(tr("To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer"
+  patchCombo->setWhatsThis(tr("To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GR-55 temporary buffer"
                               "<br>a click on the patch will load it into the editor."));
 
 
@@ -49,7 +49,7 @@ fileDialog::fileDialog(QString fileName, QList<QString> patchList, QByteArray fi
 
   QPushButton *cancelButton = new QPushButton(tr("Cancel"));
   connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
-  cancelButton->setWhatsThis(tr("Selecting this will close the patch load window and reset the GT back to the current editor patch."));
+  cancelButton->setWhatsThis(tr("Selecting this will close the patch load window and reset the GR-55 back to the current editor patch."));
 
 
 

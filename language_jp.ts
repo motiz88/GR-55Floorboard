@@ -84,42 +84,42 @@
         <translation>*このファイルを読み込んで、予期しない結果を*.可能性があります</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="78"/>
+        <location filename="main.cpp" line="81"/>
         <source>Initializing - please wait...</source>
         <translation>初期化-お待ちください...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="85"/>
+        <location filename="main.cpp" line="88"/>
         <source>Checking license file...</source>
         <translation>チェックライセンスファイル...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="88"/>
+        <location filename="main.cpp" line="91"/>
         <source>Loading license file...</source>
         <translation>ライセンスファイルを読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="96"/>
+        <location filename="main.cpp" line="99"/>
         <source>Loading midi mapping...</source>
         <translation>MIDIマッピングを読み込んでいます...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="102"/>
+        <location filename="main.cpp" line="105"/>
         <source>Initializing main window...</source>
         <translation>メインウィンドウを初期化しています...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="153"/>
+        <location filename="main.cpp" line="156"/>
         <source>Restoring window position...</source>
         <translation>リストアウィンドウの位置を...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="168"/>
+        <location filename="main.cpp" line="171"/>
         <source>Centering main window...</source>
         <translation>メインウィンドウを中心に...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="183"/>
+        <location filename="main.cpp" line="186"/>
         <source>Finished Initializing...</source>
         <translation>仕上がり初期化中...</translation>
     </message>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="38"/>
-        <location filename="preferencesPages.cpp" line="383"/>
+        <location filename="preferencesPages.cpp" line="392"/>
         <source>Select the default folder for storing patches.</source>
         <translation>を格納するパッチのデフォルトのフォルダを選択します。</translation>
     </message>
@@ -266,63 +266,78 @@
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="292"/>
+        <source>Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="293"/>
+        <source>Spanish</source>
+        <translation>スペイン語</translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="294"/>
+        <source>Japanese</source>
+        <translation>日本</translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="295"/>
         <source>Chinese (simplified)</source>
         <translation>中国語（簡体字）</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="306"/>
-        <location filename="preferencesPages.cpp" line="370"/>
+        <location filename="preferencesPages.cpp" line="315"/>
+        <location filename="preferencesPages.cpp" line="379"/>
         <source>Changes take effect on next startup</source>
         <translation>変更は、次回起動時に有効にする</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="324"/>
+        <location filename="preferencesPages.cpp" line="333"/>
         <source>Window Style Selection</source>
         <translation>ウィンドウスタイルの選択</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="326"/>
-        <location filename="preferencesPages.cpp" line="354"/>
+        <location filename="preferencesPages.cpp" line="335"/>
+        <location filename="preferencesPages.cpp" line="363"/>
         <source>System</source>
         <translation>システム</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="328"/>
+        <location filename="preferencesPages.cpp" line="337"/>
         <source>Plastique</source>
         <translation>プラスチック</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="329"/>
+        <location filename="preferencesPages.cpp" line="338"/>
         <source>CDE</source>
         <translation>CDEの</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="330"/>
+        <location filename="preferencesPages.cpp" line="339"/>
         <source>Motif</source>
         <translation>理由</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="347"/>
+        <location filename="preferencesPages.cpp" line="356"/>
         <source>Colour Scheme Selection</source>
         <translation>カラースキームの選択</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="349"/>
+        <location filename="preferencesPages.cpp" line="358"/>
         <source>Black (default)</source>
         <translation>ブラック（デフォルト）</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="351"/>
+        <location filename="preferencesPages.cpp" line="360"/>
         <source>White</source>
         <translation>ホワイト</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="352"/>
+        <location filename="preferencesPages.cpp" line="361"/>
         <source>Blue</source>
         <translation>ブルー</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="353"/>
+        <location filename="preferencesPages.cpp" line="362"/>
         <source>Green</source>
         <translation>グリーン</translation>
     </message>
@@ -475,7 +490,8 @@
     <name>bankTreeList</name>
     <message>
         <location filename="bankTreeList.cpp" line="304"/>
-        <source>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GT patch data.</source>
+        <source>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GR-55 patch data.</source>
+        <oldsource>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GT patch data.</oldsource>
         <translation>一時的なバッファは書き込みに設定されます一回のマウスクリックを&lt;br&gt;/同期は、現在のGTのパッチデータをロードするをダブルクリックすると&lt;br&gt;が専用のバッファに送信するボタンをクリックします。</translation>
     </message>
     <message>
@@ -495,7 +511,8 @@
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="329"/>
-        <source>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GT.</source>
+        <source>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GR-55.</source>
+        <oldsource>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GT.</oldsource>
         <translation>ユーザーパッチは単一のマウスクリックは、GR55から選択してパッチをロードするダブルマウスをクリックして&lt;br&gt;パッチを変更する&lt;br&gt;。</translation>
     </message>
     <message>
@@ -876,7 +893,8 @@
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="58"/>
-        <source>Rename Catagory</source>
+        <source>Rename Category</source>
+        <oldsource>Rename Catagory</oldsource>
         <translation>カテゴリ名を変更</translation>
     </message>
     <message>
@@ -973,7 +991,6 @@
         <translation>クリップボード1貼り付け</translation>
     </message>
     <message>
-        <location filename="editWindow.cpp" line="70"/>
         <location filename="editWindow.cpp" line="78"/>
         <location filename="editWindow.cpp" line="87"/>
         <location filename="editWindow.cpp" line="96"/>
@@ -985,6 +1002,11 @@
         <location filename="editWindow.cpp" line="76"/>
         <source>ClipBd 2 Paste</source>
         <translation>クリップボード2貼り付け</translation>
+    </message>
+    <message>
+        <location filename="editWindow.cpp" line="70"/>
+        <source>Effect Partial Paste Button&lt;br&gt;will paste only the currently displayed effect part from the selected Temp clipboard.&lt;br&gt;can be used to quickly compare settings between patches.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="85"/>
@@ -1035,7 +1057,8 @@
     </message>
     <message>
         <location filename="fileDialog.cpp" line="40"/>
-        <source>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</source>
+        <source>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GR-55 temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</source>
+        <oldsource>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</oldsource>
         <translation>*. g5lファイルマルチパッチをオーディションするには、パッチとパッチデータの上にマウスカーソルがエディタにロードされますパッチをクリックして&lt;br&gt; GR55一時バッファにロードされます。</translation>
     </message>
     <message>
@@ -1045,7 +1068,8 @@
     </message>
     <message>
         <location filename="fileDialog.cpp" line="52"/>
-        <source>Selecting this will close the patch load window and reset the GT back to the current editor patch.</source>
+        <source>Selecting this will close the patch load window and reset the GR-55 back to the current editor patch.</source>
+        <oldsource>Selecting this will close the patch load window and reset the GT back to the current editor patch.</oldsource>
         <translation>これを選択すると、パッチのロード]ウィンドウを閉じて、戻って、現在のエディタのパッチを適用するGR55をリセットしてください。</translation>
     </message>
     <message>
@@ -1067,7 +1091,7 @@
         <location filename="floorBoardDisplay.cpp" line="73"/>
         <location filename="floorBoardDisplay.cpp" line="78"/>
         <location filename="floorBoardDisplay.cpp" line="83"/>
-        <location filename="floorBoardDisplay.cpp" line="298"/>
+        <location filename="floorBoardDisplay.cpp" line="287"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
@@ -1082,9 +1106,9 @@
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="88"/>
-        <location filename="floorBoardDisplay.cpp" line="308"/>
-        <location filename="floorBoardDisplay.cpp" line="1104"/>
-        <location filename="floorBoardDisplay.cpp" line="1131"/>
+        <location filename="floorBoardDisplay.cpp" line="297"/>
+        <location filename="floorBoardDisplay.cpp" line="1089"/>
+        <location filename="floorBoardDisplay.cpp" line="1116"/>
         <source> FloorBoard</source>
         <translation>床板</translation>
     </message>
@@ -1104,374 +1128,374 @@
         <translation>これをクリックすると、ユーザーがテキスト入力を可能にするウィンドウのチャット&lt;br&gt;ダイアログのテキストを&lt;br&gt;開きます。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="108"/>
+        <location filename="floorBoardDisplay.cpp" line="97"/>
         <source>Connect</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="109"/>
+        <location filename="floorBoardDisplay.cpp" line="98"/>
         <source>Connect Button&lt;br&gt;used to establish a continuous midi connection&lt;br&gt;when lit green, the connection is valid</source>
         <translation>ボタン&lt;br&gt;を点灯緑色の接続はなときに連続リアル接続チャット&lt;br&gt;確立するため接続</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="110"/>
+        <location filename="floorBoardDisplay.cpp" line="99"/>
         <source>Write</source>
         <translation>お書きください。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="111"/>
+        <location filename="floorBoardDisplay.cpp" line="100"/>
         <source>Write Button&lt;br&gt;if the patch number displays [temp buffer]&lt;br&gt;the current patch is sent to the GR-55 temporary memory only&lt;br&gt;or else the patch will be written to the displayed patch memory location.</source>
         <translation>パッチ番号が表示されます[一時バッファは]現在のパッチは、GR-55一時メモリのみ、または他の&lt;br&gt;パッチが表示されるパッチのメモリ位置に書き込まれると送信されます&lt;br&gt;場合、ボタンチャット&lt;br&gt;をお書きください。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="112"/>
+        <location filename="floorBoardDisplay.cpp" line="101"/>
         <source>System</source>
         <translation>システム</translation>
     </message>
     <message>
+        <location filename="floorBoardDisplay.cpp" line="102"/>
+        <location filename="floorBoardDisplay.cpp" line="104"/>
+        <location filename="floorBoardDisplay.cpp" line="106"/>
+        <location filename="floorBoardDisplay.cpp" line="109"/>
+        <location filename="floorBoardDisplay.cpp" line="111"/>
         <location filename="floorBoardDisplay.cpp" line="113"/>
         <location filename="floorBoardDisplay.cpp" line="115"/>
         <location filename="floorBoardDisplay.cpp" line="117"/>
-        <location filename="floorBoardDisplay.cpp" line="120"/>
-        <location filename="floorBoardDisplay.cpp" line="122"/>
-        <location filename="floorBoardDisplay.cpp" line="124"/>
-        <location filename="floorBoardDisplay.cpp" line="126"/>
-        <location filename="floorBoardDisplay.cpp" line="128"/>
-        <location filename="floorBoardDisplay.cpp" line="130"/>
-        <location filename="floorBoardDisplay.cpp" line="132"/>
-        <location filename="floorBoardDisplay.cpp" line="134"/>
-        <location filename="floorBoardDisplay.cpp" line="136"/>
+        <location filename="floorBoardDisplay.cpp" line="119"/>
+        <location filename="floorBoardDisplay.cpp" line="121"/>
+        <location filename="floorBoardDisplay.cpp" line="123"/>
+        <location filename="floorBoardDisplay.cpp" line="125"/>
+        <location filename="floorBoardDisplay.cpp" line="127"/>
+        <location filename="floorBoardDisplay.cpp" line="129"/>
+        <location filename="floorBoardDisplay.cpp" line="131"/>
+        <location filename="floorBoardDisplay.cpp" line="133"/>
+        <location filename="floorBoardDisplay.cpp" line="135"/>
         <location filename="floorBoardDisplay.cpp" line="138"/>
         <location filename="floorBoardDisplay.cpp" line="140"/>
         <location filename="floorBoardDisplay.cpp" line="142"/>
         <location filename="floorBoardDisplay.cpp" line="144"/>
         <location filename="floorBoardDisplay.cpp" line="146"/>
-        <location filename="floorBoardDisplay.cpp" line="149"/>
-        <location filename="floorBoardDisplay.cpp" line="151"/>
-        <location filename="floorBoardDisplay.cpp" line="153"/>
-        <location filename="floorBoardDisplay.cpp" line="155"/>
-        <location filename="floorBoardDisplay.cpp" line="157"/>
-        <location filename="floorBoardDisplay.cpp" line="159"/>
-        <location filename="floorBoardDisplay.cpp" line="161"/>
-        <location filename="floorBoardDisplay.cpp" line="163"/>
+        <location filename="floorBoardDisplay.cpp" line="148"/>
+        <location filename="floorBoardDisplay.cpp" line="150"/>
+        <location filename="floorBoardDisplay.cpp" line="152"/>
         <source>Deep editing of the selected effect&lt;br&gt;pressing this button will open an edit page&lt;br&gt;allowing detailed setting of this effects parameters.</source>
         <translation>このボタンを押すと、選択したエフェクト&lt;br&gt;の深部の編集は、このエフェクトのパラメータの詳細設定を可能にするプロフィール&lt;br&gt;を編集表示されます。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="114"/>
+        <location filename="floorBoardDisplay.cpp" line="103"/>
         <source>Master</source>
         <translation>マスター</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="116"/>
+        <location filename="floorBoardDisplay.cpp" line="105"/>
         <source>Pedal/GK</source>
         <translation>ペダル/ GK</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="119"/>
+        <location filename="floorBoardDisplay.cpp" line="108"/>
         <source>Normal PU</source>
         <translation>通常のポリウレタン</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="121"/>
+        <location filename="floorBoardDisplay.cpp" line="110"/>
         <source>Structure 1</source>
         <translation>構造1</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="123"/>
+        <location filename="floorBoardDisplay.cpp" line="112"/>
         <source>Structure 2</source>
         <translation>構造2</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="125"/>
+        <location filename="floorBoardDisplay.cpp" line="114"/>
         <source>Modeling</source>
         <translation>モデリング</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="127"/>
+        <location filename="floorBoardDisplay.cpp" line="116"/>
         <source>Synth A</source>
         <translation>シンセA</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="129"/>
+        <location filename="floorBoardDisplay.cpp" line="118"/>
         <source>Synth B</source>
         <translation>シンBの</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="131"/>
+        <location filename="floorBoardDisplay.cpp" line="120"/>
         <source>Amp</source>
         <translation>アンプ</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="133"/>
+        <location filename="floorBoardDisplay.cpp" line="122"/>
         <source>NS</source>
         <translation>ノイズ抑制</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="135"/>
+        <location filename="floorBoardDisplay.cpp" line="124"/>
         <source>MOD</source>
         <translation>変調効果</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="137"/>
+        <location filename="floorBoardDisplay.cpp" line="126"/>
         <source>MFX</source>
         <translation>マルチエフェクト</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="139"/>
+        <location filename="floorBoardDisplay.cpp" line="128"/>
         <source>Reverb</source>
         <translation>リバーブ</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="141"/>
+        <location filename="floorBoardDisplay.cpp" line="130"/>
         <source>Delay</source>
         <translation>遅延</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="143"/>
+        <location filename="floorBoardDisplay.cpp" line="132"/>
         <source>Chorus</source>
         <translation>コーラス</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="145"/>
+        <location filename="floorBoardDisplay.cpp" line="134"/>
         <source>Equalizer</source>
         <translation>イコライザ</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="148"/>
+        <location filename="floorBoardDisplay.cpp" line="137"/>
         <source>Assign 1</source>
         <translation>割り当て1</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="150"/>
+        <location filename="floorBoardDisplay.cpp" line="139"/>
         <source>Assign 2</source>
         <translation>割り当て2</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="152"/>
+        <location filename="floorBoardDisplay.cpp" line="141"/>
         <source>Assign 3</source>
         <translation>割り当て3</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="154"/>
+        <location filename="floorBoardDisplay.cpp" line="143"/>
         <source>Assign 4</source>
         <translation>割り当て4</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="156"/>
+        <location filename="floorBoardDisplay.cpp" line="145"/>
         <source>Assign 5</source>
         <translation>割り当て5</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="158"/>
+        <location filename="floorBoardDisplay.cpp" line="147"/>
         <source>Assign 6</source>
         <translation>割り当て6</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="160"/>
+        <location filename="floorBoardDisplay.cpp" line="149"/>
         <source>Assign 7</source>
         <translation>割り当て7</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="162"/>
+        <location filename="floorBoardDisplay.cpp" line="151"/>
         <source>Assign 8</source>
         <translation>割り当て8</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="165"/>
-        <location filename="floorBoardDisplay.cpp" line="169"/>
-        <location filename="floorBoardDisplay.cpp" line="173"/>
-        <location filename="floorBoardDisplay.cpp" line="177"/>
-        <location filename="floorBoardDisplay.cpp" line="181"/>
+        <location filename="floorBoardDisplay.cpp" line="154"/>
+        <location filename="floorBoardDisplay.cpp" line="158"/>
+        <location filename="floorBoardDisplay.cpp" line="162"/>
+        <location filename="floorBoardDisplay.cpp" line="166"/>
+        <location filename="floorBoardDisplay.cpp" line="170"/>
         <source>Patch Copy</source>
         <translation>パッチのコピー</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="166"/>
-        <location filename="floorBoardDisplay.cpp" line="170"/>
-        <location filename="floorBoardDisplay.cpp" line="174"/>
-        <location filename="floorBoardDisplay.cpp" line="178"/>
-        <location filename="floorBoardDisplay.cpp" line="182"/>
+        <location filename="floorBoardDisplay.cpp" line="155"/>
+        <location filename="floorBoardDisplay.cpp" line="159"/>
+        <location filename="floorBoardDisplay.cpp" line="163"/>
+        <location filename="floorBoardDisplay.cpp" line="167"/>
+        <location filename="floorBoardDisplay.cpp" line="171"/>
         <source>Copy current patch to clipboard&lt;br&gt;pressing this button will save the current patch to a clipboard&lt;br&gt;the clipboard is saved to file and is re-loaded&lt;br&gt;on the next session startup.</source>
         <translation>クリップボードに現在のパッチを保存するには、このボタンを押してクリップボード&lt;br&gt;にコピーし、現在のパッチは、クリップボードには、ファイルに保存されている&lt;br&gt;、次のセッションの起動時に再ロード&lt;br&gt;です。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="167"/>
-        <location filename="floorBoardDisplay.cpp" line="171"/>
-        <location filename="floorBoardDisplay.cpp" line="175"/>
-        <location filename="floorBoardDisplay.cpp" line="179"/>
-        <location filename="floorBoardDisplay.cpp" line="183"/>
+        <location filename="floorBoardDisplay.cpp" line="156"/>
+        <location filename="floorBoardDisplay.cpp" line="160"/>
+        <location filename="floorBoardDisplay.cpp" line="164"/>
+        <location filename="floorBoardDisplay.cpp" line="168"/>
+        <location filename="floorBoardDisplay.cpp" line="172"/>
         <source>Patch Paste</source>
         <translation>パッチを貼り付けます</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="168"/>
-        <location filename="floorBoardDisplay.cpp" line="172"/>
-        <location filename="floorBoardDisplay.cpp" line="176"/>
-        <location filename="floorBoardDisplay.cpp" line="180"/>
-        <location filename="floorBoardDisplay.cpp" line="184"/>
+        <location filename="floorBoardDisplay.cpp" line="157"/>
+        <location filename="floorBoardDisplay.cpp" line="161"/>
+        <location filename="floorBoardDisplay.cpp" line="165"/>
+        <location filename="floorBoardDisplay.cpp" line="169"/>
+        <location filename="floorBoardDisplay.cpp" line="173"/>
         <source>Paste current patch from clipboard&lt;br&gt;pressing this button will load the current patch to a clipboard&lt;br&gt;the clipboard is re-loaded&lt;br&gt;from the previous session copy.</source>
         <translation>クリップボードに現在のパッチをロードするには、このボタンを押してクリップボード&lt;br&gt;から貼り付け、現在のパッチは、クリップボードは、以前のセッションのコピーから&lt;br&gt;リロードさ&lt;br&gt;。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="295"/>
+        <location filename="floorBoardDisplay.cpp" line="284"/>
         <source>init patch</source>
         <translation>initのパッチ</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="302"/>
+        <location filename="floorBoardDisplay.cpp" line="291"/>
         <source> patch</source>
         <translation>パッチ</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="313"/>
+        <location filename="floorBoardDisplay.cpp" line="302"/>
         <source>Error while changing banks.</source>
         <translation>エラーは、銀行を変えながら。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="315"/>
+        <location filename="floorBoardDisplay.cpp" line="304"/>
         <source>An incorrect patch has been loaded. Please try to load the patch again.</source>
         <translation>不適切なパッチがロードされています。再度パッチをロードしてみてください。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="335"/>
+        <location filename="floorBoardDisplay.cpp" line="324"/>
         <source>User</source>
         <translation>ユーザー。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="340"/>
+        <location filename="floorBoardDisplay.cpp" line="329"/>
         <source>Preset</source>
         <translation>プリセット</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="362"/>
+        <location filename="floorBoardDisplay.cpp" line="351"/>
         <source>Temp</source>
         <translation>温度</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="363"/>
+        <location filename="floorBoardDisplay.cpp" line="352"/>
         <source>Buffer</source>
-        <translation>バッファ</translation>
+        <translation>Buffer</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="454"/>
-        <location filename="floorBoardDisplay.cpp" line="967"/>
+        <location filename="floorBoardDisplay.cpp" line="439"/>
+        <location filename="floorBoardDisplay.cpp" line="952"/>
         <source>Connecting</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="691"/>
-        <location filename="floorBoardDisplay.cpp" line="748"/>
-        <location filename="floorBoardDisplay.cpp" line="804"/>
-        <location filename="floorBoardDisplay.cpp" line="860"/>
-        <location filename="floorBoardDisplay.cpp" line="916"/>
+        <location filename="floorBoardDisplay.cpp" line="676"/>
+        <location filename="floorBoardDisplay.cpp" line="733"/>
+        <location filename="floorBoardDisplay.cpp" line="789"/>
+        <location filename="floorBoardDisplay.cpp" line="845"/>
+        <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>in-consistant patch data detected </source>
         <translation>一貫性のないパッチデータが検出されました</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="691"/>
-        <location filename="floorBoardDisplay.cpp" line="748"/>
-        <location filename="floorBoardDisplay.cpp" line="804"/>
-        <location filename="floorBoardDisplay.cpp" line="860"/>
-        <location filename="floorBoardDisplay.cpp" line="916"/>
+        <location filename="floorBoardDisplay.cpp" line="676"/>
+        <location filename="floorBoardDisplay.cpp" line="733"/>
+        <location filename="floorBoardDisplay.cpp" line="789"/>
+        <location filename="floorBoardDisplay.cpp" line="845"/>
+        <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>bytes: re-save or re-load file to correct</source>
         <translation>バイトは：再保存したり、修正するファイルをリロード</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="709"/>
-        <location filename="floorBoardDisplay.cpp" line="765"/>
-        <location filename="floorBoardDisplay.cpp" line="821"/>
-        <location filename="floorBoardDisplay.cpp" line="877"/>
-        <location filename="floorBoardDisplay.cpp" line="933"/>
+        <location filename="floorBoardDisplay.cpp" line="694"/>
+        <location filename="floorBoardDisplay.cpp" line="750"/>
+        <location filename="floorBoardDisplay.cpp" line="806"/>
+        <location filename="floorBoardDisplay.cpp" line="862"/>
+        <location filename="floorBoardDisplay.cpp" line="918"/>
         <source>patch must be copied to clipboard first</source>
         <translation>パッチは、まずクリップボードにコピーする必要があります。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1001"/>
-        <location filename="floorBoardDisplay.cpp" line="1333"/>
+        <location filename="floorBoardDisplay.cpp" line="986"/>
+        <location filename="floorBoardDisplay.cpp" line="1307"/>
         <source>Ready</source>
         <translation>準備ができて</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1032"/>
-        <location filename="floorBoardDisplay.cpp" line="1058"/>
+        <location filename="floorBoardDisplay.cpp" line="1017"/>
+        <location filename="floorBoardDisplay.cpp" line="1043"/>
         <source> FloorBoard connection Error !!</source>
         <translation>床板の接続エラー！</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1037"/>
+        <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source>The device connected is not a ROLAND </source>
         <translation>接続されたデバイスは、ローランドではありません</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1037"/>
+        <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source> Guitar Synthesizer.</source>
         <translation>ギターシンセサイザー。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1039"/>
+        <location filename="floorBoardDisplay.cpp" line="1024"/>
         <source>&lt;br&gt;Midi loopback detected, ensure midi device &apos;thru&apos; is switched off.</source>
         <translation>&lt;br&gt;ミディループバックはオフになっている&apos;から&apos;MIDIデバイスを確保するために、検出された。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1049"/>
-        <location filename="floorBoardDisplay.cpp" line="1075"/>
-        <location filename="floorBoardDisplay.cpp" line="1359"/>
+        <location filename="floorBoardDisplay.cpp" line="1034"/>
+        <location filename="floorBoardDisplay.cpp" line="1060"/>
+        <location filename="floorBoardDisplay.cpp" line="1333"/>
         <source>Not connected</source>
         <translation>接続されていない</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1063"/>
+        <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source>The ROLAND </source>
         <translation>ローランド</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1063"/>
+        <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source> Guitar Synth was not found.</source>
         <translation>ギターシンセサイザーが見つかりませんでした。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1064"/>
+        <location filename="floorBoardDisplay.cpp" line="1049"/>
         <source>&lt;br&gt;&lt;br&gt;Ensure correct midi device is selected in Menu, </source>
         <translation>&lt;br&gt;&lt;br&gt;が正しいことを確認MIDIデバイスは、メニューで選択されている</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1065"/>
+        <location filename="floorBoardDisplay.cpp" line="1050"/>
         <source>&lt;br&gt;ROLAND drivers are installed and the GR-55 is switched on,</source>
         <translation>&lt;br&gt;ローランドドライバがインストールされている入庫-55がオンになっている、</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1109"/>
+        <location filename="floorBoardDisplay.cpp" line="1094"/>
         <source>You can&apos;t write to the preset banks.</source>
         <translation>あなたはプリセットバンクに書き込むことはできません。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1111"/>
+        <location filename="floorBoardDisplay.cpp" line="1096"/>
         <source>Please select a user bank to write this patch to and try again.</source>
         <translation>このパッチを書いて、もう一度試してユーザーバンクを選択してください。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1136"/>
+        <location filename="floorBoardDisplay.cpp" line="1121"/>
         <source>You have chosen to write the patch into </source>
         <translation>あなたはにパッチを書いて選択した</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1138"/>
+        <location filename="floorBoardDisplay.cpp" line="1123"/>
         <source>This will overwrite the patch currently stored at patch location&lt;br&gt;</source>
         <translation>これは、現在のパッチの場所&lt;br&gt;に格納されているパッチを上書きしてしまいます</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1143"/>
+        <location filename="floorBoardDisplay.cpp" line="1128"/>
         <source> and can&apos;t be undone. </source>
         <translation>とすることができます元に戻すことはできません。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1144"/>
+        <location filename="floorBoardDisplay.cpp" line="1129"/>
         <source>Are you sure you want to continue?</source>
         <translation>あなたが継続してもよろしいですか？</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1184"/>
+        <location filename="floorBoardDisplay.cpp" line="1169"/>
         <source>Writing to Patch</source>
         <translation>パッチへの書き込み</translation>
     </message>
@@ -1790,7 +1814,8 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="226"/>
-        <source>User Manual PDF</source>
+        <source>Owner&apos;s Manual</source>
+        <oldsource>User Manual PDF</oldsource>
         <translation>ユーザマニュアルPDF</translation>
     </message>
     <message>
@@ -1901,18 +1926,16 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="486"/>
-        <source>ROLAND Librarian File (*.g5l *.g5l)</source>
+        <location filename="mainWindow.cpp" line="516"/>
+        <source>ROLAND Librarian File (*.g5l)</source>
+        <oldsource>ROLAND Librarian File (*.g5l *.g5l)</oldsource>
         <translation>ローランドライブラリアンファイル（*. g5l*）</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="514"/>
-        <source>Save Patch *.G5L</source>
-        <translation>保存パッチ*. G5L</translation>
-    </message>
-    <message>
-        <location filename="mainWindow.cpp" line="516"/>
-        <source>ROLAND Librarian File (*.g5l)</source>
-        <translation>ローランドライブラリアンファイル（*. g5l*）</translation>
+        <source>Save Patch *.g5l</source>
+        <oldsource>Save Patch *.G5L</oldsource>
+        <translation>保存パッチ*.g5l</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="550"/>
@@ -1936,7 +1959,8 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="574"/>
-        <source>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GT System&lt;br&gt;</source>
+        <source>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GR-55 System&lt;br&gt;</source>
+        <oldsource>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GT System&lt;br&gt;</oldsource>
         <translation>を選択して&quot;いいえ&quot;だけでエディタを更新するために-を選択して&quot;はい&quot;GR55システムチャット&lt;br&gt;更新する</translation>
     </message>
     <message>
@@ -1975,45 +1999,45 @@
         <translation>確認接続がアクティブになっているし、再試行&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="753"/>
-        <location filename="mainWindow.cpp" line="780"/>
+        <location filename="mainWindow.cpp" line="756"/>
+        <location filename="mainWindow.cpp" line="783"/>
         <source>Ensure GR-55 mode matches the patch mode or else Modeling and Assigns realtime control will not work correctly</source>
         <translation>確認GR55モードでは、正常に動作しませんパッチモードまたは他のモデリングと割り当てますリアルタイム制御に一致する</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="755"/>
-        <location filename="mainWindow.cpp" line="782"/>
+        <location filename="mainWindow.cpp" line="758"/>
+        <location filename="mainWindow.cpp" line="785"/>
         <source>Patch Mode changed !!</source>
         <translation>パッチモードを変更！</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="761"/>
+        <location filename="mainWindow.cpp" line="764"/>
         <source>Patch is already set to Guitar Mode, Patch Mode change not required</source>
         <translation>パッチはすでに不要変更ギターモードでは、パッチモードに設定されている</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="763"/>
-        <location filename="mainWindow.cpp" line="790"/>
+        <location filename="mainWindow.cpp" line="766"/>
+        <location filename="mainWindow.cpp" line="793"/>
         <source>Patch Mode change not required !!</source>
         <translation>パッチモードでは必須ではありません変更！</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="788"/>
+        <location filename="mainWindow.cpp" line="791"/>
         <source>Patch is already set to Bass Mode, Patch Mode change is not required</source>
         <translation>パッチがすでにベースモードに設定されて、パッチモードの変更は必須ではありません</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="872"/>
+        <location filename="mainWindow.cpp" line="875"/>
         <source> FloorBoard - About</source>
         <translation>床板について</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="873"/>
+        <location filename="mainWindow.cpp" line="876"/>
         <source> FloorBoard - </source>
         <translation>床板 </translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="873"/>
+        <location filename="mainWindow.cpp" line="876"/>
         <source>version</source>
         <translation>バージョン</translation>
     </message>
@@ -2042,8 +2066,9 @@
     </message>
     <message>
         <location filename="menuPage.cpp" line="186"/>
-        <source>System data not transfered, current settings are to be used&lt;br&gt;</source>
-        <translation>システムデータは転送されません、現在の設定は、&lt;br&gt;を使用される</translation>
+        <source>System data not transferred, current settings are to be used&lt;br&gt;</source>
+        <oldsource>System data not transfered, current settings are to be used&lt;br&gt;</oldsource>
+        <translation>システムデータは転送されません、現在の設定は、を使用される&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="188"/>
@@ -2071,8 +2096,12 @@
         <translation>ローランド</translation>
     </message>
     <message>
-        <location filename="menuPage.cpp" line="367"/>
         <source> System data was not transfered !!.</source>
+        <translation type="obsolete">システムデータは転送されませんでした！。</translation>
+    </message>
+    <message>
+        <location filename="menuPage.cpp" line="367"/>
+        <source> System data was not transferred !!.</source>
         <translation>システムデータは転送されませんでした！。</translation>
     </message>
     <message>
@@ -2092,7 +2121,8 @@
     </message>
     <message>
         <location filename="menuPage.cpp" line="501"/>
-        <source>System/Midi</source>
+        <source>System/Global</source>
+        <oldsource>System/Midi</oldsource>
         <translation>システム/ミディ</translation>
     </message>
     <message>
@@ -2243,8 +2273,9 @@
     <message>
         <location filename="midiIO.cpp" line="82"/>
         <location filename="midiIO.cpp" line="129"/>
-        <source>un-named midi device: </source>
-        <translation>無名のMIDIデバイス：</translation>
+        <source>unnamed midi device: </source>
+        <oldsource>un-named midi device: </oldsource>
+        <translation>無名のMIDIデバイス： </translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="91"/>
@@ -2266,7 +2297,8 @@
     </message>
     <message>
         <location filename="midiIO.cpp" line="420"/>
-        <source>re-trying data request</source>
+        <source>retrying data request</source>
+        <oldsource>re-trying data request</oldsource>
         <translation>データを再要求を試みる</translation>
     </message>
     <message>
@@ -2600,7 +2632,8 @@
     <name>stompbox_amp</name>
     <message>
         <location filename="stompbox_amp.cpp" line="59"/>
-        <source>Pre Amp</source>
+        <source>PreAmp</source>
+        <oldsource>Pre Amp</oldsource>
         <translation>プリアンプ</translation>
     </message>
     <message>

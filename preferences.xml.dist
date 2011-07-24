@@ -2,10 +2,10 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="Alpha 20110516"/>
+		<Application version="Beta 20110701"/>
 		<Donate url=""/>
 		<Files dir=""/>
-		<Help url="GR-55FloorBoard_help.html"/>
+		<Help url="GR-55FloorBoard_help.htm"/>
 		<Language code="en"/>
 		<Manual url="http://www.roland.com/products/en/_support/om.cfm?PRODUCT=GR-55"/>
 		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
@@ -24,7 +24,7 @@
 		<Time set="80"/>		
 	</Midi>
 	<Scheme>
-	  <Style select="0"/>
+	  <Style select="1"/>
 	  <Colour select="0"/>
 	</Scheme>
 	<Window>
