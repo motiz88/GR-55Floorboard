@@ -55,7 +55,7 @@ customRenameDialog::customRenameDialog(QWidget *parent, QString hex1, QString he
    { 
     rx = rc;
      dialogLength = 150;
-     dialogText = tr("Rename Catagory");
+     dialogText = tr("Rename Category");
    };
 	QValidator *validator = new QRegExpValidator(rx, this);
 	

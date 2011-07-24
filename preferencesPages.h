@@ -70,6 +70,7 @@ public:
     QRadioButton* englishButton;
     QRadioButton* frenchButton;
     QRadioButton* germanButton;
+    QRadioButton* portugueseButton;
     QRadioButton* spanishButton;
     QRadioButton* japaneseButton;
     QRadioButton* chineseButton;

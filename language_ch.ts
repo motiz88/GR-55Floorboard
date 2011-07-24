@@ -84,42 +84,42 @@
         <translation>*加载此文件可能有不可预知的结果*.</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="78"/>
+        <location filename="main.cpp" line="81"/>
         <source>Initializing - please wait...</source>
         <translation>初始化- 请稍候...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="85"/>
+        <location filename="main.cpp" line="88"/>
         <source>Checking license file...</source>
         <translation>检查许可文件...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="88"/>
+        <location filename="main.cpp" line="91"/>
         <source>Loading license file...</source>
         <translation>载入许可文件...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="96"/>
+        <location filename="main.cpp" line="99"/>
         <source>Loading midi mapping...</source>
         <translation>载入MIDI映射...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="102"/>
+        <location filename="main.cpp" line="105"/>
         <source>Initializing main window...</source>
         <translation>初始化主窗口...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="153"/>
+        <location filename="main.cpp" line="156"/>
         <source>Restoring window position...</source>
         <translation>恢复窗口的位置...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="168"/>
+        <location filename="main.cpp" line="171"/>
         <source>Centering main window...</source>
         <translation>围绕主窗口...</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="183"/>
+        <location filename="main.cpp" line="186"/>
         <source>Finished Initializing...</source>
         <translation>完成初始化...</translation>
     </message>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="38"/>
-        <location filename="preferencesPages.cpp" line="383"/>
+        <location filename="preferencesPages.cpp" line="392"/>
         <source>Select the default folder for storing patches.</source>
         <translation>选择用于存储补丁默认文件夹。</translation>
     </message>
@@ -266,63 +266,78 @@
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="292"/>
+        <source>Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="293"/>
+        <source>Spanish</source>
+        <translation>西班牙语</translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="294"/>
+        <source>Japanese</source>
+        <translation>日本</translation>
+    </message>
+    <message>
+        <location filename="preferencesPages.cpp" line="295"/>
         <source>Chinese (simplified)</source>
         <translation>中文（简体）</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="306"/>
-        <location filename="preferencesPages.cpp" line="370"/>
+        <location filename="preferencesPages.cpp" line="315"/>
+        <location filename="preferencesPages.cpp" line="379"/>
         <source>Changes take effect on next startup</source>
         <translation>更改将在下一次启动时生效</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="324"/>
+        <location filename="preferencesPages.cpp" line="333"/>
         <source>Window Style Selection</source>
         <translation>窗口样式的选择</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="326"/>
-        <location filename="preferencesPages.cpp" line="354"/>
+        <location filename="preferencesPages.cpp" line="335"/>
+        <location filename="preferencesPages.cpp" line="363"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="328"/>
+        <location filename="preferencesPages.cpp" line="337"/>
         <source>Plastique</source>
         <translation>塑料</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="329"/>
+        <location filename="preferencesPages.cpp" line="338"/>
         <source>CDE</source>
         <translation>CDE的</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="330"/>
+        <location filename="preferencesPages.cpp" line="339"/>
         <source>Motif</source>
         <translation>原因</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="347"/>
+        <location filename="preferencesPages.cpp" line="356"/>
         <source>Colour Scheme Selection</source>
         <translation>色彩方案选择</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="349"/>
+        <location filename="preferencesPages.cpp" line="358"/>
         <source>Black (default)</source>
         <translation>黑色（默认）</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="351"/>
+        <location filename="preferencesPages.cpp" line="360"/>
         <source>White</source>
         <translation>白</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="352"/>
+        <location filename="preferencesPages.cpp" line="361"/>
         <source>Blue</source>
         <translation>蓝</translation>
     </message>
     <message>
-        <location filename="preferencesPages.cpp" line="353"/>
+        <location filename="preferencesPages.cpp" line="362"/>
         <source>Green</source>
         <translation>绿</translation>
     </message>
@@ -475,7 +490,8 @@
     <name>bankTreeList</name>
     <message>
         <location filename="bankTreeList.cpp" line="304"/>
-        <source>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GT patch data.</source>
+        <source>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GR-55 patch data.</source>
+        <oldsource>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GT patch data.</oldsource>
         <translation>临时缓冲区。&lt;br&gt;文章点击一次鼠标将设置写入/同步按钮来传送到缓冲区只，&lt;br&gt;文章双击将负载的电流GT的修补数据。</translation>
     </message>
     <message>
@@ -495,7 +511,8 @@
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="329"/>
-        <source>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GT.</source>
+        <source>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GR-55.</source>
+        <oldsource>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GT.</oldsource>
         <translation>用户修补程序。&lt;br&gt;文章点击一次鼠标将只更改补丁&lt;br&gt;文章点击鼠标将负载双从的GR -55选择补丁。</translation>
     </message>
     <message>
@@ -876,7 +893,8 @@
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="58"/>
-        <source>Rename Catagory</source>
+        <source>Rename Category</source>
+        <oldsource>Rename Catagory</oldsource>
         <translation>重命名分类</translation>
     </message>
     <message>
@@ -974,7 +992,6 @@
         <translation>1粘贴剪贴板</translation>
     </message>
     <message>
-        <location filename="editWindow.cpp" line="70"/>
         <location filename="editWindow.cpp" line="78"/>
         <location filename="editWindow.cpp" line="87"/>
         <location filename="editWindow.cpp" line="96"/>
@@ -987,6 +1004,11 @@
         <source>ClipBd 2 Paste</source>
         <oldsource>Temp 2 Partial</oldsource>
         <translation>2粘贴剪贴板</translation>
+    </message>
+    <message>
+        <location filename="editWindow.cpp" line="70"/>
+        <source>Effect Partial Paste Button&lt;br&gt;will paste only the currently displayed effect part from the selected Temp clipboard.&lt;br&gt;can be used to quickly compare settings between patches.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="85"/>
@@ -1040,8 +1062,9 @@
     </message>
     <message>
         <location filename="fileDialog.cpp" line="40"/>
-        <source>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</source>
-        <translation>试镜多补丁*. g5l文件，悬停补丁和修补程序将纳入临时&lt;br&gt;物理化学上的GT补丁点击编辑器将它加载到缓冲区数据加载鼠标光标。</translation>
+        <source>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GR-55 temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</source>
+        <oldsource>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</oldsource>
+        <translation>试镜多补丁*. g5l文件，悬停补丁和修补程序将纳入临时&lt;br&gt;物理化学上的GR-55补丁点击编辑器将它加载到缓冲区数据加载鼠标光标。</translation>
     </message>
     <message>
         <location filename="fileDialog.cpp" line="50"/>
@@ -1050,7 +1073,8 @@
     </message>
     <message>
         <location filename="fileDialog.cpp" line="52"/>
-        <source>Selecting this will close the patch load window and reset the GT back to the current editor patch.</source>
+        <source>Selecting this will close the patch load window and reset the GR-55 back to the current editor patch.</source>
+        <oldsource>Selecting this will close the patch load window and reset the GT back to the current editor patch.</oldsource>
         <translation>选择此修补程序将关闭窗口并重新加载的GR- 55回到当前编辑器补丁。</translation>
     </message>
     <message>
@@ -1072,7 +1096,7 @@
         <location filename="floorBoardDisplay.cpp" line="73"/>
         <location filename="floorBoardDisplay.cpp" line="78"/>
         <location filename="floorBoardDisplay.cpp" line="83"/>
-        <location filename="floorBoardDisplay.cpp" line="298"/>
+        <location filename="floorBoardDisplay.cpp" line="287"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
@@ -1087,9 +1111,9 @@
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="88"/>
-        <location filename="floorBoardDisplay.cpp" line="308"/>
-        <location filename="floorBoardDisplay.cpp" line="1104"/>
-        <location filename="floorBoardDisplay.cpp" line="1131"/>
+        <location filename="floorBoardDisplay.cpp" line="297"/>
+        <location filename="floorBoardDisplay.cpp" line="1089"/>
+        <location filename="floorBoardDisplay.cpp" line="1116"/>
         <source> FloorBoard</source>
         <translation>地板</translation>
     </message>
@@ -1109,374 +1133,374 @@
         <translation>点击此文字将打开&lt;br&gt;文章对话窗口&lt;br&gt;物理化学允许用户文字输入。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="108"/>
+        <location filename="floorBoardDisplay.cpp" line="97"/>
         <source>Connect</source>
         <translation>连接</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="109"/>
+        <location filename="floorBoardDisplay.cpp" line="98"/>
         <source>Connect Button&lt;br&gt;used to establish a continuous midi connection&lt;br&gt;when lit green, the connection is valid</source>
         <translation>连接按钮&lt;br&gt;用于建立一个连续的MIDI连接&lt;br&gt;当点燃绿色，连接有效</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="110"/>
+        <location filename="floorBoardDisplay.cpp" line="99"/>
         <source>Write</source>
         <translation>写</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="111"/>
+        <location filename="floorBoardDisplay.cpp" line="100"/>
         <source>Write Button&lt;br&gt;if the patch number displays [temp buffer]&lt;br&gt;the current patch is sent to the GR-55 temporary memory only&lt;br&gt;or else the patch will be written to the displayed patch memory location.</source>
         <translation>如果保存按钮&lt;br&gt;斑块数量显示[临时缓冲区]&lt;br&gt;随即被发送到当前补丁的GR- 55的临时内存仅&lt;br&gt;或其他修补程序将被写入到显示的补丁内存位置。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="112"/>
+        <location filename="floorBoardDisplay.cpp" line="101"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
+        <location filename="floorBoardDisplay.cpp" line="102"/>
+        <location filename="floorBoardDisplay.cpp" line="104"/>
+        <location filename="floorBoardDisplay.cpp" line="106"/>
+        <location filename="floorBoardDisplay.cpp" line="109"/>
+        <location filename="floorBoardDisplay.cpp" line="111"/>
         <location filename="floorBoardDisplay.cpp" line="113"/>
         <location filename="floorBoardDisplay.cpp" line="115"/>
         <location filename="floorBoardDisplay.cpp" line="117"/>
-        <location filename="floorBoardDisplay.cpp" line="120"/>
-        <location filename="floorBoardDisplay.cpp" line="122"/>
-        <location filename="floorBoardDisplay.cpp" line="124"/>
-        <location filename="floorBoardDisplay.cpp" line="126"/>
-        <location filename="floorBoardDisplay.cpp" line="128"/>
-        <location filename="floorBoardDisplay.cpp" line="130"/>
-        <location filename="floorBoardDisplay.cpp" line="132"/>
-        <location filename="floorBoardDisplay.cpp" line="134"/>
-        <location filename="floorBoardDisplay.cpp" line="136"/>
+        <location filename="floorBoardDisplay.cpp" line="119"/>
+        <location filename="floorBoardDisplay.cpp" line="121"/>
+        <location filename="floorBoardDisplay.cpp" line="123"/>
+        <location filename="floorBoardDisplay.cpp" line="125"/>
+        <location filename="floorBoardDisplay.cpp" line="127"/>
+        <location filename="floorBoardDisplay.cpp" line="129"/>
+        <location filename="floorBoardDisplay.cpp" line="131"/>
+        <location filename="floorBoardDisplay.cpp" line="133"/>
+        <location filename="floorBoardDisplay.cpp" line="135"/>
         <location filename="floorBoardDisplay.cpp" line="138"/>
         <location filename="floorBoardDisplay.cpp" line="140"/>
         <location filename="floorBoardDisplay.cpp" line="142"/>
         <location filename="floorBoardDisplay.cpp" line="144"/>
         <location filename="floorBoardDisplay.cpp" line="146"/>
-        <location filename="floorBoardDisplay.cpp" line="149"/>
-        <location filename="floorBoardDisplay.cpp" line="151"/>
-        <location filename="floorBoardDisplay.cpp" line="153"/>
-        <location filename="floorBoardDisplay.cpp" line="155"/>
-        <location filename="floorBoardDisplay.cpp" line="157"/>
-        <location filename="floorBoardDisplay.cpp" line="159"/>
-        <location filename="floorBoardDisplay.cpp" line="161"/>
-        <location filename="floorBoardDisplay.cpp" line="163"/>
+        <location filename="floorBoardDisplay.cpp" line="148"/>
+        <location filename="floorBoardDisplay.cpp" line="150"/>
+        <location filename="floorBoardDisplay.cpp" line="152"/>
         <source>Deep editing of the selected effect&lt;br&gt;pressing this button will open an edit page&lt;br&gt;allowing detailed setting of this effects parameters.</source>
         <translation>选择效果按下此按钮&lt;br&gt;深编辑会打开一个编辑页面&lt;br&gt;物理化学允许此效果参数的详细设置。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="114"/>
+        <location filename="floorBoardDisplay.cpp" line="103"/>
         <source>Master</source>
         <translation>主 </translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="116"/>
+        <location filename="floorBoardDisplay.cpp" line="105"/>
         <source>Pedal/GK</source>
         <translation>踏板/门将</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="119"/>
+        <location filename="floorBoardDisplay.cpp" line="108"/>
         <source>Normal PU</source>
         <translation>正常聚氨酯</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="121"/>
+        <location filename="floorBoardDisplay.cpp" line="110"/>
         <source>Structure 1</source>
         <translation>结构一</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="123"/>
+        <location filename="floorBoardDisplay.cpp" line="112"/>
         <source>Structure 2</source>
         <translation>两种结构</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="125"/>
+        <location filename="floorBoardDisplay.cpp" line="114"/>
         <source>Modeling</source>
         <translation>建模</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="127"/>
+        <location filename="floorBoardDisplay.cpp" line="116"/>
         <source>Synth A</source>
         <translation>合成甲</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="129"/>
+        <location filename="floorBoardDisplay.cpp" line="118"/>
         <source>Synth B</source>
         <translation>合成乙</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="131"/>
+        <location filename="floorBoardDisplay.cpp" line="120"/>
         <source>Amp</source>
         <translation>放大器</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="133"/>
+        <location filename="floorBoardDisplay.cpp" line="122"/>
         <source>NS</source>
         <translation>噪声抑制器</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="135"/>
+        <location filename="floorBoardDisplay.cpp" line="124"/>
         <source>MOD</source>
         <translation>调制</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="137"/>
+        <location filename="floorBoardDisplay.cpp" line="126"/>
         <source>MFX</source>
         <translation>多重效应</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="139"/>
+        <location filename="floorBoardDisplay.cpp" line="128"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="141"/>
+        <location filename="floorBoardDisplay.cpp" line="130"/>
         <source>Delay</source>
         <translation>延迟</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="143"/>
+        <location filename="floorBoardDisplay.cpp" line="132"/>
         <source>Chorus</source>
         <translation>合唱</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="145"/>
+        <location filename="floorBoardDisplay.cpp" line="134"/>
         <source>Equalizer</source>
         <translation>均衡器</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="148"/>
+        <location filename="floorBoardDisplay.cpp" line="137"/>
         <source>Assign 1</source>
         <translation>指定一</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="150"/>
+        <location filename="floorBoardDisplay.cpp" line="139"/>
         <source>Assign 2</source>
         <translation>分配2</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="152"/>
+        <location filename="floorBoardDisplay.cpp" line="141"/>
         <source>Assign 3</source>
         <translation>派3</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="154"/>
+        <location filename="floorBoardDisplay.cpp" line="143"/>
         <source>Assign 4</source>
         <translation>分配4</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="156"/>
+        <location filename="floorBoardDisplay.cpp" line="145"/>
         <source>Assign 5</source>
         <translation>分配5</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="158"/>
+        <location filename="floorBoardDisplay.cpp" line="147"/>
         <source>Assign 6</source>
         <translation>分配6</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="160"/>
+        <location filename="floorBoardDisplay.cpp" line="149"/>
         <source>Assign 7</source>
         <translation>分配7</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="162"/>
+        <location filename="floorBoardDisplay.cpp" line="151"/>
         <source>Assign 8</source>
         <translation>分配8</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="165"/>
-        <location filename="floorBoardDisplay.cpp" line="169"/>
-        <location filename="floorBoardDisplay.cpp" line="173"/>
-        <location filename="floorBoardDisplay.cpp" line="177"/>
-        <location filename="floorBoardDisplay.cpp" line="181"/>
+        <location filename="floorBoardDisplay.cpp" line="154"/>
+        <location filename="floorBoardDisplay.cpp" line="158"/>
+        <location filename="floorBoardDisplay.cpp" line="162"/>
+        <location filename="floorBoardDisplay.cpp" line="166"/>
+        <location filename="floorBoardDisplay.cpp" line="170"/>
         <source>Patch Copy</source>
         <translation>补丁复制</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="166"/>
-        <location filename="floorBoardDisplay.cpp" line="170"/>
-        <location filename="floorBoardDisplay.cpp" line="174"/>
-        <location filename="floorBoardDisplay.cpp" line="178"/>
-        <location filename="floorBoardDisplay.cpp" line="182"/>
+        <location filename="floorBoardDisplay.cpp" line="155"/>
+        <location filename="floorBoardDisplay.cpp" line="159"/>
+        <location filename="floorBoardDisplay.cpp" line="163"/>
+        <location filename="floorBoardDisplay.cpp" line="167"/>
+        <location filename="floorBoardDisplay.cpp" line="171"/>
         <source>Copy current patch to clipboard&lt;br&gt;pressing this button will save the current patch to a clipboard&lt;br&gt;the clipboard is saved to file and is re-loaded&lt;br&gt;on the next session startup.</source>
         <translation>目前的补丁复制到剪贴板&lt;br&gt;物理化学按下此按钮将保存当前补丁到剪贴板&lt;br&gt;文章保存到剪贴板文件，重新装上下届会议启动&lt;br&gt;物理化学。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="167"/>
-        <location filename="floorBoardDisplay.cpp" line="171"/>
-        <location filename="floorBoardDisplay.cpp" line="175"/>
-        <location filename="floorBoardDisplay.cpp" line="179"/>
-        <location filename="floorBoardDisplay.cpp" line="183"/>
+        <location filename="floorBoardDisplay.cpp" line="156"/>
+        <location filename="floorBoardDisplay.cpp" line="160"/>
+        <location filename="floorBoardDisplay.cpp" line="164"/>
+        <location filename="floorBoardDisplay.cpp" line="168"/>
+        <location filename="floorBoardDisplay.cpp" line="172"/>
         <source>Patch Paste</source>
         <translation>粘贴补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="168"/>
-        <location filename="floorBoardDisplay.cpp" line="172"/>
-        <location filename="floorBoardDisplay.cpp" line="176"/>
-        <location filename="floorBoardDisplay.cpp" line="180"/>
-        <location filename="floorBoardDisplay.cpp" line="184"/>
+        <location filename="floorBoardDisplay.cpp" line="157"/>
+        <location filename="floorBoardDisplay.cpp" line="161"/>
+        <location filename="floorBoardDisplay.cpp" line="165"/>
+        <location filename="floorBoardDisplay.cpp" line="169"/>
+        <location filename="floorBoardDisplay.cpp" line="173"/>
         <source>Paste current patch from clipboard&lt;br&gt;pressing this button will load the current patch to a clipboard&lt;br&gt;the clipboard is re-loaded&lt;br&gt;from the previous session copy.</source>
         <translation>从剪贴板粘贴按下此按钮&lt;br&gt;当前修补程序将加载最新补丁到剪贴板&lt;br&gt;文章剪贴板重新加载从前一交易日的副本&lt;br&gt;物理化学。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="295"/>
+        <location filename="floorBoardDisplay.cpp" line="284"/>
         <source>init patch</source>
         <translation>初始化补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="302"/>
+        <location filename="floorBoardDisplay.cpp" line="291"/>
         <source> patch</source>
         <translation>补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="313"/>
+        <location filename="floorBoardDisplay.cpp" line="302"/>
         <source>Error while changing banks.</source>
         <translation>错误而改变银行。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="315"/>
+        <location filename="floorBoardDisplay.cpp" line="304"/>
         <source>An incorrect patch has been loaded. Please try to load the patch again.</source>
         <translation>一个不正确的修补程序已加载。请尝试再次加载补丁。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="335"/>
+        <location filename="floorBoardDisplay.cpp" line="324"/>
         <source>User</source>
         <translation>用户</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="340"/>
+        <location filename="floorBoardDisplay.cpp" line="329"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="362"/>
+        <location filename="floorBoardDisplay.cpp" line="351"/>
         <source>Temp</source>
         <translation>温度</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="363"/>
+        <location filename="floorBoardDisplay.cpp" line="352"/>
         <source>Buffer</source>
         <translation>缓冲区</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="454"/>
-        <location filename="floorBoardDisplay.cpp" line="967"/>
+        <location filename="floorBoardDisplay.cpp" line="439"/>
+        <location filename="floorBoardDisplay.cpp" line="952"/>
         <source>Connecting</source>
         <translation>连接</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="691"/>
-        <location filename="floorBoardDisplay.cpp" line="748"/>
-        <location filename="floorBoardDisplay.cpp" line="804"/>
-        <location filename="floorBoardDisplay.cpp" line="860"/>
-        <location filename="floorBoardDisplay.cpp" line="916"/>
+        <location filename="floorBoardDisplay.cpp" line="676"/>
+        <location filename="floorBoardDisplay.cpp" line="733"/>
+        <location filename="floorBoardDisplay.cpp" line="789"/>
+        <location filename="floorBoardDisplay.cpp" line="845"/>
+        <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>in-consistant patch data detected </source>
         <translation>检测数据不一致的补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="691"/>
-        <location filename="floorBoardDisplay.cpp" line="748"/>
-        <location filename="floorBoardDisplay.cpp" line="804"/>
-        <location filename="floorBoardDisplay.cpp" line="860"/>
-        <location filename="floorBoardDisplay.cpp" line="916"/>
+        <location filename="floorBoardDisplay.cpp" line="676"/>
+        <location filename="floorBoardDisplay.cpp" line="733"/>
+        <location filename="floorBoardDisplay.cpp" line="789"/>
+        <location filename="floorBoardDisplay.cpp" line="845"/>
+        <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>bytes: re-save or re-load file to correct</source>
         <translation>字节：重新保存和恢复文件以更正</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="709"/>
-        <location filename="floorBoardDisplay.cpp" line="765"/>
-        <location filename="floorBoardDisplay.cpp" line="821"/>
-        <location filename="floorBoardDisplay.cpp" line="877"/>
-        <location filename="floorBoardDisplay.cpp" line="933"/>
+        <location filename="floorBoardDisplay.cpp" line="694"/>
+        <location filename="floorBoardDisplay.cpp" line="750"/>
+        <location filename="floorBoardDisplay.cpp" line="806"/>
+        <location filename="floorBoardDisplay.cpp" line="862"/>
+        <location filename="floorBoardDisplay.cpp" line="918"/>
         <source>patch must be copied to clipboard first</source>
         <translation>修补程序必须先复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1001"/>
-        <location filename="floorBoardDisplay.cpp" line="1333"/>
+        <location filename="floorBoardDisplay.cpp" line="986"/>
+        <location filename="floorBoardDisplay.cpp" line="1307"/>
         <source>Ready</source>
         <translation>准备</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1032"/>
-        <location filename="floorBoardDisplay.cpp" line="1058"/>
+        <location filename="floorBoardDisplay.cpp" line="1017"/>
+        <location filename="floorBoardDisplay.cpp" line="1043"/>
         <source> FloorBoard connection Error !!</source>
         <translation>地板连接错误！</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1037"/>
+        <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source>The device connected is not a ROLAND </source>
         <translation>该设备连接的不是罗兰</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1037"/>
+        <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source> Guitar Synthesizer.</source>
         <translation>吉他合成器。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1039"/>
+        <location filename="floorBoardDisplay.cpp" line="1024"/>
         <source>&lt;br&gt;Midi loopback detected, ensure midi device &apos;thru&apos; is switched off.</source>
         <translation>&lt;br&gt;物理化学迷笛环回检测，确保MIDI设备&apos;到&apos;已关闭。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1049"/>
-        <location filename="floorBoardDisplay.cpp" line="1075"/>
-        <location filename="floorBoardDisplay.cpp" line="1359"/>
+        <location filename="floorBoardDisplay.cpp" line="1034"/>
+        <location filename="floorBoardDisplay.cpp" line="1060"/>
+        <location filename="floorBoardDisplay.cpp" line="1333"/>
         <source>Not connected</source>
         <translation>没有连接</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1063"/>
+        <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source>The ROLAND </source>
         <translation>罗兰</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1063"/>
+        <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source> Guitar Synth was not found.</source>
         <translation>吉他合成器没有被发现。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1064"/>
+        <location filename="floorBoardDisplay.cpp" line="1049"/>
         <source>&lt;br&gt;&lt;br&gt;Ensure correct midi device is selected in Menu, </source>
         <translation>&lt;BR&gt; &lt;BR&gt;在确保正确的MIDI设备中选择菜单，</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1065"/>
+        <location filename="floorBoardDisplay.cpp" line="1050"/>
         <source>&lt;br&gt;ROLAND drivers are installed and the GR-55 is switched on,</source>
         <translation>&lt;br&gt;物理化学罗兰驱动程序安装和GR- 55开机时，</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1109"/>
+        <location filename="floorBoardDisplay.cpp" line="1094"/>
         <source>You can&apos;t write to the preset banks.</source>
         <translation>您不能写入预设银行。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1111"/>
+        <location filename="floorBoardDisplay.cpp" line="1096"/>
         <source>Please select a user bank to write this patch to and try again.</source>
         <translation>请选择一个用户银行写这个修补，然后再试一次。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1136"/>
+        <location filename="floorBoardDisplay.cpp" line="1121"/>
         <source>You have chosen to write the patch into </source>
         <translation>您已选择将写入补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1138"/>
+        <location filename="floorBoardDisplay.cpp" line="1123"/>
         <source>This will overwrite the patch currently stored at patch location&lt;br&gt;</source>
         <translation>这将覆盖目前在补丁中存储的位置&lt;br&gt;物理化学补丁</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1143"/>
+        <location filename="floorBoardDisplay.cpp" line="1128"/>
         <source> and can&apos;t be undone. </source>
         <translation>且无法复原。</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1144"/>
+        <location filename="floorBoardDisplay.cpp" line="1129"/>
         <source>Are you sure you want to continue?</source>
         <translation>你确定要继续吗？</translation>
     </message>
     <message>
-        <location filename="floorBoardDisplay.cpp" line="1184"/>
+        <location filename="floorBoardDisplay.cpp" line="1169"/>
         <source>Writing to Patch</source>
         <translation>写补丁</translation>
     </message>
@@ -1795,7 +1819,8 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="226"/>
-        <source>User Manual PDF</source>
+        <source>Owner&apos;s Manual</source>
+        <oldsource>User Manual PDF</oldsource>
         <translation>用户手册PDF</translation>
     </message>
     <message>
@@ -1906,18 +1931,16 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="486"/>
-        <source>ROLAND Librarian File (*.g5l *.g5l)</source>
-        <translation>罗兰馆员文件（*. g5l*. g5l）</translation>
+        <location filename="mainWindow.cpp" line="516"/>
+        <source>ROLAND Librarian File (*.g5l)</source>
+        <oldsource>ROLAND Librarian File (*.g5l *.g5l)</oldsource>
+        <translation>罗兰馆员文件（*. g5l）</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="514"/>
-        <source>Save Patch *.G5L</source>
+        <source>Save Patch *.g5l</source>
+        <oldsource>Save Patch *.G5L</oldsource>
         <translation>另存为G5L补丁... （*. g5l）</translation>
-    </message>
-    <message>
-        <location filename="mainWindow.cpp" line="516"/>
-        <source>ROLAND Librarian File (*.g5l)</source>
-        <translation>罗兰馆员文件（*. g5l*. g5l）</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="550"/>
@@ -1941,8 +1964,9 @@
     </message>
     <message>
         <location filename="mainWindow.cpp" line="574"/>
-        <source>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GT System&lt;br&gt;</source>
-        <translation>选择&apos;不&apos;，只更新编辑器- 选择&apos;是&apos;更新的GR- 55系统&lt;br&gt;物理化学</translation>
+        <source>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GR-55 System&lt;br&gt;</source>
+        <oldsource>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GT System&lt;br&gt;</oldsource>
+        <translation>选择&apos;不&apos;，只更新编辑器- 选择&apos;是&apos;更新的GR- 55系统物理化学&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="577"/>
@@ -1980,45 +2004,45 @@
         <translation>确保连接是活动的，重试</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="753"/>
-        <location filename="mainWindow.cpp" line="780"/>
+        <location filename="mainWindow.cpp" line="756"/>
+        <location filename="mainWindow.cpp" line="783"/>
         <source>Ensure GR-55 mode matches the patch mode or else Modeling and Assigns realtime control will not work correctly</source>
         <translation>确保的GR -55模式匹配的补丁模式或其他分配的建模与实时控制将无法正常工作</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="755"/>
-        <location filename="mainWindow.cpp" line="782"/>
+        <location filename="mainWindow.cpp" line="758"/>
+        <location filename="mainWindow.cpp" line="785"/>
         <source>Patch Mode changed !!</source>
         <translation>修补模式改变！</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="761"/>
+        <location filename="mainWindow.cpp" line="764"/>
         <source>Patch is already set to Guitar Mode, Patch Mode change not required</source>
         <translation>补丁已被设置为吉他模式，不需要补丁模式改变</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="763"/>
-        <location filename="mainWindow.cpp" line="790"/>
+        <location filename="mainWindow.cpp" line="766"/>
+        <location filename="mainWindow.cpp" line="793"/>
         <source>Patch Mode change not required !!</source>
         <translation>修补模式不要求改变！</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="788"/>
+        <location filename="mainWindow.cpp" line="791"/>
         <source>Patch is already set to Bass Mode, Patch Mode change is not required</source>
         <translation>补丁已被设置为低音模式，修补模式不要求改变</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="872"/>
+        <location filename="mainWindow.cpp" line="875"/>
         <source> FloorBoard - About</source>
         <translation>地板- 关于</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="873"/>
+        <location filename="mainWindow.cpp" line="876"/>
         <source> FloorBoard - </source>
         <translation>地板</translation>
     </message>
     <message>
-        <location filename="mainWindow.cpp" line="873"/>
+        <location filename="mainWindow.cpp" line="876"/>
         <source>version</source>
         <translation>版本</translation>
     </message>
@@ -2047,8 +2071,9 @@
     </message>
     <message>
         <location filename="menuPage.cpp" line="186"/>
-        <source>System data not transfered, current settings are to be used&lt;br&gt;</source>
-        <translation>系统数据不转移，当前的设置，应使用&lt;br&gt;物理化学</translation>
+        <source>System data not transferred, current settings are to be used&lt;br&gt;</source>
+        <oldsource>System data not transfered, current settings are to be used&lt;br&gt;</oldsource>
+        <translation>系统数据不转移，当前的设置，应使用物理化学&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="188"/>
@@ -2076,8 +2101,12 @@
         <translation>罗兰</translation>
     </message>
     <message>
-        <location filename="menuPage.cpp" line="367"/>
         <source> System data was not transfered !!.</source>
+        <translation type="obsolete">系统数据未转让的！！。</translation>
+    </message>
+    <message>
+        <location filename="menuPage.cpp" line="367"/>
+        <source> System data was not transferred !!.</source>
         <translation>系统数据未转让的！！。</translation>
     </message>
     <message>
@@ -2097,7 +2126,8 @@
     </message>
     <message>
         <location filename="menuPage.cpp" line="501"/>
-        <source>System/Midi</source>
+        <source>System/Global</source>
+        <oldsource>System/Midi</oldsource>
         <translation>系统/迷笛</translation>
     </message>
     <message>
@@ -2248,8 +2278,9 @@
     <message>
         <location filename="midiIO.cpp" line="82"/>
         <location filename="midiIO.cpp" line="129"/>
-        <source>un-named midi device: </source>
-        <translation>无名MIDI设备：</translation>
+        <source>unnamed midi device: </source>
+        <oldsource>un-named midi device: </oldsource>
+        <translation>无名MIDI设备： </translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="91"/>
@@ -2271,7 +2302,8 @@
     </message>
     <message>
         <location filename="midiIO.cpp" line="420"/>
-        <source>re-trying data request</source>
+        <source>retrying data request</source>
+        <oldsource>re-trying data request</oldsource>
         <translation>重新尝试请求数据</translation>
     </message>
     <message>
@@ -2605,7 +2637,8 @@
     <name>stompbox_amp</name>
     <message>
         <location filename="stompbox_amp.cpp" line="59"/>
-        <source>Pre Amp</source>
+        <source>PreAmp</source>
+        <oldsource>Pre Amp</oldsource>
         <translation>前置放大器</translation>
     </message>
     <message>

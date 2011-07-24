@@ -68,7 +68,7 @@ editWindow::editWindow(QWidget *parent)
     this->temp1_Button->setText(tr("ClipBd 1 Paste"));
     this->temp1_Button->setAlignment(Qt::AlignCenter);
     this->temp1_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
-                                        "<br>can be used to quicky compare settings between patches."));
+                                        "<br>can be used to quickly compare settings between patches."));
 
     this->temp2_Button = new customControlLabel;
     this->temp2_Button->setButton(true);

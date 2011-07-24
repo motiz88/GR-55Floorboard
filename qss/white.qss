@@ -3,7 +3,7 @@
 ** Copyright (C) 2007~2011 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
-** This file is part of "GT-55 FloorBoard".
+** This file is part of "GR-55 FloorBoard".
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -163,13 +163,13 @@ border-color: rgb(150,150,150);
 }
 QLabel#bankMain { 
 font-family: Arial;
-font-size: 12px;
+font-size: 11px;
 font-weight: bold;
 color: rgb(0,0,0);
 }
 QLabel#bankSub {
 font-family: Arial;
-font-size: 10px;
+font-size: 9px;
 font-weight: bold;
 color: rgb(0,0,0);
 }

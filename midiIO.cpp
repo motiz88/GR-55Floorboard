@@ -79,7 +79,7 @@ void midiIO::queryMidiOutDevices()
         if(QSysInfo::WindowsVersion <= QSysInfo::WV_Me)
         {
             char dev = char(i+49); // point to character set numerals
-            QString outstring = tr("un-named midi device: ");
+            QString outstring = tr("unnamed midi device: ");
             outstring.append(dev);
             this->midiOutDevices.append(outstring);
         }
@@ -126,7 +126,7 @@ void midiIO::queryMidiInDevices()
         if(QSysInfo::WindowsVersion <= QSysInfo::WV_Me)
         {
             char dev = char(i+49); // point to character set numerals
-            QString instring = tr("un-named midi device: ");
+            QString instring = tr("unnamed midi device: ");
             instring.append(dev);
             this->midiInDevices.append(instring);
         }
@@ -417,7 +417,7 @@ void midiIO::run()
             if((this->sysxBuffer.size()/2 != count) && (repeat<3) && preferences->getPreferences("Midi", "DBug", "bool")!="true")
 
             {
-                emit setStatusdBugMessage(tr("re-trying data request"));
+                emit setStatusdBugMessage(tr("retrying data request"));
                 repeat = repeat+1;
                 goto RECEIVE;
             };

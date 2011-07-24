@@ -77,12 +77,12 @@ border-radius: 3px;
 }
 QLabel#bankMain {
 font-family: Arial;
-font-size: 12px;
+font-size: 11px;
 font-weight: bold;
 }
 QLabel#bankSub {
 font-family: Arial;
-font-size: 10px;
+font-size: 9px;
 font-weight: bold;
 }
 QLabel#nameMain {
