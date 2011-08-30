@@ -2,7 +2,7 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="Beta 20110701"/>
+		<Application version="20110901"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.htm"/>

@@ -32,8 +32,6 @@ editWindow::editWindow(QWidget *parent)
     : QDialog(parent)
 {
 
-    //this->w = image.width();
-    //this->h = image.height();
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
@@ -61,13 +59,14 @@ editWindow::editWindow(QWidget *parent)
     this->bulkEdit_Button->setImage(":/images/pushbutton_dark.png");
     this->bulkEdit_Button->setText(tr("Bulk Write"));
     this->bulkEdit_Button->setAlignment(Qt::AlignCenter);
-    this->bulkEdit_Button->setWhatsThis(tr("Multiple Patch Edit Button<br>will write only the currently displayed effect part to a selection of User Patches."));
+    this->bulkEdit_Button->setWhatsThis(tr("Multiple Patch Edit Button<br>will write only the currently displayed effect edit-page to a selected range of User Patches."));
+
     this->temp1_Button = new customControlLabel;
     this->temp1_Button->setButton(true);
     this->temp1_Button->setImage(":/images/pushbutton_dark.png");
     this->temp1_Button->setText(tr("ClipBd 1 Paste"));
     this->temp1_Button->setAlignment(Qt::AlignCenter);
-    this->temp1_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
+    this->temp1_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Patch clipboard."
                                         "<br>can be used to quickly compare settings between patches."));
 
     this->temp2_Button = new customControlLabel;
@@ -75,7 +74,7 @@ editWindow::editWindow(QWidget *parent)
     this->temp2_Button->setImage(":/images/pushbutton_dark.png");
     this->temp2_Button->setText(tr("ClipBd 2 Paste"));
     this->temp2_Button->setAlignment(Qt::AlignCenter);
-    this->temp2_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
+    this->temp2_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Patch clipboard."
                                         "<br>can be used to quicky compare settings between patches."));
 
 
@@ -84,7 +83,7 @@ editWindow::editWindow(QWidget *parent)
     this->temp3_Button->setImage(":/images/pushbutton_dark.png");
     this->temp3_Button->setText(tr("ClipBd 3 Paste"));
     this->temp3_Button->setAlignment(Qt::AlignCenter);
-    this->temp3_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
+    this->temp3_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Patch clipboard."
                                         "<br>can be used to quicky compare settings between patches."));
 
 
@@ -93,7 +92,7 @@ editWindow::editWindow(QWidget *parent)
     this->temp4_Button->setImage(":/images/pushbutton_dark.png");
     this->temp4_Button->setText(tr("ClipBd 4 Paste"));
     this->temp4_Button->setAlignment(Qt::AlignCenter);
-    this->temp4_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
+    this->temp4_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Patch clipboard."
                                         "<br>can be used to quicky compare settings between patches."));
 
 
@@ -102,8 +101,72 @@ editWindow::editWindow(QWidget *parent)
     this->temp5_Button->setImage(":/images/pushbutton_dark.png");
     this->temp5_Button->setText(tr("ClipBd 5 Paste"));
     this->temp5_Button->setAlignment(Qt::AlignCenter);
-    this->temp5_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Temp clipboard."
+    this->temp5_Button->setWhatsThis(tr("Effect Partial Paste Button<br>will paste only the currently displayed effect part from the selected Patch clipboard."
                                         "<br>can be used to quicky compare settings between patches."));
+
+    this->assign1_Button = new customControlLabel;
+    this->assign1_Button->setButton(true);
+    this->assign1_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign1_Button->setText(tr("Assign 1 Paste"));
+    this->assign1_Button->setAlignment(Qt::AlignCenter);
+    this->assign1_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign2_Button = new customControlLabel;
+    this->assign2_Button->setButton(true);
+    this->assign2_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign2_Button->setText(tr("Assign 2 Paste"));
+    this->assign2_Button->setAlignment(Qt::AlignCenter);
+    this->assign2_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign3_Button = new customControlLabel;
+    this->assign3_Button->setButton(true);
+    this->assign3_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign3_Button->setText(tr("Assign 3 Paste"));
+    this->assign3_Button->setAlignment(Qt::AlignCenter);
+    this->assign3_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign4_Button = new customControlLabel;
+    this->assign4_Button->setButton(true);
+    this->assign4_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign4_Button->setText(tr("Assign 4 Paste"));
+    this->assign4_Button->setAlignment(Qt::AlignCenter);
+    this->assign4_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign5_Button = new customControlLabel;
+    this->assign5_Button->setButton(true);
+    this->assign5_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign5_Button->setText(tr("Assign 5 Paste"));
+    this->assign5_Button->setAlignment(Qt::AlignCenter);
+    this->assign5_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign6_Button = new customControlLabel;
+    this->assign6_Button->setButton(true);
+    this->assign6_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign6_Button->setText(tr("Assign 6 Paste"));
+    this->assign6_Button->setAlignment(Qt::AlignCenter);
+    this->assign6_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign7_Button = new customControlLabel;
+    this->assign7_Button->setButton(true);
+    this->assign7_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign7_Button->setText(tr("Assign 7 Paste"));
+    this->assign7_Button->setAlignment(Qt::AlignCenter);
+    this->assign7_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
+
+    this->assign8_Button = new customControlLabel;
+    this->assign8_Button->setButton(true);
+    this->assign8_Button->setImage(":/images/pushbutton_dark.png");
+    this->assign8_Button->setText(tr("Assign 8 Paste"));
+    this->assign8_Button->setAlignment(Qt::AlignCenter);
+    this->assign8_Button->setWhatsThis(tr("Assign Paste Button<br>will paste an Assign setting from another Assign from the same patch."
+                                          "<br>can be used to copy or shift an Assign setting."));
 
 
     this->closeButton = new customControlLabel;
@@ -111,13 +174,33 @@ editWindow::editWindow(QWidget *parent)
     this->closeButton->setImage(":/images/closebutton.png");
     this->closeButton->setWhatsThis(tr("Will close the current edit page window."));
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(this->bulkEdit_Button);
-    buttonLayout->addWidget(this->temp1_Button);
-    buttonLayout->addWidget(this->temp2_Button);
-    buttonLayout->addWidget(this->temp3_Button);
-    buttonLayout->addWidget(this->temp4_Button);
-    buttonLayout->addWidget(this->temp5_Button);
+    QHBoxLayout *pastebuttonLayout = new QHBoxLayout;
+    pastebuttonLayout->addWidget(this->bulkEdit_Button);
+    pastebuttonLayout->addWidget(this->temp1_Button);
+    pastebuttonLayout->addWidget(this->temp2_Button);
+    pastebuttonLayout->addWidget(this->temp3_Button);
+    pastebuttonLayout->addWidget(this->temp4_Button);
+    pastebuttonLayout->addWidget(this->temp5_Button);
+
+    QHBoxLayout *top4buttonLayout = new QHBoxLayout;
+    top4buttonLayout->addSpacing(170);
+    top4buttonLayout->addWidget(this->assign1_Button);
+    top4buttonLayout->addWidget(this->assign2_Button);
+    top4buttonLayout->addWidget(this->assign3_Button);
+    top4buttonLayout->addWidget(this->assign4_Button);
+
+    QHBoxLayout *bottom4buttonLayout = new QHBoxLayout;
+    bottom4buttonLayout->addSpacing(170);
+    bottom4buttonLayout->addWidget(this->assign5_Button);
+    bottom4buttonLayout->addWidget(this->assign6_Button);
+    bottom4buttonLayout->addWidget(this->assign7_Button);
+    bottom4buttonLayout->addWidget(this->assign8_Button);
+
+    QVBoxLayout *buttonLayout = new QVBoxLayout;
+    buttonLayout->addLayout(pastebuttonLayout);
+    buttonLayout->addSpacing(10);
+    buttonLayout->addLayout(top4buttonLayout);
+    buttonLayout->addLayout(bottom4buttonLayout);
 
     QHBoxLayout *headerLayout = new QHBoxLayout;
     headerLayout->addWidget(this->title);
@@ -139,10 +222,8 @@ editWindow::editWindow(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(headerLayout);
     mainLayout->addStretch();
-    //mainLayout->addLayout(sellectLayout);
     mainLayout->addLayout(pagesLayout);
     mainLayout->addStretch();
-    //mainLayout->addSpacing(16);
     setLayout(mainLayout);
 
     this->tempPage = new editPage;
@@ -156,19 +237,22 @@ editWindow::editWindow(QWidget *parent)
     QObject::connect(this->temp4_Button, SIGNAL(mouseReleased()), this, SLOT(temp4()));
     QObject::connect(this->temp5_Button, SIGNAL(mouseReleased()), this, SLOT(temp5()));
 
+    QObject::connect(this->assign1_Button, SIGNAL(mouseReleased()), this, SLOT(assign1_paste()));
+    QObject::connect(this->assign2_Button, SIGNAL(mouseReleased()), this, SLOT(assign2_paste()));
+    QObject::connect(this->assign3_Button, SIGNAL(mouseReleased()), this, SLOT(assign3_paste()));
+    QObject::connect(this->assign4_Button, SIGNAL(mouseReleased()), this, SLOT(assign4_paste()));
+    QObject::connect(this->assign5_Button, SIGNAL(mouseReleased()), this, SLOT(assign5_paste()));
+    QObject::connect(this->assign6_Button, SIGNAL(mouseReleased()), this, SLOT(assign6_paste()));
+    QObject::connect(this->assign7_Button, SIGNAL(mouseReleased()), this, SLOT(assign7_paste()));
+    QObject::connect(this->assign8_Button, SIGNAL(mouseReleased()), this, SLOT(assign8_paste()));
+
     QObject::connect(this->closeButton, SIGNAL(mouseReleased()), this, SLOT(hide()));
 
     QObject::connect(this, SIGNAL( closeWindow() ), this, SLOT(hide()));
 
-
-
-
     QObject::connect(this, SIGNAL( dialogUpdateSignal() ), this, SLOT( pageUpdateSignal() ));
 
     QObject::connect(this->pageComboBox, SIGNAL(activated(int)), this, SLOT(valueChanged(int)));
-
-    //QObject::connect(this, SIGNAL( updateDisplay(QString)), this->parent(), SLOT( updateDisplay(QString)));
-
 };
 
 void editWindow::paintEvent(QPaintEvent *)
@@ -218,6 +302,9 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
     QObject::connect(editPages.last(), SIGNAL( updateSignal() ),
                      this, SIGNAL( updateSignal() ));
+    bool assign_check = false;
+
+    if(area == "Structure" ) {assign_check = true; };
 
     if (this->area != "Structure" || this->temp_hex1.isEmpty() || this->temp_hex1.contains("void"))
     {
@@ -228,6 +315,26 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
         this->temp4_Button->hide();
         this->temp5_Button->hide();
     };
+
+    if ((this->temp_hex1 != "01" && this->temp_hex1 != "02") || this->position < 327 || this->position > 620)
+    {
+        this->assign1_Button->hide();
+        this->assign2_Button->hide();
+        this->assign3_Button->hide();
+        this->assign4_Button->hide();
+        this->assign5_Button->hide();
+        this->assign6_Button->hide();
+        this->assign7_Button->hide();
+        this->assign8_Button->hide();
+    };
+    if(this->position == 328) {this->assign1_Button->hide(); };
+    if(this->position == 366) {this->assign2_Button->hide(); };
+    if(this->position == 404) {this->assign3_Button->hide(); };
+    if(this->position == 442) {this->assign4_Button->hide(); };
+    if(this->position == 480) {this->assign5_Button->hide(); };
+    if(this->position == 518) {this->assign6_Button->hide(); };
+    if(this->position == 556) {this->assign7_Button->hide(); };
+    if(this->position == 620) {this->assign8_Button->hide(); };
 
     if(hex1 != "void" && hex2 != "void" && hex3 != "void")
     {
@@ -260,9 +367,7 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
         this->pageComboBox->addItem(item);
         this->tempPage = new editPage;
-
         this->pageComboBox->setMaxVisibleItems(this->pages);
-        //this->pageComboBox->view()->setMinimumWidth(50);
 
         if(this->pages > 1)
         {
@@ -274,38 +379,37 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
 void editWindow::valueChanged(int index)
 {
-    QString valueName, valueStr;
     if(hex1 != "void" && hex2 != "void")
     {
         QString valueHex = QString::number(index, 16).toUpper();
         if(valueHex.length() < 2) valueHex.prepend("0");
-        //QString area = "Structure";
-
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueHex);
-
-        //emit updateDisplay(valueHex);
-        //emit updateSignal();
     };
 };
 
 void editWindow::pageUpdateSignal()
 {
-        if(this->pages > 1 && hex1 != "void" && hex2 != "void")
-        {
-                SysxIO *sysxIO = SysxIO::Instance();
-                int index = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
-                this->pageComboBox->setCurrentIndex(index);
-                this->pagesWidget->setCurrentIndex(index);
-                //this->valueChanged(index);
-
-        };
-    //emit updateSignal();
+    if(this->pages > 1 && hex1 != "void" && hex2 != "void")
+    {
+        SysxIO *sysxIO = SysxIO::Instance();
+        int index = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
+        this->pageComboBox->setCurrentIndex(index);
+        this->pagesWidget->setCurrentIndex(index);
+    };
 };
 
 editPage* editWindow::page()
 {
     return this->tempPage;
+};
+
+void editWindow::patchPos(int pos, int len, QString t_hex1, QString t_hex3)
+{
+    this->position = pos;
+    this->length = len;
+    this->temp_hex1 = t_hex1;
+    this->temp_hex3 = t_hex3;
 };
 
 void editWindow::closeEvent(QCloseEvent* ce)
@@ -323,8 +427,7 @@ void editWindow::bulkEdit()
 {
     SysxIO *sysxIO = SysxIO::Instance();
     if (sysxIO->isConnected())
-    {
-	
+    {	
         bulkEditDialog *editDialog = new bulkEditDialog(this->position, this->length, this->temp_hex1, this->temp_hex3);
         editDialog->exec();
     }
@@ -342,38 +445,11 @@ void editWindow::bulkEdit()
 
 void editWindow::temp1()
 {
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (!sysxIO->temp1_sysxMsg.isEmpty() && !temp_hex1.isEmpty() && !temp_hex1.contains("void") )
     {
-        QString temp = sysxIO->temp1_sysxMsg.mid(this->position, this->length);
-
-
-        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-        QList<QString> patchAddress = sysxIO->getFileSource().address;
-        QString addr1 = tempBulkWrite;  // temp address
-        QString addr2 = QString::number(0, 16).toUpper();
-        QString sysxMsg;
-        for(int i=0;i<patchData.size();++i)
-        {
-            QList<QString> data = patchData.at(i);
-            for(int x=0;x<data.size();++x)
-            {
-                QString hex;
-                if(x == sysxAddressOffset)
-                { hex = addr1; }
-                else if(x == sysxAddressOffset + 1)
-                {	hex = addr2; }
-                else
-                {	hex = data.at(x);	};
-                if (hex.length() < 2) hex.prepend("0");
-                sysxMsg.append(hex);
-            };
-        };
-        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
-        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
-        sysxIO->setFileSource("Structure", sysxMsg );
-        emit dialogUpdateSignal();
+        temp = sysxIO->temp1_sysxMsg.mid(this->position, this->length);
+        temp_paste();
     }
     else
     {
@@ -384,37 +460,11 @@ void editWindow::temp1()
 
 void editWindow::temp2()
 {
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (!sysxIO->temp2_sysxMsg.isEmpty() && !temp_hex1.isEmpty() && !temp_hex1.contains("void")  )
     {
-        QString temp = sysxIO->temp2_sysxMsg.mid(this->position, this->length);
-
-        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-        QList<QString> patchAddress = sysxIO->getFileSource().address;
-        QString addr1 = tempBulkWrite;  // temp address
-        QString addr2 = QString::number(0, 16).toUpper();
-        QString sysxMsg;
-        for(int i=0;i<patchData.size();++i)
-        {
-            QList<QString> data = patchData.at(i);
-            for(int x=0;x<data.size();++x)
-            {
-                QString hex;
-                if(x == sysxAddressOffset)
-                { hex = addr1; }
-                else if(x == sysxAddressOffset + 1)
-                {	hex = addr2; }
-                else
-                {	hex = data.at(x);	};
-                if (hex.length() < 2) hex.prepend("0");
-                sysxMsg.append(hex);
-            };
-        };
-        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
-        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
-        sysxIO->setFileSource("Structure", sysxMsg );
-        emit dialogUpdateSignal();
+        temp = sysxIO->temp2_sysxMsg.mid(this->position, this->length);
+        temp_paste();
     }
     else
     {
@@ -425,37 +475,11 @@ void editWindow::temp2()
 
 void editWindow::temp3()
 {
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (!sysxIO->temp3_sysxMsg.isEmpty() && !temp_hex1.isEmpty() && !temp_hex1.contains("void")  )
     {
-        QString temp = sysxIO->temp3_sysxMsg.mid(this->position, this->length);
-
-        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-        QList<QString> patchAddress = sysxIO->getFileSource().address;
-        QString addr1 = tempBulkWrite;  // temp address
-        QString addr2 = QString::number(0, 16).toUpper();
-        QString sysxMsg;
-        for(int i=0;i<patchData.size();++i)
-        {
-            QList<QString> data = patchData.at(i);
-            for(int x=0;x<data.size();++x)
-            {
-                QString hex;
-                if(x == sysxAddressOffset)
-                { hex = addr1; }
-                else if(x == sysxAddressOffset + 1)
-                {	hex = addr2; }
-                else
-                {	hex = data.at(x);	};
-                if (hex.length() < 2) hex.prepend("0");
-                sysxMsg.append(hex);
-            };
-        };
-        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
-        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
-        sysxIO->setFileSource("Structure", sysxMsg );
-        emit dialogUpdateSignal();
+        temp = sysxIO->temp3_sysxMsg.mid(this->position, this->length);
+        temp_paste();
     }
     else
     {
@@ -466,37 +490,11 @@ void editWindow::temp3()
 
 void editWindow::temp4()
 {
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (!sysxIO->temp4_sysxMsg.isEmpty() && !temp_hex1.isEmpty() && !temp_hex1.contains("void")  )
     {
-        QString temp = sysxIO->temp4_sysxMsg.mid(this->position, this->length);
-
-        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-        QList<QString> patchAddress = sysxIO->getFileSource().address;
-        QString addr1 = tempBulkWrite;  // temp address
-        QString addr2 = QString::number(0, 16).toUpper();
-        QString sysxMsg;
-        for(int i=0;i<patchData.size();++i)
-        {
-            QList<QString> data = patchData.at(i);
-            for(int x=0;x<data.size();++x)
-            {
-                QString hex;
-                if(x == sysxAddressOffset)
-                { hex = addr1; }
-                else if(x == sysxAddressOffset + 1)
-                {	hex = addr2; }
-                else
-                {	hex = data.at(x);	};
-                if (hex.length() < 2) hex.prepend("0");
-                sysxMsg.append(hex);
-            };
-        };
-        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
-        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
-        sysxIO->setFileSource("Structure", sysxMsg );
-        emit dialogUpdateSignal();
+        temp = sysxIO->temp4_sysxMsg.mid(this->position, this->length);
+        temp_paste();
     }
     else
     {
@@ -507,37 +505,11 @@ void editWindow::temp4()
 
 void editWindow::temp5()
 {
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (!sysxIO->temp5_sysxMsg.isEmpty() && !temp_hex1.isEmpty() && !temp_hex1.contains("void")  )
     {
-        QString temp = sysxIO->temp5_sysxMsg.mid(this->position, this->length);
-
-        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-        QList<QString> patchAddress = sysxIO->getFileSource().address;
-        QString addr1 = tempBulkWrite;  // temp address
-        QString addr2 = QString::number(0, 16).toUpper();
-        QString sysxMsg;
-        for(int i=0;i<patchData.size();++i)
-        {
-            QList<QString> data = patchData.at(i);
-            for(int x=0;x<data.size();++x)
-            {
-                QString hex;
-                if(x == sysxAddressOffset)
-                { hex = addr1; }
-                else if(x == sysxAddressOffset + 1)
-                {	hex = addr2; }
-                else
-                {	hex = data.at(x);	};
-                if (hex.length() < 2) hex.prepend("0");
-                sysxMsg.append(hex);
-            };
-        };
-        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
-        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
-        sysxIO->setFileSource("Structure", sysxMsg );
-        emit dialogUpdateSignal();
+        temp = sysxIO->temp5_sysxMsg.mid(this->position, this->length);
+        temp_paste();
     }
     else
     {
@@ -546,16 +518,122 @@ void editWindow::temp5()
     };
 };
 
-void editWindow::swap_pre()
+void editWindow::temp_paste()
 {
-
+    SysxIO *sysxIO = SysxIO::Instance();
+    QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
+    QString addr1 = tempBulkWrite;  // temp address
+    QString addr2 = QString::number(0, 16).toUpper();
+    QString sysxMsg;
+    for(int i=0;i<patchData.size();++i)
+    {
+        QList<QString> data = patchData.at(i);
+        for(int x=0;x<data.size();++x)
+        {
+            QString hex;
+            if(x == sysxAddressOffset)
+            { hex = addr1; }
+            else if(x == sysxAddressOffset + 1)
+            {	hex = addr2; }
+            else
+            {	hex = data.at(x);	};
+            if (hex.length() < 2) hex.prepend("0");
+            sysxMsg.append(hex);
+        };
+    };
+    if(this->position == 2236){    //pcm synth 1 is in two sections
+        sysxMsg = sysxMsg.replace(2236, 70, temp.mid(0, 70));
+        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp.mid(0, 70));
+        sysxMsg = sysxMsg.replace(2428, 104, temp.mid(192, 104));
+        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp.mid(192, 104));
+    } else if(this->position == 2332){    //pcm synth 2 is in two sections
+        sysxMsg = sysxMsg.replace(2332, 70, temp.mid(0, 70));
+        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp.mid(0, 70));
+        sysxMsg = sysxMsg.replace(2558, 104, temp.mid(226, 104));
+        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp.mid(226, 104));
+    } else {
+        sysxMsg = sysxMsg.replace(this->position, this->length, temp);
+        sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp); };
+    sysxIO->setFileSource("Structure", sysxMsg );
+    emit dialogUpdateSignal();
 };
-void editWindow::patchPos(int pos, int len, QString t_hex1, QString t_hex3)
+
+void editWindow::assign1_paste()
 {
-    this->position = pos;
-    this->length = len;
-    this->temp_hex1 = t_hex1;
-    this->temp_hex3 = t_hex3;
+    start_int = 328; length_int = 38;
+    assign_paste();
 };
 
+void editWindow::assign2_paste()
+{
+    start_int = 366; length_int = 38;
+    assign_paste();
+};
 
+void editWindow::assign3_paste()
+{
+    start_int = 404; length_int = 38;
+    assign_paste();
+};
+
+void editWindow::assign4_paste()
+{
+    start_int = 442; length_int = 38;
+    assign_paste();
+};
+
+void editWindow::assign5_paste()
+{
+    start_int = 480; length_int = 38;
+    assign_paste();
+};
+
+void editWindow::assign6_paste()
+{
+    start_int = 518; length_int = 38;
+    assign_paste();
+};
+
+void editWindow::assign7_paste()
+{
+    start_int = 556; length_int = 64;
+    assign_paste();
+};
+
+void editWindow::assign8_paste()
+{
+    start_int = 620; length_int = 38;
+    assign_paste();
+};
+
+void editWindow::assign_paste()
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
+    QString addr1 = tempBulkWrite;  // temp address
+    QString addr2 = QString::number(0, 16).toUpper();
+    QString sysxMsg;
+    for(int i=0;i<patchData.size();++i)
+    {
+        QList<QString> data = patchData.at(i);
+        for(int x=0;x<data.size();++x)
+        {
+            QString hex;
+            if(x == sysxAddressOffset)
+            { hex = addr1; }
+            else if(x == sysxAddressOffset + 1)
+            { hex = addr2; }
+            else
+            { hex = data.at(x);	};
+            if (hex.length() < 2) hex.prepend("0");
+            sysxMsg.append(hex);
+        };
+    };
+    temp = sysxMsg.mid(start_int, length_int);
+    if(length_int == 64) {temp.remove(4, 26); };   // if the assign comes from assign 7
+    if(this->position == 556){temp.insert(4, sysxMsg.mid(560, 26)); }; // if the assign is pasted to assign 7
+    sysxMsg = sysxMsg.replace(this->position, this->length, temp);
+    sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
+    sysxIO->setFileSource("Structure", sysxMsg );
+    emit dialogUpdateSignal();
+};

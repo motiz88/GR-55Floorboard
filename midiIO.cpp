@@ -165,7 +165,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     int p=0;
     int retryCount = 0;
     std::vector<unsigned char> message;
-    message.reserve(256);
+    message.reserve(1333);
     int msgLength = 0;
     msgLength = sysxOutMsg.length()/2;
     char *ptr  = new char[msgLength];		// Convert QString to char* (hex value)

@@ -83,7 +83,7 @@
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">C:/FxFloorBoard/ME-Edit/GR-55FloorBoard-build-desktop</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">4</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">false</value>
    </valuemap>
    <value key="ProjectExplorer.Target.BuildConfigurationCount" type="int">2</value>
    <valuemap key="ProjectExplorer.Target.RunConfiguration.0" type="QVariantMap">

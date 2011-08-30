@@ -34,7 +34,7 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
     setComboBox("21", "routeSwitch", "16");
     setKnob1("21", "00", "01");
     setKnob2("21", "00", "04");
-    editDetails()->patchPos(2332, 70, "21", "00");
+    editDetails()->patchPos(2332, 330, "21", "00");
     setEditPages();
 
 };
@@ -67,13 +67,13 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addKnob(0, 1, 1, 1, "21", "00", "05");               //octave
     editDetails()->page()->addKnob(0, 2, 1, 1, "21", "00", "0A");               // pitch shift
     editDetails()->page()->addKnob(0, 3, 1, 1, "21", "00", "0B");               // pitch fine
-    editDetails()->page()->addGroupBox(0, 7, 1, 4);
+    editDetails()->page()->addGroupBox(0, 7, 1, 3);
 
     editDetails()->page()->newGroupBox("Portamento");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "21", "00", "0C", "bottom", Qt::AlignLeft); //portamento sw
     editDetails()->page()->addComboBox(1, 0, 1, 1, "31", "00", "1B");        //portamento type
     editDetails()->page()->addDataKnob(0, 1, 2, 1, "21", "00", "0D", "PORTAMENTO"); // portamento time
-    editDetails()->page()->addGroupBox(0, 11, 1, 2);
+    editDetails()->page()->addGroupBox(0, 10, 1, 2);
 
     editDetails()->page()->newGroupBox(tr("String level"));
     editDetails()->page()->addKnob(0, 0, 1, 1, "21", "00", "10");            //string level 1
@@ -82,26 +82,27 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addKnob(0, 3, 1, 1, "21", "00", "13");            //string level 4
     editDetails()->page()->addKnob(0, 4, 1, 1, "21", "00", "14");            //string level 5
     editDetails()->page()->addKnob(0, 5, 1, 1, "21", "00", "15");            //string level 6
-    editDetails()->page()->addGroupBox(1, 0, 1, 6);
+    editDetails()->page()->addGroupBox(1, 0, 1, 5);
 
     editDetails()->page()->newGroupBox(tr("Filter"));
     editDetails()->page()->addComboBox(0, 0, 1, 1, "31", "00", "00");        //filter type
     editDetails()->page()->addKnob(0, 1, 1, 1, "31", "00", "01");            //cutoff
     editDetails()->page()->addKnob(0, 2, 1, 1, "31", "00", "02");            //resonance
-    editDetails()->page()->addGroupBox(1, 6, 1, 3);
+    editDetails()->page()->addGroupBox(1, 5, 1, 3);
+
     editDetails()->page()->newGroupBox(tr("Filter Cutoff"));
     editDetails()->page()->addKnob(0, 0, 1, 1, "31", "00", "03");            //cutoff velo sens
     editDetails()->page()->addComboBox(0, 1, 1, 1, "31", "00", "04");        //cutoff velo curve
     editDetails()->page()->addKnob(0, 2, 1, 1, "31", "00", "05");            //cutoff key follow
     editDetails()->page()->addKnob(0, 3, 1, 1, "31", "00", "06");            //cutoff nuance sens
-    editDetails()->page()->addGroupBox(1, 9, 1, 4);
+    editDetails()->page()->addGroupBox(1, 8, 1, 4);
 
     editDetails()->page()->newGroupBox(tr("Pitch ENV"));
     editDetails()->page()->addKnob(0, 0, 1, 1, "31", "00", "17");            //env vel sens
     editDetails()->page()->addKnob(0, 1, 1, 1, "31", "00", "18");            //env depth
     editDetails()->page()->addKnob(0, 2, 1, 1, "31", "00", "19");            //attack time
     editDetails()->page()->addKnob(0, 3, 1, 1, "31", "00", "1A");            //decay time
-    editDetails()->page()->addGroupBox(2, 9, 1, 4);
+    editDetails()->page()->addGroupBox(2, 8, 1, 4);
 
 
     editDetails()->page()->newGroupBox(tr("TVF"));
@@ -112,12 +113,16 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addKnob(0, 4, 1, 1, "31", "00", "0B");            //release time
     editDetails()->page()->addKnob(0, 5, 1, 1, "31", "00", "0C");            //attack velocity sens
     editDetails()->page()->addKnob(0, 6, 1, 1, "31", "00", "0D");            //attack nuance sens
+    editDetails()->page()->addGroupBox(2, 0, 1, 6);
+
+    editDetails()->page()->newGroupBox(tr("Velocity"));
     editDetails()->page()->addKnob(0, 7, 1, 1, "31", "00", "0E");            //level velocity sens
     editDetails()->page()->addComboBox(0, 8, 1, 1, "31", "00", "0F");        //velocity curve type
-    editDetails()->page()->addGroupBox(2, 0, 1, 9);
+    editDetails()->page()->addGroupBox(2, 6, 1, 2);
 
 
     Preferences *preferences = Preferences::Instance();
+    QString text = tr("detailed settings available in multi-window mode");
 
     editDetails()->page()->newGroupBox(tr("TVA"));
     editDetails()->page()->addKnob(0, 0, 1, 1, "31", "00", "10");            //attack time
@@ -141,8 +146,8 @@ void soundsource_synth_b::setEditPages()
         editDetails()->page()->addKnob(1, 1, 1, 1, "31", "00", "1F");            //TVF depth
         editDetails()->page()->addKnob(1, 2, 1, 1, "31", "00", "20");            //TVA depth
         editDetails()->page()->addKnob(1, 3, 1, 1, "31", "00", "21");            //pan depth
-    };
-    editDetails()->page()->addGroupBox(4, 5, 1, 4);
+    } else { editDetails()->page()->addLabel(1, 0, 1, 4, text); };
+    editDetails()->page()->addGroupBox(4, 5, 1, 3);
 
     editDetails()->page()->newGroupBox(tr("LFO 2"));
     editDetails()->page()->addDataKnob(0, 0, 1, 4, "31", "00", "22", "RATE","right", 120); //Rate
@@ -152,8 +157,8 @@ void soundsource_synth_b::setEditPages()
         editDetails()->page()->addKnob(1, 1, 1, 1, "31", "00", "25");            //TVF depth
         editDetails()->page()->addKnob(1, 2, 1, 1, "31", "00", "26");            //TVA depth
         editDetails()->page()->addKnob(1, 3, 1, 1, "31", "00", "27");            //pan depth
-    };
-    editDetails()->page()->addGroupBox(4, 9, 1, 4);
+    } else { editDetails()->page()->addLabel(1, 0, 1, 4, text); };
+    editDetails()->page()->addGroupBox(4, 8, 1, 4);
 
 editDetails()->addPage();
 };
