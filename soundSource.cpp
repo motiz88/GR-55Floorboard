@@ -203,8 +203,7 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
 {
     QString type = hex2;
     this->hex1 = hex1;
-    if (type == "routeSwitch") { this->hex2 = "00"; } else {
-        this->hex2 = hex2; };
+    if (type == "routeSwitch") { this->hex2 = "00"; } else { this->hex2 = hex2; };
     this->hex3 = hex3;
 
     MidiTable *midiTable = MidiTable::Instance();
@@ -322,8 +321,14 @@ void soundSource::updateComboBox(QString hex1, QString hex2, QString hex3)
 
 void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
 {
+    MidiTable *midiTable = MidiTable::Instance();
     SysxIO *sysxIO = SysxIO::Instance();
     int index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
+    if(hex1=="20" || hex1=="21")
+    {
+        int pcm_check = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, "00" );
+        if (pcm_check == 86) {index = index + 896; };
+    };
 
     if (this->id == 1)
     {
@@ -331,7 +336,6 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
         hex3 = "0" + QString::number(QString(hex3).toInt(&ok, 16) + index + 1, 16).toUpper();
         index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
     };
-    MidiTable *midiTable = MidiTable::Instance();
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);

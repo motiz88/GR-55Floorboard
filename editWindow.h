@@ -64,7 +64,16 @@ public slots:
 	void temp3();
 	void temp4();
 	void temp5();
-	void swap_pre();
+        void temp_paste();
+        void assign1_paste();
+        void assign2_paste();
+        void assign3_paste();
+        void assign4_paste();
+        void assign5_paste();
+        void assign6_paste();
+        void assign7_paste();
+        void assign8_paste();
+        void assign_paste();
 
 protected:
 	void paintEvent(QPaintEvent *event);
@@ -87,13 +96,24 @@ private:
 	customControlLabel* temp3_Button;
 	customControlLabel* temp4_Button;
 	customControlLabel* temp5_Button;
+        customControlLabel* assign1_Button;
+        customControlLabel* assign2_Button;
+        customControlLabel* assign3_Button;
+        customControlLabel* assign4_Button;
+        customControlLabel* assign5_Button;
+        customControlLabel* assign6_Button;
+        customControlLabel* assign7_Button;
+        customControlLabel* assign8_Button;
 	customControlLabel* closeButton;
 	editPage* tempPage;
 	QList<editPage*> editPages;
 	int position;
 	int length;
+        QString temp;
 	QString temp_hex1;
 	QString temp_hex3;
+        int start_int;
+        int length_int;
 };
 
 #endif // EDITWINDOW_H

@@ -219,8 +219,8 @@ void mainWindow::createActions()
     homepageAct->setWhatsThis(tr("download Webpage for GR-55FloorBoard<br>find if the latest version is available."));
     connect(homepageAct, SIGNAL(triggered()), this, SLOT(homepage()));
 
-    donationAct = new QAction(QIcon(":/images/donate.png"), tr("Donate towards GR-55 test equipment"), this);
-    donationAct->setWhatsThis(tr("Even though the software is free,<br>an occassional donation is very much appreciated<br>i am not paid for this work."));
+    donationAct = new QAction(QIcon(":/images/donate.png"), tr("Donate if you appreciate this software"), this);
+    donationAct->setWhatsThis(tr("Even though the software is free,<br>a donation is very much appreciated<br>for my un-paid efforts to provide this software."));
     connect(donationAct, SIGNAL(triggered()), this, SLOT(donate()));
 
     manualAct = new QAction(QIcon(":/images/manual.png"), tr("Owner's Manual"), this);
