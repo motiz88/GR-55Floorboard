@@ -452,6 +452,13 @@ void midiIO::run()
  *************************************************************************/
 void midiIO::sendSysxMsg(QString sysxOutMsg, int midiOutPort, int midiInPort)
 {
+    if(sysxOutMsg.size()/2 == 1333 || sysxOutMsg.size()/2 == 1347) {
+        sysxOutMsg = sysxOutMsg.remove(139*2, 13*2);
+        sysxOutMsg = sysxOutMsg.remove(267*2, 13*2);
+        sysxOutMsg = sysxOutMsg.remove(486*2, 13*2);
+        sysxOutMsg = sysxOutMsg.remove(614*2, 13*2);
+        sysxOutMsg = sysxOutMsg.remove(954*2, 13*2);
+    };
     QString reBuild;
     QString sysxEOF;
     QString hex;
