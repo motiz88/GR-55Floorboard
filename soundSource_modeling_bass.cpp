@@ -98,7 +98,7 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("");
     editDetails()->page()->newStackControl(2);
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "07"); // synth select
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "08"); // synth select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(2, 1, 0, 1, 1);
     editDetails()->page()->addGroupBox(0, 0, 1, 4);
@@ -107,7 +107,7 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("");
     editDetails()->page()->newStackControl(3);
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "08"); // E.guitar select
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "07"); // E.guitar select
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(3, 1, 0, 1, 1);
     editDetails()->page()->addGroupBox(0, 0, 1, 4);

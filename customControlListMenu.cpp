@@ -81,14 +81,14 @@ customControlListMenu::customControlListMenu(QWidget *parent,
     }
     else
     {
-        this->label->setAlignment(Qt::AlignLeft);
+        this->label->setAlignment(Qt::AlignCenter);
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->setMargin(0);
         mainLayout->setSpacing(0);
         mainLayout->addStretch(0);
-        mainLayout->addWidget(this->label, 0, Qt::AlignLeft);
-        mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignLeft);
+        mainLayout->addWidget(this->label, 0, Qt::AlignCenter);
+        mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignCenter);
 
         this->setLayout(mainLayout);
         if(midiTable->isData(this->area, hex1, hex2, hex3))

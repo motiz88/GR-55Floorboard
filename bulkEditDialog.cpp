@@ -185,8 +185,9 @@ void bulkEditDialog::sendData()
 void bulkEditDialog::sendPatch(QString data)
 {
 	SysxIO *sysxIO = SysxIO::Instance();
-	QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));          
-  sysxIO->sendSysx(data);               
+        QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+  data.append("F04110000053120F000001016FF7");   // key code to write data to GR-55 memory
+  sysxIO->sendSysx(data);
 };                                                           
 
 void bulkEditDialog::sendSequence(QString value)

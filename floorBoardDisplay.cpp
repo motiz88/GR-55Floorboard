@@ -1213,7 +1213,9 @@ void floorBoardDisplay::writeToMemory()
     this->writeButton->setValue(true);	// ... and still the button will be active also ...
 
     QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(resetDevice(QString))); // Connect the result signal to a slot that will reset the device after sending.
-    sysxIO->sendSysx(sysxMsg);								// Send the data.
+    sysxMsg.append("F04110000053120F000001016FF7");   // key code to write data to GR-55 memory
+    sysxIO->sendSysx(sysxMsg);	                      // Send the data.
+    sysxIO->requestPatchChange(bank, patch);
 };
 
 void floorBoardDisplay::patchChangeFailed()
