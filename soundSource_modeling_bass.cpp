@@ -56,7 +56,7 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "09");  //level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
-    editDetails()->page()->addKnob(0, 0, 1, 1, "10", "00", "11");  //pitch
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "10", "00", "11");  //pitch
     editDetails()->page()->addKnob(0, 1, 1, 1, "10", "00", "12");  //pitch fine
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->page()->newGroupBox("12 String");

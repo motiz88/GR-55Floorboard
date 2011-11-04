@@ -4,7 +4,7 @@ GR-55FloorBoard Copyright (C) 2011 Colin Willcocks (gumtownbassman@yahoo.com).
 =======
 
 
-GR-55FloorBoard version 20110929: 29 September 2011
+GR-55FloorBoard version 2011026: 26 October 2011
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -16,20 +16,23 @@ You can email custom patch files to the above address, or post them at V-Guitars
 for inclusion in a later release.
 ***********************************************************************************
  ********* LATEST FEATURES ADDED****************************************************
- *<<<< now at Release stage >>>>
   
  Here is an update on "where it's at"...
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ +++++ The New Zealand "All Blacks" are now the rugby world cup champions !!! ++++++
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  
-Added Assign paste/Transfer buttons, fixed PCM Synth Drum kit selection, fixed PCM Synth layout, 
-fixed PCM synth pasting. 
-
-Editor nows supports 6 languages, English, French, German, Portuguese, Spanish, Japanese, Chinese.
-The File system is now 100% compatible with the Roland Librarian, except SMF file format export not yet complete. 
+Corrected MFX backwards BPM rates and Left panning.
+Added xml schema documents as the current xml documents would not pass validation,
+this fixes windows startup crashes.
+ 
+fixed guitar modeling layout, fixed single editpage mode, 
+added GR-55 not present dialog, removed some unnessicary startup processing code.               
 
 All functions are now implemented, except for
 
 Preset patches are not displayed, because i can't find the memory address they reside in,
- and am waiting on delivery of specification documentation.
+ because I am waiting on delivery of specification documentation from Roland (since january).
 
 Patch Text Summary will display some parameters as data values instead of text.
 

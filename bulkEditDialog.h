@@ -1,10 +1,9 @@
 /****************************************************************************
 **
-** Copyright (C) 2007, 2008, 2009 Colin Willcocks. 
-** Copyright (C) 2005, 2006, 2007 Uco Mesdag.
+** Copyright (C) 2007~2011 Colin Willcocks. 
 ** All rights reserved.
 **
-** This file is part of "GR-55B FloorBoard".
+** This file is part of "GR-55 FloorBoard".
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -70,16 +69,16 @@ private:
   QPushButton *startButton;
   QPushButton *cancelButton; 
   QPushButton *completedButton;
-  unsigned int start;
-  unsigned int finish;
+  int start;
+  int finish;
 	int patchRange;
 	int progress;
-	unsigned int partialStart;
-	unsigned int partialLength;
+	int partialStart;
+	int partialLength;
 	int range;
 	int patch;
 	int bank;	
-	unsigned int steps;
+	int steps;
 	int dataSent;
 	QString patchName;
 	QString partialData;

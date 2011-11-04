@@ -250,8 +250,22 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
     QString midiIn = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOut = preferences->getPreferences("Midi", "MidiOut", "device");
-    if(midiIn!="" && midiOut!="")
-    {autoconnect(); };
+    if(!midiIn.isEmpty() && !midiOut.isEmpty())
+    {autoconnect(); } else {
+        QMessageBox *msgBox = new QMessageBox();
+        msgBox->isTopLevel();
+        msgBox->setWindowTitle(deviceType + tr(" FloorBoard"));
+        msgBox->setIcon(QMessageBox::Warning);
+        msgBox->setTextFormat(Qt::RichText);
+        QString msgText;
+        msgText.append("<font size='+1'><b>");
+        msgText.append(tr("Midi device not selected in Preferences Menu."));
+        msgText.append("<b></font><br>");
+        msgText.append(tr("Select the GR-55 or a midi adapter from the Preferences USB/Midi menu and press the 'Connect' button"));
+        msgBox->setText(msgText);
+        msgBox->setStandardButtons(QMessageBox::Ok);
+        msgBox->exec();
+        };
 }
 
 QPoint floorBoardDisplay::getPos()
@@ -1140,12 +1154,13 @@ void floorBoardDisplay::writeSignal(bool)
                     {
                         sysxIO->setDeviceReady(true);
                         this->writeButton->setBlink(false);
-                        this->writeButton->setValue(true);
+                        //this->writeButton->setValue(true);
                     };
                 };
             };
         };
-    }
+    };
+    this->writeButton->setValue(false);
 };
 
 void floorBoardDisplay::writeToBuffer()
@@ -1210,7 +1225,7 @@ void floorBoardDisplay::writeToMemory()
     };
     sysxIO->setSyncStatus(true);		// Still in sync
     this->writeButton->setBlink(false); // so no blinking here either...
-    this->writeButton->setValue(true);	// ... and still the button will be active also ...
+    this->writeButton->setValue(false);	// ... and still the button will be active also ...
 
     QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(resetDevice(QString))); // Connect the result signal to a slot that will reset the device after sending.
     sysxMsg.append("F04110000053120F000001016FF7");   // key code to write data to GR-55 memory
@@ -1249,7 +1264,7 @@ void floorBoardDisplay::patchSelectSignal(int bank, int patch)
     {
         currentSyncStatus = sysxIO->getSyncStatus();
         sysxIO->setSyncStatus(false);
-        writeButton->setBlink(true);
+        writeButton->setBlink(false);
     };
 
     //if( sysxIO->getLoadedBank() != bank ||  sysxIO->getLoadedPatch() != patch)

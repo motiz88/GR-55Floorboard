@@ -91,5 +91,7 @@
         <file>language_es.qm</file>
         <file>language_jp.qm</file>
         <file>language_pt.qm</file>
+        <file>midi.xsd</file>
+        <file>preferences.xsd</file>
     </qresource>
 </RCC>

@@ -492,7 +492,8 @@ void floorBoard::menuButtonSignal()
 {
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
-    { this->oldDialog->hide(); };
+    { this->oldDialog->hide();
+    this->editDialog->show();};
 };
 
 void floorBoard::structure(bool value)

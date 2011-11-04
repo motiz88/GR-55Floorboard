@@ -636,8 +636,8 @@ void stompbox_mfx::setEditPages()
     // Pitch Shifter
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Pitch Shifter", Qt::AlignTop | Qt::AlignHCenter);
-    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "66");   //pitch coarse
-    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "67");   //pitch fine
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "66", "normal", "right", 120);   //pitch coarse
+    editDetails()->page()->addKnob(0, 1, 1, 1, "04", "00", "67", "normal", "right", 120);   //pitch fine
     editDetails()->page()->newStackControl(18);
     editDetails()->page()->addComboBox(0, 2, 1, 1, "04", "00", "68");// time type
     editDetails()->page()->addStackControl();
