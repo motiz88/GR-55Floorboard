@@ -101,6 +101,7 @@ void customControlLabel::setText(QString text)
 void customControlLabel::setSize()
 {
 	int pixelWidth = QFontMetrics(this->label->font()).width(this->label->text());
+	if(pixelWidth<1) {pixelWidth = 1; };
 	this->labelWidth = pixelWidth;
 };
 

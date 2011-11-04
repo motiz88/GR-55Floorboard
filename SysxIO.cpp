@@ -1041,7 +1041,7 @@ void SysxIO::errorSignal(QString errorType, QString errorMsg)
 void SysxIO::errorReturn(QString errorType, QString errorMsg)
 {
     setNoError(false);
-    emit setStatusdBugMessage(this->errorType + "  " + this->errorMsg);
+    emit setStatusdBugMessage(errorType + "  " + errorMsg);
     this->errorType = "";
     this->errorMsg = "";
 };

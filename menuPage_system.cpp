@@ -536,6 +536,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "04", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "04", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "04", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "04", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -571,6 +572,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "05", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "05", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "05", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "05", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -606,6 +608,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "06", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "06", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "06", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "06", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -641,6 +644,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "07", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "07", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "07", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "07", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -676,6 +680,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "08", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "08", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "08", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "08", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -711,6 +716,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "09", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "09", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "09", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "09", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -746,6 +752,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0A", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0A", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0A", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0A", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -781,6 +788,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0B", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0B", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0B", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0B", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -816,6 +824,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0C", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0C", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0C", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0C", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -851,6 +860,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0D", "21", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0D", "22", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0D", "0E", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0D", "51", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();
@@ -1129,6 +1139,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "04", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "04", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "04", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "04", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1165,6 +1176,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "05", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "05", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "05", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "05", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1201,6 +1213,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "06", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "06", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "06", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "07", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1237,6 +1250,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "07", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "07", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "07", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "07", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1273,6 +1287,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "08", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "08", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "08", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "08", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1309,6 +1324,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "09", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "09", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "09", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "09", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1345,6 +1361,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0A", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0A", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0A", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0A", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1381,6 +1398,8 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0B", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0B", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0B", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0B", "52", "System"); // DevelopLowCut
+
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1417,6 +1436,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0C", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0C", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0C", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0C", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(0);
@@ -1453,6 +1473,7 @@ void menuPage_system::setEditPages()
     editDetails()->page()->addKnob(2, 4, 1, 1, "02", "0D", "45", "System"); // nuance trim
     editDetails()->page()->addKnob(2, 5, 1, 1, "02", "0D", "46", "System"); // down shift
     editDetails()->page()->addKnob(2, 6, 1, 1, "02", "0D", "32", "System"); // normal pu gain
+    editDetails()->page()->addKnob(2, 7, 1, 1, "02", "0D", "52", "System"); // DevelopLowCut
     editDetails()->page()->addStackField();
 
     editDetails()->page()->newStackField(1);editDetails()->page()->addStackField();

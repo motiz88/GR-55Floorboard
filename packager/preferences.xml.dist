@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Preferences of the GR-55 FloorBoard application. -->
-<Preferences>
+<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preferences.xsd">
 	<General>
-		<Application version="20110929"/>
+		<Application version="20111026"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>
@@ -31,7 +31,7 @@
     <Collapsed bool="true" defaultwidth="1210" width="1210"/>
     <Position x="" y=""/>
     <Restore sidepanel="true" window="false"/>
-    <Single bool="false"/>
+    <Single bool="true"/>
     <Size height="" minheight="548" minwidth="1014" width=""/>
     <Splash bool="true"/>
     <Widgets bool="true"/>

@@ -54,12 +54,13 @@ void customDisplay::paintEvent(QPaintEvent *)
         /* Change the font size to make it fit... */
         QFont tmpfont = this->mainLabel->font();
         int fontSize = tmpfont.pixelSize();
-        tmpfont.setPixelSize(fontSize - 1);
-        this->mainLabel->setFont(tmpfont);
         if (fontSize <= 1)
         {
             break;
+            fontSize = 1;
         };
+        tmpfont.setPixelSize(fontSize - 1);
+        this->mainLabel->setFont(tmpfont);
     };
 
     /* This paints the background with the border. */

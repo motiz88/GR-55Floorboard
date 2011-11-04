@@ -247,7 +247,7 @@ void bulkEditDialog::sendSequence(QString value)
   if (steps<((finish-start)+1) )
   {      
         QString patchText = "'" + this->patchName + tr("' effect data pasted");
-        unsigned int bf = (finish-start);
+        int bf = (finish-start);
         if(steps>(bf-1)) 
         {
           this->completedButton->show();        
