@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -153,6 +153,8 @@ private:
         QString temp3_sysxMsg;
         QString temp4_sysxMsg;
         QString temp5_sysxMsg;
+        int set_bank;
+        int set_patch;
         };
 
 #endif // FLOORBOARDDISPLAY_H

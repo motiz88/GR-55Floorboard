@@ -109,7 +109,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 LEGAL:
 ------
 
-GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2011 Colin Willcocks <gumtownbassman@yahoo.com>.
+GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2012 Colin Willcocks <gumtownbassman@yahoo.com>.
 based on the GT8 FxFloorBoard Copyright (C)2005~2007 Uco Mesdag.
 
 Windows(TM), Windows 95(TM), Windows 98(TM), Windows ME(TM), Windows NT(TM), 

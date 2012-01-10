@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -376,6 +376,7 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
 {
     int bank = 0;
     int patch = 0;
+    SysxIO *sysxIO = SysxIO::Instance();
     if(item->childCount() != 0 && item->text(0) != "Temp")
     {
         if(item->isExpanded())
@@ -387,14 +388,9 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
             item->setExpanded(true);
         };
     }
-    else if (item->childCount() == 0)
+    else if (item->childCount() == 0 && sysxIO->isConnected() && sysxIO->deviceReady())
     {
-        SysxIO *sysxIO = SysxIO::Instance();
-
-        if(sysxIO->isConnected() && sysxIO->deviceReady())
-        {
-
-            if (item->text(0) != ("Temp"))
+          if (item->text(0) != ("Temp"))
             {
                 bool ok;
                 bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
@@ -403,16 +399,8 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
                 if (preset.contains("P")) { bank = bank + 99; };
                 sysxIO->requestPatchChange(bank, patch);
             }
-
-        }
-        else
-        {
-            bank = 0;
-            patch = 0;
             emit patchSelectSignal(bank, patch);
-        };
-        emit patchSelectSignal(bank, patch);
-    };
+        };   
 };
 
 /*********************** setItemDoubleClicked() *****************************
@@ -440,7 +428,7 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
             QString preset = item->parent()->parent()->text(0);
             if (preset.contains("P")) { bank = bank + 99; };
 
-            requestPatch(bank, patch); // use
+            requestPatch(bank, patch);
 
         }
         else if(item->text(0) == "Temp")
@@ -448,7 +436,9 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
             requestPatch();
         }
         else
-        { patch = item->parent()->indexOfChild(item) + 1;  };
+        {
+            patch = item->parent()->indexOfChild(item) + 1;
+        };
 
         emit patchSelectSignal(bank, patch);
     };

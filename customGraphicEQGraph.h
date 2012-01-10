@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** Copyright (C) 2005-2009, rncbc aka Rui Nuno Capela.
 ** All rights reserved.

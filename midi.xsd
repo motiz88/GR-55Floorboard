@@ -5758,7 +5758,7 @@
 						<xs:enumeration value="(Dist) Mild DS"/>
 						<xs:enumeration value="(Dynamic) Sennheiser MD 421"/>
 						<xs:enumeration value="(Dynamic) Shure SM 57"/>
-						<xs:enumeration value="(Flat) Flat reponse"/>
+						<xs:enumeration value="(Flat) Flat response"/>
 						<xs:enumeration value="(Fuzz) &apos;60s Fuzz"/>
 						<xs:enumeration value="(Fuzz) Muff Fuzz"/>
 						<xs:enumeration value="(Fuzz) Oct Fuzz"/>
