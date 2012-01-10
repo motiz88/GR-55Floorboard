@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -31,6 +31,15 @@
 #include "customRenameWidget.h"
 #include "customComboBox.h"
 #include "globalVariables.h"
+
+// Platform-dependent sleep routines.
+#ifdef Q_OS_WIN
+#include <windows.h>
+#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
+#else // Unix variants & Mac
+#include <unistd.h>
+#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+#endif
 
 
 floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
@@ -1166,7 +1175,26 @@ void floorBoardDisplay::writeSignal(bool)
 void floorBoardDisplay::writeToBuffer()
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->writeToBuffer();
+    QMessageBox *msgBox = new QMessageBox();
+    msgBox->setWindowTitle(deviceType + tr(" FloorBoard"));
+    msgBox->setIcon(QMessageBox::Warning);
+    msgBox->setTextFormat(Qt::RichText);
+    QString msgText;
+    msgText.append("<font size='+1'><b>");
+    msgText.append(tr("You have not chosen a User Patch address to Write the patch to"));
+    msgText.append("<b></font><br>");
+    msgText.append(tr("This will only update the GR-55 Temporary Buffer memory<br>"));
+    msgText.append(tr (" with the editor patch. "));
+    msgBox->setInformativeText(tr("Select the required destination patch <br>by a single-click on the left panel Patch-Tree"));
+    msgBox->setText(msgText);
+    msgBox->setStandardButtons(QMessageBox::Close);
+
+    msgBox->exec();
+
+        sysxIO->writeToBuffer();
+        sysxIO->setSyncStatus(true);
+
+
 
     this->writeButton->setBlink(false);	// Sync so we stop blinking the button
     this->writeButton->setValue(false);	// and activate the write button.
@@ -1230,7 +1258,8 @@ void floorBoardDisplay::writeToMemory()
     QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(resetDevice(QString))); // Connect the result signal to a slot that will reset the device after sending.
     sysxMsg.append("F04110000053120F000001016FF7");   // key code to write data to GR-55 memory
     sysxIO->sendSysx(sysxMsg);	                      // Send the data.
-    sysxIO->requestPatchChange(bank, patch);
+    set_bank = bank;
+    set_patch = patch;
 };
 
 void floorBoardDisplay::patchChangeFailed()
@@ -1244,7 +1273,7 @@ void floorBoardDisplay::patchChangeFailed()
 void floorBoardDisplay::resetDevice(QString replyMsg)
 {
     SysxIO *sysxIO = SysxIO::Instance();
-    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)),	this, SLOT(resetDevice(QString)));
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(resetDevice(QString)));
 
     if(sysxIO->getBank() != sysxIO->getLoadedBank() || sysxIO->getPatch() != sysxIO->getLoadedPatch())
     {
@@ -1252,10 +1281,15 @@ void floorBoardDisplay::resetDevice(QString replyMsg)
         sysxIO->setLoadedPatch(sysxIO->getPatch());
     };
 
-
+    Sleep(1000);
+    if(set_bank < 999 && set_patch < 999) {sysxIO->requestPatchChange(set_bank, set_patch); };
+    set_bank = 999;
+    set_patch = 999;
+    Sleep(500);
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
-    emit connectedSignal();			// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
-};
+    emit connectedSignal();		// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
+    sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
+ };
 
 void floorBoardDisplay::patchSelectSignal(int bank, int patch)
 {

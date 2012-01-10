@@ -2,7 +2,7 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preferences.xsd">
 	<General>
-		<Application version="20111026"/>
+		<Application version="20120109"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55FloorBoard_help.html"/>

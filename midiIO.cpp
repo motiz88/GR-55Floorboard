@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -370,15 +370,15 @@ void midiIO::run()
         };
         emit setStatusSymbol(2);
         emit setStatusProgress(33); // time wasting sinusidal statusbar progress animation
-        msleep(40);
+        msleep(50);
         emit setStatusProgress(66);
-        msleep(100);
+        msleep(50);
         emit setStatusProgress(100);
-        msleep(100);
+        msleep(50);
         emit setStatusProgress(75);
-        msleep(100);
+        msleep(50);
         emit setStatusProgress(42);
-        msleep(150);
+        msleep(50);
         emit setStatusProgress(0);
         emit midiFinished(); // We are finished so we send a signal to free the device.
     }
@@ -428,16 +428,16 @@ void midiIO::run()
             emit setStatusSymbol(2);
             emit setStatusMessage(tr("Sending"));
             sendSyxMsg(sysxOutMsg, midiOutPort);
-            Preferences *preferences = Preferences::Instance(); bool ok;// Load the preferences.
-            const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
+           // Preferences *preferences = Preferences::Instance(); bool ok;// Load the preferences.
+           // const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
             emit setStatusProgress(33);  // do the statusbar progress thing
-            msleep((100/minWait)*2);		// and wait predetermined time before being able to send more again.
+            msleep(20);		// and wait predetermined time before being able to send more again.
             emit setStatusProgress(75);
-            msleep((100/minWait)*3);
+            msleep(20);
             emit setStatusProgress(100);
-            msleep((100/minWait)*3);
+            msleep(20);
             emit setStatusProgress(66);
-            msleep((100/minWait)*2);
+            msleep(20);
             emit midiFinished(); // We are finished so we send a signal to free the device.
         };
         this->sysxInMsg = sysxInMsg;

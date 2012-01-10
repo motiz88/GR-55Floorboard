@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2011 Colin Willcocks.
+** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -819,8 +819,8 @@ void SysxIO::requestPatchChange(int bank, int patch)
     this->bankChange = bank;
     this->patchChange = patch;
 
-    QObject::connect(this, SIGNAL(isFinished()),	// Connect the result of the request
-                     this, SLOT(namePatchChange()));				// to returnPatchName function.
+    //QObject::connect(this, SIGNAL(isFinished()),	// Connect the result of the request
+                     //this, SLOT(namePatchChange()));				// to returnPatchName function.
 
     QString midiMsg = getPatchChangeMsg(bank, patch);
     emit setStatusMessage(tr("Patch change"));
