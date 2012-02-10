@@ -4,7 +4,7 @@ GR-55FloorBoard Copyright (C) 2011 Colin Willcocks (gumtownbassman@yahoo.com).
 =======
 
 
-GR-55FloorBoard version 2011026: 26 October 2011
+GR-55FloorBoard version 20120113: 13 January 2012
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -18,21 +18,16 @@ for inclusion in a later release.
  ********* LATEST FEATURES ADDED****************************************************
   
  Here is an update on "where it's at"...
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- +++++ The New Zealand "All Blacks" are now the rugby world cup champions !!! ++++++
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 
-Corrected MFX backwards BPM rates and Left panning.
-Added xml schema documents as the current xml documents would not pass validation,
-this fixes windows startup crashes.
- 
-fixed guitar modeling layout, fixed single editpage mode, 
-added GR-55 not present dialog, removed some unnessicary startup processing code.               
+      
+*** Modified combobox selections to give 'live update' for easier tone auditioning.
+
+*** Changed Write sequence and patch selection for less confusion.
+              
+*** Minor text changes.
 
 All functions are now implemented, except for
 
-Preset patches are not displayed, because i can't find the memory address they reside in,
- because I am waiting on delivery of specification documentation from Roland (since january).
+Preset patches are not displayed.
 
 Patch Text Summary will display some parameters as data values instead of text.
 

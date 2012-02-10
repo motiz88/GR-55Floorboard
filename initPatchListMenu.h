@@ -39,6 +39,7 @@ public:
 
 public slots:
 	void loadInitPatch(int index);
+    void highLightInitPatch(int index);
 	void setIndex(int index);
 
 signals:

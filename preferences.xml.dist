@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by x (x) -->
 <!-- Preferences of the GR-55 FloorBoard application. -->
-<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preferences.xsd">
+<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\GrFloorBoard\grfloorboard\packager\preferences.xsd">
 	<General>
-		<Application version="20120109"/>
+		<Application version="20120205"/>
 		<Donate url=""/>
 		<Files dir=""/>
-		<Help url="GR-55FloorBoard_help.html"/>
+		<Help url="GR-55-Help-HTML\GR-55_HTML_Help.html"/>
 		<Language code="en"/>
 		<Manual url="http://www.roland.com/products/en/_support/om.cfm?PRODUCT=GR-55"/>
 		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
 		<Webpage url="http://sourceforge.net/projects/grfloorboard/"/>
 	</General>
 	<Language>
-    <Locale select="0"/>
-  </Language>
+		<Locale select="0"/>
+	</Language>
 	<Midi>
-	  <BulkFinish patch="297"/>
-	  <BulkStart patch="1"/>
+		<BulkFinish patch="297"/>
+		<BulkStart patch="1"/>
 		<DBug bool="false"/>
 		<Delay set="30"/>
 		<MidiIn device=""/>
 		<MidiOut device=""/>
-		<Time set="80"/>		
+		<Time set="80"/>
 	</Midi>
 	<Scheme>
-	  <Style select="1"/>
-	  <Colour select="0"/>
+		<Style select="1"/>
+		<Colour select="0"/>
 	</Scheme>
 	<Window>
-    <Collapsed bool="true" defaultwidth="1210" width="1210"/>
-    <Position x="" y=""/>
-    <Restore sidepanel="true" window="false"/>
-    <Single bool="true"/>
-    <Size height="" minheight="548" minwidth="1014" width=""/>
-    <Splash bool="true"/>
-    <Widgets bool="true"/>
-  </Window>
+		<Collapsed bool="true" defaultwidth="1210" width="1210"/>
+		<Position x="" y=""/>
+		<Restore sidepanel="true" window="false"/>
+		<Single bool="true"/>
+		<Size height="" minheight="548" minwidth="1014" width=""/>
+		<Splash bool="true"/>
+		<Widgets bool="true"/>
+	</Window>
 </Preferences>
- 

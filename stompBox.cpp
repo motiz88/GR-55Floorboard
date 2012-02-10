@@ -282,6 +282,9 @@ void stompBox::setComboBox(QString hex1, QString hex2, QString hex3, QRect geome
 
     QObject::connect(this->stompComboBox, SIGNAL(currentIndexChanged(int)),
                      this, SLOT(valueChanged(int)));
+
+    QObject::connect(this->stompComboBox, SIGNAL(highlighted(int)),
+                     this, SLOT(valueChanged(int)));
 };
 
 void stompBox::setComboBoxCurrentIndex(int index)

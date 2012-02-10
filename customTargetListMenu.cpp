@@ -93,6 +93,8 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
 
+    QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SLOT(valueChanged(int)));
+
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(currentIndexChanged(int)));
 
     QObject::connect(this->parent(), SIGNAL(updateSignal()), this, SLOT(comboUpdateSignal()));
