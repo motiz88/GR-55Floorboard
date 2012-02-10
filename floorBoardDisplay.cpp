@@ -436,7 +436,7 @@ void floorBoardDisplay::updateDisplay()
     {
         if(sysxIO->isConnected())
         {
-            this->writeButton->setBlink(true);
+            this->writeButton->setBlink(false);
             this->writeButton->setValue(false);
         };
         int bank = sysxIO->getBank();
@@ -495,7 +495,7 @@ void floorBoardDisplay::autoConnectionResult(QString sysxMsg)
 
             if(sysxIO->getBank() != 0)
             {
-                this->writeButton->setBlink(true);
+                this->writeButton->setBlink(false);
                 this->writeButton->setValue(false);
             };
         }else

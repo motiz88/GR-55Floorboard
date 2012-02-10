@@ -52,7 +52,7 @@ QDir initPatchListMenu::getInitPatchDir()
 		symlinkExstention = ".lnk";
 	#endif
 	
-	QDir initPatchesDir; /* The "Init Pathces" directory. */
+    QDir initPatchesDir; /* The "Init Patches" directory. */
 	if ( QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).exists() &&
 		 QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).canonicalPath() == 
 		 QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).symLinkTarget() )
@@ -118,6 +118,10 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 
 			QObject::connect(initPatchComboBox, SIGNAL(currentIndexChanged(int)),
 					this, SLOT(loadInitPatch(int)));
+
+            QObject::connect(initPatchComboBox, SIGNAL(highlighted(int)),
+                    this, SLOT(highLightInitPatch(int)));
+
 			QObject::connect(this, SIGNAL(updateSignal()),
 				this->parent()->parent(), SIGNAL(updateSignal()));
 		};
@@ -147,14 +151,38 @@ void initPatchListMenu::loadInitPatch(int index)
 				// DO SOMETHING AFTER READING THE FILE (UPDATE THE GUI)
 				SysxIO *sysxIO = SysxIO::Instance();
 				QString area = "Structure";
-				sysxIO->setFileSource(area, file.getFileSource());
+                sysxIO->setFileSource(area, file.getFileSource());
 				sysxIO->setFileName(tr("init patch"));
 				sysxIO->setSyncStatus(false);
 				sysxIO->setDevice(false);
-				emit updateSignal();
-				if(sysxIO->isConnected())
-				{sysxIO->writeToBuffer(); };
+                emit updateSignal();
+                if(sysxIO->isConnected())
+                {sysxIO->writeToBuffer(); };
 			};
 		};
 	};
+};
+
+void initPatchListMenu::highLightInitPatch(int index)
+{
+    if(index > 0)
+    {
+        QString fileName = this->initPatches.at(index - 1 );
+        if (!fileName.isEmpty())
+        {
+            sysxWriter file;
+            file.setFile(fileName);
+            if(file.readFile())
+            {
+                // DO SOMETHING AFTER READING THE FILE (UPDATE THE GUI)
+                SysxIO *sysxIO = SysxIO::Instance();
+                QString area = "Structure";
+                sysxIO->setFileSource(area, file.getFileSource());
+                sysxIO->setFileName(tr("init patch"));
+                sysxIO->setSyncStatus(false);
+                sysxIO->setDevice(false);
+                emit updateSignal();
+            };
+        };
+    };
 };
