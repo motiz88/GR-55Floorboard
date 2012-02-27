@@ -36,6 +36,7 @@ class midiIO: public QThread
 
 public:
 	midiIO();
+    ~midiIO();
 	void run();
 	void sendSysxMsg(QString sysxOutMsg, int midiOutport, int midiInPort);
 	void sendMidi(QString midiMsg, int midiOutport);

@@ -7,39 +7,40 @@
     <message>
         <location filename="bankTreeList.cpp" line="299"/>
         <source>Double-click tree item to load patch</source>
-        <translation>Article d&apos;arbre de Double-click pour charger la correction</translation>
+        <translation>Cliquez 2 fois sur un élément de l&apos;arbre pour charger le patch</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="592"/>
         <source>Warning - Patch data received is incorrect!</source>
-        <translation>Avertissement - les données de correction reçues sont incorrectes !</translation>
+        <translation>Avertissement - Les données reçues pour ce patch sont incorrectes !</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="597"/>
         <source>Patch data transfer wrong size or data error</source>
-        <translation>Raccordez la taille de mal de transfert de données ou l&apos;erreur de données</translation>
+        <translation>Données de patch : Erreur de taille lors du transfert ou mauvaises données</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="599"/>
         <location filename="bankTreeList.cpp" line="617"/>
         <source>Please make sure the </source>
-        <translation>Veuillez s&apos;assurer</translation>
+        <translatorcomment>French grammar makes this translation error-prone; depending on the word that will follow (gender) or the sense (&quot;make sure that you ...&quot; against &quot;make sure you ...&quot;), there can be 3 to 4 different ending to the current sentence - Therefore, I recommend limiting this string to the neutral form and have the attached strings modified instead (as I&apos;ll be able to adapt depending on gender and number)</translatorcomment>
+        <translation type="unfinished">Veuillez vous assurer</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="599"/>
         <location filename="bankTreeList.cpp" line="617"/>
         <source> is connected correctly and re-try.</source>
-        <translation>est relié correctement et tentative</translation>
+        <translation>est relié correctement et recommencez.</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="610"/>
         <source>Warning - Patch data not received!</source>
-        <translation>Avertissement - données de correction non reçues !</translation>
+        <translation>Avertissement - Les données du patch n&apos;ont pas été reçues !</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="615"/>
         <source>Patch data transfer failed, are the correct midi ports selected?</source>
-        <translation>Raccordez la taille de mal de transfert de données ou l&apos;erreur de données</translation>
+        <translation>Le transfert des données du patch a échoué - Est-ce que les bons ports midi sont sélectionnés ?</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="216"/>
@@ -49,79 +50,80 @@
     <message>
         <location filename="bulkLoadDialog.cpp" line="221"/>
         <source>This is not a known </source>
-        <translation>Ce n&apos;est pas connu </translation>
+        <translatorcomment>1. French grammar requires the subject to be before the adjective (&apos;blue parrot&apos; -&gt; &apos;perroquet bleu&apos;); therefore, &apos;known&apos; will have to be after the missing string. 2. Gender: &apos;a&apos; in French can either be &apos;un&apos; (male) or &apos;une (female) depending on the gender of the object/name it refers to (&apos;un GR-55&apos; but &apos;une guitare&apos;), therefore, the article must be stored within the missing string.</translatorcomment>
+        <translation type="unfinished">Ce n&apos;est pas </translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="221"/>
         <source> file!</source>
-        <translation>dossier !</translation>
+        <translation>fichier !</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="223"/>
         <source>Patch file not within allowable parameters or&lt;br&gt;</source>
-        <translation>Dossier de correction pas dans des paramètres permis ou&lt;br&gt;</translation>
+        <translation>Le fichier de patch n&apos;est pas dans les paramètres autorisés ou&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="224"/>
         <source>file format unknown, please try another file.</source>
-        <translation>l&apos;inconnu de format de fichier, essayent svp un autre dossier.</translation>
+        <translation>format de fichier inconnu, veuillez essayer un autre fichier.</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="525"/>
         <location filename="sysxWriter.cpp" line="105"/>
         <source>SMF file import</source>
-        <translation>Importation de dossier de SMF</translation>
+        <translation>Importation de fichier SMF</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="530"/>
         <source>This is not a GR-55 file!</source>
-        <translation>Ce n&apos;est pas un dossier GR-55 !</translation>
+        <translation>Ce n&apos;est pas un fichier GR-55 !</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="532"/>
         <location filename="sysxWriter.cpp" line="112"/>
         <source>*Loading this file may have unpredictable results*.</source>
-        <translation>*Loading ce dossier peut avoir le results* imprévisible.</translation>
+        <translation>*Charger ce fichier peut provoquer des resultats imprévisibles*.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="81"/>
         <source>Initializing - please wait...</source>
-        <translation>Initialisation - attendez svp…</translation>
+        <translation>Initialisation - Veuillez patienter…</translation>
     </message>
     <message>
         <location filename="main.cpp" line="88"/>
         <source>Checking license file...</source>
-        <translation>Vérifiant le dossier de permis…</translation>
+        <translation>Vérification du fichier de licence…</translation>
     </message>
     <message>
         <location filename="main.cpp" line="91"/>
         <source>Loading license file...</source>
-        <translation>Dossier de permis de chargement…</translation>
+        <translation>Chargement du fichier de licence...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="99"/>
         <source>Loading midi mapping...</source>
-        <translation>Cartographie du Midi de chargement…</translation>
+        <translation>Chargement du mappage midi...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="105"/>
         <source>Initializing main window...</source>
-        <translation>Fenêtre principale de initialisation…</translation>
+        <translation>Initialisation de la fenêtre principale...</translation>
     </message>
     <message>
         <location filename="main.cpp" line="156"/>
         <source>Restoring window position...</source>
-        <translation>Reconstituant la position de fenêtre…</translation>
+        <translation>Restauration de la position de la fenêtre…</translation>
     </message>
     <message>
         <location filename="main.cpp" line="171"/>
         <source>Centering main window...</source>
-        <translation>Centrant la fenêtre principale…</translation>
+        <translation>Centrage de la fenêtre principale…</translation>
     </message>
     <message>
         <location filename="main.cpp" line="186"/>
         <source>Finished Initializing...</source>
-        <translation>Initialisation de finition…</translation>
+        <translation>Initialisation terminée…</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="36"/>
@@ -132,62 +134,62 @@
         <location filename="preferencesPages.cpp" line="38"/>
         <location filename="preferencesPages.cpp" line="392"/>
         <source>Select the default folder for storing patches.</source>
-        <translation>Choisissez le dossier de défaut pour stocker des patches.</translation>
+        <translation>Choisissez le dossier par défaut pour le stockage des patches.</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="39"/>
         <source>Default patch folder:</source>
-        <translation>Dossier de patch de défaut :</translation>
+        <translation>Dossier de patch par défaut :</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="41"/>
         <source>Browse</source>
-        <translation>Passez en revue</translation>
+        <translation>Parcourir</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="84"/>
         <source>Midi settings</source>
-        <translation>Arrangements du Midi</translation>
+        <translation>Paramètres Midi</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="86"/>
         <source>Select your midi in and out device.</source>
-        <translation>Choisissez le votre Midi dans et dehors dispositif.</translation>
+        <translation>Choisissez vos appareils midi in et out.</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="87"/>
         <source>Midi in:</source>
-        <translation>Le Midi dans :</translation>
+        <translation>Midi in:</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="88"/>
         <source>Midi out:</source>
-        <translation>Le Midi dehors :</translation>
+        <translation>Midi out:</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="92"/>
         <source>Select midi-in device</source>
-        <translation>Choisissez Midi-dans le dispositif</translation>
+        <translation>Choisissez l&apos;appareil Midi in</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="112"/>
         <source>Select midi-out device</source>
-        <translation>Choisissez le dispositif du Midi-dehors</translation>
+        <translation>Choisissez l&apos;appareil midi out</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="153"/>
         <source>Advanced settings</source>
-        <translation>Arrangements avancés</translation>
+        <translation>Paramètres avancés</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="155"/>
         <source>Debug mode.</source>
-        <translation>Corrigez le mode.</translation>
+        <translation>Mode de déboguage.</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="159"/>
         <source>deBug Mode</source>
-        <translation>corrigez le mode.</translation>
+        <translation>Mode déboguage</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="174"/>
@@ -197,32 +199,32 @@
     <message>
         <location filename="preferencesPages.cpp" line="181"/>
         <source> times/second</source>
-        <translation>périodes/en second lieu</translation>
+        <translation> périodes / secondes</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="222"/>
         <source>Window settings</source>
-        <translation>Arrangements de fenêtre</translation>
+        <translation>Paramètres de la fenêtre</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="224"/>
         <source>Select if you want the window position to be saved on exit.</source>
-        <translation>Choisissez si vous voulez que la position de fenêtre soit sauvée sur la sortie.</translation>
+        <translation>Choisissez si vous désirez que la position de fenêtre soit sauvegardée en quittant.</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="225"/>
         <source>Restore window</source>
-        <translation>Fenêtre de restauration</translation>
+        <translation>Restauration de la fenêtre</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="226"/>
         <source>Restore sidepanel</source>
-        <translation>Panneau latéral de restauration</translation>
+        <translation>Restaurer le panneau latéral</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="227"/>
         <source>Single Window Layout</source>
-        <translation>Disposition simple de fenêtre</translation>
+        <translation>Affichage dans une fenêtre unique</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="228"/>
@@ -232,22 +234,22 @@
     <message>
         <location filename="preferencesPages.cpp" line="251"/>
         <source>Show splash screen</source>
-        <translation>Montrez l&apos;écran d&apos;éclaboussure</translation>
+        <translation>Afficher l&apos;écran de démarrage</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="253"/>
         <source>Disable or enable the splash screen.</source>
-        <translation>Désactivez ou permettez l&apos;écran d&apos;éclaboussure.</translation>
+        <translation>Désactivez ou activez l&apos;écran de démarrage.</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="254"/>
         <source>Splash screen</source>
-        <translation>Écran d&apos;éclaboussure</translation>
+        <translation>Ecran de démarrage</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="286"/>
         <source>Language Selection</source>
-        <translation>Choix de langue</translation>
+        <translation>Choix de la langue</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="288"/>
@@ -267,12 +269,12 @@
     <message>
         <location filename="preferencesPages.cpp" line="292"/>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugais</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="293"/>
         <source>Spanish</source>
-        <translation>Espagnole</translation>
+        <translation>Espagnol</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="294"/>
@@ -282,18 +284,18 @@
     <message>
         <location filename="preferencesPages.cpp" line="295"/>
         <source>Chinese (simplified)</source>
-        <translation>Chinois (simplifiés)</translation>
+        <translation>Chinois (simplifié)</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="315"/>
         <location filename="preferencesPages.cpp" line="379"/>
         <source>Changes take effect on next startup</source>
-        <translation>Les changements entrent en vigueur sur le prochain démarrage</translation>
+        <translation>Les changements entreront en vigueur au prochain démarrage</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="333"/>
         <source>Window Style Selection</source>
-        <translation>Choix de modèle de fenêtre</translation>
+        <translation>Choix du style de fenêtre</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="335"/>
@@ -319,7 +321,7 @@
     <message>
         <location filename="preferencesPages.cpp" line="356"/>
         <source>Colour Scheme Selection</source>
-        <translation>Choix d&apos;arrangement de couleur</translation>
+        <translation>Choix de la palette de couleurs</translation>
     </message>
     <message>
         <location filename="preferencesPages.cpp" line="358"/>
@@ -344,48 +346,49 @@
     <message>
         <location filename="sysxWriter.cpp" line="110"/>
         <source>This is not a GR-55 patch!</source>
-        <translation>Ce n&apos;est pas un dossier GR-55 !</translation>
+        <translation>Ce n&apos;est pas un patch GR-55 !</translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="127"/>
         <location filename="sysxWriter.cpp" line="213"/>
         <source>Select Patch</source>
-        <translation>Choisissez la patch</translation>
+        <translation>Choisissez le patch</translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="320"/>
         <source>Patch size Error!</source>
-        <translation>Erreur de taille de patch !</translation>
+        <translation>Erreur de taille du patch !</translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="325"/>
         <source>This is not a </source>
-        <translation>Ce n&apos;est pas a </translation>
+        <translatorcomment>Gender: &quot;a&quot; can either be &apos;un&apos; or &apos;une&apos; depending on the gender of the following string. -Removed to be implemented in the subject string.</translatorcomment>
+        <translation type="unfinished">Ce n&apos;est pas </translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="325"/>
         <source> patch!</source>
-        <translation> patch!</translation>
+        <translation> patch !</translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="327"/>
         <source>Patch size is not </source>
-        <translation>La taille de patch n&apos;est pas </translation>
+        <translation>La taille du patch n&apos;est pas </translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="327"/>
         <source> bytes, please try another file.</source>
-        <translation>les bytes, essayent svp un autre dossier</translation>
+        <translation> bytes, veuillez essayer un autre dossier.</translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="328"/>
         <source>size reported to be </source>
-        <translation>la taille a rapporté pour être </translation>
+        <translation>la taille rapportée doit être de </translation>
     </message>
     <message>
         <location filename="sysxWriter.cpp" line="328"/>
         <source> bytes.</source>
-        <translation> bytes.</translation>
+        <translation> octets.</translation>
     </message>
 </context>
 <context>
@@ -398,12 +401,13 @@
     <message>
         <location filename="SysxIO.cpp" line="133"/>
         <source>checksum</source>
-        <translation>somme</translation>
+        <translation>checksum</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="134"/>
         <source>should have been</source>
-        <translation>devrait avoir été</translation>
+        <translatorcomment>Plural: In French grammar, verbs are conjugated differently depending on the person addressed (I, you, him/her, us, you (several), them) - &apos;devrait&apos; is singular (one thing should have been) and could sometimes be spelled &apos;devraient&apos; (several things should have been).</translatorcomment>
+        <translation type="unfinished">devrait avoir été</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="295"/>
@@ -438,32 +442,33 @@
     <message>
         <location filename="SysxIO.cpp" line="1146"/>
         <source>Request System data</source>
-        <translation>Données de système de demande</translation>
+        <translation>Récupération des données système</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1156"/>
         <source>Ensure connection is active and retry</source>
-        <translation>Assurez que le raccordement est en activité et tentative</translation>
+        <translation>Assurez-vous que le raccordement est opérationnel et ré-essayez</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1158"/>
         <source> not connected !!</source>
-        <translation>non relié ! !</translation>
+        <translation>non connecté ! !</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1213"/>
         <source>System Data from </source>
-        <translation>Données de système de </translation>
+        <translation>Données système de </translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1220"/>
         <source> FloorBoard connection Error !!</source>
-        <translation>Erreur de raccordement de planche ! !</translation>
+        <translatorcomment>Translated as &apos;Error connecting to the floorboard&apos;, assuming the GR-55 is the floorboard being referred to - If this is meant to read &apos; Error connecting the FloorBoard software&apos;, This should be re-written as &apos;Erreur de raccordement du Flooboard&apos;.</translatorcomment>
+        <translation type="unfinished">Erreur de raccordement au pédalier ! !</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1225"/>
         <source>The ROLAND </source>
-        <translation>ROLAND </translation>
+        <translation>Le ROLAND </translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1225"/>
@@ -473,17 +478,18 @@
     <message>
         <location filename="SysxIO.cpp" line="1227"/>
         <source>any saved system data will be as shown on screen&lt;br&gt;</source>
-        <translation>des données de système sauvées en seront comme montrés sur l&apos;écran&lt;br&gt;</translation>
+        <translation>toutes données système sauvegardées seront comme affichés à l&apos;écran&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1228"/>
         <source>and the GR-55 system data might not be in sync&lt;br&gt;</source>
-        <translation>et les données de système GR-55 ne pourraient pas être dans la synchro&lt;br&gt;</translation>
+        <translation>et les données système du GR-55 pourraient ne pas être synchronisées&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="SysxIO.cpp" line="1248"/>
         <source>Sync to </source>
-        <translation>Synchro à </translation>
+        <translatorcomment>Assuming this is the verb in its infinitive form (&apos;to Sync&apos;), instead of the conjugated form (which requires knowing the gender and quantity to be used)</translatorcomment>
+        <translation type="unfinished">Synchroniser vers </translation>
     </message>
 </context>
 <context>
@@ -492,39 +498,39 @@
         <location filename="bankTreeList.cpp" line="304"/>
         <source>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GR-55 patch data.</source>
         <oldsource>Temporary Buffer.&lt;br&gt;a single mouse click will set the Write/Sync button to send to the buffer only,&lt;br&gt;a double click will load the current GT patch data.</oldsource>
-        <translation>Buffer.a provisoire&lt;br&gt; le clic de souris que simple placera le bouton de l&apos;inscription/synchro pour envoyer&lt;br&gt; à l&apos;amortisseur seulement, un double clic chargera le GR-55 courant raccorde des données.</translation>
+        <translation>Mémoire temporaire.&lt;br&gt;un clic simple de souris règlera le bouton Ecriture / Synchronisation pour n&apos;envoyer que vers la mémoire tampon,&lt;br&gt; un double clic chargera les données de patch courrantes dans le GR-55.</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="308"/>
         <source>User Banks.&lt;br&gt;expand the Bank to view a section of Banks.</source>
-        <translation>Utilisateur Banks.&lt;br&gt;expand la banque pour regarder une section des banques.</translation>
+        <translation>Banques utilisateur.&lt;br&gt;Déroulez la banque pour visualiser une section des banques.</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="316"/>
         <source>User Banks.&lt;br&gt;expand the Bank to view a section of Patch Banks</source>
-        <translation>L&apos;utilisateur Banks.&lt;br&gt;expand la banque pour regarder une section de Patch encaisse</translation>
+        <translation>Banques utilisateur.&lt;br&gt;Déroulez la banque pour visualiser une section des banques de patches</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="322"/>
         <source>User Bank.&lt;br&gt;expand the Bank to view the Patches</source>
-        <translation>Utilisateur Bank.expand la banque pour regarder les patches</translation>
+        <translation>Banque utilisateur.&lt;br&gt;Déroulez la banque pour visualiser les patches</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="329"/>
         <source>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GR-55.</source>
         <oldsource>User Patches.&lt;br&gt;a single mouse click will only change patch&lt;br&gt;a double mouse click will load the select patch from the GT.</oldsource>
-        <translation>Le clic de souris simple&lt;br&gt; de l&apos;utilisateur Patches.a changera seulement le patcha que le double clic de souris chargera la patch choisie du GR-55.</translation>
+        <translation>Patches utilisateur&lt;br&gt; Un clic simple de souris ne changera que le patch&lt;br&gt;un double clic chargera le patch sélectionné depui le GR-55.</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="431"/>
         <source>Patch request</source>
-        <translation>Demande de patch</translation>
+        <translation>Requête du patch</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="473"/>
         <location filename="bankTreeList.cpp" line="487"/>
         <source>Receiving Patch</source>
-        <translation>Réception de la patch</translation>
+        <translation>Réception du patch</translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="574"/>
@@ -536,12 +542,13 @@
     <message>
         <location filename="bankTreeList.cpp" line="577"/>
         <source>Patch from </source>
-        <translation>Patch de </translation>
+        <translatorcomment>Depending where &apos;from&apos; is (gender and quantity) the article &apos;du&apos; (single, masculine) could be &apos;des&apos; (plural - all genders) or &apos;de la&apos; (single, feminine).</translatorcomment>
+        <translation type="unfinished">Patch du </translation>
     </message>
     <message>
         <location filename="bankTreeList.cpp" line="747"/>
         <source>Reading names</source>
-        <translation>Noms de lecture</translation>
+        <translation>Lecture des noms</translation>
     </message>
 </context>
 <context>
@@ -554,12 +561,12 @@
     <message>
         <location filename="bulkEditDialog.cpp" line="44"/>
         <source>Finishing at</source>
-        <translation>Finir à</translation>
+        <translation>Finissant à</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="55"/>
         <source>Set the Range of Patch data to modify</source>
-        <translation>Placez la gamme des données de patch pour modifier</translation>
+        <translation>Définissez l&apos;étendue des donnée de patch à modifier</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="59"/>
@@ -569,7 +576,7 @@
     <message>
         <location filename="bulkEditDialog.cpp" line="63"/>
         <source>DATA TRANSFER COMPLETED</source>
-        <translation>TRANSFERT DE DONNÉES ACCOMPLI</translation>
+        <translation>TRANSFERT DE DONNEES TERMINE</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="68"/>
@@ -579,12 +586,12 @@
     <message>
         <location filename="bulkEditDialog.cpp" line="72"/>
         <source>WARNING!!: Existing Patch data will be over-written</source>
-        <translation>AVERTISSEMENT ! ! : Des données existantes de patch seront recouvertes</translation>
+        <translation>AVERTISSEMENT ! ! : Les données de patch existantes seront ré-écrites</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="110"/>
         <source>Bulk Patch Modifier</source>
-        <translation>Modificateur en bloc de patch</translation>
+        <translation>Modificateur de patch par lot</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="248"/>
@@ -594,22 +601,22 @@
     <message>
         <location filename="bulkEditDialog.cpp" line="253"/>
         <source>Bulk data transfer completed!!</source>
-        <translation>Transfert de données en bloc accompli ! !</translation>
+        <translation>Transfert de données par lot terminé ! !</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="257"/>
         <source>User Patch U</source>
-        <translation>Patch U d&apos;utilisateur</translation>
+        <translation>Patch Utilisateur U</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="265"/>
         <source>File transfer size = </source>
-        <translation>Taille de transfert de fichier = </translation>
+        <translation>Taille du transfert de fichier = </translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="268"/>
         <source> bytes</source>
-        <translation> bytes</translation>
+        <translation> octets</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="275"/>
@@ -624,7 +631,7 @@
     <message>
         <location filename="bulkEditDialog.cpp" line="309"/>
         <source>in-consistant patch data detected </source>
-        <translation>données de patch incompatible détecté</translation>
+        <translation>données de patch inconsistantes détectées</translation>
     </message>
     <message>
         <location filename="bulkEditDialog.cpp" line="309"/>
@@ -687,7 +694,7 @@
     <message>
         <location filename="bulkLoadDialog.cpp" line="144"/>
         <source>Bulk File Restoration</source>
-        <translation>Restauration de fichiers en vrac</translation>
+        <translation>Restauration de fichiers par lots</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="160"/>
@@ -697,7 +704,7 @@
     <message>
         <location filename="bulkLoadDialog.cpp" line="162"/>
         <source>GR55 Bulk Data File (*.g5l *.syx *.mid)</source>
-        <translation>En vrac GR55 Fichier de données (*. G5L *. syx *. mid)</translation>
+        <translation>Fichier de données GR-55 par lots (*. G5L *. syx *. mid)</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="254"/>
@@ -708,12 +715,12 @@
     <message>
         <location filename="bulkLoadDialog.cpp" line="366"/>
         <source>Bulk data transfer completed!!</source>
-        <translation>En vrac du transfert de données!</translation>
+        <translation>Transfert de données en lot terminé !</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="369"/>
         <source>User Patch U</source>
-        <translation>Patch U d&apos;utilisateur</translation>
+        <translation>Patch Utilisateur U</translation>
     </message>
     <message>
         <location filename="bulkLoadDialog.cpp" line="377"/>
@@ -741,7 +748,7 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="36"/>
         <source>Start Bank.</source>
-        <translation>Banque Démarrer.</translation>
+        <translation>Banque de démarrage.</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="37"/>
@@ -751,17 +758,17 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="39"/>
         <source>*.g5l Librarian file</source>
-        <translation>Bibliothécaire fichier G5L *.</translation>
+        <translation>*.g5l fichier Librarian</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="40"/>
         <source>*.syx System Exclusive file</source>
-        <translation>*. syx fichier système exclusif</translation>
+        <translation>*.syx fichier système exclusif</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="41"/>
         <source>*.mid Standard Midi (SMF) file</source>
-        <translation>*. syx file system exclusive</translation>
+        <translation>*.mid fichier midi standard (SMF)</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="44"/>
@@ -771,7 +778,7 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="53"/>
         <source>Start at U</source>
-        <translation>A partir de U</translation>
+        <translation>Démarrage à partir de U</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="58"/>
@@ -786,7 +793,7 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="83"/>
         <source>Start</source>
-        <translation>Début</translation>
+        <translation>Démarrage</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="87"/>
@@ -796,7 +803,7 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="92"/>
         <source>Cancel</source>
-        <translation>Annulation</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="96"/>
@@ -811,17 +818,17 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="151"/>
         <source>Bulk File Backup</source>
-        <translation>Sauvegarde de fichiers en vrac</translation>
+        <translation>Sauvegarde de fichiers par lots</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="288"/>
         <source>Bulk data transfer completed!!</source>
-        <translation>Transfert de données en bloc accompli ! !</translation>
+        <translation>Transfert de données par lots terminé ! !</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="308"/>
         <source>User Patch U</source>
-        <translation>Patch U d&apos;utilisateur</translation>
+        <translation>Patch Utilisateur U</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="316"/>
@@ -836,7 +843,7 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="322"/>
         <source>Bulk Download</source>
-        <translation>Téléchargement en lot</translation>
+        <translation>Téléchargement par lots</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="325"/>
@@ -853,17 +860,17 @@
     <message>
         <location filename="bulkSaveDialog.cpp" line="350"/>
         <source>Librarian Backup File (*.g5l)</source>
-        <translation>Bibliothécaire fichier de sauvegarde (*. G5L)</translation>
+        <translation>Fichier de sauvegarde Librarian (*. G5L)</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="445"/>
         <source>System Exclusive Backup File (*.syx)</source>
-        <translation>Backup File System Exclusive (*. syx)</translation>
+        <translation>Fichier de sauvegarde système exclusif (*. syx)</translation>
     </message>
     <message>
         <location filename="bulkSaveDialog.cpp" line="481"/>
         <source>Standard Midi Backup File (*.mid)</source>
-        <translation>Fichier de sauvegarde standard Midi (*. mid)</translation>
+        <translation>Fichier de sauvegarde midi standard  (*. mid)</translation>
     </message>
 </context>
 <context>
@@ -871,12 +878,12 @@
     <message>
         <location filename="customControlKnob.cpp" line="49"/>
         <source>hold down mouse button and drag up/down for quick adjustment</source>
-        <translation>maintenez enfoncé le bouton de la souris et glisser vers le haut / bas pour un réglage rapide</translation>
+        <translation>maintenez le bouton de la souris enfoncé et glissez vers le haut / bas pour un réglage rapide</translation>
     </message>
     <message>
         <location filename="customControlKnob.cpp" line="50"/>
         <source>use scroll wheel or up/down arrow keys for fine adjustment</source>
-        <translation>utiliser la molette ou les touches HAUT / flèche vers le bas pour le réglage fin</translation>
+        <translation>utilisez la molette de défilement ou les flèches HAUT / BAS du clavier pour un réglage précis</translation>
     </message>
 </context>
 <context>
@@ -884,7 +891,7 @@
     <message>
         <location filename="customRenameDialog.cpp" line="47"/>
         <source>Patch Description</source>
-        <translation>Description Patch</translation>
+        <translation>Description du Patch</translation>
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="53"/>
@@ -900,17 +907,17 @@
     <message>
         <location filename="customRenameDialog.cpp" line="62"/>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="79"/>
         <source>Insert :</source>
-        <translation>Insérer:</translation>
+        <translation>Insérer :</translation>
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="82"/>
         <source>Cancel</source>
-        <translation>Annulation</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="customRenameDialog.cpp" line="83"/>
@@ -924,48 +931,49 @@
         <location filename="editPage.cpp" line="171"/>
         <location filename="editPage.cpp" line="216"/>
         <source>hold down mouse button and drag up/down for quick adjustment</source>
-        <translation>maintenez enfoncé le bouton de la souris et glisser vers le haut / bas pour un réglage rapide</translation>
+        <translation>maintenez le bouton de la souris enfoncé et glissez vers le haut / bas pour un réglage rapide</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="172"/>
         <location filename="editPage.cpp" line="217"/>
         <source>use scroll wheel or up/down arrow keys for fine adjustment</source>
-        <translation>utiliser la molette ou les touches HAUT / flèche vers le bas pour le réglage fin</translation>
+        <translation>utilisez la molette de défilement ou les flèches HAUT / BAS du clavier pour un réglage précis</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="193"/>
         <source>hold down mouse button and drag up/down for quick adjustment or</source>
-        <translation>maintenez enfoncé le bouton de la souris et glisser vers le haut / bas pour un réglage rapide</translation>
+        <translation>maintenez enfoncé le bouton de la souris et glissez vers le haut / bas pour un réglage rapide ou</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="194"/>
         <source>press arrow to open list box and click on an item to select</source>
-        <translation>Appuyez sur la flèche pour ouvrir la boîte de liste et cliquez sur un élément à sélectionner</translation>
+        <translation>appuyez sur la flèche pour ouvrir la liste et cliquez sur un élément pour le sélectionner</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="195"/>
         <source> or use scroll wheel or up/down arrow keys for fine adjustment</source>
-        <translation>utiliser la molette ou les touches HAUT / flèche vers le bas pour le réglage fin</translation>
+        <translation>ou utilisez soit la molette ou les flèches HAUT / BAS du clavier pour un réglage précis</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="240"/>
         <source>press with mouse button to toggle switch state</source>
-        <translation>de presse avec le bouton de la souris pour basculer l&apos;état de commutation</translation>
+        <translation>pressez avec le bouton de la souris pour basculer l&apos;état du commutateur</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="241"/>
         <source>a lit button indicates and effect is ON</source>
-        <translation>un bouton allumé indique et l&apos;effet est ON</translation>
+        <translatorcomment>I assumed a mistake in the english sentence: &apos;a lit button indicates an(d) effect is ON&apos;</translatorcomment>
+        <translation type="unfinished">un bouton allumé indique qu&apos;un effet est ACTIF</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="271"/>
         <source>press arrow to open selection box and click on item to select</source>
-        <translation>Appuyez sur la flèche pour ouvrir la boîte de sélection et cliquez sur le point de choisir</translation>
+        <translation>Appuyez sur la flèche pour ouvrir la liste déroulante sélection et cliquez sur l&apos;élément à sélectionner</translation>
     </message>
     <message>
         <location filename="editPage.cpp" line="272"/>
         <source>also use scroll wheel or up/down arrow keys to change selection</source>
-        <translation>également utiliser la molette ou haut / bas les touches fléchées pour changer la sélection</translation>
+        <translation>également utilisez la molette de défilement ou les flèches HAUT / BAS du clavier pour changer de sélection</translation>
     </message>
 </context>
 <context>
@@ -973,23 +981,25 @@
     <message>
         <location filename="editWindow.cpp" line="49"/>
         <source>Select</source>
+        <translatorcomment>Intended here as an imperative form (please, select) rather than the infinitive / action one.</translatorcomment>
         <translation>Sélectionnez</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="62"/>
         <source>Bulk Write</source>
-        <translation>Donnez votre vrac</translation>
+        <translation>Ecriture par lots</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="64"/>
         <source>Multiple Patch Edit Button&lt;br&gt;will write only the currently displayed effect part to a selection of User Patches.</source>
-        <translation>Multiples Patch Edit Button &lt;br&gt; écrira que la partie actuellement affichée à l&apos;effet d&apos;une sélection de patches utilisateur.</translation>
+        <translation>Bouton Edition de Patch Multiples&lt;br&gt;N&apos;écrira que la partie d&apos;effet en cours d&apos;affichage dans une sélection de patches Utilisateur.</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="68"/>
         <source>ClipBd 1 Paste</source>
         <oldsource>Temp 1 Partial</oldsource>
-        <translation>ClipBd 1 Pâques</translation>
+        <translatorcomment>ClipBd will not be understood in French as &apos;Clip Board&apos;, which is called &apos;Presse-papier&apos; and there is no abbreviation; is this a required due to a limitation of the button size?</translatorcomment>
+        <translation>Presse-papier 1 Collage</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="78"/>
@@ -997,51 +1007,51 @@
         <location filename="editWindow.cpp" line="96"/>
         <location filename="editWindow.cpp" line="105"/>
         <source>Effect Partial Paste Button&lt;br&gt;will paste only the currently displayed effect part from the selected Temp clipboard.&lt;br&gt;can be used to quicky compare settings between patches.</source>
-        <translation>Effet partiel bouton Coller &lt;br&gt; va coller que la partie actuellement affichée effet à partir du presse-papiers choisis Temp. &lt;br&gt; peut être utilisé pour comparer les paramètres de Quicky entre les parcelles.</translation>
+        <translation>Bouton Collage Partiel d&apos;Effet&lt;br&gt;Ne collera que la partie d&apos;effet en cours d&apos;affichage depuis le presse-papier&lt;br&gt;Peut être utilisé pour comparer rapidement des paramètres entre plusieurs patches.</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="76"/>
         <source>ClipBd 2 Paste</source>
         <oldsource>Temp 2 Partial</oldsource>
-        <translation>ClipBd 2 Pâques</translation>
+        <translation type="unfinished">Presse-papier 2 Collage</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="70"/>
         <source>Effect Partial Paste Button&lt;br&gt;will paste only the currently displayed effect part from the selected Temp clipboard.&lt;br&gt;can be used to quickly compare settings between patches.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Collage Partiel d&apos;Effet&lt;br&gt;Ne collera que la partie d&apos;effet en cours d&apos;affichage depuis le presse-papier&lt;br&gt;Peut être utilisé pour comparer rapidement des paramètres entre plusieurs patches.</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="85"/>
         <source>ClipBd 3 Paste</source>
         <oldsource>Temp 3 Partial</oldsource>
-        <translation>ClipBd 3 Pâques</translation>
+        <translation type="unfinished">Presse-papier 3 Collage</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="94"/>
         <source>ClipBd 4 Paste</source>
         <oldsource>Temp 4 Partial</oldsource>
-        <translation>ClipBd 4 Pâques</translation>
+        <translation type="unfinished">Presse-papier 4 Collage</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="103"/>
         <source>ClipBd 5 Paste</source>
         <oldsource>Temp 5 Partial</oldsource>
-        <translation>ClipBd 5 Pâques</translation>
+        <translation type="unfinished">Presse-papier 5 Collage</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="112"/>
         <source>Will close the current edit page window.</source>
-        <translation>Est-ce que fermer la fenêtre d&apos;édition actuelle page.</translation>
+        <translation>Fermera la fenêtre d&apos;édition courante.</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="333"/>
         <source>Ensure connection is active and retry</source>
-        <translation>Assurez-connexion est active et réessayez</translation>
+        <translation>Assurez-vous que la connection est active et ré-essayez</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="335"/>
         <source> not connected !!</source>
-        <translation>non relié ! !</translation>
+        <translation>non-connecté ! !</translation>
     </message>
     <message>
         <location filename="editWindow.cpp" line="381"/>
@@ -1050,7 +1060,7 @@
         <location filename="editWindow.cpp" line="504"/>
         <location filename="editWindow.cpp" line="545"/>
         <source>patch must be copied to clipboard first</source>
-        <translation>patch doit être copié dans le presse papier premier</translation>
+        <translation type="unfinished">le patch doit d&apos;abord être copié dans le presse papier</translation>
     </message>
 </context>
 <context>
@@ -1058,29 +1068,29 @@
     <message>
         <location filename="fileDialog.cpp" line="35"/>
         <source>Select patch to load</source>
-        <translation>Sélectionnez patch à charger</translation>
+        <translation>Sélectionnez le patch à charger</translation>
     </message>
     <message>
         <location filename="fileDialog.cpp" line="40"/>
         <source>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GR-55 temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</source>
         <oldsource>To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GT temporary buffer&lt;br&gt;a click on the patch will load it into the editor.</oldsource>
-        <translation>Pour auditon un multi-patch fichier *. G5L, déplacez le curseur de la souris sur un patch, et les données patch sera chargé dans la mémoire tampon temporaire GR-55 &lt;br&gt; un clic sur le patch de le charger dans l&apos;éditeur.</translation>
+        <translation>Pour auditionner un fichier multi-patch *.g5l, placez le curseur de la souris sur un patch, et ses données seront chargées dans la mémoire temporaire du GR-55&lt;br&gt;Un clic sur le patch le chargera dans l&apos;éditeur.</translation>
     </message>
     <message>
         <location filename="fileDialog.cpp" line="50"/>
         <source>Cancel</source>
-        <translation>Annulation</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="fileDialog.cpp" line="52"/>
         <source>Selecting this will close the patch load window and reset the GR-55 back to the current editor patch.</source>
         <oldsource>Selecting this will close the patch load window and reset the GT back to the current editor patch.</oldsource>
-        <translation>La sélection de cette ferme la fenêtre de chargement de patch et réinitialiser le GR-55 de retour pour le patch actuel rédacteur en chef.</translation>
+        <translation>Sélectionner ceci fermera la fenêtre de chargement de patch et réinitialisera le GR-55 sur le patch en cours dans l&apos;éditeur.</translation>
     </message>
     <message>
         <location filename="fileDialog.cpp" line="72"/>
         <source>Bulk File Patch Extraction</source>
-        <translation>En vrac d&apos;extraction des fichiers Patch</translation>
+        <translation>Extraction de fichiers par lots</translation>
     </message>
 </context>
 <context>
@@ -1088,7 +1098,7 @@
     <message>
         <location filename="floorBoardDisplay.cpp" line="52"/>
         <source>Patch Number Display.&lt;br&gt;displays the currently selected patch&lt;br&gt;and patch write memory location.</source>
-        <translation>Affichage du numéro de Patch. affiche &lt;br&gt; &lt;br&gt; patch actuellement sélectionné et le patch écrire emplacement mémoire.</translation>
+        <translation>Affichage du numéro de Patch.&lt;br&gt;Affiche le patch en cours de sélection&lt;br&gt;et l&apos;emplacement mémoire d&apos;écriture du patch.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="63"/>
@@ -1107,7 +1117,7 @@
         <location filename="floorBoardDisplay.cpp" line="79"/>
         <location filename="floorBoardDisplay.cpp" line="84"/>
         <source>Name of the currently stored patch in the clipboard.</source>
-        <translation>Nom du patch actuellement stockées dans le Presse-papiers.</translation>
+        <translation>Nom du patch actuellement stocké dans le Presse-papiers.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="88"/>
@@ -1115,7 +1125,8 @@
         <location filename="floorBoardDisplay.cpp" line="1089"/>
         <location filename="floorBoardDisplay.cpp" line="1116"/>
         <source> FloorBoard</source>
-        <translation>Planche</translation>
+        <translatorcomment>Is this the term for the GR-55 or the software&apos;s name? I assumed the GR-55 (A floorboard is called a &apos;pédalier&apos; in French)</translatorcomment>
+        <translation type="unfinished"> Pédalier</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="89"/>
@@ -1125,32 +1136,36 @@
     <message>
         <location filename="floorBoardDisplay.cpp" line="92"/>
         <source>Clicking on this will load a patch from a predefined selection.&lt;br&gt;patches place in the Init Patches folder will appear in this list at the start of the next session.</source>
-        <translation>En cliquant sur ce va charger un patch à partir d&apos;une sélection prédéfinie. &lt;br&gt; correctifs placer dans le dossier Patches Init apparaît dans cette liste au début de la prochaine session.</translation>
+        <translatorcomment>Assuming an error in the english version: &apos;&lt;...&gt;patches place(d) in the Init Patches folder&lt;...&gt;&apos;</translatorcomment>
+        <translation type="unfinished">Cliquer ceci chargera un patch depuis un emplacement pré-défini.&lt;br&gt;Les patches placés dane le sous-dossier &apos;/init&apos; apparaîtront dans cette liste au prochain démarrage.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="95"/>
         <source>Clicking on this will open&lt;br&gt;a text dialog window&lt;br&gt;allowing user text input.</source>
-        <translation>En cliquant sur ce s&apos;ouvrira &lt;br&gt; un texte de dialogue &lt;br&gt; fenêtre permettant la saisie de texte utilisateur.</translation>
+        <translation>Cliquer ceci ouvrira&lt;br&gt;une fenêtre de dialogue&lt;br&gt;permettant une saisie de texte.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="97"/>
         <source>Connect</source>
-        <translation>Connectez</translation>
+        <translatorcomment>Assuming the action or infinitive form rather than the conjugated imperative one (&apos;Please connect&apos;)</translatorcomment>
+        <translation type="unfinished">Connecter</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="98"/>
         <source>Connect Button&lt;br&gt;used to establish a continuous midi connection&lt;br&gt;when lit green, the connection is valid</source>
-        <translation>Connectez Button &lt;br&gt; utilisé pour établir une connexion continue &lt;br&gt; midi à l&apos;état vert allumé, la connexion est valide</translation>
+        <translation>Bouton Connexion&lt;br&gt;Utilisé pour établir une connexion midi continue&lt;br&gt;Le témoin lumineux vert indique que la connexion est valide</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="99"/>
         <source>Write</source>
-        <translation>Donnez</translation>
+        <translatorcomment>Assuming the action or infinitive form rather than the conjugated imperative one (&apos;you write&apos;)</translatorcomment>
+        <translation type="unfinished">Ecrire</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="100"/>
         <source>Write Button&lt;br&gt;if the patch number displays [temp buffer]&lt;br&gt;the current patch is sent to the GR-55 temporary memory only&lt;br&gt;or else the patch will be written to the displayed patch memory location.</source>
-        <translation>Donnez votre bouton &lt;br&gt; si le tampon [temp] affiche le numéro de patch &lt;br&gt; le patch est envoyé à la mémoire GR-55 temporaire seulement &lt;br&gt; ou bien le patch sera écrite à l&apos;emplacement mémoire patch s&apos;affiche.</translation>
+        <translatorcomment>NOTE for Toff.: Need to ensure [temp buffer] is indeed translated in the display as &apos;mémoire temporaire&apos;</translatorcomment>
+        <translation type="unfinished">Bouton d&apos;écriture&lt;br&gt;Si l&apos;affichage du numéro de patch indique [mémoire temporaire]&lt;br&gt;seul le patch courant est envoyé vers la mémoire temporaire du GR-55&lt;br&gt;sinon le patch sera enregistré à l&apos;emplacement mémoire indiqué.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="101"/>
@@ -1184,128 +1199,147 @@
         <location filename="floorBoardDisplay.cpp" line="150"/>
         <location filename="floorBoardDisplay.cpp" line="152"/>
         <source>Deep editing of the selected effect&lt;br&gt;pressing this button will open an edit page&lt;br&gt;allowing detailed setting of this effects parameters.</source>
-        <translation>Deep édition de la &lt;br&gt; effet sélectionné en appuyant sur ce bouton pour ouvrir une page permettant &lt;br&gt; modifier des réglages détaillés de cette paramètres d&apos;effets.</translation>
+        <translation>Edition étendue de l&apos;effet sélectionné&lt;br&gt;Appuyer sur ce bouton ouvrira une page d&apos;édition&lt;br&gt;des réglages détaillés des paramètres de cet effet.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="103"/>
         <source>Master</source>
-        <translation>Master</translation>
+        <translation>Maître</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="105"/>
         <source>Pedal/GK</source>
-        <translation>Pedal/GK</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>PEDAL/GK</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="108"/>
         <source>Normal PU</source>
-        <translation>Normal PU</translation>
+        <translation type="unfinished">PU normal</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="110"/>
         <source>Structure 1</source>
-        <translation>Structure 1</translation>
+        <translation type="unfinished">Structure 1</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="112"/>
         <source>Structure 2</source>
-        <translation>Structure 2</translation>
+        <translation type="unfinished">Structure 2</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="114"/>
         <source>Modeling</source>
-        <translation>Modeling</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - They use the one above instead of &apos;Modeling&apos;</translatorcomment>
+        <translation>Modélisation</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="116"/>
         <source>Synth A</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>Synth A</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="118"/>
         <source>Synth B</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>Synth B</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="120"/>
         <source>Amp</source>
-        <translation>Amp</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>AMP</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="122"/>
         <source>NS</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>NS</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="124"/>
         <source>MOD</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>MOD</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="126"/>
         <source>MFX</source>
-        <translation>MFX
-</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>MFX</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="128"/>
         <source>Reverb</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>Reverb</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="130"/>
         <source>Delay</source>
-        <translation>Retard</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Delay</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="132"/>
         <source>Chorus</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation>Chorus</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="134"/>
         <source>Equalizer</source>
-        <translation>Equalizer</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - They use the above - You might prefer the translation of the English term -&gt; &apos;Egaliseur&apos;</translatorcomment>
+        <translation type="unfinished">EQ</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="137"/>
         <source>Assign 1</source>
-        <translation>Attribuer 1</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 1</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="139"/>
         <source>Assign 2</source>
-        <translation>Attribuer 2</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 2</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="141"/>
         <source>Assign 3</source>
-        <translation>Attribuer 3</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 3</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="143"/>
         <source>Assign 4</source>
-        <translation>Attribuer 4</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 4</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="145"/>
         <source>Assign 5</source>
-        <translation>Attribuer 5</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 5</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="147"/>
         <source>Assign 6</source>
-        <translation>Attribuer 6</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 6</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="149"/>
         <source>Assign 7</source>
-        <translation>Attribuer 7</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 7</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="151"/>
         <source>Assign 8</source>
-        <translation>Attribuer 8</translation>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
+        <translation>Assign 8</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="154"/>
@@ -1314,7 +1348,7 @@
         <location filename="floorBoardDisplay.cpp" line="166"/>
         <location filename="floorBoardDisplay.cpp" line="170"/>
         <source>Patch Copy</source>
-        <translation>Patch copie</translation>
+        <translation>Copie de patch</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="155"/>
@@ -1323,7 +1357,7 @@
         <location filename="floorBoardDisplay.cpp" line="167"/>
         <location filename="floorBoardDisplay.cpp" line="171"/>
         <source>Copy current patch to clipboard&lt;br&gt;pressing this button will save the current patch to a clipboard&lt;br&gt;the clipboard is saved to file and is re-loaded&lt;br&gt;on the next session startup.</source>
-        <translation>Copier le patch en cours de &lt;br&gt; presse-papiers en appuyant sur ce bouton pour enregistrer le patch en cours à un presse-papiers &lt;br&gt; le presse-papiers est sauvegardé dans un fichier et est &lt;br&gt; rechargée sur le démarrage de la session suivante.</translation>
+        <translation>Copier le patch courant dans le Presse-papiers&lt;br&gt;Appuyer sur ce bouton enregistrera le patch courant vers un Presse-papiers&lt;br&gt;Le Presse-papiers est sauvegardé dans un fichier et est re-chargé&lt;br&gt; au démarrage de la session suivante.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="156"/>
@@ -1332,7 +1366,7 @@
         <location filename="floorBoardDisplay.cpp" line="168"/>
         <location filename="floorBoardDisplay.cpp" line="172"/>
         <source>Patch Paste</source>
-        <translation>Patch Coller</translation>
+        <translation>Collage de patch</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="157"/>
@@ -1341,27 +1375,29 @@
         <location filename="floorBoardDisplay.cpp" line="169"/>
         <location filename="floorBoardDisplay.cpp" line="173"/>
         <source>Paste current patch from clipboard&lt;br&gt;pressing this button will load the current patch to a clipboard&lt;br&gt;the clipboard is re-loaded&lt;br&gt;from the previous session copy.</source>
-        <translation>Coller patch en cours de &lt;br&gt; presse-papiers en appuyant sur ce bouton pour charger le patch en cours à un presse-papiers &lt;br&gt; le presse-papiers est &lt;br&gt; re-chargé à partir de la copie précédente session.</translation>
+        <translatorcomment>I translated the actual english sentence, but was wondering if there was a mistake as &apos;paste from cliboard&apos; is described as &apos;load to a clipboard&apos; which would probably be the description for Copy instead?</translatorcomment>
+        <translation type="unfinished">Coller le patch courant depuis le Presse-papiers&lt;br&gt;Appuyer sur ce bouton chargera le patch courant vers un Presse-papiers&lt;br&gt;Le Presse-papiers est re-chargé&lt;br&gt;à partir de la copie de la session précédente.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="284"/>
         <source>init patch</source>
-        <translation>patch init</translation>
+        <translation>initialisation du patch</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="291"/>
         <source> patch</source>
+        <translatorcomment>I checked in the French manual for the official terminology - Since the GR-55 internal display is English only, Roland chose to use English terms in the French manual</translatorcomment>
         <translation> patch</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="302"/>
         <source>Error while changing banks.</source>
-        <translation>Erreur lors du changement des banks.</translation>
+        <translation>Erreur lors du changement de banque.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="304"/>
         <source>An incorrect patch has been loaded. Please try to load the patch again.</source>
-        <translation>Un patch incorrecte a été chargé. S&apos;il vous plaît essayez de charger de nouveau le correctif.</translation>
+        <translation>Un patch incorrect a été chargé. Veuillez le charger a nouveau.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="324"/>
@@ -1376,12 +1412,12 @@
     <message>
         <location filename="floorBoardDisplay.cpp" line="351"/>
         <source>Temp</source>
-        <translation>Temp</translation>
+        <translation>Temporaire</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="352"/>
         <source>Buffer</source>
-        <translation>Buffer</translation>
+        <translation>Tampon</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="439"/>
@@ -1396,7 +1432,7 @@
         <location filename="floorBoardDisplay.cpp" line="845"/>
         <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>in-consistant patch data detected </source>
-        <translation>données de patch incompatible détecté</translation>
+        <translation>données de patch inconsistantes détectées</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="676"/>
@@ -1405,7 +1441,7 @@
         <location filename="floorBoardDisplay.cpp" line="845"/>
         <location filename="floorBoardDisplay.cpp" line="901"/>
         <source>bytes: re-save or re-load file to correct</source>
-        <translation>octets: re-enregistrer ou fichier re-charge pour corriger</translation>
+        <translation>octets: ré-enregistrer ou re-charger le fichier pour corriger</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="694"/>
@@ -1414,7 +1450,7 @@
         <location filename="floorBoardDisplay.cpp" line="862"/>
         <location filename="floorBoardDisplay.cpp" line="918"/>
         <source>patch must be copied to clipboard first</source>
-        <translation>patch doit être copié dans le presse papier premier</translation>
+        <translation>le patch doit d&apos;abord être copié dans le Presse papiers</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="986"/>
@@ -1426,74 +1462,77 @@
         <location filename="floorBoardDisplay.cpp" line="1017"/>
         <location filename="floorBoardDisplay.cpp" line="1043"/>
         <source> FloorBoard connection Error !!</source>
-        <translation>Erreur de raccordement de planche ! !</translation>
+        <translatorcomment>Is this the term for the GR-55 or the software&apos;s name? I assumed the GR-55 (A floorboard is called a &apos;pédalier&apos; in French)</translatorcomment>
+        <translation type="unfinished">Erreur de raccordement au pédalier ! !</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source>The device connected is not a ROLAND </source>
-        <translation>Le périphérique connecté n&apos;est pas un ROLAND</translation>
+        <translation>Le périphérique connecté n&apos;est pas un ROLAND </translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1022"/>
         <source> Guitar Synthesizer.</source>
-        <translation>Guitare synthétiseur.</translation>
+        <translation>Synthétiseur Guitare.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1024"/>
         <source>&lt;br&gt;Midi loopback detected, ensure midi device &apos;thru&apos; is switched off.</source>
-        <translation>&lt;br&gt; Midi bouclage détecté, vérifiez périphérique MIDI &quot;à travers&quot; est éteint.</translation>
+        <translatorcomment>I assumed this meant &apos;Make sure the midi device connected has &apos;thru&apos; switched off&apos; - Otherwise, if there is a parameter called &apos;midi device thru&apos; that I am not aware of, please change the sentence to &apos;&lt;br&gt; Boucle midi détectée, assurez-vous que &apos;midi device thru&apos; est désactivé&apos;.</translatorcomment>
+        <translation type="unfinished">&lt;br&gt; Boucle midi détectée, assurez-vous que &apos;thru&apos; est désactivé sur le périphérique midi.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1034"/>
         <location filename="floorBoardDisplay.cpp" line="1060"/>
         <location filename="floorBoardDisplay.cpp" line="1333"/>
         <source>Not connected</source>
-        <translation>Non relié </translation>
+        <translation>Non connecté </translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source>The ROLAND </source>
-        <translation>ROLAND </translation>
+        <translation>Le ROLAND </translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1048"/>
         <source> Guitar Synth was not found.</source>
-        <translation>Le synthétiseur de guitare n&apos;a pas été trouvé.</translation>
+        <translation>Le synthétiseur guitare n&apos;a pas été trouvé.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1049"/>
         <source>&lt;br&gt;&lt;br&gt;Ensure correct midi device is selected in Menu, </source>
-        <translation>&lt;br&gt;&lt;br&gt; Assurer bon périphérique MIDI est sélectionné dans le menu,</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Assurerez-vous que le bon périphérique MIDI est sélectionné dans le Menu, </translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1050"/>
         <source>&lt;br&gt;ROLAND drivers are installed and the GR-55 is switched on,</source>
-        <translation>&lt;br&gt; drivers ROLAND sont installés et le GR-55 est allumé,</translation>
+        <translation>&lt;br&gt;les drivers ROLAND sont installés et que le GR-55 est allumé,</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1094"/>
         <source>You can&apos;t write to the preset banks.</source>
-        <translation>Vous ne pouvez pas écrire les banques de préréglages.</translation>
+        <translation>Vous ne pouvez pas enregistrer dans les banques d&apos;usine.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1096"/>
         <source>Please select a user bank to write this patch to and try again.</source>
-        <translation>S&apos;il vous plaît choisir une banque utilisateur d&apos;écrire ce patch et essayez à nouveau.</translation>
+        <translation>Veuillez choisir une banque utilisateur pour enregistrer ce patch et  ré-essayez.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1121"/>
         <source>You have chosen to write the patch into </source>
-        <translation>Vous avez choisi d&apos;écrire dans le patch</translation>
+        <translation>Vous avez choisi d&apos;enregistrer le patch dans </translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1123"/>
         <source>This will overwrite the patch currently stored at patch location&lt;br&gt;</source>
-        <translation>Cela va écraser le patch actuellement stockés à emplacement du correctif&lt;br&gt;</translation>
+        <translation>Cela va écraser le patch actuellement stockés à cet emplacement&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1128"/>
         <source> and can&apos;t be undone. </source>
-        <translation>et ne peut pas être annulée.</translation>
+        <translatorcomment>Depending on the gender of what cannot be cancelled, the last word needs to be adapted (&apos;annulé&apos; (M) or &apos;annulée&apos; (F)) - I assumed it was the action of overwritting, which is male.</translatorcomment>
+        <translation type="unfinished">et ne peut pas être annulé.</translation>
     </message>
     <message>
         <location filename="floorBoardDisplay.cpp" line="1129"/>
@@ -1503,7 +1542,7 @@
     <message>
         <location filename="floorBoardDisplay.cpp" line="1169"/>
         <source>Writing to Patch</source>
-        <translation>Ecrire à Patch</translation>
+        <translation>Enregistrement dans le Patch</translation>
     </message>
 </context>
 <context>
@@ -1516,7 +1555,7 @@
     <message>
         <location filename="initPatchListMenu.cpp" line="106"/>
         <source>(My INIT) </source>
-        <translation>(My INIT) </translation>
+        <translation>(Mes INIT) </translation>
     </message>
     <message>
         <location filename="initPatchListMenu.cpp" line="151"/>
@@ -1530,12 +1569,13 @@
         <location filename="mainWindow.cpp" line="71"/>
         <location filename="mainWindow.cpp" line="565"/>
         <source> FloorBoard</source>
-        <translation>Planche</translation>
+        <translatorcomment>Is this the term for the GR-55 or the software&apos;s name? I assumed the GR-55 (a floorboard is called a &apos;pédalier&apos; in French)</translatorcomment>
+        <translation type="unfinished"> Pédalier</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="125"/>
         <source>&amp;Load Patch File... (*.g5l, *.mid, *.syx)</source>
-        <translation>&amp;File Patch charge ... (G5L *., *. mid, *. syx)</translation>
+        <translation>&amp;Charger un fichier de Patch... (*.g5l, *.mid, *.syx)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="126"/>
@@ -1550,7 +1590,7 @@
     <message>
         <location filename="mainWindow.cpp" line="130"/>
         <source>&amp;Save Patch...       (*.syx)</source>
-        <translation>&amp;Patch Enregistrer ... (*. syx)</translation>
+        <translation>&amp;Enregistrer le Patch... (*.syx)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="131"/>
@@ -1561,12 +1601,12 @@
         <location filename="mainWindow.cpp" line="132"/>
         <location filename="mainWindow.cpp" line="133"/>
         <source>Save the document to disk</source>
-        <translation>Enregistrez le document sur ​​le disque</translation>
+        <translation>Enregistrer le document sur ​​le disque</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="136"/>
         <source>&amp;Export &amp;SYX Patch...  (*.syx)</source>
-        <translation>&amp;Patch SYX l&apos;exportation ... (*. syx)</translation>
+        <translation>&amp;Exporter comme Patch &amp;SYX... (*.syx)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="137"/>
@@ -1581,7 +1621,7 @@
     <message>
         <location filename="mainWindow.cpp" line="141"/>
         <source>&amp;Export &amp;SMF Patch... (*.mid)</source>
-        <translation>&amp;Patch SMF l&apos;exportation ... (*.mid)</translation>
+        <translation>&amp;Exporter comme Patch SMF... (*.mid)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="142"/>
@@ -1591,12 +1631,12 @@
     <message>
         <location filename="mainWindow.cpp" line="143"/>
         <source>Export as a Standard Midi File</source>
-        <translation>Export dans un fichier Midi Standard</translation>
+        <translation>Exporter comme fichier Midi Standard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="146"/>
         <source>Save As G5L Patch... (*.g5l)</source>
-        <translation>Enregistrer sous Patch... G5L (*. G5L)</translation>
+        <translation>Enregistrer comme Patch G5L... (*.g5l)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="147"/>
@@ -1606,12 +1646,12 @@
     <message>
         <location filename="mainWindow.cpp" line="148"/>
         <source>Export as a ROLAND Librarian File</source>
-        <translation>Export dans un fichier bibliothécaire ROLAND</translation>
+        <translation>Exporter comme fichier ROLAND Librarian</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="151"/>
         <source>&amp;Load System and Global Data...</source>
-        <translation>&amp;Système de données de charge et mondial ...</translation>
+        <translation>&amp;Charger les données système et Globales...</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="152"/>
@@ -1621,12 +1661,12 @@
     <message>
         <location filename="mainWindow.cpp" line="153"/>
         <source>Load System Data to GR-55</source>
-        <translation>Système de données sur la charge à GR-55</translation>
+        <translation>Charger les données système vers le GR-55</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="156"/>
         <source>Save System and Global Data to File...</source>
-        <translation>Système de données Enregistrer et mondial de fichier ...</translation>
+        <translation>Sauvegarder les données système et globales vers un fichier...</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="157"/>
@@ -1636,12 +1676,12 @@
     <message>
         <location filename="mainWindow.cpp" line="158"/>
         <source>Save System Data to File</source>
-        <translation>Sauvegarder les données du système de fichier</translation>
+        <translation>Sauvegarder les données système vers un fichier</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="161"/>
         <source>&amp;Load Bulk Patch File to GR-55...</source>
-        <translation>&amp;Patch chargement en vrac à GR-55 ...</translation>
+        <translation>&amp;Charger en bloc les fichier de Patch vers le GR-55...</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="162"/>
@@ -1651,12 +1691,12 @@
     <message>
         <location filename="mainWindow.cpp" line="163"/>
         <source>Load Bulk Data to GR-55</source>
-        <translation>Les données de chargement en masse à GR-55</translation>
+        <translation>Charger les données en bloc vers le GR-55</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="166"/>
         <source>Save Bulk GR-55 Patches to File...</source>
-        <translation>Ajoutez le bloc GR-55 correctifs pour le fichier ...</translation>
+        <translation>Sauvegarder en bloc les Patches du GR-55 vers un fichier ...</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="167"/>
@@ -1666,12 +1706,12 @@
     <message>
         <location filename="mainWindow.cpp" line="168"/>
         <source>Save Bulk Data to File</source>
-        <translation>Enregistrer les données en vrac dans un fichier</translation>
+        <translation>Enregistrer en bloc les données dans un fichier</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="171"/>
         <source>E&amp;xit</source>
-        <translation>&amp;Quittez</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="172"/>
@@ -1681,7 +1721,7 @@
     <message>
         <location filename="mainWindow.cpp" line="173"/>
         <source>Exit the application</source>
-        <translation>Quittez l&apos;application</translation>
+        <translation>Quitter l&apos;application</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="176"/>
@@ -1696,7 +1736,7 @@
     <message>
         <location filename="mainWindow.cpp" line="178"/>
         <source>GR-55FloorBoard Preferences&lt;br&gt;Select midi device, language,splash, directories</source>
-        <translation>GR-55FloorBoard Préférences &lt;br&gt; Sélectionnez midi dispositif, la langue, des éclaboussures, des répertoires</translation>
+        <translation>Préférences de GR-55FloorBoard&lt;br&gt;Sélectionner le périphérique midi, la langue, l&apos;écran de démarrage, les répertoires</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="182"/>
@@ -1706,17 +1746,17 @@
     <message>
         <location filename="mainWindow.cpp" line="183"/>
         <source>Force to Guitar Mode&lt;br&gt;Force editor to Guitar mode modeling to edit/convert Bass mode patches</source>
-        <translation>Force de Guitar Mode &lt;br&gt; Force éditeur de mode à la modélisation de guitare de modifier ou de transformer le mode Bass correctifs</translation>
+        <translation>Forcer le mode Guitare&lt;br&gt;Force l&apos;éditeur en mode modélisation de Guitare pour éditer / convertir les Patches du mode Basse</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="181"/>
         <source>&amp;Change Patch to Guitar Mode</source>
-        <translation>&amp;Changement de patch en mode guitare</translation>
+        <translation>&amp;Changer le patch vers le mode Guitare</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="186"/>
         <source>&amp;Change Patch to Bass Mode</source>
-        <translation>Changement de patch en mode basse</translation>
+        <translation>&amp;Changer le patch vers le mode Basse</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="187"/>
@@ -1726,52 +1766,52 @@
     <message>
         <location filename="mainWindow.cpp" line="188"/>
         <source>Force to Bass Mode&lt;br&gt;Force editor to Bass Mode modeling to edit/convert Guitar mode patches</source>
-        <translation>Force de Bass Mode éditeur &lt;br&gt; Force Bass Mode de modélisation de modifier ou de transformer le mode Guitar correctifs</translation>
+        <translation>Forcer le mode Basse&lt;br&gt;Force l&apos;éditeur en mode modélisation de Basse pour éditer / convertir les Patches du mode Guitare</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="192"/>
         <source>Upload patch to V-Guitar Forums</source>
-        <translation>Patch Envoyer à V-Guitar Forums</translation>
+        <translation>Poster un Patch sur V-Guitar Forums</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="193"/>
         <source>Upload any saved patch file to a shared patch library&lt;br&gt;via the internet.</source>
-        <translation>Envoyer un fichier enregistré dans un patch &lt;br&gt; bibliothèque partagée patch via l&apos;Internet.</translation>
+        <translation>Envoyer n&apos;importe quel Patch enregistré vers une librairie de patchs partagée&lt;br&gt;via Internet.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="196"/>
         <source>Patch Text Summary</source>
-        <translation>Résumé Texte Patch</translation>
+        <translation>Texte de résumé du Patch</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="197"/>
         <source>Display the current patch parameters&lt;br&gt;in a readable text format, which&lt;br&gt;can be printed or saved to file.</source>
-        <translation>Afficher les paramètres actuels &lt;br&gt; patch dans un format texte lisible, ce qui &lt;br&gt; peuvent être imprimés ou enregistrés dans un fichier.</translation>
+        <translation>Afficher les paramètres actuels du patch&lt;br&gt;dans un format texte lisible, pour&lt;br&gt;impression ou enregistrement dans un fichier.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="200"/>
         <source>System/Global Text Summary</source>
-        <translation>Système/Global Résumé Texte</translation>
+        <translation type="unfinished">Texte du résumé Système / Global</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="201"/>
         <source>Display the current System and Global parameters&lt;br&gt;in a readable text format, which&lt;br&gt;can be printed or saved to file.</source>
-        <translation>Affichage du système actuel et les paramètres Global &lt;br&gt; dans un format texte lisible, ce qui &lt;br&gt; peuvent être imprimés ou enregistrés dans un fichier.</translation>
+        <translation>Affichage des paramètres Système et Global courants&lt;br&gt;dans un format texte lisible,pour&lt;br&gt;impression ou enregistrement dans un fichier.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="204"/>
         <source>GR-55 Patch List Summary</source>
-        <translation>GR-55 Résumé Liste de patchs</translation>
+        <translation>Résumé de la liste des Patches du GR-55</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="205"/>
         <source>Display the GR-55 patch listing names&lt;br&gt;in a readable text format, which&lt;br&gt;can be printed or saved to file.</source>
-        <translation>Afficher le GR-55 noms annonce patch &lt;br&gt; dans un format texte lisible, ce qui &lt;br&gt; peuvent être imprimés ou enregistrés dans un fichier.</translation>
+        <translation>Afficher les noms des listes de Patches du GR-55&lt;br&gt;dans un format texte lisible, pour&lt;br&gt;impression ou enregistrement dans un fichier.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="208"/>
         <source>GR-55 FloorBoard &amp;Help</source>
-        <translation>Aide GR Plancher-55</translation>
+        <translation>&amp;Aide de GR-55 FloorBoard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="209"/>
@@ -1781,12 +1821,13 @@
     <message>
         <location filename="mainWindow.cpp" line="210"/>
         <source>Help page to assist with GR-55 FloorBoard functions.</source>
-        <translation>Page d&apos;aide pour aider à fonctions GR Plancher-55.</translation>
+        <translatorcomment>I assumed this referred to the help page to provide assistance with the software functions, if this actually refers to the GR-55 unit&apos;s functions I would need to rephrase.</translatorcomment>
+        <translation type="unfinished">Page d&apos;aide pour assistance sur les fonctions de GR-55 FloorBoard.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="213"/>
         <source>Whats This? description of items under the mouse cursor</source>
-        <translation>Whats ce que c&apos;est? la description des articles sous le curseur de la souris</translation>
+        <translation>Qu&apos;est-ce-donc? Affiche le descriptif des éléments qui sont sous le curseur de la souris</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="214"/>
@@ -1796,33 +1837,33 @@
     <message>
         <location filename="mainWindow.cpp" line="215"/>
         <source>ha..ha..ha..!!</source>
-        <translation>ha..ha..ha..!!</translation>
+        <translation>ha, ha, ha !!</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="218"/>
         <source>GR-55 FloorBoard &amp;Webpage</source>
-        <translation>Site web GR Plancher-55</translation>
+        <translation>Site &amp;Internet de GR-55 FloorBoard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="219"/>
         <source>download Webpage for GR-55FloorBoard&lt;br&gt;find if the latest version is available.</source>
-        <translation>Site web de téléchargement pour GR-55FloorBoard &lt;br&gt; trouver si la dernière version est disponible.</translation>
+        <translation>Page pour le téléchargement de GR-55 FloorBoard&lt;br&gt;Vérifiez si la dernière version est disponible.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="222"/>
         <source>Donate towards GR-55 test equipment</source>
-        <translation>Faire un don à l&apos;équipement d&apos;essai GR-55</translation>
+        <translation>Faire un don en faveur des tests matériels du GR-55</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="223"/>
         <source>Even though the software is free,&lt;br&gt;an occassional donation is very much appreciated&lt;br&gt;i am not paid for this work.</source>
-        <translation>Même si le logiciel est libre, &lt;br&gt; un don occasionnels est très apprécié i &lt;br&gt; ne suis pas payé pour ce travail.</translation>
+        <translation>Même si le logiciel est libre,&lt;br&gt;un don occasionnels est très apprécié&lt;br&gt;je ne suis pas rémunéré pour ce travail.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="226"/>
         <source>Owner&apos;s Manual</source>
         <oldsource>User Manual PDF</oldsource>
-        <translation>Manuel d&apos;utilisation</translation>
+        <translation>Manuel de l&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="227"/>
@@ -1837,17 +1878,17 @@
     <message>
         <location filename="mainWindow.cpp" line="231"/>
         <source>licence agreement which you&lt;br&gt;have accepted by installing this software.</source>
-        <translation>accord de licence qui vous &lt;br&gt; ont accepté en installant ce logiciel.</translation>
+        <translation>accord de licence que vous &lt;br&gt; avez accepté en installant ce logiciel.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="234"/>
         <source>&amp;About GR-55FloorBoard</source>
-        <translation>&amp;A propos de GR-55 Planche</translation>
+        <translation>&amp;A propos de GR-55 FloorBoard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="235"/>
         <source>Show the application&apos;s About box</source>
-        <translation>Afficher À propos de l&apos;application de la boîte de</translation>
+        <translation>Afficher À propos de l&apos;application</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="238"/>
@@ -1867,7 +1908,7 @@
     <message>
         <location filename="mainWindow.cpp" line="261"/>
         <source>File Saving and Loading,&lt;br&gt; and application Exit.</source>
-        <translation>Sauvegarde et le chargement, &lt;br&gt; et sortie de l&apos;application.</translation>
+        <translation>Sauvegarde et chargement de fichier,&lt;br&gt;et sortie de l&apos;application.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="265"/>
@@ -1892,7 +1933,7 @@
     <message>
         <location filename="mainWindow.cpp" line="303"/>
         <source>Not connected</source>
-        <translation>Non relié </translation>
+        <translation>Non connecté </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="323"/>
@@ -1905,7 +1946,7 @@
     <message>
         <location filename="mainWindow.cpp" line="325"/>
         <source>for GR-55   (*.syx *.mid *.g5l)</source>
-        <translation>pour le GR-55 (*. syx *. mid *. g5l)</translation>
+        <translation>pour le GR-55 (*.syx *.mid *.g5l)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="357"/>
@@ -1923,7 +1964,7 @@
         <location filename="mainWindow.cpp" line="426"/>
         <location filename="mainWindow.cpp" line="455"/>
         <source>Standard Midi File (*.mid)</source>
-        <translation>Standard Midi File (*.mid)</translation>
+        <translation>Fichier Midi Standard (*.mid)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="453"/>
@@ -1935,51 +1976,52 @@
         <location filename="mainWindow.cpp" line="516"/>
         <source>ROLAND Librarian File (*.g5l)</source>
         <oldsource>ROLAND Librarian File (*.g5l *.g5l)</oldsource>
-        <translation>Fichier bibliothécaire ROLAND (*.g5l)</translation>
+        <translation>Fichier ROLAND Librarian (*.g5l)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="514"/>
         <source>Save Patch *.g5l</source>
         <oldsource>Save Patch *.G5L</oldsource>
-        <translation>Patch Save (*.g5l)</translation>
+        <translation>Sauvegarder le Patch (*.g5l)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="550"/>
         <source> System Data File (*.GR55_system_syx)</source>
-        <translation>Système de Fichier de données (*. GR55_system_syx)</translation>
+        <translation>Fichier de données système (*.GR55_system_syx)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="570"/>
         <source>You have chosen to load a SYSTEM DATA file.</source>
-        <translation>Vous avez choisi de charger un fichier système de données.</translation>
+        <translation>Vous avez choisi de charger un fichier de DONNEES SYSTEME.</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="572"/>
         <source>This will overwrite the SYSTEM DATA currently stored in the </source>
-        <translation>Cela va écraser les données du système actuellement stockées dans le</translation>
+        <translation>Cela écrasera les DONNEES SYSTEME actuellement stockées dans le </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="573"/>
         <source>&lt;br&gt; and can&apos;t be undone.&lt;br&gt;</source>
-        <translation>&lt;br&gt; et ne peut pas être annulée. &lt;br&gt;</translation>
+        <translation>&lt;br&gt; et ne peut pas être annulé.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="574"/>
         <source>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GR-55 System&lt;br&gt;</source>
         <oldsource>Select &apos;NO&apos; to only update the Editor - Select &apos;YES&apos; to update the GT System&lt;br&gt;</oldsource>
-        <translation>Sélectionnez «NON »à ne mettre à jour l&apos;éditeur - Sélectionnez &apos;OUI &apos; pour mettre à jour le système GR-55 &lt;br&gt;</translation>
+        <translation>Sélectionnez &apos;NON&apos; pour ne mettre à jour que l&apos;Editeur - Sélectionnez &apos;OUI &apos; pour mettre à jour le système du GR-55 &lt;br&gt;</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="577"/>
         <source>Are you sure you want to write to the </source>
-        <translation>Êtes-vous sûr de vouloir écrire à l&apos;</translation>
+        <translatorcomment>Depending what will be &apos;written to&apos;, gender and quantity can differ - therefore, it can be &apos;le&apos;, &apos;la&apos; or &apos;les&apos;.</translatorcomment>
+        <translation type="unfinished">Êtes-vous sûr de vouloir écrire dans le</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="590"/>
         <location filename="mainWindow.cpp" line="658"/>
         <location filename="mainWindow.cpp" line="679"/>
         <source>Ensure connection is active and retry</source>
-        <translation>Assurez-connexion est active et réessayez</translation>
+        <translation>Assurez-vous que la connexion est active et réessayez</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="592"/>
@@ -1987,60 +2029,60 @@
         <location filename="mainWindow.cpp" line="660"/>
         <location filename="mainWindow.cpp" line="681"/>
         <source> not connected !!</source>
-        <translation>non relié ! !</translation>
+        <translation>non connecté !!</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="614"/>
         <source>Save System Data</source>
-        <translation>Sauvegarder les données du système</translation>
+        <translation>Sauvegarder les données système</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="616"/>
         <source>System Exclusive File (*.GR55_system_syx)</source>
-        <translation>Système de Fichier de données (*. GR55_system_syx)</translation>
+        <translation>Fichier de données Système Exclusif (*.GR55_system_syx)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="638"/>
         <source>Ensure connection is active and retry&lt;br&gt;</source>
-        <translation>Assurez-connexion est active et réessayez</translation>
+        <translation>Assurez-vous que la connexion est active et réessayez&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="756"/>
         <location filename="mainWindow.cpp" line="783"/>
         <source>Ensure GR-55 mode matches the patch mode or else Modeling and Assigns realtime control will not work correctly</source>
-        <translation>Assurez-GR-55 en mode correspond au mode de patch ou encore la modélisation et le contrôle en temps réel Affecte ne fonctionnera pas correctement</translation>
+        <translation>Assurez-vous que le mode actif du GR-55 correspond au mode du patch ou bien la modélisation et les assignations de contrôle en temps réel ne fonctionneront pas correctement</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="758"/>
         <location filename="mainWindow.cpp" line="785"/>
         <source>Patch Mode changed !!</source>
-        <translation>Patch Mode changé!</translation>
+        <translation>Mode de Patch changé !!</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="764"/>
         <source>Patch is already set to Guitar Mode, Patch Mode change not required</source>
-        <translation>Patch est déjà positionné sur Guitar Mode, Mode Patch changement n&apos;est pas nécessaire</translation>
+        <translation>Le Patch est déjà positionné sur le mode Guitare, le changement de mode du Patch n&apos;est pas nécessaire</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="766"/>
         <location filename="mainWindow.cpp" line="793"/>
         <source>Patch Mode change not required !!</source>
-        <translation>Patch de changement de régime n&apos;est pas nécessaire!</translation>
+        <translation>Changement du mode de Patch non-requis !!</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="791"/>
         <source>Patch is already set to Bass Mode, Patch Mode change is not required</source>
-        <translation>Patch est déjà défini à Bass Mode, Mode Patch changement n&apos;est pas nécessaire</translation>
+        <translation>Le Patch est déjà positionné sur le mode Basse, le changement de mode du Patch n&apos;est pas nécessaire</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="875"/>
         <source> FloorBoard - About</source>
-        <translation>Planche - A propos</translation>
+        <translation> FloorBoard - A propos</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="876"/>
         <source> FloorBoard - </source>
-        <translation>Planche -</translation>
+        <translation> FloorBoard -</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="876"/>
@@ -2053,53 +2095,53 @@
     <message>
         <location filename="menuPage.cpp" line="39"/>
         <source>Deep editing of the selected effect&lt;br&gt;pressing this button will open an edit page&lt;br&gt;allowing detailed setting of this effects parameters.</source>
-        <translation>Deep édition de la &lt;br&gt; effet sélectionné en appuyant sur ce bouton pour ouvrir une page permettant &lt;br&gt; modifier des réglages détaillés de cette paramètres d&apos;effets.</translation>
+        <translation>Edition avancée de l&apos;effet sélectionné&lt;br&gt;Appuyez sur ce bouton sur ce bouton pour ouvrir une page permettant &lt;br&gt; l&apos;édition détaillés des paramètres de cet effet.</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="167"/>
         <source>Opening Page...</source>
-        <translation>Page d&apos;ouverture ...</translation>
+        <translation>Ouverture de la page...</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="180"/>
         <source>Request System data</source>
-        <translation>Données de système de demande</translation>
+        <translation>Demande les données du système</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="185"/>
         <source>Ensure connection is active and retry&lt;br&gt;</source>
-        <translation>Assurez-connexion est active et réessayez</translation>
+        <translation>Assurez-vous que la connexion est active et réessayez</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="186"/>
         <source>System data not transferred, current settings are to be used&lt;br&gt;</source>
         <oldsource>System data not transfered, current settings are to be used&lt;br&gt;</oldsource>
-        <translation>Les données du système n&apos;est pas transférée, les paramètres actuels doivent être utilisés &lt;br&gt;</translation>
+        <translation>Les données du système n&apos;ont pas été transférées, les paramètres actuels vont être utilisés &lt;br&gt;</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="188"/>
         <source> midi connection not found!!</source>
-        <translation>connexion midi pas trouvé!</translation>
+        <translation>Aucune connexion midi trouvée !</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="193"/>
         <source>Not Connected</source>
-        <translation>Non relié </translation>
+        <translation>Non connecté </translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="354"/>
         <source>System Data from </source>
-        <translation>Données de système de </translation>
+        <translation>Données système de </translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="362"/>
         <source> FloorBoard connection Error !!</source>
-        <translation>Erreur de raccordement de planche ! !</translation>
+        <translation>Erreur de connexion du FloorBoard !!</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="367"/>
         <source>The Roland </source>
-        <translation>ROLAND </translation>
+        <translation>Le ROLAND </translation>
     </message>
     <message>
         <source> System data was not transfered !!.</source>
@@ -2108,7 +2150,7 @@
     <message>
         <location filename="menuPage.cpp" line="367"/>
         <source> System data was not transferred !!.</source>
-        <translation>Les données du système n&apos;a pas été transféré!.</translation>
+        <translation>Les données du système n&apos;ont pas été transmises !!.</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="374"/>
@@ -2118,7 +2160,7 @@
     <message>
         <location filename="menuPage.cpp" line="499"/>
         <source>Pedal/GK</source>
-        <translation>Pedal/GK</translation>
+        <translation>Pédale/GK</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="500"/>
@@ -2129,47 +2171,47 @@
         <location filename="menuPage.cpp" line="501"/>
         <source>System/Global</source>
         <oldsource>System/Midi</oldsource>
-        <translation>System/Global</translation>
+        <translation>Système / Global</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="502"/>
         <source>Assign 1</source>
-        <translation>Attribuer 1</translation>
+        <translation>Assign 1</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="503"/>
         <source>Assign 2</source>
-        <translation>Attribuer 2</translation>
+        <translation>Assign 2</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="504"/>
         <source>Assign 3</source>
-        <translation>Attribuer 3</translation>
+        <translation>Assign 3</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="505"/>
         <source>Assign 4</source>
-        <translation>Attribuer 4</translation>
+        <translation>Assign 4</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="506"/>
         <source>Assign 5</source>
-        <translation>Attribuer 5</translation>
+        <translation>Assign 5</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="507"/>
         <source>Assign 6</source>
-        <translation>Attribuer 6</translation>
+        <translation>Assign 6</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="508"/>
         <source>Assign 7</source>
-        <translation>Attribuer 7</translation>
+        <translation>Assign 7</translation>
     </message>
     <message>
         <location filename="menuPage.cpp" line="509"/>
         <source>Assign 8</source>
-        <translation>Attribuer 8</translation>
+        <translation>Assign 8</translation>
     </message>
 </context>
 <context>
@@ -2177,7 +2219,7 @@
     <message>
         <location filename="menuPage_assign1.cpp" line="41"/>
         <source>Assign 1</source>
-        <translation>Attribuer 1</translation>
+        <translation>Assign 1</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2227,7 @@
     <message>
         <location filename="menuPage_assign2.cpp" line="41"/>
         <source>Assign 2</source>
-        <translation>Attribuer 2</translation>
+        <translation>Assign 2</translation>
     </message>
 </context>
 <context>
@@ -2193,7 +2235,7 @@
     <message>
         <location filename="menuPage_assign3.cpp" line="41"/>
         <source>Assign 3</source>
-        <translation>Attribuer 3</translation>
+        <translation>Assign 3</translation>
     </message>
 </context>
 <context>
@@ -2201,7 +2243,7 @@
     <message>
         <location filename="menuPage_assign4.cpp" line="41"/>
         <source>Assign 4</source>
-        <translation>Attribuer 4</translation>
+        <translation>Assign 4</translation>
     </message>
 </context>
 <context>
@@ -2209,7 +2251,7 @@
     <message>
         <location filename="menuPage_assign5.cpp" line="41"/>
         <source>Assign 5</source>
-        <translation>Attribuer 5</translation>
+        <translation>Assign 5</translation>
     </message>
 </context>
 <context>
@@ -2217,7 +2259,7 @@
     <message>
         <location filename="menuPage_assign6.cpp" line="41"/>
         <source>Assign 6</source>
-        <translation>Attribuer 6</translation>
+        <translation>Assign 6</translation>
     </message>
 </context>
 <context>
@@ -2225,7 +2267,7 @@
     <message>
         <location filename="menuPage_assign7.cpp" line="41"/>
         <source>Assign 7</source>
-        <translation>Attribuer 7</translation>
+        <translation>Assign 7</translation>
     </message>
 </context>
 <context>
@@ -2233,7 +2275,7 @@
     <message>
         <location filename="menuPage_assign8.cpp" line="41"/>
         <source>Assign 8</source>
-        <translation>Attribuer 8</translation>
+        <translation>Assign 8</translation>
     </message>
 </context>
 <context>
@@ -2241,7 +2283,7 @@
     <message>
         <location filename="menuPage_master.cpp" line="59"/>
         <source>ALTERNATE TUNING</source>
-        <translation>ALTERNATE TUNING</translation>
+        <translation>ACCORDAGE NON STANDARD</translation>
     </message>
 </context>
 <context>
@@ -2249,7 +2291,7 @@
     <message>
         <location filename="menuPage_system.cpp" line="41"/>
         <source>***CAUTION*** Settings changes are automatically written to GR-55 when changed</source>
-        <translation>*** ATTENTION *** changements de paramètres sont automatiquement écrites à GR-55 en cas de modification</translation>
+        <translation>*** ATTENTION *** Les changements de paramètres sont automatiquement écrits dans le GR-55 lors d&apos;une modification</translation>
     </message>
 </context>
 <context>
@@ -2274,20 +2316,20 @@
         <location filename="midiIO.cpp" line="246"/>
         <location filename="midiIO.cpp" line="325"/>
         <source>data error</source>
-        <translation>erreur concernant les données</translation>
+        <translation>erreur de données</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="82"/>
         <location filename="midiIO.cpp" line="129"/>
         <source>unnamed midi device: </source>
         <oldsource>un-named midi device: </oldsource>
-        <translation>sans nom dispositif de midi: </translation>
+        <translation>dispositif midi sans nom : </translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="91"/>
         <location filename="midiIO.cpp" line="139"/>
         <source>no midi device available</source>
-        <translation>aucun périphérique MIDI disponibles</translation>
+        <translation>aucun périphérique MIDI disponible</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="116"/>
@@ -2305,7 +2347,7 @@
         <location filename="midiIO.cpp" line="420"/>
         <source>retrying data request</source>
         <oldsource>re-trying data request</oldsource>
-        <translation>nouvelle tentative de demande de données</translation>
+        <translation>nouvelle requête de données</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="429"/>
@@ -2315,17 +2357,17 @@
     <message>
         <location filename="midiIO.cpp" line="484"/>
         <source>identity request</source>
-        <translation>demande d&apos;identité</translation>
+        <translation>demande d&apos;identification</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="488"/>
         <source>patch request</source>
-        <translation>Demande de patch</translation>
+        <translation>demande du patch</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="491"/>
         <source>name request</source>
-        <translation>demande de nom</translation>
+        <translation>demande du nom</translation>
     </message>
     <message>
         <location filename="midiIO.cpp" line="494"/>
@@ -2336,7 +2378,7 @@
         <location filename="midiIO.cpp" line="503"/>
         <location filename="midiIO.cpp" line="520"/>
         <source>no midi device set</source>
-        <translation>aucun dispositif de midi ensemble</translation>
+        <translation>aucun périphérique midi n&apos;est configuré</translation>
     </message>
 </context>
 <context>
@@ -2349,12 +2391,12 @@
     <message>
         <location filename="preferencesDialog.cpp" line="59"/>
         <source>Cancel</source>
-        <translation>Annulation</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="preferencesDialog.cpp" line="83"/>
         <source>GR-55 FloorBoard - Preferences</source>
-        <translation>GR-55 Planche - Préférences</translation>
+        <translation>GR-55 FloorBoard - Préférences</translation>
     </message>
     <message>
         <location filename="preferencesDialog.cpp" line="90"/>
@@ -2364,7 +2406,7 @@
     <message>
         <location filename="preferencesDialog.cpp" line="96"/>
         <source>USB/Midi</source>
-        <translation>USB/Midi</translation>
+        <translation>USB / Midi</translation>
     </message>
     <message>
         <location filename="preferencesDialog.cpp" line="102"/>
@@ -2379,7 +2421,7 @@
     <message>
         <location filename="preferencesDialog.cpp" line="114"/>
         <source>Look/Style</source>
-        <translation>Look/Style</translation>
+        <translation>Apparence / Style</translation>
     </message>
 </context>
 <context>
@@ -2387,17 +2429,17 @@
     <message>
         <location filename="renameDialog.cpp" line="35"/>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <location filename="renameDialog.cpp" line="48"/>
         <source>Insert :</source>
-        <translation>Insérer:</translation>
+        <translation>Insérer :</translation>
     </message>
     <message>
         <location filename="renameDialog.cpp" line="54"/>
         <source>Cancel</source>
-        <translation>Annulation</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="renameDialog.cpp" line="55"/>
@@ -2407,7 +2449,7 @@
     <message>
         <location filename="renameDialog.cpp" line="60"/>
         <source>Rename patch</source>
-        <translation>Renommer patch</translation>
+        <translation>Renommer le patch</translation>
     </message>
 </context>
 <context>
@@ -2415,34 +2457,35 @@
     <message>
         <location filename="soundSource.cpp" line="41"/>
         <source>StompBox effect&lt;br&gt;a double mouse click will open the effect edit page.</source>
-        <translation>Effet Stompbox &lt;br&gt; un double clic ouvre l&apos;effet modifier la page.</translation>
+        <translation>Effet Stompbox&lt;br&gt;un double clic ouvre la page d&apos;édition de l&apos;effet.</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="273"/>
         <source>hold down mouse button and drag up/down for quick adjustment</source>
-        <translation>maintenez enfoncé le bouton de la souris et glisser vers le haut / bas pour un réglage rapide</translation>
+        <translation>maintenez le bouton de la souris enfoncé et glissez vers le haut / bas pour un réglage rapide</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="274"/>
         <source>use scroll wheel or up/down arrow keys for fine adjustment</source>
-        <translation>utiliser la molette ou les touches HAUT / flèche vers le bas pour le réglage fin</translation>
+        <translation>utilisez la molette de défilement ou les flèches HAUT / BAS du clavier pour un réglage précis</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="284"/>
         <location filename="soundSource.cpp" line="294"/>
         <location filename="soundSource.cpp" line="301"/>
         <source>press with mouse button to toggle tone switch off/on</source>
-        <translation>de presse avec le bouton de la souris pour basculer ton allumer ou éteindre</translation>
+        <translatorcomment>I chose to leave the reference to &apos;tone&apos; as it is not translated by Roland in their GR-55 manual, and this refers to the name of one part of the devoce, not the tone of a sound - Otherwise, the translation for the word &apos;tone&apos; is &apos;ton&apos; or &apos;tonalité&apos;.</translatorcomment>
+        <translation>pressez avec le bouton de la souris pour basculer l&apos;état du commutateur de Tone</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="483"/>
         <source>Normal PickUp</source>
-        <translation>Normal Pickup</translation>
+        <translation>Pickup Normal</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="484"/>
         <source>Guitar Mode Modeling</source>
-        <translation>Modélisation</translation>
+        <translation>Mode Modélisation de guitare</translation>
     </message>
     <message>
         <location filename="soundSource.cpp" line="485"/>
@@ -2457,7 +2500,7 @@
     <message>
         <location filename="soundSource.cpp" line="487"/>
         <source>Bass Mode Modeling</source>
-        <translation>Modélisation Mode Bass</translation>
+        <translation>Mode Modélisation de Bass</translation>
     </message>
 </context>
 <context>
@@ -2470,7 +2513,7 @@
     <message>
         <location filename="soundSource_analogPU.cpp" line="52"/>
         <source>Routing Selection</source>
-        <translation>Routage de sélection</translation>
+        <translation>Sélection du routage</translation>
     </message>
     <message>
         <location filename="soundSource_analogPU.cpp" line="56"/>
@@ -2488,17 +2531,18 @@
     <message>
         <location filename="soundSource_synth_a.cpp" line="77"/>
         <source>String level</source>
-        <translation>Niveau String</translation>
+        <translatorcomment>This is for singular (1 string)</translatorcomment>
+        <translation type="unfinished">Niveau de la corde</translation>
     </message>
     <message>
         <location filename="soundSource_synth_a.cpp" line="86"/>
         <source>Filter</source>
-        <translation>Filtrer</translation>
+        <translation>Filtre</translation>
     </message>
     <message>
         <location filename="soundSource_synth_a.cpp" line="91"/>
         <source>Filter Cutoff</source>
-        <translation>De coupure du filtre</translation>
+        <translation>Coupure du filtre</translation>
     </message>
     <message>
         <location filename="soundSource_synth_a.cpp" line="98"/>
@@ -2531,22 +2575,23 @@
     <message>
         <location filename="soundSource_synth_b.cpp" line="61"/>
         <source>PCM Synth</source>
+        <translatorcomment>This is for singular (1 string)</translatorcomment>
         <translation>PCM Synth</translation>
     </message>
     <message>
         <location filename="soundSource_synth_b.cpp" line="78"/>
         <source>String level</source>
-        <translation>Niveau String</translation>
+        <translation type="unfinished">Niveau de la corde</translation>
     </message>
     <message>
         <location filename="soundSource_synth_b.cpp" line="87"/>
         <source>Filter</source>
-        <translation>Filtrer</translation>
+        <translation>Filtre</translation>
     </message>
     <message>
         <location filename="soundSource_synth_b.cpp" line="92"/>
         <source>Filter Cutoff</source>
-        <translation>De coupure du filtre</translation>
+        <translation>Coupure du filtre</translation>
     </message>
     <message>
         <location filename="soundSource_synth_b.cpp" line="99"/>
@@ -2579,24 +2624,24 @@
     <message>
         <location filename="stompBox.cpp" line="40"/>
         <source>StompBox effect&lt;br&gt;a double mouse click will open the effect edit page.</source>
-        <translation>Effet Stompbox &lt;br&gt; un double clic ouvre l&apos;effet modifier la page.</translation>
+        <translation>Effet Stompbox&lt;br&gt;un double clic ouvre la page d&apos;édition de l&apos;effet.</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="303"/>
         <location filename="stompBox.cpp" line="312"/>
         <source>hold down mouse button and drag up/down for quick adjustment</source>
-        <translation>maintenez enfoncé le bouton de la souris et glisser vers le haut / bas pour un réglage rapide</translation>
+        <translation>maintenez le bouton de la souris enfoncé et glissez vers le haut / bas pour un réglage rapide</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="304"/>
         <location filename="stompBox.cpp" line="313"/>
         <source>use scroll wheel or up/down arrow keys for fine adjustment</source>
-        <translation>utiliser la molette ou les touches HAUT / flèche vers le bas pour le réglage fin</translation>
+        <translation>utilisez la molette de défilement ou les flèches HAUT / BAS du clavier pour un réglage précis</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="547"/>
         <source>Amp/Spkr</source>
-        <translation>Amp/Spkr</translation>
+        <translation>Amp / Spkr</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="548"/>
@@ -2611,7 +2656,7 @@
     <message>
         <location filename="stompBox.cpp" line="550"/>
         <source>Multi Effect</source>
-        <translation>Effet Multi</translation>
+        <translation>Multi-effets</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="551"/>
@@ -2626,12 +2671,12 @@
     <message>
         <location filename="stompBox.cpp" line="553"/>
         <source>Delay</source>
-        <translation>Retard</translation>
+        <translation>Delay</translation>
     </message>
     <message>
         <location filename="stompBox.cpp" line="554"/>
         <source>Equalizer</source>
-        <translation>Equalizer</translation>
+        <translation>Equalisation</translation>
     </message>
 </context>
 <context>
@@ -2640,7 +2685,7 @@
         <location filename="stompbox_amp.cpp" line="59"/>
         <source>PreAmp</source>
         <oldsource>Pre Amp</oldsource>
-        <translation>Pre Amp</translation>
+        <translation>Pré-Amp</translation>
     </message>
     <message>
         <location filename="stompbox_amp.cpp" line="75"/>
@@ -2650,7 +2695,7 @@
     <message>
         <location filename="stompbox_amp.cpp" line="83"/>
         <source>Solo</source>
-        <translation>Seuls les</translation>
+        <translation>Solo</translation>
     </message>
 </context>
 <context>
@@ -2673,7 +2718,7 @@
     <message>
         <location filename="stompbox_ce.cpp" line="64"/>
         <source>Send Levels</source>
-        <translation>Envoyer niveaux</translation>
+        <translation>Niveaux d&apos;envoi</translation>
     </message>
 </context>
 <context>
@@ -2681,7 +2726,7 @@
     <message>
         <location filename="stompbox_dd.cpp" line="64"/>
         <source>Send Levels</source>
-        <translation>Envoyer niveaux</translation>
+        <translation>Niveaux d&apos;envoi</translation>
     </message>
 </context>
 <context>
@@ -2689,7 +2734,7 @@
     <message>
         <location filename="stompbox_rv.cpp" line="67"/>
         <source>Send Levels</source>
-        <translation>Envoyer niveaux</translation>
+        <translation>Niveaux d&apos;envoi</translation>
     </message>
 </context>
 <context>
@@ -2702,7 +2747,7 @@
     <message>
         <location filename="summaryDialog.cpp" line="345"/>
         <source>Will close the currently open Dialog page.</source>
-        <translation>Est-ce que fermer la page de dialogue ouvert.</translation>
+        <translation>Fermera la fenêtre d&apos;édition courante.</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="347"/>
@@ -2713,7 +2758,8 @@
         <location filename="summaryDialog.cpp" line="349"/>
         <location filename="summaryDialog.cpp" line="353"/>
         <source>Will Print the current Dialog to the prefered printer&lt;br&gt;printed text will be simular to the screen layout.</source>
-        <translation>Est-ce que la boîte de dialogue d&apos;impression actuelle à l&apos;imprimante préféré &lt;br&gt; texte imprimé sera simular à la disposition d&apos;écran.</translation>
+        <translatorcomment>I believe there is a spelling error on &apos;simular&apos; in the english sentence.</translatorcomment>
+        <translation type="unfinished">Imprimera la boîte de dialogue courante sur l&apos;imprimante par défaut&lt;br&gt;Le texte imprimé sera similaire à l&apos;écran actuel.</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="351"/>
@@ -2730,22 +2776,23 @@
     <message>
         <location filename="summaryDialog.cpp" line="357"/>
         <source>Will save the current dialog page to file in a *.txt format.</source>
-        <translation>Est-ce que pour enregistrer la page de dialogue de fichier dans un format *. txt.</translation>
+        <translation>Enregistrera la page actuelle vers un fichier au format *.txt.</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="359"/>
         <source>Change View</source>
-        <translation>Voir les changements</translation>
+        <translation>Changer de vue</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="361"/>
         <source>Will Expand the summary dialog to include all patch parameters.</source>
-        <translation>Élargira le dialogue de résumé pour inclure tous les paramètres de patch.</translation>
+        <translation>Agrandira le résumé pour inclure tous les paramètres de patch.</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="385"/>
         <source>GR-55 Patch Summary of </source>
-        <translation>GR-55 Résumé de Patch</translation>
+        <translatorcomment>Not sure about the meaning of the sentence - I need to locate it in the software</translatorcomment>
+        <translation type="unfinished">Résumé des Patches GR-55 de</translation>
     </message>
     <message>
         <location filename="summaryDialog.cpp" line="454"/>
@@ -2755,7 +2802,7 @@
     <message>
         <location filename="summaryDialog.cpp" line="483"/>
         <source>Text Document (*.txt)</source>
-        <translation>Document texte (*. txt)</translation>
+        <translation>Document texte (*.txt)</translation>
     </message>
 </context>
 <context>
@@ -2768,12 +2815,12 @@
     <message>
         <location filename="summaryDialogPatchList.cpp" line="64"/>
         <source>Ensure connection is active and retry</source>
-        <translation>Assurez que le raccordement est en activité et tentative</translation>
+        <translation>Assurez-vous que la connection est active et ré-essayez</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="66"/>
         <source> not connected !!</source>
-        <translation>non relié ! !</translation>
+        <translation>non connecté !!</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="77"/>
@@ -2783,17 +2830,17 @@
     <message>
         <location filename="summaryDialogPatchList.cpp" line="79"/>
         <source>Will close the currently open Dialog page.</source>
-        <translation>Est-ce que fermer la page de dialogue ouvert.</translation>
+        <translation>Fermera la fenêtre d&apos;édition courante.</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="82"/>
         <source>Print</source>
-        <translation></translation>
+        <translation>Imprimer</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="84"/>
         <source>Will Print the current Dialog to the prefered printer&lt;br&gt;printed text will be simular to the screen layout.</source>
-        <translation>Est-ce que la boîte de dialogue d&apos;impression actuelle à l&apos;imprimante préféré &lt;br&gt; texte imprimé sera simular à la disposition d&apos;écran.</translation>
+        <translation>Imprimera la boîte de dialogue courante sur l&apos;imprimante par défaut&lt;br&gt;Le texte imprimé sera similaire à l&apos;écran actuel.</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="87"/>
@@ -2804,17 +2851,17 @@
     <message>
         <location filename="summaryDialogPatchList.cpp" line="89"/>
         <source>Will save the current dialog page to file in a *.txt format.</source>
-        <translation>Est-ce que pour enregistrer la page de dialogue de fichier dans un format *. txt.</translation>
+        <translation>Enregistrera la boîte de dialogue actuelle vers un fichier au format *.txt.</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="110"/>
         <source> Patch List Summary</source>
-        <translation>Sommaire Liste de patchs</translation>
+        <translation>Résumé de la liste du Patch</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="144"/>
         <source>Reading names</source>
-        <translation>Noms de lecture</translation>
+        <translation>Lectire des noms</translation>
     </message>
     <message>
         <location filename="summaryDialogPatchList.cpp" line="150"/>
@@ -2830,7 +2877,7 @@
     <message>
         <location filename="summaryDialogPatchList.cpp" line="196"/>
         <source>Text Document (*.txt)</source>
-        <translation>Document texte (*. txt)</translation>
+        <translation>Document texte (*.txt)</translation>
     </message>
 </context>
 <context>
@@ -2843,32 +2890,32 @@
     <message>
         <location filename="summaryDialogSystem.cpp" line="48"/>
         <source>Opening Page...</source>
-        <translation>Page d&apos;ouverture ...</translation>
+        <translation>Ouverture de page...</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="59"/>
         <source>Request System data</source>
-        <translation>Données de système de demande</translation>
+        <translation>Récupération des données système</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="64"/>
         <source>Ensure connection is active and retry&lt;br&gt;</source>
-        <translation>Assurez-connexion est active et réessayez</translation>
+        <translation>Assurez-vous que la connexion est active et réessayez&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="65"/>
         <source>System data not transfered, current settings are to be used&lt;br&gt;</source>
-        <translation>Les données du système n&apos;est pas transférée, les paramètres actuels doivent être utilisés &lt;br&gt;</translation>
+        <translation>Les données du système n&apos;ont pas été transférées, les paramètres actuels vont être utilisés &lt;br&gt;</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="67"/>
         <source> midi connection not found!!</source>
-        <translation>connexion midi pas trouvé!</translation>
+        <translation>Aucune connexion midi trouvée !</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="72"/>
         <source>Not Connected</source>
-        <translation>Non relié </translation>
+        <translation>Non connecté </translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="300"/>
@@ -2878,7 +2925,7 @@
     <message>
         <location filename="summaryDialogSystem.cpp" line="302"/>
         <source>Will close the currently open Dialog page.</source>
-        <translation>Est-ce que fermer la page de dialogue ouvert.</translation>
+        <translation>Fermera la boîte de dialogue courante.</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="305"/>
@@ -2888,7 +2935,7 @@
     <message>
         <location filename="summaryDialogSystem.cpp" line="307"/>
         <source>Will Print the current Dialog to the prefered printer&lt;br&gt;printed text will be simular to the screen layout.</source>
-        <translation>Est-ce que la boîte de dialogue d&apos;impression actuelle à l&apos;imprimante préféré &lt;br&gt; texte imprimé sera simular à la disposition d&apos;écran.</translation>
+        <translation>Imprimera la boîte de dialogue courante sur l&apos;imprimante par défaut&lt;br&gt;Le texte imprimé sera similaire à l&apos;écran actuel.</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="310"/>
@@ -2899,32 +2946,32 @@
     <message>
         <location filename="summaryDialogSystem.cpp" line="312"/>
         <source>Will save the current dialog page to file in a *.txt format.</source>
-        <translation>Est-ce que pour enregistrer la page de dialogue de fichier dans un format *. txt.</translation>
+        <translation>Enregistrera la page actuelle vers un fichier au format *.txt.</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="333"/>
         <source> System and Global List Summary</source>
-        <translation>Et du Système mondial liste sommaire</translation>
+        <translation> Résumé de liste Système et Global</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="384"/>
         <source>System Data from </source>
-        <translation>Données de système de </translation>
+        <translation>Données système de </translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="392"/>
         <source> FloorBoard connection Error !!</source>
-        <translation>Erreur de raccordement de planche ! !</translation>
+        <translation>Erreur de connexion du FloorBoard !!</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="397"/>
         <source>The ROLAND </source>
-        <translation>ROLAND </translation>
+        <translation>Le ROLAND </translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="397"/>
         <source> System data was not transfered !!.</source>
-        <translation>Les données du système n&apos;a pas été transféré!.</translation>
+        <translation>Les données système n&apos;ont pas été transmises !!.</translation>
     </message>
     <message>
         <location filename="summaryDialogSystem.cpp" line="404"/>

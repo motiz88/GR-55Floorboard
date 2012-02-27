@@ -333,7 +333,7 @@
 			<xs:attribute name="version" use="required">
 				<xs:simpleType>
 					<xs:restriction base="xs:int">
-						<xs:enumeration value="20120205"/>
+						<xs:enumeration value="20120221"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

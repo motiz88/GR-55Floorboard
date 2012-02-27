@@ -43,6 +43,7 @@ class summaryDialogPatchList : public QWidget
 
 public:
   summaryDialogPatchList(QWidget *parent = 0);
+  ~summaryDialogPatchList();
   QTextEdit *textDialog;
   QTextDocument *document;
   QPrintDialog *dialog;

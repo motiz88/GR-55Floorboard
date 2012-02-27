@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by x (x) -->
 <!-- Preferences of the GR-55 FloorBoard application. -->
-<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\GrFloorBoard\grfloorboard\packager\preferences.xsd">
+<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\GrFloorBoard\grfloorboard\preferences.xsd">
 	<General>
-		<Application version="20120205"/>
+		<Application version="20120221"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55-Help-HTML\GR-55_HTML_Help.html"/>

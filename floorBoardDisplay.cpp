@@ -1190,11 +1190,8 @@ void floorBoardDisplay::writeToBuffer()
     msgBox->setStandardButtons(QMessageBox::Close);
 
     msgBox->exec();
-
-        sysxIO->writeToBuffer();
-        sysxIO->setSyncStatus(true);
-
-
+    sysxIO->writeToBuffer();
+    sysxIO->setSyncStatus(true);
 
     this->writeButton->setBlink(false);	// Sync so we stop blinking the button
     this->writeButton->setValue(false);	// and activate the write button.
@@ -1206,8 +1203,6 @@ void floorBoardDisplay::writeToMemory()
 
     QString sysxMsg; bool ok;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = sysxIO->getFileSource().address;
-
     emit setStatusSymbol(2);
     emit setStatusMessage(tr("Writing to Patch"));
 
@@ -1281,11 +1276,11 @@ void floorBoardDisplay::resetDevice(QString replyMsg)
         sysxIO->setLoadedPatch(sysxIO->getPatch());
     };
 
-    Sleep(1000);
+    SLEEP(1000);
     if(set_bank < 999 && set_patch < 999) {sysxIO->requestPatchChange(set_bank, set_patch); };
     set_bank = 999;
     set_patch = 999;
-    Sleep(500);
+    SLEEP(500);
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
     emit connectedSignal();		// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.

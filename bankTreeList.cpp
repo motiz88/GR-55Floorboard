@@ -747,12 +747,18 @@ void bankTreeList::updatePatchNames(QString name)
             emit setStatusSymbol(1);
             emit setStatusMessage(tr("Ready"));
             emit setStatusProgress(0);
+
+            QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
+                                this, SLOT(updatePatchNames(QString)));
         };
     }
     else {SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setDeviceReady(true);
         emit setStatusSymbol(1);
         emit setStatusMessage(tr("Ready"));
+
+        QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
+                            this, SLOT(updatePatchNames(QString)));
     };
 };
 

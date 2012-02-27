@@ -35,49 +35,51 @@
 
 class bulkSaveDialog : public QDialog
 {
-	Q_OBJECT
-  
+    Q_OBJECT
+
 public:
-	bulkSaveDialog();
-  QCheckBox* systemCheckBox;
-	QSpinBox* startRangeSpinBox;
-	QSpinBox* finishRangeSpinBox;
-  QProgressBar *progressBar;
-  QString msg;
-  
+    bulkSaveDialog();
+    ~bulkSaveDialog();
+    QCheckBox* systemCheckBox;
+    QSpinBox* startRangeSpinBox;
+    QSpinBox* finishRangeSpinBox;
+    QProgressBar *progressBar;
+    QString msg;
+
 signals:
-  void setStatusMessage(QString message);
-  void setStatusProgress(int value);
-  void setStatusSymbol(int value);
-                    
+    void setStatusMessage(QString message);
+    void setStatusProgress(int value);
+    void setStatusSymbol(int value);
+
 public slots:
-  void backup();
-  void requestPatch(int bank, int patch);
-  void updatePatch(QString replyMsg);
-  void bulkStatusProgress(int value);
-     
+    void backup();
+    void requestPatch(int bank, int patch);
+    void updatePatch(QString replyMsg);
+    void bulkStatusProgress(int value);
+    void DialogClose();
+
 private: 
-  QLabel *progressLabel;
-  QLabel *bytesLabel; 
-  QPushButton *startButton;
-  QPushButton *cancelButton; 
-  QPushButton *completedButton;
-  QRadioButton *g5lButton;
-  QRadioButton *syxButton;
-  QRadioButton *midButton;
-  int bankStart;
-	int bankFinish;
-	int progress;
-	bool systemSelect;
-	QString bulkData;	
-	QString bulk;
-	int range;
-	int patch;
-	int bank;
-	QString fileName;
-	void writeG5L();
-	void writeSYX();
-	void writeSMF();
+    QLabel *progressLabel;
+    QLabel *bytesLabel;
+    QPushButton *startButton;
+    QPushButton *cancelButton;
+    QPushButton *completedButton;
+    QRadioButton *g5lButton;
+    QRadioButton *syxButton;
+    QRadioButton *midButton;
+    int bankStart;
+    int bankFinish;
+    int progress;
+    bool systemSelect;
+    QString bulkData;
+    QString bulk;
+    int range;
+    int patch;
+    int bank;
+    QString fileName;
+    void writeG5L();
+    void writeSYX();
+    void writeSMF();
 };
 
 #endif // BULKSAVEDIALOG_H
