@@ -61,25 +61,19 @@ SysxIODestroyer SysxIO::_destroyer;
 SysxIO* SysxIO::Instance() 
 {
     /* Multi-threading safe */
-    if (!_instance /*_instance == 0*/)  // is it the first call?
+    if (!_instance)  // is it the first call?
     {
         _instance = new SysxIO; // create sole instance
         _destroyer.SetSysxIO(_instance);
     };
     return _instance; // address of sole instance
-
-    /* Single-threading */
-    /*
-	static SysxIO inst;
-	return &inst;
-	*/
 };
 
 void SysxIO::setFileSource(QString area, SysxData fileSource)
 { 
     if (area.contains("System"))
     {
-	this->systemSource = fileSource;
+        this->systemSource = fileSource;
     }
     else
     {
@@ -95,8 +89,8 @@ void SysxIO::setFileSource(QString area, QByteArray data)
         this->systemSource.hex.clear();
     }else
     {
-	this->fileSource.address.clear();
-	this->fileSource.hex.clear();
+        this->fileSource.address.clear();
+        this->fileSource.hex.clear();
     };
 
     QString errorList;
@@ -213,7 +207,7 @@ void SysxIO::setFileSource(QString area, QString data)
 {
     if (area.contains("System"))
     {
-    	this->systemSource.address.clear();
+        this->systemSource.address.clear();
         this->systemSource.hex.clear();
     }
     else
@@ -278,7 +272,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
 
     if(area.contains("System"))
     {
-  	this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
+        this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
     }
     else
     {
@@ -339,7 +333,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
 
     if (area.contains("System"))
     {
-	this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
+        this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
     }
     else
     {
@@ -378,23 +372,23 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
     int pointerOffset2 = hex3.toInt(&ok, 16);
     if (area != "System")
     {
-	QList<QString> sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
+        QList<QString> sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
         int x = 0;
         for(int i=0; i<hexData.size();++i)
         {
             if((i + sysxDataOffset + pointerOffset2) > (sysxDataOffset + 127))  // if data string crosses page boundry limit >127
-              {
+            {
                 pointerOffset2 = 0;
                 x=0;
                 this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
                 address = "0200";                         // save the data and start a sysxList with a new address
                 sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
-              };
+            };
             sysxList.replace(x + (sysxDataOffset + pointerOffset2), hexData.at(i));
             x=x+1;
         };
         this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
-	
+
         sysxMsg = "F04110000053121800";
         sysxMsg.append(hex1);
         sysxMsg.append(hex3);
@@ -408,7 +402,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
 
         };
         this->systemSource.hex.replace(this->systemSource.address.indexOf(address), sysxList);
-	
+
         sysxMsg = "F0411000005312";
         sysxMsg.append(hex1);
         sysxMsg.append("00");
@@ -546,31 +540,31 @@ QList<QString> SysxIO::getFileSource(QString area, QString hex1, QString hex2)
     QList<QString> sysxMsg;
     if (area.contains("System"))
     {
-	if(this->systemSource.address.indexOf(address) == -1)
-	{
+        if(this->systemSource.address.indexOf(address) == -1)
+        {
             sysxWriter file;
             file.setFile(":system.syx");  // Read the default sysex file so whe don't start empty handed.
             if(file.readFile())
             {
                 setFileSource(area, file.getSystemSource());
             };
-	};
-	sysxMsg = this->systemSource.hex.at( this->systemSource.address.indexOf(address) );
-	
+        };
+        sysxMsg = this->systemSource.hex.at( this->systemSource.address.indexOf(address) );
+
     }
     else
     {
         area = "Structure";
-   	if(this->fileSource.address.indexOf(address) == -1)
-	{
+        if(this->fileSource.address.indexOf(address) == -1)
+        {
             sysxWriter file;
             file.setFile(":default.syx");  // Read the default sysex file so whe don't start empty handed.
             if(file.readFile())
             {
                 setFileSource(area, file.getFileSource());
             };
-	};
-	sysxMsg = this->fileSource.hex.at( this->fileSource.address.indexOf(address) );
+        };
+        sysxMsg = this->fileSource.hex.at( this->fileSource.address.indexOf(address) );
     };
     return sysxMsg;
 };
@@ -782,20 +776,20 @@ void SysxIO::sendMidi(QString midiMsg)
         int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
 
         midiIO *midi = new midiIO();
-        QList<QString> midiOutDevices = midi->getMidiOutDevices();
-        /*if ( midiOutDevices.contains("GR-55") )
+        /*QList<QString> midiOutDevices = midi->getMidiOutDevices();
+        if ( midiOutDevices.contains("GR-55") )
         {
             midiOutPort = midiOutDevices.indexOf("GR-55");
         };*/
 
         midi->sendMidi(midiMsg, midiOutPort);
         /*DeBugGING OUTPUT */
-	if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
-	{
+        if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
+        {
             QString dBug =("      ");
             dBug.append(midiMsg);
             emit setStatusdBugMessage(dBug);
-	}
+        }
     };
 };
 
@@ -820,7 +814,7 @@ void SysxIO::requestPatchChange(int bank, int patch)
     this->patchChange = patch;
 
     //QObject::connect(this, SIGNAL(isFinished()),	// Connect the result of the request
-                     //this, SLOT(namePatchChange()));				// to returnPatchName function.
+    //this, SLOT(namePatchChange()));				// to returnPatchName function.
 
     QString midiMsg = getPatchChangeMsg(bank, patch);
     emit setStatusMessage(tr("Patch change"));
@@ -859,34 +853,34 @@ void SysxIO::checkPatchChange(QString name)
     //this->setDeviceReady(true); //  extra added  line
     //QObject::disconnect(this, SIGNAL(isChanged()));  //  extra added  line
     /*	}
-	else
-	{
-		if(changeCount < maxRetry)
-		{
-			this->changeCount++;
-			this->requestPatchChange(bankChange, patchChange);
+    else
+    {
+        if(changeCount < maxRetry)
+        {
+            this->changeCount++;
+            this->requestPatchChange(bankChange, patchChange);
 
-			emit setStatusSymbol(2);
-			//emit setStatusProgress(0);
-			emit setStatusMessage("Sending");
-		}
-		else
-		{
-			QObject::disconnect(this, SIGNAL(isChanged()));
-			
-			this->changeCount = 0;
-			this->setDeviceReady(true); // Free the device after finishing interaction.
-			
-			emit setStatusSymbol(1);
-			emit setStatusMessage(tr("Ready"));	
-			emit setStatusProgress(0);
+            emit setStatusSymbol(2);
+            //emit setStatusProgress(0);
+            emit setStatusMessage("Sending");
+        }
+        else
+        {
+            QObject::disconnect(this, SIGNAL(isChanged()));
 
-			emit patchChangeFailed();
+            this->changeCount = 0;
+            this->setDeviceReady(true); // Free the device after finishing interaction.
 
-			QApplication::beep(); 
+            emit setStatusSymbol(1);
+            emit setStatusMessage(tr("Ready"));
+            emit setStatusProgress(0);
 
-		};
-	};  */
+            emit patchChangeFailed();
+
+            QApplication::beep();
+
+        };
+    };  */
 };
 
 /***************************** sendSysx() ***********************************
@@ -901,7 +895,7 @@ void SysxIO::sendSysx(QString sysxMsg)
     midiIO *midi = new midiIO();
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
-  /*  if ( midiInDevices.contains("GR-55") )
+    /*  if ( midiInDevices.contains("GR-55") )
     {
         midiInPort = midiInDevices.indexOf("GR-55");
     };
@@ -924,38 +918,6 @@ void SysxIO::sendSysx(QString sysxMsg)
 ****************************************************************************/
 void SysxIO::receiveSysx(QString sysxMsg)
 {
-    /*DeBugGING OUTPUT */
-    /*	Preferences *preferences = Preferences::Instance(); // Load the preferences.
-	if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
-	{
-	if (sysxMsg.size() > 0){
-			QString snork;
-			snork.append("<font size='-1'>");
-			snork.append(tr("{ size="));
-			snork.append(QString::number(sysxMsg.size()/2, 10));
-			snork.append("}");	
-			snork.append(tr("<br> midi data received"));
-			for(int i=0;i<sysxMsg.size();++i)
-			{
-				snork.append(sysxMsg.mid(i, 2));
-				snork.append(" ");
-				i++;
-			};
-			snork.replace("F7", "F7 }<br>");
-			snork.replace("F0", "{ F0");
-		  if (sysxMsg == dBug){
-				  snork.append(tr("<br> WARNING: midi data received = data sent"));
-				  snork.append(tr("<br> caused by a midi loopback, port change is required"));
-			 };
-
-			QMessageBox *msgBox = new QMessageBox();
-			msgBox->setWindowTitle(tr("dBug Result for received sysx data"));
-			msgBox->setIcon(QMessageBox::Information);
-			msgBox->setText(snork);
-			msgBox->setStandardButtons(QMessageBox::Ok);
-			msgBox->exec();
-		};
-        };	  */
     emit sysxReply(sysxMsg);
 };
 
@@ -966,7 +928,7 @@ void SysxIO::receiveSysx(QString sysxMsg)
 void SysxIO::requestPatchName(int bank, int patch)
 {
     QObject::disconnect(this, SIGNAL(sysxReply(QString)),
-			this, SLOT(returnPatchName(QString)));
+                        this, SLOT(returnPatchName(QString)));
 
     QObject::connect(this, SIGNAL(sysxReply(QString)),	// Connect the result of the request
                      this, SLOT(returnPatchName(QString)));			// to returnPatchName function.
@@ -983,12 +945,11 @@ void SysxIO::requestPatchName(int bank, int patch)
 void SysxIO::returnPatchName(QString sysxMsg)
 {
     QObject::disconnect(this, SIGNAL(sysxReply(QString)),
-			this, SLOT(returnPatchName(QString)));
+                        this, SLOT(returnPatchName(QString)));
 
     QString name;
     if(sysxMsg.size()/2 == 29)
     {
-        QString hex1, hex2, hex3, hex4;
         for(int i=sysxDataOffset*2; i<(sysxDataOffset*2)+(nameLength*2);++i)   //read the length of name string.
         {
             QString hexStr = sysxMsg.mid(i, 2);
@@ -1014,7 +975,6 @@ void SysxIO::returnPatchName(QString sysxMsg)
     else {name = tr("no reply"); };
     emit patchName(name);
 };
-
 
 /***************************** requestPatch() ******************************
 * Send a patch request. Result will be send directly with receiveSysx signal
@@ -1104,34 +1064,17 @@ void SysxIO::systemWrite()
 
     QString sysxMsg;
     QList< QList<QString> > systemData = getSystemSource().hex; // Get the loaded system data.
-    //QList<QString> systemAddress = getSystemSource().address;
-
-    //QString addr1 = QString::number(0, 16).toUpper();
-    //QString addr2 = addr1;
-
     for(int i=0;i<systemData.size();++i)
     {
         QList<QString> data = systemData.at(i);
         for(int x=0;x<data.size();++x)
         {
             QString hex;
-            /*if(x == sysxAddressOffset)
-			{ 
-				hex = addr1;
-			}
-			else if(x == sysxAddressOffset + 1)
-			{
-				hex = addr2;
-			}
-			else
-			{ */
             hex = data.at(x);
-            //};
             if (hex.length() < 2) hex.prepend("0");
             sysxMsg.append(hex);
         };
     };
-    //setSyncStatus(true);		// In advance of the actual data transfer we set it already to sync.
     sendSysx(sysxMsg);	// Send the data.
     setDeviceReady(true);
 };
@@ -1148,7 +1091,6 @@ void SysxIO::systemDataRequest()
         QObject::disconnect(this, SIGNAL(sysxReply(QString)));
         QObject::connect(this, SIGNAL(sysxReply(QString)), this, SLOT(systemReply(QString)));
         sendSysx(systemRequest); // GR-55 System area data Request.
-
         emit setStatusProgress(0);
     }
     else
@@ -1167,46 +1109,44 @@ void SysxIO::systemReply(QString replyMsg)
 {
     QObject::disconnect(this, SIGNAL(sysxReply(QString)), this, SLOT(systemReply(QString)));
     setDeviceReady(true); // Free the device after finishing interaction.
-
     if(noError())
     {
         if(replyMsg.size()/2 == 1173)  // data format from the GR-55
         {
             /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
-                      QString part1 = replyMsg.mid(0, 412); //from 0, copy system data upto 02000200 byte 128
-                      part1.append("7FF7");
-                      QString part2 = replyMsg.mid(412, 1934);
-                      part2.prepend("F041100000531202000300");
-                      replyMsg = "";
-                      replyMsg.append(part1).append(part2);
-                      QString reBuild = "";       // Add correct checksum to patch strings
-                      QString sysxEOF = "";
-                      QString hex = "";
-                      int msgLength = replyMsg.length()/2;
-                      for(int i=0;i<msgLength*2;++i)
-                      {
-                          hex.append(replyMsg.mid(i*2, 2));
-                          sysxEOF = (replyMsg.mid((i*2)+4, 2));
-                          if (sysxEOF == "F7")
-                          {
-                              int dataSize = 0; bool ok;
-                              for(int h=checksumOffset;h<hex.size()-1;++h)
-                              { dataSize += hex.mid(h*2, 2).toInt(&ok, 16); };
-                              QString base = "80";                       // checksum calculate.
-                              unsigned int sum = dataSize % base.toInt(&ok, 16);
-                              if(sum!=0) { sum = base.toInt(&ok, 16) - sum; };
-                              QString checksum = QString::number(sum, 16).toUpper();
-                              if(checksum.length()<2) {checksum.prepend("0");};
-                              hex.append(checksum);
-                              hex.append("F7");
-                              reBuild.append(hex);
-
-                              hex = "";
-                              sysxEOF = "";
-                              i=i+2;
-                          };
-                      };
-                      replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
+            QString part1 = replyMsg.mid(0, 412); //from 0, copy system data upto 02000200 byte 128
+            part1.append("7FF7");
+            QString part2 = replyMsg.mid(412, 1934);
+            part2.prepend("F041100000531202000300");
+            replyMsg = "";
+            replyMsg.append(part1).append(part2);
+            QString reBuild = "";       // Add correct checksum to patch strings
+            QString sysxEOF = "";
+            QString hex = "";
+            int msgLength = replyMsg.length()/2;
+            for(int i=0;i<msgLength*2;++i)
+            {
+                hex.append(replyMsg.mid(i*2, 2));
+                sysxEOF = (replyMsg.mid((i*2)+4, 2));
+                if (sysxEOF == "F7")
+                {
+                    int dataSize = 0; bool ok;
+                    for(int h=checksumOffset;h<hex.size()-1;++h)
+                    { dataSize += hex.mid(h*2, 2).toInt(&ok, 16); };
+                    QString base = "80";                       // checksum calculate.
+                    unsigned int sum = dataSize % base.toInt(&ok, 16);
+                    if(sum!=0) { sum = base.toInt(&ok, 16) - sum; };
+                    QString checksum = QString::number(sum, 16).toUpper();
+                    if(checksum.length()<2) {checksum.prepend("0");};
+                    hex.append(checksum);
+                    hex.append("F7");
+                    reBuild.append(hex);
+                    hex = "";
+                    sysxEOF = "";
+                    i=i+2;
+                };
+            };
+            replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
 
             QString area = "System";
             setFileSource(area, replyMsg);		// Set the source to the data received.
@@ -1242,11 +1182,8 @@ void SysxIO::writeToBuffer()
 
     QString sysxMsg;
     QList< QList<QString> > patchData = getFileSource().hex; // Get the loaded patch data.
-    QList<QString> patchAddress = getFileSource().address;
-
     emit setStatusSymbol(2);
     emit setStatusMessage(tr("Sync to ")+deviceType);
-
     QString addr1 = tempDataWrite;
     QString addr2 = "00";
 

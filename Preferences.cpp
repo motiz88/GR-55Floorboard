@@ -56,23 +56,17 @@ PreferencesDestroyer Preferences::_destroyer;
 Preferences* Preferences::Instance() 
 {
 	/* Multi-threading safe */
-	if (!_instance /*_instance == 0*/)  // is it the first call?
+    if (!_instance)  // is it the first call?
 	{  
 		_instance = new Preferences; // create sole instance
 		_destroyer.SetPreferences(_instance);
 	};
 	return _instance; // address of sole instance
-
-	/* Single-threading */
-	/*
-	static Preferences inst;
-	return &inst;
-	*/
 };
 
 QString Preferences::getPreferences(QString prefGroupName, QString prefTypeName, QString prefItemName)
 {
-	/* Look op and return of the value coresponding to the group->type->item */
+    /* Look up and return of the value coresponding to the group->type->item */
 	QString setting;
 	int indexOfValue = this->metaSearch.indexOf(QString(prefGroupName + ":" + prefTypeName + ":" + prefItemName));
 	if(indexOfValue!=-1)

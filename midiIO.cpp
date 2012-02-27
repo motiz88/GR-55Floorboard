@@ -50,6 +50,12 @@ midiIO::midiIO()
     QObject::connect(this, SIGNAL(replyMsg(QString)),	sysxIO, SLOT(receiveSysx(QString)));
     QObject::connect(this, SIGNAL(midiFinished()), sysxIO, SLOT(finishedSending()));
 };
+
+midiIO::~midiIO()
+{
+    this->terminate();
+};
+
 /*********************** queryMidiOutDevices() *****************************
  * Retrieves all MIDI Out devices installed on your system and stores them
  * as a QList of QStrings and device id's.
@@ -160,18 +166,17 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     midiMsgOut = new RtMidiOut(clientName);
     QString hex;
     int wait_time = 0;
-    int close = 20;
-    int s = sysxOutMsg.size()/100;
-    int p=0;
+    int s = sysxOutMsg.size();
+    int close = 20 + s;
     int retryCount = 0;
     std::vector<unsigned char> message;
     message.reserve(1333);
     int msgLength = 0;
     msgLength = sysxOutMsg.length()/2;
     char *ptr  = new char[msgLength];		// Convert QString to char* (hex value)
+ RETRY:
     int nPorts = midiMsgOut->getPortCount();   // Check available ports.
-    if ( nPorts < 1 ) { goto cleanup; };
-    RETRY:
+    if ( nPorts < 1 ) { goto cleanup; }; 
     try {
         midiMsgOut->openPort(midiOutPort, clientName);	// Open selected port.
         for(int i=0;i<msgLength*2;++i)
@@ -183,18 +188,8 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
             *ptr = (char)n;
             message.push_back(*ptr);		// insert the char* string into a std::vector
             wait_time = wait_time + 1;
-            p=p+s;
             emit setStatusProgress(wait_time);
-            /* if(hex == "F7")
-             {
-                midiMsgOut->sendMessage(&message);  // send the midi data as a std::vector
-                SLEEP(wait);
-                message.clear();
-                close = wait;
-                wait = 0;
-             };*/
             ptr++; i++;
-
         };
         midiMsgOut->sendMessage(&message);
         goto cleanup;
@@ -331,6 +326,7 @@ void midiIO::receiveMsg(QString sysxInMsg, int midiInPort)
     midiin->cancelCallback();
     this->sysxInMsg = this->sysxBuffer;		   //get the returning data string
     dataReceive = true;
+    //msleep(20);
     midiin->closePort();             // close the midi in port
     delete midiin;
 };
@@ -414,7 +410,7 @@ void midiIO::run()
             dataReceive = true;
             receiveMsg(sysxInMsg, midiInPort);
             Preferences *preferences = Preferences::Instance(); // Load the preferences.
-            if((this->sysxBuffer.size()/2 != count) && (repeat<3) && preferences->getPreferences("Midi", "DBug", "bool")!="true")
+            if((this->sysxBuffer.size()/2 != count) && (repeat<10) && preferences->getPreferences("Midi", "DBug", "bool")!="true")
 
             {
                 emit setStatusdBugMessage(tr("retrying data request"));
@@ -430,14 +426,14 @@ void midiIO::run()
             sendSyxMsg(sysxOutMsg, midiOutPort);
            // Preferences *preferences = Preferences::Instance(); bool ok;// Load the preferences.
            // const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
-            emit setStatusProgress(33);  // do the statusbar progress thing
+       /*     emit setStatusProgress(33);  // do the statusbar progress thing
             msleep(20);		// and wait predetermined time before being able to send more again.
             emit setStatusProgress(75);
             msleep(20);
             emit setStatusProgress(100);
             msleep(20);
             emit setStatusProgress(66);
-            msleep(20);
+            msleep(20); */
             emit midiFinished(); // We are finished so we send a signal to free the device.
         };
         this->sysxInMsg = sysxInMsg;

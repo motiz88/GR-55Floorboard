@@ -150,14 +150,12 @@ void initPatchListMenu::loadInitPatch(int index)
 			{	
 				// DO SOMETHING AFTER READING THE FILE (UPDATE THE GUI)
 				SysxIO *sysxIO = SysxIO::Instance();
-				QString area = "Structure";
-                sysxIO->setFileSource(area, file.getFileSource());
+                sysxIO->setFileSource("Structure", file.getFileSource());
 				sysxIO->setFileName(tr("init patch"));
 				sysxIO->setSyncStatus(false);
 				sysxIO->setDevice(false);
+                sysxIO->writeToBuffer();
                 emit updateSignal();
-                if(sysxIO->isConnected())
-                {sysxIO->writeToBuffer(); };
 			};
 		};
 	};
@@ -165,7 +163,7 @@ void initPatchListMenu::loadInitPatch(int index)
 
 void initPatchListMenu::highLightInitPatch(int index)
 {
-    if(index > 0)
+  /*  if(index > 0)
     {
         QString fileName = this->initPatches.at(index - 1 );
         if (!fileName.isEmpty())
@@ -184,5 +182,5 @@ void initPatchListMenu::highLightInitPatch(int index)
                 emit updateSignal();
             };
         };
-    };
+    };  */
 };

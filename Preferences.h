@@ -34,7 +34,7 @@ class Preferences
 {
 
 public:
-	static Preferences* Instance(); //Singleton patern design
+    static Preferences* Instance(); //Singleton pattern design
 	
 	QString getPreferences(QString prefGroupName, QString prefTypeName, QString prefItemName);
 	void setPreferences(QString prefGroupName, QString prefTypeName, QString prefItemName, QString prefValueData);
@@ -44,7 +44,7 @@ public:
 protected :
 	Preferences();
 	friend class PreferencesDestroyer;
-	virtual ~Preferences() { };
+    virtual ~Preferences() { }
 
 private:
 	static Preferences* _instance;
