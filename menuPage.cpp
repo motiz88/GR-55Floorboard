@@ -66,6 +66,9 @@ menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this, SLOT(menuButtonSignal(bool)));
 
     //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this->parent(), SLOT(menuButtonSignal()));
+    
+    QObject::connect(this->parent(), SIGNAL(ez_edit_buttonSignal(bool)), this, SLOT(ez_edit_ButtonSignal(bool) ));
+    QObject::connect(this->parent(), SIGNAL(ez_edit_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
 
     QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this, SLOT(pedal_ButtonSignal(bool) ));
     QObject::connect(this->parent(), SIGNAL(pedal_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
@@ -113,7 +116,7 @@ menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     QObject::connect(this, SIGNAL(setStatusProgress(int)), sysxIO, SIGNAL(setStatusProgress(int)));
     QObject::connect(this, SIGNAL(setStatusMessage(QString)), sysxIO, SIGNAL(setStatusMessage(QString)));
 
-};
+}
 
 
 void menuPage::paintEvent(QPaintEvent *)
@@ -126,12 +129,12 @@ void menuPage::paintEvent(QPaintEvent *)
 
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
-};
+}
 
 editWindow* menuPage::editDetails()
 {
     return this->editDialog;
-};
+}
 
 void menuPage::pedal_ButtonSignal(bool value)
 {
@@ -141,7 +144,7 @@ void menuPage::pedal_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::master_ButtonSignal(bool value)
 {
@@ -151,7 +154,7 @@ void menuPage::master_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::system_ButtonSignal(bool value)
 {
@@ -195,7 +198,17 @@ void menuPage::system_ButtonSignal(bool value)
 
         };
     };
-};
+}
+
+void menuPage::ez_edit_ButtonSignal(bool value)
+{
+    if (this->id == 23)
+    {
+        emitValueChanged(this->hex1, this->hex2, "00", "void");
+        this->editDialog->setWindow(this->fxName);
+        emit setEditDialog(this->editDialog);
+    };
+}
 
 void menuPage::assign1_ButtonSignal(bool value)
 {
@@ -205,7 +218,7 @@ void menuPage::assign1_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign2_ButtonSignal(bool value)
 {
@@ -215,7 +228,7 @@ void menuPage::assign2_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign3_ButtonSignal(bool value)
 {
@@ -225,7 +238,7 @@ void menuPage::assign3_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign4_ButtonSignal(bool value)
 {
@@ -235,7 +248,7 @@ void menuPage::assign4_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign5_ButtonSignal(bool value)
 {
@@ -245,7 +258,7 @@ void menuPage::assign5_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign6_ButtonSignal(bool value)
 {
@@ -255,7 +268,7 @@ void menuPage::assign6_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign7_ButtonSignal(bool value)
 {
@@ -265,7 +278,7 @@ void menuPage::assign7_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::assign8_ButtonSignal(bool value)
 {
@@ -275,7 +288,7 @@ void menuPage::assign8_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void menuPage::systemReply(QString replyMsg)
 {
@@ -323,32 +336,6 @@ void menuPage::systemReply(QString replyMsg)
                       };
                       replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
 
-
-                   /*   QString snork;
-                      snork.append("<font size='-1'>");
-                      snork.append(tr("{ size="));
-                      snork.append(QString::number(replyMsg.size()/2, 10));
-                      snork.append("}");
-                      snork.append(tr("<br> midi data received"));
-                      for(int i=0;i<replyMsg.size();++i)
-                      {
-                              snork.append(replyMsg.mid(i, 2));
-                              snork.append(" ");
-                              i++;
-                      };
-                      snork.replace("F7", "F7 }<br>");
-                      snork.replace("F0", "{ F0");
-
-
-                      QMessageBox *msgBox = new QMessageBox();
-                      msgBox->setWindowTitle(tr("dBug Result for received sysx data"));
-                      msgBox->setIcon(QMessageBox::Information);
-                      msgBox->setText(snork);
-                      msgBox->setStandardButtons(QMessageBox::Ok);
-                      msgBox->exec();*/
-
-
-
             QString area = "System";
             sysxIO->setFileSource(area, replyMsg);		// Set the source to the data received.
             sysxIO->setFileName(tr("System Data from ") + deviceType);	// Set the file name to GR-55B system for the display.
@@ -372,13 +359,13 @@ void menuPage::systemReply(QString replyMsg)
         };
     };
     emit setStatusMessage(tr("Ready"));
-};
+}
 
 void menuPage::setPos(QPoint newPos)
 {
     this->move(newPos);
     //this->stompPos = newPos;
-};
+}
 
 void menuPage::updatePos(signed int offsetDif)
 {
@@ -386,36 +373,36 @@ void menuPage::updatePos(signed int offsetDif)
     QPoint newPos = stompPos + QPoint(offsetDif, 0);
     this->move(newPos);
     //this->stompPos = newPos;
-};
+}
 
 void menuPage::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
    // this->update();
-};
+}
 
 void menuPage::setSize(QSize newSize)
 {
     this->stompSize = newSize;
     this->setFixedSize(stompSize);
-};
+}
 
 void menuPage::setId(unsigned int id)
 {
     this->id = id;
-};
+}
 
 unsigned int menuPage::getId()
 {
     return this->id;
-};
+}
 
 void menuPage::setLSB(QString hex1, QString hex2)
 {
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->editDialog->setLSB(hex1, hex2);
-};
+}
 
 void menuPage::updateSwitch(QString hex1, QString hex2, QString hex3)
 {
@@ -432,7 +419,7 @@ void menuPage::updateSwitch(QString hex1, QString hex2, QString hex3)
     if(this->id == 20) { emit assign6_statusSignal(set); };
     if(this->id == 21) { emit assign7_statusSignal(set); };
     if(this->id == 22) { emit assign8_statusSignal(set); };
-};
+}
 
 void menuPage::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
@@ -461,7 +448,7 @@ void menuPage::valueChanged(int value, QString hex1, QString hex2, QString hex3)
     };
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
-};
+}
 
 void menuPage::valueChanged(bool value, QString hex1, QString hex2, QString hex3)
 {
@@ -477,7 +464,7 @@ void menuPage::valueChanged(bool value, QString hex1, QString hex2, QString hex3
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
     emit updateSignal();
-};
+}
 
 
 void menuPage::emitValueChanged(QString hex1, QString hex2, QString hex3, QString valueHex)
@@ -507,14 +494,15 @@ void menuPage::emitValueChanged(QString hex1, QString hex2, QString hex3, QStrin
             if (this->id == 20){this->fxName = tr("Assign 6");          this->area_mode = "Structure";};
             if (this->id == 21){this->fxName = tr("Assign 7");          this->area_mode = "Structure";};
             if (this->id == 22){this->fxName = tr("Assign 8");          this->area_mode = "Structure";};
+            if (this->id == 23){this->fxName = tr("EZ-Tone");           this->area_mode = "Structure";};
 
         };
     };
 
     emit valueChanged(this->fxName, valueName, valueStr);
-};
+}
 
 void menuPage::setDisplayToFxName()
 {
     emit valueChanged(this->fxName, "", "");
-};
+}

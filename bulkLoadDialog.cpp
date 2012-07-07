@@ -232,7 +232,11 @@ bulkLoadDialog::bulkLoadDialog()
     {
         this->startButton->hide();
     };
-};
+}
+
+bulkLoadDialog::~bulkLoadDialog()
+{
+}
 
 void bulkLoadDialog::comboValueChanged(int value)
 {
@@ -258,7 +262,7 @@ void bulkLoadDialog::comboValueChanged(int value)
     text.append(QString::number(y+1, 10).toUpper() );
     this->finishRange->setText(text);
     //this->startRangeComboBox->setMaxVisibleItems((bankTotalUser*patchPerBank)-(finishList-startList));
-}; 
+}
 
 void bulkLoadDialog::sendData() 
 {	
@@ -266,7 +270,7 @@ void bulkLoadDialog::sendData()
     startList = this->startPatchCombo->currentIndex();
     finishList = this->finishPatchCombo->currentIndex();
     startButton->hide();
-    cancelButton->hide();
+    //cancelButton->hide();
     progress = 0;
     patch = 1;
     range = (100)/((finishList-startList)+1);
@@ -327,15 +331,16 @@ void bulkLoadDialog::sendData()
     steps=0;
     dataSent=0;
     sendSequence("");
-};	
+}
 
 void bulkLoadDialog::sendPatch(QString data)
 {
     SysxIO *sysxIO = SysxIO::Instance();
+
     QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
     data.append("F04110000053120F000001016FF7");  // key code to write data to GR-55 memory
     sysxIO->sendSysx(data);
-};                                                           
+}
 
 void bulkLoadDialog::sendSequence(QString value)
 { 
@@ -347,7 +352,7 @@ void bulkLoadDialog::sendSequence(QString value)
     progress=progress+range;
     bulkStatusProgress(this->progress);                         // advance the progressbar.
 
-    if (steps<((finishList-startList)+2) )
+    if (steps<((finishList-startList)+1) )
     {
         bool ok;
         QString patchText;
@@ -391,7 +396,7 @@ void bulkLoadDialog::sendSequence(QString value)
         setStatusMessage(tr("Ready"));
         close();
     };
-};
+}
 
 
 void bulkLoadDialog::updatePatch()
@@ -450,14 +455,14 @@ void bulkLoadDialog::updatePatch()
         sysxBuffer.append(hex);
     };
     bulk.append(sysxBuffer);
-};
+}
 
 void bulkLoadDialog::bulkStatusProgress(int value)
 {
     if (value >100) {value = 100;};
     if (value<0) {value = 0; };
     this->progressBar->setValue(value);
-};
+}
 
 void bulkLoadDialog::loadG5L()         // ************************************ G5L File Format***************************
 {	
@@ -509,13 +514,13 @@ void bulkLoadDialog::loadG5L()         // ************************************ G
         this->sysxPatches.append(temp.mid(0, patchSize));
     };
     updatePatch();
-};
+}
 
 void bulkLoadDialog::loadSYX()        //********************************* SYX File Format *****************************
 {	
     sysxPatches = data;
     updatePatch();  
-};
+}
 
 void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMAT ***************************
 {	
@@ -574,4 +579,14 @@ void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMA
         this->sysxPatches.append(temp.mid(0, patchSize));
     };
     updatePatch();
-};
+}
+
+void bulkLoadDialog::close()
+{
+    steps = 300;
+    SysxIO *sysxIO = SysxIO::Instance();
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+    sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
+    setStatusMessage(tr("Ready"));
+    this->deleteLater();
+}

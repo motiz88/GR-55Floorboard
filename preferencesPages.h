@@ -84,11 +84,11 @@ public:
     QRadioButton* plastiqueButton;
     QRadioButton* cdeButton;
     QRadioButton* motifButton;
-    QRadioButton* blackButton;
-    QRadioButton* whiteButton;
     QRadioButton* blueButton;
+    QRadioButton* blackButton;
+    QRadioButton* aquaButton;
     QRadioButton* greenButton;
-    QRadioButton* systemButton;
+    QRadioButton* whiteButton;
 };
 
 #endif // PREFERENCESPAGES_H

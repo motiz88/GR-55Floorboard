@@ -46,6 +46,7 @@
 #include "menuPage_system.h"
 #include "menuPage_master.h"
 #include "menuPage_pdl.h"
+#include "menuPage_ez_edit.h"
 
 #include "soundSource_synth_a.h"
 #include "soundSource_synth_b.h"
@@ -71,7 +72,15 @@ floorBoard::floorBoard(QWidget *parent,
                        QPoint pos)
                            : QWidget(parent)
 {
-
+    Preferences *preferences = Preferences::Instance();
+    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+    bool ok;
+    int choice = setting.toInt(&ok, 16);
+    if(choice == 4) { imagePathFloor = "images/floor_white.png"; }
+    else if(choice == 3) { imagePathFloor = "images/floor_green.png"; }
+    else if(choice == 2) { imagePathFloor = "images/floor_aqua.png"; }
+    else if(choice == 1) { imagePathFloor = "images/floor_black.png"; }
+    else { imagePathFloor = ":images/floor_blue.png"; };
     this->imagePathFloor = imagePathFloor;
     this->imagePathStompBG = imagePathStompBG;
 
@@ -104,6 +113,8 @@ floorBoard::floorBoard(QWidget *parent,
     this->editDialog->hide();
     this->oldDialog = this->editDialog;
     //QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  update() ));
+     SysxIO *sysxIO = SysxIO::Instance();
+    QObject::connect(sysxIO, SIGNAL(updateSignal()), this, SIGNAL(updateSignal()));
 
     QObject::connect(this, SIGNAL( resizeSignal(QRect) ), bankList, SLOT( updateSize(QRect) ) );
     QObject::connect(display, SIGNAL(connectedSignal()), bankList, SLOT(connectedSignal()));
@@ -116,14 +127,12 @@ floorBoard::floorBoard(QWidget *parent,
     QObject::connect(this->parent(), SIGNAL(updateSignal()), this, SIGNAL(updateSignal()));
     QObject::connect(this, SIGNAL(updateSignal()), this, SLOT(updateStompBoxes()));
     QObject::connect(this, SIGNAL(updateSignal()), this, SLOT(update_structure()));
+    QObject::connect(this, SIGNAL(updateSignal()), bankList, SLOT(updateTreeMode()));
     QObject::connect(bankList, SIGNAL(patchSelectSignal(int, int)), display, SLOT(patchSelectSignal(int, int)));
     QObject::connect(bankList, SIGNAL(patchLoadSignal(int, int)), display, SLOT(patchLoadSignal(int, int)));
     QObject::connect(panelBar, SIGNAL(showDragBar(QPoint)), this, SIGNAL(showDragBar(QPoint)));
     QObject::connect(panelBar, SIGNAL(hideDragBar()), this, SIGNAL(hideDragBar()));
 
-
-    bool ok;
-    Preferences *preferences = Preferences::Instance();
     QString collapseState = preferences->getPreferences("Window", "Collapsed", "bool");
     QString width = preferences->getPreferences("Window", "Collapsed", "width");
     QString defaultwidth = preferences->getPreferences("Window", "Collapsed", "defaultwidth");
@@ -154,7 +163,7 @@ floorBoard::floorBoard(QWidget *parent,
     };
 
     emit updateSignal();
-};
+}
 
 floorBoard::~floorBoard()
 {
@@ -169,7 +178,7 @@ floorBoard::~floorBoard()
     };
     preferences->setPreferences("Window", "Collapsed", "bool", QString(this->colapseState?"true":"false"));
     preferences->savePreferences();
-};
+}
 
 void floorBoard::paintEvent(QPaintEvent *)
 {
@@ -179,7 +188,7 @@ void floorBoard::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
     this->setAcceptDrops(true);
-};
+}
 
 void floorBoard::setFloorBoard() {
     QPixmap imageFloor(imagePathFloor);
@@ -217,7 +226,7 @@ void floorBoard::setFloorBoard() {
 
     QRect newBankListRect = QRect(borderWidth, borderWidth, offset - panelBarOffset - (borderWidth*2), floorHeight - (borderWidth*2));
     emit resizeSignal(newBankListRect);
-};
+}
 
 void floorBoard::initSize(QSize floorSize)
 {
@@ -225,12 +234,12 @@ void floorBoard::initSize(QSize floorSize)
     this->l_floorSize = floorSize;
     QList<QPoint> fxPos;
     this->setFixedSize(floorSize);
-};
+}
 
 QPoint floorBoard::getStompPos(int id)
 {
     return QPoint(0.0, 0.0);
-};
+}
 
 void floorBoard::setCollapse()
 {
@@ -247,7 +256,7 @@ void floorBoard::setCollapse()
         emit setCollapseState(true);
         this->colapseState = true;
     };
-};
+}
 
 void floorBoard::setSize(QSize newSize)
 {
@@ -288,7 +297,7 @@ void floorBoard::setSize(QSize newSize)
 
     emit sizeChanged(floorSize, oldFloorSize);
     this->centerEditDialog();
-};
+}
 
 void floorBoard::setWidth(int dist)
 {
@@ -314,7 +323,7 @@ void floorBoard::setWidth(int dist)
         emit setCollapseState(true);
     };
     this->setSize(newSize);
-};
+}
 
 
 void floorBoard::initSoundSource()
@@ -349,7 +358,7 @@ void floorBoard::initSoundSource()
     synth_b->setId(3);
     synth_b->setPos(QPoint(offset+20, 260));
 
-};
+}
 
 void floorBoard::initStomps()
 {
@@ -398,27 +407,27 @@ void floorBoard::initStomps()
     eq->setId(11);
     eq->setPos(QPoint(offset + 840, 410));
 
-};
+}
 
 void floorBoard::setStomps(QList<QString> stompOrder)
 {
 
-};
+}
 
 void floorBoard::setStompPos(QString name, int order)
 {
 
-};
+}
 
 void floorBoard::setStompPos(int index, int order)
 {
 
-};
+}
 
 void floorBoard::updateStompBoxes()
 {
 
-};
+}
 
 void floorBoard::setEditDialog(editWindow* editDialog)
 {
@@ -434,7 +443,7 @@ void floorBoard::setEditDialog(editWindow* editDialog)
     this->centerEditDialog();
     this->editDialog->pageUpdateSignal();
     this->editDialog->show();
-};
+}
 
 void floorBoard::centerEditDialog()
 {
@@ -445,14 +454,17 @@ void floorBoard::centerEditDialog()
         int y = this->pos.y() + (((this->floorSize.height() +40) - this->editDialog->height()) / 2);
         this->editDialog->move(x, y);
     };
-};
+}
 
 void floorBoard::initMenuPages()
 {
     QVector<menuPage *> initMenuPages(11);
     this->menuPages = initMenuPages.toList();;
 
-    /* MENU_PAGES */
+    /* MENU_PAGES */  
+    menuPage *ez_edit = new menuPage_ez_edit(this);
+    ez_edit->setId(23);
+    
     menuPage *assign8 = new menuPage_assign8(this);
     assign8->setId(22);
 
@@ -486,7 +498,7 @@ void floorBoard::initMenuPages()
     menuPage *system = new menuPage_system(this);
     system->setId(14);
 
-};
+}
 
 void floorBoard::menuButtonSignal()
 {
@@ -494,7 +506,7 @@ void floorBoard::menuButtonSignal()
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     { this->oldDialog->hide();
     this->editDialog->show();};
-};
+}
 
 void floorBoard::structure(bool value)
 {
@@ -514,7 +526,7 @@ void floorBoard::structure(bool value)
             emit structure_2_statusSignal(false);
         };
    update_structure();
-};
+}
 
 void floorBoard::update_structure()
 {
@@ -539,10 +551,10 @@ void floorBoard::update_structure()
     modeling_bass->show();
     modeling->hide();
     };
-};
+}
 
 void floorBoard::beep()
 {
     QApplication::beep();
 
-};
+}

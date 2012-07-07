@@ -35,7 +35,7 @@ initPatchListMenu::initPatchListMenu(QRect geometry, QWidget *parent)
 {
 	this->available = false;
 	setInitPatchComboBox(geometry);
-};
+}
 
 QDir initPatchListMenu::getInitPatchDir()
 {
@@ -75,7 +75,7 @@ QDir initPatchListMenu::getInitPatchDir()
 	};
 
 	return initPatchesDir;
-};
+}
 
 void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 {
@@ -126,7 +126,7 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 				this->parent()->parent(), SIGNAL(updateSignal()));
 		};
 	};
-};
+}
 
 
 void initPatchListMenu::setIndex(int index)
@@ -135,7 +135,7 @@ void initPatchListMenu::setIndex(int index)
 	{
 		this->initPatchComboBox->setCurrentIndex(index);
 	};
-};
+}
 
 void initPatchListMenu::loadInitPatch(int index)
 {
@@ -159,7 +159,7 @@ void initPatchListMenu::loadInitPatch(int index)
 			};
 		};
 	};
-};
+}
 
 void initPatchListMenu::highLightInitPatch(int index)
 {
@@ -183,4 +183,4 @@ void initPatchListMenu::highLightInitPatch(int index)
             };
         };
     };  */
-};
+}

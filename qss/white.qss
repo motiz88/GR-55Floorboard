@@ -152,6 +152,90 @@ QComboBox#smallcombo QScrollBar::sub-page:vertical {
 background: none;
 }
 
+QComboBox#largecombo {
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+color: rgb(0,0,0);
+background-color: rgb(255,255,255);
+border-style: solid;
+border-width: 1px;
+border-radius: 3px;
+border-color: rgb(150,150,150);
+padding: -1px;
+padding-left: 1px;
+padding-right: 1px;
+}
+
+QComboBox#largecombo::drop-down {
+border-style: none;
+}
+QComboBox#largecombo::down-arrow {
+image: url(":/images/dropdown.png") 1;
+image-position: center right;
+}
+QComboBox#largecombo QFrame {
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+color: rgb(0,0,0);
+background-color: rgb(255,255,255);
+border-style: solid;
+border-width: 1px;
+border-radius: 3px;
+border-color: rgb(150,150,150);
+padding: -1px;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+/* CUSTOM SCROLLBAR STYLE */
+
+QComboBox#largecombo QScrollBar:vertical {
+border: none;
+background: rgb(255,255,255);
+width: 9px;
+margin: 10px 0px 10px 0px;
+}
+QComboBox#largecombo QScrollBar::handle:vertical {
+border-style: solid;
+border-width: 1px;
+border-radius: 5px;
+border-color: rgb(0,0,0);
+background: rgb(0,0,0);
+min-height: 40px;
+max-height: 40px;
+}
+QComboBox#largecombo QScrollBar::add-line:vertical {
+background: rgb(255,255,255);
+height: 9px;
+subcontrol-position: bottom;
+subcontrol-origin: margin;
+}
+QComboBox#largecombo QScrollBar::sub-line:vertical {
+background: rgb(255,255,255);
+height: 9px;
+subcontrol-position: top;
+subcontrol-origin: margin;
+}
+QComboBox#largecombo QScrollBar:up-arrow:vertical {
+image: url(":/images/uparrow.png") 1;
+image-position: center center;
+width: 9px;
+height: 10px;
+}
+QComboBox#largecombo QScrollBar::down-arrow:vertical {
+image: url(":/images/downarrow.png") 1;
+image-position: center center;
+width: 9px;
+height: 10px;
+}
+QComboBox#largecombo QScrollBar::add-page:vertical,
+QComboBox#largecombo QScrollBar::sub-page:vertical {
+background: none;
+}
+
+
 /* CUSTOM DISPLAY STYLE */
 
 #display {

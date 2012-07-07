@@ -48,6 +48,7 @@ protected:
 public slots:
 	void valueChanged(int index);
 	void dialogUpdateSignal();
+	void set_index(int index);
 
 signals:
 	void updateSignal();
@@ -62,6 +63,7 @@ private:
 	QString hex2;
 	QString hex3;
 	QString area;
+	QString direction;
 	int comboWidth;
 };
 
