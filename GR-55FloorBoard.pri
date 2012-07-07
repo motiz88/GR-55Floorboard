@@ -33,7 +33,9 @@ HEADERS += ./editPage.h \
     ./bulkSaveDialog.h \
     ./customButton.h \
     ./customComboBox.h \
-    #./customControlParaEQ.h \
+    ./customControlEZ_amp.h \
+    ./customControlEZ_Patch.h \
+    ./customControlParaEQ.h \
     #./customControlGraphicEQ.h \
     ./customControlKnob.h \
     ./customControlDataKnob.h \
@@ -41,19 +43,23 @@ HEADERS += ./editPage.h \
     ./customControlLabel.h \
     #./customControlMasterEQ.h \
     ./customControlListMenu.h \
+    ./customControlMidiTable.h \
     ./customControlSwitch.h \
     ./customControlTarget.h \
     ./customDial.h \
     ./customDisplay.h \
-    #./customParaEQGraph.h \
+    ./customParaEQGraph.h \
     #./customGraphicEQGraph.h \
     ./customKnob.h \
     ./customDataKnob.h \
+    ./customEZ_amp.h \
+    ./customEZ_Patch.h \
     ./customKnobTarget.h \
     ./customKnobRange.h \
     ./customLabelDisplay.h \
     ./customLed.h \
     #./customMasterEQGraph.h \
+    ./customMultiComboBox.h \
     ./customPanelButton.h \
     ./customRangeDial.h \
     ./customRenameDialog.h \
@@ -81,6 +87,7 @@ HEADERS += ./editPage.h \
     ./menuPage_assign6.h \
     ./menuPage_assign7.h \
     ./menuPage_assign8.h \
+    ./menuPage_EZ_Edit.h \
     ./menuPage_master.h \
     ./menuPage_pdl.h \
     ./menuPage_system.h \
@@ -132,26 +139,32 @@ SOURCES += ./editPage.cpp \
     ./bulkSaveDialog.cpp \
     ./customButton.cpp \
     ./customComboBox.cpp \
-    #./customControlParaEQ.cpp \
+    ./customControlEZ_amp.cpp \
+    ./customControlEZ_Patch.cpp \
+    ./customControlParaEQ.cpp \
     #./customControlGraphicEQ.cpp \
     ./customControlKnob.cpp \
     ./customControlDataKnob.cpp \
     ./customControlLabel.cpp \
     ./customControlListMenu.cpp \
+    ./customControlMidiTable.cpp \
     #./customControlMasterEQ.cpp \
     ./customControlRange.cpp \
     ./customControlSwitch.cpp \
     ./customControlTarget.cpp \
     ./customDial.cpp \
     ./customDisplay.cpp \
-    #./customParaEQGraph.cpp \
+    ./customParaEQGraph.cpp \
     #./customGraphicEQGraph.cpp \
     ./customKnob.cpp \
     ./customDataKnob.cpp \
+    ./customEZ_amp.cpp \
+    ./customEZ_Patch.cpp \
     ./customKnobTarget.cpp \
     ./customKnobRange.cpp \
     ./customLabelDisplay.cpp \
     ./customLed.cpp \
+    ./customMultiComboBox.cpp \
     #./customMasterEQGraph.cpp \
     ./customPanelButton.cpp \
     ./customRangeDial.cpp \
@@ -180,6 +193,7 @@ SOURCES += ./editPage.cpp \
     ./menuPage_assign6.cpp \
     ./menuPage_assign7.cpp \
     ./menuPage_assign8.cpp \
+    ./menuPage_EZ_Edit.cpp \
     ./menuPage_master.cpp \
     ./menuPage_pdl.cpp \
     ./menuPage_system.cpp \

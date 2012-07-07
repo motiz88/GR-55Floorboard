@@ -62,7 +62,7 @@ GeneralPage::GeneralPage(QWidget *parent)
     mainLayout->addWidget(patchGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
-};
+}
 
 MidiPage::MidiPage(QWidget *parent)
     : QWidget(parent)
@@ -101,11 +101,11 @@ MidiPage::MidiPage(QWidget *parent)
     {
         midiInCombo->setCurrentIndex(midiInDeviceID + 1); // +1 because there is a default entry at 0
     };
-    /*if ( midiInDevices.contains("ROLAND GR-55") )
+    if ( midiInDevices.contains("GR-55") )
   {
-    int inputDevice = midiInDevices.indexOf("ROLAND GR-55") + 1;
+    int inputDevice = midiInDevices.indexOf("GR-55") + 1;
     midiInCombo->setCurrentIndex(inputDevice);
-	};  */
+    };
 
     QComboBox *midiOutCombo = new QComboBox;
     this->midiOutCombo = midiOutCombo;
@@ -121,11 +121,11 @@ MidiPage::MidiPage(QWidget *parent)
     {
         midiOutCombo->setCurrentIndex(midiOutDeviceID + 1); // +1 because there is a default entry at 0
     };
-    /*if ( midiOutDevices.contains("ROLAND GR-55") )
+    if ( midiOutDevices.contains("GR-55") )
   {
-    int outputDevice = midiOutDevices.indexOf("ROLAND GR-55") + 1;
+    int outputDevice = midiOutDevices.indexOf("GR-55") + 1;
     midiOutCombo->setCurrentIndex(outputDevice);
-  }; */
+  };
 
     QVBoxLayout *midiLabelLayout = new QVBoxLayout;
     midiLabelLayout->addWidget(midiInLabel);
@@ -207,7 +207,7 @@ MidiPage::MidiPage(QWidget *parent)
     mainLayout->addWidget(dBugScreenGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
-};
+}
 
 WindowPage::WindowPage(QWidget *parent)
     : QWidget(parent)
@@ -273,7 +273,7 @@ WindowPage::WindowPage(QWidget *parent)
 
     mainLayout->addStretch(1);
     setLayout(mainLayout);
-};
+}
 
 LanguagePage::LanguagePage(QWidget *parent)
     : QWidget(parent)
@@ -355,24 +355,24 @@ StylePage::StylePage(QWidget *parent)
     choice = setting.toInt(&ok, 16);
     QGroupBox *colourGroup = new QGroupBox(QObject::tr("Colour Scheme Selection"));
 
-    QRadioButton *blackButton = new QRadioButton(QObject::tr("Black (default)"));
-    this->blackButton = blackButton;
+    QRadioButton *blueButton = new QRadioButton(QObject::tr("GR Blue"));
+    this->blueButton = blueButton;
+    this->blackButton = new QRadioButton(QObject::tr("GR Black"));
+    this->aquaButton = new QRadioButton(QObject::tr("Aqua"));
+    this->greenButton = new QRadioButton(QObject::tr("Gumtown Green"));
     this->whiteButton = new QRadioButton(QObject::tr("White"));
-    this->blueButton = new QRadioButton(QObject::tr("Blue"));
-    this->greenButton = new QRadioButton(QObject::tr("Green"));
-    this->systemButton = new QRadioButton(QObject::tr("System"));
-    if (choice == 4) {systemButton->setChecked(true); }
+    if (choice == 4) {whiteButton->setChecked(true); }
     else if (choice == 3) {greenButton->setChecked(true); }
-    else if (choice == 2) {blueButton->setChecked(true); }
-    else if (choice == 1) {whiteButton->setChecked(true); }
-    else {blackButton->setChecked(true); };
+    else if (choice == 2) {aquaButton->setChecked(true); }
+    else if (choice == 1) {blackButton->setChecked(true); }
+    else {blueButton->setChecked(true); };
 
     QVBoxLayout *colourLayout = new QVBoxLayout;
-    colourLayout->addWidget(blackButton);
-    colourLayout->addWidget(whiteButton);
     colourLayout->addWidget(blueButton);
+    colourLayout->addWidget(blackButton);
+    colourLayout->addWidget(aquaButton);
     colourLayout->addWidget(greenButton);
-    colourLayout->addWidget(systemButton);
+    colourLayout->addWidget(whiteButton);
 
     colourGroup->setLayout(colourLayout);
 
@@ -385,7 +385,7 @@ StylePage::StylePage(QWidget *parent)
     mainLayout->addStretch(1);
     mainLayout->addWidget(note);
     setLayout(mainLayout);
-};
+}
 
 void GeneralPage::browseDir()
 {
@@ -396,4 +396,4 @@ void GeneralPage::browseDir()
     {
         this->dirEdit->setText(dirName);
     };
-};
+}

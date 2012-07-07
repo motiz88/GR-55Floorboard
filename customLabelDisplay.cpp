@@ -74,11 +74,11 @@ void customLabelDisplay::paintEvent(QPaintEvent *)
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
     int choice = setting.toInt(&ok, 16);
-    if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //system
+    if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //white
     else if(choice == 3) {painter.setBrush(QColor(0,62,5)); }  //green
-    else if(choice == 2) {painter.setBrush(QColor(0,1,62)); }  //blue
-    else if(choice == 1) {painter.setBrush(QColor(255,255,255)); } //white
-    else {painter.setBrush(QColor(0,0,0)); }; //black
+    else if(choice == 2) {painter.setBrush(QColor(0,1,62)); }  //aqua
+    else if(choice == 1) {painter.setBrush(QColor(0,0,0)); } //black
+    else {painter.setBrush(QColor(0,0,0)); }; //blue
 
 
     int radius = 5; // Set the border radius.

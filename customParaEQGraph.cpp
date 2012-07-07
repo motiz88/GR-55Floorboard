@@ -3,7 +3,7 @@
 ** Copyright (C) 2007~2012 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
-** This file is part of "GR-55B FloorBoard".
+** This file is part of "GT-100B Fx FloorBoard".
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -29,8 +29,8 @@
 
 customParaEQGraph::customParaEQGraph (QWidget *parent) //: /*m_poly(5), */loMid(11), m_iDragNode(-1)
 {
-	QFrame::setFrameShape(QFrame::Panel);
-        QFrame::setFrameShadow(QFrame::Sunken);
+    QFrame::setFrameShape(QFrame::Panel);
+    QFrame::setFrameShadow(QFrame::Sunken);
 
 }
 
@@ -40,180 +40,180 @@ customParaEQGraph::~customParaEQGraph (void)
 
 void customParaEQGraph::setLowCut ( unsigned short iLowCut )
 {
-     if (iLowCut > 9) iLowCut = 9;
-        if (m_iLowCut != iLowCut) {
-                m_iLowCut  = iLowCut;
-                update();
-                emit LowCutChanged(LowCut());
-        };
+    if (iLowCut > 9) iLowCut = 9;
+    if (m_iLowCut != iLowCut) {
+        m_iLowCut  = iLowCut;
+        update();
+        emit LowCutChanged(LowCut());
+    };
 }
 
 unsigned short customParaEQGraph::LowCut (void) const
 {
-        return m_iLowCut;
+    return m_iLowCut;
 }
 
 
 void customParaEQGraph::setLowGain ( unsigned short iLowGain )
 {
-     if (iLowGain > 40) iLowGain = 40;
-        if (m_iLowGain != iLowGain) {
-                m_iLowGain  = iLowGain;
-                update();
-                emit LowGainChanged(LowGain());
-        };
+    if (iLowGain > 40) iLowGain = 40;
+    if (m_iLowGain != iLowGain) {
+        m_iLowGain  = iLowGain;
+        update();
+        emit LowGainChanged(LowGain());
+    };
 }
 
 unsigned short customParaEQGraph::LowGain (void) const
 {
-        return m_iLowGain;
+    return m_iLowGain;
 }
 
 
 void customParaEQGraph::setLowMidFreq ( unsigned short iLowMidFreq )
 {
-     if (iLowMidFreq > 27) iLowMidFreq = 27;
-        if (m_iLowMidFreq != iLowMidFreq) {
-                m_iLowMidFreq  = iLowMidFreq;
-                update();
-                emit LowMidFreqChanged(LowMidFreq());
-        };
+    if (iLowMidFreq > 27) iLowMidFreq = 27;
+    if (m_iLowMidFreq != iLowMidFreq) {
+        m_iLowMidFreq  = iLowMidFreq;
+        update();
+        emit LowMidFreqChanged(LowMidFreq());
+    };
 }
 
 unsigned short customParaEQGraph::LowMidFreq (void) const
 {
-        return m_iLowMidFreq;
+    return m_iLowMidFreq;
 }
 
 
 void customParaEQGraph::setLowMidQ ( unsigned short iLowMidQ )
 {
     if (iLowMidQ > 5) iLowMidQ = 5;
-        if (m_iLowMidQ != iLowMidQ) {
-                m_iLowMidQ  = iLowMidQ;
-                update();
-                emit LowMidQChanged(LowMidQ());
-        }
+    if (m_iLowMidQ != iLowMidQ) {
+        m_iLowMidQ  = iLowMidQ;
+        update();
+        emit LowMidQChanged(LowMidQ());
+    }
 }
 
 unsigned short customParaEQGraph::LowMidQ (void) const
 {
-        return m_iLowMidQ;
+    return m_iLowMidQ;
 }
 
 
 void customParaEQGraph::setLowMidGain ( unsigned short iLowMidGain )
 {
     if (iLowMidGain > 40) iLowMidGain = 40;
-        if (m_iLowMidGain != iLowMidGain) {
-                m_iLowMidGain  = iLowMidGain;
-                update();
-                emit LowMidGainChanged(LowMidGain());
-        }
+    if (m_iLowMidGain != iLowMidGain) {
+        m_iLowMidGain  = iLowMidGain;
+        update();
+        emit LowMidGainChanged(LowMidGain());
+    }
 }
 
 unsigned short customParaEQGraph::LowMidGain (void) const
 {
-        return m_iLowMidGain;
+    return m_iLowMidGain;
 }
 
 
 void customParaEQGraph::setHighMidFreq ( unsigned short iHighMidFreq )
 {
     if (iHighMidFreq > 27) iHighMidFreq = 27;
-        if (m_iHighMidFreq != iHighMidFreq) {
-                m_iHighMidFreq  = iHighMidFreq;
-                update();
-                emit HighMidFreqChanged(HighMidFreq());
-        }
+    if (m_iHighMidFreq != iHighMidFreq) {
+        m_iHighMidFreq  = iHighMidFreq;
+        update();
+        emit HighMidFreqChanged(HighMidFreq());
+    }
 }
 
 unsigned short customParaEQGraph::HighMidFreq (void) const
 {
-        return m_iHighMidFreq;
+    return m_iHighMidFreq;
 }
 
 void customParaEQGraph::setHighMidQ ( unsigned short iHighMidQ )
 {
     if (iHighMidQ > 5) iHighMidQ = 5;
-        if (m_iHighMidQ != iHighMidQ) {
-                m_iHighMidQ  = iHighMidQ;
-                update();
-                emit HighMidQChanged(HighMidQ());
-        }
+    if (m_iHighMidQ != iHighMidQ) {
+        m_iHighMidQ  = iHighMidQ;
+        update();
+        emit HighMidQChanged(HighMidQ());
+    }
 }
 
 unsigned short customParaEQGraph::HighMidQ (void) const
 {
-        return m_iHighMidQ;
+    return m_iHighMidQ;
 }
 
 
 void customParaEQGraph::setHighMidGain ( unsigned short iHighMidGain )
 {
     if (iHighMidGain > 40) iHighMidGain = 40;
-        if (m_iHighMidGain != iHighMidGain) {
-                m_iHighMidGain  = iHighMidGain;
-                update();
-                emit HighMidGainChanged(HighMidGain());
-        }
+    if (m_iHighMidGain != iHighMidGain) {
+        m_iHighMidGain  = iHighMidGain;
+        update();
+        emit HighMidGainChanged(HighMidGain());
+    }
 }
 
 unsigned short customParaEQGraph::HighMidGain (void) const
 {
-        return m_iHighMidGain;
+    return m_iHighMidGain;
 }
 
 void customParaEQGraph::setHighGain ( unsigned short iHighGain )
 {
     if (iHighGain > 40) iHighGain = 40;
-        if (m_iHighGain != iHighGain) {
-                m_iHighGain  = iHighGain;
-                update();
-                emit HighGainChanged(HighGain());
-        };
+    if (m_iHighGain != iHighGain) {
+        m_iHighGain  = iHighGain;
+        update();
+        emit HighGainChanged(HighGain());
+    };
 }
 
 unsigned short customParaEQGraph::HighGain (void) const
 {
-        return m_iHighGain;
+    return m_iHighGain;
 }
 
 void customParaEQGraph::setHighCut ( unsigned short iHighCut )
 {
     if (iHighCut > 9) iHighCut = 9;
-        if (m_iHighCut != iHighCut) {
-                m_iHighCut  = iHighCut;
-                update();
-                emit HighCutChanged(HighCut());
-        };
+    if (m_iHighCut != iHighCut) {
+        m_iHighCut  = iHighCut;
+        update();
+        emit HighCutChanged(HighCut());
+    };
 }
 
 unsigned short customParaEQGraph::HighCut (void) const
 {
-        return m_iHighCut;
+    return m_iHighCut;
 }
 
 void customParaEQGraph::setLevel ( unsigned short iLevel )
 {
     if (iLevel > 40) iLevel = 40;
-        if (m_iLevel != iLevel) {
-                m_iLevel  = iLevel;
-                update();
-                emit LevelChanged(Level());
-        };
+    if (m_iLevel != iLevel) {
+        m_iLevel  = iLevel;
+        update();
+        emit LevelChanged(Level());
+    };
 }
 
 unsigned short customParaEQGraph::Level (void) const
 {
-        return m_iLevel;
+    return m_iLevel;
 }
 
 
 void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 {
     QPixmap image = QPixmap(":images/EQ_graph.png");
-    QRectF target(0.0, 0.0, image.width()*85/100, image.height()*43/100);
+    QRectF target(0.0, 0.0, image.width()*90/100, image.height()*43/100);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
     QPainter painter(this);
@@ -238,106 +238,81 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 
     int lev = h/10 - (m_iLevel*2);
 
-    //if (hmf+hmq > hc) hmf = hc - hmq;
-    //if (lmf+lmq > hmf-hmq) lmf = hmf - hmq - lmq ;
-    //if (lc > lmf-lmq) lmf = lc + lmq;
-
-
-  /*  m_poly.putPoints(0, 5,
-            lc-50,   h+lev+63,
-            lc,      lg+lev,
-
-            //lmf-lmq, lmg+lev,
-            //lmf,     ((h*100/82)-(m_iLowMidGain*5))+lev,
-            //lmf+lmq, lmg+lev,
-            w/2,       (h*50/78)+lev,
-            //hmf-hmq, hmg+lev,
-            //hmf,     ((h*100/82)-(m_iHighMidGain*5))+lev,
-            //hmf+hmq, hmg+lev,
-
-            hc,      hg+lev,
-            hc+50,   h+lev+63);
-
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-    path.addPolygon(m_poly);
-    //path.moveTo(m_poly.at(0));
-    //path.cubicTo(m_poly.at(0), m_poly.at(1), m_poly.at(2));
-    //path.cubicTo(m_poly.at(2), m_poly.at(3), m_poly.at(4));
-    //path.lineTo(m_poly.at(1));
-    //path.quadTo(m_poly.at(1), m_poly.at(2));
-    //path.cubicTo(m_poly.at(3), m_poly.at(4), m_poly.at(5));
-    //path.cubicTo(m_poly.at(4), m_poly.at(7), m_poly.at(8));
-    //path.lineTo(m_poly.at(9));
-    //path.moveTo(m_poly.at(0));
-    //path.lineTo(m_poly.at(1));
-    //path.quadTo(m_poly.at(1), m_poly.at(2));
-    //path.cubicTo(m_poly.at(5), m_poly.at(6), m_poly.at(7));
-    //path.quadTo(m_poly.at(7), m_poly.at(8));
-    //path.lineTo(m_poly.at(9));
-
-    //path.addText(m_poly.at(1), QFont("Arial"), QString("LowCut") );
-
-    const QPalette& pal = palette();
-    painter.fillRect(0, 0, w, h, pal.dark().color());
-
-    painter.setPen(Qt::yellow);
-*/
     QLinearGradient grad(0, 0, w << 1, h << 1);
     grad.setColorAt(0.0f, Qt::yellow);
     grad.setColorAt(1.0f, Qt::black);
-
-   /* painter.setBrush(grad);
-    //painter.drawPath(path);*/
+    painter.setPen(Qt::gray);
+    painter.setBrush(grad);
 
     loMid.putPoints(0, 11,
-            lc-50,   h+lev+63,
-            lc,      lg+lev,
+                    lc-50,   h+lev+63,
+                    lc,      lg+lev,
 
-            lmf-lmq, lmg+lev,
-            lmf,     ((h*100/82)-(m_iLowMidGain*5))+lev,
-            lmf+lmq, lmg+lev,
-                w/2,       (h*50/78)+lev,
-            hmf-hmq, hmg+lev,
-            hmf,     ((h*100/82)-(m_iHighMidGain*5))+lev,
-            hmf+hmq, hmg+lev,
+                    lmf-lmq, lmg+lev,
+                    lmf,     ((h*100/82)-(m_iLowMidGain*5))+lev,
+                    lmf+lmq, lmg+lev,
+                    w/2,       (h*50/78)+lev,
+                    hmf-hmq, hmg+lev,
+                    hmf,     ((h*100/82)-(m_iHighMidGain*5))+lev,
+                    hmf+hmq, hmg+lev,
 
-            hc,      hg+lev,
-            hc+50,   h+lev+63);
+                    hc,      hg+lev,
+                    hc+50,   h+lev+63);
 
     QPainterPath loHiCut;
     loHiCut.moveTo(loMid.at(0));
     loHiCut.lineTo(loMid.at(1));
-    //loHiCut.cubicTo(loMid.at(0), loMid.at(1), loMid.at(5));
     loHiCut.quadTo(loMid.at(1), loMid.at(5));
     loHiCut.quadTo(loMid.at(5), loMid.at(9));
-    //loHiCut.cubicTo(loMid.at(5), loMid.at(9), loMid.at(10));
     loHiCut.lineTo(loMid.at(10));
+    loHiCut.quadTo(loMid.at(9), loMid.at(5));
+    loHiCut.quadTo(loMid.at(5), loMid.at(1));
+    loHiCut.lineTo(loMid.at(0));
 
     QPainterPath para_1;
     para_1.moveTo(loMid.at(2));
-    //para_1.lineTo(loMid.at(2));
     para_1.cubicTo(loMid.at(2), loMid.at(3), loMid.at(4));
-    //para_1.lineTo(w, h+lev);
-    //para_1.lineTo(loMid.at(9));
+    para_1.cubicTo(loMid.at(4), loMid.at(3), loMid.at(2));
 
     QPainterPath para_2;
     para_2.moveTo(loMid.at(6));
-    //para_2.lineTo(loMid.at(6));
     para_2.cubicTo(loMid.at(6), loMid.at(7), loMid.at(8));
-    //para_2.lineTo(loMid.at(10));
+    para_2.cubicTo(loMid.at(8), loMid.at(7), loMid.at(6));
 
-    //loHiCut.setFillRule(Qt::WindingFill);
-    //loHiCut.addText(loMid.at(1), QFont("Arial"), QString("LowCut") );
-    //const QPalette& pal = palette();
-    //painter.fillRect(0, 0, w, h, pal.dark().color());
- //painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-    painter.setPen(Qt::yellow);
+    QPainterPath graph;
+    graph.moveTo(0, h);
+    bool intersect = false;
+    int x = 0;
+    signed int a = 0;
+    signed int b = 0;
+    signed int c = 0;
+    for(x=0; x<600; ++x)
+    {
+        for( a=0; a<200&&intersect!=true; ++a)
+        {
+            intersect = loHiCut.intersects(QRectF(x, a, 1, 1));
+        };
+        intersect = false;
 
-    QPainterPath graph = (loHiCut.subtracted(para_1));
+        for( b=0; b<200&&intersect!=true; ++b)
+        {
+            intersect = para_1.intersects(QRectF(x, b, 1, 1));
+        };
+        if(b>=200){b=100;};
+        intersect = false;
+
+        for( c=0; c<200&&intersect!=true; ++c)
+        {
+            intersect = para_2.intersects(QRectF(x, c, 1, 1));
+        };
+        if(c>=200) {c=100;};
+        intersect = false;
+        graph.lineTo(x, a+b+c-200 );
+    };
+    graph.lineTo(w, h);
+
     painter.setBrush(grad);
-    //painter.drawPath(loHiCut);
-    painter.drawPath((graph));
+    painter.drawPath(graph);
     /*painter.setBrush(Qt::red);
     painter.drawRect(nodeRect(1));
     painter.setBrush(Qt::green);
@@ -353,11 +328,7 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
     painter.drawRect(nodeRect(7));
     painter.setBrush(Qt::red);
     painter.drawRect(nodeRect(8));*/
-
-
-
     painter.end();
-
     QFrame::paintEvent(pPaintEvent);
 }
 
@@ -365,7 +336,7 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 // Mouse interaction.
 void customParaEQGraph::mousePressEvent ( QMouseEvent *pMouseEvent )
 {
-   /* if (pMouseEvent->button() == Qt::LeftButton) {
+    /* if (pMouseEvent->button() == Qt::LeftButton) {
             const QPoint& pos = pMouseEvent->pos();
             int iDragNode = nodeIndex(pos);
             if (iDragNode >= 0) {
@@ -391,7 +362,7 @@ void customParaEQGraph::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 
 void customParaEQGraph::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 {
-  /*  QFrame::mouseReleaseEvent(pMouseEvent);
+    /*  QFrame::mouseReleaseEvent(pMouseEvent);
 
         dragNode(pMouseEvent->pos());
 
@@ -406,14 +377,14 @@ void customParaEQGraph::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 // Draw rectangular point.
 QRect customParaEQGraph::nodeRect ( int iNode ) const
 {
-       // const QPoint& pos = m_poly.at(iNode);
-       // return QRect(pos.x() - 4, pos.y() - 4, 8, 8);
+     //const QPoint& pos = m_poly.at(iNode);
+     //return QRect(pos.x() - 4, pos.y() - 4, 8, 8);
 }
 
 
 int customParaEQGraph::nodeIndex ( const QPoint& pos ) const
 {
-     /*   if (nodeRect(8).contains(pos))
+       if (nodeRect(8).contains(pos))
             return 8; // HighCut+HighGain
 
         if (nodeRect(7).contains(pos))
@@ -437,12 +408,12 @@ int customParaEQGraph::nodeIndex ( const QPoint& pos ) const
         if (nodeRect(1).contains(pos))
                 return 1; //LowCut+LowGain
 
-        return -1;*/
+        return -1;
 }
 
 void customParaEQGraph::dragNode ( const QPoint& pos )
 {
- /*       static unsigned short m_iLevel0 = 0; // Dummy!
+    /*       static unsigned short m_iLevel0 = 0; // Dummy!
         unsigned short *piRate  = NULL;
         unsigned short *piLevel = NULL;
         switch (m_iDragNode) {
@@ -531,9 +502,9 @@ void customParaEQGraph::dragNode ( const QPoint& pos )
 }
 
 void customParaEQGraph::updateSlot(  QString hex_1, QString hex_2, QString hex_3,
-                               QString hex_4, QString hex_5, QString hex_6,
-                               QString hex_7, QString hex_8, QString hex_9,
-                               QString hex_10, QString hex_11)
+                                     QString hex_4, QString hex_5, QString hex_6,
+                                     QString hex_7, QString hex_8, QString hex_9,
+                                     QString hex_10, QString hex_11)
 {
     this->hex_1 = hex_1;
     this->hex_2 = hex_2;

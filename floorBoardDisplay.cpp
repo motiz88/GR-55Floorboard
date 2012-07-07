@@ -48,7 +48,9 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->pos = pos;
     this->timer = new QTimer(this);
     this->patchLoadError = false;
-    this->blinkCount = 0;
+    this->blinkCount = 0;    
+    this->autosyncTimer = new QTimer(this);
+    connect(autosyncTimer, SIGNAL(timeout()), this, SLOT(autosync()));
 
     int patchDisplayRowOffset = 9;
     int editButtonRowOffset = 75;
@@ -102,7 +104,9 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     renameWidget *nameEdit = new renameWidget(this);
     nameEdit->setGeometry(70, patchDisplayRowOffset, 150, 34);
     nameEdit->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));
-
+    
+    this->autoButton = new customButton(tr("Auto Sync"), false, QPoint(440, editButtonRowOffset+50), this, ":/images/greenledbutton.png");
+    this->autoButton->setWhatsThis(tr("Auto refresh<br>used to automatically update editor settings changes made on the GR-55"));
     this->connectButton = new customButton(tr("Connect"), false, QPoint(390, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
     this->connectButton->setWhatsThis(tr("Connect Button<br>used to establish a continuous midi connection<br>when lit green, the connection is valid"));
     this->writeButton = new customButton(tr("Write"), false, QPoint(476, patchDisplayRowOffset), this, ":/images/ledbutton.png");
@@ -111,6 +115,8 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->system_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->master_Button = new customPanelButton(tr("Master"), false, QPoint(640, patchDisplayRowOffset+18), this, ":/images/switch.png");
     this->master_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
+    this->ez_edit_Button = new customPanelButton(tr("EZ-EDIT"), false, QPoint(550, editButtonRowOffset+52), this, ":/images/switch.png");
+    this->ez_edit_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
     this->pedal_Button = new customPanelButton(tr("Pedal/GK"), false, QPoint(700, patchDisplayRowOffset+18), this, ":/images/switch.png");
     this->pedal_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
@@ -194,6 +200,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
     QObject::connect(this->connectButton, SIGNAL(valueChanged(bool)), this, SLOT(connectSignal(bool)));
     QObject::connect(this->writeButton, SIGNAL(valueChanged(bool)), this, SLOT(writeSignal(bool)));
+    QObject::connect(this->autoButton, SIGNAL(valueChanged(bool)), this, SLOT(autosyncSignal(bool)));
 
     QObject::connect(this->normal_PU_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(normal_PU_buttonSignal(bool)));
     QObject::connect(this->structure_1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(structure_1_buttonSignal(bool)));
@@ -212,6 +219,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->pedal_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(pedal_buttonSignal(bool)));
     QObject::connect(this->master_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(master_buttonSignal(bool)));
     QObject::connect(this->system_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(system_buttonSignal(bool)));
+    QObject::connect(this->ez_edit_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ez_edit_buttonSignal(bool)));
     QObject::connect(this->assign1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign1_buttonSignal(bool)));
     QObject::connect(this->assign2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign2_buttonSignal(bool)));
     QObject::connect(this->assign3_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign3_buttonSignal(bool)));
@@ -341,15 +349,27 @@ void floorBoardDisplay::setPatchNumDisplay(int bank, int patch)
 {
     if(bank > 0)
     {
+        SysxIO *sysxIO = SysxIO::Instance();
         if(bank <= bankTotalUser)
         {
             this->patchNumDisplay->resetAllColor();
             this->patchNumDisplay->setSubText(tr("User"));
         }
-        else if (bank > bankTotalUser && bank <= bankTotalAll)
+        else if (bank > bankTotalUser)
         {
-            this->patchNumDisplay->setAllColor(QColor(255,0,0));
-            this->patchNumDisplay->setSubText(tr("Preset"));
+            //this->patchNumDisplay->setAllColor(QColor(255,0,0));
+            int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+            if(mode_check > 0)
+            {
+                if(bank>99 && bank<112){ this->patchNumDisplay->setSubText(tr("Lead")); };
+                if(bank>111 && bank<124){ this->patchNumDisplay->setSubText(tr("Rhythm")); };
+                if(bank>123){ this->patchNumDisplay->setSubText(tr("Other")); };
+            }
+            else
+            {   if(bank>99 && bank<140){ this->patchNumDisplay->setSubText(tr("Lead")); };
+                if(bank>139 && bank<180){ this->patchNumDisplay->setSubText(tr("Rhythm")); };
+                if(bank>179){ this->patchNumDisplay->setSubText(tr("Other")); };
+            };
         };
 
         QString str;
@@ -359,10 +379,24 @@ void floorBoardDisplay::setPatchNumDisplay(int bank, int patch)
             if(bank < 10) {	str.append("0"); };
             str.append(QString::number(bank, 10));
         }
-        else if (bank > 99 )
-        { str.append("P");
+        else
+        {
+            int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+            if(mode_check > 0)
+            {
+            if(bank>99 && bank<112){ bank=bank-99; };
+            if(bank>111 && bank<124){ bank=bank-111; };
+            if(bank>123){ bank=bank-123; };
+            }
+            else
+            {
+                if(bank>99 && bank<140){ bank=bank-99; };
+                if(bank>139 && bank<180){ bank=bank-139; };
+                if(bank>179){ bank=bank-179; };
+            };
+            str.append("P");
             if(bank < 10) {	str.append("0"); };
-            str.append(QString::number(bank-99, 10));
+            str.append(QString::number(bank, 10));
         };
         str.append(":");
         str.append(QString::number(patch, 10));
@@ -375,7 +409,7 @@ void floorBoardDisplay::setPatchNumDisplay(int bank, int patch)
         QString str = tr("Buffer");
         this->patchNumDisplay->setMainText(str, Qt::AlignCenter);
     };
-};
+}
 
 void floorBoardDisplay::updateDisplay()
 {
@@ -449,11 +483,11 @@ void floorBoardDisplay::updateDisplay()
         this->writeButton->setBlink(false);
         this->writeButton->setValue(false);
     };
-};
+}
 
 void floorBoardDisplay::autoconnect()
 {
-    QString replyMsg;
+    QString sysxMsg;
     SysxIO *sysxIO = SysxIO::Instance();
     //this->connectButtonActive = value;
     if(!sysxIO->isConnected() && sysxIO->deviceReady())
@@ -659,7 +693,7 @@ void floorBoardDisplay::set_temp()
         this->temp5Display->setMainText(patchText, Qt::AlignCenter);
         sysxIO->temp5_sysxMsg = sysxBuffer;
     };
-};
+}
 
 void floorBoardDisplay::temp1_copy(bool value)
 {
@@ -698,7 +732,7 @@ void floorBoardDisplay::temp1_copy(bool value)
         QString size = QString::number(sysxMsg.size()/2, 10);
         sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
     };
-};
+}
 
 void floorBoardDisplay::temp1_paste(bool value)
 {
@@ -716,7 +750,7 @@ void floorBoardDisplay::temp1_paste(bool value)
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void floorBoardDisplay::temp2_copy(bool value)
 {
@@ -755,7 +789,7 @@ void floorBoardDisplay::temp2_copy(bool value)
         QString size = QString::number(sysxMsg.size()/2, 10);
         sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
     };
-};
+}
 
 void floorBoardDisplay::temp2_paste(bool value)
 {
@@ -772,7 +806,7 @@ void floorBoardDisplay::temp2_paste(bool value)
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void floorBoardDisplay::temp3_copy(bool value)
 {
@@ -811,7 +845,7 @@ void floorBoardDisplay::temp3_copy(bool value)
         QString size = QString::number(sysxMsg.size()/2, 10);
         sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
     };
-};
+}
 
 void floorBoardDisplay::temp3_paste(bool value)
 {
@@ -828,7 +862,7 @@ void floorBoardDisplay::temp3_paste(bool value)
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void floorBoardDisplay::temp4_copy(bool value)
 {
@@ -867,7 +901,7 @@ void floorBoardDisplay::temp4_copy(bool value)
         QString size = QString::number(sysxMsg.size()/2, 10);
         sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
     };
-};
+}
 
 void floorBoardDisplay::temp4_paste(bool value)
 {
@@ -884,7 +918,7 @@ void floorBoardDisplay::temp4_paste(bool value)
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void floorBoardDisplay::temp5_copy(bool value)
 {
@@ -923,7 +957,7 @@ void floorBoardDisplay::temp5_copy(bool value)
         QString size = QString::number(sysxMsg.size()/2, 10);
         sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
     };
-};
+}
 
 void floorBoardDisplay::temp5_paste(bool value)
 {
@@ -940,7 +974,7 @@ void floorBoardDisplay::temp5_paste(bool value)
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void floorBoardDisplay::save_temp(QString fileName, QString sysxMsg)
 {
@@ -962,11 +996,11 @@ void floorBoardDisplay::save_temp(QString fileName, QString sysxMsg)
         };
         file.write(out);
     };
-};
+}
 
 void floorBoardDisplay::connectSignal(bool value)
 {
-    QString replyMsg;
+    QString sysxMsg;
     SysxIO *sysxIO = SysxIO::Instance();
     this->connectButtonActive = value;
     if(connectButtonActive == true && sysxIO->deviceReady())
@@ -1106,7 +1140,7 @@ void floorBoardDisplay::writeSignal(bool)
         {
             sysxIO->setDeviceReady(false);			// Reserve the device for interaction.
             {
-                if((sysxIO->getBank() > bankTotalUser && sysxIO->getBank() <= bankTotalAll) || (sysxIO->getBank() == 105)) // Preset banks are NOT writable so we check.
+                if(sysxIO->getBank() > bankTotalUser) // Preset banks are NOT writable so we check.
                 {
                     QMessageBox *msgBox = new QMessageBox();
                     msgBox->setWindowTitle(deviceType + tr(" FloorBoard"));
@@ -1170,7 +1204,7 @@ void floorBoardDisplay::writeSignal(bool)
         };
     };
     this->writeButton->setValue(false);
-};
+}
 
 void floorBoardDisplay::writeToBuffer()
 {
@@ -1195,7 +1229,7 @@ void floorBoardDisplay::writeToBuffer()
 
     this->writeButton->setBlink(false);	// Sync so we stop blinking the button
     this->writeButton->setValue(false);	// and activate the write button.
-};
+}
 
 void floorBoardDisplay::writeToMemory()
 {
@@ -1255,7 +1289,144 @@ void floorBoardDisplay::writeToMemory()
     sysxIO->sendSysx(sysxMsg);	                      // Send the data.
     set_bank = bank;
     set_patch = patch;
-};
+}
+
+void floorBoardDisplay::autosyncSignal(bool value)
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    this->autosyncButtonActive = value;
+    if(autosyncButtonActive == true  && sysxIO->isConnected())
+    {
+        autosyncTimer->start(5000);
+        autosync();
+    }
+    else
+    {
+        autosyncTimer->stop();
+        this->autoButton->setBlink(false);
+        this->autoButton->setValue(false);
+        emit setStatusMessage(tr("Ready"));
+    };
+}
+
+void floorBoardDisplay::autosync()
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    //if(autosyncButtonActive == true) { emit sysxIO->relayUpdateSignal(); };
+    if(autosyncButtonActive == true && sysxIO->deviceReady() && sysxIO->isConnected())
+    {
+
+        emit setStatusSymbol(2);
+        emit setStatusMessage(tr("Auto Sync"));
+
+        this->autoButton->setBlink(true);
+        sysxIO->setDeviceReady(false); // Reserve the device for interaction.
+
+        QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)));
+        QObject::connect(sysxIO, SIGNAL(sysxReply(QString)),
+                         this, SLOT(autosyncResult(QString)));
+
+        sysxIO->requestPatch(0, 0); // GT100 patch request from temorary buffer memory.
+
+    };
+}
+
+void floorBoardDisplay::autosyncResult(QString sysxMsg)
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)),
+                        this, SLOT(autosyncResult(QString)));
+
+    sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
+    this->autoButton->setBlink(false);
+    sysxMsg = sysxMsg.remove(" ").toUpper();       /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
+    if (sysxMsg.size()/2 == patchReplySize){
+        QString header = "F0411000005312";
+        QString footer ="00F7";
+        QString addressMsb = sysxMsg.mid(14,4);    //  copy patch address MSB.
+        QString part1 = sysxMsg.mid(22, 256);      //  copy 128 bytes of address 00 data .
+        part1.prepend("0000").prepend(addressMsb).prepend(header).append(footer);   //add LSB + MSB address, header and footer.
+        QString part2 = sysxMsg.mid(278, 256);     // copy 114 bytes of address 01 data.
+        part2.prepend("0100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part3 = sysxMsg.mid(534, 156);     //  copy 78 bytes of address 02 data .
+        part3.prepend("0200").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+        QString part4 = sysxMsg.mid(716, 256);    //  copy 128 bytes of address 03 data .
+        part4.prepend("0300").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+        QString part5 = sysxMsg.mid(972, 256);    // copy 114 bytes of address 04 data.
+        part5.prepend("0400").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part6 = sysxMsg.mid(1228, 36);    // copy 18 bytes of address 05 data.
+        part6.prepend("0500").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part7 = sysxMsg.mid(1290, 60);    // copy 30 bytes of address 06 data.
+        part7.prepend("0600").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part8 = sysxMsg.mid(1376, 250);   //  copy 125 bytes of address 07 data .
+        part8.prepend("0700").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part9 = sysxMsg.mid(1652, 256);   //  copy 128 bytes of address 10 data .
+        part9.prepend("1000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part10 = sysxMsg.mid(1908,172);   //  copy 86 bytes of address 11 data .
+        part10.prepend("1100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part11 = sysxMsg.mid(2106, 70);    //  copy 35 bytes of address 20 data .
+        part11.prepend("2000").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part12 = sysxMsg.mid(2202, 70);    //  copy 35 bytes of address 21 data .
+        part12.prepend("2100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+        QString part13 = sysxMsg.mid(2298, 104);   //  copy 52 bytes of address 30 data .
+        part13.prepend("3000").prepend(addressMsb).prepend(header).append(footer);  //add LSB + MSB address, header and footer.
+        QString part14 = sysxMsg.mid(2428, 104);   //  copy 52 bytes of address 31 data .
+        part14.prepend("3100").prepend(addressMsb).prepend(header).append(footer); //add LSB + MSB address, header and footer.
+
+        sysxMsg = "";
+        sysxMsg.append(part1).append(part2).append(part3).append(part4).append(part5).append(part6).append(part7)
+                .append(part8).append(part9).append(part10).append(part11).append(part12).append(part13).append(part14);
+
+        QString reBuild = "";       /* Add correct checksum to patch strings */
+        QString sysxEOF = "";
+        QString hex = "";
+        int msgLength = sysxMsg.length()/2;
+        for(int i=0;i<msgLength*2;++i)
+        {
+            hex.append(sysxMsg.mid(i*2, 2));
+            sysxEOF = (sysxMsg.mid((i*2)+4, 2));
+            if (sysxEOF == "F7")
+            {
+                int dataSize = 0; bool ok;
+                for(int h=checksumOffset;h<hex.size()-1;++h)
+                { dataSize += hex.mid(h*2, 2).toInt(&ok, 16); };
+                QString base = "80";                       // checksum calculate.
+                unsigned int sum = dataSize % base.toInt(&ok, 16);
+                if(sum!=0) { sum = base.toInt(&ok, 16) - sum; };
+                QString checksum = QString::number(sum, 16).toUpper();
+                if(checksum.length()<2) {checksum.prepend("0");};
+                hex.append(checksum);
+                hex.append("F7");
+                reBuild.append(hex);
+
+                hex = "";
+                sysxEOF = "";
+                i=i+2;
+            };
+        };
+        sysxMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
+
+        QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
+        QString current_data;
+        for(int i=0;i<patchData.size();++i)
+        {
+            QList<QString> data = patchData.at(i);
+            for(int x=0;x<data.size();++x)
+            {
+                QString hex = data.at(x);
+                if (hex.length() < 2) hex.prepend("0");
+                current_data.append(hex);
+            };
+        };
+        if(sysxMsg != current_data)
+        {
+            sysxIO->setFileSource("Structure", sysxMsg);		// Set the source to the data received.
+            sysxIO->setDevice(true);				// Patch received from the device so this is set to true.
+            sysxIO->setSyncStatus(true);			// We can't be more in sync than right now! :)
+            emit updateSignal();
+        };
+    };
+}
 
 void floorBoardDisplay::patchChangeFailed()
 {
@@ -1265,7 +1436,7 @@ void floorBoardDisplay::patchChangeFailed()
     setPatchNumDisplay(sysxIO->getLoadedBank(), sysxIO->getLoadedPatch());
 }
 
-void floorBoardDisplay::resetDevice(QString replyMsg)
+void floorBoardDisplay::resetDevice(QString sysxMsg)
 {
     SysxIO *sysxIO = SysxIO::Instance();
     QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(resetDevice(QString)));
@@ -1284,7 +1455,7 @@ void floorBoardDisplay::resetDevice(QString replyMsg)
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
     emit connectedSignal();		// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
- };
+ }
 
 void floorBoardDisplay::patchSelectSignal(int bank, int patch)
 {
@@ -1367,6 +1538,9 @@ void floorBoardDisplay::notConnected()
     this->connectButton->setBlink(false);
     this->connectButton->setValue(false);
     this->writeButton->setBlink(false);
+    this->autosyncTimer->stop();
+    this->autoButton->setBlink(false);
+    this->autoButton->setValue(false);
     this->writeButton->setValue(false);
 
     SysxIO *sysxIO = SysxIO::Instance();
@@ -1382,6 +1556,6 @@ void floorBoardDisplay::notConnected()
 void floorBoardDisplay::valueChanged(bool value, QString hex1, QString hex2, QString hex3)
 {
 
-};
+}
 
 

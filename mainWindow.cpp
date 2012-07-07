@@ -48,16 +48,16 @@ mainWindow::mainWindow()
     if(choice == 3) {style = "motif"; }
     else if(choice == 2) {style = "cde"; }
     else if(choice == 1) {style = "plastique"; }
-    else style = "";
+    else {style = ""; };
 
     setting = preferences->getPreferences("Scheme", "Colour", "select");
     choice = setting.toInt(&ok, 16);
     QString colour;
-    if(choice == 4) {colour = ":qss/system.qss"; }
+    if(choice == 4) {colour = ":qss/white.qss"; }
     else if(choice == 3) {colour = ":qss/green.qss"; }
     else if(choice == 2) {colour = ":qss/blue.qss"; }
-    else if(choice == 1) {colour = ":qss/white.qss"; }
-    else colour = ":qss/black.qss";
+    else if(choice == 1) {colour = ":qss/black.qss"; }
+    else {colour = ":qss/black.qss"; };
     /* Loads the stylesheet for the current platform if present */
     QApplication::setStyle(QStyleFactory::create(style));
     if(QFile(colour).exists())
@@ -77,7 +77,7 @@ mainWindow::mainWindow()
 
     QObject::connect(fxsBoard, SIGNAL( sizeChanged(QSize, QSize) ),
                      this, SLOT( updateSize(QSize, QSize) ) );
-};
+}
 
 mainWindow::~mainWindow()
 {
@@ -89,7 +89,7 @@ mainWindow::~mainWindow()
            preferences->getPreferences("Window", "Collapsed", "bool")=="true")
         {
             width = QString::number(this->geometry().width(), 10);
-            posx = QString::number(this->geometry().x(), 10);
+            posx = QString::number(this->geometry().x()-3, 10);
         }
         else
         {
@@ -98,7 +98,7 @@ mainWindow::~mainWindow()
             posx = QString::number(this->geometry().x()+((this->geometry().width()-width.toInt(&ok,10))/2), 10);
         };
         preferences->setPreferences("Window", "Position", "x", posx);
-        preferences->setPreferences("Window", "Position", "y", QString::number(this->geometry().y(), 10));
+        preferences->setPreferences("Window", "Position", "y", QString::number(this->geometry().y()-25, 10));
         preferences->setPreferences("Window", "Size", "width", width);
         preferences->setPreferences("Window", "Size", "height", QString::number(this->geometry().height(), 10));
     }
@@ -110,7 +110,7 @@ mainWindow::~mainWindow()
         preferences->setPreferences("Window", "Size", "height", "");
     };
     preferences->savePreferences();
-};
+}
 
 void mainWindow::updateSize(QSize floorSize, QSize oldFloorSize)
 {
@@ -118,7 +118,7 @@ void mainWindow::updateSize(QSize floorSize, QSize oldFloorSize)
     int x = this->geometry().x() - ((floorSize.width() - oldFloorSize.width()) / 2);
     int y = this->geometry().y();
     this->setGeometry(x, y, floorSize.width(), this->geometry().height());
-};
+}
 
 void mainWindow::createActions()
 {
@@ -238,7 +238,7 @@ void mainWindow::createActions()
     aboutQtAct = new QAction(QIcon(":/images/qt-logo.png"),tr("About &Qt"), this);
     aboutQtAct->setWhatsThis(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-};
+}
 
 void mainWindow::createMenus()
 {
@@ -292,7 +292,7 @@ void mainWindow::createMenus()
     modeMenu = menuBar()->addMenu(tr("&Mode"));
     modeMenu->addAction(guitarModeAct);
     modeMenu->addAction(bassModeAct);
-};
+}
 
 void mainWindow::createStatusBar()
 {
@@ -310,7 +310,7 @@ void mainWindow::createStatusBar()
     //statusBar = new QStatusBar;
     statusBar()->addWidget(statusInfo);
     statusBar()->setSizeGripEnabled(false);
-};
+}
 
 /* FILE MENU */
 void mainWindow::open()
@@ -340,7 +340,7 @@ void mainWindow::open()
             {sysxIO->writeToBuffer();};
         };
     };
-};
+}
 
 void mainWindow::save()
 {
@@ -380,7 +380,7 @@ void mainWindow::save()
     {
         file.writeFile(file.getFileName());
     };
-};
+}
 
 void mainWindow::saveAs()
 {
@@ -412,7 +412,7 @@ void mainWindow::saveAs()
             emit updateSignal();
         };
     };
-};
+}
 
 void mainWindow::importSMF()
 {
@@ -441,7 +441,7 @@ void mainWindow::importSMF()
             {sysxIO->writeToBuffer(); };
         };
     };
-};
+}
 
 void mainWindow::exportSMF()
 {
@@ -472,7 +472,7 @@ void mainWindow::exportSMF()
             emit updateSignal();
         };
     };
-};
+}
 
 void mainWindow::openG5L()
 {
@@ -502,7 +502,7 @@ void mainWindow::openG5L()
             {sysxIO->writeToBuffer(); };
         };
     };
-};
+}
 
 void mainWindow::saveG5L()
 {
@@ -533,7 +533,7 @@ void mainWindow::saveG5L()
             emit updateSignal();
         };
     };
-};
+}
 
 void mainWindow::systemLoad()
 {
@@ -595,7 +595,7 @@ void mainWindow::systemLoad()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 void mainWindow::systemSave()
 {
@@ -643,7 +643,7 @@ void mainWindow::systemSave()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 void mainWindow::bulkLoad()
 {
@@ -663,7 +663,7 @@ void mainWindow::bulkLoad()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 void mainWindow::bulkSave()
 {
@@ -684,7 +684,7 @@ void mainWindow::bulkSave()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 /* TOOLS MENU */
 void mainWindow::settings()
@@ -720,10 +720,10 @@ void mainWindow::settings()
         else if (dialog->styleSettings->plastiqueButton->isChecked() ) {choice="1"; }
         else {choice="0"; };
         preferences->setPreferences("Scheme", "Style", "select", choice);
-        if (dialog->styleSettings->systemButton->isChecked() ) {choice="4"; }
+        if (dialog->styleSettings->whiteButton->isChecked() ) {choice="4"; }
         else if (dialog->styleSettings->greenButton->isChecked() ) {choice="3"; }
-        else if (dialog->styleSettings->blueButton->isChecked() ) {choice="2"; }
-        else if (dialog->styleSettings->whiteButton->isChecked() ) {choice="1"; }
+        else if (dialog->styleSettings->aquaButton->isChecked() ) {choice="2"; }
+        else if (dialog->styleSettings->blackButton->isChecked() ) {choice="1"; }
         else {choice="0"; };
         preferences->setPreferences("Scheme", "Colour", "select", choice);
 
@@ -743,7 +743,7 @@ void mainWindow::settings()
         preferences->setPreferences("Window", "Splash", "bool", splash);
         preferences->savePreferences();
     };
-};
+}
 
 void mainWindow::guitarMode()
 {
@@ -770,7 +770,7 @@ void mainWindow::guitarMode()
         msgBox->exec();
     };
 
-};
+}
 
 void mainWindow::bassMode()
 {
@@ -796,26 +796,26 @@ void mainWindow::bassMode()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 /* HELP MENU */
 void mainWindow::help()
 {
     Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( preferences->getPreferences("General", "Help", "url") ));
-};
+}
 
 void mainWindow::whatsThis()
 {
     QWhatsThis::enterWhatsThisMode();
-};
+}
 
 
 void mainWindow::upload()
 {
     Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( preferences->getPreferences("General", "Upload", "url") ));
-};
+}
 
 void mainWindow::summaryPage()
 {
@@ -823,7 +823,7 @@ void mainWindow::summaryPage()
     summary->setMinimumWidth(800);
     summary->setMinimumHeight(650);
     summary->show();
-};
+}
 
 void mainWindow::summarySystemPage()
 {
@@ -831,7 +831,7 @@ void mainWindow::summarySystemPage()
     summarySystem->setMinimumWidth(800);
     summarySystem->setMinimumHeight(650);
     summarySystem->show();
-};
+}
 
 void mainWindow::summaryPatchList()
 {
@@ -839,30 +839,30 @@ void mainWindow::summaryPatchList()
     summaryPatchList->setMinimumWidth(800);
     summaryPatchList->setMinimumHeight(650);
     summaryPatchList->show();
-};
+}
 
 void mainWindow::homepage()
 {
     Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( preferences->getPreferences("General", "Webpage", "url") ));
-};
+}
 
 void mainWindow::donate()
 {
     //Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YTT3NR4L7TTX8" ));
-};
+}
 
 void mainWindow::manual()
 {
     Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( preferences->getPreferences("General", "Manual", "url") ));
-};
+}
 
 void mainWindow::license()
 {
     QDesktopServices::openUrl(QUrl(":license.txt"));
-};
+}
 
 void mainWindow::about()
 {
@@ -875,7 +875,7 @@ void mainWindow::about()
         QMessageBox::about(this, deviceType + tr(" FloorBoard - About"),
                            deviceType + tr(" FloorBoard - ") + tr("version") + " " + version + "<br>" + file.readAll());
     };
-};
+}
 
 void mainWindow::closeEvent(QCloseEvent* ce)
 {
@@ -883,4 +883,4 @@ void mainWindow::closeEvent(QCloseEvent* ce)
     preferences->savePreferences();
     ce->accept();
     emit closed();
-};
+}

@@ -27,7 +27,7 @@
 customComboBox::customComboBox(QWidget *parent)	: QComboBox(parent)
  {
 
- };
+ }
 
 void customComboBox::showPopup()
 {
@@ -55,4 +55,4 @@ void customComboBox::showPopup()
    if(popupWidth < 40) { popupWidth = 40; };
  	this->view()->setMinimumWidth(popupWidth);
   QComboBox::showPopup();
-};
+}

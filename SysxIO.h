@@ -106,6 +106,7 @@ public:
 public slots:
 	void errorSignal(QString errorType, QString errorMsg);
 	void writeToBuffer();
+	void relayUpdateSignal();
 
 private slots:
 	void returnPatchName(QString sysxMsg);
@@ -121,7 +122,7 @@ signals:
 	void patchName(QString name);
 	void isFinished();
 	void isChanged();
-
+  void updateSignal();
 	void setStatusSymbol(int value);
 	void setStatusProgress(int value);
   void setStatusMessage(QString message);

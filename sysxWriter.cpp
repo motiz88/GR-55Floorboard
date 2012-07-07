@@ -32,19 +32,19 @@
 sysxWriter::sysxWriter()
 {
 
-};
+}
 
 sysxWriter::~sysxWriter()
 {
 
-};
+}
 
 void sysxWriter::setFile(QString fileName)
 {
     this->fileName = fileName;
     this->fileSource.address.clear();
     this->fileSource.hex.clear();
-};
+}
 
 bool sysxWriter::readFile()
 {
@@ -336,13 +336,13 @@ bool sysxWriter::readFile()
     {
         return false;
     };
-};
+}
 
 void sysxWriter::patchIndex(int listIndex)
 {
     SysxIO *sysxIO = SysxIO::Instance();
     this->index=sysxIO->patchListValue;
-};
+}
 
 void sysxWriter::writeFile(QString fileName)
 {
@@ -369,7 +369,7 @@ void sysxWriter::writeFile(QString fileName)
         file.write(out);
     };
 
-};
+}
 
 void sysxWriter::writeSystemFile(QString fileName)
 {
@@ -395,8 +395,7 @@ void sysxWriter::writeSystemFile(QString fileName)
         };
         file.write(out);
     };
-
-};
+}
 
 void sysxWriter::writeSMF(QString fileName)
 {
@@ -556,7 +555,7 @@ void sysxWriter::writeSMF(QString fileName)
         out.append(temp);
         file.write(out);
     };
-};
+}
 
 void sysxWriter::writeG5L(QString fileName)
 {
@@ -618,20 +617,20 @@ void sysxWriter::writeG5L(QString fileName)
         G5L_default.replace(a+1171, 52, temp);    //address "31" +
         file.write(G5L_default);
     };
-};
+}
 
 SysxData sysxWriter::getFileSource()
 {
     return fileSource;
-};
+}
 
 SysxData sysxWriter::getSystemSource()
 {
     return systemSource;
-};
+}
 
 QString sysxWriter::getFileName()
 {
     return fileName;
-};
+}
 

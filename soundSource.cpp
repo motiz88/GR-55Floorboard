@@ -240,6 +240,9 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
 
         QObject::connect(this->stompComboBox, SIGNAL(currentIndexChanged(int)),
                          switch3way, SLOT(changeValue(int)));
+
+        QObject::connect(this->stompComboBox, SIGNAL(highlighted(int)),
+                         switch3way, SLOT(changeValue(int)));
     };
 
 };
@@ -256,11 +259,11 @@ void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
     int choice = setting.toInt(&ok, 16);
-    if(choice == 4) { this->stompDisplay->setAllColor(QColor(0,0,0)); } //system
+    if(choice == 4) { this->stompDisplay->setAllColor(QColor(0,0,0)); } //white
     else if(choice == 3) {this->stompDisplay->setAllColor(QColor(185,224,243)); }   // green
-    else if(choice == 2) {this->stompDisplay->setAllColor(QColor(0,255,204)); }   //blue
-    else if(choice == 1) {this->stompDisplay->setAllColor(QColor(0,0,0)); } //white
-    else {this->stompDisplay->setAllColor(QColor(185,224,243)); }; //black
+    else if(choice == 2) {this->stompDisplay->setAllColor(QColor(0,255,204)); }   //aqua
+    else if(choice == 1) {this->stompDisplay->setAllColor(QColor(185,224,243)); } //black
+    else {this->stompDisplay->setAllColor(QColor(185,224,243)); }; //blue
 };
 
 void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)

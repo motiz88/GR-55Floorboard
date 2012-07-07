@@ -34,21 +34,21 @@ stompbox_mfx::stompbox_mfx(QWidget *parent)
     setKnob1("03", "CENTER", "06");
     editDetails()->patchPos(776, 530, "03", "04"); //correct
     setEditPages();
-};
+}
 
 void stompbox_mfx::updateSignal()
 {
     updateComboBox("03", "00", "05");
     updateSwitch("03", "00", "04");
     updateKnob1("03", "00", "06");
-};
+}
 
 void stompbox_mfx::setEditPages()
 {
     editDetails()->page()->newGroupBox("Select");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "03", "00", "04", "middle", Qt::AlignCenter);
     editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addComboBox(1, 0, 1, 1, "03", "00", "05");  //type
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "03", "00", "05", "large");  //type
     editDetails()->page()->addStackControl();
     editDetails()->page()->addKnob(2, 0, 1, 1, "03", "00", "06");   // pan
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
@@ -57,7 +57,9 @@ void stompbox_mfx::setEditPages()
     // EQ
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Equalizer");
-    editDetails()->page()->newGroupBox("Low");
+    editDetails()->page()->addParaEQ(0, 1, 2, 4, "03", "00", "07");
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+   /* editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "07");
     editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "08");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
@@ -82,7 +84,7 @@ void stompbox_mfx::setEditPages()
 
     editDetails()->page()->newGroupBox("Level");
     editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "11");
-    editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    editDetails()->page()->addGroupBox(0, 2, 1, 1);*/
     editDetails()->page()->addStackField();
 
     // Filter
@@ -662,4 +664,4 @@ void stompbox_mfx::setEditPages()
 
 
     editDetails()->addPage();
-};
+}

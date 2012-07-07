@@ -387,29 +387,55 @@ summaryDialog::summaryDialog(QWidget *parent)
 
 void summaryDialog::makeList()
 {
-    // construct a text string using address and locator parameters to read from midi.xml
+  // construct a text string using address and locator parameters to read from midi.xml
     SysxIO *sysxIO = SysxIO::Instance();
     MidiTable *midiTable = MidiTable::Instance();
+    QString assign_desc;
+    QString assign_customdesc;
     for(int i=start;i<finish;i++ )  //start and finish range defined above.
-      {
+    {
         QString temp;
         QString pos = QString::number(i, 16).toUpper();
         if(pos.size()<2){ pos.prepend("0"); };
-        QString txt = midiTable->getMidiMap("Structure", address, "00", pos).customdesc;  //trawl through midi.xml 
+        QString txt = midiTable->getMidiMap("Structure", address, "00", pos).customdesc;  //trawl through midi.xml
         if(!txt.isEmpty() && txt != "") // skip the empty midi.xml .desc section and move to the next.
         {
-        QString pretxt =  midiTable->getMidiMap("Structure", address, "00", pos).desc;
-        int value = sysxIO->getSourceValue("Structure", address, "00", pos);
-        QString valueHex = QString::number(value, 16).toUpper();
-        if(valueHex.length() < 2) {valueHex.prepend("0"); };
-         temp.append("<br>");
-         temp.append("[");
-         if(!pretxt.isEmpty() && txt != "") { temp.append(pretxt + " "); };
-         temp.append(txt);
-         temp.append("] = ");
-         QString x = midiTable->getValue("Structure", address, "00", pos, valueHex);
-         temp.append(x);
-         text2.append(temp);        
+            QString pretxt =  midiTable->getMidiMap("Structure", address, "00", pos).desc;
+            int value = sysxIO->getSourceValue("Structure", address, "00", pos);
+            QString valueHex = QString::number(value, 16).toUpper();
+            if(valueHex.length() < 2) {valueHex.prepend("0"); };
+            temp.append("<br>");
+            temp.append("[");
+            if(!pretxt.isEmpty() && txt != "") { temp.append(pretxt + " "); };
+            temp.append(txt);
+            temp.append("] = ");
+            QString x;
+            if(pretxt.contains("Assign") && (txt.contains("Target")) )
+            {
+                bool ok;
+                temp.append(midiTable->getValue("Structure", address, "00", pos, valueHex));
+                int maxRange = QString("7F").toInt(&ok, 16) + 1;
+                value = valueHex.toInt(&ok, 16);
+                int dif = value/maxRange;
+                QString valueHex1 = QString::number(dif, 16).toUpper();
+                if(valueHex1.length() < 2) valueHex1.prepend("0");
+                QString valueHex2 = QString::number(value - (dif * maxRange), 16).toUpper();
+                if(valueHex2.length() < 2) valueHex2.prepend("0");
+                QString hex4 = valueHex1;
+                QString hex5 = valueHex2;
+                QString mode_hex = "00";
+                int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+                if(mode_value != 0) {mode_hex = "0D"; };
+                Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
+                assign_desc = items.desc;
+                assign_customdesc = items.customdesc;
+            } else if(pretxt.contains("Assign") && ((txt.contains("Min") || txt.contains("Max"))))
+            {
+               // temp.append(midiTable->getValue("Structure", assign_desc, "00", assign_customdesc, valueHex));
+            } else {
+                temp.append(midiTable->getValue("Structure", address, "00", pos, valueHex));
+            };
+            text2.append(temp);        
          
           if (this->filter != "off") 
           {

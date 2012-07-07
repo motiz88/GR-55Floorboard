@@ -37,64 +37,66 @@
 
 class bulkLoadDialog : public QDialog
 {
-	Q_OBJECT
-  
+    Q_OBJECT
+
 public:
-	bulkLoadDialog();
-  QString msg;
-  
+    bulkLoadDialog();
+    ~bulkLoadDialog();
+    QString msg;
+
 signals:
-  void setStatusMessage(QString message);
-  void setStatusProgress(int value);
-  void setStatusSymbol(int value);
-  void setdeBugStatusMessage(QString message);
-                    
+    void setStatusMessage(QString message);
+    void setStatusProgress(int value);
+    void setStatusSymbol(int value);
+    void setdeBugStatusMessage(QString message);
+
 public slots:
-  void sendData();
-  void updatePatch();
-  void bulkStatusProgress(int value);
-  void sendSequence(QString value); 
-  void sendPatch(QString data);
-  
+    void sendData();
+    void updatePatch();
+    void bulkStatusProgress(int value);
+    void sendSequence(QString value);
+    void sendPatch(QString data);
+
 private slots:
-  void comboValueChanged(int value);
-       
+    void comboValueChanged(int value);
+    void close();
+
 private: 
-  QComboBox *startPatchCombo;
-	QComboBox *finishPatchCombo;
-  QComboBox *startRangeComboBox;
-	QComboBox *patchRangeSpinBox;
-	QLineEdit *finishRange;
-  QProgressBar *progressBar;
-  QLabel *progressLabel;
-  QLabel *bytesLabel; 
-  QPushButton *startButton;
-  QPushButton *cancelButton; 
-  QPushButton *completedButton;
-  int startList;
-  int finishList;
-  int bankStart;
-	int patchRange;
-	int progress;
-	QString bulkData;	
-	QString bulk;
-	int range;
-	int patch;
-	int bank;
-	int patchCount;
-	int steps;
-	int dataSent;
-	QString fileName;
-	void loadG5L();
-	void loadSYX();
-	void loadSMF();
-	QByteArray data;
-	QByteArray default_data;
-	QByteArray hextable;
-	QByteArray sysxPatches;
-	QList<QString> patchList;	 
-	QList<QString> userList;
-	bool failed;
+    QComboBox *startPatchCombo;
+    QComboBox *finishPatchCombo;
+    QComboBox *startRangeComboBox;
+    QComboBox *patchRangeSpinBox;
+    QLineEdit *finishRange;
+    QProgressBar *progressBar;
+    QLabel *progressLabel;
+    QLabel *bytesLabel;
+    QPushButton *startButton;
+    QPushButton *cancelButton;
+    QPushButton *completedButton;
+    int startList;
+    int finishList;
+    int bankStart;
+    int patchRange;
+    int progress;
+    QString bulkData;
+    QString bulk;
+    int range;
+    int patch;
+    int bank;
+    int patchCount;
+    int steps;
+    int dataSent;
+    QString fileName;
+    void loadG5L();
+    void loadSYX();
+    void loadSMF();
+    QByteArray data;
+    QByteArray default_data;
+    QByteArray hextable;
+    QByteArray sysxPatches;
+    QList<QString> patchList;
+    QList<QString> userList;
+    bool failed;
 };
 
 #endif // BULKLOADDIALOG_H

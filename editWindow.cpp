@@ -36,10 +36,32 @@ editWindow::editWindow(QWidget *parent)
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
-        this->image = QPixmap(":images/editwindow.png");
+        QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+        bool ok;
+        int choice = setting.toInt(&ok, 16);
+        QString mesh;
+        if(choice == 4) { mesh = "images/editwindow_white.png"; }
+        else if(choice == 3) { mesh = "images/editwindow_green.png"; }
+        else if(choice == 2) { mesh = "images/editwindow_aqua.png"; }
+        else if(choice == 1) { mesh = ":images/editwindow.png"; }
+        else { mesh = "images/editwindow_blue.png"; };
+        this->image = QPixmap(mesh);
         this->setFixedSize(image.width(), image.height());
         this->setWindowFlags(Qt::WindowStaysOnTopHint);
-    } else { this->image = QPixmap(":images/meshWindow.png"); };
+    }
+    else
+    {
+        QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+        bool ok;
+        int choice = setting.toInt(&ok, 16);
+        QString mesh;
+        if(choice == 4) { mesh = ":images/meshWindow_white.png"; }
+        else if(choice == 3) { mesh = ":images/meshWindow_green.png"; }
+        else if(choice == 2) { mesh = ":images/meshWindow_aqua.png"; }
+        else if(choice == 1) { mesh = ":images/meshWindow_black.png"; }
+        else { mesh = ":images/meshWindow_blue.png"; };
+        this->image = QPixmap(mesh);
+    };
 
     this->title = new QLabel;
     this->title->setObjectName("title");
@@ -49,7 +71,7 @@ editWindow::editWindow(QWidget *parent)
     this->comboBoxLabel->setVisible(false);
 
     this->pageComboBox = new QComboBox;
-    this->pageComboBox->setObjectName("smallcombo");
+    this->pageComboBox->setObjectName("largecombo");
     this->pageComboBox->setEditable(false);
     this->pageComboBox->setFrame(false);
     this->pageComboBox->setVisible(false);

@@ -41,7 +41,7 @@ class floorBoard : public QWidget
 public:
     floorBoard(
             QWidget *parent = 0,
-            QString imagePathFloor = ":/images/floor.png",
+            QString imagePathFloor = ":/images/floor_blue.png",
             QString imagePathStompBG = ":/images/stompbg.png",
             unsigned int marginStompBoxesTop = 135,
             unsigned int marginStompBoxesBottom = 72,
@@ -94,6 +94,7 @@ signals:
     void pedal_buttonSignal(bool value);
     void master_buttonSignal(bool value);
     void system_buttonSignal(bool value);
+    void ez_edit_buttonSignal(bool value);
     void assign1_buttonSignal(bool value);
     void assign2_buttonSignal(bool value);
     void assign3_buttonSignal(bool value);

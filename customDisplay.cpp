@@ -33,7 +33,7 @@ customDisplay::customDisplay(QRect geometry, QWidget *parent)
     this->setGeometry(geometry);
     this->setLabelPosition();
     r=0;
-};
+}
 
 void customDisplay::paintEvent(QPaintEvent *)
 {
@@ -77,11 +77,11 @@ void customDisplay::paintEvent(QPaintEvent *)
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
     int choice = setting.toInt(&ok, 16);
-    if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //system
+    if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //white
     else if(choice == 3) {painter.setBrush(QColor(0,62,5)); }   // green
-    else if(choice == 2) {painter.setBrush(QColor(0,1,62)); }   //blue
-    else if(choice == 1) {painter.setBrush(QColor(255,255,255)); } //white
-    else {painter.setBrush(QColor(0,0,0)); }; //black
+    else if(choice == 2) {painter.setBrush(QColor(0,1,62)); }   //aqua
+    else if(choice == 1) {painter.setBrush(QColor(0,0,0)); } //black
+    else {painter.setBrush(QColor(0,0,0)); }; //blue
 
     /* Draw a custom path. This to have a constant border
            radius independant of the rectangle size. */
@@ -97,7 +97,7 @@ void customDisplay::paintEvent(QPaintEvent *)
     roundRectPath.arcTo((geometry.width()-1) - (radius*2), (geometry.height()-1) - (radius*2), radius*2, radius*2, 270.0, 90.0);
     roundRectPath.closeSubpath();
     painter.drawPath(roundRectPath);
-};
+}
 
 void customDisplay::setLabelPosition(bool invert)
 {
@@ -135,38 +135,38 @@ void customDisplay::setLabelPosition(bool invert)
     this->subLabelRight->setObjectName("displaySmall");
     this->subLabelRight->setAlignment(Qt::AlignRight);
     this->subLabelRight->setGeometry(subGeometry);
-};
+}
 
 
 void customDisplay::setMainText(QString mainText, Qt::Alignment alignment)
 {
     this->mainLabel->setText(mainText);
     this->mainLabel->setAlignment(alignment);
-};
+}
 
 void customDisplay::setSubText(QString subTextLeft, QString subTextRight)
 {
     this->subLabelLeft->setText(subTextLeft);
     this->subLabelRight->setText(subTextRight);
-};
+}
 
 void customDisplay::clearAll()
 {
     this->mainLabel->clear();
     this->subLabelLeft->clear();
     this->subLabelRight->clear();
-};
+}
 
 void customDisplay::setMainObjectName(QString name)
 {
     this->mainLabel->setObjectName(name);
-};
+}
 
 void customDisplay::setSubObjectName(QString name)
 {
     this->subLabelLeft->setObjectName(name);
     this->subLabelRight->setObjectName(name);
-};
+}
 
 void customDisplay::setAllColor(QColor color)
 {
@@ -177,12 +177,12 @@ void customDisplay::setAllColor(QColor color)
     this->mainLabel->setStyleSheet("color: rgb("+ red +","+ green +","+ blue +");");
     this->subLabelLeft->setStyleSheet("color: rgb("+ red +","+ green +","+ blue +");");
     this->subLabelRight->setStyleSheet("color: rgb("+ red +","+ green +","+ blue +");");
-};
+}
 
 void customDisplay::resetAllColor()
 {
     this->mainLabel->setPalette(this->mainPal);
     this->subLabelLeft->setPalette(this->subPal);
     this->subLabelRight->setPalette(this->subPal);
-};
+}
 

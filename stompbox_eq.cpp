@@ -38,7 +38,7 @@ stompbox_eq::stompbox_eq(QWidget *parent)
     setSwitch("06", "00", "11");
     editDetails()->patchPos(1428, 26, "06", "11"); //correct
     setEditPages();
-};
+}
 
 void stompbox_eq::updateSignal()
 {
@@ -49,7 +49,7 @@ void stompbox_eq::updateSignal()
     updateSlider5("06", "00", "1C");
     updateComboBox("06", "00", "1D");
     updateSwitch("06", "00", "11");
-};
+}
 
 void stompbox_eq::setEditPages()
 {
@@ -60,8 +60,10 @@ void stompbox_eq::setEditPages()
 
     editDetails()->page()->newGroupBox("Effect", Qt::AlignTop | Qt::AlignHCenter);
     editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "11", "middle", Qt::AlignCenter);
+    editDetails()->page()->addParaEQ(0, 1, 2, 4, "06", "00", "12");
+    editDetails()->page()->addKnob(0, 2, 1, 1, "06", "00", "1D"); //character
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
-
+/*
     editDetails()->page()->newGroupBox("Equalizer");
     editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "12");
@@ -90,5 +92,6 @@ void stompbox_eq::setEditPages()
     editDetails()->page()->addKnob(0, 0, 1, 1, "06", "00", "1C");
     editDetails()->page()->addKnob(2, 0, 1, 1, "06", "00", "1D");
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
+    */
     editDetails()->addPage();
-};
+}

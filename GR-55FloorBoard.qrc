@@ -26,7 +26,8 @@
         <file>images/exit.png</file>
         <file>images/fileopen.png</file>
         <file>images/filesave.png</file>
-        <file>images/floor.png</file>
+        <file>images/floor_blue.png</file>
+        <file>images/floor_black.png</file>
         <file>images/mod.png</file>
         <file>images/mfx.png</file>
         <file>images/general.png</file>
@@ -74,7 +75,11 @@
         <file>preferences.xml.dist</file>
         <file>system.syx</file>
         <file>images/EQ_graph.png</file>
-        <file>images/meshWindow.png</file>
+        <file>images/meshWindow_blue.png</file>
+        <file>images/meshWindow_black.png</file>
+        <file>images/meshWindow_aqua.png</file>
+        <file>images/meshWindow_green.png</file>
+        <file>images/meshWindow_white.png</file>
         <file>images/amp.png</file>
         <file>images/switch3way.png</file>
         <file>images/sourceBG.png</file>
@@ -87,11 +92,13 @@
         <file>qss/blue.qss</file>
         <file>qss/green.qss</file>
         <file>qss/white.qss</file>
-        <file>qss/system.qss</file>
         <file>language_es.qm</file>
         <file>language_jp.qm</file>
         <file>language_pt.qm</file>
         <file>midi.xsd</file>
         <file>preferences.xsd</file>
+        <file>images/EZ_Patch.png</file>
+        <file>images/EZ_Tone.png</file>
+        <file>EZ-Tone.syx</file>
     </qresource>
 </RCC>

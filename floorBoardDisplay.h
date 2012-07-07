@@ -63,6 +63,9 @@ public slots:
         void save_temp(QString fileName, QString sysxMsg);
         void autoconnect();
         void connectSignal(bool value);
+        void autosync();
+        void autosyncSignal(bool value);
+        void autosyncResult(QString);
         void writeSignal(bool value);
         void connectionResult(QString);
         void autoConnectionResult(QString);
@@ -100,6 +103,8 @@ private:
         customControlListMenu *catagory;
         customButton *connectButton;
         customButton *writeButton;
+        customButton *autoButton;
+        customPanelButton *ez_edit_Button;
         customPanelButton *system_Button;
         customPanelButton *master_Button;
         customPanelButton *normal_PU_Button;
@@ -144,6 +149,7 @@ private:
         bool connectButtonActive;
         bool patchLoadError;
         QTimer* timer;
+        QTimer* autosyncTimer;
         int blinkCount;
         bool currentSyncStatus;
         initPatchListMenu *initPatch;
@@ -155,6 +161,7 @@ private:
         QString temp5_sysxMsg;
         int set_bank;
         int set_patch;
+        bool autosyncButtonActive;
         };
 
 #endif // FLOORBOARDDISPLAY_H

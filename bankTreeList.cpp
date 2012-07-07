@@ -51,8 +51,21 @@ bankTreeList::bankTreeList(QWidget *parent)
 
     QObject::connect(this, SIGNAL(updateSignal()), this->parent(), SIGNAL(updateSignal()));
 
+    this->treeListBass = newTreeList_Bass();
+    this->treeListBass->setObjectName("banklist");
+    QObject::connect(treeListBass, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(setOpenItems(QTreeWidgetItem*)));
+
+    QObject::connect(treeListBass, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(setClosedItems(QTreeWidgetItem*)));
+
+    QObject::connect(treeListBass, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(setItemClicked(QTreeWidgetItem*, int)));
+
+    QObject::connect(treeListBass, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(setItemDoubleClicked(QTreeWidgetItem*, int)));
+
+    QObject::connect(this, SIGNAL(updateSignal()), this->parent(), SIGNAL(updateSignal()));
+
     QVBoxLayout *treeListLayout = new QVBoxLayout;
     treeListLayout->addWidget(treeList);
+    treeListLayout->addWidget(treeListBass);
     treeListLayout->setMargin(0);
     treeListLayout->setSpacing(0);
     setLayout(treeListLayout);
@@ -65,12 +78,12 @@ bankTreeList::bankTreeList(QWidget *parent)
     QObject::connect(this, SIGNAL(setStatusMessage(QString)), sysxIO, SIGNAL(setStatusMessage(QString)));
 
     QObject::connect(this, SIGNAL(notConnectedSignal()), sysxIO, SIGNAL(notConnectedSignal()));
-};
+}
 
 void bankTreeList::updateSize(QRect newrect)
 {
     this->setGeometry(newrect);
-};
+}
 
 void bankTreeList::setClosedItems(QTreeWidgetItem *item)
 {
@@ -89,7 +102,7 @@ void bankTreeList::setClosedItems(QTreeWidgetItem *item)
     {
         closeChildren(item);
     };
-};
+}
 
 void bankTreeList::closeChildren(QTreeWidgetItem *item)
 {
@@ -101,7 +114,7 @@ void bankTreeList::closeChildren(QTreeWidgetItem *item)
         };
         item->child(i)->setExpanded(false);
     };
-};
+}
 
 void bankTreeList::setOpenItems(QTreeWidgetItem *item)
 {
@@ -122,12 +135,23 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
     int b = openBankTreeItems.size();
     int a = 0;
     if(treeList->isExpanded(treeList->model()->index(1, 0)) &&
-       treeList->isExpanded(treeList->model()->index(2, 0)))
+            treeList->isExpanded(treeList->model()->index(2, 0)))
     {
         a = 2;
     }
     else if(treeList->isExpanded(treeList->model()->index(1, 0)) ||
             treeList->isExpanded(treeList->model()->index(2, 0)))
+    {
+        a = 1;
+    };
+
+    if(treeListBass->isExpanded(treeListBass->model()->index(1, 0)) &&
+            treeListBass->isExpanded(treeListBass->model()->index(2, 0)))
+    {
+        a = 2;
+    }
+    else if(treeListBass->isExpanded(treeListBass->model()->index(1, 0)) ||
+            treeListBass->isExpanded(treeListBass->model()->index(2, 0)))
     {
         a = 1;
     };
@@ -182,7 +206,7 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
         }
         else
         {
-            if(treeList->isExpanded(treeList->model()->index(0, 0)))
+            if(treeList->isExpanded(treeList->model()->index(0, 0)) || treeListBass->isExpanded(treeListBass->model()->index(0, 0)))
             {
                 switch(c)
                 {
@@ -211,7 +235,7 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
         if(maxExpandedItems == 1)
         {
             openPatchTreeItems.first()->setExpanded(false);
-            if(treeList->isExpanded(treeList->model()->index(1, 0)))
+            if(treeList->isExpanded(treeList->model()->index(1, 0)) || treeListBass->isExpanded(treeListBass->model()->index(1, 0)))
             {
                 openPatchTreeItems.first()->setExpanded(false);
             }
@@ -254,7 +278,7 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
         }
         else
         {
-            if(treeList->isExpanded(treeList->model()->index(0, 0)))
+            if(treeList->isExpanded(treeList->model()->index(0, 0)) || treeListBass->isExpanded(treeListBass->model()->index(0, 0)))
             {
                 switch(b)
                 {
@@ -286,7 +310,7 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
             openPatchTreeItems.first()->setExpanded(true);//false);
         };
     };
-};
+}
 
 QTreeWidget* bankTreeList::newTreeList()
 {
@@ -333,19 +357,29 @@ QTreeWidget* bankTreeList::newTreeList()
         a += 8;
     };
     user->addChildren(userBankRanges);
-/*
-    QTreeWidgetItem *preset = new QTreeWidgetItem(newTreeList);
-    preset->setText(0, "Preset");
-    preset->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
 
-    QList<QTreeWidgetItem *> presetBankRanges;
-    for (int a=(bankTotalUser+1); a<=bankTotalAll; a++)
+    int x = 0;
+    QList< QString > list;
+    MidiTable *midiTable = MidiTable::Instance();
+    Midi items;
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "00"); // read LEAD preset names list.
+    for(int itemcount=0;itemcount<120;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).desc;
+        list.append(item);
+       };
+    QTreeWidgetItem *lead = new QTreeWidgetItem(newTreeList);
+    lead->setText(0, "Lead");
+    lead->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+
+    QList<QTreeWidgetItem *> leadBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
-        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-91, 10)) );
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
-        for (int b=a; b<=(a+8); b++)
+        for (int b=a; b<=(a+9); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
@@ -354,20 +388,261 @@ QTreeWidget* bankTreeList::newTreeList()
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
-                patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
+                patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+                ++x;
+           };
+        };
+        leadBankRanges << bankRange;
+        a += 9;
+    };
+    lead->addChildren(leadBankRanges);
+
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "01"); // read RHYTHM preset names list.
+    for(int itemcount=0;itemcount<120;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).desc;
+        list.append(item);
+       };
+    x=0;
+    QTreeWidgetItem *rhythm = new QTreeWidgetItem(newTreeList);
+    rhythm->setText(0, "Rhythm");
+    rhythm->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+    QList<QTreeWidgetItem *> rhythmBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
+        bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+9); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
+            bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString(list.at(x)));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+                ++x;
             };
         };
-        presetBankRanges << bankRange;
-        a += 8;
+        rhythmBankRanges << bankRange;
+        a += 9;
     };
-    preset->addChildren(presetBankRanges);
+    rhythm->addChildren(rhythmBankRanges);
 
-*/
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "02"); // read OTHER preset names list.
+    for(int itemcount=0;itemcount<120;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).desc;
+        list.append(item);
+       };
+    x=0;
+    QTreeWidgetItem *other = new QTreeWidgetItem(newTreeList);
+    other->setText(0, "Other");
+    other->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+    QList<QTreeWidgetItem *> otherBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
+        bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+9); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
+            bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString(list.at(x)));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+                ++x;
+            };
+        };
+        otherBankRanges << bankRange;
+        a += 9;
+    };
+    other->addChildren(otherBankRanges);
+
+
     newTreeList->setExpanded(newTreeList->model()->index(1, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(2, 0), true);
+    newTreeList->setExpanded(newTreeList->model()->index(3, 0), true);
+    newTreeList->setExpanded(newTreeList->model()->index(4, 0), true);
     return newTreeList;
-};
+}
+
+QTreeWidget* bankTreeList::newTreeList_Bass()
+{
+    QTreeWidget *newTreeList_Bass = new QTreeWidget();
+    newTreeList_Bass->setColumnCount(1);
+    newTreeList_Bass->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    newTreeList_Bass->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+    QStringList headers;
+    headers << QObject::tr("Double-click tree item to load patch");
+    newTreeList_Bass->setHeaderLabels(headers);
+
+    QTreeWidgetItem *temp = new QTreeWidgetItem(newTreeList_Bass);
+    temp->setText(0, "Temp");
+    temp->setWhatsThis(0, tr("Temporary Buffer.<br>a single mouse click will set the Write/Sync button to send to the buffer only,<br>a double click will load the current GR-55 patch data."));
+
+    QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList_Bass);
+    user->setText(0, "User");
+    user->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Banks."));
+    //user->setIcon(...);
+
+    QList<QTreeWidgetItem *> userBankRanges;
+    for (int a=1; a<=bankTotalUser; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank U").append(QString::number(a, 10)).append("-U").append(QString::number(a+8, 10)) );
+        bankRange->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+8); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b, 10)));
+            bank->setWhatsThis(0, tr("User Bank.<br>expand the Bank to view the Patches"));
+            //bank->setIcon(...);
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
+                patch->setWhatsThis(0, tr("User Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+            };
+        };
+        userBankRanges << bankRange;
+        a += 8;
+    };
+    user->addChildren(userBankRanges);
+
+    int x = 0;
+    QList< QString > list;
+    MidiTable *midiTable = MidiTable::Instance();
+    Midi items;
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "00"); // read LEAD preset names list.
+    for(int itemcount=0;itemcount<36;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).customdesc;
+        list.append(item);
+       };
+    QTreeWidgetItem *lead = new QTreeWidgetItem(newTreeList_Bass);
+    lead->setText(0, "Lead");
+    lead->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+
+    QList<QTreeWidgetItem *> leadBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
+        bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+5); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
+            bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString(list.at(x)));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+            ++x;
+            };
+        };
+        leadBankRanges << bankRange;
+        a += 5;
+    };
+    lead->addChildren(leadBankRanges);
+
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "01"); // read RHYTHM preset names list.
+    for(int itemcount=0;itemcount<36;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).customdesc;
+        list.append(item);
+       };
+    x=0;
+    QTreeWidgetItem *rhythm = new QTreeWidgetItem(newTreeList_Bass);
+    rhythm->setText(0, "Rhythm");
+    rhythm->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+    QList<QTreeWidgetItem *> rhythmBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
+        bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+5); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
+            bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString(list.at(x)));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+            ++x;
+            };
+        };
+        rhythmBankRanges << bankRange;
+        a += 5;
+    };
+    rhythm->addChildren(rhythmBankRanges);
+
+    items = midiTable->getMidiMap("Tables", "00", "00", "1D", "02"); // read OTHER preset names list.
+    for(int itemcount=0;itemcount<36;itemcount++ )
+       {
+        QString item = items.level.at(itemcount).customdesc;
+        list.append(item);
+       };
+    x=0;
+    QTreeWidgetItem *other = new QTreeWidgetItem(newTreeList_Bass);
+    other->setText(0, "Other");
+    other->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
+    QList<QTreeWidgetItem *> otherBankRanges;
+    for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
+    {
+        QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
+        bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
+
+        for (int b=a; b<=(a+5); b++)
+        {
+            QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
+            bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
+
+            for (int c=1; c<=3; c++)
+            {
+                QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setText(0, QString(list.at(x)));
+                patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
+                ++x;
+            };
+        };
+        otherBankRanges << bankRange;
+        a += 5;
+    };
+    other->addChildren(otherBankRanges);
+
+
+    newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(1, 0), true);
+    newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(2, 0), true);
+    newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(3, 0), true);
+    newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(4, 0), true);
+    return newTreeList_Bass;
+}
 
 /*********************** setItemClicked() ***********************************
  * Expands and colapses on a single click and sets patch sellection.
@@ -390,18 +665,29 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
     }
     else if (item->childCount() == 0 && sysxIO->isConnected() && sysxIO->deviceReady())
     {
-          if (item->text(0) != ("Temp"))
+        if (item->text(0) != ("Temp"))
+        {
+            bool ok;
+            bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
+            patch = item->parent()->indexOfChild(item) + 1;
+            QString preset = item->parent()->parent()->parent()->text(0);
+            if (preset.contains("Lead")) { bank = bank + 99; };
+            int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+            if(mode_check > 0)
             {
-                bool ok;
-                bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
-                patch = item->parent()->indexOfChild(item) + 1;
-                QString preset = item->parent()->parent()->text(0);
-                if (preset.contains("P")) { bank = bank + 99; };
-                sysxIO->requestPatchChange(bank, patch);
+                if (preset.contains("Rhythm")) { bank = bank + 111; };
+                if (preset.contains("Other")) { bank = bank + 123; };
             }
-            emit patchSelectSignal(bank, patch);
-        };   
-};
+            else
+            {
+                if (preset.contains("Rhythm")) { bank = bank + 139; };
+                if (preset.contains("Other")) { bank = bank + 179; };
+            };
+            sysxIO->requestPatchChange(bank, patch);
+        }
+        emit patchSelectSignal(bank, patch);
+    };
+}
 
 /*********************** setItemDoubleClicked() *****************************
  * Handles when a patch is double clicked in the tree list. Patch will be
@@ -425,8 +711,19 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
             bool ok;
             bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10); // Get the bank
             patch = item->parent()->indexOfChild(item) + 1;								// and the patch number.
-            QString preset = item->parent()->parent()->text(0);
-            if (preset.contains("P")) { bank = bank + 99; };
+            QString preset = item->parent()->parent()->parent()->text(0);
+            if (preset.contains("Lead")) { bank = bank + 99; };
+            int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+            if(mode_check > 0)
+            {
+                if (preset.contains("Rhythm")) { bank = bank + 111; };
+                if (preset.contains("Other")) { bank = bank + 123; };
+            }
+            else
+            {
+                if (preset.contains("Rhythm")) { bank = bank + 139; };
+                if (preset.contains("Other")) { bank = bank + 179; };
+            };
 
             requestPatch(bank, patch);
 
@@ -442,7 +739,7 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
 
         emit patchSelectSignal(bank, patch);
     };
-};
+}
 /*********************** requestPatch() *******************************
  * Does the actual requesting of the patch data and hands the
  * reception over to updatePatch function.
@@ -463,7 +760,7 @@ void bankTreeList::requestPatch()
         emit setStatusMessage(tr("Receiving Patch"));
         sysxIO->requestPatch(0, 0);
     };
-};
+}
 
 void bankTreeList::requestPatch(int bank, int patch)
 {
@@ -478,7 +775,7 @@ void bankTreeList::requestPatch(int bank, int patch)
 
         sysxIO->requestPatch(bank, patch);
     };
-};
+}
 
 /*********************** updatePatch() *******************************
  * Updates the source of the currently handled patch and set the
@@ -611,7 +908,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         /* END WARNING */
     };
 
-      /*  Preferences *preferences = Preferences::Instance(); // Load the preferences.
+    /*  Preferences *preferences = Preferences::Instance(); // Load the preferences.
         if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
         {
         if (replyMsg.size() > 0){
@@ -640,7 +937,7 @@ void bankTreeList::updatePatch(QString replyMsg)
                         };
                 };*/
     emit setStatusProgress(0);
-};
+}
 
 /********************************** connectedSignal() ****************************
 * This slot reloads all patch names of expanded items, if any, on (re)connection to a
@@ -664,12 +961,12 @@ void bankTreeList::connectedSignal()
 
         this->currentPatchTreeItems.clear();
         this->currentPatchTreeItems = this->openPatchTreeItems;
-        qSort(this->currentPatchTreeItems);
+        //qSort(this->currentPatchTreeItems);
         this->updatePatchNames("");
     }
     else if (sysxIO->deviceReady() && sysxIO->isConnected())
     { requestPatch(); };
-};
+}
 
 /********************************** updateTree() ********************************
 * This handles whether we add the newly expanded item to the current job or
@@ -700,7 +997,7 @@ void bankTreeList::updateTree(QTreeWidgetItem *item)
     {
         this->currentPatchTreeItems.append(item);
     };
-};
+}
 
 /***************************** updatePatchNames() ********************************
 * This updates the patch names in the treeList of all expanded items. this is
@@ -708,57 +1005,71 @@ void bankTreeList::updateTree(QTreeWidgetItem *item)
 *********************************************************************************/
 void bankTreeList::updatePatchNames(QString name)
 {		SysxIO *sysxIO = SysxIO::Instance();
-    if(!name.isEmpty() && sysxIO->isConnected()) //  If not empty we can assume that we did receive a patch name.
-    {
-        this->currentPatchTreeItems.at(listIndex)->child(itemIndex)->setText(0, name); // Set the patch name of the item in the tree list.
-        if(itemIndex >= patchPerBank - 1) // If we reach the last patch in this bank we need to increment the bank and restart at patch 1.
+        if(!name.isEmpty() && sysxIO->isConnected()) //  If not empty we can assume that we did receive a patch name.
         {
-            this->listIndex++;
-            this->itemIndex = 0;
-        }
-        else
-        {
-            this->itemIndex++;
+            this->currentPatchTreeItems.at(listIndex)->child(itemIndex)->setText(0, name); // Set the patch name of the item in the tree list.
+            if(itemIndex >= patchPerBank - 1) // If we reach the last patch in this bank we need to increment the bank and restart at patch 1.
+            {
+                this->listIndex++;
+                this->itemIndex = 0;
+            }
+            else
+            {
+                this->itemIndex++;
+            };
         };
-    };
 
-    if(listIndex < currentPatchTreeItems.size()) // As long as we have items in the list we continue, duh! :)
+            if(listIndex < currentPatchTreeItems.size()) // As long as we have items in the list we continue, duh! :)
+            {
+                bool ok;
+                int bank = this->currentPatchTreeItems.at(listIndex)->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
+                int patch = itemIndex + 1 ;
+                QString preset = this->currentPatchTreeItems.at(listIndex)->parent()->parent()->text(0);          
+
+                if(sysxIO->isConnected() && !preset.contains("Lead") && !preset.contains("Rhythm") && !preset.contains("Other"))
+                {
+                    emit setStatusSymbol(3);
+                    emit setStatusMessage(tr("Reading names"));
+                    sysxIO->requestPatchName(bank, patch); // The patch name request.
+                }
+                else
+                {
+                    sysxIO->setDeviceReady(true);
+
+                    this->currentPatchTreeItems.clear(); // We are done so we can safely reset items that need to be named.
+                    this->listIndex = 0;
+                    this->itemIndex = 0;
+
+                    emit setStatusSymbol(1);
+                    emit setStatusMessage(tr("Ready"));
+                    emit setStatusProgress(0);
+
+                    QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
+                                        this, SLOT(updatePatchNames(QString)));
+                };
+            }
+            else {SysxIO *sysxIO = SysxIO::Instance();
+                sysxIO->setDeviceReady(true);
+                emit setStatusSymbol(1);
+                emit setStatusMessage(tr("Ready"));
+
+                QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
+                                    this, SLOT(updatePatchNames(QString)));
+            };
+}
+
+void bankTreeList::updateTreeMode()
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+    if(mode_check < 1)
     {
-        bool ok;
-        int bank = this->currentPatchTreeItems.at(listIndex)->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
-        int patch = itemIndex + 1 ;
-        QString preset = this->currentPatchTreeItems.at(listIndex)->parent()->text(0);
-        if (preset.contains("P")) { bank = bank + 99; };
-        sysxIO->requestPatchName(bank, patch); // The patch name request.
-
-        if(sysxIO->isConnected())
-        {
-            emit setStatusSymbol(3);
-            emit setStatusMessage(tr("Reading names"));
-        }
-        else
-        {
-            sysxIO->setDeviceReady(true);
-
-            this->currentPatchTreeItems.clear(); // We are done so we can safely reset items that need to be named.
-            this->listIndex = 0;
-            this->itemIndex = 0;
-
-            emit setStatusSymbol(1);
-            emit setStatusMessage(tr("Ready"));
-            emit setStatusProgress(0);
-
-            QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
-                                this, SLOT(updatePatchNames(QString)));
-        };
+        this->treeList->show();
+        this->treeListBass->hide();
     }
-    else {SysxIO *sysxIO = SysxIO::Instance();
-        sysxIO->setDeviceReady(true);
-        emit setStatusSymbol(1);
-        emit setStatusMessage(tr("Ready"));
-
-        QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
-                            this, SLOT(updatePatchNames(QString)));
-    };
-};
-
+    else
+    {
+        this->treeList->hide();
+        this->treeListBass->show();
+    }
+}

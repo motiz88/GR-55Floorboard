@@ -34,7 +34,7 @@ class editPage : public QWidget
 public:
     editPage(QWidget *parent = 0);
     
-   /* void addParaEQ(int row, int column, int rowSpan, int columnSpan,
+    void addParaEQ(int row, int column, int rowSpan, int columnSpan,
                    QString hex1 = "void",
                    QString hex2 = "void",
                    QString hex3 = "void",
@@ -42,7 +42,7 @@ public:
                    QString direction = "bottom",
                    int lenght = 45,
                    Qt::Alignment alignment = 0);
-    void addMasterEQ(int row, int column, int rowSpan, int columnSpan,
+   void addEZ_amp(int row, int column, int rowSpan, int columnSpan,
 
                      QString hex1 = "void",
                      QString hex2 = "void",
@@ -51,14 +51,13 @@ public:
                      QString direction = "bottom",
                      int lenght = 45,
                      Qt::Alignment alignment = 0);
-    void addGraphicEQ(int row, int column, int rowSpan, int columnSpan,
-                      QString hex1 = "void",
-                      QString hex2 = "void",
-                      QString hex3 = "void",
-                      QString background = "normal",
-                      QString direction = "bottom",
-                      int lenght = 45,
-                      Qt::Alignment alignment = 0);*/
+    void addEZ_Patch(int row, int column, int rowSpan, int columnSpan,
+                   QString hex1 = "void",
+                   QString hex2 = "void",
+                   QString hex3 = "void",
+
+                   QString direction = "bottom",
+                   Qt::Alignment alignment = 0);
     void addKnob(int row, int column, int rowSpan, int columnSpan,
                  QString hex1 = "void",
                  QString hex2 = "void",
@@ -101,6 +100,12 @@ public:
                      QString hex3 = "void",
                      QString direction = "bottom",
                      Qt::Alignment alignment = 0);
+    void addMultiComboBox(int row, int column, int rowSpan, int columnSpan,
+                      QString hex1 = "void",
+                      QString hex2 = "void",
+                      QString hex3 = "void",
+                      QString direction = "bottom",
+                      Qt::Alignment alignment = 0);
     void addNameEdit(int row, int column, int rowSpan, int columnSpan,
                      QString hex1 = "void",
                      QString hex2 = "void",

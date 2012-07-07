@@ -46,6 +46,7 @@ public slots:
 	void requestPatch(int bank, int patch);
 	void setItemClicked(QTreeWidgetItem *item, int column);
 	void setItemDoubleClicked(QTreeWidgetItem *item, int column);
+    void updateTreeMode();
 
 signals:
 	void itemExpanded(QTreeWidgetItem *item);
@@ -55,21 +56,21 @@ signals:
 	void patchSelectSignal(int bank, int patch);
 	void patchLoadSignal(int bank, int patch);
 	void updateSignal();
-
 	void setStatusSymbol(int value);
 	void setStatusProgress(int value);
     void setStatusMessage(QString message);
-
 	void notConnectedSignal();
 
 private:
 	void updateTree(QTreeWidgetItem *item);
 	void closeChildren(QTreeWidgetItem *item);
 	QTreeWidget* newTreeList();
+    QTreeWidget* newTreeList_Bass();
 	QList<QTreeWidgetItem*> openBankTreeItems;
 	QList<QTreeWidgetItem*> openPatchTreeItems;
 	QList<QTreeWidgetItem*> currentPatchTreeItems;
 	QTreeWidget* treeList;
+    QTreeWidget* treeListBass;
 	int itemIndex;
 	int listIndex;
 };

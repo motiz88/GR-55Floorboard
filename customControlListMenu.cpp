@@ -29,14 +29,23 @@ customControlListMenu::customControlListMenu(QWidget *parent,
                                              QString hex1, QString hex2, QString hex3, QString direction)
                                                  : QWidget(parent)
 {
+    this->direction = direction;
     this->label = new customControlLabel(this);
     this->controlListComboBox = new customComboBox(this);
 
-    this->controlListComboBox->setObjectName("smallcombo");
+    if(direction.contains("Tables") || direction.contains("large"))
+    {
+        this->controlListComboBox->setObjectName("largecombo");
+    }
+    else
+    {
+        this->controlListComboBox->setObjectName("smallcombo");
+    };
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
     if (direction.contains("System")) {this->area = "System"; }
+    else if (direction.contains("Tables")) {this->area = "Tables"; }
     else {this->area = "Structure"; };
 
     MidiTable *midiTable = MidiTable::Instance();
@@ -51,7 +60,6 @@ customControlListMenu::customControlListMenu(QWidget *parent,
 
     setComboBox();
 
-    //QPoint labelPos, comboboxPos;
     if(direction == "left")
     {
 
@@ -76,8 +84,6 @@ customControlListMenu::customControlListMenu(QWidget *parent,
         mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignLeft);
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(12 + 16);
-
     }
     else
     {
@@ -91,11 +97,20 @@ customControlListMenu::customControlListMenu(QWidget *parent,
         mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignCenter);
 
         this->setLayout(mainLayout);
-        if(midiTable->isData(this->area, hex1, hex2, hex3))
-        { this->setFixedHeight(12 + 20); } else { this->setFixedHeight(12 + 16); };
-
-
     };
+    if(midiTable->isData(this->area, hex1, hex2, hex3))
+        { 
+          this->setFixedHeight(12 + 20);
+        } 
+      else if(direction.contains("Tables") || direction.contains("large"))
+        { 
+          this->setFixedHeight(12 + 25); 
+        }
+      else
+        { 
+          this->setFixedHeight(12 + 16); 
+        };
+
 
     QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ), this, SLOT( dialogUpdateSignal() ));
 
@@ -105,11 +120,15 @@ customControlListMenu::customControlListMenu(QWidget *parent,
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(currentIndexChanged(int)));
 
-    QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SLOT(valueChanged(int)));
+    //QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SLOT(valueChanged(int)));
 
-    QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SIGNAL(currentIndexChanged(int)));
+    //QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SIGNAL(currentIndexChanged(int)));
 
-};
+    if(this->direction.contains("Tables"))
+    {
+        QObject::connect(this->controlListComboBox, SIGNAL(activated(int)), this->parent(), SLOT(select_patch()));
+    };
+}
 
 void customControlListMenu::paintEvent(QPaintEvent *)
 {
@@ -339,7 +358,17 @@ void customControlListMenu::setComboBox()
     };
     int maxWidth = QFontMetrics( this->font() ).width( longestItem );
     if(maxWidth < 20) { maxWidth = 20; };
-    this->controlListComboBox->setFixedWidth(maxWidth + 25);
+      if(this->direction.contains("Tables") || this->direction.contains("large"))
+    {
+        this->controlListComboBox->setFixedWidth(maxWidth + 70);
+        this->controlListComboBox->setFixedHeight(25);
+    }
+    else
+    {
+        this->controlListComboBox->setFixedWidth(maxWidth + 25);
+        this->controlListComboBox->setFixedHeight(16);
+    };
+
     this->controlListComboBox->setEditable(false);
     this->controlListComboBox->setFrame(false);
 
@@ -347,6 +376,8 @@ void customControlListMenu::setComboBox()
 
 void customControlListMenu::valueChanged(int index)
 {
+if(!this->direction.contains("Tables"))
+    {
     QList<QString> hexData;
     if(index>895) {hexData.append("56"); index = index-896; } else { hexData.append("58");}
     QString valueHex = QString::number(index, 16).toUpper();
@@ -375,10 +406,13 @@ void customControlListMenu::valueChanged(int index)
 
     //emit updateDisplay(valueStr);
     emit updateSignal();
+    };
 }
 
 void customControlListMenu::dialogUpdateSignal()
 {
+   if(!this->direction.contains("Tables"))
+    {
     SysxIO *sysxIO = SysxIO::Instance();
     MidiTable *midiTable = MidiTable::Instance();
     int index = sysxIO->getSourceValue(this->area, this->hex1, this->hex2, this->hex3);
@@ -389,10 +423,11 @@ void customControlListMenu::dialogUpdateSignal()
     };
     this->controlListComboBox->setCurrentIndex(index);
     this->valueChanged(index);
+    };
 }
 
-
-
-
-
+ void customControlListMenu::set_index(int index)
+{
+    this->controlListComboBox->setCurrentIndex(index);
+}
 

@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "GR-55FloorBoard"
-!define PRODUCT_VERSION "20120113"
+!define PRODUCT_VERSION "20120703"
 !define PRODUCT_PUBLISHER "Colin Willcocks (gumtown)"
 !define PRODUCT_WEB_SITE "http://sourceforge.net/projects/grfloorboard/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\GR-55FloorBoard.exe"
