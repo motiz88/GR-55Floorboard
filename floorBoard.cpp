@@ -80,7 +80,7 @@ floorBoard::floorBoard(QWidget *parent,
     else if(choice == 3) { imagePathFloor = "images/floor_green.png"; }
     else if(choice == 2) { imagePathFloor = "images/floor_aqua.png"; }
     else if(choice == 1) { imagePathFloor = "images/floor_black.png"; }
-    else { imagePathFloor = ":images/floor_blue.png"; };
+    else { imagePathFloor = "images/floor_blue.png"; };
     this->imagePathFloor = imagePathFloor;
     this->imagePathStompBG = imagePathStompBG;
 
@@ -132,6 +132,7 @@ floorBoard::floorBoard(QWidget *parent,
     QObject::connect(bankList, SIGNAL(patchLoadSignal(int, int)), display, SLOT(patchLoadSignal(int, int)));
     QObject::connect(panelBar, SIGNAL(showDragBar(QPoint)), this, SIGNAL(showDragBar(QPoint)));
     QObject::connect(panelBar, SIGNAL(hideDragBar()), this, SIGNAL(hideDragBar()));
+    QObject::connect(this, SIGNAL(notConnected()), display, SLOT(notConnected()));
 
     QString collapseState = preferences->getPreferences("Window", "Collapsed", "bool");
     QString width = preferences->getPreferences("Window", "Collapsed", "width");
@@ -167,6 +168,7 @@ floorBoard::floorBoard(QWidget *parent,
 
 floorBoard::~floorBoard()
 {
+    emit notConnected();
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Restore", "sidepanel")=="true")
     {

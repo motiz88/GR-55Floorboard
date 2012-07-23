@@ -73,11 +73,9 @@ MidiPage::MidiPage(QWidget *parent)
     QString midiInDevice = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOutDevice = preferences->getPreferences("Midi", "MidiOut", "device");
     QString dBugScreen = preferences->getPreferences("Midi", "DBug", "bool");
-    QString midiTimeSet = preferences->getPreferences("Midi", "Time", "set");
-    QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
+    //QString midiTimeSet = preferences->getPreferences("Midi", "Time", "set");
+    //QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
 
-    int midiInDeviceID = midiInDevice.toInt(&ok, 10);
-    int midiOutDeviceID = midiOutDevice.toInt(&ok, 10);
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
 
@@ -90,42 +88,34 @@ MidiPage::MidiPage(QWidget *parent)
     QComboBox *midiInCombo = new QComboBox;
     this->midiInCombo = midiInCombo;
     midiInCombo->addItem(QObject::tr("Select midi-in device"));
-    id = 0;
-    for (QList<QString>::iterator dev = midiInDevices.begin(); dev != midiInDevices.end(); ++dev)
+    id = midiInDevices.count();
+    midiInCombo->setCurrentIndex(0);
+
+    for(int x=0; x<id; ++x)
     {
-        QString str(*dev);
-        midiInCombo->addItem(str.toAscii().data());
-        id++;
-    };
-    if(!midiInDevice.isEmpty())
-    {
-        midiInCombo->setCurrentIndex(midiInDeviceID + 1); // +1 because there is a default entry at 0
-    };
-    if ( midiInDevices.contains("GR-55") )
-  {
-    int inputDevice = midiInDevices.indexOf("GR-55") + 1;
-    midiInCombo->setCurrentIndex(inputDevice);
+        midiInCombo->addItem(midiInDevices.at(x).toAscii());
+        QString item = midiInDevices.at(x).toAscii();
+        if ( item == midiInDevice )
+        {
+            midiInCombo->setCurrentIndex(x+1);
+        };
     };
 
     QComboBox *midiOutCombo = new QComboBox;
     this->midiOutCombo = midiOutCombo;
     midiOutCombo->addItem(QObject::tr("Select midi-out device"));
-    id = 0;
-    for (QList<QString>::iterator dev = midiOutDevices.begin(); dev != midiOutDevices.end(); ++dev)
+    id = midiOutDevices.count();
+    midiOutCombo->setCurrentIndex(0);
+
+    for(int x=0; x<id; ++x)
     {
-        QString str(*dev);
-        midiOutCombo->addItem(str.toAscii().data());
-        id++;
+        midiOutCombo->addItem(midiOutDevices.at(x).toAscii());
+        QString item = midiOutDevices.at(x).toAscii();
+        if ( item == midiOutDevice )
+        {
+            midiOutCombo->setCurrentIndex(x+1);
+        };
     };
-    if(!midiOutDevice.isEmpty())
-    {
-        midiOutCombo->setCurrentIndex(midiOutDeviceID + 1); // +1 because there is a default entry at 0
-    };
-    if ( midiOutDevices.contains("GR-55") )
-  {
-    int outputDevice = midiOutDevices.indexOf("GR-55") + 1;
-    midiOutCombo->setCurrentIndex(outputDevice);
-  };
 
     QVBoxLayout *midiLabelLayout = new QVBoxLayout;
     midiLabelLayout->addWidget(midiInLabel);
@@ -265,11 +255,12 @@ WindowPage::WindowPage(QWidget *parent)
     splashScreenLayout->addLayout(splashLayout);
     splashScreenGroup->setLayout(splashScreenLayout);
 
-
+    QLabel *note = new QLabel(QObject::tr("<b>***Changes take effect on next startup***</b>" ));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(windowGroup);
     mainLayout->addWidget(splashScreenGroup);
+    mainLayout->addWidget(note);
 
     mainLayout->addStretch(1);
     setLayout(mainLayout);
@@ -312,7 +303,7 @@ LanguagePage::LanguagePage(QWidget *parent)
 
     languageGroup->setLayout(languageLayout);
 
-    QLabel *note = new QLabel(QObject::tr("Changes take effect on next startup" ));
+    QLabel *note = new QLabel(QObject::tr("<b>***Changes take effect on next startup***</b>" ));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(languageGroup);
@@ -320,7 +311,7 @@ LanguagePage::LanguagePage(QWidget *parent)
     mainLayout->addStretch(1);
     mainLayout->addWidget(note);
     setLayout(mainLayout);
-};
+}
 
 StylePage::StylePage(QWidget *parent)
     : QWidget(parent)
@@ -376,7 +367,7 @@ StylePage::StylePage(QWidget *parent)
 
     colourGroup->setLayout(colourLayout);
 
-    QLabel *note = new QLabel(QObject::tr("Changes take effect on next startup" ));
+    QLabel *note = new QLabel(QObject::tr("<b>***Changes take effect on next startup***</b>" ));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(styleGroup);

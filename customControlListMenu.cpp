@@ -360,7 +360,7 @@ void customControlListMenu::setComboBox()
     if(maxWidth < 20) { maxWidth = 20; };
       if(this->direction.contains("Tables") || this->direction.contains("large"))
     {
-        this->controlListComboBox->setFixedWidth(maxWidth + 70);
+        this->controlListComboBox->setFixedWidth(maxWidth + 90);
         this->controlListComboBox->setFixedHeight(25);
     }
     else

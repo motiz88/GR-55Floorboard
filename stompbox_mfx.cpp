@@ -57,7 +57,7 @@ void stompbox_mfx::setEditPages()
     // EQ
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Equalizer");
-    editDetails()->page()->addParaEQ(0, 1, 2, 4, "03", "00", "07");
+    editDetails()->page()->addParaEQ(0, 1, 2, 4, "03", "00", "07", "MFX");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
    /* editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "07");

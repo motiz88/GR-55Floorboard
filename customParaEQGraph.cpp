@@ -40,7 +40,7 @@ customParaEQGraph::~customParaEQGraph (void)
 
 void customParaEQGraph::setLowCut ( unsigned short iLowCut )
 {
-    if (iLowCut > 9) iLowCut = 9;
+    //if (iLowCut > 9) iLowCut = 9;
     if (m_iLowCut != iLowCut) {
         m_iLowCut  = iLowCut;
         update();
@@ -56,7 +56,7 @@ unsigned short customParaEQGraph::LowCut (void) const
 
 void customParaEQGraph::setLowGain ( unsigned short iLowGain )
 {
-    if (iLowGain > 40) iLowGain = 40;
+    //if (iLowGain > 40) iLowGain = 40;
     if (m_iLowGain != iLowGain) {
         m_iLowGain  = iLowGain;
         update();
@@ -72,7 +72,7 @@ unsigned short customParaEQGraph::LowGain (void) const
 
 void customParaEQGraph::setLowMidFreq ( unsigned short iLowMidFreq )
 {
-    if (iLowMidFreq > 27) iLowMidFreq = 27;
+    //if (iLowMidFreq > 27) iLowMidFreq = 27;
     if (m_iLowMidFreq != iLowMidFreq) {
         m_iLowMidFreq  = iLowMidFreq;
         update();
@@ -88,7 +88,7 @@ unsigned short customParaEQGraph::LowMidFreq (void) const
 
 void customParaEQGraph::setLowMidQ ( unsigned short iLowMidQ )
 {
-    if (iLowMidQ > 5) iLowMidQ = 5;
+    //if (iLowMidQ > 5) iLowMidQ = 5;
     if (m_iLowMidQ != iLowMidQ) {
         m_iLowMidQ  = iLowMidQ;
         update();
@@ -104,7 +104,7 @@ unsigned short customParaEQGraph::LowMidQ (void) const
 
 void customParaEQGraph::setLowMidGain ( unsigned short iLowMidGain )
 {
-    if (iLowMidGain > 40) iLowMidGain = 40;
+    //if (iLowMidGain > 40) iLowMidGain = 40;
     if (m_iLowMidGain != iLowMidGain) {
         m_iLowMidGain  = iLowMidGain;
         update();
@@ -120,7 +120,7 @@ unsigned short customParaEQGraph::LowMidGain (void) const
 
 void customParaEQGraph::setHighMidFreq ( unsigned short iHighMidFreq )
 {
-    if (iHighMidFreq > 27) iHighMidFreq = 27;
+    //if (iHighMidFreq > 27) iHighMidFreq = 27;
     if (m_iHighMidFreq != iHighMidFreq) {
         m_iHighMidFreq  = iHighMidFreq;
         update();
@@ -135,7 +135,7 @@ unsigned short customParaEQGraph::HighMidFreq (void) const
 
 void customParaEQGraph::setHighMidQ ( unsigned short iHighMidQ )
 {
-    if (iHighMidQ > 5) iHighMidQ = 5;
+    //if (iHighMidQ > 5) iHighMidQ = 5;
     if (m_iHighMidQ != iHighMidQ) {
         m_iHighMidQ  = iHighMidQ;
         update();
@@ -151,7 +151,7 @@ unsigned short customParaEQGraph::HighMidQ (void) const
 
 void customParaEQGraph::setHighMidGain ( unsigned short iHighMidGain )
 {
-    if (iHighMidGain > 40) iHighMidGain = 40;
+    //if (iHighMidGain > 40) iHighMidGain = 40;
     if (m_iHighMidGain != iHighMidGain) {
         m_iHighMidGain  = iHighMidGain;
         update();
@@ -166,7 +166,7 @@ unsigned short customParaEQGraph::HighMidGain (void) const
 
 void customParaEQGraph::setHighGain ( unsigned short iHighGain )
 {
-    if (iHighGain > 40) iHighGain = 40;
+    //if (iHighGain > 40) iHighGain = 40;
     if (m_iHighGain != iHighGain) {
         m_iHighGain  = iHighGain;
         update();
@@ -181,7 +181,7 @@ unsigned short customParaEQGraph::HighGain (void) const
 
 void customParaEQGraph::setHighCut ( unsigned short iHighCut )
 {
-    if (iHighCut > 9) iHighCut = 9;
+    //if (iHighCut > 9) iHighCut = 9;
     if (m_iHighCut != iHighCut) {
         m_iHighCut  = iHighCut;
         update();
@@ -196,7 +196,7 @@ unsigned short customParaEQGraph::HighCut (void) const
 
 void customParaEQGraph::setLevel ( unsigned short iLevel )
 {
-    if (iLevel > 40) iLevel = 40;
+    //if (iLevel > 40) iLevel = 40;
     if (m_iLevel != iLevel) {
         m_iLevel  = iLevel;
         update();
@@ -213,7 +213,7 @@ unsigned short customParaEQGraph::Level (void) const
 void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 {
     QPixmap image = QPixmap(":images/EQ_graph.png");
-    QRectF target(0.0, 0.0, image.width()*90/100, image.height()*43/100);
+    QRectF target(0.0, 0.0, image.width()*110/100, image.height()*50/100);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
     QPainter painter(this);
@@ -223,20 +223,20 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
     int w  = width();
 
     int lc  = (m_iLowCut*32);
-    int lg  = h - (m_iLowGain*2) - 25;
+    int lg  = h - (m_iLowGain*3)-15;
 
-    int lmf = (m_iLowMidFreq*20) + 5;
-    int lmq = h*100/82-(m_iLowMidQ*40);
-    int lmg = h - (m_iLowMidGain)-40;
+    int lmf = (m_iLowMidFreq*25)+5;
+    int lmq = h-(m_iLowMidQ*40);
+    int lmg = h-(m_iLowMidGain)-89;
 
-    int hmf = (m_iHighMidFreq*20) + 5;
-    int hmq = h*100/82-(m_iHighMidQ*40);
-    int hmg = h - (m_iHighMidGain)-40;
+    int hmf = (m_iHighMidFreq*25)+5;
+    int hmq = h-(m_iHighMidQ*40);
+    int hmg = h-(m_iHighMidGain)-89;
 
-    int hg  = h - (m_iHighGain*2) - 25;
-    int hc  = w/2 + (m_iHighCut*32)+10;
+    int hg  = h - (m_iHighGain*3)-15;
+    int hc  = w/2 + (m_iHighCut*35)+50;
 
-    int lev = h/10 - (m_iLevel*2);
+    int lev = h/20 - (m_iLevel*260/100);
 
     QLinearGradient grad(0, 0, w << 1, h << 1);
     grad.setColorAt(0.0f, Qt::yellow);
@@ -248,13 +248,13 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
                     lc-50,   h+lev+63,
                     lc,      lg+lev,
 
-                    lmf-lmq, lmg+lev,
-                    lmf,     ((h*100/82)-(m_iLowMidGain*5))+lev,
-                    lmf+lmq, lmg+lev,
+                    lmf-lmq, 110,
+                    lmf,     (h-(m_iLowMidGain*8)+(lmg/2)),
+                    lmf+lmq, 110,
                     w/2,       (h*50/78)+lev,
-                    hmf-hmq, hmg+lev,
-                    hmf,     ((h*100/82)-(m_iHighMidGain*5))+lev,
-                    hmf+hmq, hmg+lev,
+                    hmf-hmq, 110,
+                    hmf,     (h-(m_iHighMidGain*8)+(hmg/2)),
+                    hmf+hmq, 110,
 
                     hc,      hg+lev,
                     hc+50,   h+lev+63);
@@ -279,6 +279,13 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
     para_2.cubicTo(loMid.at(6), loMid.at(7), loMid.at(8));
     para_2.cubicTo(loMid.at(8), loMid.at(7), loMid.at(6));
 
+
+    painter.setPen(Qt::black);
+    QPen pen;
+    pen.setWidth(3);
+    painter.setPen(pen);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
     QPainterPath graph;
     graph.moveTo(0, h);
     bool intersect = false;
@@ -286,48 +293,34 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
     signed int a = 0;
     signed int b = 0;
     signed int c = 0;
-    for(x=0; x<600; ++x)
+    for(x=0; x<700; ++x)
     {
-        for( a=0; a<200&&intersect!=true; ++a)
+        for( a=0; a<220&&intersect!=true; ++a)
         {
             intersect = loHiCut.intersects(QRectF(x, a, 1, 1));
         };
         intersect = false;
 
-        for( b=0; b<200&&intersect!=true; ++b)
+        for( b=0; b<220&&intersect!=true; ++b)
         {
             intersect = para_1.intersects(QRectF(x, b, 1, 1));
         };
-        if(b>=200){b=100;};
+        if(b>=220){b=110;};
         intersect = false;
 
-        for( c=0; c<200&&intersect!=true; ++c)
+        for( c=0; c<220&&intersect!=true; ++c)
         {
             intersect = para_2.intersects(QRectF(x, c, 1, 1));
         };
-        if(c>=200) {c=100;};
+        if(c>=220) {c=110;};
         intersect = false;
-        graph.lineTo(x, a+b+c-200 );
+        graph.lineTo(x, a+b+c-220);
+        x=x+9;
     };
     graph.lineTo(w, h);
 
     painter.setBrush(grad);
     painter.drawPath(graph);
-    /*painter.setBrush(Qt::red);
-    painter.drawRect(nodeRect(1));
-    painter.setBrush(Qt::green);
-    painter.drawRect(nodeRect(2));
-    painter.setBrush(Qt::red);
-    painter.drawRect(nodeRect(3));
-    painter.setBrush(Qt::green);
-    painter.drawRect(nodeRect(4));
-    painter.drawRect(nodeRect(5));
-    painter.setBrush(Qt::red);
-    painter.drawRect(nodeRect(6));
-    painter.setBrush(Qt::green);
-    painter.drawRect(nodeRect(7));
-    painter.setBrush(Qt::red);
-    painter.drawRect(nodeRect(8));*/
     painter.end();
     QFrame::paintEvent(pPaintEvent);
 }

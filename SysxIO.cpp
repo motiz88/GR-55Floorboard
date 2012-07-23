@@ -740,16 +740,10 @@ void SysxIO::sendMidi(QString midiMsg)
 {
     if(isConnected())
     {
-        Preferences *preferences = Preferences::Instance(); bool ok;
-        int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
+        Preferences *preferences = Preferences::Instance();
+        QString midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device");	// Get midi out device from preferences.
 
         midiIO *midi = new midiIO();
-        /*QList<QString> midiOutDevices = midi->getMidiOutDevices();
-        if ( midiOutDevices.contains("GR-55") )
-        {
-            midiOutPort = midiOutDevices.indexOf("GR-55");
-        };*/
-
         midi->sendMidi(midiMsg, midiOutPort);
         /*DeBugGING OUTPUT */
         if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
@@ -823,21 +817,11 @@ void SysxIO::checkPatchChange(QString name)
 *****************************************************************************/
 void SysxIO::sendSysx(QString sysxMsg)
 {
-    Preferences *preferences = Preferences::Instance();  bool ok;
-    int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
-    int midiInPort = preferences->getPreferences("Midi", "MidiIn", "device").toInt(&ok, 10);	// Get midi in device from preferences.
+    Preferences *preferences = Preferences::Instance();
+    QString midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device");	// Get midi out device from preferences.
+    QString midiInPort = preferences->getPreferences("Midi", "MidiIn", "device");	// Get midi in device from preferences.
 
     midiIO *midi = new midiIO();
-    QList<QString> midiInDevices = midi->getMidiInDevices();
-    QList<QString> midiOutDevices = midi->getMidiOutDevices();
-      if ( midiInDevices.contains("GR-55") )
-    {
-        midiInPort = midiInDevices.indexOf("GR-55");
-    };
-    if ( midiOutDevices.contains("GR-55") )
-    {
-        midiOutPort = midiOutDevices.indexOf("GR-55");
-    };  
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
     /*DeBugGING OUTPUT */
     if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
@@ -1152,11 +1136,11 @@ void SysxIO::writeToBuffer()
     emit setStatusProgress(33); // time wasting sinusidal statusbar progress
     SLEEP(50);
     emit setStatusProgress(66);
-    SLEEP(50);
+    SLEEP(150);
     emit setStatusProgress(100);
-    SLEEP(50);
+    SLEEP(150);
     emit setStatusProgress(75);
-    SLEEP(50);
+    SLEEP(150);
     emit setStatusProgress(42);
     SLEEP(50);
     emit setStatusMessage(tr("Ready"));

@@ -29,12 +29,12 @@ menuPage_assign1::menuPage_assign1(QWidget *parent)
     setLSB("01", "0C");
     editDetails()->patchPos(328, 38, "01", "0C");    //sysx file offset and data length of parameters x2,
     setEditPages();
-};
+}
 
 void menuPage_assign1::updateSignal()
 {
     updateSwitch("01", "00", "0C");
-};
+}
 
 void menuPage_assign1::setEditPages()
 {
@@ -154,4 +154,4 @@ void menuPage_assign1::setEditPages()
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
 
-};
+}

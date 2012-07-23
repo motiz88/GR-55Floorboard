@@ -701,8 +701,8 @@ void mainWindow::settings()
         QString widgetHelp = (dialog->windowSettings->widgetsCheckBox->checkState())?QString("true"):QString("false");
         QString splash = (dialog->windowSettings->splashCheckBox->checkState())?QString("true"):QString("false");
         QString dBug = (dialog->midiSettings->dBugCheckBox->checkState())?QString("true"):QString("false");
-        QString midiIn = QString::number(dialog->midiSettings->midiInCombo->currentIndex() - 1, 10); // -1 because there is a default entry at index 0
-        QString midiOut = QString::number(dialog->midiSettings->midiOutCombo->currentIndex() - 1, 10);
+        int midiInInt = dialog->midiSettings->midiInCombo->currentIndex();
+        int midiOutInt = dialog->midiSettings->midiOutCombo->currentIndex();
         QString midiTimeSet =QString::number(dialog->midiSettings->midiTimeSpinBox->value());
         QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
@@ -727,8 +727,8 @@ void mainWindow::settings()
         else {choice="0"; };
         preferences->setPreferences("Scheme", "Colour", "select", choice);
 
-        if(midiIn=="-1") { midiIn = ""; };
-        if(midiOut=="-1") {	midiOut = ""; };
+        QString midiIn = dialog->midiSettings->midiInCombo->itemText(midiInInt);
+        QString midiOut = dialog->midiSettings->midiOutCombo->itemText(midiOutInt);
 
         preferences->setPreferences("General", "Files", "dir", dir);
         preferences->setPreferences("Midi", "MidiIn", "device", midiIn);

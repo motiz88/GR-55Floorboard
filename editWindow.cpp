@@ -43,7 +43,7 @@ editWindow::editWindow(QWidget *parent)
         if(choice == 4) { mesh = "images/editwindow_white.png"; }
         else if(choice == 3) { mesh = "images/editwindow_green.png"; }
         else if(choice == 2) { mesh = "images/editwindow_aqua.png"; }
-        else if(choice == 1) { mesh = ":images/editwindow.png"; }
+        else if(choice == 1) { mesh = "images/editwindow_black.png"; }
         else { mesh = "images/editwindow_blue.png"; };
         this->image = QPixmap(mesh);
         this->setFixedSize(image.width(), image.height());
@@ -55,11 +55,11 @@ editWindow::editWindow(QWidget *parent)
         bool ok;
         int choice = setting.toInt(&ok, 16);
         QString mesh;
-        if(choice == 4) { mesh = ":images/meshWindow_white.png"; }
-        else if(choice == 3) { mesh = ":images/meshWindow_green.png"; }
-        else if(choice == 2) { mesh = ":images/meshWindow_aqua.png"; }
-        else if(choice == 1) { mesh = ":images/meshWindow_black.png"; }
-        else { mesh = ":images/meshWindow_blue.png"; };
+        if(choice == 4) { mesh = "images/meshWindow_white.png"; }
+        else if(choice == 3) { mesh = "images/meshWindow_green.png"; }
+        else if(choice == 2) { mesh = "images/meshWindow_aqua.png"; }
+        else if(choice == 1) { mesh = "images/meshWindow_black.png"; }
+        else { mesh = "images/meshWindow_blue.png"; };
         this->image = QPixmap(mesh);
     };
 
@@ -275,7 +275,7 @@ editWindow::editWindow(QWidget *parent)
     QObject::connect(this, SIGNAL( dialogUpdateSignal() ), this, SLOT( pageUpdateSignal() ));
 
     QObject::connect(this->pageComboBox, SIGNAL(activated(int)), this, SLOT(valueChanged(int)));
-};
+}
 
 void editWindow::paintEvent(QPaintEvent *)
 {
@@ -284,29 +284,29 @@ void editWindow::paintEvent(QPaintEvent *)
 
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
-};
+}
 
 editWindow::~editWindow()
 {
 
-};
+}
 
 void editWindow::setLSB(QString hex1, QString hex2)
 {
     this->hex1 = hex1;
     this->hex2 = hex2;
-};
+}
 
 void editWindow::setWindow(QString title)
 {
     this->title->setText(title);
     this->pagesWidget->setCurrentIndex(0);
-};
+}
 
 QString editWindow::getTitle()
 {
     return this->title->text();
-};
+}
 
 void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4, QString area)
 {
@@ -328,6 +328,7 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
     if(area == "Structure" ) {assign_check = true; };
 
+    //If a system, midi, or EZ-Tone page then hide some buttons.
     if (this->area != "Structure" || this->temp_hex1.isEmpty() || this->temp_hex1.contains("void"))
     {
         this->bulkEdit_Button->hide();
@@ -338,6 +339,7 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
         this->temp5_Button->hide();
     };
 
+    //If not within assigns area then hide assigns paste buttons.
     if ((this->temp_hex1 != "01" && this->temp_hex1 != "02") || this->position < 327 || this->position > 620)
     {
         this->assign1_Button->hide();
@@ -397,34 +399,35 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
             this->comboBoxLabel->setVisible(true);
         };
     };
-};
+}
 
 void editWindow::valueChanged(int index)
 {
     if(hex1 != "void" && hex2 != "void")
     {
-        QString valueHex = QString::number(index, 16).toUpper();
-        if(valueHex.length() < 2) valueHex.prepend("0");
-        SysxIO *sysxIO = SysxIO::Instance();
-        sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueHex);
+        this->pageIndex = index;
+        //QString valueHex = QString::number(index, 16).toUpper();
+        //if(valueHex.length() < 2) valueHex.prepend("0");
+        //SysxIO *sysxIO = SysxIO::Instance();
+        //sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueHex);
     };
-};
+}
 
 void editWindow::pageUpdateSignal()
 {
     if(this->pages > 1 && hex1 != "void" && hex2 != "void")
     {
-        SysxIO *sysxIO = SysxIO::Instance();
-        int index = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
+        //SysxIO *sysxIO = SysxIO::Instance();
+        int index = this->pageIndex; //sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
         this->pageComboBox->setCurrentIndex(index);
         this->pagesWidget->setCurrentIndex(index);
     };
-};
+}
 
 editPage* editWindow::page()
 {
     return this->tempPage;
-};
+}
 
 void editWindow::patchPos(int pos, int len, QString t_hex1, QString t_hex3)
 {
@@ -432,18 +435,18 @@ void editWindow::patchPos(int pos, int len, QString t_hex1, QString t_hex3)
     this->length = len;
     this->temp_hex1 = t_hex1;
     this->temp_hex3 = t_hex3;
-};
+}
 
 void editWindow::closeEvent(QCloseEvent* ce)
 {
     ce->accept();
-};
+}
 
 void editWindow::hideWindow()
 {
     QApplication::beep();
     emit hide();
-};
+}
 
 void editWindow::bulkEdit()
 {
@@ -463,7 +466,7 @@ void editWindow::bulkEdit()
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
     };
-};
+}
 
 void editWindow::temp1()
 {
@@ -478,7 +481,7 @@ void editWindow::temp1()
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void editWindow::temp2()
 {
@@ -493,7 +496,7 @@ void editWindow::temp2()
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void editWindow::temp3()
 {
@@ -508,7 +511,7 @@ void editWindow::temp3()
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void editWindow::temp4()
 {
@@ -523,7 +526,7 @@ void editWindow::temp4()
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void editWindow::temp5()
 {
@@ -538,7 +541,7 @@ void editWindow::temp5()
         QApplication::beep();
         sysxIO->emitStatusdBugMessage(tr("patch must be copied to clipboard first"));
     };
-};
+}
 
 void editWindow::temp_paste()
 {
@@ -578,55 +581,55 @@ void editWindow::temp_paste()
         sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp); };
     sysxIO->setFileSource("Structure", sysxMsg );
     emit dialogUpdateSignal();
-};
+}
 
 void editWindow::assign1_paste()
 {
     start_int = 328; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign2_paste()
 {
     start_int = 366; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign3_paste()
 {
     start_int = 404; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign4_paste()
 {
     start_int = 442; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign5_paste()
 {
     start_int = 480; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign6_paste()
 {
     start_int = 518; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign7_paste()
 {
     start_int = 556; length_int = 64;
     assign_paste();
-};
+}
 
 void editWindow::assign8_paste()
 {
     start_int = 620; length_int = 38;
     assign_paste();
-};
+}
 
 void editWindow::assign_paste()
 {
@@ -658,4 +661,4 @@ void editWindow::assign_paste()
     sysxIO->setFileSource("Structure", this->temp_hex1, "00", this->temp_hex3, temp);
     sysxIO->setFileSource("Structure", sysxMsg );
     emit dialogUpdateSignal();
-};
+}

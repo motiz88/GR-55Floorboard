@@ -50,7 +50,7 @@ MidiTable* MidiTable::Instance()
 void MidiTable::loadMidiMap() 
 { 
     QDomDocument doc( "MIDI Transalation" );
-    QFile file( ":midi.xml" );
+    QFile file( "images/midi.xml" );
     doc.setContent( &file );                    // file is a QFile
     file.close();
     QDomElement root = doc.documentElement();   // Points to <SysX>

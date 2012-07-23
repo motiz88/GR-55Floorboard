@@ -25,6 +25,15 @@
 #include "MidiTable.h"
 #include "SysxIO.h"
 
+// Platform-dependent sleep routines.
+#ifdef Q_OS_WIN
+#include <windows.h>
+#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
+#else // Unix variants & Mac
+#include <unistd.h>
+#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+#endif
+
 customControlEZ_Patch::customControlEZ_Patch(QWidget *parent,
                                              QString hex1, QString hex2, QString hex3,
                                              QString direction)
@@ -112,9 +121,10 @@ void customControlEZ_Patch::valueChanged(int value)
 {
 
 }
+
 void customControlEZ_Patch::tone_select(int value)
 {
-    this->patch_range = 13330*value;   //multiples of 10 patches per catagory = 2152 * 10
+    this->patch_range = 13330*value;   //multiples of 10 patches per catagory = 1333 * 10
     variation_comboBox->set_index(0);
     this->variation_range = 0;
     QList<QString> patch_list;
@@ -127,7 +137,7 @@ void customControlEZ_Patch::tone_select(int value)
             unsigned char r = (char)EZ_Patches[l+pos];
             list.append(r);
         };
-        patch_list.append(list);
+        patch_list.append(list);        //added new patches to list and remove old list
         variation_comboBox->controlListComboBox->removeItem(0);
     };
     variation_comboBox->controlListComboBox->addItems(patch_list);
@@ -143,9 +153,34 @@ void customControlEZ_Patch::select_patch()
     this->patch_select = this->patch_range + this->variation_range;
     QByteArray patch = EZ_Patches.mid( patch_select, 1333);
     SysxIO *sysxIO = SysxIO::Instance();
+    QByteArray mode;
+    int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
+    if(mode_check > 0)
+    {
+        mode.append("1");
+        patch.replace(11, 1, mode);
+    }
+    else
+    {
+        mode = patch.mid(3, 1);
+        patch.replace(11, 1, mode);
+    };
     sysxIO->setFileName("EZ-Tone");
     sysxIO->setFileSource("Structure", patch);
+    if(sysxIO->isConnected() && sysxIO->deviceReady())
+    {
+        int time = 0;
+        sysxIO->writeToBuffer();
+        while(time<20)
+        {
+            SLEEP(150);
+            if(sysxIO->deviceReady())
+            {
+                time = 20;
+            };
+            ++time;     // wait until device is ready
+        };
+    };
     emit sysxIO->relayUpdateSignal();
-    sysxIO->writeToBuffer();
 }
 

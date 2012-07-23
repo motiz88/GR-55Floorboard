@@ -83,8 +83,8 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     }
     else
     {
-        this->hex_1 = QString::number(x+3, 16).toUpper();
-        this->hex_2 = QString::number(x+2, 16).toUpper();
+        this->hex_1 = QString::number(x+1, 16).toUpper();
+        this->hex_2 = QString::number(x, 16).toUpper();
         this->label_1->setText(tr("SOFT"));
         this->label_2->setText(tr("HARD"));
         this->label_3->setText(tr("BACKING"));
@@ -99,12 +99,14 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     this->v_slider = new QSlider(Qt::Vertical, this);
     this->v_slider->setMinimum(0);
     this->v_slider->setMaximum(100);
-    this->v_slider->setMinimumHeight(120);
+    this->v_slider->setMinimumHeight(260);
+    this->v_slider->setMinimumWidth(30);
 
     this->h_slider = new QSlider(Qt::Horizontal, this);
     this->h_slider->setMinimum(0);
     this->h_slider->setMaximum(100);
     this->h_slider->setMinimumWidth(260);
+    this->h_slider->setMinimumHeight(30);
 
     QHBoxLayout *h_slider_Layout = new QHBoxLayout;
     h_slider_Layout->setMargin(0);
@@ -113,7 +115,7 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     h_slider_Layout->addStretch(0);
 
     this->frame = new customEZ_amp(this);
-    this->frame->setMinimumSize(QSize(300, 150));
+    this->frame->setMinimumSize(QSize(300, 300));
 
     QHBoxLayout *knobLayout = new QHBoxLayout;
     knobLayout->setMargin(0);
@@ -139,8 +141,8 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
                      this, SLOT( dialogUpdateSignal() ));
 
-    QObject::connect(this, SIGNAL( updateSignal() ),
-                     this->parent(), SIGNAL( updateSignal() ));
+    //QObject::connect(this, SIGNAL( updateSignal() ),
+                     //this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->v_slider, SIGNAL(valueChanged(int)),
                      this, SLOT(y_axisChanged(int)));
@@ -178,12 +180,14 @@ void customControlEZ_amp::dialogUpdateSignal()
     value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex_2);
     if(use=="Preamp"){ value=value*2; };
     if(use=="Speaker"){ value=value*100/11; };
+    if(use=="Distortion"){ value=value*55/10; };
     this->v_slider->setValue(value);
     QString data_1 = QString::number(value, 16).toUpper();
     if(data_1.length() < 2) data_1.prepend("0");
 
     value = sysxIO->getSourceValue("Structure", this->hex4, this->hex5, this->hex_1);
     if(use=="Preamp"){ value=value-20; };
+    if(use=="Distortion"){ value=value-10; };
     this->h_slider->setValue(value);
     QString data_2 = QString::number(value, 16).toUpper();
     if(data_2.length() < 2) data_2.prepend("0");
@@ -239,6 +243,7 @@ void customControlEZ_amp::dataChanged()
     QList<QString> hexString2;
     QList<QString> hexString3;
     QList<QString> hexString4;
+    QList<QString> hexString5;
 
     if(this->use=="Preamp")
     {
@@ -260,6 +265,20 @@ void customControlEZ_amp::dataChanged()
         if (hex.size() < 2) hex.prepend("0");  // presence
         hexString3.append(hex);
 
+        data = (y_data*2/5)+8;
+        if(data>20) data=20;
+        hex = QString::number(data, 16).toUpper();
+        if (hex.size() < 2) hex.prepend("0");  // EQ low mid gain
+        hexString4.append(hex);
+
+        data = y_data;
+        data = data/4;
+        if(data<15) data=15;
+        hex = QString::number(data, 16).toUpper();
+        if (hex.size() < 2) hex.prepend("0");  // MFX EQ mid 2 gain
+        hexString5.append(hex);
+
+
         if(this->toggle == 1)
         {
             sysxIO->setFileSource("Structure", "07", "00", "02", hexString1); //preamp drive
@@ -269,6 +288,16 @@ void customControlEZ_amp::dataChanged()
         {
             sysxIO->setFileSource("Structure", "07", "00", "05", hexString2); //solo sw & level
             this->toggle = 3;
+        }
+        else if(this->toggle == 3)
+        {
+            sysxIO->setFileSource("Structure", "06", "00", "16", hexString4); //EQ low mid gain
+            this->toggle = 4;
+        }
+        else if(this->toggle == 4)
+        {
+            sysxIO->setFileSource("Structure", "03", "00", "0D", hexString5); //MFX EQ mid 2 gain
+            this->toggle = 5;
         }
         else
         {
@@ -307,7 +336,22 @@ void customControlEZ_amp::dataChanged()
         if (hex.size() < 2) hex.prepend("0");
         hexString1.append(hex);
 
-        sysxIO->setFileSource("Structure", "07", "00", "0C", hexString1);
+        data = ((100-y_data)/14);
+        if(data>6) { data = 6; };
+        hex = QString::number(data, 16).toUpper();
+        if (hex.size() < 2) hex.prepend("0");
+        hexString2.append(hex);                    //EQ character
+
+        if(this->toggle == 1)
+        {
+            sysxIO->setFileSource("Structure", "07", "00", "0C", hexString1);
+            this->toggle = 2;
+        }
+        else
+        {
+           sysxIO->setFileSource("Structure", "06", "00", "1D", hexString2);
+           this->toggle = 1;
+        };
     }
     else if(use == "Ambience")
     {
@@ -376,26 +420,23 @@ void customControlEZ_amp::dataChanged()
     }
     else
     {
-        int data = ((y_data*4)/10)+30;
-        hex = QString::number(data, 16).toUpper();
+        int data = ((y_data*10/55));
+        hex = QString::number(data, 16).toUpper(); //od/ds type
         if (hex.size() < 2) hex.prepend("0");
         hexString1.append(hex);
 
-        data = ((y_data*3)/10)+50;
-        hex = QString::number(data, 16).toUpper();
+        hex = QString::number(x_data+10, 16).toUpper(); //od/ds drive
         if (hex.size() < 2) hex.prepend("0");
         hexString1.append(hex);
 
-        hex = QString::number(y_data, 16).toUpper();
+        data = ((y_data*3)/10)+35;
+        hex = QString::number(data, 16).toUpper();  //od/ds tone
         if (hex.size() < 2) hex.prepend("0");
         hexString1.append(hex);
 
-        hex = QString::number(x_data, 16).toUpper();
-        if (hex.size() < 2) hex.prepend("0");
-        hexString1.append(hex);
 
         sysxIO->setFileSource("Structure", this->hex1, this->hex2, hex_addr, hexString1);
     };
-    emit updateSignal();
+    //emit updateSignal();
 }
 
