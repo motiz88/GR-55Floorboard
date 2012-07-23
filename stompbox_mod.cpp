@@ -208,7 +208,7 @@ void stompbox_mod::setEditPages()
     // Equalizer
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Equalizer");
-    editDetails()->page()->addParaEQ(0, 1, 2, 4, "07", "00", "4F");
+    editDetails()->page()->addParaEQ(0, 1, 2, 4, "07", "00", "4F", "MOD");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
    /* editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "4F");

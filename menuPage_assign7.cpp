@@ -29,12 +29,12 @@ menuPage_assign7::menuPage_assign7(QWidget *parent)
     setLSB("01", "7E");
     editDetails()->patchPos(556, 64, "01", "7E");    //sysx file offset and data length of parameters x 2,
     setEditPages();
-};
+}
 
 void menuPage_assign7::updateSignal()
 {
     updateSwitch("01", "00", "7E");
-};
+}
 
 void menuPage_assign7::setEditPages()
 {
@@ -152,4 +152,4 @@ void menuPage_assign7::setEditPages()
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
     editDetails()->page()->newStackField(0);editDetails()->page()->addStackField();
-};
+}

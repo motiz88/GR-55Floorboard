@@ -126,7 +126,9 @@ HEADERS += ./editPage.h \
     ./preferencesDialog.h \
     ./preferencesPages.h \
     ./xmlwriter/xmlwriter.h \
-    ./xmlwriter/xmlwriter_p.h 
+    ./xmlwriter/xmlwriter_p.h \
+    ./windows/ks.h \
+    ./windows/ksmedia.h
 
 #Source files
 SOURCES += ./editPage.cpp \
@@ -199,6 +201,7 @@ SOURCES += ./editPage.cpp \
     ./menuPage_system.cpp \
     ./renameDialog.cpp \
     ./renameWidget.cpp \
+    ./RtMidi.cpp \
     ./statusBarSymbol.cpp \
     ./statusBarWidget.cpp \
     ./soundSource.cpp \

@@ -4,7 +4,7 @@ GR-55FloorBoard Copyright (C) 2011 Colin Willcocks (gumtownbassman@yahoo.com).
 =======
 
 
-GR-55FloorBoard version 20120113: 13 January 2012
+GR-55FloorBoard beta version 20120724: 24 July 2012
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -18,12 +18,18 @@ for inclusion in a later release.
  ********* LATEST FEATURES ADDED****************************************************
   
  Here is an update on "where it's at"...
-      
-*** Modified combobox selections to give 'live update' for easier tone auditioning.
+ 
+*** New Midi I/O sub system with auto port finder.
+*
+*** Updated for firmware verion 1.50
 
-*** Changed Write sequence and patch selection for less confusion.
+***Added new background and editpage images
+      
+*** Added EZ-Tone patch creator images
+
+*** Larger comboboxes
               
-*** Minor text changes.
+*** Added Lead, Rhythm, Other patch tree items
 
 All functions are now implemented, except for
 

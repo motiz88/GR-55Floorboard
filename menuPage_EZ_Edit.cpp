@@ -47,19 +47,16 @@ void menuPage_ez_edit::setEditPages()
     editDetails()->addPage("00", "00", "1A", "00", "Tables");
 
     editDetails()->page()->newGroupBox("Speaker & Cabinet");
-    //editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "6F", "large");   // custom spkr A type
     editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "0C", "Speaker");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->addPage("00", "00", "1A", "01", "Tables");
 
     editDetails()->page()->newGroupBox("OD/DS Customiser");
-    //editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "39", "large");   // custom
-    editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "19", "Distortion");
+    editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "18", "Distortion");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "02", "Tables");
 
     editDetails()->page()->newGroupBox("Ambience");
-    //editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "39", "large");   // custom
     editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "11", "Ambience");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "03", "Tables");

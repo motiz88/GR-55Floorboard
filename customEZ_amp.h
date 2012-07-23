@@ -41,7 +41,6 @@ public slots:
     void setY_axis(int iy_axis);
     void setX_axis(int ix_axis);
     void updateSlot(  QString hex_1, QString hex_2);
-    void syncResult(QString sysxMsg);
 
 signals:
     void y_axisChanged(int iy_axis);

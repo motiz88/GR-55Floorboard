@@ -34,7 +34,7 @@ customEZ_Patch::customEZ_Patch(bool active, QWidget *parent, QString hex1, QStri
     this->active = active;
     this->imagePath = imagePath;
     QSize imageSize = QPixmap(imagePath).size();
-    this->switchSize = QSize(imageSize.width()/2, imageSize.height()/15);
+    this->switchSize = QSize(imageSize.width()/4, imageSize.height()/15);
     this->imageRange = 1;
     this->switchPos = switchPos;
     this->setOffset(0);
@@ -42,6 +42,7 @@ customEZ_Patch::customEZ_Patch(bool active, QWidget *parent, QString hex1, QStri
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(blink()) );
     setBlink(true);
+    x_count = 0;
 }
 
 void customEZ_Patch::paintEvent(QPaintEvent *)
@@ -75,33 +76,42 @@ void customEZ_Patch::setBlink(bool value)
 {
     if(value)
     {
-        timer->start(100);
+        timer->start(250);
     }
     else
     {
         timer->stop();
         if(active)
         {
-            setxOffset(1);
+
+            x_count++;
+            if(x_count>3) {x_count = 0; };
+             setxOffset(x_count);
         }
         else
         {
-            setxOffset(0);
+
+            x_count++;
+            if(x_count>3) {x_count = 0; };
+            setxOffset(x_count);
         };
     };
 }
 
 void customEZ_Patch::blink()
 {
+    x_count++;
+    if(x_count>3) {x_count = 0; };
+     setxOffset(x_count);
     if(on)
     {
         on = false;
-        setxOffset(0);
+        //setxOffset(0);
     }
     else
     {
         on = true;
-        setxOffset(1);
+        //setxOffset(1);
     };
     clearFocus();
 }

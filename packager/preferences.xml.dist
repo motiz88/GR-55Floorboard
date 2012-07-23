@@ -2,7 +2,7 @@
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\GrFloorBoard\grfloorboard\preferences.xsd">
 	<General>
-		<Application version="20120703"/>
+		<Application version="20120724"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55-Help-HTML\GR-55_HTML_Help.html"/>
@@ -19,12 +19,12 @@
 		<BulkStart patch="1"/>
 		<DBug bool="false"/>
 		<Delay set="30"/>
-		<MidiIn device=""/>
-		<MidiOut device=""/>
+		<MidiIn device="GR-55"/>
+		<MidiOut device="GR-55"/>
 		<Time set="80"/>
 	</Midi>
 	<Scheme>
-		<Style select="1"/>
+		<Style select="0"/>
 		<Colour select="0"/>
 	</Scheme>
 	<Window>

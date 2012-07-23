@@ -130,6 +130,7 @@ signals:
     void assign6_statusSignal(bool value);
     void assign7_statusSignal(bool value);
     void assign8_statusSignal(bool value);
+    void notConnected();
 
 protected:
     void paintEvent(QPaintEvent *event);

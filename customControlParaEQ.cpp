@@ -26,14 +26,15 @@
 #include "SysxIO.h"
 
 customControlParaEQ::customControlParaEQ(QWidget *parent, 
-                                 QString hex1, QString hex2, QString hex3,
-                                 QString background, QString direction, int lenght)
-                                     : QWidget(parent)
+                                         QString hex1, QString hex2, QString hex3,
+                                         QString background, QString direction, int lenght)
+    : QWidget(parent)
 {
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
     this->area = background;
+    this->eqType = background;
     bool ok;
     int addr = hex1.toInt(&ok, 16);
     int x = hex3.toInt(&ok, 16);
@@ -113,6 +114,18 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->addr_11 = QString::number(addr, 16).toUpper();   /**** set EQ address range for hex1 ****/
     if(addr_11.length() < 2) addr_11.prepend("0");
 
+    if(background == "MOD")
+    {
+        this->hex_9 = "57";
+        this->hex_10 = "58";
+    };
+    if(background == "MFX")
+    {
+        this->hex_4 = "0B";
+        this->hex_5 = "0A";
+        this->hex_7 = "0E";
+        this->hex_8 = "0D";
+    };
     MidiTable *midiTable = MidiTable::Instance();
     if (this->area != "System") {this->area = "Structure";};
 
@@ -388,7 +401,7 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
 
 
     this->frame = new customParaEQGraph(this);
-    this->frame->setMinimumSize(QSize(600, 180));
+    this->frame->setMinimumSize(QSize(700, 220));
 
     QVBoxLayout *frameLayout = new QVBoxLayout;
     frameLayout->setMargin(0);
@@ -405,7 +418,7 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
                      this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this, SIGNAL( updateDisplay(QString) ),
-                      this, SLOT( dialogUpdateSignal() ));
+                     this, SLOT( dialogUpdateSignal() ));
 
     QObject::connect(this, SIGNAL( updateDisplay_1(QString) ),
                      this->display_1, SLOT( setText(QString) ));
@@ -445,7 +458,7 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
                      this->frame, SLOT( updateSlot(QString, QString, QString, QString, QString,
                                                    QString, QString, QString, QString, QString, QString) ));
 
-    QObject::connect(this->frame, SIGNAL(LowCutChanged(unsigned short)),
+   /* QObject::connect(this->frame, SIGNAL(LowCutChanged(unsigned short)),
                      this, SLOT(LowCutChanged(unsigned short) ));
 
     QObject::connect(this->frame, SIGNAL(LowGainChanged(unsigned short)),
@@ -476,7 +489,7 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
                      this, SLOT(HighCutChanged(unsigned short) ));
 
     QObject::connect(this->frame, SIGNAL(LevelChanged(unsigned short)),
-                     this, SLOT(LevelChanged(unsigned short) ));
+                     this, SLOT(LevelChanged(unsigned short) ));*/
 
 }
 
@@ -486,11 +499,11 @@ void customControlParaEQ::paintEvent(QPaintEvent *)
     /*DRAWS RED BACKGROUND FOR DEBUGGING PURPOSE */
     /*QPixmap image(":images/dragbar.png");
 
-	QRectF target(0.0, 0.0, this->width(), this->height());
-	QRectF source(0.0, 0.0, this->width(), this->height());
+    QRectF target(0.0, 0.0, this->width(), this->height());
+    QRectF source(0.0, 0.0, this->width(), this->height());
 
-	QPainter painter(this);
-	painter.drawPixmap(target, image, source);*/
+    QPainter painter(this);
+    painter.drawPixmap(target, image, source);*/
 
 
 }
@@ -510,6 +523,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_1 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_1, hex2, hex_1, valueHex);
     emit updateDisplay_1(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*2)+4, 16).toUpper(); // lo cut
+        if(valueHex.length() < 2) valueHex.prepend("0");
+        data_1 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_2, this->hex2, this->hex_2);
     this->knob_2->setValue(value);
@@ -518,6 +537,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_2 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_2, hex2, hex_2, valueHex);
     emit updateDisplay_2(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*130/100)+3, 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");   // lo gain
+        data_2 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_3, this->hex2, this->hex_3);
     this->knob_3->setValue(value);
@@ -526,13 +551,19 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_3 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_3, hex2, hex_3, valueHex);
     emit updateDisplay_3(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*120/100)+6, 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");   // mid 1 freq
+        data_3 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_4, this->hex2, this->hex_4);
     this->knob_4->setValue(value);
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString data_4 = valueHex;
-    valueStr = midiTable->getValue(this->area, addr_4, hex2, hex_4, valueHex);
+    valueStr = midiTable->getValue(this->area, addr_4, hex2, hex_4, valueHex);  //mid 1 Q
     emit updateDisplay_4(valueStr);
 
     value = sysxIO->getSourceValue(this->area, this->addr_5, this->hex2, this->hex_5);
@@ -542,6 +573,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_5 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_5, hex2, hex_5, valueHex);
     emit updateDisplay_5(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value+6), 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");        // mid 1 gain
+        data_5 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_6, this->hex2, this->hex_6);
     this->knob_6->setValue(value);
@@ -550,6 +587,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_6 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_6, hex2, hex_6, valueHex);
     emit updateDisplay_6(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*120/100)+6, 16).toUpper();   // mid 2 freq
+        if(valueHex.length() < 2) valueHex.prepend("0");
+        data_6 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_7, this->hex2, this->hex_7);
     this->knob_7->setValue(value);
@@ -566,6 +609,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_8 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_8, hex2, hex_8, valueHex);
     emit updateDisplay_8(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value+6), 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");      // mid 2 gain
+        data_8 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_9, this->hex2, this->hex_9);
     this->knob_9->setValue(value);
@@ -574,6 +623,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_9 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_9, hex2, hex_9, valueHex);
     emit updateDisplay_9(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*130/100)+3, 16).toUpper();   // hi gain
+        if(valueHex.length() < 2) valueHex.prepend("0");
+        data_9 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_10, this->hex2, this->hex_10);
     this->knob_10->setValue(value);
@@ -582,6 +637,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_10 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_10, hex2, hex_10, valueHex);
     emit updateDisplay_10(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value*3), 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");         // hi cut
+        data_10 = valueHex;
+    };
 
     value = sysxIO->getSourceValue(this->area, this->addr_11, this->hex2, this->hex_11);
     this->knob_11->setValue(value);
@@ -590,6 +651,12 @@ void customControlParaEQ::dialogUpdateSignal()
     QString data_11 = valueHex;
     valueStr = midiTable->getValue(this->area, addr_11, hex2, hex_11, valueHex);
     emit updateDisplay_11(valueStr);
+    if(this->eqType=="MFX")
+    {
+        valueHex = QString::number((value/3)-10, 16).toUpper();
+        if(valueHex.length() < 2) valueHex.prepend("0");
+        data_11 = valueHex;
+    };
 
     emit graphUpdateSignal( data_1, data_2, data_3, data_4, data_5,
                             data_6, data_7, data_8, data_9, data_10, data_11);

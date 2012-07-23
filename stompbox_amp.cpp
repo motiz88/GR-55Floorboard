@@ -58,7 +58,7 @@ void stompbox_amp::setEditPages()
 
     editDetails()->page()->newGroupBox(tr("PreAmp"));
     editDetails()->page()->newStackControl(0);
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "01");        //pre type
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "01", "large");        //pre type
     editDetails()->page()->addStackControl();
     editDetails()->page()->addComboBox(0, 1, 1, 1, "07", "00", "04", "bottom", Qt::AlignLeft); //gain sw
     editDetails()->page()->addKnob(0, 2, 1, 1, "07", "00", "02", "turbo");   // gain
@@ -73,7 +73,7 @@ void stompbox_amp::setEditPages()
 
 
     editDetails()->page()->newGroupBox(tr("Speaker"));
-    editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "0C");       //spkr type
+    editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "0C", "large");       //spkr type
     editDetails()->page()->addComboBox(0, 1, 1, 1, "07", "00", "0D", "bottom", Qt::AlignRight); //mic type
     editDetails()->page()->addComboBox(0, 2, 1, 1, "07", "00", "0E");       //mic distance
     editDetails()->page()->addKnob(0, 3, 1, 1, "07", "00", "0F");           //mic position

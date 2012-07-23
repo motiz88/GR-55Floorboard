@@ -141,6 +141,7 @@ private:
     QString hex2;
     QString hex3;
     QString area;
+    QString eqType;
 };
 
 #endif // customControlParaEQ_H

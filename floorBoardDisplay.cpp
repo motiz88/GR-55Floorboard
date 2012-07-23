@@ -264,10 +264,10 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
 
     set_temp();
-
-    QString midiIn = preferences->getPreferences("Midi", "MidiIn", "device");
+    autoconnect();
+    /*QString midiIn = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOut = preferences->getPreferences("Midi", "MidiOut", "device");
-    if(!midiIn.isEmpty() && !midiOut.isEmpty())
+    if(!midiIn.isEmpty() && !midiOut.isEmpty() && midiIn != "")
     {autoconnect(); } else {
         QMessageBox *msgBox = new QMessageBox();
         msgBox->isTopLevel();
@@ -282,7 +282,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
         msgBox->setText(msgText);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
-        };
+        };*/
 }
 
 QPoint floorBoardDisplay::getPos()
@@ -487,10 +487,10 @@ void floorBoardDisplay::updateDisplay()
 
 void floorBoardDisplay::autoconnect()
 {
-    QString sysxMsg;
+    //QString sysxMsg;
     SysxIO *sysxIO = SysxIO::Instance();
     //this->connectButtonActive = value;
-    if(!sysxIO->isConnected() && sysxIO->deviceReady())
+    if(sysxIO->deviceReady())
     {
         emit setStatusSymbol(2);
         emit setStatusMessage(tr("Connecting"));
@@ -1297,7 +1297,7 @@ void floorBoardDisplay::autosyncSignal(bool value)
     this->autosyncButtonActive = value;
     if(autosyncButtonActive == true  && sysxIO->isConnected())
     {
-        autosyncTimer->start(5000);
+        autosyncTimer->start(200);
         autosync();
     }
     else

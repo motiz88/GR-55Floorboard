@@ -398,6 +398,7 @@ QTreeWidget* bankTreeList::newTreeList()
     };
     lead->addChildren(leadBankRanges);
 
+    list.clear();
     items = midiTable->getMidiMap("Tables", "00", "00", "1D", "01"); // read RHYTHM preset names list.
     for(int itemcount=0;itemcount<120;itemcount++ )
        {
@@ -434,6 +435,7 @@ QTreeWidget* bankTreeList::newTreeList()
     };
     rhythm->addChildren(rhythmBankRanges);
 
+    list.clear();
     items = midiTable->getMidiMap("Tables", "00", "00", "1D", "02"); // read OTHER preset names list.
     for(int itemcount=0;itemcount<120;itemcount++ )
        {
@@ -564,6 +566,7 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     };
     lead->addChildren(leadBankRanges);
 
+    list.clear();
     items = midiTable->getMidiMap("Tables", "00", "00", "1D", "01"); // read RHYTHM preset names list.
     for(int itemcount=0;itemcount<36;itemcount++ )
        {
@@ -600,6 +603,8 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     };
     rhythm->addChildren(rhythmBankRanges);
 
+
+    list.clear();
     items = midiTable->getMidiMap("Tables", "00", "00", "1D", "02"); // read OTHER preset names list.
     for(int itemcount=0;itemcount<36;itemcount++ )
        {

@@ -20,14 +20,11 @@
         <file>images/downarrow.png</file>
         <file>images/dragbar.png</file>
         <file>images/dropdown.png</file>
-        <file>images/editwindow.png</file>
         <file>images/eq.png</file>
         <file>images/expand.png</file>
         <file>images/exit.png</file>
         <file>images/fileopen.png</file>
         <file>images/filesave.png</file>
-        <file>images/floor_blue.png</file>
-        <file>images/floor_black.png</file>
         <file>images/mod.png</file>
         <file>images/mfx.png</file>
         <file>images/general.png</file>
@@ -71,15 +68,9 @@
         <file>language_ge.qm</file>
         <file>language_ch.qm</file>
         <file>license.txt</file>
-        <file>midi.xml</file>
         <file>preferences.xml.dist</file>
         <file>system.syx</file>
         <file>images/EQ_graph.png</file>
-        <file>images/meshWindow_blue.png</file>
-        <file>images/meshWindow_black.png</file>
-        <file>images/meshWindow_aqua.png</file>
-        <file>images/meshWindow_green.png</file>
-        <file>images/meshWindow_white.png</file>
         <file>images/amp.png</file>
         <file>images/switch3way.png</file>
         <file>images/sourceBG.png</file>
@@ -95,7 +86,6 @@
         <file>language_es.qm</file>
         <file>language_jp.qm</file>
         <file>language_pt.qm</file>
-        <file>midi.xsd</file>
         <file>preferences.xsd</file>
         <file>images/EZ_Patch.png</file>
         <file>images/EZ_Tone.png</file>

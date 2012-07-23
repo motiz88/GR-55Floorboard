@@ -72,6 +72,7 @@ private:
     QTimer* timer;
     bool on;
     unsigned int count;
+    int x_count;
 };
 
 #endif // CUSTOMEZ_PATCH_H

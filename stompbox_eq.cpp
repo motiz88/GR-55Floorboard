@@ -61,7 +61,7 @@ void stompbox_eq::setEditPages()
     editDetails()->page()->newGroupBox("Effect", Qt::AlignTop | Qt::AlignHCenter);
     editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "11", "middle", Qt::AlignCenter);
     editDetails()->page()->addParaEQ(0, 1, 2, 4, "06", "00", "12");
-    editDetails()->page()->addKnob(0, 2, 1, 1, "06", "00", "1D"); //character
+    editDetails()->page()->addKnob(0, 6, 1, 1, "06", "00", "1D"); //character
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 /*
     editDetails()->page()->newGroupBox("Equalizer");
