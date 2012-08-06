@@ -37,7 +37,7 @@ customStructure::customStructure(bool active, QPoint ledPos, QWidget *parent,
 
     setOffset(0);
     setGeometry(ledPos.x(), ledPos.y(), ledSize.width(), ledSize.height());
-};
+}
 
 void customStructure::paintEvent(QPaintEvent *)
 {
@@ -49,13 +49,13 @@ void customStructure::paintEvent(QPaintEvent *)
     QPainter painter(this);
     //painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawPixmap(target, image, source);
-};
+}
 
 void customStructure::setOffset(signed int imageNr)
 {
     this->yOffset = imageNr*ledSize.height();
     this->update();
-};
+}
 
 void customStructure::setValue(bool value)
 {
@@ -68,9 +68,9 @@ void customStructure::setValue(bool value)
     {
         setOffset(0);
     };
-};
+}
 
 void customStructure::changeValue(bool value)
 {
     setValue(value);
-};
+}

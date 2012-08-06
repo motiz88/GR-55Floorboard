@@ -34,14 +34,14 @@ soundsource_analogPU::soundsource_analogPU(QWidget *parent)
     setSwitch("02", "INVERT", "32");
     editDetails()->patchPos(686, 4, "02", "32");
     setEditPages();
-};
+}
 
 void soundsource_analogPU::updateSignal()
 {
     updateComboBox("02", "routeSwitch", "2E");
     updateKnob2("02", "00", "33");
     updateSwitch("02", "00", "32");
-};
+}
 
 void soundsource_analogPU::setEditPages()
 {
@@ -58,4 +58,4 @@ void soundsource_analogPU::setEditPages()
     editDetails()->page()->addGroupBox(0, 1, 2, 1);
 
     editDetails()->addPage();
-};
+}

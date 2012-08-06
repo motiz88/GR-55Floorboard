@@ -113,8 +113,7 @@ summaryDialogPatchList::summaryDialogPatchList(QWidget *parent)
     };
     textDialog->setText(patchList);
     textDialog->show();
-
-};
+}
 
 summaryDialogPatchList::~summaryDialogPatchList()
 {
@@ -181,7 +180,7 @@ void summaryDialogPatchList::updatePatchNames(QString name)
                     this->patchList.prepend("ROLAND "+deviceType+" Patch List <br>");
                     textDialog->setText(this->patchList);
                 };
-};
+}
 
 void summaryDialogPatchList::cancel()
 {
@@ -193,7 +192,7 @@ void summaryDialogPatchList::cancel()
     emit setStatusMessage(tr("Ready"));
     this->deleteLater();
     this->close();
-};
+}
 
 void summaryDialogPatchList::printFile()
 {
@@ -206,7 +205,7 @@ void summaryDialogPatchList::printFile()
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
 #endif
-};
+}
 
 void summaryDialogPatchList::saveAs()
 {
@@ -257,4 +256,4 @@ void summaryDialogPatchList::saveAs()
         };
 
     };
-};
+}

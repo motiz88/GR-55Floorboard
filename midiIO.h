@@ -83,6 +83,8 @@ private:
 	int count;
     unsigned int outPortsCount;
     unsigned int inPortsCount;
+    unsigned int first_out_port_count;
+    unsigned int first_in_port_count;
 };
 
 #endif // MIDIIO_H

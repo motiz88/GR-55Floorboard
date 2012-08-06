@@ -88,7 +88,7 @@ renameDialog::renameDialog(QWidget *parent)
 	setLayout(mainLayout);
 
 	this->setMinimumWidth(250);
-};
+}
 
 
 void renameDialog::addRightArrow()
@@ -96,16 +96,16 @@ void renameDialog::addRightArrow()
 	nameEdit->insert((QChar)(0x2190));
 	nameEdit->setFocus();
 
-};
+}
 
 void renameDialog::addLeftArrow()
 {
 	nameEdit->insert((QChar)(0x2192));
 	nameEdit->setFocus();
-};
+}
 
 void renameDialog::emitValue()
 {
 	emit nameChanged(nameEdit->text());
 	this->accept();
-};
+}

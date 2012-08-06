@@ -30,7 +30,7 @@ customRangeDial::customRangeDial(double value, double min, double max, double si
 					   QString type, QString imagePath, unsigned int imageRange)
     : QWidget(parent)
 {
-  this->area = area;
+    this->area = area;
 	this->hex1 = hex1;
 	this->hex2 = hex2;
 	this->hex3 = hex3;
@@ -50,9 +50,8 @@ customRangeDial::customRangeDial(double value, double min, double max, double si
     setGeometry(dialPos.x(), dialPos.y(), dialSize.width(), dialSize.height());
 
 	QObject::connect(this, SIGNAL( valueChanged(int, QString, QString, QString) ),
-                this->parent(), SLOT( valueChanged(int, QString, QString, QString) ));
- 
-};
+                this->parent(), SLOT( valueChanged(int, QString, QString, QString) )); 
+}
 
 void customRangeDial::paintEvent(QPaintEvent *)
 {
@@ -64,7 +63,7 @@ void customRangeDial::paintEvent(QPaintEvent *)
 	QPainter painter(this);
 	//painter.setRenderHint(QPainter::Antialiasing, true);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void customRangeDial::setOffset(double _newValue)
 {  
@@ -84,7 +83,7 @@ void customRangeDial::setOffset(double _newValue)
 	this->value = _newValue;	
         this->xOffset = imageNr*dialSize.width();
 	this->update();
-};
+}
 
 void customRangeDial::mousePressEvent(QMouseEvent *event)
 {
@@ -96,7 +95,7 @@ void customRangeDial::mousePressEvent(QMouseEvent *event)
 		setFocus();
 		emitValue(value);
 	};
-};
+}
 
 void customRangeDial::mouseMoveEvent(QMouseEvent *event)
 {
@@ -129,7 +128,7 @@ void customRangeDial::mouseMoveEvent(QMouseEvent *event)
 	this->_lastpos = event->pos();
 	setOffset(_newValue);
 	emitValue(_newValue);
-};
+}
 
 void customRangeDial::wheelEvent(QWheelEvent *event)
 {
@@ -153,7 +152,7 @@ void customRangeDial::wheelEvent(QWheelEvent *event)
 		setOffset(_newValue);
 		emitValue(_newValue);
     };
-};
+}
 
 void customRangeDial::keyPressEvent(QKeyEvent *event)
 {
@@ -190,7 +189,7 @@ void customRangeDial::keyPressEvent(QKeyEvent *event)
 		setOffset(_newValue);
 		emitValue(_newValue);
 	};
-};
+}
 
 void customRangeDial::emitValue(double value)
 {
@@ -199,12 +198,12 @@ void customRangeDial::emitValue(double value)
     };
 	emit valueChanged((int)value, this->hex1, this->hex2, this->hex3);
 	knobSignal(hex1, hex2, hex3);
-};
+}
 
 void customRangeDial::setValue(int value)
 {
 	setOffset((double)value);
-};
+}
 
 void customRangeDial::knobSignal(QString hex1, QString hex2, QString hex3)
 {
@@ -231,4 +230,4 @@ void customRangeDial::knobSignal(QString hex1, QString hex2, QString hex3)
     if(valueHex.length() < 2) valueHex.prepend("0");  
     this->min = QString(valueHex).toInt(&ok, 16) + 1;
   };
-};
+}

@@ -55,15 +55,21 @@ class RtMidi
  public:
 #ifdef Q_OS_WIN
         #define __WINDOWS_MM__
-#elif Q_OS_MAC
-        #define __MACOSX_CORE__
-#elif Q_OS_LINUX
-        #define __LINUX_ALSA__
-#elif Q_OS_UNIX
-        #define __UNIX_JACK__
-#else
-        #define __RTMIDI_DUMMY__
+        #define __WINDOWS_KS__
 #endif
+#ifdef Q_OS_MAC
+        #define __MACOSX_CORE__
+        #define __UNIX_JACK__
+#endif
+#ifdef Q_OS_LINUX
+        #define __LINUX_ALSA__
+        #define __UNIX_JACK__
+#endif
+#ifdef Q_OS_UNIX
+        #define __UNIX_JACK__
+        #define __LINUX_ALSA__
+#endif
+        #define __RTMIDI_DUMMY__
 
   //! MIDI API specifier arguments.
   enum Api {
@@ -104,8 +110,8 @@ class RtMidi
 
  protected:
 
-  RtMidi() {};
-  virtual ~RtMidi() {};
+  RtMidi() {}
+  virtual ~RtMidi() {}
 };
 
 /**********************************************************************/

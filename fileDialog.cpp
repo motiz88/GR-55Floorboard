@@ -38,12 +38,11 @@ fileDialog::fileDialog(QString fileName, QList<QString> patchList, QByteArray fi
     patchCombo->setWhatsThis(tr("To auditon a multi-patch *.g5l file, hover the mouse cursor over a patch and the patch data will be loaded into the GR-55 temporary buffer"
                                 "<br>a click on the patch will load it into the editor."));
 
-
     QObject::connect(patchCombo, SIGNAL(currentIndexChanged(int)),
                      this, SLOT(valueChanged(int)));
 
-    QObject::connect(patchCombo, SIGNAL(highlighted(int)),
-                     this, SLOT(highlighted(int)));
+    //QObject::connect(patchCombo, SIGNAL(highlighted(int)),
+                     //this, SLOT(highlighted(int)));
 
     QPushButton *cancelButton = new QPushButton(tr("Cancel"));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
@@ -66,14 +65,14 @@ fileDialog::fileDialog(QString fileName, QList<QString> patchList, QByteArray fi
     setLayout(mainLayout);
 
     setWindowTitle(tr("Bulk File Patch Extraction"));
-};
+}
 
 void fileDialog::valueChanged(int value)
-{
+{  
     SysxIO *sysxIO = SysxIO::Instance();
     sysxIO->patchListValue = value;
     this->close();
-};
+}
 
 void fileDialog::cancel()
 {
@@ -81,12 +80,11 @@ void fileDialog::cancel()
     sysxIO->patchListValue = 0;
     sysxIO->writeToBuffer();
     this->close();
-};
+}
 
 void fileDialog::highlighted(int value)
 {
-
-
+    this->value = value;
     if (file_format == "g5l")
     {
         QByteArray marker = fileData.mid(162, 10);      //copy marker key to find "04D3" which marks the start of each patch block
@@ -140,9 +138,12 @@ void fileDialog::highlighted(int value)
             sysxIO->writeToBuffer();
         };
     };
-};
+}
 
 
-
+void fileDialog::mouseRightClickEvent(QMouseEvent *event)
+{
+    highlighted(value);
+}
 
 

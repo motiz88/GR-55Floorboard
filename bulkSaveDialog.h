@@ -76,6 +76,7 @@ private:
     int range;
     int patch;
     int bank;
+    int bad_hits;
     QString fileName;
     void writeG5L();
     void writeSYX();

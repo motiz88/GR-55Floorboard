@@ -275,6 +275,8 @@ editWindow::editWindow(QWidget *parent)
     QObject::connect(this, SIGNAL( dialogUpdateSignal() ), this, SLOT( pageUpdateSignal() ));
 
     QObject::connect(this->pageComboBox, SIGNAL(activated(int)), this, SLOT(valueChanged(int)));
+
+    this->pageIndex = 0;
 }
 
 void editWindow::paintEvent(QPaintEvent *)
@@ -324,9 +326,9 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
     QObject::connect(editPages.last(), SIGNAL( updateSignal() ),
                      this, SIGNAL( updateSignal() ));
-    bool assign_check = false;
+   // bool assign_check = false;
 
-    if(area == "Structure" ) {assign_check = true; };
+    //if(area == "Structure" ) { assign_check = true; };
 
     //If a system, midi, or EZ-Tone page then hide some buttons.
     if (this->area != "Structure" || this->temp_hex1.isEmpty() || this->temp_hex1.contains("void"))

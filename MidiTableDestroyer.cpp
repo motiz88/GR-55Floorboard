@@ -26,14 +26,14 @@
 MidiTableDestroyer::MidiTableDestroyer(MidiTable* s) 
 {
 	_midiMap = s;
-};
+}
 
 MidiTableDestroyer::~MidiTableDestroyer ()
 {
 	delete _midiMap;
-};
+}
 
 void MidiTableDestroyer::SetMidiTable(MidiTable* s)
 {
 	_midiMap = s;
-};
+}

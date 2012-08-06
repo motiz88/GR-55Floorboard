@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by x (x) -->
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\GrFloorBoard\grfloorboard\preferences.xsd">
 	<General>
-		<Application version="20120724"/>
+		<Application version="20120806"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="GR-55-Help-HTML\GR-55_HTML_Help.html"/>
@@ -19,17 +20,18 @@
 		<BulkStart patch="1"/>
 		<DBug bool="false"/>
 		<Delay set="30"/>
-		<MidiIn device="GR-55"/>
-		<MidiOut device="GR-55"/>
-		<Time set="80"/>
+		<MidiIn device=""/>
+		<MidiOut device=""/>
+		<TxCh set="1"/>
 	</Midi>
 	<Scheme>
-		<Style select="0"/>
+		<Style select="1"/>
 		<Colour select="0"/>
 	</Scheme>
 	<Window>
 		<Collapsed bool="true" defaultwidth="1210" width="1210"/>
 		<Position x="" y=""/>
+		<Ratio size="10"/>
 		<Restore sidepanel="true" window="false"/>
 		<Single bool="true"/>
 		<Size height="" minheight="548" minwidth="1014" width=""/>

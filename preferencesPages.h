@@ -48,7 +48,7 @@ public:
     QComboBox* midiInCombo;
     QComboBox* midiOutCombo;
     QCheckBox* dBugCheckBox;
-    QSpinBox* midiTimeSpinBox;
+    QSpinBox* midiTxChSpinBox;
     QSpinBox* midiDelaySpinBox;
 };
 

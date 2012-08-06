@@ -26,15 +26,15 @@
 PreferencesDestroyer::PreferencesDestroyer(Preferences* s) 
 {
 	_preferences = s;
-};
+}
 
 PreferencesDestroyer::~PreferencesDestroyer ()
 {
     //_preferences->savePreferences();
     delete _preferences;
-};
+}
 
 void PreferencesDestroyer::SetPreferences(Preferences* s)
 {
 	_preferences = s;
-};
+}

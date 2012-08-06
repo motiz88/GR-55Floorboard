@@ -79,7 +79,7 @@ preferencesDialog::preferencesDialog()
     setLayout(mainLayout);
 
     setWindowTitle(tr("GR-55 FloorBoard - Preferences"));
-};
+}
 
 void preferencesDialog::createIcons()
 {
@@ -125,4 +125,4 @@ void preferencesDialog::changePage(QListWidgetItem *current, QListWidgetItem *pr
         current = previous;
     };
     pagesWidget->setCurrentIndex(contentsWidget->row(current));
-};
+}

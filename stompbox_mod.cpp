@@ -47,10 +47,10 @@ void stompbox_mod::setEditPages()
 {
     editDetails()->page()->newGroupBox("MOD");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "15", "middle", Qt::AlignCenter);
-    editDetails()->page()->newStackControl(0);  
+    editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(1, 0, 1, 1, "07", "00", "16", "large"); //type
     editDetails()->page()->addStackControl();
-     editDetails()->page()->addKnob(2, 0, 1, 1, "07", "00", "17");   //pan
+    editDetails()->page()->addKnob(2, 0, 1, 1, "07", "00", "17");   //pan
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
     editDetails()->page()->insertStackField(0, 0, 1, 3, 1);
 
@@ -67,7 +67,7 @@ void stompbox_mod::setEditPages()
     // WAH
     editDetails()->page()->newStackField(0);
     editDetails()->page()->newGroupBox("Wah");
-     editDetails()->page()->newStackControl(1);
+    editDetails()->page()->newStackControl(1);
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "1C");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(1, 0, 1, 1, 1);
@@ -210,7 +210,7 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->newGroupBox("Equalizer");
     editDetails()->page()->addParaEQ(0, 1, 2, 4, "07", "00", "4F", "MOD");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
-   /* editDetails()->page()->newGroupBox("Low");
+    /* editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "07", "00", "4F");
     editDetails()->page()->addKnob(0, 1, 1, 1, "07", "00", "50");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
@@ -238,5 +238,5 @@ void stompbox_mod::setEditPages()
     editDetails()->page()->addGroupBox(0, 2, 1, 1);*/
     editDetails()->page()->addStackField();
 
-editDetails()->addPage();
+    editDetails()->addPage();
 }

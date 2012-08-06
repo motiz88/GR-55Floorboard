@@ -74,7 +74,7 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this, SLOT(synth2_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(synth2_statusSignal(bool)), this->parent(), SIGNAL(synth2_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
-};
+}
 
 void soundSource::paintEvent(QPaintEvent *)
 {
@@ -88,18 +88,18 @@ void soundSource::paintEvent(QPaintEvent *)
 
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
-};
+}
 
 editWindow* soundSource::editDetails()
 {
     return this->editDialog;
-};
+}
 
 void soundSource::mousePressEvent(QMouseEvent *event)
 {
     this->editDialog->setWindow(this->fxName);
     emit setEditDialog(this->editDialog);
-};
+}
 
 
 void soundSource::mouseDoubleClickEvent(QMouseEvent *event)
@@ -107,12 +107,12 @@ void soundSource::mouseDoubleClickEvent(QMouseEvent *event)
 
     this->editDialog->setWindow(this->fxName);
     emit setEditDialog(this->editDialog);
-};
+}
 
 void soundSource::mouseMoveEvent(QMouseEvent *event)
 {
 
-};
+}
 
 void soundSource::normal_PU_ButtonSignal(bool value)
 {
@@ -122,7 +122,7 @@ void soundSource::normal_PU_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void soundSource::modeling_ButtonSignal(bool value)
 {
@@ -132,7 +132,7 @@ void soundSource::modeling_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void soundSource::synth1_ButtonSignal(bool value)
 {
@@ -142,7 +142,7 @@ void soundSource::synth1_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void soundSource::synth2_ButtonSignal(bool value)
 {
@@ -152,14 +152,14 @@ void soundSource::synth2_ButtonSignal(bool value)
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
     };
-};
+}
 
 void soundSource::setPos(QPoint newPos)
 {
     this->move(newPos);
     this->stompPos = newPos;
     updateStompPath();
-};
+}
 
 void soundSource::updatePos(signed int offsetDif)
 {
@@ -167,28 +167,28 @@ void soundSource::updatePos(signed int offsetDif)
     QPoint newPos = stompPos + QPoint(offsetDif, 0);
     this->move(newPos);
     this->stompPos = newPos;
-};
+}
 
 void soundSource::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-};
+}
 
 void soundSource::setSize(QSize newSize)
 {
     this->stompSize = newSize;
     this->setFixedSize(stompSize);
-};
+}
 
 void soundSource::setId(unsigned int id)
 {
     this->id = id;
-};
+}
 
 unsigned int soundSource::getId()
 {
     return this->id;
-};
+}
 
 
 void soundSource::setLSB(QString hex1, QString hex2)
@@ -196,7 +196,7 @@ void soundSource::setLSB(QString hex1, QString hex2)
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->editDialog->setLSB(hex1, hex2);
-};
+}
 
 void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect geometry)
 {
@@ -244,13 +244,12 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
         QObject::connect(this->stompComboBox, SIGNAL(highlighted(int)),
                          switch3way, SLOT(changeValue(int)));
     };
-
-};
+}
 
 void soundSource::setComboBoxCurrentIndex(int index)
 {
     this->stompComboBox->setCurrentIndex(index);
-};
+}
 
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
@@ -264,7 +263,7 @@ void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
     else if(choice == 2) {this->stompDisplay->setAllColor(QColor(0,255,204)); }   //aqua
     else if(choice == 1) {this->stompDisplay->setAllColor(QColor(185,224,243)); } //black
     else {this->stompDisplay->setAllColor(QColor(185,224,243)); }; //blue
-};
+}
 
 void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)
 {
@@ -273,7 +272,7 @@ void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)
     knob2 = new customDial(0, 0, range, 1, 10, QPoint(213, 13), this, hex1, hex2, hex3);
     this->knob2->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
                              + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
-};
+}
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3)
 {
@@ -283,7 +282,7 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3)
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
     this->button->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
-};
+}
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, QString imagePath)
 {
@@ -293,14 +292,14 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
     this->button->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
-};
+}
 
 void soundSource::setSwitch(QString hex1, QString hex2, QString hex3)
 {
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
     switchbutton->move(QPoint(17, 16));
     this->switchbutton->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
-};
+}
 
 
 void soundSource::updateComboBox(QString hex1, QString hex2, QString hex3)
@@ -319,7 +318,7 @@ void soundSource::updateComboBox(QString hex1, QString hex2, QString hex3)
 
     QObject::connect(this->stompComboBox, SIGNAL(currentIndexChanged(int)),
                      this, SLOT(valueChanged(int)));
-};
+}
 
 void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
 {
@@ -342,14 +341,14 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
     this->stompDisplay->setMainText(valueStr, Qt::AlignTop);
-};
+}
 
 void soundSource::updateKnob2(QString hex1, QString hex2, QString hex3)
 {
     SysxIO *sysxIO = SysxIO::Instance();
     QString area;
     knob2->setValue(sysxIO->getSourceValue(area, hex1, hex2, hex3));
-};
+}
 
 void soundSource::updateButton(QString hex1, QString hex2, QString hex3)
 {
@@ -358,7 +357,7 @@ void soundSource::updateButton(QString hex1, QString hex2, QString hex3)
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     led->setValue((value==1)?true:false);
     button->setValue((value==1)?true:false);
-};
+}
 
 void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
 {
@@ -374,7 +373,7 @@ void soundSource::updateSwitch(QString hex1, QString hex2, QString hex3)
     if(this->id == 1) { emit modeling_statusSignal(set); };
     if(this->id == 2) { emit synth1_statusSignal(set); };
     if(this->id == 3) { emit synth2_statusSignal(set); };
-};
+}
 
 void soundSource::updateSwitch3way(QString hex1, QString hex2, QString hex3)
 {
@@ -382,7 +381,7 @@ void soundSource::updateSwitch3way(QString hex1, QString hex2, QString hex3)
     QString area;
     int value = sysxIO->getSourceValue(area, hex1, hex2, hex3);
     switch3way->setValue(value);
-};
+}
 
 void soundSource::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
@@ -416,7 +415,7 @@ void soundSource::valueChanged(int value, QString hex1, QString hex2, QString he
     };
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
-};
+}
 
 void soundSource::valueChanged(bool value, QString hex1, QString hex2, QString hex3)
 {
@@ -431,7 +430,7 @@ void soundSource::valueChanged(bool value, QString hex1, QString hex2, QString h
     sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueHex);
 
     emitValueChanged(hex1, hex2, hex3, valueHex);
-};
+}
 
 void soundSource::valueChanged(int index)
 {
@@ -458,8 +457,7 @@ void soundSource::valueChanged(int index)
 
     this->stompComboBox->setCurrentIndex(index);
     this->stompComboBox->setEditText(desc);
-
-};
+}
 
 void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QString valueHex)
 {
@@ -477,12 +475,12 @@ void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QSt
         };
     };
     emit valueChanged(this->fxName, valueName, valueStr);
-};
+}
 
 void soundSource::setDisplayToFxName()
 {
     emit valueChanged(this->fxName, "", "");
-};
+}
 
 void soundSource::updateStompPath()
 {
@@ -491,9 +489,9 @@ void soundSource::updateStompPath()
     if (this->id == 2) {this->fxName = tr("PCM Synth 1");};
     if (this->id == 3) {this->fxName = tr("PCM Synth 2");};
     if (this->id == 25) {this->fxName = tr("Bass Mode Modeling");};
-};
+}
 
 void soundSource::getStompOrder()
 {
 
-};
+}

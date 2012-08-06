@@ -36,7 +36,7 @@ floorPanelBar::floorPanelBar(QWidget *parent, QString imagePathPanelBar, QSize p
 
 	this->setFixedSize(panelBarSize);
 	this->setCursor(Qt::SplitHCursor);
-};
+}
 
 void floorPanelBar::paintEvent(QPaintEvent *)
 {
@@ -45,19 +45,19 @@ void floorPanelBar::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void floorPanelBar::setPos(QPoint newPos)
 {
 	this->move(newPos);
-};
+}
 
 void floorPanelBar::mousePressEvent(QMouseEvent *event) 
 { 
 	if (event->button() == Qt::LeftButton) this->dragStartPosition = event->pos(); 
 	QPoint mousePoint = event->pos();
 	emit showDragBar( QPoint(this->x() + mousePoint.x(), this->y()) );
-};
+}
 
 void floorPanelBar::mouseDoubleClickEvent(QMouseEvent *event) 
 { 
@@ -65,7 +65,7 @@ void floorPanelBar::mouseDoubleClickEvent(QMouseEvent *event)
 	{
 		emit collapseSignal();
 	}; 
-};
+}
 
 void floorPanelBar::mouseMoveEvent(QMouseEvent *event)
 {
@@ -75,7 +75,7 @@ void floorPanelBar::mouseMoveEvent(QMouseEvent *event)
 		QPoint mousePoint = event->pos();
 		emit showDragBar( QPoint(this->x() + mousePoint.x(), this->y()) );
 	};
-};
+}
 
 void floorPanelBar::mouseReleaseEvent(QMouseEvent *event) 
 { 
@@ -86,7 +86,7 @@ void floorPanelBar::mouseReleaseEvent(QMouseEvent *event)
 		setValue( mousePoint.x() - dragStartPosition.x() );
 	}; 
 	emit hideDragBar();
-};
+}
 
 void floorPanelBar::setValue(int value)
 {
@@ -94,4 +94,4 @@ void floorPanelBar::setValue(int value)
         this->r_value = value;
 		emit resizeSignal((int)(value));
     };
-};
+}

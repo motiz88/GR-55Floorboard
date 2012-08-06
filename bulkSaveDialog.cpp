@@ -157,11 +157,11 @@ bulkSaveDialog::bulkSaveDialog()
     QObject::connect(this, SIGNAL(setStatusProgress(int)), sysxIO, SIGNAL(setStatusProgress(int)));
     QObject::connect(this, SIGNAL(setStatusMessage(QString)), sysxIO, SIGNAL(setStatusMessage(QString)));
 
-};
+}
 
 bulkSaveDialog::~bulkSaveDialog()
 {
-};
+}
 
 
 void bulkSaveDialog::backup()
@@ -177,7 +177,7 @@ void bulkSaveDialog::backup()
     this->patch = 1;
     range = 100/(bankFinish-bankStart+1);
     requestPatch(bank/3, patch);
-};
+}
 
 void bulkSaveDialog::requestPatch(int bank, int patch) 
 {	
@@ -189,7 +189,7 @@ void bulkSaveDialog::requestPatch(int bank, int patch)
         QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(updatePatch(QString)));
         sysxIO->requestPatch(bank, patch);
     };
-};
+}
 
 void bulkSaveDialog::updatePatch(QString replyMsg)
 {
@@ -198,7 +198,9 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
     sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
 
     replyMsg = replyMsg.remove(" ").toUpper();       // TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks
-    if (replyMsg.size()/2 == patchReplySize){
+    if (replyMsg.size()/2 == patchReplySize)
+    {
+        bad_hits=0;
         QString header = "F0411000005312";
         QString footer ="00F7";
         QString addressMsb = replyMsg.mid(14,4);    //  copy patch address MSB.
@@ -235,24 +237,6 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
         replyMsg.append(part1).append(part2).append(part3).append(part4).append(part5).append(part6).append(part7)
                 .append(part8).append(part9).append(part10).append(part11).append(part12).append(part13).append(part14);
 
-        /*QByteArray data;
-  QFile file(":default.syx");   // Read the default GR-55 sysx file so we don't start empty handed.
-    if (file.open(QIODevice::ReadOnly))
-      {	data = file.readAll(); };
-      QByteArray temp;
-    temp = data.mid(1763, 282);           // copy patch description from default.syx  address 00 0D 00 00
-
-    QString sysxBuffer;
-    for(int i=0;i<temp.size();i++)
-    {
-        unsigned char byte = (char)temp[i];
-        unsigned int n = (int)byte;
-        QString hex = QString::number(n, 16).toUpper();     // convert QByteArray to QString
-        if (hex.length() < 2) hex.prepend("0");
-        sysxBuffer.append(hex);
-  };
-    replyMsg.append(sysxBuffer);   */
-
         QString reBuild = "";       // Add correct checksum to patch strings
         QString sysxEOF = "";
         QString hex = "";
@@ -282,6 +266,27 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
         };
         replyMsg = reBuild.simplified().toUpper();
         bulk.append(replyMsg); 	                                           // add patch to the bulk string.
+    }
+    else
+    {
+            QMessageBox *msgBox = new QMessageBox();
+            msgBox->setWindowTitle(deviceType + tr(" FloorBoard"));
+            msgBox->setIcon(QMessageBox::Critical);
+            msgBox->setTextFormat(Qt::RichText);
+            QString msgText;
+            msgText.append("<font size='+1'><b>");
+            msgText.append(tr("Received patch data is corrupted or incomplete"));
+            msgText.append("<b></font><br>");
+            msgText.append(tr("Retry events have failed to retrieve the correct data<br>"));
+            msgText.append(tr ("Do you wish to save the patch data anyway? "));
+            msgBox->setInformativeText(tr("Are you sure you want to continue?"));
+            msgBox->setText(msgText);
+            msgBox->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+
+            if(msgBox->exec() == QMessageBox::No)
+            {
+                DialogClose();
+            };
     };
     ++patch;
     if(patch>3) {patch=1; bank=bank+3;};	                      // increment patch.
@@ -334,7 +339,7 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
         if (this->syxButton->isChecked() ) { writeSYX(); };
         if (this->midButton->isChecked() ) { writeSMF(); };
     };
-};
+}
 
 void bulkSaveDialog::bulkStatusProgress(int value)
 {
@@ -342,7 +347,7 @@ void bulkSaveDialog::bulkStatusProgress(int value)
     if (value >100) {value = 100;};
     if (value<0) {value = 0; };
     this->progressBar->setValue(value);
-};
+}
 
 void bulkSaveDialog::writeG5L()         // ************************************ G5L File Format***************************
 {	
@@ -437,7 +442,7 @@ void bulkSaveDialog::writeG5L()         // ************************************ 
         };
     };
     close();      // close the dialog page after the file has been saved or cancelled.
-};
+}
 
 void bulkSaveDialog::writeSYX()        //********************************* SYX File Format *****************************
 {	
@@ -473,7 +478,7 @@ void bulkSaveDialog::writeSYX()        //********************************* SYX F
         };
     };
     close();
-};
+}
 
 void bulkSaveDialog::writeSMF()    // **************************** SMF FILE FORMAT ***************************
 {	
@@ -613,7 +618,7 @@ void bulkSaveDialog::writeSMF()    // **************************** SMF FILE FORM
         };
         close();
     };
-};
+}
 
 void bulkSaveDialog::DialogClose()
 {
@@ -622,4 +627,4 @@ void bulkSaveDialog::DialogClose()
     QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(updatePatch(QString)));
     this->deleteLater();
     this->close();
-};
+}

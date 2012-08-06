@@ -126,9 +126,7 @@ HEADERS += ./editPage.h \
     ./preferencesDialog.h \
     ./preferencesPages.h \
     ./xmlwriter/xmlwriter.h \
-    ./xmlwriter/xmlwriter_p.h \
-    ./windows/ks.h \
-    ./windows/ksmedia.h
+    ./xmlwriter/xmlwriter_p.h
 
 #Source files
 SOURCES += ./editPage.cpp \

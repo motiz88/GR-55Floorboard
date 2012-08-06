@@ -37,7 +37,7 @@ customLed::customLed(bool active, QPoint ledPos, QWidget *parent,
 
 	setOffset(0);
 	setGeometry(ledPos.x(), ledPos.y(), ledSize.width(), ledSize.height());
-};
+}
 
 void customLed::paintEvent(QPaintEvent *)
 {
@@ -49,13 +49,13 @@ void customLed::paintEvent(QPaintEvent *)
 	QPainter painter(this);
 	//painter.setRenderHint(QPainter::Antialiasing, true);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void customLed::setOffset(signed int imageNr)
 {
 	this->yOffset = imageNr*ledSize.height();
 	this->update();
-};
+}
 
 void customLed::setValue(bool value)
 {
@@ -68,9 +68,9 @@ void customLed::setValue(bool value)
 	{
 		setOffset(0);
 	};
-};
+}
 
 void customLed::changeValue(bool value)
 {
 	setValue(value);
-};
+}

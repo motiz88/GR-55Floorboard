@@ -62,7 +62,7 @@
 				<xs:element ref="DATA" maxOccurs="unbounded"/>
 				<xs:element ref="PARAM" maxOccurs="unbounded"/>
 			</xs:choice>
-			<xs:attribute name="value" use="required">
+			<xs:attribute name="value">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:enumeration value="00"/>
@@ -1114,7 +1114,6 @@
 						<xs:enumeration value="00/E6/710/940"/>
 						<xs:enumeration value="00/FF/00/255"/>
 						<xs:enumeration value="00/FF/00/256"/>
-						<xs:enumeration value="00/FF/00/3400"/>
 						<xs:enumeration value="00/FF/1024/1279"/>
 						<xs:enumeration value="00/FF/1280/1535"/>
 						<xs:enumeration value="00/FF/1536/1791"/>
@@ -2782,6 +2781,9 @@
 						<xs:enumeration value="EXP1 PDL On High"/>
 						<xs:enumeration value="EXP1 PDL On Low"/>
 						<xs:enumeration value="EXP1 PDL On Mid"/>
+						<xs:enumeration value="EZ Cabinet"/>
+						<xs:enumeration value="EZ Patch"/>
+						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="Electric Bass"/>
 						<xs:enumeration value="Electric Guitar"/>
@@ -4025,7 +4027,6 @@
 						<xs:enumeration value="Panner"/>
 						<xs:enumeration value="Patch"/>
 						<xs:enumeration value="Patch Change"/>
-						<xs:enumeration value="Patch Create"/>
 						<xs:enumeration value="Patch Volume"/>
 						<xs:enumeration value="Patch number dec"/>
 						<xs:enumeration value="Patch number inc"/>
@@ -4263,7 +4264,6 @@
 						<xs:enumeration value="Sound style dec"/>
 						<xs:enumeration value="Sound style inc"/>
 						<xs:enumeration value="Space-D"/>
-						<xs:enumeration value="Speaker Cab"/>
 						<xs:enumeration value="Square"/>
 						<xs:enumeration value="Stack Amp"/>
 						<xs:enumeration value="Stack Return"/>
@@ -4640,7 +4640,6 @@
 						<xs:enumeration value="bypass"/>
 						<xs:enumeration value="c"/>
 						<xs:enumeration value="center"/>
-						<xs:enumeration value="custom 1"/>
 						<xs:enumeration value="d"/>
 						<xs:enumeration value="doted eighth note"/>
 						<xs:enumeration value="doted half note"/>
@@ -5609,6 +5608,9 @@
 						<xs:enumeration value="EXP: PITCH BEND"/>
 						<xs:enumeration value="EXP: REVERB LEVEL"/>
 						<xs:enumeration value="EXP: TONE VOLUME"/>
+						<xs:enumeration value="EZ Cabinet"/>
+						<xs:enumeration value="EZ Patch"/>
+						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="EasternFluteGT"/>
 						<xs:enumeration value="Edge Brass"/>
@@ -6121,7 +6123,6 @@
 						<xs:enumeration value="Panner"/>
 						<xs:enumeration value="Patch"/>
 						<xs:enumeration value="Patch Change"/>
-						<xs:enumeration value="Patch Create"/>
 						<xs:enumeration value="Patch Volume"/>
 						<xs:enumeration value="Patch number dec"/>
 						<xs:enumeration value="Patch number inc"/>
@@ -6394,7 +6395,6 @@
 						<xs:enumeration value="Space Altar"/>
 						<xs:enumeration value="Space-D"/>
 						<xs:enumeration value="SparkleBellGTR"/>
-						<xs:enumeration value="Speaker Cab"/>
 						<xs:enumeration value="SqrPipe For You"/>
 						<xs:enumeration value="Square"/>
 						<xs:enumeration value="Stack Amp"/>
@@ -6794,7 +6794,6 @@
 						<xs:enumeration value="Xylophone Plus"/>
 						<xs:enumeration value="bypass"/>
 						<xs:enumeration value="center"/>
-						<xs:enumeration value="custom 1"/>
 						<xs:enumeration value="dB"/>
 						<xs:enumeration value="doted eighth note"/>
 						<xs:enumeration value="doted half note"/>
@@ -8159,6 +8158,7 @@
 						<xs:enumeration value="Attack Level"/>
 						<xs:enumeration value="B Fine"/>
 						<xs:enumeration value="BPM"/>
+						<xs:enumeration value="BPM Rate"/>
 						<xs:enumeration value="Balance"/>
 						<xs:enumeration value="Basic Tone"/>
 						<xs:enumeration value="Bass"/>
@@ -8248,7 +8248,6 @@
 						<xs:enumeration value="Internal Trigger"/>
 						<xs:enumeration value="Key follow"/>
 						<xs:enumeration value="LEVEL"/>
-						<xs:enumeration value="LSB"/>
 						<xs:enumeration value="Left Level"/>
 						<xs:enumeration value="Legato"/>
 						<xs:enumeration value="Level"/>
@@ -8270,7 +8269,6 @@
 						<xs:enumeration value="MOD Depth"/>
 						<xs:enumeration value="MOD Tune"/>
 						<xs:enumeration value="MPT"/>
-						<xs:enumeration value="MSB"/>
 						<xs:enumeration value="Manual"/>
 						<xs:enumeration value="Max"/>
 						<xs:enumeration value="Mic Dis."/>
@@ -8375,8 +8373,9 @@
 						<xs:enumeration value="Speed"/>
 						<xs:enumeration value="Spread"/>
 						<xs:enumeration value="Status"/>
-						<xs:enumeration value="Step Rate"/>
+						<xs:enumeration value="Step BPM Rate"/>
 						<xs:enumeration value="Step Rate Type"/>
+						<xs:enumeration value="Step Time Rate"/>
 						<xs:enumeration value="String 2"/>
 						<xs:enumeration value="String 3"/>
 						<xs:enumeration value="String 4"/>
@@ -8402,6 +8401,7 @@
 						<xs:enumeration value="Time"/>
 						<xs:enumeration value="Time Center"/>
 						<xs:enumeration value="Time Left"/>
+						<xs:enumeration value="Time Rate"/>
 						<xs:enumeration value="Time Right"/>
 						<xs:enumeration value="Tone"/>
 						<xs:enumeration value="Tone Level"/>
@@ -8502,6 +8502,7 @@
 						<xs:enumeration value="Name7"/>
 						<xs:enumeration value="Name8"/>
 						<xs:enumeration value="Name9"/>
+						<xs:enumeration value="PATCH LEVEL"/>
 						<xs:enumeration value="PCM"/>
 						<xs:enumeration value="Portamento"/>
 						<xs:enumeration value="PreAmp/Spkr"/>

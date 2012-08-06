@@ -368,16 +368,16 @@ void customParaEQGraph::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 
 
 // Draw rectangular point.
-QRect customParaEQGraph::nodeRect ( int iNode ) const
+/*QRect customParaEQGraph::nodeRect ( int iNode ) const
 {
-     //const QPoint& pos = m_poly.at(iNode);
-     //return QRect(pos.x() - 4, pos.y() - 4, 8, 8);
-}
+     const QPoint& pos = m_poly.at(iNode);
+     return QRect(pos.x() - 4, pos.y() - 4, 8, 8);
+}*/
 
 
 int customParaEQGraph::nodeIndex ( const QPoint& pos ) const
 {
-       if (nodeRect(8).contains(pos))
+   /*    if (nodeRect(8).contains(pos))
             return 8; // HighCut+HighGain
 
         if (nodeRect(7).contains(pos))
@@ -400,7 +400,7 @@ int customParaEQGraph::nodeIndex ( const QPoint& pos ) const
 
         if (nodeRect(1).contains(pos))
                 return 1; //LowCut+LowGain
-
+*/
         return -1;
 }
 

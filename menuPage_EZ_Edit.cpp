@@ -60,4 +60,12 @@ void menuPage_ez_edit::setEditPages()
     editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "11", "Ambience");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "03", "Tables");
+
+    editDetails()->page()->newGroupBox("Style");
+    editDetails()->page()->addEZ_Patch(0, 0, 1, 1, "00", "00", "1B", "middle", Qt::AlignCenter);
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Preamp");
+    editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "02", "Preamp");
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->addPage("00", "00", "1A", "04", "Tables");
 }

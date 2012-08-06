@@ -42,7 +42,7 @@ customControlLabel::customControlLabel(QWidget *parent)
 	mainLayout->setMargin(0);
 	this->setLayout(mainLayout);
 	this->setFixedHeight(10);
-};
+}
 
 void customControlLabel::paintEvent(QPaintEvent *)
 {
@@ -65,24 +65,24 @@ void customControlLabel::paintEvent(QPaintEvent *)
 		QPainter painter(this);
 		painter.drawPixmap(target, image, source);
 	}*/;
-};
+}
 
 void customControlLabel::setOffset(int imageNr)
 {
 	this->offset = imageNr * this->height();
 	this->update();
-};
+}
 
 void customControlLabel::setUpperCase(bool active)
 {
 	this->uppercase = active;
 	this->setText(this->label->text());
-};
+}
 
 void customControlLabel::setAlignment(Qt::Alignment flag)
 {
 	this->label->setAlignment(flag);
-};
+}
 
 void customControlLabel::setText(QString text)
 {
@@ -96,24 +96,24 @@ void customControlLabel::setText(QString text)
 	};
 
 	setSize();
-};
+}
 
 void customControlLabel::setSize()
 {
 	int pixelWidth = QFontMetrics(this->label->font()).width(this->label->text());
 	if(pixelWidth<1) {pixelWidth = 1; };
 	this->labelWidth = pixelWidth;
-};
+}
 
 int customControlLabel::getLabelWidth()
 {
 	return this->labelWidth;
-};
+}
 
 void customControlLabel::setButton(bool button)
 {
 	this->button = button;
-};
+}
 
 void customControlLabel::setImage(QString imagePath)
 {
@@ -130,7 +130,7 @@ void customControlLabel::setImage(QString imagePath)
 		this->setFixedSize(this->image.width(), this->image.height());
 		this->label->setPixmap(this->image);
 	};
-};
+}
 
 void customControlLabel::mousePressEvent(QMouseEvent *event)
 {
@@ -140,7 +140,7 @@ void customControlLabel::mousePressEvent(QMouseEvent *event)
 		setOffset(3);
 	}
 	emit mousePressed();
-};
+}
 
 void customControlLabel::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -150,11 +150,11 @@ void customControlLabel::mouseReleaseEvent(QMouseEvent *event)
 		setOffset(2);
 	}
 	emit mouseReleased();
-};
+}
 
 void customControlLabel::enterEvent(QEvent *event)
 {
-	//event;
+    //event;
 	if(button)
 	{
 		if(isImage)
@@ -163,17 +163,14 @@ void customControlLabel::enterEvent(QEvent *event)
 		}
 		else
 		{
-			//this->labelPal.setColor(this->label->foregroundRole(), Qt::white);
-			//this->label->setPalette(labelPal);
-			//this->labelFont.setUnderline(true);
-			//this->label->setFont(this->labelFont);
+
 		};
 	};
-};
+}
 
 void customControlLabel::leaveEvent( QEvent *event)
 {
-	//event;
+    //event;
 	if(button)
 	{
 		if(isImage)
@@ -182,10 +179,7 @@ void customControlLabel::leaveEvent( QEvent *event)
 		}
 		else
 		{
-			//this->labelPal.setColor(this->label->foregroundRole(), Qt::white);
-			//this->label->setPalette(labelPal);
-			//this->labelFont.setUnderline(false);
-			//this->label->setFont(this->labelFont);
+
 		};
 	};
-};
+}

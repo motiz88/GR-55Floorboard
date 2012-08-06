@@ -876,6 +876,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         emit updateSignal();
         
     };
+    Preferences *preferences = Preferences::Instance(); // Load the preferences.
     if(!replyMsg.isEmpty() && replyMsg.size()/2 != fullPatchSize)
     {
         //emit notConnectedSignal();				// No message returned so connection must be lost.
@@ -894,7 +895,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgBox->exec();
         /* END WARNING */
     };
-    if(replyMsg.isEmpty())
+    if(replyMsg.isEmpty() && preferences->getPreferences("Midi", "DBug", "bool")!="true")
     {
         //emit notConnectedSignal();				// No message returned so connection must be lost.
         /* NO-REPLY WARNING */

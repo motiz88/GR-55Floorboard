@@ -29,7 +29,7 @@
 customKnobTarget::customKnobTarget(QWidget *parent, 
                                    QString hex1, QString hex2, QString hex3,
                                    QString hexMsb, QString hexLsb, QString background)
-                                       : QWidget(parent)
+    : QWidget(parent)
 {
     this->hex1 = hex1;
     this->hex2 = hex2;
@@ -89,19 +89,19 @@ customKnobTarget::customKnobTarget(QWidget *parent,
     QObject::connect(this->parent(), SIGNAL( updateHex(QString, QString, QString) ),
                      this, SIGNAL( updateHex(QString, QString, QString) ));
 
-};
+}
 
 void customKnobTarget::paintEvent(QPaintEvent *)
 {
     /*DRAWS RED BACKGROUND FOR DEBUGGING PURPOSE */
     /*QPixmap image(":images/dragbar.png");
 
-	QRectF target(0.0, 0.0, this->width(), this->height());
-	QRectF source(0.0, 0.0, this->width(), this->height());
+    QRectF target(0.0, 0.0, this->width(), this->height());
+    QRectF source(0.0, 0.0, this->width(), this->height());
 
-	QPainter painter(this);
-	painter.drawPixmap(target, image, source);*/
-};
+    QPainter painter(this);
+    painter.drawPixmap(target, image, source);*/
+}
 
 void customKnobTarget::knobSignal(QString hexMsb, QString hex2, QString hexLsb)
 {
@@ -110,12 +110,12 @@ void customKnobTarget::knobSignal(QString hexMsb, QString hex2, QString hexLsb)
         this->hexMsb = hexMsb;
         this->hexLsb = hexLsb;
     };
-};
+}
 
 void customKnobTarget::setValue(int value)
 {
     this->knob->setValue(value);     // on initialisation only
-};
+}
 
 void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
@@ -186,10 +186,10 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         QString hex5 = valueHex2;                                                       //convert valueStr to 7bit hex4, hex5
         Midi items = midiTable->getMidiMap("Tables", "00", "00", mode_hex, hex4, hex5);
         this->hexMsb = items.desc;
-	this->hexLsb = items.customdesc;  
+        this->hexLsb = items.customdesc;
 
         emit updateTarget(hexMsb, hex2, hexLsb);                                        // hexMsb & hexLsb are lookup address for label value
         emit updateTarget(hexMsb, hex2, hexLsb);
     };                                                            // updates on knob value change
-};
+}
 

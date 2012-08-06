@@ -144,7 +144,7 @@ bulkEditDialog::bulkEditDialog(int partStart, int partLength, QString partHex1, 
   QObject::connect(finishPatchCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(comboValueChanged(int)));	
   
   prepareData();
-};
+}
 
 void bulkEditDialog::comboValueChanged(int value)
 {
@@ -164,7 +164,7 @@ void bulkEditDialog::comboValueChanged(int value)
   preferences->setPreferences("Midi", "BulkStart", "patch", startIndex);
   QString finishIndex = QString::number(this->finish+1, 10).toUpper();
   preferences->setPreferences("Midi", "BulkFinish", "patch", finishIndex);
-}; 
+}
 
 void bulkEditDialog::sendData() 
 {	 
@@ -180,7 +180,7 @@ void bulkEditDialog::sendData()
   steps=0;
   dataSent=0;
   sendSequence("");         
-};	
+}
 	
 void bulkEditDialog::sendPatch(QString data)
 {
@@ -188,7 +188,7 @@ void bulkEditDialog::sendPatch(QString data)
         QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
   data.append("F04110000053120F000001016FF7");   // key code to write data to GR-55 memory
   sysxIO->sendSysx(data);
-};                                                           
+}
 
 void bulkEditDialog::sendSequence(QString value)
 { 
@@ -280,7 +280,7 @@ void bulkEditDialog::sendSequence(QString value)
   setStatusMessage(tr("Ready"));
   close();  
   };        
-};
+}
 
 
 void bulkEditDialog::prepareData()
@@ -309,7 +309,7 @@ void bulkEditDialog::prepareData()
   QString size = QString::number(sysxMsg.size()/2, 10);
   sysxIO->emitStatusdBugMessage(tr("in-consistant patch data detected ") + size + tr("bytes: re-save or re-load file to correct"));
   };
-};
+}
 
 void bulkEditDialog::bulkStatusProgress(int value)
 {
@@ -317,6 +317,6 @@ void bulkEditDialog::bulkStatusProgress(int value)
   if (value >100) {value = 100;};
   if (value<0) {value = 0; };
 	this->progressBar->setValue(value);
-};
+}
 
 
