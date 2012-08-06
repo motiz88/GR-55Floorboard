@@ -48,7 +48,7 @@ Preferences::Preferences()
 			loadPreferences(":preferences.xml.dist");
 		};
 	};
-};
+}
 
 Preferences* Preferences::_instance = 0;// initialize pointer
 PreferencesDestroyer Preferences::_destroyer;
@@ -62,7 +62,7 @@ Preferences* Preferences::Instance()
 		_destroyer.SetPreferences(_instance);
 	};
 	return _instance; // address of sole instance
-};
+}
 
 QString Preferences::getPreferences(QString prefGroupName, QString prefTypeName, QString prefItemName)
 {
@@ -78,7 +78,7 @@ QString Preferences::getPreferences(QString prefGroupName, QString prefTypeName,
 		setting = "";
 	};
 	return setting;
-};
+}
 
 void Preferences::setPreferences(QString prefGroupName, QString prefTypeName, QString prefItemName, QString prefValueData)
 {
@@ -97,7 +97,7 @@ void Preferences::setPreferences(QString prefGroupName, QString prefTypeName, QS
 		this->itemNames.append(prefItemName);		
 		this->prefValues.append(prefValueData);
 	};
-};
+}
 
 void Preferences::loadPreferences(QString fileName)
 {	
@@ -144,7 +144,7 @@ void Preferences::loadPreferences(QString fileName)
 		
 		node = node.nextSibling();
 	};	
-};
+}
 
 struct IndexList // Create a structure of metaSearchData and indexnumbers to sort and match them afterwords
 {
@@ -157,7 +157,7 @@ struct IndexList // Create a structure of metaSearchData and indexnumbers to sor
 bool IndexList::operator<(const IndexList& rhs) const
 {
 	return (metaSearchData < rhs.metaSearchData) ? true : (metaSearchData == rhs.metaSearchData) ? rhs.indexNumber > indexNumber : false;
-};
+}
 
 void Preferences::savePreferences()
 {
@@ -226,4 +226,4 @@ void Preferences::savePreferences()
 
 	xout.writeCloseTag("Preferences");
 	//file.close();
-};
+}

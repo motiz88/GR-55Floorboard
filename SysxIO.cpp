@@ -725,11 +725,15 @@ QString SysxIO::getPatchChangeMsg(int bank, int patch)
 
     if (bankMsb.length() < 2) bankMsb.prepend("0");
     if (programChange.length() < 2) programChange.prepend("0");
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    int midiTxCh = preferences->getPreferences("Midi", "TxCh", "set").toInt(&ok, 10);
+    QString TxCh = QString::number(midiTxCh-1, 16).toUpper();
 
     QString midiMsg ="";                     // universal bank change method
-    midiMsg.append("B000"+bankMsb);
-    midiMsg.append("B02000");
-    midiMsg.append("C0"+programChange);
+    midiMsg.append("B"+TxCh+"00"+bankMsb);
+    midiMsg.append("B"+TxCh+"2000");
+    midiMsg.append("C"+TxCh+programChange);
     return midiMsg;
 }
 
@@ -820,15 +824,13 @@ void SysxIO::sendSysx(QString sysxMsg)
     Preferences *preferences = Preferences::Instance();
     QString midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device");	// Get midi out device from preferences.
     QString midiInPort = preferences->getPreferences("Midi", "MidiIn", "device");	// Get midi in device from preferences.
-
-    midiIO *midi = new midiIO();
-    midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
     /*DeBugGING OUTPUT */
     if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
     {
-        dBug = (sysxMsg);
-        emit setStatusdBugMessage(dBug);
+        emit setStatusdBugMessage(sysxMsg);
     };
+    midiIO *midi = new midiIO();
+    midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
 }
 
 /***************************** receiveSysx() *******************************
@@ -837,6 +839,7 @@ void SysxIO::sendSysx(QString sysxMsg)
 void SysxIO::receiveSysx(QString sysxMsg)
 {
     emit sysxReply(sysxMsg);
+    //emit setStatusdBugMessage(sysxMsg);
 }
 
 /***************************** requestPatchName() ***************************

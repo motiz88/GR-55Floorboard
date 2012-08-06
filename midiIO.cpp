@@ -63,32 +63,64 @@ midiIO::~midiIO()
 void midiIO::queryMidiOutDevices()
 {
     RtMidiOut *midiout = 0;
-    std::string portName;
-    try { midiout = new RtMidiOut(); }   /* RtMidiOut constructor */
-    catch (RtError &error)
-    {
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal(tr("Midi Output Fail"), d);
-        goto cleanup;
-    };
+    int apiInt = 0;
+    outPortsCount = 0;
+    unsigned int current_port_count = 0;
+    QString ApiString;
+    std::string portName = "FloorBoard";
+    RtMidi::Api list;
+    RtMidi::Api list_A;
+    RtMidi::Api list_B;
+#ifdef Q_OS_WIN
+    list_A = midiout->WINDOWS_MM;
+    list_B = midiout->WINDOWS_KS;
+#endif
+#ifdef Q_OS_MAC
+    list_A = midiout->MACOSX_CORE;
+    list_B = midiout->UNIX_JACK;
+#endif
+#ifdef Q_OS_LINUX
+    list_A = midiout->LINUX_ALSA;
+    list_B = midiout->UNIX_JACK;
+#endif
 
-        outPortsCount = midiout->getPortCount();      /* Check outputs. */
-        for ( unsigned int i=0; i<outPortsCount; i++ )
+    for(int x=0; x<2; ++x)
+    {
+        if(x==0) { list = list_A; };
+        if(x==1) { list = list_B; };
+        try { midiout = new RtMidiOut(list , portName); }   /* RtMidiOut constructor */
+        catch (RtError &error)
         {
-            try{ portName = midiout->getPortName(i); }
+            emit errorSignal(tr("Midi Output Fail"), QString::fromStdString(error.getMessage()));
+            goto cleanup;
+        };
+        apiInt = midiout->getCurrentApi();
+        if(apiInt == 1) { ApiString = "Core_Midi: "; };
+        if(apiInt == 2) { ApiString = "ALSA: "; };
+        if(apiInt == 3) { ApiString = "Jack: "; };
+        if(apiInt == 4) { ApiString = "Win_MM: "; };
+        if(apiInt == 5) { ApiString = "WDM/KS: "; };
+        if(apiInt == 6) { ApiString = "Rt_Dummy: "; };
+        current_port_count = midiout->getPortCount();
+        if(x==0) {first_out_port_count = current_port_count; };
+        outPortsCount = outPortsCount + current_port_count;      /* Check outputs. */
+        for ( unsigned int i=0; i<current_port_count; i++ )
+        {
+            try{
+                this->midiOutDevices.append(ApiString + QString::fromStdString(midiout->getPortName(i)));
+            }
             catch (RtError &error)
             {
-                QString d =  QString::fromStdString(error.getMessage());
-                emit errorSignal(tr("Midi Output Fail"), d);
+                emit errorSignal(tr("Midi Output Fail"), QString::fromStdString(error.getMessage()));
                 error.printMessage();
                 goto cleanup;
             };
-            this->midiOutDevices.append(QString::fromStdString(portName));
         };
-        if (outPortsCount < 1) { this->midiOutDevices.push_back(tr("no midi device available")); };
+        if (current_port_count < 1) { this->midiOutDevices.push_back(tr("no midi device available")); };
 
 cleanup:
-    delete midiout;
+        delete midiout;
+    };
 }
 
 QList<QString> midiIO::getMidiOutDevices()
@@ -104,29 +136,61 @@ QList<QString> midiIO::getMidiOutDevices()
 void midiIO::queryMidiInDevices()
 {
     RtMidiIn *midiin = 0;
-    std::string portName;
-    try { midiin = new RtMidiIn(); }    /* RtMidiIn constructor */
-    catch (RtError &error)
+    std::string portName = "FloorBoard";
+    int apiInt = 0;
+    inPortsCount = 0;
+    unsigned int current_port_count = 0;
+    QString ApiString;
+    RtMidi::Api list;
+    RtMidi::Api list_A;
+    RtMidi::Api list_B;
+#ifdef Q_OS_WIN
+    list_A = midiin->WINDOWS_MM;
+    list_B = midiin->WINDOWS_KS;
+#endif
+#ifdef Q_OS_MAC
+    list_A = midiin->MACOSX_CORE;
+    list_B = midiin->UNIX_JACK;
+#endif
+#ifdef Q_OS_LINUX
+    list_A = midiin->LINUX_ALSA;
+    list_B = midiin->UNIX_JACK;
+#endif
+
+    for(int x=0; x<2; ++x)
     {
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal(tr("Midi Input Fail"), d);
-        goto cleanup;
-    };
-        inPortsCount = midiin->getPortCount();   /* Check inputs. */
-        for ( unsigned int i=0; i<inPortsCount; i++ ) {
-          try {  portName = midiin->getPortName(i); }
+        if(x==0) { list = list_A; };
+        if(x==1) { list = list_B; };
+        try { midiin = new RtMidiIn(list , portName); }    /* RtMidiIn constructor */
+        catch (RtError &error)
+        {
+            emit errorSignal(tr("Midi Input Fail"), QString::fromStdString(error.getMessage()));
+            goto cleanup;
+        };
+        apiInt = midiin->getCurrentApi();
+        if(apiInt == 1) { ApiString = "Core Midi: "; };
+        if(apiInt == 2) { ApiString = "ALSA: "; };
+        if(apiInt == 3) { ApiString = "Jack: "; };
+        if(apiInt == 4) { ApiString = "Win_MM: "; };
+        if(apiInt == 5) { ApiString = "WDM/KS: "; };
+        if(apiInt == 6) { ApiString = "Rt Dummy: "; };
+        current_port_count = midiin->getPortCount();   /* Check inputs. */
+        if(x==0) {first_in_port_count = current_port_count; };
+        inPortsCount = inPortsCount + current_port_count;
+        for ( unsigned int i=0; i<current_port_count; i++ ) {
+            try {  portName = midiin->getPortName(i); }
             catch (RtError &error)
             {
-                QString d =  QString::fromStdString(error.getMessage());
-                emit errorSignal(tr("Midi Input Fail"), d);
+                emit errorSignal(tr("Midi Input Fail"), QString::fromStdString(error.getMessage()));
                 goto cleanup;
             };
-            this->midiInDevices.append(QString::fromStdString(portName));
+            this->midiInDevices.append(ApiString + QString::fromStdString(portName));
         };
-        if (inPortsCount < 1)
+        if (current_port_count < 1)
         { this->midiInDevices.push_back(tr("no midi device available")); };
 cleanup:
-    delete midiin;
+        delete midiin;
+    };
 }
 
 QList<QString> midiIO::getMidiInDevices()
@@ -146,6 +210,8 @@ void midiIO::sendSyxMsg(QString sysxOutMsg)
     int retryCount = 0;
     int wait_time = 0;
     int s = 0;
+    unsigned int remove_count = 0;
+    std::string portName = "FloorBoard";
     std::vector<unsigned char> message;
     message.reserve(1333);
     int msgLength = sysxOutMsg.length()/2;
@@ -156,6 +222,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg)
     close = 20 + s;
     retryCount = 0;
     int midiOutPortInt = 0;
+    RtMidi::Api list;
     RtMidiOut *midiMsgOut = 0;
     QList<QString> midiOutDevices = getMidiOutDevices();
     int id=outPortsCount;
@@ -167,13 +234,19 @@ void midiIO::sendSyxMsg(QString sysxOutMsg)
             midiOutPortInt=x;
         };
     };
-RETRY:
-   try {
+    if(this->midiOutPort.contains("Core_Midi: "))  {list = midiMsgOut->MACOSX_CORE; remove_count=0;}
+    else if(this->midiOutPort.contains("ALSA: "))  {list = midiMsgOut->LINUX_ALSA;  remove_count=0;}
+    else if(this->midiOutPort.contains("Jack: "))  {list = midiMsgOut->UNIX_JACK;   remove_count=first_out_port_count; }
+    else if(this->midiOutPort.contains("Win_MM: ")){list = midiMsgOut->WINDOWS_MM;  remove_count=0;}
+    else if(this->midiOutPort.contains("WDM/KS: ")){list = midiMsgOut->WINDOWS_KS;  remove_count=first_out_port_count; }
+    else {list = midiMsgOut->RTMIDI_DUMMY; };
 
-        midiMsgOut = new RtMidiOut();
+RETRY:
+    try {
+        midiMsgOut = new RtMidiOut(list, portName);
         if ( outPortsCount < 1 ) { goto cleanup; };
 
-        midiMsgOut->openPort(midiOutPortInt);	// Open selected port.
+        midiMsgOut->openPort(midiOutPortInt-remove_count);	// Open selected port.
         for(int i=0;i<msgLength*2;++i)
         {
             unsigned int n;
@@ -188,6 +261,7 @@ RETRY:
         };
         midiMsgOut->sendMessage(&message);
         midiMsgOut->closePort();
+        //emit errorSignal(QString::number(first_out_port_count)+"=first "+QString::number(midiOutPortInt-remove_count)+" ",midiOutPort );
         goto cleanup;
     }
     catch (RtError &error)
@@ -195,25 +269,22 @@ RETRY:
         msleep(100);
         retryCount++;
         if (retryCount < 10) { goto RETRY; };
-        //error.printMessage();
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal("Syx Output Error - midi-out:"+midiOutPort+": port number:"+QString::number(midiOutPortInt,10)+": ", d);
+        emit errorSignal("Device Out Error - ", QString::fromStdString(error.getMessage()));
         goto cleanup;
     };
     /* Clean up */
 cleanup:
     msleep(close);						// wait as long as the message is sending.
     delete midiMsgOut;
-    //emit errorSignal("test - midi-out:"+midiOutPort+":", "port number:"+QString::number(midiOutPortInt,10)+": ");
-
 }
 /*********** send midi messages *******************************/
 void midiIO::sendMidiMsg(QString sysxOutMsg)
 {
     RtMidiOut *midiMsgOut = 0;
-    const std::string clientName = "FloorBoard";
-
+    unsigned int remove_count = 0;
+    std::string portName = "FloorBoard";
     int midiOutPortInt = 0;
+    RtMidi::Api list;
     QList<QString> midiOutDevices = getMidiOutDevices();
     int id=outPortsCount;
     for(int x=0; x<id; ++x)
@@ -224,11 +295,17 @@ void midiIO::sendMidiMsg(QString sysxOutMsg)
             midiOutPortInt = x;
         };
     };
+    if(this->midiOutPort.contains("Core_Midi: "))  {list = midiMsgOut->MACOSX_CORE; remove_count=0;}
+    else if(this->midiOutPort.contains("ALSA: "))  {list = midiMsgOut->LINUX_ALSA;  remove_count=0;}
+    else if(this->midiOutPort.contains("Jack: "))  {list = midiMsgOut->UNIX_JACK;   remove_count=first_out_port_count; }
+    else if(this->midiOutPort.contains("Win_MM: ")){list = midiMsgOut->WINDOWS_MM;  remove_count=0;}
+    else if(this->midiOutPort.contains("WDM/KS: ")){list = midiMsgOut->WINDOWS_KS;  remove_count=first_out_port_count; }
+    else {list = midiMsgOut->RTMIDI_DUMMY; };
 
     try{
-        midiMsgOut = new RtMidiOut();
+        midiMsgOut = new RtMidiOut(list, portName);
         if ( outPortsCount < 1 ){ goto cleanup; };
-        midiMsgOut->openPort(midiOutPortInt, clientName);	// Open selected port.
+        midiMsgOut->openPort(midiOutPortInt-remove_count);	// Open selected port.
         std::vector<unsigned char> message;
         int msgLength = sysxOutMsg.length()/2;
         char *ptr  = new char[msgLength];		// Convert QString to char* (hex value)
@@ -248,8 +325,7 @@ void midiIO::sendMidiMsg(QString sysxOutMsg)
     }
     catch (RtError &error)
     {
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal(tr("Midi Output Fail  -"), d);
+        emit errorSignal(tr("Midi Output Fail  -"), QString::fromStdString(error.getMessage()));
         goto cleanup;
     };
 cleanup:
@@ -284,10 +360,13 @@ void midiIO::callbackMsg(QString rxData)
 
 void midiIO::receiveMsg()
 {
+    RtMidi::Api list;
+    const std::string portName = "FloorBoard";
+    unsigned int remove_count = 0;
     count = 0;
     emit setStatusSymbol(3);
 #ifdef Q_OS_WIN
-    int q = 1;
+    int q = 2;
 #else
     int q = 3;
 #endif
@@ -310,41 +389,48 @@ void midiIO::receiveMsg()
             midiInPortInt = deviceCount;
         };
     };
+    RtMidiIn *midiin = 0;
+    if(this->midiInPort.contains("Core_Midi: "))  {list = midiin->MACOSX_CORE; remove_count=0;}
+    else if(this->midiInPort.contains("ALSA: "))  {list = midiin->LINUX_ALSA;  remove_count=0;}
+    else if(this->midiInPort.contains("Jack: "))  {list = midiin->UNIX_JACK;   remove_count=first_in_port_count; }
+    else if(this->midiInPort.contains("Win_MM: ")){list = midiin->WINDOWS_MM;  remove_count=0;}
+    else if(this->midiInPort.contains("WDM/KS: ")){list = midiin->WINDOWS_KS;  remove_count=first_in_port_count; }
+    else {list = midiin->RTMIDI_DUMMY; };
     int x = 0;
     unsigned int s = 1;
     unsigned int t = 1;
-    RtMidiIn *midiin = 0;
     if(midiInPortInt<1) {goto cleanup; };
-try {  midiin = new RtMidiIn();	}	         //RtMidi constructor
+    try {  midiin = new RtMidiIn(list, portName);	}	         //RtMidi constructor
     catch (RtError &error)
     {
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal(tr("no Midi In Port avaliable-"), d);
+        emit errorSignal(tr("no Midi In Port avaliable-"), QString::fromStdString(error.getMessage()));
         goto cleanup;
     };
     if ( inPortsCount < 1 ) { goto cleanup; };
-  try{  midiin->ignoreTypes(false, true, true);      //don,t ignore sysex messages, but ignore other crap like active-sensing
-        midiin->openPort(midiInPortInt); // open the midi in port
-        midiin->setCallback(&midicallback);       }   // set the callback
+    try{
+        midiin->ignoreTypes(false, true, true);      //don,t ignore sysex messages, but ignore other crap like active-sensing
+        midiin->openPort(midiInPortInt-remove_count); // open the midi in port
+        midiin->setCallback(&midicallback);          // set the callback
+    }
     catch (RtError &error)
     {
-        QString d =  QString::fromStdString(error.getMessage());
-        emit errorSignal("Midi Input Fail - ","midi-out:"+midiOutPort+":  midi-in:"+midiInPort+":");
+        emit errorSignal("Midi Input Fail - ",QString::fromStdString(error.getMessage()));
         goto cleanup;
     };
-        sendSyxMsg(sysxOutMsg);         // send the data request message out
-        while ((x<loopCount && sysxBuffer.size()/2 < count) && !sysxBuffer.contains("F04110000053120F000002434F4D504C45545BF7"))  // wait until exact bytes received or timeout or write returns "COMPLET"
-        {
-            msleep(5);
-            s = (this->sysxBuffer.size()*50)/count;
-            t = (x*200)/loopCount;
-            if (s>t) {t=s;};
-            emit setStatusProgress(t);
-            x++;
-        };                   // time it takes to get all sysx messages in.
-        midiin->cancelCallback();
-        midiin->closePort();             // close the midi in port
-        goto cleanup;
+    sendSyxMsg(sysxOutMsg);         // send the data request message out
+    while ((x<loopCount && sysxBuffer.size()/2 < count) && !sysxBuffer.contains("F04110000053120F000002434F4D504C45545BF7"))  // wait until exact bytes received or timeout or write returns "COMPLET"
+    {
+        msleep(5);
+        s = (this->sysxBuffer.size()*50)/count;
+        t = (x*200)/loopCount;
+        if (s>t) {t=s;};
+        emit setStatusProgress(t);
+        x++;
+    };                   // time it takes to get all sysx messages in.
+    midiin->cancelCallback();
+    midiin->closePort();             // close the midi in port
+    //emit errorSignal(QString::number(first_in_port_count)+"=first  "+QString::number(midiInPortInt)+" of "+QString::number(id)+" ",midiInPort );
+    goto cleanup;
 
 
     /*Clean up */
@@ -363,7 +449,7 @@ cleanup:
 void midiIO::run()
 {
     int repeat = 0;
-     if(midi && midiMsg.size() > 1)	// Check if we are going to send sysx or midi data & have an actual midi message to send.
+    if(midi && midiMsg.size() > 1)	// Check if we are going to send sysx or midi data & have an actual midi message to send.
     {
         if (midiMsg.size() <= 6)		// if the midi message is <= 3 words
         {
@@ -549,10 +635,10 @@ void midiIO::sendSysxMsg(QString sysxOutMsg, QString midiOutPort, QString midiIn
         this->midiOutPort = portCopy;
         this->midiInPort = portCopy;
     };
-    if(midiOutPort=="Select midi-out device" || midiOutPort=="" || midiOutPortInt<1)
+    if(midiInPort.contains("Select midi") || midiOutPort.contains("Select midi") || midiOutPort=="" || midiInPort==""/* || midiOutPortInt<1*/)
     {
         emit setStatusSymbol(0);
-        emit setStatusMessage("no midi device set - midi-out: "+midiOutPort+" - midi-in: "+midiInPort);
+        emit setStatusMessage("no device set: Out="+midiOutPort+" In="+midiInPort);
         emit replyMsg("");
     }
     else

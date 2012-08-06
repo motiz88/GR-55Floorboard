@@ -28,7 +28,7 @@
 customControlTarget::customControlTarget(QWidget *parent,
                                          QString hex1, QString hex2, QString hex3,
                                          QString background, QString direction, int lenght)
-                                             : QWidget(parent)
+    : QWidget(parent)
 {
 
 
@@ -152,7 +152,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     this->setFixedHeight(this->knobMin->height() + 13 + 12);
     this->setFixedHeight(this->knobMax->height() + 13 + 12);
 
-   QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
+    QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
                      this, SLOT( dialogUpdateSignal() ));
 
     QObject::connect(this, SIGNAL( updateSignal() ),
@@ -173,7 +173,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     QObject::connect(this, SIGNAL( updateTarget(QString, QString, QString) ),
                      this, SIGNAL( updateHex(QString, QString, QString) ));
 
-};
+}
 
 void customControlTarget::paintEvent(QPaintEvent *)
 {
@@ -185,7 +185,7 @@ void customControlTarget::paintEvent(QPaintEvent *)
 
         QPainter painter(this);
         painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLsb)
 {
@@ -212,6 +212,22 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
     emit updateDisplayMin(valueStr);                                                            // initial value only is displayed under knob
+
+
+    valueHex = QString::number(value, 16).toUpper();
+    if(valueHex.length() < 2) { valueHex.prepend("00"); }
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
+    QList<QString> valueString;
+    QString lsb_a = valueHex.at(0);
+    lsb_a.prepend("0");
+    valueString.append(lsb_a);
+    QString lsb_b = valueHex.at(1);
+    lsb_b.prepend("0");
+    valueString.append(lsb_b);
+    QString lsb_c = valueHex.at(2);
+    lsb_c.prepend("0");
+    valueString.append(lsb_c);
+    sysxIO->setFileSource("Structure", hex_a, hex2, hexMin, valueString);
     ////////////////////////////////////
     value = midiTable->getRange("Tables", "00", "00", hexLsb);
     this->knobMax->setValue(value);                                                             // sets knob initial position
@@ -219,8 +235,22 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     if(valueHex.length() < 2) valueHex.prepend("0");
     valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
     emit updateDisplayMax(valueStr);
+    valueHex = QString::number(value, 16).toUpper();
+    if(valueHex.length() < 2) { valueHex.prepend("00"); }
+    else if(valueHex.length() < 3) { valueHex.prepend("0"); };
+    valueString.clear();
+    lsb_a = valueHex.at(0);
+    lsb_a.prepend("0");
+    valueString.append(lsb_a);
+    lsb_b = valueHex.at(1);
+    lsb_b.prepend("0");
+    valueString.append(lsb_b);
+    lsb_c = valueHex.at(2);
+    lsb_c.prepend("0");
+    valueString.append(lsb_c);
+    sysxIO->setFileSource("Structure", hex_a, hex2, hexMax, valueString);
     emit updateSignal();                                                                      // initial value only is displayed under knob
-};
+}
 
 void customControlTarget::dialogUpdateSignal()
 {
@@ -302,11 +332,11 @@ void customControlTarget::dialogUpdateSignal()
     maxValue = midiTable->getRange("Tables", "00", "00", hexLsb);
     if(value>maxValue){value=maxValue;};
     this->knobMax->setValue(value);   // sets knob initial position
-    if(!midiTable->isData("Tables", "00", "00", hexLsb) && !midiTable->isRange("Tables", "00", "00", hexLsb)) {
-        value = value - midiTable->getRangeMinimum("Tables", "00", "00", hexLsb); };
+    if(!midiTable->isData("Tables", "00", "00", hexLsb) && !midiTable->isRange("Tables", "00", "00", hexLsb))
+         { value = value - midiTable->getRangeMinimum("Tables", "00", "00", hexLsb); };
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
     updateDisplayMax(valueStr);
-};
+}
 

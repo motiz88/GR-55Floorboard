@@ -34,7 +34,7 @@ statusBarSymbol::statusBarSymbol(QWidget *parent, QString imagePath)
 	this->setFixedSize(symbolSize);
 
 	setOffset(0);
-};
+}
 
 void statusBarSymbol::paintEvent(QPaintEvent *)
 {
@@ -44,16 +44,16 @@ void statusBarSymbol::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void statusBarSymbol::setOffset(int imageNr)
 {
 	this->xOffset = imageNr*symbolSize.width();
 	this->update();
-};
+}
 
 void statusBarSymbol::setValue(int value)
 {
 	setOffset(value);
-};
+}
 

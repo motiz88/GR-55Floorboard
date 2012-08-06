@@ -143,7 +143,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
 
     QObject::connect(this, SIGNAL( updateDisplay(QString) ),
                      this->display, SLOT( setText(QString) ));
-};
+}
 
 void customControlDataKnob::paintEvent(QPaintEvent *)
 {
@@ -155,7 +155,7 @@ void customControlDataKnob::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customControlDataKnob::dialogUpdateSignal()
 {
@@ -180,4 +180,4 @@ void customControlDataKnob::dialogUpdateSignal()
     MidiTable *midiTable = MidiTable::Instance();
     QString valueStr = midiTable->getValue("Tables", hex_a, hex_b, hex_c, valueHex);
     emit updateDisplay(valueStr);
-};
+}

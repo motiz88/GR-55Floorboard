@@ -36,7 +36,7 @@ dragBar::dragBar(QWidget *parent, QString imagePath)
 	this->imagePath = imagePath;
 	this->image = QPixmap(imagePath);
 	this->hide();
-};
+}
 
 void dragBar::paintEvent(QPaintEvent *)
 {
@@ -45,7 +45,7 @@ void dragBar::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void dragBar::showDragBar(QPoint newpos)
 {
@@ -63,29 +63,29 @@ void dragBar::showDragBar(QPoint newpos)
 	};
 	this->setGeometry(barPos.x(), barPos.y(), barSize.width(), barSize.height());
 	this->show();
-};
+}
 
 void dragBar::hideDragBar()
 {
 	this->hide();	
-};
+}
 
 void dragBar::setDragBarSize(QSize newsize)
 {
 	this->barSize = newsize;
-};
+}
 
 void dragBar::setDragBarMinOffset(signed int e_offsetMin, signed int c_offsetMin)
 {
 	this->e_offsetMin = e_offsetMin;
 	this->c_offsetMin = c_offsetMin;
 	this->offsetMin = e_offsetMin;
-};
+}
 
 void dragBar::setDragBarMaxOffset(signed int maxOffset)
 {
 	this->offsetMax = maxOffset;
-};
+}
 
 void dragBar::setCollapseState(bool state)
 {
@@ -97,4 +97,4 @@ void dragBar::setCollapseState(bool state)
 	{
 		this->offsetMin = e_offsetMin;
 	};
-};
+}

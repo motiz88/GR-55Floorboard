@@ -37,7 +37,7 @@ soundsource_synth_b::soundsource_synth_b(QWidget *parent)
     editDetails()->patchPos(2332, 330, "21", "00");
     setEditPages();
 
-};
+}
 
 void soundsource_synth_b::updateSignal()
 {
@@ -45,7 +45,7 @@ void soundsource_synth_b::updateSignal()
     updateComboBox("21", "routeSwitch", "16");
     updateKnob1("21", "00", "01");
     updateKnob2("21", "00", "04");
-};
+}
 
 void soundsource_synth_b::setEditPages()
 {
@@ -161,4 +161,4 @@ void soundsource_synth_b::setEditPages()
     editDetails()->page()->addGroupBox(4, 8, 1, 4);
 
 editDetails()->addPage();
-};
+}

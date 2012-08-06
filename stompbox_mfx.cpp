@@ -59,7 +59,7 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->newGroupBox("Equalizer");
     editDetails()->page()->addParaEQ(0, 1, 2, 4, "03", "00", "07", "MFX");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
-   /* editDetails()->page()->newGroupBox("Low");
+    /* editDetails()->page()->newGroupBox("Low");
     editDetails()->page()->addKnob(0, 0, 1, 1, "03", "00", "07");
     editDetails()->page()->addKnob(0, 1, 1, 1, "03", "00", "08");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
@@ -568,29 +568,29 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackField();
 
 
-     editDetails()->page()->newStackField(14);
-     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "3B", "DELAY2600", "right", 120); // left time
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(14);
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "3B", "DELAY2600", "right", 120); // left time
+    editDetails()->page()->addStackField();
 
-     editDetails()->page()->newStackField(14);
-     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "3E", "normal", "right", 120);   // left Rate
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(14);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "3E", "normal", "right", 120);   // left Rate
+    editDetails()->page()->addStackField();
 
-     editDetails()->page()->newStackField(15);
-     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "45", "DELAY2600", "right", 120); // center time
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(15);
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "45", "DELAY2600", "right", 120); // center time
+    editDetails()->page()->addStackField();
 
-     editDetails()->page()->newStackField(15);
-     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "48", "normal", "right", 120);   // center Rate
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(15);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "48", "normal", "right", 120);   // center Rate
+    editDetails()->page()->addStackField();
 
-     editDetails()->page()->newStackField(16);
-     editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "40", "DELAY2600", "right", 120); // right time
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(16);
+    editDetails()->page()->addDataKnob(0, 0, 1, 1, "04", "00", "40", "DELAY2600", "right", 120); // right time
+    editDetails()->page()->addStackField();
 
-     editDetails()->page()->newStackField(16);
-     editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "43", "normal", "right", 120);   // right Rate
-     editDetails()->page()->addStackField();
+    editDetails()->page()->newStackField(16);
+    editDetails()->page()->addKnob(0, 0, 1, 1, "04", "00", "43", "normal", "right", 120);   // right Rate
+    editDetails()->page()->addStackField();
 
     // Time CTRL delay
     editDetails()->page()->newStackField(0);

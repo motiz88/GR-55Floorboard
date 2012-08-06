@@ -68,6 +68,8 @@ int finish;
 QString mode;
 QString effect;
 QString filter;
+QString assign_desc;
+QString assign_customdesc;
 };
 
 #endif // FILEDIALOG_H

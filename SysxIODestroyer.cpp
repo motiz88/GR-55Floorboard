@@ -26,14 +26,14 @@
 SysxIODestroyer::SysxIODestroyer(SysxIO* s) 
 {
 	_sysxIO = s;
-};
+}
 
 SysxIODestroyer::~SysxIODestroyer ()
 {
 	delete _sysxIO;
-};
+}
 
 void SysxIODestroyer::SetSysxIO(SysxIO* s)
 {
 	_sysxIO = s;
-};
+}

@@ -52,6 +52,9 @@ public slots:
   void highlighted(int value);
   void cancel();
 
+protected:
+  void mouseRightClickEvent(QMouseEvent *event);
+
 private:
   QList<QString> patchList;
   QListWidget *contentsWidget;
@@ -59,6 +62,7 @@ private:
   QByteArray fileData;
   QByteArray default_data;
   QString file_format;
+  int value;
 };
 
 #endif // FILEDIALOG_H

@@ -73,7 +73,7 @@ summaryDialogSystem::summaryDialogSystem(QWidget *parent)
             emit setStatusSymbol(0);
         };
     };
-};
+}
 
 void summaryDialogSystem::do_the_list()
 {
@@ -93,173 +93,173 @@ void summaryDialogSystem::do_the_list()
     finish = 1;
     makeList();
 
-  text.append("<br><br><b><u>**********System and Midi settings**********</b></u><br>");
-  address1= "02";
-  address2= "00";
-  start = 0;
-  finish = 32;
-  makeList();
+    text.append("<br><br><b><u>**********System and Midi settings**********</b></u><br>");
+    address1= "02";
+    address2= "00";
+    start = 0;
+    finish = 32;
+    makeList();
 
-  text.append("<br><br><b><u>**********System Pedal and GK control**********</b></u><br>");
-  address1= "02";
-  address2= "02";
-  start = 0;
-  finish = 127;
-  makeList();
+    text.append("<br><br><b><u>**********System Pedal and GK control**********</b></u><br>");
+    address1= "02";
+    address2= "02";
+    start = 0;
+    finish = 127;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 1**********</b></u><br>");
-  address1= "02";
-  address2= "04";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 1**********</b></u><br>");
+    address1= "02";
+    address2= "04";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode set 2**********</b></u><br>");
-  address1= "02";
-  address2= "05";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode set 2**********</b></u><br>");
+    address1= "02";
+    address2= "05";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 3**********</b></u><br>");
-  address1= "02";
-  address2= "06";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 3**********</b></u><br>");
+    address1= "02";
+    address2= "06";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 4**********</b></u><br>");
-  address1= "02";
-  address2= "07";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 4**********</b></u><br>");
+    address1= "02";
+    address2= "07";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 5**********</b></u><br>");
-  address1= "02";
-  address2= "08";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 5**********</b></u><br>");
+    address1= "02";
+    address2= "08";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 6**********</b></u><br>");
-  address1= "02";
-  address2= "09";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 6**********</b></u><br>");
+    address1= "02";
+    address2= "09";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 7**********</b></u><br>");
-  address1= "02";
-  address2= "0A";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 7**********</b></u><br>");
+    address1= "02";
+    address2= "0A";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 8**********</b></u><br>");
-  address1= "02";
-  address2= "0B";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 8**********</b></u><br>");
+    address1= "02";
+    address2= "0B";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 9**********</b></u><br>");
-  address1= "02";
-  address2= "0C";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 9**********</b></u><br>");
+    address1= "02";
+    address2= "0C";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Guitar Mode GK set 10**********</b></u><br>");
-  address1= "02";
-  address2= "0D";
-  start = 0;
-  finish = 35;
-  makeList();
+    text.append("<br><br><b><u>**********Guitar Mode GK set 10**********</b></u><br>");
+    address1= "02";
+    address2= "0D";
+    start = 0;
+    finish = 35;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 1**********</b></u><br>");
-  address1= "02";
-  address2= "04";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 1**********</b></u><br>");
+    address1= "02";
+    address2= "04";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 2**********</b></u><br>");
-  address1= "02";
-  address2= "05";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 2**********</b></u><br>");
+    address1= "02";
+    address2= "05";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 3**********</b></u><br>");
-  address1= "02";
-  address2= "06";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 3**********</b></u><br>");
+    address1= "02";
+    address2= "06";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 4**********</b></u><br>");
-  address1= "02";
-  address2= "07";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 4**********</b></u><br>");
+    address1= "02";
+    address2= "07";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 5**********</b></u><br>");
-  address1= "02";
-  address2= "08";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 5**********</b></u><br>");
+    address1= "02";
+    address2= "08";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 6**********</b></u><br>");
-  address1= "02";
-  address2= "09";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 6**********</b></u><br>");
+    address1= "02";
+    address2= "09";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 7**********</b></u><br>");
-  address1= "02";
-  address2= "0A";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 7**********</b></u><br>");
+    address1= "02";
+    address2= "0A";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 8**********</b></u><br>");
-  address1= "02";
-  address2= "0B";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 8**********</b></u><br>");
+    address1= "02";
+    address2= "0B";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 9**********</b></u><br>");
-  address1= "02";
-  address2= "0C";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 9**********</b></u><br>");
+    address1= "02";
+    address2= "0C";
+    start = 35;
+    finish = 71;
+    makeList();
 
-  text.append("<br><br><b><u>**********Bass Mode GK set 10**********</b></u><br>");
-  address1= "02";
-  address2= "0D";
-  start = 35;
-  finish = 71;
-  makeList();
+    text.append("<br><br><b><u>**********Bass Mode GK set 10**********</b></u><br>");
+    address1= "02";
+    address2= "0D";
+    start = 35;
+    finish = 71;
+    makeList();
 
-/*
+    /*
   text.append("<br><br><b><u>********** MIDI ***********</b></u><br>");
   address1= "02";
   address2= "00";
   start = 0;
   finish = 14;
-  makeList();   
+  makeList();
   
   text.append("<br><br><b><u>********** MIDI MAPPING ***********</b></u><br><br>");
   address1= "02";
   address2= "01";
   finish = 127;
-  makeMidiMapList(); 
+  makeMidiMapList();
   address1= "02";
   address2= "02";
   finish = 127;
@@ -275,19 +275,19 @@ void summaryDialogSystem::do_the_list()
   address1= "02";
   address2= "05";
   finish = 127;
-  makeMidiMapList(); 
+  makeMidiMapList();
   address1= "02";
   address2= "06";
   finish = 127;
-  makeMidiMapList();  
+  makeMidiMapList();
   address1= "02";
   address2= "07";
   finish = 127;
-  makeMidiMapList(); 
+  makeMidiMapList();
   address1= "02";
   address2= "08";
   finish = 72;
-  makeMidiMapList();     
+  makeMidiMapList();
   
   */
 
@@ -331,7 +331,7 @@ void summaryDialogSystem::do_the_list()
     setLayout(mainLayout);
 
     setWindowTitle(deviceType + tr(" System and Global List Summary"));
-};
+}
 
 void summaryDialogSystem::systemReply(QString replyMsg)
 {
@@ -402,7 +402,7 @@ void summaryDialogSystem::systemReply(QString replyMsg)
         };
     };
     emit setStatusMessage(tr("Ready"));
-};
+}
 
 void summaryDialogSystem::cancel()
 {
@@ -413,7 +413,7 @@ void summaryDialogSystem::cancel()
     emit setStatusSymbol(1);
     emit setStatusMessage(tr("Ready"));
     this->close();
-};
+}
 
 void summaryDialogSystem::printFile()
 {
@@ -426,7 +426,7 @@ void summaryDialogSystem::printFile()
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
 #endif
-};
+}
 
 void summaryDialogSystem::saveAs()
 {
@@ -435,10 +435,10 @@ void summaryDialogSystem::saveAs()
     QString dir = preferences->getPreferences("General", "Files", "dir");
 
     QString fileName = QFileDialog::getSaveFileName(
-            this,
-            tr("Save As"),
-            dir,
-            tr("Text Document (*.txt)"));
+                this,
+                tr("Save As"),
+                dir,
+                tr("Text Document (*.txt)"));
     if (!fileName.isEmpty())
     {
         if(!fileName.contains(".txt"))
@@ -471,7 +471,7 @@ void summaryDialogSystem::saveAs()
         };
 
     };
-};
+}
 
 void summaryDialogSystem::makeList()
 {
@@ -499,7 +499,7 @@ void summaryDialogSystem::makeList()
             text.append(midiTable->getValue("System", address1, address2, pos, valueHex) );
         };
     };
-};
+}
 
 void summaryDialogSystem::makeMidiMapList()
 {
@@ -531,7 +531,7 @@ void summaryDialogSystem::makeMidiMapList()
         };
         ++i;
     };
-};
+}
 
 
 

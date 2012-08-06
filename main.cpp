@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 
     splash->showStatusMessage(QObject::tr("Loading midi mapping..."));
     MidiTable *midiTable = MidiTable::Instance();
-    midiTable = 0;
+    midiTable->Instance();
 
     app.processEvents();
 
@@ -188,4 +188,4 @@ int main(int argc, char **argv)
     splash->finish(&window);
 
     return app.exec();
-};
+}

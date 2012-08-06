@@ -35,7 +35,7 @@ soundsource_modeling::soundsource_modeling(QWidget *parent)
     setKnob2("10", "00", "09");
     editDetails()->patchPos(1756, 454, "10", "00");
     setEditPages();
-};
+}
 
 void soundsource_modeling::updateSignal()
 {
@@ -43,7 +43,7 @@ void soundsource_modeling::updateSignal()
     updateComboBox("02", "routeSwitch", "2D");
     updateKnob1("10", "00", "00");
     updateKnob2("10", "00", "09");
-};
+}
 
 void soundsource_modeling::setEditPages()
 {
@@ -684,4 +684,4 @@ void soundsource_modeling::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->addPage();
-};
+}

@@ -32,7 +32,7 @@ renameWidget::renameWidget(QWidget *parent)
 {
 	QObject::connect(this, SIGNAL(nameChanged(QString)), 
 		this->parentWidget(), SLOT(setPatchDisplay(QString)));
-};
+}
 
 void renameWidget::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -42,7 +42,7 @@ void renameWidget::mouseReleaseEvent(QMouseEvent *event)
 		connect(dialog, SIGNAL(nameChanged(QString)), this, SLOT(updateName(QString)));
 		dialog->exec();
 	};
-};
+}
 
 void renameWidget::updateName(QString name)
 {
@@ -70,4 +70,4 @@ void renameWidget::updateName(QString name)
 	sysxIO->setCurrentPatchName(name);
 
 	emit nameChanged(name);
-};
+}

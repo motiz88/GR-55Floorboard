@@ -30,12 +30,12 @@ menuPage_pdl::menuPage_pdl(QWidget *parent)
     setLSB("00", "11");
     editDetails()->patchPos(56, 272, "00", "11"); //correct
     setEditPages();
-};
+}
 
 void menuPage_pdl::updateSignal()
 {
 
-};
+}
 
 void menuPage_pdl::setEditPages()
 {
@@ -393,4 +393,4 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addStackField();
 
     editDetails()->addPage();
-};
+}

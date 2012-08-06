@@ -55,7 +55,7 @@ customTargetDial::customTargetDial(double value, double min, double max, double 
   QObject::connect(this->parent(), SIGNAL( updateHex(QString, QString, QString) ),
                 this, SLOT( knobSignal(QString, QString, QString) ));
 
-};
+}
 
 void customTargetDial::paintEvent(QPaintEvent *)
 {
@@ -67,7 +67,7 @@ void customTargetDial::paintEvent(QPaintEvent *)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing, true);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void customTargetDial::setOffset(double _newValue)
 {
@@ -88,7 +88,7 @@ void customTargetDial::setOffset(double _newValue)
 	this->value = _newValue;	
 	this->xOffset = imageNr*dialSize.width();	
 	this->update();                                                     // continuous update
-	};
+}
 
 void customTargetDial::mousePressEvent(QMouseEvent *event)
 {
@@ -100,7 +100,7 @@ void customTargetDial::mousePressEvent(QMouseEvent *event)
                 setFocus();
 		emitValue(value);
 	};
-};
+}
 
 void customTargetDial::mouseMoveEvent(QMouseEvent *event)
 {
@@ -133,7 +133,7 @@ void customTargetDial::mouseMoveEvent(QMouseEvent *event)
 	this->_lastpos = event->pos();
 	setOffset(_newValue);
 	emitValue(_newValue);
-};
+}
 
 void customTargetDial::wheelEvent(QWheelEvent *event)
 {
@@ -157,7 +157,7 @@ void customTargetDial::wheelEvent(QWheelEvent *event)
 		setOffset(_newValue);
 		emitValue(_newValue);
     };
-};
+}
 
 void customTargetDial::keyPressEvent(QKeyEvent *event)
 {
@@ -194,7 +194,7 @@ void customTargetDial::keyPressEvent(QKeyEvent *event)
 		setOffset(_newValue);
 		emitValue(_newValue);
 	};
-};
+}
 
 void customTargetDial::emitValue(double value)
 {
@@ -202,12 +202,12 @@ void customTargetDial::emitValue(double value)
         this->m_value = value;
     };
         emit valueChanged((int)value, this->hex1, this->hex2, this->hex3);
-};
+}
 
 void customTargetDial::setValue(int value)
 {
 	setOffset((double)value);                  //  on initial loading of patch
-};
+}
 
 void customTargetDial::knobSignal(QString hex1, QString hex2, QString hex3)
 {
@@ -217,4 +217,4 @@ if (this->background != "target")
     this->max = midiTable->getRange("Tables", "00", "00", hex3);
     this->min = midiTable->getRangeMinimum("Tables", "00", "00", hex3);
   };
-};
+}

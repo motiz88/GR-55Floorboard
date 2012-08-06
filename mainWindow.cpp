@@ -23,6 +23,7 @@
 
 #include <QtGui>
 #include <QWhatsThis>
+#include <QWebPage>
 #include "mainWindow.h"
 #include "Preferences.h"
 #include "preferencesDialog.h"
@@ -38,15 +39,31 @@
 
 mainWindow::mainWindow()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    /*int current_version = preferences->getPreferences("General", "Application", "version").toInt(&ok, 10);
+    QDate date = QDate::currentDate();
+    text = date.toString("yyyyMMdd");
+    QString site_file;
+    QUrl site("http://sourceforge.net/projects/grfloorboard/files/GR-55/readme.txt");           // Read the default GR-55 G5L file .
+    site_file = site.hasQuery();
+    if (site_file.isEmpty() ) { QApplication::beep(); };
+
+    QMessageBox *msgBox = new QMessageBox();
+    msgBox->setWindowTitle("Web site read version number");
+    msgBox->setIcon(QMessageBox::Information);
+    msgBox->setText(site_file);
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->exec();*/
+
 
     floorBoard *fxsBoard = new floorBoard(this);
-    Preferences *preferences = Preferences::Instance();
+
     QString setting = preferences->getPreferences("Scheme", "Style", "select");
-    bool ok;
     int choice = setting.toInt(&ok, 16);
     QString style;
     if(choice == 3) {style = "motif"; }
-    else if(choice == 2) {style = "cde"; }
+    else if(choice == 2) {style = "cleanlooks"; }
     else if(choice == 1) {style = "plastique"; }
     else {style = ""; };
 
@@ -124,6 +141,7 @@ void mainWindow::createActions()
 {
     openAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Load Patch File... (*.g5l, *.mid, *.syx)"), this);
     openAct->setShortcut(tr("Ctrl+O"));
+    openAct->setStatusTip(tr("Open an existing file"));
     openAct->setWhatsThis(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
@@ -135,107 +153,130 @@ void mainWindow::createActions()
 
     saveAsAct = new QAction(QIcon(":/images/filesave.png"), tr("&Export &SYX Patch...  (*.syx)"), this);
     saveAsAct->setShortcut(tr("Ctrl+Shift+S"));
-    saveAsAct->setWhatsThis(tr("Save the document under a new name"));
+    saveAsAct->setStatusTip(tr("Export as a System Exclusive File"));
+    saveAsAct->setWhatsThis(tr("Export as a System Exclusive File"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
     exportSMFAct = new QAction(QIcon(":/images/filesave.png"), tr("&Export &SMF Patch... (*.mid)"), this);
     exportSMFAct->setShortcut(tr("Ctrl+Shift+E"));
+    exportSMFAct->setStatusTip(tr("Export as a Standard Midi File"));
     exportSMFAct->setWhatsThis(tr("Export as a Standard Midi File"));
     connect(exportSMFAct, SIGNAL(triggered()), this, SLOT(exportSMF()));
 
     saveG5LAct = new QAction(QIcon(":/images/filesave.png"), tr("Save As G5L Patch... (*.g5l)"), this);
     saveG5LAct->setShortcut(tr("Ctrl+Shift+G"));
+    saveG5LAct->setStatusTip(tr("Export as a ROLAND Librarian File"));
     saveG5LAct->setWhatsThis(tr("Export as a ROLAND Librarian File"));
     connect(saveG5LAct, SIGNAL(triggered()), this, SLOT(saveG5L()));
 
     systemLoadAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Load System and Global Data..."), this);
     systemLoadAct->setShortcut(tr("Ctrl+L"));
+    systemLoadAct->setStatusTip(tr("Load System Data to GR-55"));
     systemLoadAct->setWhatsThis(tr("Load System Data to GR-55"));
     connect(systemLoadAct, SIGNAL(triggered()), this, SLOT(systemLoad()));
 
     systemSaveAct = new QAction(QIcon(":/images/filesave.png"), tr("Save System and Global Data to File..."), this);
     systemSaveAct->setShortcut(tr("Ctrl+D"));
+    systemSaveAct->setStatusTip(tr("Save System Data to File"));
     systemSaveAct->setWhatsThis(tr("Save System Data to File"));
     connect(systemSaveAct, SIGNAL(triggered()), this, SLOT(systemSave()));
 
     bulkLoadAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Load Bulk Patch File to GR-55..."), this);
     bulkLoadAct->setShortcut(tr("Ctrl+B"));
-    bulkLoadAct->setWhatsThis(tr("Load Bulk Data to GR-55"));
+    bulkLoadAct->setStatusTip(tr("Load Bulk Patch Data to GR-55"));
+    bulkLoadAct->setWhatsThis(tr("Load Bulk Patch Data to GR-55"));
     connect(bulkLoadAct, SIGNAL(triggered()), this, SLOT(bulkLoad()));
 
     bulkSaveAct = new QAction(QIcon(":/images/filesave.png"), tr("Save Bulk GR-55 Patches to File..."), this);
     bulkSaveAct->setShortcut(tr("Ctrl+G"));
-    bulkSaveAct->setWhatsThis(tr("Save Bulk Data to File"));
+    bulkSaveAct->setStatusTip(tr("Save Bulk Patch Data to File"));
+    bulkSaveAct->setWhatsThis(tr("Save Bulk Patch Data to File"));
     connect(bulkSaveAct, SIGNAL(triggered()), this, SLOT(bulkSave()));
 
     exitAct = new QAction(QIcon(":/images/exit.png"),tr("E&xit"), this);
     exitAct->setShortcut(tr("Ctrl+Q"));
+    exitAct->setStatusTip(tr("Exit the application"));
     exitAct->setWhatsThis(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
 
     settingsAct = new QAction(QIcon(":/images/preferences.png"), tr("&Preferences"), this);
     settingsAct->setShortcut(tr("Ctrl+P"));
+    settingsAct->setStatusTip(tr("GR-55FloorBoard Preferences<br>Select midi device, language,splash, directories"));
     settingsAct->setWhatsThis(tr("GR-55FloorBoard Preferences<br>Select midi device, language,splash, directories"));
     connect(settingsAct, SIGNAL(triggered()), this, SLOT(settings()));
 
     guitarModeAct = new QAction(QIcon(":/images/guitar_icon.png"), tr("&Change Patch to Guitar Mode"), this);
     guitarModeAct->setShortcut(tr("Shift+G"));
+    guitarModeAct->setStatusTip(tr("Force to Guitar Mode Force editor to Guitar mode modeling to edit/convert Bass mode patches"));
     guitarModeAct->setWhatsThis(tr("Force to Guitar Mode<br>Force editor to Guitar mode modeling to edit/convert Bass mode patches"));
     connect(guitarModeAct, SIGNAL(triggered()), this, SLOT(guitarMode()));
 
     bassModeAct = new QAction(QIcon(":/images/bass_icon.png"), tr("&Change Patch to Bass Mode"), this);
     bassModeAct->setShortcut(tr("Shift+B"));
+    bassModeAct->setStatusTip(tr("Force to Bass Mode Force editor to Bass Mode modeling to edit/convert Guitar mode patches"));
     bassModeAct->setWhatsThis(tr("Force to Bass Mode<br>Force editor to Bass Mode modeling to edit/convert Guitar mode patches"));
     connect(bassModeAct, SIGNAL(triggered()), this, SLOT(bassMode()));
 
 
     uploadAct = new QAction(QIcon(":/images/upload.png"), tr("Upload patch to V-Guitar Forums"), this);
+    uploadAct->setStatusTip(tr("Upload any saved patch file to a shared patch library via the internet."));
     uploadAct->setWhatsThis(tr("Upload any saved patch file to a shared patch library<br>via the internet."));
     connect(uploadAct, SIGNAL(triggered()), this, SLOT(upload()));
 
     summaryAct = new QAction(QIcon(":/images/copy.png"), tr("Patch Text Summary"), this);
+    summaryAct->setStatusTip(tr("Display the current patch parameters in a readable text format, which can be printed or saved to file."));
     summaryAct->setWhatsThis(tr("Display the current patch parameters<br>in a readable text format, which<br>can be printed or saved to file."));
     connect(summaryAct, SIGNAL(triggered()), this, SLOT(summaryPage()));
 
     summarySystemAct = new QAction(QIcon(":/images/copy.png"), tr("System/Global Text Summary"), this);
+    summarySystemAct->setStatusTip(tr("Display the current System and Global parameters in a readable text format, which can be printed or saved to file."));
     summarySystemAct->setWhatsThis(tr("Display the current System and Global parameters<br>in a readable text format, which<br>can be printed or saved to file."));
     connect(summarySystemAct, SIGNAL(triggered()), this, SLOT(summarySystemPage()));
 
     summaryPatchListAct = new QAction(QIcon(":/images/copy.png"), tr("GR-55 Patch List Summary"), this);
+    summaryPatchListAct->setStatusTip(tr("Display the GR-55 patch listing names in a readable text format, which can be printed or saved to file."));
     summaryPatchListAct->setWhatsThis(tr("Display the GR-55 patch listing names<br>in a readable text format, which<br>can be printed or saved to file."));
     connect(summaryPatchListAct, SIGNAL(triggered()), this, SLOT(summaryPatchList()));
 
     helpAct = new QAction(QIcon(":/images/help.png"), tr("GR-55 FloorBoard &Help"), this);
     helpAct->setShortcut(tr("Ctrl+F1"));
+    helpAct->setStatusTip(tr("Help page to assist with GR-55 FloorBoard functions."));
     helpAct->setWhatsThis(tr("Help page to assist with GR-55 FloorBoard functions."));
     connect(helpAct, SIGNAL(triggered()), this, SLOT(help()));
 
     whatsThisAct = new QAction(QIcon(":/images/help.png"), tr("Whats This? description of items under the mouse cursor"), this);
     whatsThisAct->setShortcut(tr("F1"));
-    whatsThisAct->setWhatsThis(tr("ha..ha..ha..!!"));
+    whatsThisAct->setWhatsThis(tr("Whats This? description of items under the mouse cursor"));
+    whatsThisAct->setStatusTip(tr("Whats This? description of items under the mouse cursor"));
     connect(whatsThisAct, SIGNAL(triggered()), this, SLOT(whatsThis()));
 
     homepageAct = new QAction(QIcon(":/images/GR-55FloorBoard.png"), tr("GR-55 FloorBoard &Webpage"), this);
+    homepageAct->setStatusTip(tr("download Webpage for GR-55FloorBoard find if the latest version is available."));
     homepageAct->setWhatsThis(tr("download Webpage for GR-55FloorBoard<br>find if the latest version is available."));
     connect(homepageAct, SIGNAL(triggered()), this, SLOT(homepage()));
 
     donationAct = new QAction(QIcon(":/images/donate.png"), tr("Donate if you appreciate this software"), this);
+    donationAct->setStatusTip(tr("Even though the software is free, a donation is very much appreciated for my un-paid efforts to provide this software."));
     donationAct->setWhatsThis(tr("Even though the software is free,<br>a donation is very much appreciated<br>for my un-paid efforts to provide this software."));
     connect(donationAct, SIGNAL(triggered()), this, SLOT(donate()));
 
     manualAct = new QAction(QIcon(":/images/manual.png"), tr("Owner's Manual"), this);
-    manualAct->setWhatsThis(tr("........"));
+    manualAct->setStatusTip(tr("download the Owner's Manual"));
+    manualAct->setWhatsThis(tr("download the Owner's Manual"));
     connect(manualAct, SIGNAL(triggered()), this, SLOT(manual()));
 
     licenseAct = new QAction(QIcon(":/images/licence.png"), tr("&License"), this);
+    licenseAct->setStatusTip(tr("licence agreement which you have accepted by installing this software."));
     licenseAct->setWhatsThis(tr("licence agreement which you<br>have accepted by installing this software."));
     connect(licenseAct, SIGNAL(triggered()), this, SLOT(license()));
 
     aboutAct = new QAction(QIcon(":/images/GR-55FloorBoard.png"), tr("&About GR-55FloorBoard"), this);
+    aboutAct->setStatusTip(tr("Show the application's About box"));
     aboutAct->setWhatsThis(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 
     aboutQtAct = new QAction(QIcon(":/images/qt-logo.png"),tr("About &Qt"), this);
+    aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     aboutQtAct->setWhatsThis(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
@@ -703,7 +744,7 @@ void mainWindow::settings()
         QString dBug = (dialog->midiSettings->dBugCheckBox->checkState())?QString("true"):QString("false");
         int midiInInt = dialog->midiSettings->midiInCombo->currentIndex();
         int midiOutInt = dialog->midiSettings->midiOutCombo->currentIndex();
-        QString midiTimeSet =QString::number(dialog->midiSettings->midiTimeSpinBox->value());
+        QString midiTxChSet =QString::number(dialog->midiSettings->midiTxChSpinBox->value());
         QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
         if (dialog->languageSettings->chineseButton->isChecked() ) {lang="6"; }
@@ -734,7 +775,7 @@ void mainWindow::settings()
         preferences->setPreferences("Midi", "MidiIn", "device", midiIn);
         preferences->setPreferences("Midi", "MidiOut", "device", midiOut);
         preferences->setPreferences("Midi", "DBug", "bool", dBug);
-        preferences->setPreferences("Midi", "Time", "set", midiTimeSet);
+        preferences->setPreferences("Midi", "TxCh", "set", midiTxChSet);
         preferences->setPreferences("Midi", "Delay", "set", receiveTimeout);
         preferences->setPreferences("Window", "Restore", "sidepanel", sidepanel);
         preferences->setPreferences("Window", "Restore", "window", window);

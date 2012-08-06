@@ -73,7 +73,7 @@ customKnobRange::customKnobRange(QWidget *parent, QString area, QString hex1, QS
 
     QObject::connect(this, SIGNAL( updateDisplayMax(QString) ),
                      this->parent(), SIGNAL( updateDisplayMax(QString) ));
-};
+}
 
 void customKnobRange::paintEvent(QPaintEvent *)
 {
@@ -85,12 +85,12 @@ void customKnobRange::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customKnobRange::setValue(int value)
 {
     this->knob->setValue(value);
-};
+}
 
 void customKnobRange::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
@@ -121,4 +121,4 @@ void customKnobRange::valueChanged(int value, QString hex1, QString hex2, QStrin
     QString valueStr = midiTable->getValue(this->area, hex1, hex2, hex3, valueHex);
     if (this->type == "Min"){	emit updateDisplayMin(valueStr);} else { emit updateDisplayMax(valueStr); };
     emit updateSignal();
-};
+}

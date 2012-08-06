@@ -1044,7 +1044,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
 
         if(sysxIO->getBank() != 0)
         {
-            this->writeButton->setBlink(true);
+            this->writeButton->setBlink(false);
             this->writeButton->setValue(false);
         };
     }
@@ -1060,7 +1060,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
 
             if(sysxIO->getBank() != 0)
             {
-                this->writeButton->setBlink(true);
+                this->writeButton->setBlink(false);
                 this->writeButton->setValue(false);
             };
         }

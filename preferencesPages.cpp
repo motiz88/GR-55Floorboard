@@ -73,7 +73,7 @@ MidiPage::MidiPage(QWidget *parent)
     QString midiInDevice = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOutDevice = preferences->getPreferences("Midi", "MidiOut", "device");
     QString dBugScreen = preferences->getPreferences("Midi", "DBug", "bool");
-    //QString midiTimeSet = preferences->getPreferences("Midi", "Time", "set");
+    QString midiTxChSet = preferences->getPreferences("Midi", "TxCh", "set");
     //QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
 
     QList<QString> midiInDevices = midi->getMidiInDevices();
@@ -143,11 +143,11 @@ MidiPage::MidiPage(QWidget *parent)
     QGroupBox *dBugScreenGroup = new QGroupBox(QObject::tr("Advanced settings"));
 
     QLabel *dBugDescriptionLabel = new QLabel(QObject::tr("Debug mode."));
-    //QLabel *midiTimeDescriptionLabel = new QLabel(tr("Data receive wait time."));
+    QLabel *midiTxChDescriptionLabel = new QLabel(tr("Midi Tx Channel:"));
     //QLabel *midiDelayDescriptionLabel = new QLabel(tr("Realtime edit send rate."));
 
     QCheckBox *dBugCheckBox = new QCheckBox(QObject::tr("deBug Mode"));
-    QSpinBox *midiTimeSpinBox = new QSpinBox;
+    QSpinBox *midiTxChSpinBox = new QSpinBox;
     QSpinBox *midiDelaySpinBox = new QSpinBox;
 
     this->dBugCheckBox = dBugCheckBox;
@@ -156,12 +156,12 @@ MidiPage::MidiPage(QWidget *parent)
         dBugCheckBox->setChecked(true);
     };
 
-    this->midiTimeSpinBox = midiTimeSpinBox;
-    const int tempDataWrite = preferences->getPreferences("Midi", "Time", "set").toInt(&ok, 10);
-    midiTimeSpinBox->setValue(tempDataWrite);
-    midiTimeSpinBox->setRange(1, 99);
-    midiTimeSpinBox->setPrefix("= ");
-    midiTimeSpinBox->setSuffix(QObject::tr("0 millisecond"));
+    this->midiTxChSpinBox = midiTxChSpinBox;
+    const int tempDataWrite = preferences->getPreferences("Midi", "TxCh", "set").toInt(&ok, 10);
+    midiTxChSpinBox->setValue(tempDataWrite);
+    midiTxChSpinBox->setRange(1, 16);
+    midiTxChSpinBox->setPrefix("Channel ");
+    //midiTxChSpinBox->setSuffix(QObject::tr("Channel"));
 
     this->midiDelaySpinBox = midiDelaySpinBox;
     const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
@@ -173,12 +173,12 @@ MidiPage::MidiPage(QWidget *parent)
 
     QVBoxLayout *dBugLabelLayout = new QVBoxLayout;
     dBugLabelLayout->addWidget(dBugDescriptionLabel);
-    //dBugLabelLayout->addWidget(midiTimeDescriptionLabel);
+    dBugLabelLayout->addWidget(midiTxChDescriptionLabel);
     //dBugLabelLayout->addWidget(midiDelayDescriptionLabel);
 
     QVBoxLayout *dBugTimeBoxLayout = new QVBoxLayout;
     dBugTimeBoxLayout->addWidget(dBugCheckBox);
-    //dBugTimeBoxLayout->addWidget(midiTimeSpinBox);
+    dBugTimeBoxLayout->addWidget(midiTxChSpinBox);
     //dBugTimeBoxLayout->addWidget(midiDelaySpinBox);
 
     QHBoxLayout *dBugSelectLayout = new QHBoxLayout;
@@ -326,7 +326,7 @@ StylePage::StylePage(QWidget *parent)
     QRadioButton *standardButton = new QRadioButton(QObject::tr("System"));
     this->standardButton = standardButton;
     this->plastiqueButton = new QRadioButton(QObject::tr("Plastique"));
-    this->cdeButton = new QRadioButton(QObject::tr("CDE"));
+    this->cdeButton = new QRadioButton(QObject::tr("Cleanlooks"));
     this->motifButton = new QRadioButton(QObject::tr("Motif"));
     if (choice == 3) {motifButton->setChecked(true); }
     else if (choice == 2) {cdeButton->setChecked(true); }

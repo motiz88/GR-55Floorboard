@@ -35,7 +35,7 @@ stompbox_amp::stompbox_amp(QWidget *parent)
     setSwitch("07", "00", "00");
     editDetails()->patchPos(1480, 34, "07", "00");  //correct
     setEditPages();
-};
+}
 
 void stompbox_amp::updateSignal()
 {
@@ -43,18 +43,13 @@ void stompbox_amp::updateSignal()
     updateKnob2("07", "00", "03");
     updateComboBox("07", "00", "01");
     updateSwitch("07", "00", "00");
-};
+}
 
 void stompbox_amp::setEditPages()
 {
     editDetails()->page()->newGroupBox("Effect");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "00");   // off/on effect
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
-
-    //AMP
-
-
-    //editDetails()->page()->newGroupBox(tr("Amp/Spkr"));
 
     editDetails()->page()->newGroupBox(tr("PreAmp"));
     editDetails()->page()->newStackControl(0);
@@ -71,7 +66,6 @@ void stompbox_amp::setEditPages()
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
 
 
-
     editDetails()->page()->newGroupBox(tr("Speaker"));
     editDetails()->page()->addComboBox(0, 0, 1, 1, "07", "00", "0C", "large");       //spkr type
     editDetails()->page()->addComboBox(0, 1, 1, 1, "07", "00", "0D", "bottom", Qt::AlignRight); //mic type
@@ -84,10 +78,6 @@ void stompbox_amp::setEditPages()
     editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "05", "middle", Qt::AlignLeft | Qt::AlignTop);  //solo sw
     editDetails()->page()->addKnob(1, 0, 1, 1, "07", "00", "06");           // solo level
     editDetails()->page()->addGroupBox(0, 2, 2, 1);
-
-    //editDetails()->page()->addGroupBox(0, 1, 1, 1);
-
-
 
 
     // Bright Button stack fields
@@ -232,4 +222,4 @@ void stompbox_amp::setEditPages()
 
 
     editDetails()->addPage();
-};
+}

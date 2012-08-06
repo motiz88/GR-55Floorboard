@@ -30,12 +30,12 @@ menuPage_master::menuPage_master(QWidget *parent)
     setLSB("02", "24");
     editDetails()->patchPos(660, 50, "02", "24"); //correct
     setEditPages();
-};
+}
 
 void menuPage_master::updateSignal()
 {
 
-};
+}
 
 void menuPage_master::setEditPages()
 {
@@ -122,4 +122,4 @@ void menuPage_master::setEditPages()
     editDetails()->page()->addGroupBox(2, 0, 1, 4);
 
     editDetails()->addPage();
-};
+}

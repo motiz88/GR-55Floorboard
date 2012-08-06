@@ -6,6 +6,7 @@
 			<xs:sequence>
 				<xs:element ref="Collapsed"/>
 				<xs:element ref="Position"/>
+				<xs:element ref="Ratio"/>
 				<xs:element ref="Restore"/>
 				<xs:element ref="Single"/>
 				<xs:element ref="Size"/>
@@ -41,12 +42,12 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="Time">
+	<xs:element name="TxCh">
 		<xs:complexType>
 			<xs:attribute name="set" use="required">
 				<xs:simpleType>
 					<xs:restriction base="xs:byte">
-						<xs:enumeration value="80"/>
+						<xs:enumeration value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -119,6 +120,17 @@
 			<xs:attribute name="sidepanel" use="required" type="xs:boolean"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="Ratio">
+		<xs:complexType>
+			<xs:attribute name="size" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Preferences">
 		<xs:complexType>
 			<xs:sequence>
@@ -179,7 +191,7 @@
 				<xs:element ref="Delay"/>
 				<xs:element ref="MidiIn"/>
 				<xs:element ref="MidiOut"/>
-				<xs:element ref="Time"/>
+				<xs:element ref="TxCh"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -333,7 +345,7 @@
 			<xs:attribute name="version" use="required">
 				<xs:simpleType>
 					<xs:restriction base="xs:int">
-						<xs:enumeration value="20120205"/>
+						<xs:enumeration value="20120806"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

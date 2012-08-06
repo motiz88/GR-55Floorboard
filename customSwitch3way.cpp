@@ -38,7 +38,7 @@ customSwitch3way::customSwitch3way(int active, QPoint switch3wayPos, QWidget *pa
 	setOffset(0);
 	setGeometry(switch3wayPos.x(), switch3wayPos.y(), switch3waySize.width(), switch3waySize.height());
 
-};
+}
 
 void customSwitch3way::paintEvent(QPaintEvent *)
 {
@@ -50,13 +50,13 @@ void customSwitch3way::paintEvent(QPaintEvent *)
 	QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing, true);
 	painter.drawPixmap(target, image, source);
-};
+}
 
 void customSwitch3way::setOffset(signed int imageNr)
 {
 	this->yOffset = imageNr*switch3waySize.height();
 	this->update();
-};
+}
 
 void customSwitch3way::setValue(int value)
 {
@@ -73,9 +73,9 @@ void customSwitch3way::setValue(int value)
 	{
                 setOffset(0);
 	};
-};
+}
 
 void customSwitch3way::changeValue(int value)
 {
 	setValue(value);
-};
+}
