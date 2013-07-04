@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -743,7 +743,7 @@ void floorBoardDisplay::temp1_paste(bool value)
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource("patch", temp1_sysxMsg);
         emit updateSignal();
-        sysxIO->writeToBuffer();
+        if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
     }
     else
     {
@@ -800,7 +800,7 @@ void floorBoardDisplay::temp2_paste(bool value)
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource("patch", temp2_sysxMsg);
         emit updateSignal();
-        sysxIO->writeToBuffer();
+        if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
     }else
     {
         QApplication::beep();
@@ -856,7 +856,7 @@ void floorBoardDisplay::temp3_paste(bool value)
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource("patch", temp3_sysxMsg);
         emit updateSignal();
-        sysxIO->writeToBuffer();
+        if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
     }else
     {
         QApplication::beep();
@@ -912,7 +912,7 @@ void floorBoardDisplay::temp4_paste(bool value)
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource("patch", temp4_sysxMsg);
         emit updateSignal();
-        sysxIO->writeToBuffer();
+        if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
     }else
     {
         QApplication::beep();
@@ -968,7 +968,7 @@ void floorBoardDisplay::temp5_paste(bool value)
         SysxIO *sysxIO = SysxIO::Instance();
         sysxIO->setFileSource("patch", temp5_sysxMsg);
         emit updateSignal();
-        sysxIO->writeToBuffer();
+        if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
     }else
     {
         QApplication::beep();

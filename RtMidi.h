@@ -8,7 +8,7 @@
     RtMidi WWW site: http://music.mcgill.ca/~gary/rtmidi/
 
     RtMidi: realtime MIDI i/o C++ classes
-    Copyright (c) 2003-2012 Gary P. Scavone
+    Copyright (c) 2003-2013 Gary P. Scavone
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation files
@@ -55,20 +55,20 @@ class RtMidi
  public:
 #ifdef Q_OS_WIN
         #define __WINDOWS_MM__
-        #define __WINDOWS_KS__
+       // #define __WINDOWS_KS__
 #endif
 #ifdef Q_OS_MAC
         #define __MACOSX_CORE__
-        #define __UNIX_JACK__
+       // #define __UNIX_JACK__
 #endif
 #ifdef Q_OS_LINUX
         #define __LINUX_ALSA__
-        #define __UNIX_JACK__
+       // #define __UNIX_JACK__
 #endif
-#ifdef Q_OS_UNIX
+/*#ifdef Q_OS_UNIX
         #define __UNIX_JACK__
         #define __LINUX_ALSA__
-#endif
+#endif*/
         #define __RTMIDI_DUMMY__
 
   //! MIDI API specifier arguments.
@@ -128,7 +128,7 @@ class RtMidi
     to open a virtual input port to which other MIDI software clients
     can connect.
 
-    by Gary P. Scavone, 2003-2012.
+    by Gary P. Scavone, 2003-2013.
 */
 /**********************************************************************/
 
@@ -260,7 +260,7 @@ class RtMidiIn : public RtMidi
     OS-X and Linux ALSA MIDI APIs, it is also possible to open a
     virtual port to which other MIDI software clients can connect.
 
-    by Gary P. Scavone, 2003-2012.
+    by Gary P. Scavone, 2003-2013.
 */
 /**********************************************************************/
 

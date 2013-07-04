@@ -8,7 +8,7 @@
     RtMidi WWW site: http://music.mcgill.ca/~gary/rtmidi/
 
     RtMidi: realtime MIDI i/o C++ classes
-    Copyright (c) 2003-2012 Gary P. Scavone
+    Copyright (c) 2003-2013 Gary P. Scavone
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation files
@@ -2349,7 +2349,7 @@ void MidiOutWinMM :: sendMessage( std::vector<unsigned char> *message )
 // *********************************************************************//
 // API: WINDOWS Kernel Streaming
 //
-// Written by Sebastien Alaiwan, 2012.
+// Written by Sebastien Alaiwan, 2013.
 //
 // NOTE BY GARY: much of the KS-specific code below probably should go in a separate file.
 //

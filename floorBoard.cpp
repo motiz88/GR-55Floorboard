@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -94,6 +94,7 @@ floorBoard::floorBoard(QWidget *parent,
     bankTreeList *bankList = new bankTreeList(this);
 
     setFloorBoard();
+
     floorBoardDisplay *display = new floorBoardDisplay(this);
     display->setPos(displayPos);
 
@@ -535,7 +536,7 @@ void floorBoard::update_structure()
     this->structure_2->move(offset + 421, 144);
     SysxIO *sysxIO = SysxIO::Instance();
     int value2 = sysxIO->getSourceValue("Structure", "02", "00", "2C");
-    this->structure_2->changeValue((value2==1)?true:false);
+    this->structure_2->changeValue((value2==0)?true:false);
     emit structure_1_statusSignal((value2==1)?true:false);
     emit structure_2_statusSignal((value2==1)?false:true);
     value2 = sysxIO->getSourceValue("Structure", "00", "00", "00");

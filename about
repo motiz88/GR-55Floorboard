@@ -2,14 +2,14 @@
 Editor for the ROLAND GR-55 Guitar Synthesizer Processor<br>
 <br>
 GR-55 version by<br>
-© Copyright 2007~2012 Colin Willcocks (gumtown) <br>gumtownbassman@yahoo.com <br>  <br>
+© Copyright 2007~2013 Colin Willcocks (gumtown) <br>gumtownbassman@yahoo.com <br>  <br>
 based on the original fxfloorboard source by<br>
 © Copyright 2005~2007 Uco Mesdag <fxfloorboard@gmail.com> <br>
 (GNU General Public License)<br> <br>	
 Many thanks for the graphic design by Denis Diaz (aka ddlooping)<br> http://www.diazguitars.co.uk (a work in progress) <br> 
 Many thanks for the Help File system by Steve Meiers (aka tekrytor)<br> http://www.vguitarforums.com/smf/index.php?action=profile;u=2961 <br> <br>
 RtMidi: realtime MIDI i/o C++ classes<br>
-Copyright (c) 2003~2012 Gary P. Scavone<br>	<br>	
+Copyright (c) 2003~2013 Gary P. Scavone<br>	<br>	
 This software is built on open-source Qt Framework by http://qt.nokia.com/ <br>
 <br>
 Thanks to all participants of the V-Guitars Forum http://www.vguitarforums.com <br> <br>

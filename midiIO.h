@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -28,9 +28,9 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
-#include <map>
-#include <iostream>
-#include <cstdlib>
+
+
+
 
 class midiIO: public QThread
 {
@@ -38,13 +38,14 @@ class midiIO: public QThread
 
 public:
 	midiIO();
-    ~midiIO();
-    void run();
-    void sendSysxMsg(QString sysxOutMsg, QString midiOutport, QString midiInPort);
-    void sendMidi(QString midiMsg, QString midiOutport);
+	~midiIO();
+	void sendSysxMsg(QString sysxOutMsg, int midiOutport, int midiInPort);
+	void sendMidi(QString midiMsg, int midiOutport);
+
 	void callbackMsg(QString rxData);
 	QList<QString> getMidiOutDevices();
 	QList<QString> getMidiInDevices();
+  static QString sysxBuffer;
 		
 signals:
 	void errorSignal(QString windowTitle, QString errorMsg);
@@ -59,19 +60,20 @@ signals:
 private:
 	void queryMidiInDevices();
 	void queryMidiOutDevices();
-    void sendSyxMsg(QString sysxOutMsg);
-    void sendMidiMsg(QString sysxOutMsg);
-    void receiveMsg();
+	void sendSyxMsg(QString sysxOutMsg, int midiOutport);
+	void sendMidiMsg(QString sysxOutMsg, int midiOutport);
+
 	QList<QString> midiOutDevices;
 	QList<QString> midiInDevices;
-	
+	void run();
+  void receiveMsg(int midiInPort);
 	static QString msgType;
-	static QString sysxBuffer;
+
 	static bool dataReceive;
 	static int bytesTotal;
 	static int bytesReceived;
-    QString midiOutPort;
-    QString midiInPort;
+	int midiOutPort;
+	int midiInPort;
 	QString sysxOutMsg;
 	QString sysxInMsg;
 	QString midiMsg;
@@ -81,10 +83,6 @@ private:
 	QString hex;
 	bool midi;
 	int count;
-    unsigned int outPortsCount;
-    unsigned int inPortsCount;
-    unsigned int first_out_port_count;
-    unsigned int first_in_port_count;
 };
 
 #endif // MIDIIO_H

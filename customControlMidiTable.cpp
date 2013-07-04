@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
 **
@@ -43,9 +43,9 @@ customControlMidiTable::customControlMidiTable(QWidget *parent,
 
         this->display = new QLineEdit();
         this->display->setObjectName("editdisplay");
-        this->display->setFixedWidth(800);
+        this->display->setFixedWidth(850);
         this->display->setFixedHeight(16);
-        this->display->setAlignment(Qt::AlignCenter);
+        this->display->setAlignment(Qt::AlignLeft);
         this->display->setDisabled(true);
 
         QVBoxLayout *labelLayout = new QVBoxLayout;
@@ -83,7 +83,7 @@ void customControlMidiTable::setComboBox()
     this->label = new customControlLabel(this);
     this->controlMidiComboBox = new customComboBox(this);
     this->controlMidiComboBox->setObjectName("largecombo");
-    this->controlMidiComboBox->setFixedWidth(80);
+    this->controlMidiComboBox->setFixedWidth(90);
     this->controlMidiComboBox->setFixedHeight(25);
     this->controlMidiComboBox->setEditable(false);
     this->controlMidiComboBox->setFrame(false);
@@ -108,16 +108,16 @@ void customControlMidiTable::setComboBox()
 
     QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(currentIndexChanged(int)));
 
-    QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this, SIGNAL(currentIndexChanged(int)));
+    //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this, SIGNAL(currentIndexChanged(int)));
 
     if(text != "GR-55 Patch") {
       QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(changedIndex(int)));
 
-      QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(changedIndex(int)));
+      //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(changedIndex(int)));
         } else {
       QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(valueChanged(int)));
 
-      QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(valueChanged(int)));
+      //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(valueChanged(int)));
      };
 }
 
@@ -130,8 +130,8 @@ void customControlMidiTable::dialogUpdateSignal()
 {
     if(text == "GR-55 Patch")
     {
-        SysxIO *sysxIO = SysxIO::Instance();
-        int index = sysxIO->getSourceValue("MidiT", hex1, hex2, hex3);
+        //SysxIO *sysxIO = SysxIO::Instance();
+        int index = 1;//sysxIO->getSourceValue("MidiT", hex1, hex2, hex3);
         this->controlMidiComboBox->setCurrentIndex(index);
         this->valueChanged(index);
     };

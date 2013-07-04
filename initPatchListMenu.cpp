@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -154,7 +154,7 @@ void initPatchListMenu::loadInitPatch(int index)
 				sysxIO->setFileName(tr("init patch"));
 				sysxIO->setSyncStatus(false);
 				sysxIO->setDevice(false);
-                sysxIO->writeToBuffer();
+                if(sysxIO->isConnected()) { sysxIO->writeToBuffer(); };
                 emit updateSignal();
 			};
 		};

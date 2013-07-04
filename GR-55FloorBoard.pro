@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## Copyright (C) 2007~2012 Colin Willcocks.
+## Copyright (C) 2007~2013 Colin Willcocks.
 ## Copyright (C) 2005~2007 Uco Mesdag. 
 ## All rights reserved.
 ##
@@ -57,11 +57,11 @@ QT += webkit
 
 #Platform dependent file(s)
 win32{
-        exists("C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/WinMM.Lib")
+        exists("C:/SDK/Lib/WinMM.Lib")
                 {	# <-- Change the path to WinMM.Lib here!
-                    LIBS += C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/WinMM.Lib	# <-- Change the path here also!
-                    LIBS += C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/setupapi.Lib
-                    LIBS += C:/Progra~1/MS_SDKs/Windows/v7.1/Lib/ksuser.Lib
+                    LIBS += C:/SDK/Lib/WinMM.Lib	# <-- Change the path here also!
+                    LIBS += C:/SDK/Lib/setupapi.Lib
+                    LIBS += C:/SDK/Lib/ksuser.Lib
                 }
            else                {
         exists("c:/PROGRA~1/MICROS~3/VC/PLATFO~1/Lib/WinMM.Lib")
