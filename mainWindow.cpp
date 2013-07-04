@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -742,8 +742,8 @@ void mainWindow::settings()
         QString widgetHelp = (dialog->windowSettings->widgetsCheckBox->checkState())?QString("true"):QString("false");
         QString splash = (dialog->windowSettings->splashCheckBox->checkState())?QString("true"):QString("false");
         QString dBug = (dialog->midiSettings->dBugCheckBox->checkState())?QString("true"):QString("false");
-        int midiInInt = dialog->midiSettings->midiInCombo->currentIndex();
-        int midiOutInt = dialog->midiSettings->midiOutCombo->currentIndex();
+        QString midiIn = QString::number(dialog->midiSettings->midiInCombo->currentIndex() - 1, 10); // -1 because there is a default entry at index 0
+        QString midiOut = QString::number(dialog->midiSettings->midiOutCombo->currentIndex() - 1, 10);
         QString midiTxChSet =QString::number(dialog->midiSettings->midiTxChSpinBox->value());
         QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
@@ -768,8 +768,8 @@ void mainWindow::settings()
         else {choice="0"; };
         preferences->setPreferences("Scheme", "Colour", "select", choice);
 
-        QString midiIn = dialog->midiSettings->midiInCombo->itemText(midiInInt);
-        QString midiOut = dialog->midiSettings->midiOutCombo->itemText(midiOutInt);
+        if(midiIn=="-1") { midiIn = ""; };
+        if(midiOut=="-1") {	midiOut = ""; };
 
         preferences->setPreferences("General", "Files", "dir", dir);
         preferences->setPreferences("Midi", "MidiIn", "device", midiIn);

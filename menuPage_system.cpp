@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -1629,12 +1629,12 @@ void menuPage_system::setEditPages()
     editDetails()->addPage("00", "00", "17", "03", "Tables");
 
     editDetails()->page()->newGroupBox("GUITAR MODE - MIDI PROGRAM TABLE.            Caution: Changes are automatically written to the GR-55.");
-    //editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "01", "00", "System");
+    editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "01", "00", "System");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->addPage("00", "00", "17", "04", "Tables");
 
     editDetails()->page()->newGroupBox("BASS MODE - MIDI PROGRAM TABLE.            Caution: Changes are automatically written to the GR-55.");
-    //editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "01", "00", "System");
+    editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "04", "01", "00", "System");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->addPage("00", "00", "17", "05", "Tables");
 }

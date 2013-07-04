@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
 **
@@ -46,6 +46,7 @@ customMultiComboBox::customMultiComboBox(QWidget *parent,
 
 void customMultiComboBox::makeList()
 {
+    QString bankList;
     QString pcList;
     QString pcList_01;
     QString pcList_02;
@@ -61,14 +62,20 @@ void customMultiComboBox::makeList()
         if(num.length() < 2) {num.prepend("00"); }
         else if(num.length() < 3) {num.prepend("0"); };
         pcList.append("PC:"+num+" ");
-        if(x<17)        {pcList_01.append("   PC:"+num+"   "); };
-        if(x>16 && x<33){pcList_02.append("   PC:"+num+"   "); };
-        if(x>32 && x<49){pcList_03.append("   PC:"+num+"   "); };
-        if(x>48 && x<65){pcList_04.append("   PC:"+num+"   "); };
-        if(x>64 && x<81){pcList_05.append("   PC:"+num+"   "); };
-        if(x>80 && x<97){pcList_06.append("   PC:"+num+"   "); };
-        if(x>96 && x<113){pcList_07.append("   PC:"+num+"   "); };
-        if(x>112 && x<129){pcList_08.append("   PC:"+num+"   "); };
+        if(x<17)        {pcList_01.append("  PC:"+num+"     "); };
+        if(x>16 && x<33){pcList_02.append("  PC:"+num+"     "); };
+        if(x>32 && x<49){pcList_03.append("  PC:"+num+"     "); };
+        if(x>48 && x<65){pcList_04.append("  PC:"+num+"     "); };
+        if(x>64 && x<81){pcList_05.append("  PC:"+num+"     "); };
+        if(x>80 && x<97){pcList_06.append("  PC:"+num+"     "); };
+        if(x>96 && x<113){pcList_07.append("  PC:"+num+"     "); };
+        if(x>112 && x<129){pcList_08.append("  PC:"+num+"     "); };
+    };
+    for(int b=0; b<65; ++b)
+    {
+        QString num = QString::number(b, 10).toUpper();
+        if(num.length() < 2) {num.prepend("0"); }
+        bankList.append("Bank:"+num+" ");
     };
     display_01 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
     display_02 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
@@ -78,8 +85,9 @@ void customMultiComboBox::makeList()
     display_06 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
     display_07 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
     display_08 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_09 = new customControlMidiTable(this, hex1, hex2 ,hex3, "Program Change", pcList);
-    display_10 = new customControlMidiTable(this, hex1, hex2 ,hex3, "GR-55 Patch", comboList);
+    display_09 = new customControlMidiTable(this, hex1, hex2 ,hex3, "Bank", bankList);
+    display_10 = new customControlMidiTable(this, hex1, hex2 ,hex3, "Program Change", pcList);
+    display_11 = new customControlMidiTable(this, hex1, hex2 ,hex3, "GR-55 Patch", comboList);
 
     QVBoxLayout *oneLayout = new QVBoxLayout;
     oneLayout->setMargin(0);
@@ -100,6 +108,7 @@ void customMultiComboBox::makeList()
     twoLayout->addStretch(10);
     twoLayout->addWidget(display_09, 0, Qt::AlignCenter);
     twoLayout->addWidget(display_10, 0, Qt::AlignCenter);
+    twoLayout->addWidget(display_11, 0, Qt::AlignCenter);
 
     QVBoxLayout *mLayout = new QVBoxLayout;
     mLayout->setMargin(0);
@@ -138,16 +147,16 @@ void customMultiComboBox::makeList()
         if(hex_02.length() < 2) {hex_02.prepend("0"); }
         QString hex_03 = QString::number(hex_3, 16).toUpper();
         if(hex_03.length() < 2) {hex_03.prepend("0"); }
-        int index = sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
+        int index = 0;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
         QString num = list.at(index);
-        if(x<17)        {patchList_01.append("  "+num+"   "); };
-        if(x>16 && x<33){patchList_02.append("  "+num+"   "); };
-        if(x>32 && x<49){patchList_03.append("  "+num+"   "); };
-        if(x>48 && x<65){patchList_04.append("  "+num+"   "); };
-        if(x>64 && x<81){patchList_05.append("  "+num+"   "); };
-        if(x>80 && x<97){patchList_06.append("  "+num+"   "); };
-        if(x>96 && x<113){patchList_07.append("  "+num+"   "); };
-        if(x>112 && x<129){patchList_08.append("  "+num+"   "); };
+        if(x<17)        {patchList_01.append("   "+num+"  "); };
+        if(x>16 && x<33){patchList_02.append("   "+num+"  "); };
+        if(x>32 && x<49){patchList_03.append("   "+num+"  "); };
+        if(x>48 && x<65){patchList_04.append("   "+num+"  "); };
+        if(x>64 && x<81){patchList_05.append("   "+num+"  "); };
+        if(x>80 && x<97){patchList_06.append("   "+num+"  "); };
+        if(x>96 && x<113){patchList_07.append("   "+num+"  "); };
+        if(x>112 && x<129){patchList_08.append("   "+num+"  "); };
         hex_3 = hex_3 + 2;
     };
     display_01->display->setText(patchList_01);
@@ -291,6 +300,7 @@ void customMultiComboBox::setComboBoxList()
         this->comboList.append(" ");
     };
     itemTotal = itemTotal + itemcount;
+
 }
 
 void customMultiComboBox::valueChanged(int index)
@@ -317,7 +327,7 @@ void customMultiComboBox::valueChanged(int index)
     QString hex_03 = QString::number(hex_3, 16).toUpper();
     if(hex_03.length() < 2) {hex_03.prepend("0"); }
 
-    sysxIO->setFileSource("System", hex1, hex_02, hex_03, valueHex1, valueHex2);
+    //sysxIO->setFileSource("System", hex1, hex_02, hex_03, valueHex1, valueHex2);
 
     QString patchList_01;
     QString patchList_02;
@@ -337,16 +347,16 @@ void customMultiComboBox::valueChanged(int index)
         if(hex_02.length() < 2) {hex_02.prepend("0"); }
         QString hex_03 = QString::number(hex_3, 16).toUpper();
         if(hex_03.length() < 2) {hex_03.prepend("0"); }
-        int index = sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
+        int index = 0;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
         QString num = list.at(index);
-        if(x<17)        {patchList_01.append("  "+num+"   "); };
-        if(x>16 && x<33){patchList_02.append("  "+num+"   "); };
-        if(x>32 && x<49){patchList_03.append("  "+num+"   "); };
-        if(x>48 && x<65){patchList_04.append("  "+num+"   "); };
-        if(x>64 && x<81){patchList_05.append("  "+num+"   "); };
-        if(x>80 && x<97){patchList_06.append("  "+num+"   "); };
-        if(x>96 && x<113){patchList_07.append("  "+num+"   "); };
-        if(x>112 && x<129){patchList_08.append("  "+num+"   "); };
+        if(x<17)        {patchList_01.append("   "+num+"  "); };
+        if(x>16 && x<33){patchList_02.append("   "+num+"  "); };
+        if(x>32 && x<49){patchList_03.append("   "+num+"  "); };
+        if(x>48 && x<65){patchList_04.append("   "+num+"  "); };
+        if(x>64 && x<81){patchList_05.append("   "+num+"  "); };
+        if(x>80 && x<97){patchList_06.append("   "+num+"  "); };
+        if(x>96 && x<113){patchList_07.append("   "+num+"  "); };
+        if(x>112 && x<129){patchList_08.append("   "+num+"  "); };
         hex_3 = hex_3 + 2;
     };
     display_01->display->setText(patchList_01);
@@ -359,7 +369,6 @@ void customMultiComboBox::valueChanged(int index)
     display_08->display->setText(patchList_08);
 
     emit updateSignal();
-
 }
 
 void customMultiComboBox::dialogUpdateSignal()
@@ -380,8 +389,9 @@ void customMultiComboBox::changedIndex(int index)
     if(hex_02.length() < 2) {hex_02.prepend("0"); }
     QString hex_03 = QString::number(hex_3, 16).toUpper();
     if(hex_03.length() < 2) {hex_03.prepend("0"); }
-    int indice = sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
+    int indice = 1;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
     display_10->controlMidiComboBox->setCurrentIndex(indice);
+
 }
 
 

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -744,10 +744,15 @@ void SysxIO::sendMidi(QString midiMsg)
 {
     if(isConnected())
     {
-        Preferences *preferences = Preferences::Instance();
-        QString midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device");	// Get midi out device from preferences.
-
-        midiIO *midi = new midiIO();
+       		Preferences *preferences = Preferences::Instance(); bool ok;
+		int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
+		
+		midiIO *midi = new midiIO();
+		QList<QString> midiOutDevices = midi->getMidiOutDevices();
+	  if ( midiOutDevices.contains("GR-55") )
+    {
+      midiOutPort = midiOutDevices.indexOf("GR-55");
+    }; 
         midi->sendMidi(midiMsg, midiOutPort);
         /*DeBugGING OUTPUT */
         if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
@@ -821,15 +826,21 @@ void SysxIO::checkPatchChange(QString name)
 *****************************************************************************/
 void SysxIO::sendSysx(QString sysxMsg)
 {
-    Preferences *preferences = Preferences::Instance();
-    QString midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device");	// Get midi out device from preferences.
-    QString midiInPort = preferences->getPreferences("Midi", "MidiIn", "device");	// Get midi in device from preferences.
-    /*DeBugGING OUTPUT */
-    if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
+    Preferences *preferences = Preferences::Instance();  bool ok;
+	int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
+	int midiInPort = preferences->getPreferences("Midi", "MidiIn", "device").toInt(&ok, 10);	// Get midi in device from preferences.
+	
+	midiIO *midi = new midiIO();
+    QList<QString> midiInDevices = midi->getMidiInDevices();
+	  QList<QString> midiOutDevices = midi->getMidiOutDevices();
+	  if ( midiInDevices.contains("GR-55") )
     {
-        emit setStatusdBugMessage(sysxMsg);
+      midiInPort = midiInDevices.indexOf("GR-55");
     };
-    midiIO *midi = new midiIO();
+	  if ( midiOutDevices.contains("GR-55") )
+    {
+      midiOutPort = midiOutDevices.indexOf("GR-55");
+    };  
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
 }
 

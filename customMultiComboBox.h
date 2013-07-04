@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
@@ -68,6 +68,7 @@ private:
     customControlMidiTable* display_08;
     customControlMidiTable* display_09;
     customControlMidiTable* display_10;
+    customControlMidiTable* display_11;
 
     QString hex1;
     QString hex2;
@@ -77,6 +78,7 @@ private:
     QString comboList;
     int itemcount;
     int pc_index;
+    int bank_index;
     QString text;
 };
 
