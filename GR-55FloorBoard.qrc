@@ -90,5 +90,11 @@
         <file>images/EZ_Patch.png</file>
         <file>images/EZ_Tone.png</file>
         <file>EZ-Tone.syx</file>
+        <file>midi.xml</file>
+        <file>midi.xsd</file>
+        <file>images/floor_blue.png</file>
+        <file>images/editwindow_blue.png</file>
+        <file>images/meshWindow_blue.png</file>
+        <file>default.mid</file>
     </qresource>
 </RCC>

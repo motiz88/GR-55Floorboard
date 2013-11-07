@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLLISTMENU_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customControlLabel.h"
 #include "customComboBox.h"
 

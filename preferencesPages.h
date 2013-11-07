@@ -25,7 +25,7 @@
 #define PREFERENCESPAGES_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include <QSpinBox>
 #include <QRadioButton>
 

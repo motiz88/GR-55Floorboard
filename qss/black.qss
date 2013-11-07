@@ -71,7 +71,6 @@ QComboBox#smallcombo {
 font-family: Arial;
 font-size: 10px;
 font-weight: bold;
-/*font-stretch: 110;*/
 color: rgb(185,224,243);
 background-color: rgb(0,0,0);
 border-style: solid;

@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "statusBarWidget.h"
 #include "Preferences.h"
 
@@ -37,13 +37,19 @@ statusBarWidget::statusBarWidget(QWidget *parent)
     this->symbol = new statusBarSymbol(this);
     this->symbol->setValue(0);
 
+    QFont labelFont;
+    labelFont.setFamily("Arial");
+    labelFont.setPixelSize(11);
+
     this->label = new QLabel(this);
     this->label->setFixedWidth(150);
     this->label->setText("");
+    this->label->setFont(labelFont);
 
     this->dBuglabel = new QStatusBar(this);
     this->dBuglabel->setFixedWidth(950);
     this->dBuglabel->showMessage(tr(""));
+    this->dBuglabel->setFont(labelFont);
 
     QHBoxLayout *widgetLayout = new QHBoxLayout;
     widgetLayout->setMargin(0);
@@ -67,7 +73,7 @@ void statusBarWidget::setStatusdBugMessage(QString dBug)
 {
     Preferences *preferences = Preferences::Instance(); // Load the preferences.
     if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
-    { this->dBuglabel->showMessage(dBug, 30000); } else {
+    { this->dBuglabel->showMessage(dBug, 10000); } else {
       this->dBuglabel->showMessage(dBug, 3000); };
 }
 

@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "customEZ_Patch.h"
 
 customEZ_Patch::customEZ_Patch(bool active, QWidget *parent, QString hex1, QString hex2, QString hex3,

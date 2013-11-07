@@ -44,7 +44,7 @@ editWindow::editWindow(QWidget *parent)
         else if(choice == 3) { mesh = "images/editwindow_green.png"; }
         else if(choice == 2) { mesh = "images/editwindow_aqua.png"; }
         else if(choice == 1) { mesh = "images/editwindow_black.png"; }
-        else { mesh = "images/editwindow_blue.png"; };
+        else { mesh = ":images/editwindow_blue.png"; };
         this->image = QPixmap(mesh);
         this->setFixedSize(image.width(), image.height());
         this->setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -59,7 +59,7 @@ editWindow::editWindow(QWidget *parent)
         else if(choice == 3) { mesh = "images/meshWindow_green.png"; }
         else if(choice == 2) { mesh = "images/meshWindow_aqua.png"; }
         else if(choice == 1) { mesh = "images/meshWindow_black.png"; }
-        else { mesh = "images/meshWindow_blue.png"; };
+        else { mesh = ":images/meshWindow_blue.png"; };
         this->image = QPixmap(mesh);
     };
 
@@ -457,6 +457,7 @@ void editWindow::bulkEdit()
     {	
         bulkEditDialog *editDialog = new bulkEditDialog(this->position, this->length, this->temp_hex1, this->temp_hex3);
         editDialog->exec();
+        editDialog->deleteLater();
     }
     else
     {
@@ -467,6 +468,7 @@ void editWindow::bulkEdit()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 

@@ -21,9 +21,8 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "midiIO.h"
-#include "RtMidi.h"
 #include "preferencesPages.h"
 #include "Preferences.h"
 
@@ -74,7 +73,7 @@ MidiPage::MidiPage(QWidget *parent)
     QString midiOutDevice = preferences->getPreferences("Midi", "MidiOut", "device");
     QString dBugScreen = preferences->getPreferences("Midi", "DBug", "bool");
     QString midiTxChSet = preferences->getPreferences("Midi", "TxCh", "set");
-    //QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
+    QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
 
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
@@ -93,13 +92,16 @@ MidiPage::MidiPage(QWidget *parent)
 
     for(int x=0; x<id; ++x)
     {
-        midiInCombo->addItem(midiInDevices.at(x).toAscii());
-        QString item = midiInDevices.at(x).toAscii();
+        midiInCombo->addItem(midiInDevices.at(x).toLatin1());
+        /*QString item = midiInDevices.at(x).toLatin1();
         if ( item == midiInDevice )
         {
             midiInCombo->setCurrentIndex(x+1);
-        };
+        };*/
     };
+    int device_count = midiInDevice.toInt(&ok, 10)+1;
+    if(device_count>id) midiInCombo->addItem("last used device missing");
+    midiInCombo->setCurrentIndex(device_count);
 
     QComboBox *midiOutCombo = new QComboBox;
     this->midiOutCombo = midiOutCombo;
@@ -109,13 +111,16 @@ MidiPage::MidiPage(QWidget *parent)
 
     for(int x=0; x<id; ++x)
     {
-        midiOutCombo->addItem(midiOutDevices.at(x).toAscii());
-        QString item = midiOutDevices.at(x).toAscii();
+        midiOutCombo->addItem(midiOutDevices.at(x).toLatin1());
+       /* QString item = midiOutDevices.at(x).toLatin1();
         if ( item == midiOutDevice )
         {
             midiOutCombo->setCurrentIndex(x+1);
-        };
+        };*/
     };
+    device_count = midiOutDevice.toInt(&ok, 10)+1;
+    if(device_count>id) midiOutCombo->addItem("last used device missing");
+    midiOutCombo->setCurrentIndex(device_count);
 
     QVBoxLayout *midiLabelLayout = new QVBoxLayout;
     midiLabelLayout->addWidget(midiInLabel);
@@ -144,7 +149,7 @@ MidiPage::MidiPage(QWidget *parent)
 
     QLabel *dBugDescriptionLabel = new QLabel(QObject::tr("Debug mode."));
     QLabel *midiTxChDescriptionLabel = new QLabel(tr("Midi Tx Channel:"));
-    //QLabel *midiDelayDescriptionLabel = new QLabel(tr("Realtime edit send rate."));
+    QLabel *midiDelayDescriptionLabel = new QLabel(tr("Realtime edit send rate."));
 
     QCheckBox *dBugCheckBox = new QCheckBox(QObject::tr("deBug Mode"));
     QSpinBox *midiTxChSpinBox = new QSpinBox;
@@ -161,7 +166,6 @@ MidiPage::MidiPage(QWidget *parent)
     midiTxChSpinBox->setValue(tempDataWrite);
     midiTxChSpinBox->setRange(1, 16);
     midiTxChSpinBox->setPrefix("Channel ");
-    //midiTxChSpinBox->setSuffix(QObject::tr("Channel"));
 
     this->midiDelaySpinBox = midiDelaySpinBox;
     const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
@@ -174,7 +178,7 @@ MidiPage::MidiPage(QWidget *parent)
     QVBoxLayout *dBugLabelLayout = new QVBoxLayout;
     dBugLabelLayout->addWidget(dBugDescriptionLabel);
     dBugLabelLayout->addWidget(midiTxChDescriptionLabel);
-    //dBugLabelLayout->addWidget(midiDelayDescriptionLabel);
+    dBugLabelLayout->addWidget(midiDelayDescriptionLabel);
 
     QVBoxLayout *dBugTimeBoxLayout = new QVBoxLayout;
     dBugTimeBoxLayout->addWidget(dBugCheckBox);

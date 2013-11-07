@@ -30,15 +30,16 @@
 #include <QList>
 
 
-
+class midiIODestroyer;
 
 class midiIO: public QThread
 {
 	Q_OBJECT
 
 public:
-	midiIO();
-	~midiIO();
+    midiIO();
+    //~midiIO();
+    static midiIO* Instance();
 	void sendSysxMsg(QString sysxOutMsg, int midiOutport, int midiInPort);
 	void sendMidi(QString midiMsg, int midiOutport);
 
@@ -46,6 +47,11 @@ public:
 	QList<QString> getMidiOutDevices();
 	QList<QString> getMidiInDevices();
   static QString sysxBuffer;
+
+protected :
+    //midiIO();
+    friend class midiIODestroyer;
+    virtual ~midiIO() { }
 		
 signals:
 	void errorSignal(QString windowTitle, QString errorMsg);
@@ -58,6 +64,8 @@ signals:
   void setStatusdBugMessage(QString dBug);
 		
 private:
+    static midiIO* _instance;
+    static midiIODestroyer _destroyer;
 	void queryMidiInDevices();
 	void queryMidiOutDevices();
 	void sendSyxMsg(QString sysxOutMsg, int midiOutport);

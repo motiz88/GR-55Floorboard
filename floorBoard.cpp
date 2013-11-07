@@ -46,7 +46,7 @@
 #include "menuPage_system.h"
 #include "menuPage_master.h"
 #include "menuPage_pdl.h"
-#include "menuPage_ez_edit.h"
+#include "menuPage_EZ_Edit.h"
 
 #include "soundSource_synth_a.h"
 #include "soundSource_synth_b.h"
@@ -80,7 +80,7 @@ floorBoard::floorBoard(QWidget *parent,
     else if(choice == 3) { imagePathFloor = "images/floor_green.png"; }
     else if(choice == 2) { imagePathFloor = "images/floor_aqua.png"; }
     else if(choice == 1) { imagePathFloor = "images/floor_black.png"; }
-    else { imagePathFloor = "images/floor_blue.png"; };
+    else { imagePathFloor = ":images/floor_blue.png"; };
     this->imagePathFloor = imagePathFloor;
     this->imagePathStompBG = imagePathStompBG;
 
@@ -190,7 +190,7 @@ void floorBoard::paintEvent(QPaintEvent *)
 
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
-    this->setAcceptDrops(true);
+    //this->setAcceptDrops(true);
 }
 
 void floorBoard::setFloorBoard() {
@@ -556,8 +556,3 @@ void floorBoard::update_structure()
     };
 }
 
-void floorBoard::beep()
-{
-    QApplication::beep();
-
-}

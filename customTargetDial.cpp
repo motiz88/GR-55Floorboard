@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "customTargetDial.h"
 #include "MidiTable.h"
 #include "SysxIO.h"

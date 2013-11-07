@@ -31,6 +31,7 @@ customSplashScreen::customSplashScreen(const QPixmap& pixmap)
 
 customSplashScreen::~customSplashScreen()
 {
+    this->deleteLater();
 }
 
 void customSplashScreen::drawContents(QPainter *painter)

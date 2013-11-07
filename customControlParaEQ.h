@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLPARAEQ_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include <QFrame>
 #include "customParaEQGraph.h"
 #include "customKnob.h"

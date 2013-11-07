@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_MFX_H
 #define STOMPBOX_MFX_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "stompBox.h"
 

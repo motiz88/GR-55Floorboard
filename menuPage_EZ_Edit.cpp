@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include "menuPage_ez_edit.h"
+#include "menuPage_EZ_Edit.h"
 
 menuPage_ez_edit::menuPage_ez_edit(QWidget *parent)
     : menuPage(parent)
@@ -37,18 +37,19 @@ void menuPage_ez_edit::updateSignal()
 
 void menuPage_ez_edit::setEditPages()
 {
-    //editDetails()->page()->newGroupBox("Patch & PreAmp Creator");
+    //editDetails()->page()->newGroupBox("Patch Creator");
     editDetails()->page()->newGroupBox("Style");
     editDetails()->page()->addEZ_Patch(0, 0, 1, 1, "00", "00", "1B", "middle", Qt::AlignCenter);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->addPage("00", "00", "1A", "00", "Tables");
+
     editDetails()->page()->newGroupBox("Preamp");
     editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "02", "Preamp");
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->addPage("00", "00", "1A", "00", "Tables");
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newGroupBox("Speaker & Cabinet");
     editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "0C", "Speaker");
-    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "01", "Tables");
 
     editDetails()->page()->newGroupBox("OD/DS Customiser");

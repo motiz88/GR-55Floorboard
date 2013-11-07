@@ -45,7 +45,7 @@ public:
   summaryDialogSystem(QWidget *parent = 0);
   QTextEdit *textDialog;
   QTextDocument *document;
-  QPrintDialog *dialog;
+  //QPrintDialog *dialog;
   QPushButton *cancelButton;
   QPushButton *printButton;
   QPushButton *saveAsButton;

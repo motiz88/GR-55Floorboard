@@ -24,7 +24,7 @@
 #ifndef INITPATCHLISTMENU_H 
 #define INITPATCHLISTMENU_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include <QTimer>
 #include "customButton.h"

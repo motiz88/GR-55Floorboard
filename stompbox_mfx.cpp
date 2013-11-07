@@ -52,7 +52,7 @@ void stompbox_mfx::setEditPages()
     editDetails()->page()->addStackControl();
     editDetails()->page()->addKnob(2, 0, 1, 1, "03", "00", "06");   // pan
     editDetails()->page()->addGroupBox(0, 0, 2, 1);
-    editDetails()->page()->insertStackField(0, 0, 1, 3, 1);
+    editDetails()->page()->insertStackField(0, 0, 1, 3, 2);
 
     // EQ
     editDetails()->page()->newStackField(0);

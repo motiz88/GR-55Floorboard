@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2013 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -71,7 +71,6 @@ QComboBox#smallcombo {
 font-family: Arial;
 font-size: 10px;
 font-weight: bold;
-/*font-stretch: 110;*/
 color: rgb(0,255,204);
 background-color: rgb(0,1,62);
 border-style: solid;
@@ -106,7 +105,7 @@ padding-right: 0px;
 
 /* CUSTOM SCROLLBAR STYLE */
 
-QComboBox#smallcombo QScrollBar:vertical {
+/*QComboBox#smallcombo QScrollBar:vertical {
 border: none;
 background: rgb(0,1,62);
 width: 9px;
@@ -148,7 +147,7 @@ height: 10px;
 QComboBox#smallcombo QScrollBar::add-page:vertical,
 QComboBox#smallcombo QScrollBar::sub-page:vertical {
 background: none;
-}
+}*/
 
 QComboBox#largecombo {
 font-family: Arial;

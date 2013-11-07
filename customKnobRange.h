@@ -25,7 +25,7 @@
 #define CUSTOMKNOBRANGE_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customRangeDial.h"
 
 class customKnobRange : public QWidget

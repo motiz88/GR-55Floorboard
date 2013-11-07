@@ -20,7 +20,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QFile>
 #include "summaryDialog.h"
 #include "Preferences.h"
@@ -508,20 +508,22 @@ void summaryDialog::cancel()
 
 void summaryDialog::printFile()
 {
-#ifndef QT_NO_PRINTER
-
+ #ifdef  Q_PROCESSOR_ARM
+ #elif QT_NO_PRINTER
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
     //QPrintPreviewDialog *dialog = new QPrintPreviewDialog(&printer, this);
     dialog->setWindowTitle(tr("Print Document"));
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
+    dialog->deleteLater();
 #endif
 }
 
 void summaryDialog::printPreview()
 {
-#ifndef QT_NO_PRINTER
+#ifdef  Q_PROCESSOR_ARM
+#elif QT_NO_PRINTER
 
     QPrinter printer;
     //QPrintDialog *dialog = new QPrintDialog(&printer, this);
@@ -529,6 +531,7 @@ void summaryDialog::printPreview()
     dialog->setWindowTitle(tr("Print Preview"));
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
+    dialog->deleteLater();
 #endif
 }
 

@@ -25,7 +25,7 @@
 #define CUSTOMDATAKNOB_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customDial.h"
 
 class customDataKnob : public QWidget

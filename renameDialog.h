@@ -24,7 +24,7 @@
 #ifndef RENAMEDIALOG_H
 #define RENAMEDIALOG_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 class renameDialog : public QDialog
 {

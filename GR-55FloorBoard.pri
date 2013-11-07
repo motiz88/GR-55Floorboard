@@ -36,12 +36,10 @@ HEADERS += ./editPage.h \
     ./customControlEZ_amp.h \
     ./customControlEZ_Patch.h \
     ./customControlParaEQ.h \
-    #./customControlGraphicEQ.h \
     ./customControlKnob.h \
     ./customControlDataKnob.h \
     ./customControlRange.h \
     ./customControlLabel.h \
-    #./customControlMasterEQ.h \
     ./customControlListMenu.h \
     ./customControlMidiTable.h \
     ./customControlSwitch.h \
@@ -49,7 +47,6 @@ HEADERS += ./editPage.h \
     ./customDial.h \
     ./customDisplay.h \
     ./customParaEQGraph.h \
-    #./customGraphicEQGraph.h \
     ./customKnob.h \
     ./customDataKnob.h \
     ./customEZ_amp.h \
@@ -58,7 +55,6 @@ HEADERS += ./editPage.h \
     ./customKnobRange.h \
     ./customLabelDisplay.h \
     ./customLed.h \
-    #./customMasterEQGraph.h \
     ./customMultiComboBox.h \
     ./customPanelButton.h \
     ./customRangeDial.h \
@@ -111,6 +107,7 @@ HEADERS += ./editPage.h \
     ./stompbox_ns.h \   
     ./stompbox_rv.h \
     ./midiIO.h \
+    ./midiIODestroyer.h \
     ./MidiTable.h \
     ./MidiTableDestroyer.h \
     ./RtError.h \
@@ -142,20 +139,17 @@ SOURCES += ./editPage.cpp \
     ./customControlEZ_amp.cpp \
     ./customControlEZ_Patch.cpp \
     ./customControlParaEQ.cpp \
-    #./customControlGraphicEQ.cpp \
     ./customControlKnob.cpp \
     ./customControlDataKnob.cpp \
     ./customControlLabel.cpp \
     ./customControlListMenu.cpp \
     ./customControlMidiTable.cpp \
-    #./customControlMasterEQ.cpp \
     ./customControlRange.cpp \
     ./customControlSwitch.cpp \
     ./customControlTarget.cpp \
     ./customDial.cpp \
     ./customDisplay.cpp \
     ./customParaEQGraph.cpp \
-    #./customGraphicEQGraph.cpp \
     ./customKnob.cpp \
     ./customDataKnob.cpp \
     ./customEZ_amp.cpp \
@@ -165,7 +159,6 @@ SOURCES += ./editPage.cpp \
     ./customLabelDisplay.cpp \
     ./customLed.cpp \
     ./customMultiComboBox.cpp \
-    #./customMasterEQGraph.cpp \
     ./customPanelButton.cpp \
     ./customRangeDial.cpp \
     ./customRenameDialog.cpp \
@@ -221,6 +214,7 @@ SOURCES += ./editPage.cpp \
     ./summaryDialogPatchList.cpp \
     ./summaryDialogSystem.cpp \
     ./midiIO.cpp \
+    ./midiIODestroyer.cpp \
     ./MidiTable.cpp \
     ./MidiTableDestroyer.cpp \
     ./Preferences.cpp \

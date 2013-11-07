@@ -25,7 +25,7 @@
 #define CUSTOMKNOBTARGET_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customTargetDial.h"
 
 

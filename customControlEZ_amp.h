@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLEZ_AMP_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include <QFrame>
 #include <QSlider>
 #include "customEZ_amp.h"

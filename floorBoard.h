@@ -61,7 +61,6 @@ public slots:
     void menuButtonSignal();
     void structure(bool value);
     void update_structure();
-    void beep();
 
 signals:
     void valueChanged(QString fxName, QString valueName, QString value);

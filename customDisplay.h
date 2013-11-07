@@ -24,7 +24,7 @@
 #ifndef CUSTOMDISPLAY_H
 #define CUSTOMDISPLAY_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 
 class customDisplay : public QWidget

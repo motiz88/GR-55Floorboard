@@ -24,6 +24,7 @@
 #include "customControlMidiTable.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "globalVariables.h"
 
 customMultiComboBox::customMultiComboBox(QWidget *parent,
                                          QString hex1, QString hex2, QString hex3,
@@ -33,10 +34,9 @@ customMultiComboBox::customMultiComboBox(QWidget *parent,
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
-    this->direction = direction;
-    if (direction.contains("System")) {this->area = "System"; }
-    else {this->area = "Structure"; };
+    this->area = "MidiT";
     pc_index = 0;
+    direction = "nul";
 
     setComboBoxList();
     makeList();
@@ -46,6 +46,7 @@ customMultiComboBox::customMultiComboBox(QWidget *parent,
 
 void customMultiComboBox::makeList()
 {
+    // strings of row lists initialised for PC labels 1~128
     QString bankList;
     QString pcList;
     QString pcList_01;
@@ -56,6 +57,7 @@ void customMultiComboBox::makeList()
     QString pcList_06;
     QString pcList_07;
     QString pcList_08;
+    // create 16 label items per row to display 128 Patch Change items per Bank
     for(int x=1; x<129; ++x)
     {
         QString num = QString::number(x, 10).toUpper();
@@ -77,14 +79,14 @@ void customMultiComboBox::makeList()
         if(num.length() < 2) {num.prepend("0"); }
         bankList.append("Bank:"+num+" ");
     };
-    display_01 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_02 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_03 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_04 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_05 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_06 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_07 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
-    display_08 = new customControlMidiTable(this, hex1, hex2 ,hex3, direction, "label");
+    display_01 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_02 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_03 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_04 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_05 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_06 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_07 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
+    display_08 = new customControlMidiTable(this, hex1, hex2 ,hex3, area, "label");
     display_09 = new customControlMidiTable(this, hex1, hex2 ,hex3, "Bank", bankList);
     display_10 = new customControlMidiTable(this, hex1, hex2 ,hex3, "Program Change", pcList);
     display_11 = new customControlMidiTable(this, hex1, hex2 ,hex3, "GR-55 Patch", comboList);
@@ -104,7 +106,7 @@ void customMultiComboBox::makeList()
 
     QHBoxLayout *twoLayout = new QHBoxLayout;
     twoLayout->setMargin(0);
-    twoLayout->setSpacing(0);
+    twoLayout->setSpacing(10);
     twoLayout->addStretch(10);
     twoLayout->addWidget(display_09, 0, Qt::AlignCenter);
     twoLayout->addWidget(display_10, 0, Qt::AlignCenter);
@@ -127,67 +129,14 @@ void customMultiComboBox::makeList()
     display_07->label->setText(pcList_07);
     display_08->label->setText(pcList_08);
 
-    SysxIO *sysxIO = SysxIO::Instance();
-    QString patchList_01;
-    QString patchList_02;
-    QString patchList_03;
-    QString patchList_04;
-    QString patchList_05;
-    QString patchList_06;
-    QString patchList_07;
-    QString patchList_08;
-    QStringList list = comboList.split(" ");
-    bool ok;
-    int hex_2 = QString(hex2).toInt(&ok, 16);
-    int hex_3 = QString(hex3).toInt(&ok, 16);
-    for(int x=1; x<129; ++x)
-    {
-        if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
-        QString hex_02 = QString::number(hex_2, 16).toUpper();
-        if(hex_02.length() < 2) {hex_02.prepend("0"); }
-        QString hex_03 = QString::number(hex_3, 16).toUpper();
-        if(hex_03.length() < 2) {hex_03.prepend("0"); }
-        int index = 0;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
-        QString num = list.at(index);
-        if(x<17)        {patchList_01.append("   "+num+"  "); };
-        if(x>16 && x<33){patchList_02.append("   "+num+"  "); };
-        if(x>32 && x<49){patchList_03.append("   "+num+"  "); };
-        if(x>48 && x<65){patchList_04.append("   "+num+"  "); };
-        if(x>64 && x<81){patchList_05.append("   "+num+"  "); };
-        if(x>80 && x<97){patchList_06.append("   "+num+"  "); };
-        if(x>96 && x<113){patchList_07.append("   "+num+"  "); };
-        if(x>112 && x<129){patchList_08.append("   "+num+"  "); };
-        hex_3 = hex_3 + 2;
-    };
-    display_01->display->setText(patchList_01);
-    display_02->display->setText(patchList_02);
-    display_03->display->setText(patchList_03);
-    display_04->display->setText(patchList_04);
-    display_05->display->setText(patchList_05);
-    display_06->display->setText(patchList_06);
-    display_07->display->setText(patchList_07);
-    display_08->display->setText(patchList_08);
-
+    displayUpdate();
 
     QObject::connect(this, SIGNAL( updateSignal() ), this->parent(), SIGNAL( updateSignal() ));
 }
 
-//void customMultiComboBox::paintEvent(QPaintEvent *)
-//{
-/*DRAWS RED BACKGROUND FOR DeBugGING PURPOSE */
-/*QPixmap image(":images/dragbar.png");
-
-        QRectF target(0.0, 0.0, this->width(), this->height());
-        QRectF source(0.0, 0.0, this->width(), this->height());
-
-        QPainter painter(this);
-        painter.drawPixmap(target, image, source);*/
-//}
-
 void customMultiComboBox::setComboBoxList()
 {
     MidiTable *midiTable = MidiTable::Instance();
-    Midi items;
     Midi item_0;
     Midi item_1;
     Midi item_2;
@@ -198,137 +147,106 @@ void customMultiComboBox::setComboBoxList()
     item_2 = midiTable->getMidiMap("MPT", "00", "00", "00", "02");
     item_3 = midiTable->getMidiMap("MPT", "00", "00", "00", "03");
     item_4 = midiTable->getMidiMap("MPT", "00", "00", "00", "04");
-    items = item_0;
 
-    QString longestItem = "";
     itemcount = 0;
-    int itemSize = items.level.size();
-    int itemTotal = 0;
+    int itemSize = item_0.level.size();
     for(itemcount=0;itemcount<itemSize;itemcount++ )
     {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->comboList.append(item);
-        this->comboList.append(" ");
+        this->comboList.append(item_0.level.at(itemcount).name+" ");
     };
 
-    itemTotal = itemTotal + itemcount;
-    items = item_1;
-    itemSize = items.level.size();
+    itemSize = item_1.level.size();
     for(itemcount=0;itemcount<itemSize;itemcount++ )
     {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->comboList.append(item);
-        this->comboList.append(" ");
+        this->comboList.append(item_1.level.at(itemcount).name+" ");
     };
 
-    itemTotal = itemTotal + itemcount;
-    items = item_2;
-    itemSize = items.level.size();
+    itemSize = item_2.level.size();
     for(itemcount=0;itemcount<itemSize;itemcount++ )
     {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->comboList.append(item);
-        this->comboList.append(" ");
+        this->comboList.append(item_2.level.at(itemcount).name+" ");
     };
 
-    itemTotal = itemTotal + itemcount;
-    items = item_3;
-    itemSize = items.level.size();
+    itemSize = item_3.level.size();
     for(itemcount=0;itemcount<itemSize;itemcount++ )
     {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->comboList.append(item);
-        this->comboList.append(" ");
+        this->comboList.append(item_3.level.at(itemcount).name+" ");
     };
-    itemTotal = itemTotal + itemcount;
-    items = item_4;
-    itemSize = items.level.size();
-    for(itemcount=0;itemcount<itemSize;itemcount++ )
-    {
-        QString item;
-        QString desc = items.level.at(itemcount).name;
-        if(!desc.isEmpty())
-        {
-            item = desc;
-        }
-        else
-        {
-            item = "Out of Range";
-        };
-        if(longestItem.size() < item.size()) longestItem = item;
-        this->comboList.append(item);
-        this->comboList.append(" ");
-    };
-    itemTotal = itemTotal + itemcount;
 
+    itemSize = item_4.level.size();
+    for(itemcount=0;itemcount<itemSize;itemcount++ )
+    {
+        this->comboList.append(item_4.level.at(itemcount).name+" ");
+    };
 }
 
 void customMultiComboBox::valueChanged(int index)
 {
-    QString valueHex = QString::number(index, 16).toUpper();
-    if(valueHex.length() < 2) valueHex.prepend("0");
-
+    // when GR-55 patch combo is changed
     SysxIO *sysxIO = SysxIO::Instance();
     bool ok;
-    int maxRange = 128;
-    int value = valueHex.toInt(&ok, 16);
-    int dif = value/maxRange;
+    int dif = index/128;
     QString valueHex1 = QString::number(dif, 16).toUpper();
     if(valueHex1.length() < 2) valueHex1.prepend("0");
-    QString valueHex2 = QString::number(value - (dif * maxRange), 16).toUpper();
-    if(valueHex2.length() < 2) valueHex2.prepend("0");
+    QString valueHex2 = QString::number(index - (dif * 128), 16).toUpper();
+    if(valueHex2.length() < 2) valueHex2.prepend("0");  // index converted to 2 byte QString.
+    QString valueHex3 = "0";
+    valueHex3.append(valueHex2.mid(1,1));
+    valueHex2.remove(1,1);
+    valueHex2.prepend("0");    // convert to a 3 byte '0' separated string.
 
     int hex_2 = QString(this->hex2).toInt(&ok, 16);
     int hex_3 = QString(this->hex3).toInt(&ok, 16);
-    hex_3 = hex_3 + pc_index;
+    hex_3 = hex_3 + (display_10->controlMidiComboBox->currentIndex()*3);  //MPT patch x 3
     if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
+    if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
+    if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
+    hex_2 = hex_2 + display_09->controlMidiComboBox->currentIndex();  //MPT bank
     QString hex_02 = QString::number(hex_2, 16).toUpper();
     if(hex_02.length() < 2) {hex_02.prepend("0"); }
     QString hex_03 = QString::number(hex_3, 16).toUpper();
     if(hex_03.length() < 2) {hex_03.prepend("0"); }
 
-    //sysxIO->setFileSource("System", hex1, hex_02, hex_03, valueHex1, valueHex2);
+    QString sysxMsg = "F0411000005312";
+    sysxMsg.append("02"+hex1+hex_02+hex_03+valueHex1+valueHex2+valueHex3);
+    int dataSize = 0;
+    for(int h=checksumOffset;h<sysxMsg.size()-1;++h)
+    { dataSize += sysxMsg.mid(h*2, 2).toInt(&ok, 16); };
+    QString base = "80";                                   // checksum calculate.
+    unsigned int sum = dataSize % base.toInt(&ok, 16);
+    if(sum!=0) { sum = base.toInt(&ok, 16) - sum; };
+    QString checksum = QString::number(sum, 16).toUpper();
+    if(checksum.length()<2) {checksum.prepend("0");};
+    sysxMsg.append(checksum);
+    sysxMsg.append("F7");
+    if(sysxIO->isConnected() && sysxIO->deviceReady() )
+    {
+        sysxIO->setDeviceReady(false);
 
+        emit sysxIO->setStatusSymbol(2);
+        emit sysxIO->setStatusMessage(tr("Sending"));
+
+        QObject::connect(sysxIO, SIGNAL(sysxReply(QString)),
+                         sysxIO, SLOT(resetDevice(QString)));
+
+        sysxIO->sendSysx(sysxMsg);
+    }
+    else if(sysxIO->isConnected())
+    {
+        sysxIO->sendSpooler.append(sysxMsg);
+    };
+
+    displayUpdate();
+    emit updateSignal();
+}
+
+void customMultiComboBox::dialogUpdateSignal()
+{
+
+}
+
+void customMultiComboBox::displayUpdate()
+{
     QString patchList_01;
     QString patchList_02;
     QString patchList_03;
@@ -338,26 +256,30 @@ void customMultiComboBox::valueChanged(int index)
     QString patchList_07;
     QString patchList_08;
     QStringList list = comboList.split(" ");
-    hex_2 = QString(this->hex2).toInt(&ok, 16);
-    hex_3 = QString(this->hex3).toInt(&ok, 16);
-    for(int x=1; x<129; ++x)
+    bool ok;
+    QList <QString> items;
+    items = getMPTitems();  // get the data block from the GR-55 system MPT area
+
+    for(int x=1; x<129; ++x) // list of 128 patches on the page
     {
-        if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
-        QString hex_02 = QString::number(hex_2, 16).toUpper();
-        if(hex_02.length() < 2) {hex_02.prepend("0"); }
-        QString hex_03 = QString::number(hex_3, 16).toUpper();
-        if(hex_03.length() < 2) {hex_03.prepend("0"); }
-        int index = 0;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
-        QString num = list.at(index);
-        if(x<17)        {patchList_01.append("   "+num+"  "); };
-        if(x>16 && x<33){patchList_02.append("   "+num+"  "); };
-        if(x>32 && x<49){patchList_03.append("   "+num+"  "); };
-        if(x>48 && x<65){patchList_04.append("   "+num+"  "); };
-        if(x>64 && x<81){patchList_05.append("   "+num+"  "); };
-        if(x>80 && x<97){patchList_06.append("   "+num+"  "); };
-        if(x>96 && x<113){patchList_07.append("   "+num+"  "); };
-        if(x>112 && x<129){patchList_08.append("   "+num+"  "); };
-        hex_3 = hex_3 + 2;
+        QString num;
+        if(items.size()==382)
+        {
+            QString v = items.at(x-1);
+            int index = v.toInt(&ok, 16);                   //work in progress
+            num = list.at(index);
+            num.prepend("__");
+        } else {
+            num="_no_data_";
+        };
+        if(x<17)        {patchList_01.append(num); };
+        if(x>16 && x<33){patchList_02.append(num); };
+        if(x>32 && x<49){patchList_03.append(num); };
+        if(x>48 && x<65){patchList_04.append(num); };
+        if(x>64 && x<81){patchList_05.append(num); };
+        if(x>80 && x<97){patchList_06.append(num); };
+        if(x>96 && x<113){patchList_07.append(num); };
+        if(x>112 && x<129){patchList_08.append(num); };
     };
     display_01->display->setText(patchList_01);
     display_02->display->setText(patchList_02);
@@ -368,32 +290,89 @@ void customMultiComboBox::valueChanged(int index)
     display_07->display->setText(patchList_07);
     display_08->display->setText(patchList_08);
 
-    emit updateSignal();
-}
-
-void customMultiComboBox::dialogUpdateSignal()
-{
-
 }
 
 void customMultiComboBox::changedIndex(int index)
 {
-    pc_index = index*2;
-    bool ok;
-    SysxIO *sysxIO = SysxIO::Instance();
-    int hex_2 = QString(this->hex2).toInt(&ok, 16);
-    int hex_3 = QString(this->hex3).toInt(&ok, 16);
-    hex_3 = hex_3 + pc_index;
-    if(hex_3 > 127) {hex_3 = hex_3 - 128; hex_2 = hex_2 + 1; };
-    QString hex_02 = QString::number(hex_2, 16).toUpper();
-    if(hex_02.length() < 2) {hex_02.prepend("0"); }
-    QString hex_03 = QString::number(hex_3, 16).toUpper();
-    if(hex_03.length() < 2) {hex_03.prepend("0"); }
-    int indice = 1;//sysxIO->getSourceValue("MidiT", hex1, hex_02, hex_03);
-    display_10->controlMidiComboBox->setCurrentIndex(indice);
-
+    index++;
+    // when bank combo is changed
+    displayUpdate();
 }
 
+QList<QString> customMultiComboBox::getMPTitems()
+{
+    MPT_items.clear();
+    //create a sudo list of MPT items for testing
+    for(int x=0; x<382; ++x)
+    {
+        QString num = QString::number(x, 16).toUpper();
+        if(num.length()<3) {num.prepend("0");};
+        if(num.length()<3) {num.prepend("0");};
+        MPT_items.append(num);
+    };
+    SysxIO *sysxIO = SysxIO::Instance();
+    bool ok;
+    sysxIO->setStatusProgress(100);
+    if (sysxIO->isConnected() && sysxIO->deviceReady())
+    {
+        sysxIO->setStatusSymbol(2);
+        sysxIO->setStatusMessage(tr("Request MPT data"));
+        sysxIO->setDeviceReady(false); // Reserve the device for interaction.
+        QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)));
+        QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(MPTReply(QString)));
+        int bank = (this->hex2.toInt(&ok, 16)*128)+this->hex3.toInt(&ok, 16)+
+                (display_09->controlMidiComboBox->currentIndex()*4);   // get bank combo value
+        QString hex_02 = QString::number(bank/128, 16).toUpper();
+        if(hex_02.length()<2) {hex_02.prepend("0"); };
+        int msb = bank/128;
+        int lsb = bank-(msb*128);
+        QString hex_03 = QString::number(lsb, 16).toUpper();
+        if(hex_03.length()<2) {hex_03.prepend("0"); };
+        QString MPTrequest = "F041100000531102"+hex_02+hex_03+"0000000300";
+        int dataSize = 0; bool ok;
+        for(int h=checksumOffset;h<MPTrequest.size()-1;++h)
+        { dataSize += MPTrequest.mid(h*2, 2).toInt(&ok, 16); };
+        QString base = "80";                                   // checksum calculate.
+        unsigned int sum = dataSize % base.toInt(&ok, 16);
+        if(sum!=0) { sum = base.toInt(&ok, 16) - sum; };
+        QString checksum = QString::number(sum, 16).toUpper();
+        if(checksum.length()<2) {checksum.prepend("0");};
+        MPTrequest.append(checksum);
+        MPTrequest.append("F7");
+        sysxIO->sendSysx(MPTrequest); // GR-55 System MPT bank data Request.
+        sysxIO->setStatusProgress(0);
+    };
+    //return MPT_items;
+}
 
-
+QList<QString> customMultiComboBox::MPTReply(QString replyMsg)
+{
+    QString test;
+    QList <QString> items;
+    SysxIO *sysxIO = SysxIO::Instance();
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(MPTReply(QString)));
+    sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
+        if(sysxIO->noError() && replyMsg.size()/2 == 397)  // data format from the GR-55 MPT
+        {
+            replyMsg = replyMsg.mid(22, 764).simplified().toUpper(); //copy data bits only
+            for (int x=0; x<397; ++x)
+            {
+                items.append(replyMsg.mid(x*2, 2));
+                test.append(replyMsg.mid(x*2, 2)+" ");
+            };
+        } else
+        { items = MPT_items; };
+    sysxIO->setStatusMessage(tr("Ready"));
+    bool ok;
+    int MPT_MSB = (replyMsg.mid(16, 2).toInt(&ok, 16)-this->hex2.toInt(&ok, 16))*128;
+    int MPT_LSB = (replyMsg.mid(18, 2).toInt(&ok, 16));
+    this->MPT_index = MPT_MSB+MPT_LSB;
+    /*QMessageBox *msgBox = new QMessageBox();
+    msgBox->setWindowTitle(QObject::tr("deBug"));
+    msgBox->setText(test);
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->exec();
+    msgBox->deleteLater();*/
+    return items;
+}
 

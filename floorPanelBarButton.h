@@ -24,7 +24,7 @@
 #ifndef FLOORPANELBARBUTTON_H
 #define FLOORPANELBARBUTTON_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include <QPixmap>
 

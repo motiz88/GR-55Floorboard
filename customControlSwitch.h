@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLSWITCH_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customSwitch.h"
 #include "customControlLabel.h"
 

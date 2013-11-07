@@ -24,7 +24,7 @@
 #ifndef MENUPAGE_EZ_EDIT_H
 #define MENUPAGE_EZ_EDIT_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "menuPage.h"
 

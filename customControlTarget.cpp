@@ -158,9 +158,6 @@ customControlTarget::customControlTarget(QWidget *parent,
     QObject::connect(this, SIGNAL( updateSignal() ),
                      this->parent(), SIGNAL( updateSignal() ));
 
-    QObject::connect(this, SIGNAL( updateDisplayTarget(QString) ),
-                     this, SIGNAL( updateSignal() ));
-
     QObject::connect(this, SIGNAL( updateDisplayMin(QString) ),
                      this->displayMin, SLOT( setText(QString) ));
 
@@ -177,18 +174,12 @@ customControlTarget::customControlTarget(QWidget *parent,
 
 void customControlTarget::paintEvent(QPaintEvent *)
 {
-    /*DRAWS RED BACKGROUND FOR DEBUGGING PURPOSE */
-    /*QPixmap image(":images/dragbar.png");
 
-        QRectF target(0.0, 0.0, this->width(), this->height());
-        QRectF source(0.0, 0.0, this->width(), this->height());
-
-        QPainter painter(this);
-        painter.drawPixmap(target, image, source);*/
 }
 
 void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLsb)
 {
+    // Set value for TARGET Knob
     QString hex_a = this->hex1;
     if(this->hex3 == "7F") { hex_a = "02"; }; // assign 7 crosses the page boundry
     SysxIO *sysxIO = SysxIO::Instance();
@@ -201,10 +192,11 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     bool ok;
     value = valueHex.toInt(&ok, 16);
     this->knobTarget->setValue(value);                                                          // set the target knob position..
-
+    this->displayCombo->controlListComboBox->setCurrentIndex(value);
     this->hexMsb = hexMsb;
     this->hexLsb = hexLsb;
 
+    //Set value for Target MIN
     MidiTable *midiTable = MidiTable::Instance();
     value = midiTable->getRangeMinimum("Tables", "00", "00", hexLsb);
     this->knobMin->setValue(value);                                                             // sets knob initial position
@@ -212,7 +204,6 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
     emit updateDisplayMin(valueStr);                                                            // initial value only is displayed under knob
-
 
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) { valueHex.prepend("00"); }
@@ -227,14 +218,15 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     QString lsb_c = valueHex.at(2);
     lsb_c.prepend("0");
     valueString.append(lsb_c);
-    sysxIO->setFileSource("Structure", hex_a, hex2, hexMin, valueString);
-    ////////////////////////////////////
+
+    // Set Value for Target MAX
     value = midiTable->getRange("Tables", "00", "00", hexLsb);
     this->knobMax->setValue(value);                                                             // sets knob initial position
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
     emit updateDisplayMax(valueStr);
+
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) { valueHex.prepend("00"); }
     else if(valueHex.length() < 3) { valueHex.prepend("0"); };
@@ -248,7 +240,7 @@ void customControlTarget::knobSignal(QString hexMsb, QString hex2, QString hexLs
     lsb_c = valueHex.at(2);
     lsb_c.prepend("0");
     valueString.append(lsb_c);
-    sysxIO->setFileSource("Structure", hex_a, hex2, hexMax, valueString);
+
     emit updateSignal();                                                                      // initial value only is displayed under knob
 }
 
@@ -274,9 +266,11 @@ void customControlTarget::dialogUpdateSignal()
     int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");                     // check Mode setting.
     if(mode_value != 0) {mode_hex = "0D"; };
     QString valueStr = midiTable->getValue("Tables", "00", "00", mode_hex, valueHex);          // lookup the target values
-    emit updateDisplayTarget(valueStr);
+
     int maxRange = 256;
     value = valueHex.toInt(&ok, 16);
+    this->displayCombo->controlListComboBox->setCurrentIndex(value);
+
     int dif = value/maxRange;
     QString valueHex1 = QString::number(dif, 16).toUpper();
     if(valueHex1.length() < 2) valueHex1.prepend("0");
@@ -337,6 +331,6 @@ void customControlTarget::dialogUpdateSignal()
     valueHex = QString::number(value, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     valueStr = midiTable->getValue("Tables", "00", "00", hexLsb, valueHex);
-    updateDisplayMax(valueStr);
+    emit updateDisplayMax(valueStr);
 }
 

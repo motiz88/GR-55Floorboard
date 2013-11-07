@@ -24,7 +24,7 @@
 #ifndef CUSTOMRENAMEWIDGET_H
 #define CUSTOMRENAMEWIDGET_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "customDisplay.h"
 #include "customControlLabel.h"

@@ -4,7 +4,7 @@ GR-55FloorBoard Copyright (C) 2011 Colin Willcocks (gumtownbassman@yahoo.com).
 =======
 
 
-GR-55FloorBoard beta version 20120724: 24 July 2012
+GR-55FloorBoard beta version 20120806: 06 August 2012
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 

@@ -24,7 +24,7 @@
 #ifndef CUSTOMLABELDISPLAY_H
 #define CUSTOMLABELDISPLAY_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 
 class customLabelDisplay : public QWidget

@@ -26,8 +26,6 @@
 menuPage_system::menuPage_system(QWidget *parent)
     : menuPage(parent)
 { 
-    //setImage(":/images/system_pushbutton.png");
-    //setLSB("00", "00");
     setEditPages();
 }
 
@@ -1095,7 +1093,6 @@ void menuPage_system::setEditPages()
 
     editDetails()->addPage("00", "00", "17", "02", "Tables");
 
-
     editDetails()->page()->addLabel(0, 0, 1, 1, text);
     editDetails()->page()->newGroupBox("Bass Mode - GK setup");
     editDetails()->page()->newStackControl(0);
@@ -1629,12 +1626,12 @@ void menuPage_system::setEditPages()
     editDetails()->addPage("00", "00", "17", "03", "Tables");
 
     editDetails()->page()->newGroupBox("GUITAR MODE - MIDI PROGRAM TABLE.            Caution: Changes are automatically written to the GR-55.");
-    editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "01", "00", "System");
+   // editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "01", "00", "MidiT");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->addPage("00", "00", "17", "04", "Tables");
 
     editDetails()->page()->newGroupBox("BASS MODE - MIDI PROGRAM TABLE.            Caution: Changes are automatically written to the GR-55.");
-    editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "04", "01", "00", "System");
+    //editDetails()->page()->addMultiComboBox(0, 0, 1, 1, "02", "03", "00", "MidiT");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->addPage("00", "00", "17", "05", "Tables");
 }

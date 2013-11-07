@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLMIDITABLE_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customControlLabel.h"
 #include "customComboBox.h"
 
@@ -49,8 +49,8 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 public slots:
-    void valueChanged(int index);
-    void dialogUpdateSignal();
+    //void valueChanged(int index);
+    //void dialogUpdateSignal();
 
 signals:
     void updateSignal();
