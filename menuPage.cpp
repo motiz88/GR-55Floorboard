@@ -138,7 +138,7 @@ editWindow* menuPage::editDetails()
 
 void menuPage::pedal_ButtonSignal(bool value)
 {
-    if (this->id == 12)
+    if (this->id == 12 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -148,7 +148,7 @@ void menuPage::pedal_ButtonSignal(bool value)
 
 void menuPage::master_ButtonSignal(bool value)
 {
-    if (this->id == 13)
+    if (this->id == 13 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -165,11 +165,10 @@ void menuPage::system_ButtonSignal(bool value)
         emit setEditDialog(this->editDialog);
     };*/
     SysxIO *sysxIO = SysxIO::Instance();
-    if((this->id == 14) && sysxIO->deviceReady())
+    if(this->id == 14  && value == true && sysxIO->deviceReady())
     {
-        emit setStatusMessage(tr("Opening Page..."));
+        emit setStatusMessage(tr("Opening Page...Please Wait..."));
         emit setStatusSymbol(3);
-        QString replyMsg;
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
         emit setEditDialog(this->editDialog);
@@ -193,6 +192,7 @@ void menuPage::system_ButtonSignal(bool value)
             msgBox->setText(snork);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
             emit setStatusMessage(tr("Not Connected"));
             emit setStatusSymbol(0);
 
@@ -202,7 +202,7 @@ void menuPage::system_ButtonSignal(bool value)
 
 void menuPage::ez_edit_ButtonSignal(bool value)
 {
-    if (this->id == 23)
+    if (this->id == 23 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -212,7 +212,7 @@ void menuPage::ez_edit_ButtonSignal(bool value)
 
 void menuPage::assign1_ButtonSignal(bool value)
 {
-    if (this->id == 15)
+    if (this->id == 15 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -222,7 +222,7 @@ void menuPage::assign1_ButtonSignal(bool value)
 
 void menuPage::assign2_ButtonSignal(bool value)
 {
-    if (this->id == 16)
+    if (this->id == 16 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -232,7 +232,7 @@ void menuPage::assign2_ButtonSignal(bool value)
 
 void menuPage::assign3_ButtonSignal(bool value)
 {
-    if (this->id == 17)
+    if (this->id == 17 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -242,7 +242,7 @@ void menuPage::assign3_ButtonSignal(bool value)
 
 void menuPage::assign4_ButtonSignal(bool value)
 {
-    if (this->id == 18)
+    if (this->id == 18 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -252,7 +252,7 @@ void menuPage::assign4_ButtonSignal(bool value)
 
 void menuPage::assign5_ButtonSignal(bool value)
 {
-    if (this->id == 19)
+    if (this->id == 19 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -262,7 +262,7 @@ void menuPage::assign5_ButtonSignal(bool value)
 
 void menuPage::assign6_ButtonSignal(bool value)
 {
-    if (this->id == 20)
+    if (this->id == 20 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -272,7 +272,7 @@ void menuPage::assign6_ButtonSignal(bool value)
 
 void menuPage::assign7_ButtonSignal(bool value)
 {
-    if (this->id == 21)
+    if (this->id == 21 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -282,7 +282,7 @@ void menuPage::assign7_ButtonSignal(bool value)
 
 void menuPage::assign8_ButtonSignal(bool value)
 {
-    if (this->id == 22)
+    if (this->id == 22 && value == true)
     {
         emitValueChanged(this->hex1, this->hex2, "00", "void");
         this->editDialog->setWindow(this->fxName);
@@ -298,12 +298,13 @@ void menuPage::systemReply(QString replyMsg)
 
     if(sysxIO->noError())
     {
-        if(replyMsg.size()/2 == 1173)  // data format from the GR-55
+        if(replyMsg.size()/2 == 51989 || replyMsg.size()/2 == 1173)  // 51989 = large data format and 1173 = small from the GR-55
         {
             /* TRANSLATE SYSX MESSAGE FORMAT to 128 byte data blocks */
                       QString part1 = replyMsg.mid(0, 412); //from 0, copy system data upto 02000200 byte 128
                       part1.append("7FF7");
-                      QString part2 = replyMsg.mid(412, 1934);
+                      int end = replyMsg.count()-412 ;
+                      QString part2 = replyMsg.mid(412, end );   //was 1934
                       part2.prepend("F041100000531202000300");
                       replyMsg = "";
                       replyMsg.append(part1).append(part2);
@@ -334,7 +335,7 @@ void menuPage::systemReply(QString replyMsg)
                               i=i+2;
                           };
                       };
-                      replyMsg = reBuild.simplified().toUpper().remove("0X").remove(" ");
+                      replyMsg = reBuild.simplified().toUpper();
 
             QString area = "System";
             sysxIO->setFileSource(area, replyMsg);		// Set the source to the data received.
@@ -356,6 +357,7 @@ void menuPage::systemReply(QString replyMsg)
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
         };
     };
     emit setStatusMessage(tr("Ready"));

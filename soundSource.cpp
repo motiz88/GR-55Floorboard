@@ -254,6 +254,7 @@ void soundSource::setComboBoxCurrentIndex(int index)
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
     stompDisplay = new customDisplay(QRect(17, 41, 120, 25), this);
+    this->stompDisplay->setSubObjectName("nameSub");
     Preferences *preferences = Preferences::Instance();
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
@@ -340,7 +341,7 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
     QString valueStr = midiTable->getValue("Structure", hex1, hex2, hex3, valueHex);
-    this->stompDisplay->setMainText(valueStr, Qt::AlignTop);
+    this->stompDisplay->setMainText(valueStr, Qt::AlignCenter);
 }
 
 void soundSource::updateKnob2(QString hex1, QString hex2, QString hex3)
@@ -461,8 +462,9 @@ void soundSource::valueChanged(int index)
 
 void soundSource::emitValueChanged(QString hex1, QString hex2, QString hex3, QString valueHex)
 {
+    SysxIO *sysxIO = SysxIO::Instance();
     QString valueName, valueStr;
-    if(hex1 != "void" && hex2 != "void")
+    if(hex1 != "void" && hex2 != "void" && sysxIO->deviceReady())
     {
         MidiTable *midiTable = MidiTable::Instance();
         if(valueHex != "void")

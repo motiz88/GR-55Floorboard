@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "customPanelButton.h"
 #include "globalVariables.h"
 

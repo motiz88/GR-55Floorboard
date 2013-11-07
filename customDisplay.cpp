@@ -142,6 +142,15 @@ void customDisplay::setMainText(QString mainText, Qt::Alignment alignment)
 {
     this->mainLabel->setText(mainText);
     this->mainLabel->setAlignment(alignment);
+    if(alignment==Qt::AlignCenter)
+    {
+        QFont splashFont;
+        splashFont.setFamily("Arial");
+        splashFont.setBold(true);
+        splashFont.setPixelSize(13);
+        splashFont.setStretch(90);
+        this->mainLabel->setFont(splashFont);
+    };
 }
 
 void customDisplay::setSubText(QString subTextLeft, QString subTextRight)

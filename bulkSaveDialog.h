@@ -27,7 +27,7 @@
 #include <QDialog>
 #include <QLabel>
 #include <QProgressBar>
-#include <QSpinBox>
+#include <QComboBox>
 #include <QCheckBox>
 #include <QRadioButton>
 #include "SysxIO.h" 
@@ -41,10 +41,14 @@ public:
     bulkSaveDialog();
     ~bulkSaveDialog();
     QCheckBox* systemCheckBox;
-    QSpinBox* startRangeSpinBox;
-    QSpinBox* finishRangeSpinBox;
+    QComboBox* startRangeComboBox;
+    QComboBox* finishRangeComboBox;
     QProgressBar *progressBar;
     QString msg;
+    int patch_start;
+    int patch_finish;
+    int patch_count;
+    int patch_range;
 
 signals:
     void setStatusMessage(QString message);
@@ -52,6 +56,7 @@ signals:
     void setStatusSymbol(int value);
 
 public slots:
+    void comboChanged();
     void backup();
     void requestPatch(int bank, int patch);
     void updatePatch(QString replyMsg);
@@ -67,8 +72,6 @@ private:
     QRadioButton *g5lButton;
     QRadioButton *syxButton;
     QRadioButton *midButton;
-    int bankStart;
-    int bankFinish;
     int progress;
     bool systemSelect;
     QString bulkData;

@@ -114,7 +114,7 @@ void customControlEZ_Patch::paintEvent(QPaintEvent *)
 
 void customControlEZ_Patch::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 {
-    select_patch();
+    if(pMouseEvent) select_patch();
 }
 
 void customControlEZ_Patch::valueChanged(int value)
@@ -169,14 +169,15 @@ void customControlEZ_Patch::select_patch()
     sysxIO->setFileSource("Structure", patch);
     if(sysxIO->isConnected() && sysxIO->deviceReady())
     {
+        SLEEP(100);
         int time = 0;
         sysxIO->writeToBuffer();
-        while(time<20)
+        while(time<50)
         {
-            SLEEP(150);
+            SLEEP(100);
             if(sysxIO->deviceReady())
             {
-                time = 20;
+                time = 50;
             };
             ++time;     // wait until device is ready
         };

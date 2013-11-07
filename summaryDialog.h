@@ -47,7 +47,7 @@ public:
   ~summaryDialog();
   QTextEdit *textDialog;
   QTextDocument *document;
-  QPrintDialog *dialog;
+ // QPrintDialog *dialog;
                                                             
 public slots:
   void view();

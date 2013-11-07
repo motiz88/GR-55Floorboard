@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_DD_H
 #define STOMPBOX_DD_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "stompBox.h"
 

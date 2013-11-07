@@ -37,57 +37,59 @@
 
 class bulkEditDialog : public QDialog
 {
-	Q_OBJECT
-  
+    Q_OBJECT
+
 public:
-	bulkEditDialog(int partStart, int partLength, QString partHex1, QString partHex3);
-  QString msg;
-  
+    bulkEditDialog(int partStart, int partLength, QString partHex1, QString partHex3);
+    ~bulkEditDialog();
+    QString msg;
+
 signals:
-  void setStatusMessage(QString message);
-  void setStatusProgress(int value);
-  void setStatusSymbol(int value);
-  void setdeBugStatusMessage(QString message);
-                    
+    void setStatusMessage(QString message);
+    void setStatusProgress(int value);
+    void setStatusSymbol(int value);
+    void setdeBugStatusMessage(QString message);
+
 public slots:
-  void sendData();
-  void prepareData();
-  void bulkStatusProgress(int value);
-  void sendSequence(QString value); 
-  void sendPatch(QString data);
-  
+    void sendData();
+    void prepareData();
+    void bulkStatusProgress(int value);
+    void sendSequence(QString value);
+    void sendPatch(QString data);
+
 private slots:
-  void comboValueChanged(int value);
-       
+    void comboValueChanged(int value);
+    void close();
+
 private: 
-  QComboBox *startPatchCombo;
-	QComboBox *finishPatchCombo;
-	QLineEdit *finishRange;
-  QProgressBar *progressBar;
-  QLabel *progressLabel;
-  QLabel *bytesLabel; 
-  QPushButton *startButton;
-  QPushButton *cancelButton; 
-  QPushButton *completedButton;
-  int start;
-  int finish;
-	int patchRange;
-	int progress;
-	int partialStart;
-	int partialLength;
-	int range;
-	int patch;
-	int bank;	
-	int steps;
-	int dataSent;
-	QString patchName;
-	QString partialData;
-	QString bulk;
-	QList<QString> patchList;	 
-	bool failed;
-	QString hex1;
-	QString hex3;
-	QString addrMSB;
+    QComboBox *startPatchCombo;
+    QComboBox *finishPatchCombo;
+    QLineEdit *finishRange;
+    QProgressBar *progressBar;
+    QLabel *progressLabel;
+    QLabel *bytesLabel;
+    QPushButton *startButton;
+    QPushButton *cancelButton;
+    QPushButton *completedButton;
+    int start;
+    int finish;
+    int patchRange;
+    int progress;
+    int partialStart;
+    int partialLength;
+    int range;
+    int patch;
+    int bank;
+    int steps;
+    int dataSent;
+    QString patchName;
+    QString partialData;
+    QString bulk;
+    QList<QString> patchList;
+    bool failed;
+    QString hex1;
+    QString hex3;
+    QString addrMSB;
 };
 
 #endif // bulkEditDialog_H

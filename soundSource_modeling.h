@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_MODELING_H
 #define STOMPBOX_MODELING_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "soundSource.h"
 

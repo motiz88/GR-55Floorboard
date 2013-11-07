@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "customButton.h"
 #include "globalVariables.h"
 
@@ -89,9 +89,9 @@ void customButton::setOffset(signed int imageNr)
 
 void customButton::mousePressEvent(QMouseEvent *event)
 {
-	if ( event->button() == Qt::LeftButton )
+    if ( event->button() == Qt::LeftButton )
 	{	
-		this->dragStartPosition = event->pos();
+        this->dragStartPosition = event->pos();
 		if(active)
 		{
 			setOffset(3);
@@ -106,7 +106,7 @@ void customButton::mousePressEvent(QMouseEvent *event)
 
 void customButton::mouseReleaseEvent(QMouseEvent *event)
 {
-	if ( event->button() == Qt::LeftButton )
+    if ( event->button() == Qt::LeftButton )
 	{	
 		if(active)
 		{
@@ -155,7 +155,7 @@ void customButton::setValue(bool value)
 	{
 		setOffset(0);
 	};
-	clearFocus();
+    clearFocus();
 }
 
 void customButton::setBlink(bool value)

@@ -220,6 +220,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     QObject::connect(this->master_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(master_buttonSignal(bool)));
     QObject::connect(this->system_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(system_buttonSignal(bool)));
     QObject::connect(this->ez_edit_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(ez_edit_buttonSignal(bool)));
+      QObject::connect(this->ez_edit_Button, SIGNAL(valueChanged(bool)), this, SLOT(autosync_off(bool)));
     QObject::connect(this->assign1_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign1_buttonSignal(bool)));
     QObject::connect(this->assign2_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign2_buttonSignal(bool)));
     QObject::connect(this->assign3_Button, SIGNAL(valueChanged(bool)), this->parent(), SIGNAL(assign3_buttonSignal(bool)));
@@ -264,6 +265,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
 
 
     set_temp();
+
     autoconnect();
     /*QString midiIn = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOut = preferences->getPreferences("Midi", "MidiOut", "device");
@@ -282,6 +284,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
         msgBox->setText(msgText);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
         };*/
 }
 
@@ -336,6 +339,7 @@ void floorBoardDisplay::setPatchDisplay(QString patchName)
                 msgBox->setText(msgText);
                 msgBox->setStandardButtons(QMessageBox::Ok);
                 msgBox->exec();
+                msgBox->deleteLater();
 
                 sysxIO->setBank(0);
                 sysxIO->setPatch(0);
@@ -1083,7 +1087,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
-
+            msgBox->deleteLater();
             notConnected();
 
             emit setStatusSymbol(0);
@@ -1109,6 +1113,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
 
             notConnected();
 
@@ -1154,6 +1159,7 @@ void floorBoardDisplay::writeSignal(bool)
                     msgBox->setText(msgText);
                     msgBox->setStandardButtons(QMessageBox::Ok);
                     msgBox->exec();
+                    msgBox->deleteLater();
                     this->writeButton->setBlink(false); // Allready sync with the buffer so no blinking
                     this->writeButton->setValue(true);	// and so we will also leave the write button active.
                     sysxIO->setDeviceReady(true);
@@ -1199,6 +1205,7 @@ void floorBoardDisplay::writeSignal(bool)
                         this->writeButton->setBlink(false);
                         //this->writeButton->setValue(true);
                     };
+                    msgBox->deleteLater();
                 };
             };
         };
@@ -1222,8 +1229,9 @@ void floorBoardDisplay::writeToBuffer()
     msgBox->setInformativeText(tr("Select the required destination patch <br>by a single-click on the left panel Patch-Tree"));
     msgBox->setText(msgText);
     msgBox->setStandardButtons(QMessageBox::Close);
-
     msgBox->exec();
+    msgBox->deleteLater();
+
     sysxIO->writeToBuffer();
     sysxIO->setSyncStatus(true);
 
@@ -1291,6 +1299,14 @@ void floorBoardDisplay::writeToMemory()
     set_patch = patch;
 }
 
+void floorBoardDisplay::autosync_off(bool value)
+{
+    value = value;
+        autosyncTimer->stop();
+        this->autoButton->setBlink(false);
+        this->autoButton->setValue(false);
+        emit setStatusMessage(tr("Ready"));
+}
 void floorBoardDisplay::autosyncSignal(bool value)
 {
     SysxIO *sysxIO = SysxIO::Instance();

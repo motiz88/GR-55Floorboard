@@ -24,7 +24,7 @@
 #ifndef MENUPAGE_SYSTEM_H
 #define MENUPAGE_SYSTEM_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "menuPage.h"
 

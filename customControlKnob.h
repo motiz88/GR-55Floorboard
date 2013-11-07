@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLKNOB_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customKnob.h"
 #include "customControlLabel.h"
 

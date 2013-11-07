@@ -27,20 +27,19 @@
 #include <QMouseEvent>
 #include <QGraphicsPathItem>
 
-customParaEQGraph::customParaEQGraph (QWidget *parent) //: /*m_poly(5), */loMid(11), m_iDragNode(-1)
+customParaEQGraph::customParaEQGraph (QWidget *parent)
 {
     QFrame::setFrameShape(QFrame::Panel);
     QFrame::setFrameShadow(QFrame::Sunken);
-
 }
 
 customParaEQGraph::~customParaEQGraph (void)
 {
+
 }
 
 void customParaEQGraph::setLowCut ( unsigned short iLowCut )
 {
-    //if (iLowCut > 9) iLowCut = 9;
     if (m_iLowCut != iLowCut) {
         m_iLowCut  = iLowCut;
         update();
@@ -56,7 +55,6 @@ unsigned short customParaEQGraph::LowCut (void) const
 
 void customParaEQGraph::setLowGain ( unsigned short iLowGain )
 {
-    //if (iLowGain > 40) iLowGain = 40;
     if (m_iLowGain != iLowGain) {
         m_iLowGain  = iLowGain;
         update();
@@ -72,7 +70,6 @@ unsigned short customParaEQGraph::LowGain (void) const
 
 void customParaEQGraph::setLowMidFreq ( unsigned short iLowMidFreq )
 {
-    //if (iLowMidFreq > 27) iLowMidFreq = 27;
     if (m_iLowMidFreq != iLowMidFreq) {
         m_iLowMidFreq  = iLowMidFreq;
         update();
@@ -88,7 +85,6 @@ unsigned short customParaEQGraph::LowMidFreq (void) const
 
 void customParaEQGraph::setLowMidQ ( unsigned short iLowMidQ )
 {
-    //if (iLowMidQ > 5) iLowMidQ = 5;
     if (m_iLowMidQ != iLowMidQ) {
         m_iLowMidQ  = iLowMidQ;
         update();
@@ -104,7 +100,6 @@ unsigned short customParaEQGraph::LowMidQ (void) const
 
 void customParaEQGraph::setLowMidGain ( unsigned short iLowMidGain )
 {
-    //if (iLowMidGain > 40) iLowMidGain = 40;
     if (m_iLowMidGain != iLowMidGain) {
         m_iLowMidGain  = iLowMidGain;
         update();
@@ -120,7 +115,6 @@ unsigned short customParaEQGraph::LowMidGain (void) const
 
 void customParaEQGraph::setHighMidFreq ( unsigned short iHighMidFreq )
 {
-    //if (iHighMidFreq > 27) iHighMidFreq = 27;
     if (m_iHighMidFreq != iHighMidFreq) {
         m_iHighMidFreq  = iHighMidFreq;
         update();
@@ -135,7 +129,6 @@ unsigned short customParaEQGraph::HighMidFreq (void) const
 
 void customParaEQGraph::setHighMidQ ( unsigned short iHighMidQ )
 {
-    //if (iHighMidQ > 5) iHighMidQ = 5;
     if (m_iHighMidQ != iHighMidQ) {
         m_iHighMidQ  = iHighMidQ;
         update();
@@ -151,7 +144,6 @@ unsigned short customParaEQGraph::HighMidQ (void) const
 
 void customParaEQGraph::setHighMidGain ( unsigned short iHighMidGain )
 {
-    //if (iHighMidGain > 40) iHighMidGain = 40;
     if (m_iHighMidGain != iHighMidGain) {
         m_iHighMidGain  = iHighMidGain;
         update();
@@ -166,7 +158,6 @@ unsigned short customParaEQGraph::HighMidGain (void) const
 
 void customParaEQGraph::setHighGain ( unsigned short iHighGain )
 {
-    //if (iHighGain > 40) iHighGain = 40;
     if (m_iHighGain != iHighGain) {
         m_iHighGain  = iHighGain;
         update();
@@ -181,7 +172,6 @@ unsigned short customParaEQGraph::HighGain (void) const
 
 void customParaEQGraph::setHighCut ( unsigned short iHighCut )
 {
-    //if (iHighCut > 9) iHighCut = 9;
     if (m_iHighCut != iHighCut) {
         m_iHighCut  = iHighCut;
         update();
@@ -196,7 +186,6 @@ unsigned short customParaEQGraph::HighCut (void) const
 
 void customParaEQGraph::setLevel ( unsigned short iLevel )
 {
-    //if (iLevel > 40) iLevel = 40;
     if (m_iLevel != iLevel) {
         m_iLevel  = iLevel;
         update();
@@ -213,13 +202,13 @@ unsigned short customParaEQGraph::Level (void) const
 void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 {
     QPixmap image = QPixmap(":images/EQ_graph.png");
-    QRectF target(0.0, 0.0, image.width()*110/100, image.height()*50/100);
+    QRectF target(0.0, 0.0, image.width()*110/100, image.height()*40/100);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
     QPainter painter(this);
     painter.drawPixmap(target, image, source);
 
-    int h  = height();
+    int h  = height()+60;
     int w  = width();
 
     int lc  = (m_iLowCut*32);
@@ -236,7 +225,7 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
     int hg  = h - (m_iHighGain*3)-15;
     int hc  = w/2 + (m_iHighCut*35)+50;
 
-    int lev = h/20 - (m_iLevel*260/100);
+    int lev = -30 - (m_iLevel*130/100);
 
     QLinearGradient grad(0, 0, w << 1, h << 1);
     grad.setColorAt(0.0f, Qt::yellow);
@@ -329,19 +318,6 @@ void customParaEQGraph::paintEvent ( QPaintEvent *pPaintEvent )
 // Mouse interaction.
 void customParaEQGraph::mousePressEvent ( QMouseEvent *pMouseEvent )
 {
-    /* if (pMouseEvent->button() == Qt::LeftButton) {
-            const QPoint& pos = pMouseEvent->pos();
-            int iDragNode = nodeIndex(pos);
-            if (iDragNode >= 0) {
-                    setCursor(iDragNode == 1 || iDragNode == 3 || iDragNode == 6 || iDragNode == 8
-                            ? Qt::SizeAllCursor
-                            : Qt::SizeHorCursor);
-                    m_iDragNode = iDragNode;
-                    m_posDrag = pos;
-            }
-    }
-
-    QFrame::mousePressEvent(pMouseEvent);*/
 
 }
 
@@ -349,149 +325,23 @@ void customParaEQGraph::mousePressEvent ( QMouseEvent *pMouseEvent )
 void customParaEQGraph::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 {
 
-    //dragNode(pMouseEvent->pos());
 }
 
 
 void customParaEQGraph::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 {
-    /*  QFrame::mouseReleaseEvent(pMouseEvent);
 
-        dragNode(pMouseEvent->pos());
-
-        if (m_iDragNode >= 0) {
-                m_iDragNode = -1;
-                unsetCursor();
-        }*/
 }
-
-
-
-// Draw rectangular point.
-/*QRect customParaEQGraph::nodeRect ( int iNode ) const
-{
-     const QPoint& pos = m_poly.at(iNode);
-     return QRect(pos.x() - 4, pos.y() - 4, 8, 8);
-}*/
 
 
 int customParaEQGraph::nodeIndex ( const QPoint& pos ) const
 {
-   /*    if (nodeRect(8).contains(pos))
-            return 8; // HighCut+HighGain
-
-        if (nodeRect(7).contains(pos))
-            return 7; // HighMidQ
-
-        if (nodeRect(6).contains(pos))
-                return 6; // HighMidFreq+HighMidGain
-
-        if (nodeRect(5).contains(pos))
-                return 5; // HighMidQ
-
-        if (nodeRect(4).contains(pos))
-                return 4; // LowMidQ
-
-        if (nodeRect(3).contains(pos))
-                return 3; // LowMidFreq/LowMidGain
-
-        if (nodeRect(2).contains(pos))
-                return 2; // LowMidQ
-
-        if (nodeRect(1).contains(pos))
-                return 1; //LowCut+LowGain
-*/
         return -1;
 }
 
 void customParaEQGraph::dragNode ( const QPoint& pos )
 {
-    /*       static unsigned short m_iLevel0 = 0; // Dummy!
-        unsigned short *piRate  = NULL;
-        unsigned short *piLevel = NULL;
-        switch (m_iDragNode) {
-        case 1: // LowCut+LowGain
-                piRate  = &m_iLowCut;
-                piLevel = &m_iLowGain;
-                break;
-        case 2: // LowMidQ
-                piRate  = &m_iLowMidQ;
-                piLevel = &m_iLevel0;
-                break;
-        case 3: // LowMidFreq/LowMidGain
-                piRate  = &m_iLowMidFreq;
-                piLevel = &m_iLowMidGain;
-                break;
-        case 4: // LowMidQ
-                piRate  = &m_iLowMidQ;
-                piLevel = &m_iLevel0;
-                break;
-        case 5: // HighMidQ
-                piRate  = &m_iHighMidQ;
-                piLevel = &m_iLevel0;
-                break;
-        case 6: // HighMidFreq+HighMidGain
-                piRate  = &m_iHighMidFreq;
-                piLevel = &m_iHighMidGain;
-                break;
-        case 7: // HighMidQ
-                piRate  = &m_iHighMidQ;
-                piLevel = &m_iLevel0;
-                break;
-        case 8: // HighCut+HighGain
-                piRate  = &m_iHighCut;
-                piLevel = &m_iHighGain;
-                break;
-        }
 
-        if (piRate && piLevel) {
-                int iRate = int(*piRate) + ((pos.x() - m_posDrag.x()) << 6) / (width() >> 2);
-                int iLevel = int(*piLevel) + ((m_posDrag.y() - pos.y()) << 7) / height();
-                if (iLevel < 0) iLevel = 0;
-                else
-                if (iLevel > 40) iLevel = 40;
-                if (iRate < 0) iRate = 0;
-                else
-                if (iRate > 30) iRate = 30;
-                if (*piRate  != (unsigned short) iRate ||
-                        *piLevel != (unsigned short) iLevel) {
-                        m_posDrag = pos;
-                        switch (m_iDragNode) {
-                        case 1: // LowCut/LowGain
-                                setLowCut(iRate);
-                                setLowGain(iLevel);
-                                break;
-                        case 2: // LowCut
-                                setLowMidQ(iRate);
-                                break;
-                        case 3: // LowMidFreq/LowMidGain
-                                setLowMidFreq(iRate);
-                                setLowMidGain(iLevel);
-                                break;
-                        case 4: // LowMidQ
-                                setLowMidQ(iRate);
-                                break;
-                        case 5: // HighMidQ
-                                setHighMidQ(iRate);
-                                break;
-                        case 6: // HighMidFreq/HighMidGain
-                                setHighMidFreq(iRate);
-                                setHighMidGain(iLevel);
-                                break;
-                        case 7: // HighMidQ
-                                setHighMidQ(iRate);
-                                break;
-                        case 8: // HighCut/HighGain
-                                setHighCut(iRate);
-                                setHighGain(iLevel);
-                                break;
-                        }
-                }
-        } else if (nodeIndex(pos) >= 0) {
-                setCursor(Qt::PointingHandCursor);
-        } else {
-                unsetCursor();
-        }*/
 }
 
 void customParaEQGraph::updateSlot(  QString hex_1, QString hex_2, QString hex_3,

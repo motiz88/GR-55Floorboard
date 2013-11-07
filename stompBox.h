@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_H
 #define STOMPBOX_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "MidiTable.h"
 #include "editWindow.h"
 #include "customButton.h"

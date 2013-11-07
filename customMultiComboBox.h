@@ -25,7 +25,7 @@
 #define CUSTOMMULTICOMBOBOX_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customControlMidiTable.h"
 //#include "customControlLabel.h"
 //#include "customComboBox.h"
@@ -42,6 +42,8 @@ public:
                         QString direction = "bottom");
     void setComboBoxList();
     void makeList();
+    QList<QString> getMPTitems();
+    void displayUpdate();
 
 protected:
    // void paintEvent(QPaintEvent *event);
@@ -50,6 +52,7 @@ public slots:
     void valueChanged(int index);
     void dialogUpdateSignal();
     void changedIndex(int index);
+    QList<QString> MPTReply(QString replyMsg);
 
 signals:
     void updateSignal();
@@ -80,6 +83,8 @@ private:
     int pc_index;
     int bank_index;
     QString text;
+    int MPT_index;
+    QList <QString> MPT_items;
 };
 
 #endif // CUSTOMMULTICOMBOBOX_H

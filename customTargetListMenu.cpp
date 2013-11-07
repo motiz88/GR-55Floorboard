@@ -89,30 +89,14 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
 
     };
 
-    QObject::connect(this, SIGNAL( updateSignal() ), this->parent(), SIGNAL( updateSignal() ));
-
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
 
     QObject::connect(this->controlListComboBox, SIGNAL(highlighted(int)), this, SLOT(valueChanged(int)));
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(currentIndexChanged(int)));
 
-    QObject::connect(this->parent(), SIGNAL(updateSignal()), this, SLOT(comboUpdateSignal()));
-
     QObject::connect(this, SIGNAL( updateTarget(QString, QString, QString) ),
                      this->parent(), SIGNAL( updateTarget(QString, QString, QString) ));
-}
-
-void customTargetListMenu::paintEvent(QPaintEvent *)
-{
-    /*DRAWS RED BACKGROUND FOR DeBugGING PURPOSE */
-    /*QPixmap image(":images/dragbar.png");
-
-	QRectF target(0.0, 0.0, this->width(), this->height());
-	QRectF source(0.0, 0.0, this->width(), this->height());
-
-	QPainter painter(this);
-	painter.drawPixmap(target, image, source);*/
 }
 
 void customTargetListMenu::setComboBox()
@@ -196,7 +180,7 @@ void customTargetListMenu::setComboBox()
 
     itemTotal = itemTotal + itemcount;
     this->controlListComboBox->setFixedWidth(250);
-    this->controlListComboBox->setFixedHeight(17);
+    this->controlListComboBox->setFixedHeight(15);
     this->controlListComboBox->setEditable(false);
     this->controlListComboBox->setFrame(false);
     this->controlListComboBox->setMaxVisibleItems(itemTotal);
@@ -204,6 +188,8 @@ void customTargetListMenu::setComboBox()
 
 void customTargetListMenu::valueChanged(int index)
 {
+    QObject::disconnect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
+
     SysxIO *sysxIO = SysxIO::Instance();
     int mode_check = sysxIO->getSourceValue("Structure", "00", "00", "00");     //check for guitar mode
     if (mode_check != this->mode_value)
@@ -267,6 +253,8 @@ void customTargetListMenu::valueChanged(int index)
 
     emit updateTarget(hexMsb, hex2, hexLsb);                                                    // hexMsb & hexLsb are lookup address for label value
     emit updateTarget(hexMsb, hex2, hexLsb);
+
+    QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
 }
 
 void customTargetListMenu::dialogUpdateSignal(QString valueStr)
@@ -277,25 +265,4 @@ void customTargetListMenu::dialogUpdateSignal(QString valueStr)
     this->valueChanged(index);
 }
 
-void customTargetListMenu::comboUpdateSignal()
-{
-    bool ok;
-    SysxIO *sysxIO = SysxIO::Instance();
-    QString hex3_msb = QString::number((hex3.toInt(&ok, 16) + 1), 16).toUpper();                // go forward 1 to select target MSB address
-    if(hex3_msb.length() < 2) hex3_msb.prepend("0");                                            // prepend with "0" if single digit.
-
-    QString hex3_lsb = QString::number((hex3.toInt(&ok, 16) + 2), 16).toUpper();                // go forward 2 to select target LSB address
-    if(hex3_lsb.length() < 2) hex3_lsb.prepend("0");                                            // prepend with "0" if single digit.
-
-    QString hex_a = this->hex1;
-    if(this->hex3 == "7F") {hex_a = "02"; hex3_msb = "00"; hex3_lsb = "01"; };
-    int value = sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);        // read target value as integer from sysx.
-    QString valueHex = QString::number(value, 16).toUpper();                                            // convert to hex qstring.
-    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_msb);              // read target value as integer from sysx.
-    valueHex.append(QString::number(value, 16).toUpper());
-    value = sysxIO->getSourceValue("Structure", hex_a, this->hex2, hex3_lsb);              // read target value as integer from sysx.
-    valueHex.append(QString::number(value, 16).toUpper());
-    int index = valueHex.toInt(&ok, 16);
-    this->controlListComboBox->setCurrentIndex(index);
-}
 

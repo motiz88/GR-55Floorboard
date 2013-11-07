@@ -493,13 +493,14 @@ void stompBox::valueChanged(int index)
 
 void stompBox::emitValueChanged(QString hex1, QString hex2, QString hex3, QString valueHex)
 {
+    SysxIO *sysxIO = SysxIO::Instance();
     QString valueName, valueStr;
-    if(hex1 != "void" && hex2 != "void")
+    if(hex1 != "void" && hex2 != "void" && sysxIO->deviceReady())
     {
         MidiTable *midiTable = MidiTable::Instance();
         if(valueHex != "void")
         {
-            SysxIO *sysxIO = SysxIO::Instance(); bool ok;
+            bool ok;
             if(midiTable->isData("Structure", hex1, hex2, hex3))
             {
                 int maxRange = QString("7F").toInt(&ok, 16) + 1;

@@ -25,7 +25,7 @@
 #define CUSTOMTARGETLISTMENU_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customControlLabel.h"
 #include "customComboBox.h"
 
@@ -41,14 +41,11 @@ public:
 		QString hexMsb = "void",
 		QString hexLsb = "void",
 		QString direction = "bottom");
-
-protected:
-	void paintEvent(QPaintEvent *event);
+    customComboBox* controlListComboBox;
 
 public slots:
 	void valueChanged(int index);
-        void dialogUpdateSignal(QString valueStr);
-        void comboUpdateSignal();
+    void dialogUpdateSignal(QString valueStr);
 
 signals:
 	void updateSignal();
@@ -58,7 +55,6 @@ signals:
 
 private:
 	void setComboBox();
-	customComboBox* controlListComboBox;
 	QString hex1;
 	QString hex2;
 	QString hex3;
@@ -66,7 +62,7 @@ private:
 	QString hexLsb;
 	QString area;
 	int comboWidth;
-        int mode_value;
+    int mode_value;
 };
 
 #endif // CUSTOMTARGETLISTMENU_H

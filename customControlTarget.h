@@ -25,7 +25,7 @@
 #define customControlTarget_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customKnobTarget.h"
 #include "customControlLabel.h"
 #include "customTargetListMenu.h"

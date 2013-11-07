@@ -24,7 +24,7 @@
 #ifndef MENUPAGE_H
 #define MENUPAGE_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "MidiTable.h"
 #include "editWindow.h"
 #include "editPage.h"

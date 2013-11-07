@@ -25,7 +25,7 @@
 #define EDITPAGE_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 
 class editPage : public QWidget
 {

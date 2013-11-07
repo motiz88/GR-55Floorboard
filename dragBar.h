@@ -24,7 +24,7 @@
 #ifndef DRAGBAR_H
 #define DRAGBAR_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 
 class dragBar : public QWidget

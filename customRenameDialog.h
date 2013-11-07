@@ -24,7 +24,7 @@
 #ifndef CUSTOMRENAMEDIALOG_H
 #define CUSTOMRENAMEDIALOG_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 class customRenameDialog : public QDialog
 {

@@ -390,18 +390,20 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     knobLayout->setSpacing(10);
     knobLayout->addLayout(knob_1Layout);  //LowCut
     knobLayout->addLayout(knob_2Layout);  //LowGain
-
+    knobLayout->addSpacing(40);
     knobLayout->addLayout(lowMidLayout);
+    knobLayout->addSpacing(40);
     knobLayout->addLayout(highMidLayout);
-
+    knobLayout->addSpacing(40);
     knobLayout->addLayout(knob_9Layout);  //HighGain
     knobLayout->addLayout(knob_10Layout); //HighCut
+    knobLayout->addSpacing(40);
     knobLayout->addLayout(knob_11Layout); //Level
     knobLayout->addStretch(0);
 
 
     this->frame = new customParaEQGraph(this);
-    this->frame->setMinimumSize(QSize(700, 220));
+    this->frame->setMinimumSize(QSize(700, 160));
 
     QVBoxLayout *frameLayout = new QVBoxLayout;
     frameLayout->setMargin(0);
@@ -457,40 +459,6 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
                                                      QString, QString, QString, QString, QString, QString) ),
                      this->frame, SLOT( updateSlot(QString, QString, QString, QString, QString,
                                                    QString, QString, QString, QString, QString, QString) ));
-
-   /* QObject::connect(this->frame, SIGNAL(LowCutChanged(unsigned short)),
-                     this, SLOT(LowCutChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(LowGainChanged(unsigned short)),
-                     this, SLOT(LowGainChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(HighMidFreqChanged(unsigned short)),
-                     this, SLOT(HighMidFreqChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(HighMidQChanged(unsigned short)),
-                     this, SLOT(HighMidQChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(HighMidGainChanged(unsigned short)),
-                     this, SLOT(HighMidGainChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(LowMidFreqChanged(unsigned short)),
-                     this, SLOT(LowMidFreqChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(LowMidQChanged(unsigned short)),
-                     this, SLOT(LowMidQChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(LowMidGainChanged(unsigned short)),
-                     this, SLOT(LowMidGainChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(HighGainChanged(unsigned short)),
-                     this, SLOT(HighGainChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(HighCutChanged(unsigned short)),
-                     this, SLOT(HighCutChanged(unsigned short) ));
-
-    QObject::connect(this->frame, SIGNAL(LevelChanged(unsigned short)),
-                     this, SLOT(LevelChanged(unsigned short) ));*/
-
 }
 
 
@@ -653,7 +621,7 @@ void customControlParaEQ::dialogUpdateSignal()
     emit updateDisplay_11(valueStr);
     if(this->eqType=="MFX")
     {
-        valueHex = QString::number((value/3)-10, 16).toUpper();
+        valueHex = QString::number((value/3), 16).toUpper();
         if(valueHex.length() < 2) valueHex.prepend("0");
         data_11 = valueHex;
     };

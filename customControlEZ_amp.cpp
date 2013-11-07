@@ -206,7 +206,7 @@ void customControlEZ_amp::y_axisChanged(int iy_axis)
         QString data_2 = QString::number(x_data, 16).toUpper();
         if(data_2.length() < 2) data_2.prepend("0");
         emit graphUpdateSignal( data_1, data_2);
-        dataChanged();
+        if(this->window()->isActiveWindow()) { dataChanged(); };
     };
 }
 
@@ -221,7 +221,7 @@ void customControlEZ_amp::x_axisChanged(int ix_axis)
         QString data_2 = QString::number(x_data, 16).toUpper();
         if(data_2.length() < 2) data_2.prepend("0");
         emit graphUpdateSignal( data_1, data_2);
-        dataChanged();
+       if(this->window()->isActiveWindow()) { dataChanged(); };
     };
 }
 

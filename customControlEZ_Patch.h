@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLEZ_PATCH_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customEZ_Patch.h"
 #include "customControlLabel.h"
 #include "customControlListMenu.h"

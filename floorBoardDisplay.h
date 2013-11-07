@@ -24,7 +24,7 @@
 #ifndef FLOORBOARDDISPLAY_H
 #define FLOORBOARDDISPLAY_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include <QTimer>
 #include "customButton.h"
@@ -64,6 +64,7 @@ public slots:
         void autoconnect();
         void connectSignal(bool value);
         void autosync();
+        void autosync_off(bool value);
         void autosyncSignal(bool value);
         void autosyncResult(QString);
         void writeSignal(bool value);

@@ -25,7 +25,7 @@
 #ifndef SOUNDSOURCE_H
 #define SOUNDSOURCE_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "MidiTable.h"
 #include "editWindow.h"
 #include "customButton.h"

@@ -24,7 +24,7 @@
 #ifndef SOUNDSOURCE_SYNTH_A_H
 #define SOUNDSOURCE_SYNTH_A_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "soundSource.h"
 

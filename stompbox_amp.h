@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_amp_H
 #define STOMPBOX_amp_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "stompBox.h"
 

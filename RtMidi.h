@@ -62,8 +62,12 @@ class RtMidi
        // #define __UNIX_JACK__
 #endif
 #ifdef Q_OS_LINUX
+#ifdef Q_PROCESSOR_ARM
+        #define __RTMIDI_DUMMY__
+#else
         #define __LINUX_ALSA__
        // #define __UNIX_JACK__
+#endif
 #endif
 /*#ifdef Q_OS_UNIX
         #define __UNIX_JACK__

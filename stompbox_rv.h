@@ -24,7 +24,7 @@
 #ifndef STOMPBOX_RV_H
 #define STOMPBOX_RV_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "stompBox.h"
 

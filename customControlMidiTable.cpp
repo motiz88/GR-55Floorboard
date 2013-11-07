@@ -45,7 +45,7 @@ customControlMidiTable::customControlMidiTable(QWidget *parent,
         this->display->setObjectName("editdisplay");
         this->display->setFixedWidth(850);
         this->display->setFixedHeight(16);
-        this->display->setAlignment(Qt::AlignLeft);
+        this->display->setAlignment(Qt::AlignCenter);
         this->display->setDisabled(true);
 
         QVBoxLayout *labelLayout = new QVBoxLayout;
@@ -102,40 +102,37 @@ void customControlMidiTable::setComboBox()
     comboLayout->addWidget(this->controlMidiComboBox, 0, Qt::AlignCenter);
     this->setLayout(comboLayout);
 
-    QObject::connect(this->parent()->parent(), SIGNAL( dialogUpdateSignal() ), this, SLOT( dialogUpdateSignal() ));
+    //QObject::connect(this->parent()->parent(), SIGNAL( dialogUpdateSignal() ), this, SLOT( dialogUpdateSignal() ));
 
     QObject::connect(this, SIGNAL( updateSignal() ), this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(currentIndexChanged(int)));
 
-    //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this, SIGNAL(currentIndexChanged(int)));
-
-    if(text != "GR-55 Patch") {
-      QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(changedIndex(int)));
-
-      //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(changedIndex(int)));
-        } else {
-      QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(valueChanged(int)));
-
-      //QObject::connect(this->controlMidiComboBox, SIGNAL(highlighted(int)), this->parent(), SLOT(valueChanged(int)));
-     };
+    if(text == "Bank")
+    {
+        QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(changedIndex(int)));
+    }
+    else if(text == "GR-55 Patch")
+    {
+        QObject::connect(this->controlMidiComboBox, SIGNAL(currentIndexChanged(int)), this->parent(), SLOT(valueChanged(int)));
+    };
 }
 
-void customControlMidiTable::valueChanged(int index)
+/*void customControlMidiTable::valueChanged(int index)
 {
 
-}
+}*/
 
-void customControlMidiTable::dialogUpdateSignal()
+/*void customControlMidiTable::dialogUpdateSignal()
 {
     if(text == "GR-55 Patch")
     {
         //SysxIO *sysxIO = SysxIO::Instance();
-        int index = 1;//sysxIO->getSourceValue("MidiT", hex1, hex2, hex3);
-        this->controlMidiComboBox->setCurrentIndex(index);
-        this->valueChanged(index);
+        //int index = 0;//sysxIO->getSourceValue("MidiT", hex1, hex2, hex3);
+        //this->controlMidiComboBox->setCurrentIndex(index);
+        //this->valueChanged(index);
     };
-}
+}*/
 
 
 

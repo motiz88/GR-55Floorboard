@@ -2645,6 +2645,7 @@
 						<xs:enumeration value="Acoustic-RESONATOR"/>
 						<xs:enumeration value="All"/>
 						<xs:enumeration value="Ambience"/>
+						<xs:enumeration value="Ambience Effect"/>
 						<xs:enumeration value="Amp Sw"/>
 						<xs:enumeration value="Amp/MOD"/>
 						<xs:enumeration value="Amp/Mod"/>
@@ -2781,8 +2782,8 @@
 						<xs:enumeration value="EXP1 PDL On High"/>
 						<xs:enumeration value="EXP1 PDL On Low"/>
 						<xs:enumeration value="EXP1 PDL On Mid"/>
-						<xs:enumeration value="EZ Cabinet"/>
-						<xs:enumeration value="EZ Patch"/>
+						<xs:enumeration value="EZ Amp and Cabinet"/>
+						<xs:enumeration value="EZ Patch Style"/>
 						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="Electric Bass"/>
@@ -3888,6 +3889,7 @@
 						<xs:enumeration value="O"/>
 						<xs:enumeration value="OD-2 Turbo"/>
 						<xs:enumeration value="OFF"/>
+						<xs:enumeration value="OFF_"/>
 						<xs:enumeration value="ORIGINAL"/>
 						<xs:enumeration value="O_01:1"/>
 						<xs:enumeration value="O_01:2"/>
@@ -5201,7 +5203,6 @@
 						<xs:enumeration value="]"/>
 						<xs:enumeration value="^"/>
 						<xs:enumeration value="_"/>
-						<xs:enumeration value="_OFF_"/>
 						<xs:enumeration value="`"/>
 						<xs:enumeration value="a"/>
 						<xs:enumeration value="b"/>
@@ -5993,6 +5994,7 @@
 						<xs:enumeration value="AggroClav"/>
 						<xs:enumeration value="Alto Sax"/>
 						<xs:enumeration value="Ambience"/>
+						<xs:enumeration value="Ambience Effect"/>
 						<xs:enumeration value="Amp Sw"/>
 						<xs:enumeration value="Amp/MOD"/>
 						<xs:enumeration value="Analog"/>
@@ -6174,8 +6176,8 @@
 						<xs:enumeration value="EXP: PITCH BEND"/>
 						<xs:enumeration value="EXP: REVERB LEVEL"/>
 						<xs:enumeration value="EXP: TONE VOLUME"/>
-						<xs:enumeration value="EZ Cabinet"/>
-						<xs:enumeration value="EZ Patch"/>
+						<xs:enumeration value="EZ Amp and Cabinet"/>
+						<xs:enumeration value="EZ Patch Style"/>
 						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="EasternFluteGT"/>
@@ -6565,6 +6567,7 @@
 						<xs:enumeration value="Nylon String Gtr"/>
 						<xs:enumeration value="OD-2 Turbo"/>
 						<xs:enumeration value="OFF"/>
+						<xs:enumeration value="OFF_"/>
 						<xs:enumeration value="ORCHESTRA"/>
 						<xs:enumeration value="ORIGINAL"/>
 						<xs:enumeration value="OVERDRIVE+CELLO"/>
@@ -7358,7 +7361,6 @@
 						<xs:enumeration value="Weather Forecast"/>
 						<xs:enumeration value="West Coast"/>
 						<xs:enumeration value="Xylophone Plus"/>
-						<xs:enumeration value="_OFF_"/>
 						<xs:enumeration value="bypass"/>
 						<xs:enumeration value="center"/>
 						<xs:enumeration value="dB"/>

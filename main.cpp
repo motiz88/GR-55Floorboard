@@ -29,7 +29,7 @@
 #include "sysxWriter.h"
 #include "customSplashScreen.h"
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     QString lang = preferences->getPreferences("Language", "Locale", "select");
     bool ok;
     int choice = lang.toInt(&ok, 16);
-    /* Loading translation */
+    // Loading translation
     QTranslator translator;
 
     if (choice == 6)     {translator.load(":language_ch.qm");  }
@@ -46,13 +46,13 @@ int main(int argc, char **argv)
     else if (choice ==3) {translator.load(":language_pt.qm"); }
     else if (choice ==2) {translator.load(":language_ge.qm"); }
     else if (choice ==1) {translator.load(":language_fr.qm"); }
-    else {/*translator.load(":language_en.qm");*/ };
+    else { };
 
     app.installTranslator(&translator);
 
-    /* Splash Screen setup uses subclassed QSplashScreen for message position controle. */
+    // Splash Screen setup uses subclassed QSplashScreen for message position control.
     QPixmap splashImage(":images/splash.png");
-    QPixmap splashMask(":images/splashmask.png");
+    //QPixmap splashMask(":images/splashmask.png");
 
     customSplashScreen *splash = new customSplashScreen(splashImage);
     splash->setMessageRect(QRect(7, 253, 415, 14), Qt::AlignCenter); // Setting the message position.
@@ -62,23 +62,19 @@ int main(int argc, char **argv)
     splashFont.setBold(true);
     splashFont.setPixelSize(9);
     splashFont.setStretch(125);
-
     splash->setFont(splashFont);
-    splash->setMask(splashMask);
-    //splash->setWindowOpacity(0.90);
+    //splash->setMask(splashMask);
     //splash->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::SplashScreen);
 
     if(preferences->getPreferences("Window", "Splash", "bool")=="true")
     {
         splash->show();
+        splash->showStatusMessage(QObject::tr("  Initializing.. please wait..."));
     };
-    /* To intercept mousclick to hide splash screen. Since the
-     splash screen is typically displayed before the event loop
-     has started running, it is necessary to periodically call. */
-    //app.processEvents();
 
-    splash->showStatusMessage(QObject::tr("Initializing - please wait..."));
-    mainWindow window;// = new mainWindow;
+    app.processEvents();
+
+    mainWindow window;
 
     QObject::connect( &window, SIGNAL(closed()), &app, SLOT(quit()) );
 
@@ -87,7 +83,7 @@ int main(int argc, char **argv)
     splash->showStatusMessage(QObject::tr("Checking license file..."));
     if(!QFile("license.txt").exists())
     {
-        splash->showStatusMessage(QObject::tr("Loading license file..."));
+     //   splash->showStatusMessage(QObject::tr("Loading license file..."));
         QFile file(":license.txt" );
         file.copy("license.txt");
         file.close();
@@ -101,10 +97,10 @@ int main(int argc, char **argv)
 
     app.processEvents();
 
-    splash->showStatusMessage(QObject::tr("Initializing main window..."));
-    window.setWindowFlags( Qt::WindowTitleHint
-                           | Qt::WindowMinimizeButtonHint
-                           | Qt::MSWindowsFixedSizeDialogHint );
+   // splash->showStatusMessage(QObject::tr("Initializing main window..."));
+   // window.setWindowFlags( Qt::WindowTitleHint
+     //                      | Qt::WindowMinimizeButtonHint
+     //                      | Qt::MSWindowsFixedSizeDialogHint );
     window.setWindowIcon(QIcon(":/images/windowicon.png"));
 
     //app.processEvents();
@@ -112,14 +108,6 @@ int main(int argc, char **argv)
     //bool ok;
     QString x_str = preferences->getPreferences("Window", "Position", "x");
     QString y_str = preferences->getPreferences("Window", "Position", "y");
-
-    //app.processEvents();
-
-    //window.show(); // need to show the windows to get the size of it, before that it doesn't exist
-    //int windowWidth = window.width();
-    //int windowHeight = window.height();
-
-    //app.processEvents();
 
     int windowWidth, windowHeight;
     if(preferences->getPreferences("Window", "Collapsed", "bool")=="true" &&
@@ -183,9 +171,8 @@ int main(int argc, char **argv)
     app.processEvents();
 
     splash->showStatusMessage(QObject::tr("Finished Initializing..."));
-
     window.show();
-    splash->finish(&window);
+   splash->finish(&window);
 
     return app.exec();
 }

@@ -46,7 +46,7 @@ public:
   ~summaryDialogPatchList();
   QTextEdit *textDialog;
   QTextDocument *document;
-  QPrintDialog *dialog;
+  //QPrintDialog *dialog;
   QPushButton *cancelButton;
   QPushButton *printButton;
   QPushButton *saveAsButton;

@@ -24,7 +24,7 @@
 #ifndef MENUPAGE_PDL_H
 #define MENUPAGE_PDL_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "menuPage.h"
 

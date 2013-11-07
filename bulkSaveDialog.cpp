@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QFile>
 #include <QDataStream>
 #include <QByteArray>
@@ -33,29 +33,26 @@
 
 bulkSaveDialog::bulkSaveDialog()
 { 
-    QLabel *startRangeLabel = new QLabel(tr("Start Bank."));
-    QLabel *finishRangeLabel = new QLabel(tr("Finish Bank."));
+    QLabel *startRangeLabel = new QLabel(tr("Start Patch."));
+    QLabel *finishRangeLabel = new QLabel(tr("Finish Patch."));
 
-    this->g5lButton = new QRadioButton(tr("*.g5l Librarian file"), this );
-    this->syxButton = new QRadioButton(tr("*.syx System Exclusive file"), this );
-    this->midButton = new QRadioButton(tr("*.mid Standard Midi (SMF) file"), this );
+    this->g5lButton = new QRadioButton(tr("*.g5l - Librarian compatable file - (G5L)"), this );
+    this->syxButton = new QRadioButton(tr("*.syx - System Exclusive file - (SYX)"), this );
+    this->midButton = new QRadioButton(tr("*.mid - Standard Midi file - (SMF)"), this );
     this->g5lButton->setChecked(true);
     
     QCheckBox *systemCheckBox = new QCheckBox(tr("Save System Data"));
-    QSpinBox *startRangeSpinBox = new QSpinBox;
-    QSpinBox *finishRangeSpinBox = new QSpinBox;
+    this->startRangeComboBox = new QComboBox(this);
+    this->finishRangeComboBox = new QComboBox(this);
 
     this->systemCheckBox = systemCheckBox;
 
-    this->startRangeSpinBox = startRangeSpinBox;
-    startRangeSpinBox->setValue(1);
-    startRangeSpinBox->setRange(1, 99);
-    startRangeSpinBox->setPrefix(tr("Start at U"));
-
-    this->finishRangeSpinBox = finishRangeSpinBox;
-    finishRangeSpinBox->setValue(99);
-    finishRangeSpinBox->setRange(1, 99);
-    finishRangeSpinBox->setPrefix(tr("Finish at U"));
+    for(int x=0; x<297; x++)
+    {
+        this->startRangeComboBox->addItem("Patch "+QString::number( x+1 ,10)+"    USER: "+QString::number((x/3)+1 ,10)+"-"+QString::number((x%3)+1 ,10)+"  ");
+        this->finishRangeComboBox->addItem("Patch "+QString::number( x+1 ,10)+"    USER: "+QString::number((x/3)+1 ,10)+"-"+QString::number((x%3)+1 ,10)+"  ");
+    };
+    this->finishRangeComboBox->setCurrentIndex(296);
 
     QVBoxLayout *rangeLabelLayout = new QVBoxLayout;
     rangeLabelLayout->addSpacing(12);
@@ -65,9 +62,9 @@ bulkSaveDialog::bulkSaveDialog()
     QVBoxLayout *rangeBoxLayout = new QVBoxLayout;
     //rangeBoxLayout->addWidget(systemCheckBox);
     rangeBoxLayout->addSpacing(12);
-    rangeBoxLayout->addWidget(startRangeSpinBox);
+    rangeBoxLayout->addWidget(startRangeComboBox);
     rangeBoxLayout->addSpacing(12);
-    rangeBoxLayout->addWidget(finishRangeSpinBox);
+    rangeBoxLayout->addWidget(finishRangeComboBox);
 
     QHBoxLayout *dataRangeLayout = new QHBoxLayout;
     dataRangeLayout->addSpacing(20);
@@ -150,8 +147,8 @@ bulkSaveDialog::bulkSaveDialog()
 
     setWindowTitle(tr("Bulk File Backup"));
 
-    //QObject::connect(this, SIGNAL( startRangeSpinBox->valueChanged(int) ), this, SLOT( bankStart(int) ));
-    //QObject::connect(this, SIGNAL( finishRangeSpinBox->valueChanged(int) ), this, SLOT( bankFinish(int) ));
+    QObject::connect(this->startRangeComboBox, SIGNAL( currentIndexChanged(int) ), this, SLOT( comboChanged() ));
+    QObject::connect(this->finishRangeComboBox, SIGNAL( currentIndexChanged(int) ), this, SLOT( comboChanged() ));
     SysxIO *sysxIO = SysxIO::Instance();
     QObject::connect(this, SIGNAL(setStatusSymbol(int)), sysxIO, SIGNAL(setStatusSymbol(int)));
     QObject::connect(this, SIGNAL(setStatusProgress(int)), sysxIO, SIGNAL(setStatusProgress(int)));
@@ -163,20 +160,29 @@ bulkSaveDialog::~bulkSaveDialog()
 {
 }
 
+void bulkSaveDialog::comboChanged()
+{
+    if(this->startRangeComboBox->currentIndex()>this->finishRangeComboBox->currentIndex())
+    { this->finishRangeComboBox->setCurrentIndex(this->startRangeComboBox->currentIndex()); };
+
+    if(this->finishRangeComboBox->currentIndex()<this->startRangeComboBox->currentIndex())
+    { this->startRangeComboBox->setCurrentIndex(this->finishRangeComboBox->currentIndex()); };
+}
 
 void bulkSaveDialog::backup()
 {
     this->startButton->hide();
     //this->cancelButton->hide();
-    this->bankStart = this->startRangeSpinBox->value();
-    this->bankFinish = this->finishRangeSpinBox->value();
-    if (bankFinish<bankStart) {bankFinish = bankStart; this->finishRangeSpinBox->setValue(bankStart); };
-    this->bank=bankStart*3;
+    this->patch_start = this->startRangeComboBox->currentIndex();
+    this->patch_finish = this->finishRangeComboBox->currentIndex();
+    this->patch_range = this->patch_finish-this->patch_start+1;
+    this->bank = (patch_start/3)+1;
+    this->patch = (patch_start%3)+1;
     bulk.clear();
     this->progress = 0;
-    this->patch = 1;
-    range = 100/(bankFinish-bankStart+1);
-    requestPatch(bank/3, patch);
+    this->patch_count = 0;
+    range = 100/(this->patch_range/3);
+    requestPatch(bank, patch);
 }
 
 void bulkSaveDialog::requestPatch(int bank, int patch) 
@@ -266,6 +272,7 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
         };
         replyMsg = reBuild.simplified().toUpper();
         bulk.append(replyMsg); 	                                           // add patch to the bulk string.
+        ++this->patch_count;
     }
     else
     {
@@ -287,18 +294,19 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
             {
                 DialogClose();
             };
+            msgBox->deleteLater();
     };
     ++patch;
-    if(patch>3) {patch=1; bank=bank+3;};	                      // increment patch.
+    if(patch>3) {patch=1; bank=bank+1;};	                      // increment patch.
     progress=progress+range;
     bulkStatusProgress(this->progress);                         // advance the progressbar.
-    int bf = (bankFinish+1)*3 -2;
+    int bf = (patch_finish+1) -2;
     if (bank >= bf)
     {                                                            // check if nearly finished.
         this->completedButton->show();
         this->progressLabel->setText(tr("Bulk data transfer completed!!"));
     };
-    if (bank<(bankFinish+1)*3 )
+    if (this->patch_count<this->patch_range)
     {
         bool ok;
         QString patchText;
@@ -314,7 +322,7 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
             patchText.append( (char)(hexStr.toInt(&ok, 16)) );      // convert name to readable text characters.
         };
         
-        QString patchNumber = QString::number(bank/3, 10).toUpper();
+        QString patchNumber = QString::number(bank, 10).toUpper();
         if (patchNumber.size()<2) { patchNumber.prepend("0"); };
         patchNumber.prepend(tr("User Patch U"));
         patchNumber.append("-");
@@ -331,7 +339,7 @@ void bulkSaveDialog::updatePatch(QString replyMsg)
         this->bytesLabel->setText(patchNumber);                         //display the bulk data size.
 
         setStatusMessage(tr("Bulk Download"));
-        requestPatch(bank/3, patch);                                   //request the next patch.
+        requestPatch(bank, patch);                                   //request the next patch.
     } else {
         setStatusMessage(tr("Ready"));
         sysxIO->bulk = this->bulk;
@@ -390,36 +398,22 @@ void bulkSaveDialog::writeG5L()         // ************************************ 
             for (int x=0;x<patchCount;x++)
             {
                 int a = 172;          // distance from start of single *.g5l file to patch data start.
-                temp = out.mid(b+11, 128);
-                G5L_default.replace(a, 128, temp);         //address "00" +
-                temp = out.mid(b+152, 114);
-                G5L_default.replace(a+128, 114, temp);     //address "01" +
-                temp = out.mid(b+266, 6);
-                G5L_default.replace(a+250, 6, temp);     //address "01 B" +
-                temp = out.mid(b+293, 78);
-                G5L_default.replace(a+264, 78, temp);     //address "02" +
-                temp = out.mid(b+384, 128);
-                G5L_default.replace(a+350, 128, temp);     //address "03" +
-                temp = out.mid(b+525, 128);
-                G5L_default.replace(a+478, 128, temp);     //address "04" +
-                temp = out.mid(b+666, 18);
-                G5L_default.replace(a+606, 18, temp);     //address "05" +
-                temp = out.mid(b+697, 30);
-                G5L_default.replace(a+640, 30, temp);     //address "06" +
-                temp = out.mid(b+740, 125);
-                G5L_default.replace(a+678, 125, temp);     //address "07" +
-                temp = out.mid(b+878, 128);
-                G5L_default.replace(a+811, 128, temp);     //address "10" +
-                temp = out.mid(b+1019, 86);
-                G5L_default.replace(a+939, 86, temp);    //address "11" +
-                temp = out.mid(b+1118, 35);
-                G5L_default.replace(a+1033, 35, temp);    //address "20" +
-                temp = out.mid(b+1166, 35);
-                G5L_default.replace(a+1072, 35, temp);    //address "21" +
-                temp = out.mid(b+1214, 52);
-                G5L_default.replace(a+1115, 52, temp);    //address "30" +
-                temp = out.mid(b+1279, 52);
-                G5L_default.replace(a+1171, 52, temp);    //address "31" +
+                G5L_default.replace(a, 128, out.mid(b+11, 128));          //address "00"
+                G5L_default.replace(a+128, 114, out.mid(b+152, 114));     //address "01"
+                G5L_default.replace(a+252, 12, out.mid(b+268, 12));       //address "01 B"
+                G5L_default.replace(a+264, 78, out.mid(b+293, 78));       //address "02"
+                G5L_default.replace(a+350, 128, out.mid(b+384, 128));     //address "03"
+                G5L_default.replace(a+478, 72, out.mid(b+525, 72));       //address "04"
+                G5L_default.replace(a+606, 18, out.mid(b+666, 18));       //address "05"
+                G5L_default.replace(a+640, 30, out.mid(b+697, 30));       //address "06"
+                G5L_default.replace(a+678, 125, out.mid(b+740, 125));     //address "07"
+                G5L_default.replace(a+811, 128, out.mid(b+878, 128));     //address "10"
+                G5L_default.replace(a+939, 86, out.mid(b+1019, 86));      //address "11"
+                G5L_default.replace(a+1033, 35, out.mid(b+1118, 35));     //address "20"
+                G5L_default.replace(a+1072, 35, out.mid(b+1166, 35));     //address "21"
+                G5L_default.replace(a+1115, 52, out.mid(b+1214, 52));     //address "30"
+                G5L_default.replace(a+1171, 52, out.mid(b+1279, 52));     //address "31"
+
                 temp.clear();
                 QString hexStr = "04";
                 temp.append((char)(hexStr.toInt(&ok, 16)));
@@ -489,7 +483,7 @@ void bulkSaveDialog::writeSMF()    // **************************** SMF FILE FORM
                 this,
                 tr("Save Bulk Data"),
                 dir,
-                tr("Standard Midi Backup File (*.mid)"));
+                tr("Standard Midi File (*.mid)"));
     if (!fileName.isEmpty())
     {
         if(!fileName.contains(".mid"))
@@ -502,10 +496,10 @@ void bulkSaveDialog::writeSMF()    // **************************** SMF FILE FORM
         if (file.open(QIODevice::WriteOnly))
         {
             bool ok;
-            QByteArray out;
+            QString out;
             QByteArray patches;
             int size = this->bulk.size()/2;
-            int patchCount = size/patchSize;
+            int patchCount = size/patchSize;   //patchSize = 1333
             for (int x=0;x<size*2;x++)
             {
                 QString hexStr = bulk.mid(x, 2);
@@ -513,107 +507,116 @@ void bulkSaveDialog::writeSMF()    // **************************** SMF FILE FORM
                 ++x;
             };
             QByteArray bulkFile;
-            QByteArray temp;                        // TRANSLATION of GR-55B PATCHES, data read from GR55B syx patch **************
-            QByteArray Qhex;                        // and used to replace GR55B patch SMF data*********************************
-            QFile hexfile(":HexLookupTable.hex");   // use a QByteArray of hex numbers from a lookup table.
-            if (hexfile.open(QIODevice::ReadOnly))
-            {	Qhex = hexfile.readAll(); };             // read the hexlookupTable and call the QByteArray QHex.
-            bulkFile.append(Qhex.mid((288), 30));   // insert midi timing file header...
+            QByteArray header;                        // TRANSLATION of GR-55 PATCHES, data read from GR55 syx patch **************
+            QByteArray footer;                        // and used to replace GR55 patch SMF data*********************************
+            QByteArray smf_build;
+            QByteArray syx;
+            QByteArray default_smf;
+            QFile smffile(":default.mid");   // use a QByteArray of hex numbers from a lookup table.
+            if (smffile.open(QIODevice::ReadOnly))
+               { default_smf = smffile.readAll(); };
+            header = default_smf.mid(0,22);
+            footer = default_smf.mid(1342,4);
             int b = 0;
             for (int x=0;x<patchCount;x++)
             {
-                out.clear();
-                out.append( patches.mid(b, patchSize) );
-                //out.remove(1763, 282);	   // remove the user text portion at the end..
-                out.remove(0, 11);         // remove address "00 00" header
-                temp = Qhex.mid((320), 13);
-                out.insert(0, temp);       // insert new address "00 00" header
-                out.remove(141, 13);        // remove address "01 00" header
-                temp = Qhex.mid((336), 16);
-                out.insert(255, temp);      // insert new address "01 72" header
-                out.remove(285, 13);        // remove address "02 00" header
-                out.remove(413, 13);        // remove address "03 00" header
-                temp = Qhex.mid((352), 16);
-                out.insert(513, temp);      // insert new address "03 64" header
-                out.remove(557, 13);        // remove address "04 00" header
-                out.remove(685, 13);        // remove address "05 00" header
-                temp = Qhex.mid((368), 16);
-                out.insert(771, temp);      // insert new address "05 56" header
-                out.remove(787, 13);        // remove address "06 00" header
-                out.remove(915, 13);        // remove address "07 00" header
-                temp = Qhex.mid((438), 42);  // copy 42 x extra "00"
-                out.insert(787, temp);      // insert 42 x extra "00"
-                temp = Qhex.mid((384), 16);
-                out.insert(1029, temp);      // insert new address "07 48" header
-                out.remove(1101, 13);        // remove address "08 00" header
-                out.remove(1229, 13);        // remove address "09 00" header
-                temp = Qhex.mid((400), 16);
-                out.insert(1287, temp);      // insert new address "09 3A" header
-                out.remove(1345, 13);        // remove address "0A 00" header
-                out.remove(1473, 13);        // remove address "0B 00" header
-                out.remove(1601, 13);        // remove address "0C 00" header
-                temp = Qhex.mid((438), 28);  // copy 28 x extra "00"
-                out.insert(1345, temp);      // insert 28 x extra "00"
-                temp = Qhex.mid((416), 16);
-                out.insert(1545, temp);      // insert new address "0B 2C" header
-                out.remove(1773, 2);        // remove file footer
-                temp = Qhex.mid((438), 29);  // copy 29 x extra "00"
-                out.insert(1773, temp);      // insert 28 x extra "00"
-                temp = Qhex.mid((432), 3);
-                out.insert(1802, temp);      // insert new file footer (part of)
-                out.append(Qhex.mid((20), 1));           // add last "14" on end.
+                syx.clear();
+                syx.append( patches.mid(b, patchSize) );
+                smf_build = default_smf;
+                smf_build.replace(36, 128, syx.mid(11, 128));   //Address 00 00
+                smf_build.replace(164, 114, syx.mid(152, 114)); //Address 00 00
+                smf_build.replace(293, 14, syx.mid(266, 14));   //Address 01 72
+                smf_build.replace(307, 78, syx.mid(293, 78));   //Address 01 72
+                smf_build.replace(401, 128, syx.mid(384, 128)); //Address 03 00
+                smf_build.replace(529, 114, syx.mid(525, 114)); //Address 03 00
+                smf_build.replace(658, 14, syx.mid(639, 14));   //Address 04 72
+                smf_build.replace(672, 18, syx.mid(666, 18));   //Address 04 72
+                smf_build.replace(705, 30, syx.mid(697, 30));   //Address 06 00
+                smf_build.replace(751, 125, syx.mid(740, 125)); //Address 07 00
+                smf_build.replace(892, 128, syx.mid(878, 128)); //Address 10 00
+                smf_build.replace(1020, 86, syx.mid(1019, 86)); //Address 11 00
+                smf_build.replace(1121, 35, syx.mid(1118, 35)); //Address 20 00
+                smf_build.replace(1171, 35, syx.mid(1166, 35)); //Address 21 00
+                smf_build.replace(1221, 52, syx.mid(1214, 52)); //Address 30 00
+                smf_build.replace(1288, 52, syx.mid(1279, 52)); //Address 31 00
+                smf_build.replace(32, 2, syx.mid(7, 2));    //Replace patch Address 00 00
+                smf_build.replace(289, 2, syx.mid(7, 2));   //Replace patch Address 01 72
+                smf_build.replace(397, 2, syx.mid(7, 2));   //Replace patch Address 03 00
+                smf_build.replace(654, 2, syx.mid(7, 2));   //Replace patch Address 04 72
+                smf_build.replace(701, 2, syx.mid(7, 2));   //Replace patch Address 06 00
+                smf_build.replace(747, 2, syx.mid(7, 2));   //Replace patch Address 07 00
+                smf_build.replace(888, 2, syx.mid(7, 2));   //Replace patch Address 10 00
+                smf_build.replace(1117, 2, syx.mid(7, 2));  //Replace patch Address 20 00
+                smf_build.replace(1167, 2, syx.mid(7, 2));  //Replace patch Address 21 00
+                smf_build.replace(1217, 2, syx.mid(7, 2));  //Replace patch Address 30 00
+                smf_build.replace(1284, 2, syx.mid(7, 2));  //Replace patch Address 31 00
 
+                smf_build.remove(1342, 4);      // remove file footer
+                smf_build.remove(0, 22);  // remove File header
 
-                QByteArray sysxBuffer;
-                int dataSize = 0; int offset = 0;
-                for(int i=0;i<out.size();i++)
+                QString sysxBuffer;
+                QString checksum;
+                int dataSize = 110; int offset = 0;
+                for(int i=0;i<smf_build.size();i++)
                 {
-                    unsigned char byte = (char)out[i];
+                    unsigned char byte = (char)smf_build[i];
                     unsigned int n = (int)byte;
                     QString hex = QString::number(n, 16).toUpper();
                     if (hex.length() < 2) hex.prepend("0");
                     sysxBuffer.append(hex);
 
-                    unsigned char nextbyte = (char)out[i+1];
+                    unsigned char nextbyte = (char)smf_build[i+1];
                     unsigned int nextn = (int)nextbyte;
                     QString nexthex = QString::number(nextn, 16).toUpper();
                     if (nexthex.length() < 2) nexthex.prepend("0");
-                    if(offset >= checksumOffset+3 && nexthex != "F7")   // smf offset is 8 bytes + previous byte
+
+                    if(offset >= 9 && nexthex != "F7")   // smf offset is 8 bytes + previous byte
                     {
                         dataSize += n;
                     };
                     if(nexthex == "F7")
                     {
-                        QString checksum;
-                        bool ok;
-                        int dataSize = 0;
-                        for(int i=checksumOffset+3;i<sysxBuffer.size()-1;++i)
-                        {
-                            QString hexStr = sysxBuffer.mid(i, 2);
-                            dataSize += ( (char)(hexStr.toInt(&ok, 16)) );
-                        };
-                        QString base = "80";
-                        int sum = dataSize % base.toInt(&ok, 16);
-                        if(sum!=0) sum = base.toInt(&ok, 16) - sum;
+                        int sum = dataSize % 128;
+                        if(sum!=0) { sum = 128 - sum; };
                         checksum = QString::number(sum, 16).toUpper();
-                        if(checksum.length()<2) checksum.prepend("0");
-                        sysxBuffer.replace(sysxBuffer.size() - 1, checksum);
-
+                        if(checksum.length()<2) { checksum.prepend("0"); };
                     };
-                    offset++;
 
                     if(hex == "F7")
                     {
-
+                        sysxBuffer.replace(sysxBuffer.size()-4, 2, checksum);
+                        out.append(sysxBuffer);
                         sysxBuffer.clear();
-                        dataSize = 0;
+                        dataSize = 110;
                         offset = 0;
                     };
+                    offset++;
                 };
                 b=b+patchSize;
-                bulkFile.append(out);      // append the bulk file.
+                QByteArray rebuild;
+                    for (int k=0; k<out.size(); k++)
+                    {
+                        bool ok;
+                        unsigned int n = out.mid(k, 2).toInt(&ok, 16);
+                        rebuild[k/2] = (char)n;
+                        ++k;
+                    };
+                out.clear();
+                if(x>0 && x<patchCount-1) { rebuild.replace(0, 1, default_smf.mid(368, 1)); }; //add "08" marker between patches
+                bulkFile.append(rebuild);      // append the bulk file.
             };
-            bulkFile.append(Qhex.mid((436), 3));    // add file footer.
+            bulkFile.prepend(header);   // add file header.
+            bulkFile.append(footer);    // add file footer.
+            QString file_size = QString::number((patchCount*1320)+4, 16).toUpper(); // calculate file size info
+            if(file_size.size()==5) {file_size.prepend("0"); };
+            if(file_size.size()==4) {file_size.prepend("00"); };
+            if(file_size.size()==3) {file_size.prepend("000"); };
+            QByteArray f_size;
+            f_size[0] = (char)file_size.mid(0, 2).toInt(&ok, 16);
+            f_size[1] = (char)file_size.mid(2, 2).toInt(&ok, 16);
+            f_size[2] = (char)file_size.mid(4, 2).toInt(&ok, 16);
+
+            bulkFile.replace(19, 3, f_size);   // replace 3 bytes of file size info
             file.write(bulkFile);
         };
         close();

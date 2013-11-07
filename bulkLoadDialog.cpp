@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QFile>
 #include <QDataStream>
 #include <QByteArray>
@@ -225,6 +225,7 @@ bulkLoadDialog::bulkLoadDialog()
                 msgBox->setText(msgText);
                 msgBox->setStandardButtons(QMessageBox::Ok);
                 msgBox->exec();
+                msgBox->deleteLater();
             };
         };
     };
@@ -471,15 +472,13 @@ void bulkLoadDialog::loadG5L()         // ************************************ G
     bool ok;
     int count;
     count = (256*QString::number(msb, 16).toUpper().toInt(&ok, 16)) + (QString::number(lsb, 16).toUpper().toInt(&ok, 16));
-    QByteArray marker;
-    marker = data.mid(162, 10);      //copy marker key to find "06A5" which marks the start of each patch block
-    unsigned int a = data.indexOf(marker, 0); // locate patch start position from the start of the file
-    a=a+10;                             // offset is set in front of marker
+    int m_step = 162;
+    unsigned int a = m_step + 10;
     for (int h=0;h<count;h++)
     {
         QByteArray temp;
         temp = data.mid(a, 128);
-        default_data.replace(11, 128, temp);      //address "00"
+       default_data.replace(11, 128, temp);      //address "00"
         temp = data.mid(a+128, 114);
         default_data.replace(152, 114, temp);     //address "01"
         temp = data.mid(a+250, 6);
@@ -508,8 +507,10 @@ void bulkLoadDialog::loadG5L()         // ************************************ G
         default_data.replace(1214, 52, temp);    //address "30" +
         temp = data.mid(a+1171, 52);
         default_data.replace(1279, 52, temp);    //address "31" +
-        a = data.indexOf(marker, a); // locate patch start position from the start of the file
-        a=a+10;                      // offset is set in front of marker
+        msb = (char)data[m_step];     // find patch size msb bit
+        lsb = (char)data[m_step+1];   // find patch size lsb bit and calculate jump to next patch.
+        m_step = m_step+4+(256*QString::number(msb, 16).toUpper().toInt(&ok, 16)) + (QString::number(lsb, 16).toUpper().toInt(&ok, 16));
+        a = m_step + 10;   // move to start of patch
         temp = default_data;
         this->sysxPatches.append(temp.mid(0, patchSize));
     };
@@ -524,8 +525,7 @@ void bulkLoadDialog::loadSYX()        //********************************* SYX Fi
 
 void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMAT ***************************
 {	
-
-    QByteArray temp;                         // TRANSLATION of GR-55B SMF PATCHES, data read from smf patch **************
+ // TRANSLATION of GR-55 SMF PATCHES, data read from smf patch **************
     if ( data.at(30) != default_data.at(5) ){    // check if a valid GR-55B file
         QMessageBox *msgBox = new QMessageBox();
 	msgBox->setWindowTitle(QObject::tr("SMF file import"));
@@ -539,44 +539,31 @@ void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMA
 	msgBox->setText(msgText);
 	msgBox->setStandardButtons(QMessageBox::Ok);
 	msgBox->exec();  
+    msgBox->deleteLater();
     };
     int count = (data.size()-26)/1320;
     int a=0;                             // offset is set to first patch
     for (int h=0;h<count;h++)
     {
-        temp = data.mid(a+36, 128);            // copy SMF 128 bytes
-        default_data.replace(11, 128, temp);             // replace GR55 address "00"
-        temp = data.mid(a+164, 114);           // copy SMF part1
-        temp.append(data.mid(a+293,14));       // copy SMF part2
-        default_data.replace(152, 128, temp);            // replace GR55 address "01"
-        temp = data.mid(a+307, 78);           // copy SMF part1
-        default_data.replace(293, 78, temp);            // replace GR55 address "02"
-        temp = data.mid(a+401, 128);           // copy SMF 128 bytes
-        default_data.replace(384, 128, temp);            // replace GR55 address "03"
-        temp = data.mid(a+529, 114);           // copy SMF part1
-        temp.append(data.mid(a+658,14));      // copy SMF part2
-        default_data.replace(525, 128, temp);            // replace GR55 address "04"
-        temp = data.mid(a+672, 18);            // copy SMF part1
-        default_data.replace(666, 18, temp);             // replace GR55 address "05"
-        temp = data.mid(a+705, 30);           // copy SMF part1
-        default_data.replace(697,30, temp);             // replace GR55 address "06"
-        temp = data.mid(a+751, 125);            // copy SMF part1
-        default_data.replace(740, 125, temp);            // replace GR55 address "07"
-        temp = data.mid(a+892, 128);          // copy SMF part1
-        default_data.replace(878,128, temp);            // replace GR55 address "10"
-        temp = data.mid(a+1020, 86);           // copy SMF part1
-        default_data.replace(1019, 86, temp);           // replace GR55 address "11"
-        temp = data.mid(a+1121, 35);          // copy SMF part1
-        default_data.replace(1118,35, temp);            // replace GR55 address "20"
-        temp = data.mid(a+1171, 35);           // copy SMF part1
-        default_data.replace(1166, 35, temp);           // replace GR55 address "21"
-        temp = data.mid(a+1221, 52);          // copy SMF part1
-        default_data.replace(1214,52, temp);            // replace GR55 address "30"
-        temp = data.mid(a+1288, 52);          // copy SMF part1
-        default_data.replace(1279,52, temp);            // replace GR55 address "31"
+        default_data.replace(11, 128, data.mid(a+36, 128));   //Address 00 00
+        default_data.replace(152, 114, data.mid(a+164, 114)); //Address 00 00
+        default_data.replace(266, 14, data.mid(a+293, 14));   //Address 01 72
+        default_data.replace(293, 78, data.mid(a+307, 78));   //Address 01 72
+        default_data.replace(384, 128, data.mid(a+401, 128)); //Address 03 00
+        default_data.replace(525, 114, data.mid(a+529, 114)); //Address 03 00
+        default_data.replace(639, 14, data.mid(a+658, 14));   //Address 04 72
+        default_data.replace(666, 18, data.mid(a+672, 18));   //Address 04 72
+        default_data.replace(697, 30, data.mid(a+705, 30));   //Address 06 00
+        default_data.replace(740, 125, data.mid(a+751, 125)); //Address 07 00
+        default_data.replace(878, 128, data.mid(a+892, 128)); //Address 10 00
+        default_data.replace(1019, 86, data.mid(a+1020, 86)); //Address 11 00
+        default_data.replace(1118, 35, data.mid(a+1121, 35)); //Address 20 00
+        default_data.replace(1166, 35, data.mid(a+1171, 35)); //Address 21 00
+        default_data.replace(1214, 52, data.mid(a+1221, 52)); //Address 30 00
+        default_data.replace(1279, 52, data.mid(a+1288, 52)); //Address 31 00
+
         a=a+1320;                      // offset is set in front of marker
-        temp = default_data;
-        this->sysxPatches.append(temp.mid(0, patchSize));
+        this->sysxPatches.append(default_data.mid(0, patchSize));
     };
     updatePatch();
 }

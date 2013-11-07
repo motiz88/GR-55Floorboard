@@ -24,7 +24,7 @@
 #ifndef SOUNDSOURCE_analogPU_H
 #define SOUNDSOURCE_analogPU_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWidget>
 #include "soundSource.h"
 

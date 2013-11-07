@@ -893,6 +893,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgBox->setText(msgText);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
         /* END WARNING */
     };
     if(replyMsg.isEmpty() && preferences->getPreferences("Midi", "DBug", "bool")!="true")
@@ -911,6 +912,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgBox->setText(msgText);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
         /* END WARNING */
     };
 
@@ -940,6 +942,7 @@ void bankTreeList::updatePatch(QString replyMsg)
                         msgBox->setText(snork);
                         msgBox->setStandardButtons(QMessageBox::Ok);
                         msgBox->exec();
+                        msgBox->deleteLater();
                         };
                 };*/
     emit setStatusProgress(0);

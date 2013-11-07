@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "customRangeDial.h"
 #include "SysxIO.h"
 

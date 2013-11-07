@@ -1056,7 +1056,7 @@ static unsigned int s_numPorts = 0;
 
 // The client name to use when creating the sequencer, which is
 // currently set on the first call to createSequencer.
-static string s_clientName = "RtMidi Client";
+static std::string s_clientName = "RtMidi Client";
 
 // A structure to hold variables related to the ALSA API
 // implementation.

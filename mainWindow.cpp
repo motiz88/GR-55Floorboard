@@ -21,9 +21,9 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QWhatsThis>
-#include <QWebPage>
+//#include <QWebPage>
 #include "mainWindow.h"
 #include "Preferences.h"
 #include "preferencesDialog.h"
@@ -54,10 +54,14 @@ mainWindow::mainWindow()
     msgBox->setIcon(QMessageBox::Information);
     msgBox->setText(site_file);
     msgBox->setStandardButtons(QMessageBox::Ok);
-    msgBox->exec();*/
-
+    msgBox->exec();
+    msgBox->deleteLater();*/
+#ifdef Q_PROCESSOR_ARM
+    this->setMinimumSize(1210, 691);
+#endif
 
     floorBoard *fxsBoard = new floorBoard(this);
+    fxsBoard->scroll(600, 300);
 
     QString setting = preferences->getPreferences("Scheme", "Style", "select");
     int choice = setting.toInt(&ok, 16);
@@ -106,7 +110,7 @@ mainWindow::~mainWindow()
            preferences->getPreferences("Window", "Collapsed", "bool")=="true")
         {
             width = QString::number(this->geometry().width(), 10);
-            posx = QString::number(this->geometry().x()-3, 10);
+            posx = QString::number(this->geometry().x()-8, 10);
         }
         else
         {
@@ -115,7 +119,7 @@ mainWindow::~mainWindow()
             posx = QString::number(this->geometry().x()+((this->geometry().width()-width.toInt(&ok,10))/2), 10);
         };
         preferences->setPreferences("Window", "Position", "x", posx);
-        preferences->setPreferences("Window", "Position", "y", QString::number(this->geometry().y()-25, 10));
+        preferences->setPreferences("Window", "Position", "y", QString::number(this->geometry().y()-30, 10));
         preferences->setPreferences("Window", "Size", "width", width);
         preferences->setPreferences("Window", "Size", "height", QString::number(this->geometry().height(), 10));
     }
@@ -283,9 +287,7 @@ void mainWindow::createActions()
 
 void mainWindow::createMenus()
 {
-    //menuBar = new QMenuBar();
     fileMenu = menuBar()->addMenu(tr("&File"));
-    //QMenu *fileMenu = new QMenu(tr("&File"));
     fileMenu->addAction(openAct);
     fileMenu->addSeparator();
     fileMenu->addAction(saveG5LAct);
@@ -301,21 +303,16 @@ void mainWindow::createMenus()
     fileMenu->addAction(exitAct);
     fileMenu->setWhatsThis(tr("File Saving and Loading,<br> and application Exit."));
 
-
-    //QMenu *toolsMenu = new QMenu(tr("&Tools"), this);
     toolsMenu = menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(uploadAct);
     fileMenu->addSeparator();
     toolsMenu->addAction(summaryAct);
     toolsMenu->addAction(summarySystemAct);
     toolsMenu->addAction(summaryPatchListAct);
-    //menuBar->addMenu(toolsMenu);
 
     settingsMenu = menuBar()->addMenu(tr("&Settings"));
     settingsMenu->addAction(settingsAct);
 
-
-    //QMenu *helpMenu = new QMenu(tr("&Help"), this);
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(helpAct);
     helpMenu->addAction(whatsThisAct);
@@ -328,7 +325,6 @@ void mainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
-    //menuBar->addMenu(helpMenu);
 
     modeMenu = menuBar()->addMenu(tr("&Mode"));
     modeMenu->addAction(guitarModeAct);
@@ -623,6 +619,7 @@ void mainWindow::systemLoad()
                 {	// Accepted to overwrite system data.
                     sysxIO->systemWrite();
                 };
+                msgBox->deleteLater();
             };
         };
     }
@@ -635,6 +632,7 @@ void mainWindow::systemLoad()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 
@@ -683,6 +681,7 @@ void mainWindow::systemSave()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 
@@ -693,6 +692,7 @@ void mainWindow::bulkLoad()
     {
         bulkLoadDialog *loadDialog = new bulkLoadDialog();
         loadDialog->exec();
+        loadDialog->deleteLater();
     }
     else
     {
@@ -703,6 +703,7 @@ void mainWindow::bulkLoad()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 
@@ -714,6 +715,7 @@ void mainWindow::bulkSave()
     {
         bulkSaveDialog *bulkDialog = new bulkSaveDialog();
         bulkDialog->exec();
+        bulkDialog->deleteLater();
     }
     else
     {
@@ -724,6 +726,7 @@ void mainWindow::bulkSave()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 
@@ -784,6 +787,7 @@ void mainWindow::settings()
         preferences->setPreferences("Window", "Splash", "bool", splash);
         preferences->savePreferences();
     };
+    dialog->deleteLater();
 }
 
 void mainWindow::guitarMode()
@@ -801,6 +805,7 @@ void mainWindow::guitarMode()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     } else {
         QString snork = tr("Patch is already set to Guitar Mode, Patch Mode change not required");
         QMessageBox *msgBox = new QMessageBox();
@@ -809,6 +814,7 @@ void mainWindow::guitarMode()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 
 }
@@ -828,6 +834,7 @@ void mainWindow::bassMode()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     } else {
         QString snork = tr("Patch is already set to Bass Mode, Patch Mode change is not required");
         QMessageBox *msgBox = new QMessageBox();
@@ -836,6 +843,7 @@ void mainWindow::bassMode()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 

@@ -145,7 +145,8 @@ void SysxIO::setFileSource(QString area, QByteArray data)
                 msgBox->setWindowTitle(QObject::tr("deBug"));
                 msgBox->setText(address);
                 msgBox->setStandardButtons(QMessageBox::Ok);
-                msgBox->exec();*/
+                msgBox->exec();
+                msgBox->deleteLater();*/
             }
             else
             {
@@ -181,7 +182,8 @@ void SysxIO::setFileSource(QString area, QByteArray data)
     msgBox->setIcon(QMessageBox::Information);
     msgBox->setText(snork);
     msgBox->setStandardButtons(QMessageBox::Ok);
-    msgBox->exec();*/
+    msgBox->exec();
+    msgBox->deleteLater();*/
     if(!errorList.isEmpty())
     {
         /*   QMessageBox *msgBox = new QMessageBox();
@@ -199,7 +201,8 @@ void SysxIO::setFileSource(QString area, QByteArray data)
         msgBox->setInformativeText(tr("Be aware of possible inconsistencies in this patch!"));
         msgBox->setDetailedText(errorList);
         msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();*/
+        msgBox->exec();
+        msgBox->deleteLater();*/
     };
 }
 
@@ -380,8 +383,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
             {
                 pointerOffset2 = 0;
                 x=0;
-                this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);
-                address = "0200";                         // save the data and start a sysxList with a new address
+                this->fileSource.hex.replace(this->fileSource.address.indexOf(address), sysxList);                         // save the data and start a sysxList with a new address
                 sysxList = this->fileSource.hex.at(this->fileSource.address.indexOf(address));
             };
             sysxList.replace(x + (sysxDataOffset + pointerOffset2), hexData.at(i));
@@ -450,17 +452,17 @@ int SysxIO::getSourceValue(QString area, QString hex1, QString hex2, QString hex
     bool ok;
     if(area == "MidiT")
     {
-        QList<QString> items = this->getSourceItems("System", hex1, hex2);
-        int maxRange = QString("7F").toInt(&ok, 16) + 1;
+        //QList<QString> items = this->getSourceItems("System", hex1, hex2);
+        /*int maxRange = QString("7F").toInt(&ok, 16) + 1;
         int listindex = sysxDataOffset + QString(hex3).toInt(&ok, 16);
         int valueData1 = items.at(listindex).toInt(&ok, 16);
-        int valueData2 = items.at(listindex + 1).toInt(&ok, 16);
-        value = (valueData1 * maxRange) + valueData2;
+        int valueData2 = items.at(listindex + 1).toInt(&ok, 16);*/
+        value = 0;//(valueData1 * maxRange) + valueData2;
     }
     else
     {
         if (area != "System")  { area = "Structure"; };
-    };
+
 
     QList<QString> items = this->getSourceItems(area, hex1, hex2);
     if(midiTable->isData(area, hex1, hex2, hex3))
@@ -474,6 +476,7 @@ int SysxIO::getSourceValue(QString area, QString hex1, QString hex2, QString hex
     else
     {
         value = items.at(sysxDataOffset + QString(hex3).toInt(&ok, 16)).toInt(&ok, 16);
+    };
     };
     return value;
 }
@@ -1014,8 +1017,8 @@ void SysxIO::systemWrite()
 void SysxIO::systemDataRequest()
 {
     emit setStatusProgress(100);
-    QString replyMsg;
-    if (isConnected())
+    //QString replyMsg;
+    if (isConnected() && deviceReady())
     {
         emit setStatusSymbol(2);
         emit setStatusMessage(tr("Request System data"));
@@ -1034,6 +1037,7 @@ void SysxIO::systemDataRequest()
         msgBox->setText(snork);
         msgBox->setStandardButtons(QMessageBox::Ok);
         msgBox->exec();
+        msgBox->deleteLater();
     };
 }
 
@@ -1101,6 +1105,7 @@ void SysxIO::systemReply(QString replyMsg)
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
         };
     };
     emit setStatusMessage(tr("Ready"));
@@ -1165,3 +1170,55 @@ void SysxIO::relayUpdateSignal()
 {
     emit updateSignal();
 }
+
+/*QList<QString> SysxIO::getMPTitems(QString hex1, QString hex2, QString hex3)
+{
+    QList<QString> items;
+    for(int x=0; x<382; ++x)
+    {
+        QString num = QString::number(x, 16).toUpper();
+                if(num.length()<2) {num.prepend("0");};  // work in progress
+                    items.append(num);
+    };
+    this->MPTDataRequest(hex1, hex2, hex3);
+    return items;
+}
+
+void SysxIO::MPTDataRequest(QString hex1, QString hex2, QString hex3)
+{
+    emit setStatusProgress(100);
+    //QString replyMsg;
+    if (isConnected())
+    {
+        emit setStatusSymbol(2);
+        emit setStatusMessage(tr("Request MPT data"));
+        setDeviceReady(false); // Reserve the device for interaction.
+        QObject::disconnect(this, SIGNAL(sysxReply(QString)));
+        QObject::connect(this, SIGNAL(sysxReply(QString)), this, SLOT(MPTReply(QString)));
+        QString MPTrequest = "F0411000005311"+hex1;
+        MPTrequest.append(hex2+hex3+"000000030000F7");
+        sendSysx(systemRequest); // GR-55 System MPT bank data Request.
+        emit setStatusProgress(0);
+    };
+}
+
+void SysxIO::MPTReply(QString replyMsg)
+{
+    QList <QString> items;
+    QObject::disconnect(this, SIGNAL(sysxReply(QString)), this, SLOT(MPTReply(QString)));
+    setDeviceReady(true); // Free the device after finishing interaction.
+    if(noError())
+    {
+        if(replyMsg.size()/2 == 397)  // data format from the GR-55 MPT
+        {
+            replyMsg = replyMsg.mid(22, 764).simplified().toUpper();; //copy data bits only
+            for (int x=0; x<397; ++x)
+            {
+                items.append(replyMsg.mid(2, x*2));
+            };
+        };
+    };
+    emit setStatusMessage(tr("Ready"));
+    //return items;
+}
+*/

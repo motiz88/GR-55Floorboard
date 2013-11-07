@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include "fileDialog.h"
 
 
@@ -102,10 +102,12 @@ void fileDialog::highlighted(int value)
         QByteArray temp;
         temp = fileData.mid(a, 128);
         default_data.replace(11, 128, temp);      //address "00"
-        temp = fileData.mid(a+128, 128);
-        default_data.replace(152, 128, temp);     //address "01"
-        temp = fileData.mid(a+261, 73);
-        default_data.replace(298, 73, temp);     //address "02" +
+        temp = fileData.mid(a+128, 114);
+        default_data.replace(152, 114, temp);     //address "01-A"
+        temp = fileData.mid(a+268, 12);
+        default_data.replace(252, 12, temp);     //address "01-B"
+        temp = fileData.mid(a+264, 78);
+        default_data.replace(293, 78, temp);     //address "02" +
         temp = fileData.mid(a+350, 128);
         default_data.replace(384, 128, temp);     //address "03" +
         temp = fileData.mid(a+478, 128);

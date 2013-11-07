@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLLABEL_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 
 class customControlLabel : public QWidget
 {

@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QFile>
 #include "summaryDialogSystem.h"
 #include "Preferences.h"
@@ -69,6 +69,7 @@ summaryDialogSystem::summaryDialogSystem(QWidget *parent)
             msgBox->setText(snork);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
             emit setStatusMessage(tr("Not Connected"));
             emit setStatusSymbol(0);
         };
@@ -399,6 +400,7 @@ void summaryDialogSystem::systemReply(QString replyMsg)
             msgBox->setText(msgText);
             msgBox->setStandardButtons(QMessageBox::Ok);
             msgBox->exec();
+            msgBox->deleteLater();
         };
     };
     emit setStatusMessage(tr("Ready"));
@@ -417,7 +419,8 @@ void summaryDialogSystem::cancel()
 
 void summaryDialogSystem::printFile()
 {
-#ifndef QT_NO_PRINTER
+#ifdef  Q_PROCESSOR_ARM
+#elif QT_NO_PRINTER
 
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
@@ -425,6 +428,7 @@ void summaryDialogSystem::printFile()
     dialog->setWindowTitle(tr("Print Document"));
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
+    dialog->deleteLater();
 #endif
 }
 

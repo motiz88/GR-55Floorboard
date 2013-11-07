@@ -25,7 +25,7 @@
 #define CUSTOMCONTROLRANGE_H
 
 #include <QWidget>
-#include <QtGui>
+#include <QtWidgets>
 #include "customKnobRange.h"
 #include "customControlLabel.h"
 
