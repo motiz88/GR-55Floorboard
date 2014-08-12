@@ -834,16 +834,16 @@ void SysxIO::sendSysx(QString sysxMsg)
 	int midiInPort = preferences->getPreferences("Midi", "MidiIn", "device").toInt(&ok, 10);	// Get midi in device from preferences.
 	
 	midiIO *midi = new midiIO();
-    QList<QString> midiInDevices = midi->getMidiInDevices();
+    /*QList<QString> midiInDevices = midi->getMidiInDevices();
 	  QList<QString> midiOutDevices = midi->getMidiOutDevices();
-	  if ( midiInDevices.contains("GR-55") )
+      if ( midiInDevices.contains("GR-55") )
     {
       midiInPort = midiInDevices.indexOf("GR-55");
     };
 	  if ( midiOutDevices.contains("GR-55") )
     {
       midiOutPort = midiOutDevices.indexOf("GR-55");
-    };  
+    };  */
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
 }
 

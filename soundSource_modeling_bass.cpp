@@ -49,10 +49,10 @@ void soundsource_modeling_bass::setEditPages()
 {
     editDetails()->page()->newGroupBox("Bass Mode Modeling");
     editDetails()->page()->addSwitch(0, 0, 1, 1, "10", "00", "0A", "invert", Qt::AlignCenter);
-     editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "2D"); //route switch
+    editDetails()->page()->addComboBox(0, 1, 1, 1, "02", "00", "2D"); //route switch
     editDetails()->page()->newStackControl(0);
     editDetails()->page()->addComboBox(0, 2, 1, 1, "10", "00", "05"); // Bass select
-    editDetails()->page()->addStackControl();  
+    editDetails()->page()->addStackControl();
     editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "09");  //level
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("Pitch");
@@ -81,7 +81,7 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->addKnob(0, 2, 1, 1, "10", "00", "0D");  //3
     editDetails()->page()->addKnob(0, 3, 1, 1, "10", "00", "0E");  //4
     editDetails()->page()->addKnob(0, 4, 1, 1, "10", "00", "0F");  //5
-    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "10");  //6  
+    editDetails()->page()->addKnob(0, 5, 1, 1, "10", "00", "10");  //6
     editDetails()->page()->addGroupBox(1, 0, 1, 2);
     editDetails()->page()->insertStackField(0, 2, 0, 1, 4);
 
@@ -271,7 +271,7 @@ void soundsource_modeling_bass::setEditPages()
     editDetails()->page()->addKnob(0, 3, 1, 1, "11", "00", "2D");  //pitch B fine
     editDetails()->page()->addKnob(0, 4, 1, 1, "11", "00", "30");  //pitch sweep rise
     editDetails()->page()->addKnob(0, 5, 1, 1, "11", "00", "31");  //pitch sweep fall
-     editDetails()->page()->addComboBox(1, 0, 1, 2, "11", "00", "29"); //pitch sw
+    editDetails()->page()->addComboBox(1, 0, 1, 2, "11", "00", "29"); //pitch sw
     editDetails()->page()->addSwitch(1, 2, 1, 2, "11", "00", "2E", "middle", Qt::AlignCenter); //duet
     editDetails()->page()->addSwitch(1, 4, 1, 2, "11", "00", "2F", "middle", Qt::AlignCenter); //pitch sweep
     editDetails()->page()->addGroupBox(0, 3, 1, 1);

@@ -48,7 +48,7 @@ protected:
 public slots:
 	void valueChanged(int index);
 	void dialogUpdateSignal();
-	void set_index(int index);
+    void set_index(int index);
 
 signals:
 	void updateSignal();
@@ -64,7 +64,7 @@ private:
 	QString hex3;
 	QString area;
 	QString direction;
-	int comboWidth;
+    int comboWidth;
 };
 
 #endif // CUSTOMCONTROLLISTMENU_H

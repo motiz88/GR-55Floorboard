@@ -41,7 +41,7 @@ QDir initPatchListMenu::getInitPatchDir()
 {
 	Preferences *preferences = Preferences::Instance();
 	QDir preferencesDir = QDir(preferences->getPreferences("General", "Files", "dir").remove(QRegExp("$(/)")));
-	QString initPatchesDirName = "Init Patches";
+    QString initPatchesDirName = "init_patches";
 	QString symlinkExstention;
 
 	#ifdef Q_OS_UNIX
@@ -52,7 +52,7 @@ QDir initPatchListMenu::getInitPatchDir()
 		symlinkExstention = ".lnk";
 	#endif
 	
-    QDir initPatchesDir; /* The "Init Patches" directory. */
+    QDir initPatchesDir; /* The "init_patches" directory. */
 	if ( QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).exists() &&
 		 QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).canonicalPath() == 
 		 QFileInfo( preferencesDir, initPatchesDirName + symlinkExstention ).symLinkTarget() )
@@ -91,7 +91,7 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 			this->initPatchComboBox = new customComboBox(this);
 			this->available = true;
 			this->initPatchComboBox->setObjectName("smallcombo");
-			initPatchComboBox->addItem(tr("[ INIT Patches ]")); 
+            initPatchComboBox->addItem(tr("[ init_patches ]"));
 			
 			int itemcount;
 			for(itemcount=0; itemcount<initPatchesList.size(); itemcount++)
@@ -114,7 +114,7 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 			initPatchComboBox->setGeometry(geometry);
 			initPatchComboBox->setEditable(false);
 			initPatchComboBox->setFrame(false);
-			initPatchComboBox->setMaxVisibleItems(itemcount + 1); // +1 for "[ INIT Patches ]" entry.
+            initPatchComboBox->setMaxVisibleItems(itemcount + 1); // +1 for "[ init_patches ]" entry.
 
 			QObject::connect(initPatchComboBox, SIGNAL(currentIndexChanged(int)),
 					this, SLOT(loadInitPatch(int)));

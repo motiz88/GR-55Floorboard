@@ -141,9 +141,6 @@ private:
     void initSoundSource();
     void initStomps();
     void initMenuPages();
-    void setStomps(QList<QString> stompOrder);
-    void setStompPos(QString name, int order);
-    void setStompPos(int index, int order);
     void centerEditDialog();
     QString imagePathFloor;
     QString imagePathStompBG;

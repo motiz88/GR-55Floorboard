@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- Preferences of the GR-55 FloorBoard application. -->
-<Preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preferences.xsd">
+<Preferences>
 	<General>
-		<Application version="20131106"/>
+		<Application version="20140811"/>
 		<Donate url=""/>
 		<Files dir=""/>
-		<Help url="GR-55-Help-HTML\GR-55_HTML_Help.html"/>
+		<Help url="///GR-55-Help-HTML\GR-55_HTML_Help.html"/>
 		<Language code="en"/>
 		<Manual url="http://www.roland.com/products/en/_support/om.cfm?PRODUCT=GR-55"/>
 		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
@@ -17,23 +18,23 @@
 	<Midi>
 		<BulkFinish patch="297"/>
 		<BulkStart patch="1"/>
-		<DBug bool="false"/>
+		<DBug bool="true"/>
 		<Delay set="20"/>
-		<MidiIn device=""/>
-		<MidiOut device=""/>
+		<MidiIn device="0"/>
+		<MidiOut device="0"/>
 		<TxCh set="1"/>
 	</Midi>
 	<Scheme>
-  	<Colour select="0"/>
+		<Colour select="0"/>
 		<Style select="1"/>
 	</Scheme>
 	<Window>
-		<Collapsed bool="true" defaultwidth="1235" width="1235"/>
-		<Position x="10" y="10"/>
+		<Collapsed width="1235" defaultwidth="1235" bool="true"/>
+		<Position x="-8" y="14"/>
 		<Ratio size="10"/>
 		<Restore sidepanel="true" window="true"/>
 		<Single bool="true"/>
-		<Size minheight="548" height="690" minwidth="1014" width="1235"/>
+		<Size height="690" width="1235" minwidth="1014" minheight="548"/>
 		<Splash bool="true"/>
 		<Widgets bool="true"/>
 	</Window>

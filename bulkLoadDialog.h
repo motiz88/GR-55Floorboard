@@ -49,17 +49,19 @@ signals:
     void setStatusProgress(int value);
     void setStatusSymbol(int value);
     void setdeBugStatusMessage(QString message);
+    void started();
 
 public slots:
     void sendData();
-    void updatePatch();
-    void bulkStatusProgress(int value);
-    void sendSequence(QString value);
-    void sendPatch(QString data);
+
 
 private slots:
     void comboValueChanged(int value);
-    void close();
+    void DialogClose();
+    void updatePatch();
+    void bulkStatusProgress(int value);
+    void sendSequence();
+    void sendPatch(QString data);
 
 private: 
     QComboBox *startPatchCombo;

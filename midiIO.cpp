@@ -46,21 +46,21 @@ midiIO::midiIO()
 {
     if (!midiin){
 #ifdef Q_OS_WIN
-midiout = new RtMidiOut(midiout->WINDOWS_MM, clientName);
-midiin = new RtMidiIn(midiin->WINDOWS_MM, clientName);
+midiout = new RtMidiOut();
+midiin = new RtMidiIn();
 #endif
 #ifdef Q_OS_MAC
-midiout = new RtMidiOut(midiout->MACOSX_CORE, clientName);
-midiin = new RtMidiIn(midiin->MACOSX_CORE, clientName);
+midiout = new RtMidiOut();
+midiin = new RtMidiIn();
 #endif
 #ifdef Q_OS_LINUX
-midiout = new RtMidiOut(midiout->LINUX_ALSA, clientName);
-midiin = new RtMidiIn(midiin->LINUX_ALSA, clientName);
+midiout = new RtMidiOut(LINUX_ALSA);
+midiin = new RtMidiIn(LINUX_ALSA);
 #endif
-#ifdef Q_PROCESSOR_ARM
-midiout = new RtMidiOut(midiout->RTMIDI_DUMMY, clientName);
-midiin = new RtMidiIn(midiin->RTMIDI_DUMMY, clientName);
-#endif
+/*#ifdef Q_PROCESSOR_ARM
+midiout = new RtMidiOut(RTMIDI_DUMMY);
+midiin = new RtMidiIn(RTMIDI_DUMMY);
+#endif*/
 };
     this->midi = false; // Set this to false until required;
     /* Connect signals */
@@ -103,7 +103,7 @@ void midiIO::queryMidiOutDevices()
             this->midiOutDevices.append(QString::fromStdString(portName));
         };
     }
-    catch (RtError &error)
+    catch (RtMidiError &error)
     {
         emit errorSignal(tr("Midi Output Error"), tr("port availability error"));
         emit setStatusdBugMessage(QString::fromStdString( error.getMessage()));
@@ -139,7 +139,7 @@ void midiIO::queryMidiInDevices()
             this->midiInDevices.append(QString::fromStdString(portName));
         };
     }
-    catch (RtError &error)
+    catch (RtMidiError &error)
     {
         emit errorSignal(tr("Midi Input Error"), tr("port availability error"));
         emit setStatusdBugMessage(QString::fromStdString( error.getMessage()));
@@ -198,7 +198,7 @@ RETRY:
             midiout->sendMessage(&message);
         goto cleanup;
     }
-    catch (RtError &error)
+    catch (RtMidiError &error)
     {
         msleep(100);
         retryCount = retryCount + 1;
@@ -236,7 +236,7 @@ void midiIO::sendMidiMsg(QString sysxOutMsg, int midiOutPort)
         midiout->sendMessage(&message);  // send the midi data as a std::vector
         goto cleanup;
     }
-    catch (RtError &error)
+    catch (RtMidiError &error)
     {
         emit errorSignal(tr("Midi Output Error"), tr("data error"));
         emit setStatusdBugMessage(QString::fromStdString( error.getMessage()));
@@ -312,7 +312,7 @@ void midiIO::receiveMsg(int midiInPort)
         };                   // time it takes to get all sysx messages in.
         goto cleanup;
     }
-    catch (RtError &error)
+    catch (RtMidiError &error)
     {
         emit errorSignal(tr("Midi Input Error"), tr("data error"));
         emit setStatusdBugMessage(QString::fromStdString( error.getMessage()));

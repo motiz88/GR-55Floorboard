@@ -65,8 +65,6 @@ win32{
         exists("C:/SDK/Lib/WinMM.Lib")
                 {	# <-- Change the path to WinMM.Lib here!
                     LIBS += C:/SDK/Lib/WinMM.Lib	# <-- Change the path here also!
-                    LIBS += C:/SDK/Lib/setupapi.Lib
-                    LIBS += C:/SDK/Lib/ksuser.Lib
                 }
 	message(Including Windows specific headers and sources...)
 }
@@ -88,6 +86,13 @@ macx{
 	message("Please install the X-Code Audio System packages if not present") 
 	ICON = GR-55FloorBoard.icns
 	message(Including Mac OS X specific headers and sources...)
+}
+ios{
+        LIBS += -framework CoreMidi -framework CoreAudio -framework CoreFoundation
+        message("X-Code LIBRARIES SHOULD BE INSTALLED or ERROR will Occur")
+        message("Please install the X-Code Audio System packages if not present")
+        ICON = GR-55FloorBoard.icns
+        message(Including Mac OS X specific headers and sources...)
 }
 android{
         message(Including Android specific headers and sources...)
