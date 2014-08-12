@@ -1,10 +1,10 @@
 
-GR-55FloorBoard Copyright (C) 2011 Colin Willcocks (gumtownbassman@yahoo.com).
+GR-55FloorBoard Copyright (C) 2014 Colin Willcocks (gumtownbassman@yahoo.com).
  All rights reserved.
 =======
 
 
-GR-55FloorBoard beta version 20120806: 06 August 2012
+GR-55FloorBoard version 20140810: 10 August 2014
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -18,6 +18,7 @@ for inclusion in a later release.
  ********* LATEST FEATURES ADDED****************************************************
   
  Here is an update on "where it's at"...
+** Another Midi I/O update with auto port finder removed to allow for multiple GR-55 connections.
  
 *** New Midi I/O sub system with auto port finder.
 *

@@ -49,7 +49,7 @@ customDial::customDial(double value, double min, double max, double single, doub
 
     QObject::connect(this, SIGNAL( valueChanged(int, QString, QString, QString) ),
                      this->parent(), SLOT( valueChanged(int, QString, QString, QString) ));
-};
+}
 
 void customDial::paintEvent(QPaintEvent *)
 {
@@ -61,7 +61,7 @@ void customDial::paintEvent(QPaintEvent *)
     QPainter painter(this);
     //painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawPixmap(target, image, source);
-};
+}
 
 void customDial::setOffset(double _newValue)
 {
@@ -82,7 +82,7 @@ void customDial::setOffset(double _newValue)
     this->value = _newValue;
     this->xOffset = imageNr*dialSize.width();
     this->update();
-};
+}
 
 void customDial::mouseHoverEvent(QHoverEvent *event)
 {
@@ -95,7 +95,7 @@ void customDial::mouseHoverEvent(QHoverEvent *event)
         clearFocus();
         emitValue(value);
     };
-};
+}
 
 void customDial::mousePressEvent(QMouseEvent *event)
 {
@@ -115,7 +115,7 @@ void customDial::mousePressEvent(QMouseEvent *event)
         clearFocus();
         emitValue(value);
     };
-};
+}
 
 void customDial::mouseMoveEvent(QMouseEvent *event)
 {
@@ -148,7 +148,7 @@ void customDial::mouseMoveEvent(QMouseEvent *event)
     this->_lastpos = event->pos();
     setOffset(_newValue);
     emitValue(_newValue);
-};
+}
 
 void customDial::wheelEvent(QWheelEvent *event)
 {
@@ -172,7 +172,7 @@ void customDial::wheelEvent(QWheelEvent *event)
         setOffset(_newValue);
         emitValue(_newValue);
     };
-};
+}
 
 void customDial::keyPressEvent(QKeyEvent *event)
 {
@@ -209,7 +209,7 @@ void customDial::keyPressEvent(QKeyEvent *event)
         setOffset(_newValue);
         emitValue(_newValue);
     };
-};
+}
 
 void customDial::emitValue(double value)
 {
@@ -217,9 +217,9 @@ void customDial::emitValue(double value)
         this->m_value = value;
     };
     emit valueChanged((int)value, this->hex1, this->hex2, this->hex3);
-};
+}
 
 void customDial::setValue(int value)
 {
     setOffset((double)value);
-};
+}

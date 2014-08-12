@@ -30,6 +30,15 @@
 #include "Preferences.h"
 #include "globalVariables.h"
 
+// Platform-dependent sleep routines.
+#ifdef Q_OS_WIN
+#include <windows.h>
+#define SLEEP( milliseconds ) Sleep( (DWORD) milliseconds )
+#else // Unix variants & Mac
+#include <unistd.h>
+#define SLEEP( milliseconds ) usleep( (unsigned long) (milliseconds * 1000.0) )
+#endif
+
 
 bulkLoadDialog::bulkLoadDialog()
 { 
@@ -93,11 +102,11 @@ bulkLoadDialog::bulkLoadDialog()
     this->completedButton = new QPushButton(this);
     this->completedButton->setText(tr("DATA TRANSFER COMPLETED"));
     this->completedButton->hide();
-    connect(completedButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(completedButton, SIGNAL(clicked()), this, SLOT(DialogClose()));
 
     this->cancelButton = new QPushButton(this);
     this->cancelButton->setText(tr("Cancel"));
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(DialogClose()));
 
     this->progressLabel = new QLabel(this);
     this->progressLabel->setText(tr("Full Restoration may take up to 2 minutes"));
@@ -225,7 +234,7 @@ bulkLoadDialog::bulkLoadDialog()
                 msgBox->setText(msgText);
                 msgBox->setStandardButtons(QMessageBox::Ok);
                 msgBox->exec();
-                msgBox->deleteLater();
+                //msgBox->deleteLater();
             };
         };
     };
@@ -265,13 +274,12 @@ void bulkLoadDialog::comboValueChanged(int value)
     //this->startRangeComboBox->setMaxVisibleItems((bankTotalUser*patchPerBank)-(finishList-startList));
 }
 
-void bulkLoadDialog::sendData() 
+void bulkLoadDialog::sendData()
 {	
     bankStart = this->startRangeComboBox->currentIndex()+1;
     startList = this->startPatchCombo->currentIndex();
     finishList = this->finishPatchCombo->currentIndex();
     startButton->hide();
-    //cancelButton->hide();
     progress = 0;
     patch = 1;
     range = (100)/((finishList-startList)+1);
@@ -331,22 +339,24 @@ void bulkLoadDialog::sendData()
     patch = bank/patchPerBank; patch = patch*patchPerBank; patch=bank-patch;
     steps=0;
     dataSent=0;
-    sendSequence("");
+    sendSequence();
 }
 
 void bulkLoadDialog::sendPatch(QString data)
 {
     SysxIO *sysxIO = SysxIO::Instance();
 
-    QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+    QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence()));
     data.append("F04110000053120F000001016FF7");  // key code to write data to GR-55 memory
+    int count=100;
+    while(!sysxIO->deviceReady() && count>0){sleep(20); --count;};
     sysxIO->sendSysx(data);
 }
 
-void bulkLoadDialog::sendSequence(QString value)
+void bulkLoadDialog::sendSequence()
 { 
     SysxIO *sysxIO = SysxIO::Instance();
-    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence()));
     sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
     msg=bulk.mid(steps*(patchSize*2), (patchSize*2));
 
@@ -392,10 +402,10 @@ void bulkLoadDialog::sendSequence(QString value)
         sendPatch(msg);                                 //request the next patch.
         setStatusMessage(tr("Sending Data"));
     } else {
-        QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+        QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence()));
         sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
         setStatusMessage(tr("Ready"));
-        close();
+        DialogClose();
     };
 }
 
@@ -539,7 +549,7 @@ void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMA
 	msgBox->setText(msgText);
 	msgBox->setStandardButtons(QMessageBox::Ok);
 	msgBox->exec();  
-    msgBox->deleteLater();
+    //msgBox->deleteLater();
     };
     int count = (data.size()-26)/1320;
     int a=0;                             // offset is set to first patch
@@ -568,12 +578,13 @@ void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMA
     updatePatch();
 }
 
-void bulkLoadDialog::close()
+void bulkLoadDialog::DialogClose()
 {
     steps = 300;
     SysxIO *sysxIO = SysxIO::Instance();
-    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence(QString)));
+    QObject::disconnect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence()));
     sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
     setStatusMessage(tr("Ready"));
-    this->deleteLater();
+    close();
+    //this->deleteLater();
 }

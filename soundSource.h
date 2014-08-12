@@ -76,7 +76,7 @@ public:
     unsigned int getId();
     virtual void setEditPages() {}
     editWindow* editDetails();
-    void getStompOrder();
+    //void getStompOrder();
     unsigned int id;
 
 
@@ -100,9 +100,9 @@ signals:
     void dialogUpdateSignal();
     void setEditDialog(editWindow* editDialog);
     void notConnectedSignal();
-    void pathSwitchSignal();
+    //void pathSwitchSignal();
     void pageUpdateSignal();
-    void updateStompBoxes();
+    //void updateStompBoxes();
     void switchSignal();
     void normal_PU_statusSignal(bool value);
     void modeling_statusSignal(bool value);
@@ -139,14 +139,14 @@ private:
     QString hex1;
     QString hex2;
     QString hex3;
-    customButton *pathSwitch;
-    bool pathSwitchActive;
+    //customButton *pathSwitch;
+    //bool pathSwitchActive;
     QString fxName;
-    QList<QString> stompOrderName;
-    QString stompOrderHex;
-    QString hexdata_A;
-    QString hexdata_B;
-    QString namedata;
+    //QList<QString> stompOrderName;
+    //QString stompOrderHex;
+    //QString hexdata_A;
+    //QString hexdata_B;
+    //QString namedata;
 };
 
 #endif // SOUNDSOURCE_H

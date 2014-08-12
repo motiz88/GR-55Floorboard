@@ -100,7 +100,7 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->patchDisplay->setSubText(tr("version"), version);
 
     initPatch = new initPatchListMenu(QRect(390, patchDisplayRowOffset+19, 168, 15), this);
-    initPatch->setWhatsThis(tr("Clicking on this will load a patch from a predefined selection.<br>patches place in the Init Patches folder will appear in this list at the start of the next session."));
+    initPatch->setWhatsThis(tr("Clicking on this will load a patch from a predefined selection.<br>patches place in the init_patches folder will appear in this list at the start of the next session."));
     renameWidget *nameEdit = new renameWidget(this);
     nameEdit->setGeometry(70, patchDisplayRowOffset, 150, 34);
     nameEdit->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));

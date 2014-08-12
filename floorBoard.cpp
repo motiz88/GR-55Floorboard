@@ -412,21 +412,6 @@ void floorBoard::initStomps()
 
 }
 
-void floorBoard::setStomps(QList<QString> stompOrder)
-{
-
-}
-
-void floorBoard::setStompPos(QString name, int order)
-{
-
-}
-
-void floorBoard::setStompPos(int index, int order)
-{
-
-}
-
 void floorBoard::updateStompBoxes()
 {
 
@@ -453,7 +438,7 @@ void floorBoard::centerEditDialog()
     Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
-	int x = this->displayPos.x() + (((this->floorSize.width() - this->displayPos.x()) - this->editDialog->width()) / 2);
+    int x = this->displayPos.x() + (((this->floorSize.width() - this->displayPos.x()) - this->editDialog->width()) / 2);
         int y = this->pos.y() + (((this->floorSize.height() +40) - this->editDialog->height()) / 2);
         this->editDialog->move(x, y);
     };

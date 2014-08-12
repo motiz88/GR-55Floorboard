@@ -55,7 +55,7 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
     QObject::connect(this, SIGNAL( setEditDialog( editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
 
-    QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
+  //  QObject::connect(this, SIGNAL( updateStompBoxes() ), this->parent(), SLOT( updateStompBoxes() ));
 
     QObject::connect(this, SIGNAL( pageUpdateSignal() ), this->editDialog, SIGNAL(  dialogUpdateSignal() ));
 
@@ -74,6 +74,7 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this, SLOT(synth2_ButtonSignal(bool) ));
     QObject::connect(this, SIGNAL(synth2_statusSignal(bool)), this->parent(), SIGNAL(synth2_statusSignal(bool)));
     QObject::connect(this->parent(), SIGNAL(synth2_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
+
 }
 
 void soundSource::paintEvent(QPaintEvent *)
@@ -332,11 +333,11 @@ void soundSource::updateKnob1(QString hex1, QString hex2, QString hex3)
         if (pcm_check == 86) {index = index + 896; };
     };
 
-    if (this->id == 1)
+    if (hex1=="10" /*this->id == 1*/)
     {
-        bool ok;
-        hex3 = "0" + QString::number(QString(hex3).toInt(&ok, 16) + index + 1, 16).toUpper();
-        index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
+       // bool ok;
+       // hex3 = "0" + QString::number(QString(hex3).toInt(&ok, 16) + index + 1, 16).toUpper();
+        //index = sysxIO->getSourceValue("Structure", hex1, hex2, hex3);
     };
     QString valueHex = QString::number(index, 16).toUpper();
     if(valueHex.length() < 2) valueHex.prepend("0");
@@ -493,7 +494,3 @@ void soundSource::updateStompPath()
     if (this->id == 25) {this->fxName = tr("Bass Mode Modeling");};
 }
 
-void soundSource::getStompOrder()
-{
-
-}
