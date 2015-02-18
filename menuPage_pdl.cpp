@@ -45,6 +45,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 1, 1, 1, "00", "00", "12");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(0, 1, 0, 1, 2);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 4, "02", "02", "00", "01");
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
 
     editDetails()->page()->newStackField(0); //off
@@ -94,6 +95,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "1F");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(1, 1, 0, 1, 2);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 4, "02", "02", "0D", "01");
     editDetails()->page()->addGroupBox(1, 0, 1, 1);
 
     editDetails()->page()->newStackField(1); //off
@@ -155,6 +157,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "36");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(2, 1, 0, 1, 1);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 4, "02", "02", "24", "01");
     editDetails()->page()->addGroupBox(1, 1, 1, 1);
 
     editDetails()->page()->newStackField(2); //off
@@ -218,6 +221,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 1, 1, 1, "00", "00", "4E");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(3, 1, 0, 1, 2);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 4, "02", "02", "3B", "01");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
 
     editDetails()->page()->newStackField(3); //off
@@ -258,6 +262,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "72");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(4, 1, 0, 1, 1);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 3, "02", "02", "5F", "01");
     editDetails()->page()->addGroupBox(2, 0, 1, 1);
 
     editDetails()->page()->newStackField(4); //off
@@ -297,6 +302,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "7F");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(5, 1, 0, 1, 1);
+    editDetails()->page()->addSystemOverride(0, 0, 2, 4, "02", "02", "6C", "01");
     editDetails()->page()->addGroupBox(2, 1, 1, 1);
 
     editDetails()->page()->newStackField(5); //off
@@ -336,6 +342,7 @@ void menuPage_pdl::setEditPages()
     editDetails()->page()->addComboBox(0, 0, 1, 1, "00", "00", "5B");
     editDetails()->page()->addStackControl();
     editDetails()->page()->insertStackField(6, 1, 0, 1, 2);
+    editDetails()->page()->addSystemOverride(0, 0, 3, 2, "02", "02", "48", "01");
     editDetails()->page()->addGroupBox(0, 2, 3, 1);
 
     editDetails()->page()->newStackField(6); //off

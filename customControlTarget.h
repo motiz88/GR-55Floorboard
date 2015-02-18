@@ -85,6 +85,7 @@ private:
         QString direction;
         QString hex3_msb;
         QString hex3_lsb;
+        QString hex_a;
 };
 
 #endif // customControlTarget_H

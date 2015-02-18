@@ -70,6 +70,7 @@ QString effect;
 QString filter;
 QString assign_desc;
 QString assign_customdesc;
+QPushButton *viewButton;
 };
 
 #endif // FILEDIALOG_H

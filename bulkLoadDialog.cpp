@@ -186,21 +186,12 @@ bulkLoadDialog::bulkLoadDialog()
             QFile hexfile(":HexLookupTable.hex");           // Read the HexLookupTable for the SMF header file .
             if (hexfile.open(QIODevice::ReadOnly))
             {	this->hextable = hexfile.readAll(); };
-            /*
-	  patchNum = QString::number(r, 16).toUpper().toInt(&ok, 16);
-	  bool isPatch = false;
-	  if (patchNum >= bankUserStart) { isPatch = true; };    // check the sysx file is a valid patch & not system data- patchNum matches patch address.
-	  
-	  r = (char)data[(patchSize)+1];     // find sysx product id number in file roland = 41 	  
-	  patchNum = QString::number(r, 16).toUpper().toInt(&ok, 16);
-	  bool isGTM = false;
-	  if ((patchNum != 65) && (data.size() > patchSize) )  {isGTM = true; }; 
-	   */
+
             QByteArray default_header = default_data.mid(0, 7);           // copy header from default.syx
             QByteArray file_header = data.mid(0, 7);                      // copy header from read file.syx
             QByteArray G5L_header = G5L_default.mid(3, 20);                // copy header from default.g5l
             QByteArray SMF_header = hextable.mid(144,18);
-            QByteArray SMF_file = data.mid(0, 18);
+            //QByteArray SMF_file = data.mid(0, 18);
             unsigned char r = (char)data[7];     // find patch number in file (msb))
             bool ok;
             int patchNum;
@@ -232,9 +223,8 @@ bulkLoadDialog::bulkLoadDialog()
                 msgText.append(QObject::tr("Patch file not within allowable parameters or<br>"));
                 msgText.append(QObject::tr("file format unknown, please try another file."));
                 msgBox->setText(msgText);
-                msgBox->setStandardButtons(QMessageBox::Ok);
-                msgBox->exec();
-                //msgBox->deleteLater();
+                msgBox->show();
+                QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
             };
         };
     };
@@ -254,8 +244,7 @@ void bulkLoadDialog::comboValueChanged(int value)
     this->startList = this->startPatchCombo->currentIndex();
     this->finishList = this->finishPatchCombo->currentIndex();
     if ((this->finishList-this->startList)>(this->bankStart+(bankTotalUser*patchPerBank)))
-    {this->startPatchCombo->setCurrentIndex(this->finishList-(bankTotalUser*patchPerBank)+1);
-        /*this->startRangeComboBox->setCurrentIndex(1);*/ };
+    {this->startPatchCombo->setCurrentIndex(this->finishList-(bankTotalUser*patchPerBank)+1); };
     if (this->startList > this->finishList) {this->startPatchCombo->setCurrentIndex(finishList); }
     else if (this->finishList < this->startList) {this->finishPatchCombo->setCurrentIndex(startList); };
     int x = (this->bankStart+(this->finishList-this->startList));
@@ -271,7 +260,6 @@ void bulkLoadDialog::comboValueChanged(int value)
     text.append("-");
     text.append(QString::number(y+1, 10).toUpper() );
     this->finishRange->setText(text);
-    //this->startRangeComboBox->setMaxVisibleItems((bankTotalUser*patchPerBank)-(finishList-startList));
 }
 
 void bulkLoadDialog::sendData()
@@ -349,7 +337,7 @@ void bulkLoadDialog::sendPatch(QString data)
     QObject::connect(sysxIO, SIGNAL(sysxReply(QString)), this, SLOT(sendSequence()));
     data.append("F04110000053120F000001016FF7");  // key code to write data to GR-55 memory
     int count=100;
-    while(!sysxIO->deviceReady() && count>0){sleep(20); --count;};
+    while(!sysxIO->deviceReady() && count>0){SLEEP(20); --count;};
     sysxIO->sendSysx(data);
 }
 
@@ -408,7 +396,6 @@ void bulkLoadDialog::sendSequence()
         DialogClose();
     };
 }
-
 
 void bulkLoadDialog::updatePatch()
 {
@@ -547,9 +534,8 @@ void bulkLoadDialog::loadSMF()    // **************************** SMF FILE FORMA
 	msgText.append("<b></font><br>");
 	msgText.append(QObject::tr("*Loading this file may have unpredictable results*."));
 	msgBox->setText(msgText);
-	msgBox->setStandardButtons(QMessageBox::Ok);
-	msgBox->exec();  
-    //msgBox->deleteLater();
+    msgBox->show();
+    QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
     int count = (data.size()-26)/1320;
     int a=0;                             // offset is set to first patch
@@ -586,5 +572,4 @@ void bulkLoadDialog::DialogClose()
     sysxIO->setDeviceReady(true); // Free the device after finishing interaction.
     setStatusMessage(tr("Ready"));
     close();
-    //this->deleteLater();
 }

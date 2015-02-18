@@ -326,11 +326,7 @@ void editWindow::addPage(QString hex1, QString hex2, QString hex3, QString hex4,
 
     QObject::connect(editPages.last(), SIGNAL( updateSignal() ),
                      this, SIGNAL( updateSignal() ));
-   // bool assign_check = false;
 
-    //if(area == "Structure" ) { assign_check = true; };
-
-    //If a system, midi, or EZ-Tone page then hide some buttons.
     if (this->area != "Structure" || this->temp_hex1.isEmpty() || this->temp_hex1.contains("void"))
     {
         this->bulkEdit_Button->hide();
@@ -408,10 +404,6 @@ void editWindow::valueChanged(int index)
     if(hex1 != "void" && hex2 != "void")
     {
         this->pageIndex = index;
-        //QString valueHex = QString::number(index, 16).toUpper();
-        //if(valueHex.length() < 2) valueHex.prepend("0");
-        //SysxIO *sysxIO = SysxIO::Instance();
-        //sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueHex);
     };
 }
 
@@ -419,8 +411,7 @@ void editWindow::pageUpdateSignal()
 {
     if(this->pages > 1 && hex1 != "void" && hex2 != "void")
     {
-        //SysxIO *sysxIO = SysxIO::Instance();
-        int index = this->pageIndex; //sysxIO->getSourceValue("Structure", this->hex1, this->hex2, this->hex3);
+        int index = this->pageIndex;
         this->pageComboBox->setCurrentIndex(index);
         this->pagesWidget->setCurrentIndex(index);
     };
@@ -466,9 +457,8 @@ void editWindow::bulkEdit()
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 

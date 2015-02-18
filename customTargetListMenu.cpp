@@ -252,7 +252,7 @@ void customTargetListMenu::valueChanged(int index)
     this->hexLsb = items.customdesc;
 
     emit updateTarget(hexMsb, hex2, hexLsb);                                                    // hexMsb & hexLsb are lookup address for label value
-    emit updateTarget(hexMsb, hex2, hexLsb);
+   // emit updateTarget(hexMsb, hex2, hexLsb);
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
 }

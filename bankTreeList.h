@@ -47,6 +47,7 @@ public slots:
 	void setItemClicked(QTreeWidgetItem *item, int column);
 	void setItemDoubleClicked(QTreeWidgetItem *item, int column);
     void updateTreeMode();
+    void systemRequest();
 
 signals:
 	void itemExpanded(QTreeWidgetItem *item);
@@ -73,6 +74,7 @@ private:
     QTreeWidget* treeListBass;
 	int itemIndex;
 	int listIndex;
+    bool systemRequested;
 };
 
 #endif // BANKTREELIST_H

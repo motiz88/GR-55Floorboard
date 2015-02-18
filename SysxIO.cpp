@@ -31,6 +31,7 @@
 #include "MidiTable.h"
 #include "globalVariables.h"
 #include <QThread>
+#include <QTimer>
 
 // Platform-dependent sleep routines.
 #ifdef Q_OS_WIN
@@ -140,13 +141,6 @@ void SysxIO::setFileSource(QString area, QByteArray data)
             {
                 this->systemSource.address.append( sysxBuffer.at(sysxAddressOffset) + sysxBuffer.at(sysxAddressOffset + 2));
                 this->systemSource.hex.append(sysxBuffer);
-                /* QString address = (  sysxBuffer.at(sysxAddressOffset) + sysxBuffer.at(sysxAddressOffset + 2));
-                QMessageBox *msgBox = new QMessageBox();
-                msgBox->setWindowTitle(QObject::tr("deBug"));
-                msgBox->setText(address);
-                msgBox->setStandardButtons(QMessageBox::Ok);
-                msgBox->exec();
-                msgBox->deleteLater();*/
             }
             else
             {
@@ -284,7 +278,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
 
     QString sysxMsg = midiTable->dataChange(area, hex1, hex2, hex3, hex4);
 
-    if(this->isConnected() && this->deviceReady() /*&& this->getSyncStatus()*/)
+    if(this->isConnected() && this->deviceReady() )
     {
         this->setDeviceReady(false);
 
@@ -345,7 +339,7 @@ void SysxIO::setFileSource(QString area, QString hex1, QString hex2, QString hex
 
     QString sysxMsg = midiTable->dataChange(area, hex1, hex2, hex3, hex4, hex5);
 
-    if(this->isConnected() && this->deviceReady() /*&& this->getSyncStatus()*/)
+    if(this->isConnected() && this->deviceReady() )
     {
         this->setDeviceReady(false);
 
@@ -787,9 +781,6 @@ void SysxIO::requestPatchChange(int bank, int patch)
     this->bankChange = bank;
     this->patchChange = patch;
 
-    //QObject::connect(this, SIGNAL(isFinished()),	// Connect the result of the request
-    //this, SLOT(namePatchChange()));				// to returnPatchName function.
-
     QString midiMsg = getPatchChangeMsg(bank, patch);
     emit setStatusMessage(tr("Patch change"));
     this->sendMidi(midiMsg);
@@ -807,8 +798,6 @@ void SysxIO::namePatchChange()
 
     QObject::connect(this, SIGNAL(patchName(QString)),
                      this, SLOT(checkPatchChange(QString)));
-
-    //this->requestPatchName(0, 0);
 }
 
 /***************************** checkPatchChange() *************************namePatchChange()
@@ -1017,7 +1006,6 @@ void SysxIO::systemWrite()
 void SysxIO::systemDataRequest()
 {
     emit setStatusProgress(100);
-    //QString replyMsg;
     if (isConnected() && deviceReady())
     {
         emit setStatusSymbol(2);
@@ -1030,14 +1018,13 @@ void SysxIO::systemDataRequest()
     }
     else
     {
-        QString snork = tr("Ensure connection is active and retry");
+        QString snork = tr("Ensure connection is active and retry<br>default data used");
         QMessageBox *msgBox = new QMessageBox();
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
@@ -1103,9 +1090,8 @@ void SysxIO::systemReply(QString replyMsg)
             msgText.append(tr("any saved system data will be as shown on screen<br>"));
             msgText.append(tr("and the GR-55 system data might not be in sync<br>"));
             msgBox->setText(msgText);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+             QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         };
     };
     emit setStatusMessage(tr("Ready"));
