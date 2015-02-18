@@ -1,10 +1,10 @@
 
-GR-55FloorBoard Copyright (C) 2014 Colin Willcocks (gumtownbassman@yahoo.com).
+GR-55FloorBoard Copyright (C) 2015 Colin Willcocks (gumtownbassman@yahoo.com).
  All rights reserved.
 =======
 
 
-GR-55FloorBoard version 20140810: 10 August 2014
+GR-55FloorBoard version 20150201: 01 Febuary 2015
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -18,6 +18,11 @@ for inclusion in a later release.
  ********* LATEST FEATURES ADDED****************************************************
   
  Here is an update on "where it's at"...
+ 
+*** Added system override interlock on patch pedal parameters
+*** Changed dialog popup messages to self closing
+*** Fixed assigns
+
 ** Another Midi I/O update with auto port finder removed to allow for multiple GR-55 connections.
  
 *** New Midi I/O sub system with auto port finder.

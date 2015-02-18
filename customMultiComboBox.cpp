@@ -367,12 +367,6 @@ QList<QString> customMultiComboBox::MPTReply(QString replyMsg)
     int MPT_MSB = (replyMsg.mid(16, 2).toInt(&ok, 16)-this->hex2.toInt(&ok, 16))*128;
     int MPT_LSB = (replyMsg.mid(18, 2).toInt(&ok, 16));
     this->MPT_index = MPT_MSB+MPT_LSB;
-    /*QMessageBox *msgBox = new QMessageBox();
-    msgBox->setWindowTitle(QObject::tr("deBug"));
-    msgBox->setText(test);
-    msgBox->setStandardButtons(QMessageBox::Ok);
-    msgBox->exec();
-    msgBox->deleteLater();*/
     return items;
 }
 

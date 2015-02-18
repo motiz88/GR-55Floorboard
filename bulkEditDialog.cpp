@@ -25,7 +25,6 @@
 #include <QFile>
 #include <QDataStream>
 #include <QByteArray>
-#include <QMessageBox>
 #include "bulkEditDialog.h"
 #include "Preferences.h"
 #include "globalVariables.h"

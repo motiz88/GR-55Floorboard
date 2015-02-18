@@ -984,10 +984,10 @@ void MidiOutCore :: openVirtualPort( std::string portName )
 
 // Not necessary if we don't treat sysex messages any differently than
 // normal messages ... see below.
-//static void sysexCompletionProc( MIDISysexSendRequest *sreq )
-//{
-//  free( sreq );
-//}
+static void sysexCompletionProc( MIDISysexSendRequest *sreq )
+{
+  free( sreq );
+}
 
 void MidiOutCore :: sendMessage( std::vector<unsigned char> *message )
 {
@@ -1006,7 +1006,7 @@ void MidiOutCore :: sendMessage( std::vector<unsigned char> *message )
   CoreMidiData *data = static_cast<CoreMidiData *> (apiData_);
   OSStatus result;
 
-  /*
+
     // I don't think this code is necessary.  We can send sysex
     // messages through the normal mechanism.  In addition, this avoids
     // the problem of virtual ports not receiving sysex messages.
@@ -1047,7 +1047,7 @@ void MidiOutCore :: sendMessage( std::vector<unsigned char> *message )
     error( RtMidiError::WARNING, errorString_ );
     return;
   }
-  */
+
 
   MIDIPacketList packetList;
   MIDIPacket *packet = MIDIPacketListInit( &packetList );

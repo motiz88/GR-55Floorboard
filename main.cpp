@@ -32,6 +32,13 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setOrganizationName("Gumtown");
+    app.setApplicationName("GR-55FloorBoard");
+
+#ifdef Q_OS_MAC
+    QDir().setCurrent(QCoreApplication::applicationDirPath());
+    QDir().setCurrent("../../../");
+#endif
 
     Preferences *preferences = Preferences::Instance(); // Load the preferences.
     QString lang = preferences->getPreferences("Language", "Locale", "select");
@@ -64,7 +71,7 @@ int main(int argc, char *argv[])
     splashFont.setStretch(125);
     splash->setFont(splashFont);
     //splash->setMask(splashMask);
-    //splash->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::SplashScreen);
+    splash->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::SplashScreen);
 
     if(preferences->getPreferences("Window", "Splash", "bool")=="true")
     {

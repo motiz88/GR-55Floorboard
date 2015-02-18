@@ -23,7 +23,7 @@
 
 #ifndef MIDIIO_H
 #define MIDIIO_H
-#include <vector>
+//#include <vector>
 #include <QThread>
 #include <QString>
 #include <QStringList>

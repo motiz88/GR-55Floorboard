@@ -344,7 +344,6 @@ void mainWindow::createStatusBar()
     QObject::connect(sysxIO, SIGNAL(setStatusMessage(QString)), statusInfo, SLOT(setStatusMessage(QString)));
     QObject::connect(sysxIO, SIGNAL(setStatusdBugMessage(QString)), statusInfo, SLOT(setStatusdBugMessage(QString)));
 
-    //statusBar = new QStatusBar;
     statusBar()->addWidget(statusInfo);
     statusBar()->setSizeGripEnabled(false);
 }
@@ -444,8 +443,6 @@ void mainWindow::saveAs()
             SysxIO *sysxIO = SysxIO::Instance();
             QString area = "Structure";
             sysxIO->setFileSource(area, file.getFileSource());
-
-
             emit updateSignal();
         };
     };
@@ -595,8 +592,6 @@ void mainWindow::systemLoad()
                 QString area = "System";
                 sysxIO->setFileSource(area, file.getSystemSource());
                 sysxIO->setFileName(fileName);
-                //sysxIO->setSyncStatus(false);
-                //sysxIO->setDevice(false);
                 emit updateSignal();
                 QMessageBox *msgBox = new QMessageBox();
                 msgBox->setWindowTitle(deviceType + tr(" FloorBoard"));
@@ -609,7 +604,6 @@ void mainWindow::systemLoad()
                 msgText.append(tr("This will overwrite the SYSTEM DATA currently stored in the ")+ deviceType);
                 msgText.append(tr ("<br> and can't be undone.<br>"));
                 msgText.append(tr("Select 'NO' to only update the Editor - Select 'YES' to update the GR-55 System<br>"));
-
 
                 msgBox->setInformativeText(tr("Are you sure you want to write to the ")+ deviceType);
                 msgBox->setText(msgText);
@@ -630,16 +624,13 @@ void mainWindow::systemLoad()
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
 void mainWindow::systemSave()
 {
-
-
     SysxIO *sysxIO = SysxIO::Instance();
     if (sysxIO->isConnected())
     {
@@ -679,9 +670,8 @@ void mainWindow::systemSave()
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
@@ -701,9 +691,8 @@ void mainWindow::bulkLoad()
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
@@ -724,9 +713,8 @@ void mainWindow::bulkSave()
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
@@ -803,18 +791,16 @@ void mainWindow::guitarMode()
         msgBox->setWindowTitle(tr("Patch Mode changed !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     } else {
         QString snork = tr("Patch is already set to Guitar Mode, Patch Mode change not required");
         QMessageBox *msgBox = new QMessageBox();
         msgBox->setWindowTitle(tr("Patch Mode change not required !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 
 }
@@ -832,26 +818,23 @@ void mainWindow::bassMode()
         msgBox->setWindowTitle(tr("Patch Mode changed !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     } else {
         QString snork = tr("Patch is already set to Bass Mode, Patch Mode change is not required");
         QMessageBox *msgBox = new QMessageBox();
         msgBox->setWindowTitle(tr("Patch Mode change not required !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
 }
 
 /* HELP MENU */
 void mainWindow::help()
 {
-    Preferences *preferences = Preferences::Instance();
-    QDesktopServices::openUrl(QUrl( preferences->getPreferences("General", "Help", "url") ));
+    QDesktopServices::openUrl(QUrl("file:help/help.html"));
 }
 
 void mainWindow::whatsThis()
@@ -898,7 +881,6 @@ void mainWindow::homepage()
 
 void mainWindow::donate()
 {
-    //Preferences *preferences = Preferences::Instance();
     QDesktopServices::openUrl(QUrl( "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YTT3NR4L7TTX8" ));
 }
 
@@ -910,19 +892,23 @@ void mainWindow::manual()
 
 void mainWindow::license()
 {
-    QDesktopServices::openUrl(QUrl(":license.txt"));
+    QDesktopServices::openUrl(QUrl("file:license.txt"));
 }
 
 void mainWindow::about()
 {
     Preferences *preferences = Preferences::Instance();
     QString version = preferences->getPreferences("General", "Application", "version");
+    QDate date = QDate::currentDate();
+    QString dateText = date.toString("yyyy");
 
     QFile file(":about");
     if(file.open(QIODevice::ReadOnly))
     {
         QMessageBox::about(this, deviceType + tr(" FloorBoard - About"),
-                           deviceType + tr(" FloorBoard - ") + tr("version") + " " + version + "<br>" + file.readAll());
+                           deviceType + tr(" FloorBoard - ") + tr("version") + " " + version + "<br>"
+                           + tr("© Copyright ") + dateText + "<br>"
+                           + file.readAll());
     };
 }
 

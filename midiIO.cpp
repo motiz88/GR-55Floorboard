@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2014 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -53,14 +53,14 @@ midiin = new RtMidiIn();
 midiout = new RtMidiOut();
 midiin = new RtMidiIn();
 #endif
-#ifdef Q_OS_LINUX
-midiout = new RtMidiOut(LINUX_ALSA);
-midiin = new RtMidiIn(LINUX_ALSA);
+#if defined(Q_OS_LINUX) && !defined(Q_PROCESSOR_ARM)
+midiout = new RtMidiOut();
+midiin = new RtMidiIn();
 #endif
-/*#ifdef Q_PROCESSOR_ARM
-midiout = new RtMidiOut(RTMIDI_DUMMY);
-midiin = new RtMidiIn(RTMIDI_DUMMY);
-#endif*/
+#ifdef Q_PROCESSOR_ARM
+midiout = new RtMidiOut();
+midiin = new RtMidiIn();
+#endif
 };
     this->midi = false; // Set this to false until required;
     /* Connect signals */
@@ -173,7 +173,7 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     int p=0;
     int retryCount = 0;
     std::vector<unsigned char> message;
-    message.reserve(1024);
+    //message.reserve(1024);
     int msgLength = 0;
     msgLength = sysxOutMsg.length()/2;
     char *ptr  = new char[msgLength];		// Convert QString to char* (hex value)

@@ -67,9 +67,8 @@ summaryDialogSystem::summaryDialogSystem(QWidget *parent)
             msgBox->setWindowTitle(deviceType + tr(" midi connection not found!!"));
             msgBox->setIcon(QMessageBox::Information);
             msgBox->setText(snork);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
             emit setStatusMessage(tr("Not Connected"));
             emit setStatusSymbol(0);
         };
@@ -398,9 +397,8 @@ void summaryDialogSystem::systemReply(QString replyMsg)
             msgText.append(tr("The ROLAND ") + deviceType + tr(" System data was not transfered !!."));
             msgText.append("<b></font><br>");
             msgBox->setText(msgText);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         };
     };
     emit setStatusMessage(tr("Ready"));

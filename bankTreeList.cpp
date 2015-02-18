@@ -31,6 +31,7 @@
 #include "MidiTable.h"
 #include "SysxIO.h"
 #include "globalVariables.h"
+#include <QTimer>
 
 
 bankTreeList::bankTreeList(QWidget *parent)
@@ -78,6 +79,8 @@ bankTreeList::bankTreeList(QWidget *parent)
     QObject::connect(this, SIGNAL(setStatusMessage(QString)), sysxIO, SIGNAL(setStatusMessage(QString)));
 
     QObject::connect(this, SIGNAL(notConnectedSignal()), sysxIO, SIGNAL(notConnectedSignal()));
+
+    this->systemRequested=false;
 }
 
 void bankTreeList::updateSize(QRect newrect)
@@ -330,7 +333,6 @@ QTreeWidget* bankTreeList::newTreeList()
     QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList);
     user->setText(0, "User");
     user->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Banks."));
-    //user->setIcon(...);
 
     QList<QTreeWidgetItem *> userBankRanges;
     for (int a=1; a<=bankTotalUser; a++)
@@ -344,7 +346,6 @@ QTreeWidget* bankTreeList::newTreeList()
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
             bank->setText(0, QString("Bank ").append(QString::number(b, 10)));
             bank->setWhatsThis(0, tr("User Bank.<br>expand the Bank to view the Patches"));
-            //bank->setIcon(...);
 
             for (int c=1; c<=3; c++)
             {
@@ -472,7 +473,6 @@ QTreeWidget* bankTreeList::newTreeList()
     };
     other->addChildren(otherBankRanges);
 
-
     newTreeList->setExpanded(newTreeList->model()->index(1, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(2, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(3, 0), true);
@@ -498,7 +498,6 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList_Bass);
     user->setText(0, "User");
     user->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Banks."));
-    //user->setIcon(...);
 
     QList<QTreeWidgetItem *> userBankRanges;
     for (int a=1; a<=bankTotalUser; a++)
@@ -512,7 +511,6 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
             bank->setText(0, QString("Bank ").append(QString::number(b, 10)));
             bank->setWhatsThis(0, tr("User Bank.<br>expand the Bank to view the Patches"));
-            //bank->setIcon(...);
 
             for (int c=1; c<=3; c++)
             {
@@ -640,7 +638,6 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
         a += 5;
     };
     other->addChildren(otherBankRanges);
-
 
     newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(1, 0), true);
     newTreeList_Bass->setExpanded(newTreeList_Bass->model()->index(2, 0), true);
@@ -874,6 +871,7 @@ void bankTreeList::updatePatch(QString replyMsg)
         sysxIO->setLoadedPatch(sysxIO->getPatch());
 
         emit updateSignal();
+        if(this->systemRequested==false) {QTimer::singleShot(2000, this, SLOT(systemRequest())); };
         
     };
     Preferences *preferences = Preferences::Instance(); // Load the preferences.
@@ -891,9 +889,8 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgText.append("<b></font><br>");
         msgText.append(QObject::tr("Please make sure the ") + deviceType + QObject::tr(" is connected correctly and re-try."));
         msgBox->setText(msgText);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         /* END WARNING */
     };
     if(replyMsg.isEmpty() && preferences->getPreferences("Midi", "DBug", "bool")!="true")
@@ -910,41 +907,10 @@ void bankTreeList::updatePatch(QString replyMsg)
         msgText.append("<b></font><br>");
         msgText.append(QObject::tr("Please make sure the ") + deviceType + QObject::tr(" is connected correctly and re-try."));
         msgBox->setText(msgText);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         /* END WARNING */
     };
-
-    /*  Preferences *preferences = Preferences::Instance(); // Load the preferences.
-        if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
-        {
-        if (replyMsg.size() > 0){
-                QString snork;
-                        snork.append("<font size='-1'>");
-                        snork.append(tr("{ size="));
-                        snork.append(QString::number(replyMsg.size()/2, 10));
-                        snork.append("}");
-                        snork.append(tr("<br> midi data received"));
-                        for(int i=0;i<replyMsg.size();++i)
-                        {
-                                snork.append(replyMsg.mid(i, 2));
-                                snork.append(" ");
-                                i++;
-                        };
-                        snork.replace("F7", "F7 } <br>");
-                        snork.replace("F0", "{ F0");
-
-
-                        QMessageBox *msgBox = new QMessageBox();
-                        msgBox->setWindowTitle(tr("dBug Result for re-formatted GR-55 patch data"));
-                        msgBox->setIcon(QMessageBox::Information);
-                        msgBox->setText(snork);
-                        msgBox->setStandardButtons(QMessageBox::Ok);
-                        msgBox->exec();
-                        msgBox->deleteLater();
-                        };
-                };*/
     emit setStatusProgress(0);
 }
 
@@ -970,11 +936,11 @@ void bankTreeList::connectedSignal()
 
         this->currentPatchTreeItems.clear();
         this->currentPatchTreeItems = this->openPatchTreeItems;
-        //qSort(this->currentPatchTreeItems);
         this->updatePatchNames("");
     }
     else if (sysxIO->deviceReady() && sysxIO->isConnected())
     { requestPatch(); };
+    this->systemRequested=false;
 }
 
 /********************************** updateTree() ********************************
@@ -1064,6 +1030,7 @@ void bankTreeList::updatePatchNames(QString name)
 
                 QObject::disconnect(sysxIO, SIGNAL(patchName(QString)),
                                     this, SLOT(updatePatchNames(QString)));
+                if(this->systemRequested==false) {QTimer::singleShot(2000, this, SLOT(systemRequest())); };
             };
 }
 
@@ -1082,3 +1049,11 @@ void bankTreeList::updateTreeMode()
         this->treeListBass->show();
     }
 }
+
+void bankTreeList::systemRequest()
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    sysxIO->systemDataRequest();
+    this->systemRequested=true;
+}
+

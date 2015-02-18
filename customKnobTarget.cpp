@@ -138,7 +138,13 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
     valueString.append(lsb_c);
 
     SysxIO *sysxIO = SysxIO::Instance();
-    sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString);
+    if(hex3 == "7F")
+    { sysxIO->setFileSource("Structure", hex1, hex2, hex3, lsb_a);
+        QList<QString> partValue;
+        partValue.append(lsb_b);
+        partValue.append(lsb_c);
+      sysxIO->setFileSource("Structure", "02", hex2, "00", partValue); }
+    else {sysxIO->setFileSource("Structure", hex1, hex2, hex3, valueString); };
     QString mode_hex = "00";
     int mode_value = sysxIO->getSourceValue("Structure", "00", "00", "00");    //check for guitar mode
     if(mode_value != 0) {mode_hex = "0D"; };
@@ -189,7 +195,7 @@ void customKnobTarget::valueChanged(int value, QString hex1, QString hex2, QStri
         this->hexLsb = items.customdesc;
 
         emit updateTarget(hexMsb, hex2, hexLsb);                                        // hexMsb & hexLsb are lookup address for label value
-        emit updateTarget(hexMsb, hex2, hexLsb);
+        //emit updateTarget(hexMsb, hex2, hexLsb);
     };                                                            // updates on knob value change
 }
 

@@ -28,6 +28,7 @@
 #include "floorBoardDisplay.h"
 #include "floorBoard.h"
 #include "Preferences.h"
+#include <QTimer>
 
 menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint stompPos)
     : QWidget(parent)
@@ -62,10 +63,6 @@ menuPage::menuPage(QWidget *parent, unsigned int id, QString imagePath, QPoint s
     QObject::connect(this->editDialog, SIGNAL( updateSignal() ), this, SLOT( setDisplayToFxName() ));
 
     QObject::connect(this, SIGNAL( setEditDialog(editWindow*) ), this->parent(), SLOT( setEditDialog(editWindow*) ));
-
-    //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this, SLOT(menuButtonSignal(bool)));
-
-    //QObject::connect(this->menuButton, SIGNAL(valueChanged(bool)), this->parent(), SLOT(menuButtonSignal()));
     
     QObject::connect(this->parent(), SIGNAL(ez_edit_buttonSignal(bool)), this, SLOT(ez_edit_ButtonSignal(bool) ));
     QObject::connect(this->parent(), SIGNAL(ez_edit_buttonSignal(bool)), this->parent(), SLOT(menuButtonSignal()));
@@ -158,12 +155,6 @@ void menuPage::master_ButtonSignal(bool value)
 
 void menuPage::system_ButtonSignal(bool value)
 {
-   /* if (this->id == 14)
-    {
-        emitValueChanged(this->hex1, this->hex2, "00", "void");
-        this->editDialog->setWindow(this->fxName);
-        emit setEditDialog(this->editDialog);
-    };*/
     SysxIO *sysxIO = SysxIO::Instance();
     if(this->id == 14  && value == true && sysxIO->deviceReady())
     {
@@ -190,9 +181,8 @@ void menuPage::system_ButtonSignal(bool value)
             msgBox->setWindowTitle(deviceType + tr(" midi connection not found!!"));
             msgBox->setIcon(QMessageBox::Information);
             msgBox->setText(snork);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
             emit setStatusMessage(tr("Not Connected"));
             emit setStatusSymbol(0);
 
@@ -355,9 +345,8 @@ void menuPage::systemReply(QString replyMsg)
             msgText.append(tr("The Roland ") + deviceType + tr(" System data was not transferred !!."));
             msgText.append("<b></font><br>");
             msgBox->setText(msgText);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         };
     };
     emit setStatusMessage(tr("Ready"));
@@ -366,7 +355,6 @@ void menuPage::systemReply(QString replyMsg)
 void menuPage::setPos(QPoint newPos)
 {
     this->move(newPos);
-    //this->stompPos = newPos;
 }
 
 void menuPage::updatePos(signed int offsetDif)
@@ -374,13 +362,11 @@ void menuPage::updatePos(signed int offsetDif)
     this->stompPos = this->pos();
     QPoint newPos = stompPos + QPoint(offsetDif, 0);
     this->move(newPos);
-    //this->stompPos = newPos;
 }
 
 void menuPage::setImage(QString imagePath)
 {
     this->imagePath = imagePath;
-   // this->update();
 }
 
 void menuPage::setSize(QSize newSize)

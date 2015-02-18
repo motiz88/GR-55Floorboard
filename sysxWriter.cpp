@@ -28,6 +28,7 @@
 #include "sysxWriter.h"
 #include "fileDialog.h"
 #include "globalVariables.h"
+#include <QTimer>
 
 sysxWriter::sysxWriter()
 {
@@ -111,9 +112,8 @@ bool sysxWriter::readFile()
                 msgText.append("<b></font><br>");
                 msgText.append(QObject::tr("*Loading this file may have unpredictable results*."));
                 msgBox->setText(msgText);
-                msgBox->setStandardButtons(QMessageBox::Ok);
-                msgBox->exec();
-                msgBox->deleteLater();
+                msgBox->show();
+                QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
             };
 
             index = 1;
@@ -294,9 +294,8 @@ bool sysxWriter::readFile()
             msgText.append(QObject::tr("Patch size is not ") + (QString::number(patchSize, 10)) + QObject::tr(" bytes, please try another file."));
             msgText.append(QObject::tr("size reported to be ") + (QString::number(data.size(), 10)) + QObject::tr(" bytes."));
             msgBox->setText(msgText);
-            msgBox->setStandardButtons(QMessageBox::Ok);
-            msgBox->exec();
-            msgBox->deleteLater();
+            msgBox->show();
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
             return false;
         };
     }

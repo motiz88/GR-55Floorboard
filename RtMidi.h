@@ -572,7 +572,7 @@ inline void RtMidiOut :: setErrorCallback( RtMidiErrorCallback errorCallback ) {
 #ifdef Q_OS_MAC
 #define __MACOSX_CORE__
 #endif
-#ifdef Q_OS_LINUX
+#if defined (Q_OS_LINUX) && !defined(Q_PROCESSOR_ARM)
 #define __LINUX_ALSA__
 #endif
 #if !defined(__LINUX_ALSA__) && !defined(__UNIX_JACK__) && !defined(__MACOSX_CORE__) && !defined(__WINDOWS_MM__)

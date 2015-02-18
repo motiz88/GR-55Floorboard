@@ -108,9 +108,8 @@ summaryDialogPatchList::summaryDialogPatchList(QWidget *parent)
         msgBox->setWindowTitle(deviceType + tr(" not connected !!"));
         msgBox->setIcon(QMessageBox::Information);
         msgBox->setText(snork);
-        msgBox->setStandardButtons(QMessageBox::Ok);
-        msgBox->exec();
-        msgBox->deleteLater();
+        msgBox->show();
+        QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
     textDialog->setText(patchList);
     textDialog->show();

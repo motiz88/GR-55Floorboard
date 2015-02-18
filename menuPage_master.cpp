@@ -50,6 +50,7 @@ void menuPage_master::setEditPages()
 
     editDetails()->page()->newGroupBox("Guitar Out Jack");
     editDetails()->page()->addComboBox(0, 0, 1, 1, "02", "00", "25");    // guitar out
+    editDetails()->page()->addSystemOverride(0, 0, 2, 2, "02", "00", "16", "00");
     editDetails()->page()->addGroupBox(0, 2, 1, 1);
 
     editDetails()->page()->newGroupBox("GK SET Select");

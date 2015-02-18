@@ -356,7 +356,7 @@ summaryDialog::summaryDialog(QWidget *parent)
     connect(saveAsButton, SIGNAL(clicked()), this, SLOT(saveAs()));
     saveAsButton->setWhatsThis(tr("Will save the current dialog page to file in a *.txt format."));
 
-    QPushButton *viewButton = new QPushButton(tr("Change View"));
+    viewButton = new QPushButton(tr("More Details"));
     connect(viewButton, SIGNAL(clicked()), this, SLOT(view()));
     viewButton->setWhatsThis(tr("Will Expand the summary dialog to include all patch parameters."));
 
@@ -491,11 +491,13 @@ void summaryDialog::view()
 {
     if (mode == "Compact")
     {
+        viewButton->setText(tr("Less Details"));
         textDialog->setText(large_text);
         this->mode = "Expanded";
     }
     else
     {
+        viewButton->setText(tr("More Details"));
         textDialog->setText(small_text);
         this->mode = "Compact";
     };

@@ -22,7 +22,6 @@
 ****************************************************************************/
 
 #include "customParaEQGraph.h"
-//#include <QMessageBox>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QGraphicsPathItem>
