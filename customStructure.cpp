@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-10 Fx FloorBoard".
@@ -22,13 +22,17 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
 #include "customStructure.h"
+#include "Preferences.h"
 
 customStructure::customStructure(bool active, QPoint ledPos, QWidget *parent,
                                  QString imagePath)
                                      : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->active = active;
     this->imagePath = ":/images/structure_2.png";
     QSize imageSize = QPixmap(imagePath).size();
@@ -36,12 +40,16 @@ customStructure::customStructure(bool active, QPoint ledPos, QWidget *parent,
     this->ledPos = ledPos;
 
     setOffset(0);
-    setGeometry(ledPos.x(), ledPos.y(), ledSize.width(), ledSize.height());
+    setGeometry(ledPos.x(), ledPos.y(), ledSize.width()*ratio, ledSize.height()*ratio);
 }
 
 void customStructure::paintEvent(QPaintEvent *)
 {
-    QRectF target(0.0 , 0.0, ledSize.width(), ledSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, ledSize.width()*ratio, ledSize.height()*ratio);
     QRectF source(0.0, yOffset, ledSize.width(), ledSize.height());
     QPixmap image(imagePath);
     //image.setMask(image.mask());

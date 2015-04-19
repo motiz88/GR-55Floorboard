@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
 **
@@ -52,10 +52,6 @@ summaryDialogPatchList::summaryDialogPatchList(QWidget *parent)
     this->bank = 1;
     this->patch = 1;
     
-
-
-
-
     QPushButton *cancelButton = new QPushButton(tr("Close"));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
     cancelButton->setWhatsThis(tr("Will close the currently open Dialog page."));
@@ -196,8 +192,8 @@ void summaryDialogPatchList::cancel()
 
 void summaryDialogPatchList::printFile()
 {
-#ifdef  Q_PROCESSOR_ARM
-#elif QT_NO_PRINTER
+//#ifdef Q_PROCESSOR_ARM
+//#elif QT_NO_PRINTER
 
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
@@ -206,7 +202,7 @@ void summaryDialogPatchList::printFile()
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
     dialog->deleteLater();
-#endif
+//#endif
 }
 
 void summaryDialogPatchList::saveAs()

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
@@ -24,6 +24,7 @@
 #include "customControlEZ_Patch.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 // Platform-dependent sleep routines.
 #ifdef Q_OS_WIN
@@ -39,6 +40,10 @@ customControlEZ_Patch::customControlEZ_Patch(QWidget *parent,
                                              QString direction)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->label = new customControlLabel(this);
     this->hex1 = hex1;
     this->hex2 = hex2;
@@ -54,7 +59,7 @@ customControlEZ_Patch::customControlEZ_Patch(QWidget *parent,
     QString imagePath(":/images/EZ_Patch.png");
     this->switchbutton = new customEZ_Patch(false, this, hex1, hex2, hex3, imagePath);
     this->tone_comboBox = new customControlListMenu(this, hex1, hex2, hex3, "Tables");
-    bool ok;
+    //bool ok;
     int x = hex3.toInt(&ok, 16)+1;
     QString hex = QString::number(x, 16).toUpper();
     if(hex.length() < 2) hex.prepend("0");
@@ -63,14 +68,14 @@ customControlEZ_Patch::customControlEZ_Patch(QWidget *parent,
 
     QVBoxLayout *comboLayout = new QVBoxLayout;
     comboLayout->setMargin(0);
-    comboLayout->setSpacing(5);
+    comboLayout->setSpacing(5*ratio);
     comboLayout->addWidget(this->tone_comboBox, 0, Qt::AlignCenter);
     comboLayout->addWidget(this->variation_comboBox, 0, Qt::AlignCenter);
     comboLayout->addStretch(0);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setMargin(0);
-    mainLayout->setSpacing(5);
+    mainLayout->setSpacing(5*ratio);
     mainLayout->addWidget(this->label, 0, Qt::AlignCenter);
     mainLayout->addWidget(this->switchbutton, 0, Qt::AlignCenter);
 
@@ -94,7 +99,7 @@ customControlEZ_Patch::customControlEZ_Patch(QWidget *parent,
 
     tone_comboBox->set_index(0);
     variation_comboBox->set_index(0);
-    variation_comboBox->controlListComboBox->setFixedWidth(180);
+    variation_comboBox->controlListComboBox->setFixedWidth(180*ratio);
     variation_comboBox->controlListComboBox->setMaxVisibleItems(10);
     tone_select(0);
 }

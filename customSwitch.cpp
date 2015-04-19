@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -23,11 +23,16 @@
 
 #include <QtWidgets>
 #include "customSwitch.h"
+#include "Preferences.h"
 
 customSwitch::customSwitch(bool active, QWidget *parent, QString hex1, QString hex2, QString hex3,
                            QString imagePath)
                                : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     if(hex2 == "INVERT") {
         this->hex2 = "00";
@@ -45,7 +50,7 @@ customSwitch::customSwitch(bool active, QWidget *parent, QString hex1, QString h
     this->imageRange = 1;
     this->switchPos = switchPos;
     this->setOffset(0);
-    this->setFixedSize(switchSize);
+    this->setFixedSize(switchSize*ratio);
 
     QObject::connect(this, SIGNAL( valueChanged(bool, QString, QString, QString) ),
                      this->parent(), SLOT( valueChanged(bool, QString, QString, QString) ));
@@ -53,7 +58,11 @@ customSwitch::customSwitch(bool active, QWidget *parent, QString hex1, QString h
 
 void customSwitch::paintEvent(QPaintEvent *)
 {
-    QRectF target(0.0 , 0.0, switchSize.width(), switchSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, switchSize.width()*ratio, switchSize.height()*ratio);
     QRectF source(0.0, yOffset, switchSize.width(), switchSize.height());
     QPixmap image(imagePath);
 

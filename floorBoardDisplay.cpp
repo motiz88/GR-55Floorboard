@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -46,6 +46,13 @@
 floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Lfont( "Arial", 11*ratio, QFont::Bold);
+    QFont Mfont( "Arial", 10*ratio, QFont::Bold);
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
+
     this->pos = pos;
     this->timer = new QTimer(this);
     this->patchLoadError = false;
@@ -53,139 +60,141 @@ floorBoardDisplay::floorBoardDisplay(QWidget *parent, QPoint pos)
     this->autosyncTimer = new QTimer(this);
     connect(autosyncTimer, SIGNAL(timeout()), this, SLOT(autosync()));
 
-    int patchDisplayRowOffset = 9;
-    int editButtonRowOffset = 75;
-    int assignButtonRowOffset = 32;
-    int tempRowOffset = 597;
-    this->patchNumDisplay = new customDisplay(QRect(8, patchDisplayRowOffset, 50, 34), this);
+    int patchDisplayRowOffset = 9*ratio;
+    int editButtonRowOffset = 75*ratio;
+    int assignButtonRowOffset = 32*ratio;
+    int tempRowOffset = 597*ratio;
+    this->patchNumDisplay = new customDisplay(QRect(8*ratio, patchDisplayRowOffset, 50*ratio, 34*ratio), this);
     this->patchNumDisplay->setLabelPosition(true);
     this->patchNumDisplay->setMainObjectName("bankMain");
     this->patchNumDisplay->setSubObjectName("bankSub");
     this->patchNumDisplay->setWhatsThis(tr("Patch Number Display.<br>displays the currently selected patch<br>and patch write memory location."));
-    this->patchDisplay = new customDisplay(QRect(73, patchDisplayRowOffset, 145, 34), this);
+    this->patchDisplay = new customDisplay(QRect(73*ratio, patchDisplayRowOffset, 145*ratio, 34*ratio), this);
     this->patchDisplay->setMainObjectName("nameMain");
     this->patchDisplay->setSubObjectName("nameSub");
-    this->valueDisplay = new customDisplay(QRect(230, patchDisplayRowOffset, 150, 34), this);
+    this->valueDisplay = new customDisplay(QRect(230*ratio, patchDisplayRowOffset, 150*ratio, 34*ratio), this);
     this->valueDisplay->setMainObjectName("valueMain");
     this->valueDisplay->setSubObjectName("valueSub");
 
-    this->temp1Display = new customLabelDisplay(QRect(28, tempRowOffset+22, 166, 18), this);
+    this->temp1Display = new customLabelDisplay(QRect(28*ratio, tempRowOffset+(22*ratio), 166*ratio, 18*ratio), this);
     this->temp1Display->setLabelPosition(true);
     this->temp1Display->setMainObjectName("nameMain");
     this->temp1Display->setMainText(tr("Empty"), Qt::AlignCenter);
     this->temp1Display->setWhatsThis(tr("Name of the currently stored patch in the clipboard."));
-    this->temp2Display = new customLabelDisplay(QRect(222, tempRowOffset+22, 166, 18), this);
+    this->temp1Display->setFont(Lfont);
+    this->temp2Display = new customLabelDisplay(QRect(222*ratio, tempRowOffset+(22*ratio), 166*ratio, 18*ratio), this);
     this->temp2Display->setLabelPosition(true);
     this->temp2Display->setMainObjectName("nameMain");
     this->temp2Display->setMainText(tr("Empty"), Qt::AlignCenter);
     this->temp2Display->setWhatsThis(tr("Name of the currently stored patch in the clipboard."));
-    this->temp3Display = new customLabelDisplay(QRect(417, tempRowOffset+22, 166, 18), this);
+    this->temp3Display = new customLabelDisplay(QRect(417*ratio, tempRowOffset+(22*ratio), 166*ratio, 18*ratio), this);
     this->temp3Display->setLabelPosition(true);
     this->temp3Display->setMainObjectName("nameMain");
     this->temp3Display->setMainText(tr("Empty"), Qt::AlignCenter);
     this->temp3Display->setWhatsThis(tr("Name of the currently stored patch in the clipboard."));
-    this->temp4Display = new customLabelDisplay(QRect(611, tempRowOffset+22, 166, 18), this);
+    this->temp4Display = new customLabelDisplay(QRect(611*ratio, tempRowOffset+(22*ratio), 166*ratio, 18*ratio), this);
     this->temp4Display->setLabelPosition(true);
     this->temp4Display->setMainObjectName("nameMain");
     this->temp4Display->setMainText(tr("Empty"), Qt::AlignCenter);
     this->temp4Display->setWhatsThis(tr("Name of the currently stored patch in the clipboard."));
-    this->temp5Display = new customLabelDisplay(QRect(804, tempRowOffset+22, 166, 18), this);
+    this->temp5Display = new customLabelDisplay(QRect(804*ratio, tempRowOffset+(22*ratio), 166*ratio, 18*ratio), this);
     this->temp5Display->setLabelPosition(true);
     this->temp5Display->setMainObjectName("nameMain");
     this->temp5Display->setMainText(tr("Empty"), Qt::AlignCenter);
     this->temp5Display->setWhatsThis(tr("Name of the currently stored patch in the clipboard."));
 
-    Preferences *preferences = Preferences::Instance();
+    //Preferences *preferences = Preferences::Instance();
     QString version = preferences->getPreferences("General", "Application", "version");
     this->patchDisplay->setMainText(deviceType + tr(" FloorBoard"));
     this->patchDisplay->setSubText(tr("version"), version);
 
-    initPatch = new initPatchListMenu(QRect(390, patchDisplayRowOffset+19, 168, 15), this);
+    initPatch = new initPatchListMenu(QRect(390*ratio, patchDisplayRowOffset+(19*ratio), 168*ratio, 15*ratio), this);
+    initPatch->setFont(Mfont);
     initPatch->setWhatsThis(tr("Clicking on this will load a patch from a predefined selection.<br>patches place in the init_patches folder will appear in this list at the start of the next session."));
     renameWidget *nameEdit = new renameWidget(this);
-    nameEdit->setGeometry(70, patchDisplayRowOffset, 150, 34);
+    nameEdit->setGeometry(70*ratio, patchDisplayRowOffset, 150*ratio, 34*ratio);
     nameEdit->setWhatsThis(tr("Clicking on this will open<br>a text dialog window<br>allowing user text input."));
     
-    this->autoButton = new customButton(tr("Auto Sync"), false, QPoint(440, editButtonRowOffset+50), this, ":/images/greenledbutton.png");
+    this->autoButton = new customButton(tr("Auto Sync"), false, QPoint(440*ratio, editButtonRowOffset+(50*ratio)), this, ":/images/greenledbutton.png");
     this->autoButton->setWhatsThis(tr("Auto refresh<br>used to automatically update editor settings changes made on the GR-55"));
-    this->connectButton = new customButton(tr("Connect"), false, QPoint(390, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
+    this->connectButton = new customButton(tr("Connect"), false, QPoint(390*ratio, patchDisplayRowOffset), this, ":/images/greenledbutton.png");
     this->connectButton->setWhatsThis(tr("Connect Button<br>used to establish a continuous midi connection<br>when lit green, the connection is valid"));
-    this->writeButton = new customButton(tr("Write"), false, QPoint(476, patchDisplayRowOffset), this, ":/images/ledbutton.png");
+    this->writeButton = new customButton(tr("Write"), false, QPoint(476*ratio, patchDisplayRowOffset), this, ":/images/ledbutton.png");
     this->writeButton->setWhatsThis(tr("Write Button<br>if the patch number displays [temp buffer]<br>the current patch is sent to the GR-55 temporary memory only<br>or else the patch will be written to the displayed patch memory location."));
-    this->system_Button = new customPanelButton(tr("System"), false, QPoint(580, patchDisplayRowOffset+18), this, ":/images/switch.png");
+    this->system_Button = new customPanelButton(tr("System"), false, QPoint(580*ratio, patchDisplayRowOffset+(18*ratio)), this, ":/images/switch.png");
     this->system_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->master_Button = new customPanelButton(tr("Master"), false, QPoint(640, patchDisplayRowOffset+18), this, ":/images/switch.png");
+    this->master_Button = new customPanelButton(tr("Master"), false, QPoint(640*ratio, patchDisplayRowOffset+(18*ratio)), this, ":/images/switch.png");
     this->master_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->ez_edit_Button = new customPanelButton(tr("EZ-EDIT"), false, QPoint(550, editButtonRowOffset+52), this, ":/images/switch.png");
+    this->ez_edit_Button = new customPanelButton(tr("EZ-EDIT"), false, QPoint(550*ratio, editButtonRowOffset+(52*ratio)), this, ":/images/switch.png");
     this->ez_edit_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->pedal_Button = new customPanelButton(tr("Pedal/GK"), false, QPoint(700, patchDisplayRowOffset+18), this, ":/images/switch.png");
+    this->pedal_Button = new customPanelButton(tr("Pedal/GK"), false, QPoint(700*ratio, patchDisplayRowOffset+(18*ratio)), this, ":/images/switch.png");
     this->pedal_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
-    this->normal_PU_Button = new customPanelButton(tr("Normal PU"), false, QPoint(40, editButtonRowOffset), this,  ":/images/switch.png");
+    this->normal_PU_Button = new customPanelButton(tr("Normal PU"), false, QPoint(40*ratio, editButtonRowOffset), this,  ":/images/switch.png");
     this->normal_PU_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->structure_1_Button = new customPanelButton(tr("Structure 1"), false, QPoint(323, editButtonRowOffset+52), this,  ":/images/switch_invert.png");
+    this->structure_1_Button = new customPanelButton(tr("Structure 1"), false, QPoint(323*ratio, editButtonRowOffset+(52*ratio)), this,  ":/images/switch_invert.png");
     this->structure_1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->structure_2_Button = new customPanelButton(tr("Structure 2"), false, QPoint(373, editButtonRowOffset+52), this,  ":/images/switch_invert.png");
+    this->structure_2_Button = new customPanelButton(tr("Structure 2"), false, QPoint(373*ratio, editButtonRowOffset+(52*ratio)), this,  ":/images/switch_invert.png");
     this->structure_2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->modeling_Button = new customPanelButton(tr("Modeling"), false, QPoint(100, editButtonRowOffset), this,  ":/images/switch_invert.png");
+    this->modeling_Button = new customPanelButton(tr("Modeling"), false, QPoint(100*ratio, editButtonRowOffset), this,  ":/images/switch_invert.png");
     this->modeling_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->synth1_Button = new customPanelButton(tr("Synth A"), false, QPoint(160, editButtonRowOffset), this, ":/images/switch_invert.png");
+    this->synth1_Button = new customPanelButton(tr("Synth A"), false, QPoint(160*ratio, editButtonRowOffset), this, ":/images/switch_invert.png");
     this->synth1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->synth2_Button = new customPanelButton(tr("Synth B"), false, QPoint(220, editButtonRowOffset), this, ":/images/switch_invert.png");
+    this->synth2_Button = new customPanelButton(tr("Synth B"), false, QPoint(220*ratio, editButtonRowOffset), this, ":/images/switch_invert.png");
     this->synth2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->amp_Button = new customPanelButton(tr("Amp"), false, QPoint(280,editButtonRowOffset), this, ":/images/switch.png");
+    this->amp_Button = new customPanelButton(tr("Amp"), false, QPoint(280*ratio,editButtonRowOffset), this, ":/images/switch.png");
     this->amp_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->ns1_Button = new customPanelButton(tr("NS"), false, QPoint(340, editButtonRowOffset), this, ":/images/switch.png");
+    this->ns1_Button = new customPanelButton(tr("NS"), false, QPoint(340*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->ns1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->mod_Button = new customPanelButton(tr("MOD"), false, QPoint(400, editButtonRowOffset), this, ":/images/switch.png");
+    this->mod_Button = new customPanelButton(tr("MOD"), false, QPoint(400*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->mod_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->mfx_Button = new customPanelButton(tr("MFX"), false, QPoint(460, editButtonRowOffset), this, ":/images/switch.png");
+    this->mfx_Button = new customPanelButton(tr("MFX"), false, QPoint(460*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->mfx_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->reverb_Button = new customPanelButton(tr("Reverb"), false, QPoint(520, editButtonRowOffset), this, ":/images/switch.png");
+    this->reverb_Button = new customPanelButton(tr("Reverb"), false, QPoint(520*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->reverb_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->delay_Button = new customPanelButton(tr("Delay"), false, QPoint(580, editButtonRowOffset), this, ":/images/switch.png");
+    this->delay_Button = new customPanelButton(tr("Delay"), false, QPoint(580*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->delay_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->chorus_Button = new customPanelButton(tr("Chorus"), false, QPoint(640, editButtonRowOffset), this, ":/images/switch.png");
+    this->chorus_Button = new customPanelButton(tr("Chorus"), false, QPoint(640*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->chorus_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->eq_Button = new customPanelButton(tr("Equalizer"), false, QPoint(700, editButtonRowOffset), this, ":/images/switch.png");
+    this->eq_Button = new customPanelButton(tr("Equalizer"), false, QPoint(700*ratio, editButtonRowOffset), this, ":/images/switch.png");
     this->eq_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
-    this->assign1_Button = new customPanelButton(tr("Assign 1"), false, QPoint(778, assignButtonRowOffset), this, ":/images/switch.png");
+    this->assign1_Button = new customPanelButton(tr("Assign 1"), false, QPoint(778*ratio, assignButtonRowOffset), this, ":/images/switch.png");
     this->assign1_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign2_Button = new customPanelButton(tr("Assign 2"), false, QPoint(828, assignButtonRowOffset), this, ":/images/switch.png");
+    this->assign2_Button = new customPanelButton(tr("Assign 2"), false, QPoint(828*ratio, assignButtonRowOffset), this, ":/images/switch.png");
     this->assign2_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign3_Button = new customPanelButton(tr("Assign 3"), false, QPoint(878, assignButtonRowOffset), this, ":/images/switch.png");
+    this->assign3_Button = new customPanelButton(tr("Assign 3"), false, QPoint(878*ratio, assignButtonRowOffset), this, ":/images/switch.png");
     this->assign3_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign4_Button = new customPanelButton(tr("Assign 4"), false, QPoint(928, assignButtonRowOffset), this, ":/images/switch.png");
+    this->assign4_Button = new customPanelButton(tr("Assign 4"), false, QPoint(928*ratio, assignButtonRowOffset), this, ":/images/switch.png");
     this->assign4_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign5_Button = new customPanelButton(tr("Assign 5"), false, QPoint(778, assignButtonRowOffset+33), this, ":/images/switch.png");
+    this->assign5_Button = new customPanelButton(tr("Assign 5"), false, QPoint(778*ratio, assignButtonRowOffset+(33*ratio)), this, ":/images/switch.png");
     this->assign5_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign6_Button = new customPanelButton(tr("Assign 6"), false, QPoint(828, assignButtonRowOffset+33), this, ":/images/switch.png");
+    this->assign6_Button = new customPanelButton(tr("Assign 6"), false, QPoint(828*ratio, assignButtonRowOffset+(33*ratio)), this, ":/images/switch.png");
     this->assign6_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign7_Button = new customPanelButton(tr("Assign 7"), false, QPoint(878, assignButtonRowOffset+33), this, ":/images/switch.png");
+    this->assign7_Button = new customPanelButton(tr("Assign 7"), false, QPoint(878*ratio, assignButtonRowOffset+(33*ratio)), this, ":/images/switch.png");
     this->assign7_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
-    this->assign8_Button = new customPanelButton(tr("Assign 8"), false, QPoint(928, assignButtonRowOffset+33), this, ":/images/switch.png");
+    this->assign8_Button = new customPanelButton(tr("Assign 8"), false, QPoint(928*ratio, assignButtonRowOffset+(33*ratio)), this, ":/images/switch.png");
     this->assign8_Button->setWhatsThis(tr("Deep editing of the selected effect<br>pressing this button will open an edit page<br>allowing detailed setting of this effects parameters."));
 
-    this->temp1_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(26, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp1_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(26*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp1_copy_Button->setWhatsThis(tr("Copy current patch to clipboard<br>pressing this button will save the current patch to a clipboard<br>the clipboard is saved to file and is re-loaded<br>on the next session startup."));
-    this->temp1_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(112, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp1_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(112*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp1_paste_Button->setWhatsThis(tr("Paste current patch from clipboard<br>pressing this button will load the current patch to a clipboard<br>the clipboard is re-loaded<br>from the previous session copy."));
-    this->temp2_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(222, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp2_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(222*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp2_copy_Button->setWhatsThis(tr("Copy current patch to clipboard<br>pressing this button will save the current patch to a clipboard<br>the clipboard is saved to file and is re-loaded<br>on the next session startup."));
-    this->temp2_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(306, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp2_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(306*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp2_paste_Button->setWhatsThis(tr("Paste current patch from clipboard<br>pressing this button will load the current patch to a clipboard<br>the clipboard is re-loaded<br>from the previous session copy."));
-    this->temp3_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(417, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp3_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(417*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp3_copy_Button->setWhatsThis(tr("Copy current patch to clipboard<br>pressing this button will save the current patch to a clipboard<br>the clipboard is saved to file and is re-loaded<br>on the next session startup."));
-    this->temp3_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(501, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp3_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(501*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp3_paste_Button->setWhatsThis(tr("Paste current patch from clipboard<br>pressing this button will load the current patch to a clipboard<br>the clipboard is re-loaded<br>from the previous session copy."));
-    this->temp4_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(612, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp4_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(612*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp4_copy_Button->setWhatsThis(tr("Copy current patch to clipboard<br>pressing this button will save the current patch to a clipboard<br>the clipboard is saved to file and is re-loaded<br>on the next session startup."));
-    this->temp4_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(696, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp4_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(696*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp4_paste_Button->setWhatsThis(tr("Paste current patch from clipboard<br>pressing this button will load the current patch to a clipboard<br>the clipboard is re-loaded<br>from the previous session copy."));
-    this->temp5_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(805, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp5_copy_Button = new customButton(tr("Patch Copy"), false, QPoint(805*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp5_copy_Button->setWhatsThis(tr("Copy current patch to clipboard<br>pressing this button will save the current patch to a clipboard<br>the clipboard is saved to file and is re-loaded<br>on the next session startup."));
-    this->temp5_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(889, tempRowOffset), this, ":/images/pushbutton.png");
+    this->temp5_paste_Button = new customButton(tr("Patch Paste"), false, QPoint(889*ratio, tempRowOffset), this, ":/images/pushbutton.png");
     this->temp5_paste_Button->setWhatsThis(tr("Paste current patch from clipboard<br>pressing this button will load the current patch to a clipboard<br>the clipboard is re-loaded<br>from the previous session copy."));
 
     SysxIO *sysxIO = SysxIO::Instance();
@@ -1117,6 +1126,7 @@ void floorBoardDisplay::connectionResult(QString sysxMsg)
 
 void floorBoardDisplay::writeSignal(bool)
 {
+    autosync_off(true);
     SysxIO *sysxIO = SysxIO::Instance();
     if(sysxIO->isConnected() && sysxIO->deviceReady()) /* Check if we are connected and if the device is free. */
     {

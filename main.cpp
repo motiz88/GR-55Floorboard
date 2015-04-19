@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -57,26 +57,58 @@ int main(int argc, char *argv[])
 
     app.installTranslator(&translator);
 
+    if(preferences->getPreferences("Window", "AutoScale", "bool")=="true")
+     {
+        int windowWidth;
+        if(preferences->getPreferences("Window", "Collapsed", "width").isEmpty())
+        {
+            windowWidth = preferences->getPreferences("Window", "Collapsed", "defaultwidth").toInt(&ok, 10);
+        }
+        else
+        {
+            windowWidth = preferences->getPreferences("Window", "Collapsed", "width").toInt(&ok, 10);
+        };
+        QDesktopWidget *desktop = new QDesktopWidget;
+        QRect screen = desktop->availableGeometry(desktop->primaryScreen());
+        int screenWidth = screen.width();                    // returns available screen width
+        int screenHeight = screen.height();                  // returns available screen height
+        double resolution = screenWidth;
+        if(screenHeight>screenWidth) {resolution = screenHeight; };   // if is a tablet on it's side initially
+        resolution = resolution/(windowWidth+15);
+        QString scaleRatio = QString::number(resolution,'f',2);
+        preferences->setPreferences("Window", "Scale", "ratio", scaleRatio);
+        preferences->setPreferences("Window", "Position", "x", "1");
+        preferences->setPreferences("Window", "Position", "y", "1");
+        preferences->savePreferences();
+     };
+
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Wfont( "Arial", 9*ratio);
+    QApplication::setFont(Wfont);
+
     // Splash Screen setup uses subclassed QSplashScreen for message position control.
     QPixmap splashImage(":images/splash.png");
-    //QPixmap splashMask(":images/splashmask.png");
+    QPixmap splashMask(":images/splashmask.png");
+    splashImage = splashImage.scaled(429*ratio, 269*ratio);
+    splashMask = splashMask.scaled(429*ratio, 269*ratio);
 
     customSplashScreen *splash = new customSplashScreen(splashImage);
-    splash->setMessageRect(QRect(7, 253, 415, 14), Qt::AlignCenter); // Setting the message position.
+    splash->setMessageRect(QRect(7*ratio, 253*ratio, 415*ratio, 14*ratio), Qt::AlignCenter); // Setting the message position.
 
     QFont splashFont;
     splashFont.setFamily("Arial");
     splashFont.setBold(true);
-    splashFont.setPixelSize(9);
+    splashFont.setPixelSize(9*ratio);
     splashFont.setStretch(125);
     splash->setFont(splashFont);
-    //splash->setMask(splashMask);
+    splash->setMask(splashMask);
     splash->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::SplashScreen);
 
     if(preferences->getPreferences("Window", "Splash", "bool")=="true")
     {
         splash->show();
         splash->showStatusMessage(QObject::tr("  Initializing.. please wait..."));
+        splash->progressBar->setValue(10);
     };
 
     app.processEvents();
@@ -88,9 +120,9 @@ int main(int argc, char *argv[])
     app.processEvents();
 
     splash->showStatusMessage(QObject::tr("Checking license file..."));
+    splash->progressBar->setValue(25);
     if(!QFile("license.txt").exists())
     {
-     //   splash->showStatusMessage(QObject::tr("Loading license file..."));
         QFile file(":license.txt" );
         file.copy("license.txt");
         file.close();
@@ -99,16 +131,19 @@ int main(int argc, char *argv[])
     app.processEvents();
 
     splash->showStatusMessage(QObject::tr("Loading midi mapping..."));
+    splash->progressBar->setValue(40);
     MidiTable *midiTable = MidiTable::Instance();
     midiTable->loadMidiMap();
 
     app.processEvents();
 
-   // splash->showStatusMessage(QObject::tr("Initializing main window..."));
+    splash->showStatusMessage(QObject::tr("Initializing main window..."));
+    splash->progressBar->setValue(60);
    // window.setWindowFlags( Qt::WindowTitleHint
      //                      | Qt::WindowMinimizeButtonHint
      //                      | Qt::MSWindowsFixedSizeDialogHint );
     window.setWindowIcon(QIcon(":/images/windowicon.png"));
+
 
     //app.processEvents();
 
@@ -154,15 +189,22 @@ int main(int argc, char *argv[])
         }
         else
         {
-            windowHeight = preferences->getPreferences("Window", "Size", "height").toInt(&ok, 10);
+            windowHeight = preferences->getPreferences("Window", "Size", "minheight").toInt(&ok, 10);
         };
-        //window.setGeometry(x_str.toInt(&ok, 10), y_str.toInt(&ok, 10), windowWidth, windowHeight);
-        window.resize(QSize(windowWidth, windowHeight));
+
+
+        if(windowHeight>6600) { windowHeight=6600; };
+        if(windowHeight<369) { windowHeight=369; };
+        if(windowWidth>12300) { windowWidth=12300; };
+        if(windowWidth<623) { windowWidth=623; };
+        //if(windowHeight>windowWidth*0.7) { windowHeight=windowWidth*0.7; };
+        window.resize(QSize(windowWidth*ratio, windowHeight*ratio));
         window.move(x_str.toInt(&ok, 10), y_str.toInt(&ok, 10));
     }
     else
     {
         splash->showStatusMessage(QObject::tr("Centering main window..."));
+        splash->progressBar->setValue(80);
         QDesktopWidget *desktop = new QDesktopWidget;
         QRect screen = desktop->availableGeometry(desktop->primaryScreen());
         int screenWidth = screen.width();                    // returns available screen width
@@ -178,6 +220,7 @@ int main(int argc, char *argv[])
     app.processEvents();
 
     splash->showStatusMessage(QObject::tr("Finished Initializing..."));
+    splash->progressBar->setValue(100);
     window.show();
    splash->finish(&window);
 

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -29,6 +29,7 @@
 #include "fileDialog.h"
 #include "globalVariables.h"
 #include <QTimer>
+#include "SysxIO.h"
 
 sysxWriter::sysxWriter()
 {
@@ -191,7 +192,7 @@ bool sysxWriter::readFile()
             bool ok;
             int patchCount;
             patchCount = (256*QString::number(msb, 16).toUpper().toInt(&ok, 16)) + (QString::number(lsb, 16).toUpper().toInt(&ok, 16));
-           if (patchCount>1)
+            if (patchCount>1)
             {
                 int m_step = 162;
                 unsigned int a = m_step + 10;
@@ -226,8 +227,8 @@ bool sysxWriter::readFile()
                 patchIndex(this->index);
             };
 
-             int m_step = 162;
-             unsigned int a = m_step + 10;                                   // offset is set in front of marker
+            int m_step = 162;
+            unsigned int a = m_step + 10;                                   // offset is set in front of marker
             if (patchCount>1)
             {
                 int q=index-1;
@@ -244,8 +245,8 @@ bool sysxWriter::readFile()
             default_data.replace(11, 128, temp);      //address "00"
             temp = data.mid(a+128, 114);
             default_data.replace(152, 114, temp);     //address "01"
-            temp = data.mid(a+252, 12);
-            default_data.replace(268, 12, temp);     //address "01"
+            temp = data.mid(a+250, 14);
+            default_data.replace(266, 14, temp);     //address "01"
             temp = data.mid(a+264, 78);
             default_data.replace(293, 78, temp);     //address "02" +
             temp = data.mid(a+350, 128);
@@ -270,6 +271,17 @@ bool sysxWriter::readFile()
             default_data.replace(1214, 52, temp);    //address "30" +
             temp = data.mid(a+1171, 52);
             default_data.replace(1279, 52, temp);    //address "31" +
+
+            SysxIO *sysxIO = SysxIO::Instance();
+            data.remove(0, 1395);
+            QString m = "00";
+            sysxIO->memo1Array = data.mid(0, data.indexOf((char)m.toInt(&ok, 16)));
+            data.remove(0, sysxIO->memo1Array.size()+1);
+            sysxIO->memo2Array = data.mid(0, data.indexOf((char)m.toInt(&ok, 16)));
+            data.remove(0, sysxIO->memo2Array.size()+1);
+            sysxIO->memo3Array = data.mid(0, data.indexOf((char)m.toInt(&ok, 16)));
+            data.remove(0, sysxIO->memo3Array.size()+1);
+            sysxIO->memo4Array = data.mid(0, data.indexOf((char)m.toInt(&ok, 16)));
 
             if (index>0)
             {
@@ -438,7 +450,7 @@ void sysxWriter::writeSMF(QString fileName)
             }
 
             else if(nexthex == "F7")
-            {      
+            {
                 int sum = dataSize % 128;
                 if(sum!=0) { sum = 128 - sum; };
                 checksum = QString::number(sum, 16).toUpper();
@@ -453,7 +465,7 @@ void sysxWriter::writeSMF(QString fileName)
                 dataSize = 110;
                 offset = 0;
             };
-             ++offset;
+            ++offset;
         };
         smf.clear();
         for (int k=0; k<rebuild.size(); k++)
@@ -499,7 +511,7 @@ void sysxWriter::writeG5L(QString fileName)
 
         G5L_default.replace(a, 128, out.mid(11, 128));          //address "00"
         G5L_default.replace(a+128, 114, out.mid(152, 114));     //address "01"
-        G5L_default.replace(a+252, 12, out.mid(268, 12));       //address "01 B"
+        G5L_default.replace(a+250, 14, out.mid(266, 14));       //address "01 B"
         G5L_default.replace(a+264, 78, out.mid(293, 78));       //address "02"
         G5L_default.replace(a+350, 128, out.mid(384, 128));     //address "03"
         G5L_default.replace(a+478, 72, out.mid(525, 72));       //address "04"
@@ -512,6 +524,36 @@ void sysxWriter::writeG5L(QString fileName)
         G5L_default.replace(a+1072, 35, out.mid(1166, 35));     //address "21"
         G5L_default.replace(a+1115, 52, out.mid(1214, 52));     //address "30"
         G5L_default.replace(a+1171, 52, out.mid(1279, 52));     //address "31"
+
+        uint pos1 = a+1223;
+        uint txtSize = sysxIO->memo1Array.size();
+        G5L_default.insert(pos1, sysxIO->memo1Array);
+
+        pos1 = pos1+txtSize+1;
+        txtSize = sysxIO->memo2Array.size();
+        G5L_default.insert(pos1, sysxIO->memo2Array);
+
+        pos1 = pos1+txtSize+1;
+        txtSize = sysxIO->memo3Array.size();
+        G5L_default.insert(pos1, sysxIO->memo3Array);
+
+        pos1 = pos1+txtSize+1;
+        txtSize = sysxIO->memo4Array.size();
+        G5L_default.insert(pos1, sysxIO->memo4Array);
+
+        QString hex(QString::number(G5L_default.size()-164, 16).toUpper());
+        if (hex.length() < 4) hex.prepend("000");
+        if (hex.length() < 5) hex.prepend("00");
+        if (hex.length() < 6) hex.prepend("0");
+        QByteArray fileSize;
+        for(int i=0;i<hex.size();++i)
+        {
+            bool ok;
+            unsigned char byte = (char)hex.mid(i, 2).toInt(&ok, 16);
+            fileSize.append(byte);
+            ++i;
+        };
+        G5L_default.replace(161, 3, fileSize);
         file.write(G5L_default);
     };
 }

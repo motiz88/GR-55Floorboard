@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,22 +24,29 @@
 #include <QtWidgets>
 #include "statusBarSymbol.h"
 #include "globalVariables.h"
+#include "Preferences.h"
 
 statusBarSymbol::statusBarSymbol(QWidget *parent, QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 	this->imagePath = imagePath;
-	QSize imageSize = QPixmap(imagePath).size();
-	this->symbolSize =  QSize(imageSize.width()/4, imageSize.height());
-	this->setFixedSize(symbolSize);
+    QSize imageSize = QPixmap(imagePath).size();
+    this->symbolSize =  QSize((imageSize.width()/4), imageSize.height());
+    this->setFixedSize(symbolSize*ratio);
 
 	setOffset(0);
 }
 
 void statusBarSymbol::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, symbolSize.width(), symbolSize.height());
-	QRectF source(xOffset, 0.0, symbolSize.width(), symbolSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QRectF target(0.0 , 0.0, symbolSize.width()*ratio, symbolSize.height()*ratio);
+    QRectF source(xOffset, 0.0, symbolSize.width(), symbolSize.height());
 	QPixmap image(imagePath);
 
 	QPainter painter(this);
@@ -48,7 +55,10 @@ void statusBarSymbol::paintEvent(QPaintEvent *)
 
 void statusBarSymbol::setOffset(int imageNr)
 {
-	this->xOffset = imageNr*symbolSize.width();
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    this->xOffset = imageNr*symbolSize.width();
 	this->update();
 }
 

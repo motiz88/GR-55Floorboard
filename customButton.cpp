@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,21 +24,26 @@
 #include <QtWidgets>
 #include "customButton.h"
 #include "globalVariables.h"
+#include "Preferences.h"
 
 customButton::customButton(bool active, QPoint buttonPos, QWidget *parent, QString hex1, QString hex2, QString hex3, 
 						   QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	this->hex1 = hex1;
 	this->hex2 = hex2;
 	this->hex3 = hex3;
 	this->active = active;
 	this->imagePath = imagePath;
-	QSize imageSize = QPixmap(imagePath).size();
-	this->buttonSize =  QSize(imageSize.width(), imageSize.height()/4);
+    QSize imageSize = QPixmap(imagePath).size();
+    this->buttonSize =  QSize(imageSize.width(), imageSize.height()/4);
 	this->buttonPos = buttonPos;
 	setOffset(0);
-    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width(), buttonSize.height());
+    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width()*ratio, buttonSize.height()*ratio);
 
 	timer = new QTimer(this);
 	QObject::connect(this, SIGNAL( valueChanged(bool, QString, QString, QString) ),
@@ -49,20 +54,26 @@ customButton::customButton(QString text, bool active, QPoint buttonPos, QWidget 
 						   QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	this->active = active;
 	this->text = text;
 	this->imagePath = imagePath;
-	QSize imageSize = QPixmap(imagePath).size();
-	this->buttonSize =  QSize(imageSize.width(), imageSize.height()/4);
+    QSize imageSize = QPixmap(imagePath).size();
+    this->buttonSize =  QSize(imageSize.width(), imageSize.height()/4);
 	this->buttonPos = buttonPos;
 	setOffset(0);
-    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width(), buttonSize.height());
+    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width()*ratio, buttonSize.height()*ratio);
 
 	QLabel *textLabel = new QLabel(this);
 	textLabel->setObjectName("button");
+    QFont Mfont( "Arial", 9*ratio, QFont::Bold);
+    textLabel->setFont(Mfont);
 	textLabel->setText(this->text);
 	textLabel->setAlignment(Qt::AlignCenter);
-	textLabel->setGeometry(0, (buttonSize.height() - textLabel->height())/2, buttonSize.width(), textLabel->height());
+    textLabel->setGeometry(0, (buttonSize.height() - textLabel->height())/2, buttonSize.width()*ratio, textLabel->height()*ratio);
 
 	timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(blink()) );
@@ -73,7 +84,11 @@ customButton::customButton(QString text, bool active, QPoint buttonPos, QWidget 
 
 void customButton::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, buttonSize.width(), buttonSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, buttonSize.width()*ratio, buttonSize.height()*ratio);
 	QRectF source(0.0, yOffset, buttonSize.width(), buttonSize.height());
 	QPixmap image(imagePath);
 

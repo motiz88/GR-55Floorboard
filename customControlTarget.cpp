@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -24,12 +24,18 @@
 #include "customControlTarget.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlTarget::customControlTarget(QWidget *parent,
                                          QString hex1, QString hex2, QString hex3,
                                          QString background, QString direction, int lenght)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+
     this->displayMin = new QLineEdit(this);
     this->displayMax = new QLineEdit(this);
     this->label = new customControlLabel(this);
@@ -46,7 +52,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     this->hexTemp1 = hexTemp1;
     this->hexTemp2 = hexTemp2;
 
-    bool ok;
+    //bool ok;
     this->hexMin = QString::number((hex3.toInt(&ok, 16) + 3), 16).toUpper();             // go forward 3 to select target Min address
     if(this->hexMin.length() < 2) this->hexMin.prepend("0");                             // prepend with "0" if single digit.
 
@@ -97,8 +103,9 @@ customControlTarget::customControlTarget(QWidget *parent,
 
     this->knobMin = new customKnobTarget(this, this->hex_a, hex2, hexMin, hexMsb, hexLsb, "min");      // create knob with target address
     this->displayMin->setObjectName("editdisplay");
-    this->displayMin->setFixedWidth(lenght);
-    this->displayMin->setFixedHeight(15);
+    this->displayMin->setFont(Sfont);
+    this->displayMin->setFixedWidth(lenght*ratio);
+    this->displayMin->setFixedHeight(15*ratio);
     this->displayMin->setAlignment(Qt::AlignCenter);
     this->displayMin->setDisabled(true);
     this->labelMin->setText("MINIMUM");
@@ -106,8 +113,9 @@ customControlTarget::customControlTarget(QWidget *parent,
 
     this->knobMax = new customKnobTarget(this, this->hex_a, hex2, hexMax, hexMsb, hexLsb, "max");      // create knob with target address
     this->displayMax->setObjectName("editdisplay");
-    this->displayMax->setFixedWidth(lenght);
-    this->displayMax->setFixedHeight(15);
+    this->displayMax->setFont(Sfont);
+    this->displayMax->setFixedWidth(lenght*ratio);
+    this->displayMax->setFixedHeight(15*ratio);
     this->displayMax->setAlignment(Qt::AlignCenter);
     this->displayMax->setDisabled(true);
     this->labelMax->setText("MAXIMUM");
@@ -146,9 +154,9 @@ customControlTarget::customControlTarget(QWidget *parent,
     mainLayout->addStretch(0);
 
     this->setLayout(mainLayout);
-    this->setFixedHeight(this->knobTarget->height() + 13 + 12);
-    this->setFixedHeight(this->knobMin->height() + 13 + 12);
-    this->setFixedHeight(this->knobMax->height() + 13 + 12);
+    this->setFixedHeight((this->knobTarget->height() + 13 + 12)*ratio);
+    this->setFixedHeight((this->knobMin->height() + 13 + 12)*ratio);
+    this->setFixedHeight((this->knobMax->height() + 13 + 12)*ratio);
 
     QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
                      this, SLOT( dialogUpdateSignal() ));

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -26,7 +26,16 @@
 
 customSplashScreen::customSplashScreen(const QPixmap& pixmap)
 {
-        QSplashScreen::setPixmap(pixmap);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QSplashScreen::setPixmap(pixmap);
+    this->progressBar = new QProgressBar(this);
+    this->progressBar->setTextVisible(false);
+    this->progressBar->setFixedSize(450*ratio, 13*ratio);
+    this->progressBar->setRange(0, 100);
+    this->progressBar->setGeometry(0, 240*ratio, 415*ratio, 14*ratio);
 }
 
 customSplashScreen::~customSplashScreen()
@@ -36,10 +45,9 @@ customSplashScreen::~customSplashScreen()
 
 void customSplashScreen::drawContents(QPainter *painter)
 {
-        QPixmap textPix = QSplashScreen::pixmap();
-        painter->setPen(this->color);
-        //painter->drawText(r, this->alignement, this->message);
-        painter->drawText(this->rect, this->alignement, this->message);
+    QPixmap textPix = QSplashScreen::pixmap();
+    painter->setPen(this->color);
+    painter->drawText(this->rect, this->alignement, this->message);
 }
 
 void customSplashScreen::showStatusMessage(const QString &message, const QColor &color)
@@ -47,12 +55,12 @@ void customSplashScreen::showStatusMessage(const QString &message, const QColor 
     Preferences *preferences = Preferences::Instance();
     QString version = preferences->getPreferences("General", "Application", "version");
     this->message = "version " + version + " " + message;
-        this->color = color;
-        this->showMessage(this->message, this->alignement, this->color);
+    this->color = color;
+    this->showMessage(this->message, this->alignement, this->color);
 }
 
 void customSplashScreen::setMessageRect(QRect rect, int alignement)
 {
-        this->rect = rect;
-        this->alignement = alignement;
+    this->rect = rect;
+    this->alignement = alignement;
 }

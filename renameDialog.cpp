@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -23,10 +23,15 @@
 
 #include "renameDialog.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 renameDialog::renameDialog(QWidget *parent)
      : QDialog(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	SysxIO *sysxIO = SysxIO::Instance();
 
 	QRegExp rx( QString::fromUtf8( "[\x20-\x7F\xe2\x86\x92\xe2\x86\x90]{1,16}" ) );
@@ -37,12 +42,12 @@ renameDialog::renameDialog(QWidget *parent)
 	nameEdit->setValidator(validator);
 
 	QPushButton *leftArrowButton =	new QPushButton((QChar)(0x2192));
-	leftArrowButton->setMaximumWidth(20);
-	leftArrowButton->setMaximumHeight(15);
+    leftArrowButton->setMaximumWidth(20*ratio);
+    leftArrowButton->setMaximumHeight(15*ratio);
 	leftArrowButton->setFlat(true);
 	QPushButton *rightArrowButton = new QPushButton((QChar)(0x2190));
-	rightArrowButton->setMaximumWidth(20);
-	rightArrowButton->setMaximumHeight(15);
+    rightArrowButton->setMaximumWidth(20*ratio);
+    rightArrowButton->setMaximumHeight(15*ratio);
 	rightArrowButton->setFlat(true);
 
 	charLabel = new QLabel(tr("Insert :"));
@@ -63,13 +68,10 @@ renameDialog::renameDialog(QWidget *parent)
 	nameEditLayout->addWidget(nameEdit);
 
 	QHBoxLayout *arrowButtonLayout = new QHBoxLayout;
-	arrowButtonLayout->addStretch(1);
-	//arrowButtonLayout->addWidget(charLabel);
-	//arrowButtonLayout->addWidget(rightArrowButton);
-	//arrowButtonLayout->addWidget(leftArrowButton);
+    arrowButtonLayout->addStretch(1*ratio);
 
 	QHBoxLayout *buttonsLayout = new QHBoxLayout;
-	buttonsLayout->addStretch(1);
+    buttonsLayout->addStretch(1*ratio);
 	buttonsLayout->addWidget(okButton);
 	buttonsLayout->addWidget(cancelButton);
 
@@ -87,7 +89,7 @@ renameDialog::renameDialog(QWidget *parent)
 	mainLayout->addLayout(buttonsLayout);
 	setLayout(mainLayout);
 
-	this->setMinimumWidth(250);
+    this->setMinimumWidth(250*ratio);
 }
 
 

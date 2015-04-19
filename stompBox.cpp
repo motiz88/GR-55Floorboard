@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -27,13 +27,18 @@
 #include "globalVariables.h"
 #include "floorBoardDisplay.h"
 #include "floorBoard.h"
+#include "Preferences.h"
 
 stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint stompPos)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->id = id;
     this->imagePath = imagePath;
-    this->stompSize = QPixmap(":/images/stompbg.png").size();
+    this->stompSize = QPixmap(":/images/stompbg.png").size()*ratio;
     this->stompPos = stompPos;
     this->setFixedSize(stompSize);
     this->editDialog = new editWindow();
@@ -93,11 +98,14 @@ stompBox::stompBox(QWidget *parent, unsigned int id, QString imagePath, QPoint s
 
 void stompBox::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
     //QRectF target(0.0, 0.0, stompSize.width(), stompSize.height());
     //QRectF source(0.0, 0.0, stompSize.width(), stompSize.height());
     setImage(imagePath);
     QPixmap image(imagePath);
-    QRectF target(0.0, 0.0, image.width(), image.height());
+    QRectF target(0.0, 0.0, image.width()*ratio, image.height()*ratio);
     QRectF source(0.0, 0.0, image.width(), image.height());
     this->image = image;
     QPainter painter(this);
@@ -242,15 +250,21 @@ void stompBox::setLSB(QString hex1, QString hex2)
 
 void stompBox::setComboBox(QString hex1, QString hex2, QString hex3, QRect geometry)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->combo_hex1 = hex1;
     this->combo_hex2 = hex2;
     this->combo_hex3 = hex3;
-
+    geometry = QRect(11*ratio, 37*ratio, 105*ratio, 15*ratio);
     MidiTable *midiTable = MidiTable::Instance();
     Midi items = midiTable->getMidiMap("Structure", this->combo_hex1, this->combo_hex2, this->combo_hex3);
 
     this->stompComboBox = new customComboBox(this);
     this->stompComboBox->setObjectName("smallcombo");
+    QFont Sfont( "Arial", 8*ratio, QFont::Bold);
+    this->stompComboBox->setFont(Sfont);
 
     int itemcount = 0;
     for(itemcount=0;itemcount<items.level.size();itemcount++ )
@@ -288,14 +302,18 @@ void stompBox::setComboBoxCurrentIndex(int index)
 
 void stompBox::setKnob1(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     if(hex2 == "CENTER") {
         hex2 = "00";
         int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-        knob1 = new customDial(0, 0, range, 1, 10, QPoint(47, 69), this, hex1, hex2, hex3);
+        knob1 = new customDial(0, 0, range, 1, 10, QPoint(47*ratio, 69*ratio), this, hex1, hex2, hex3);
     } else {
         int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-        knob1 = new customDial(0, 0, range, 1, 10, QPoint(19, 69), this, hex1, hex2, hex3);
+        knob1 = new customDial(0, 0, range, 1, 10, QPoint(19*ratio, 69*ratio), this, hex1, hex2, hex3);
     };
     this->knob1->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
                               + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
@@ -303,52 +321,80 @@ void stompBox::setKnob1(QString hex1, QString hex2, QString hex3)
 
 void stompBox::setKnob2(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob2 = new customDial(0, 0, range, 1, 10, QPoint(71, 69), this, hex1, hex2, hex3);
+    knob2 = new customDial(0, 0, range, 1, 10, QPoint(71*ratio, 69*ratio), this, hex1, hex2, hex3);
     this->knob2->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
                               + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 }
 
 void stompBox::setSlider1(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider1 = new customSlider(0, 0, range, 1, 10, QPoint(15, 70), this, hex1, hex2, hex3);
+    slider1 = new customSlider(0, 0, range, 1, 10, QPoint(15*ratio, 70*ratio), this, hex1, hex2, hex3);
 }
 
 void stompBox::setSlider2(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider2 = new customSlider(0, 0, range, 1, 10, QPoint(35, 70), this, hex1, hex2, hex3);
+    slider2 = new customSlider(0, 0, range, 1, 10, QPoint(35*ratio, 70*ratio), this, hex1, hex2, hex3);
 }
 
 void stompBox::setSlider3(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider3 = new customSlider(0, 0, range, 1, 10, QPoint(55, 70), this, hex1, hex2, hex3);
+    slider3 = new customSlider(0, 0, range, 1, 10, QPoint(55*ratio, 70*ratio), this, hex1, hex2, hex3);
 }
 
 void stompBox::setSlider4(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider4 = new customSlider(0, 0, range, 1, 10, QPoint(75, 70), this, hex1, hex2, hex3);
+    slider4 = new customSlider(0, 0, range, 1, 10, QPoint(75*ratio, 70*ratio), this, hex1, hex2, hex3);
 }
 
 void stompBox::setSlider5(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    slider5 = new customSlider(0, 0, range, 1, 10, QPoint(103, 70), this, hex1, hex2, hex3);
+    slider5 = new customSlider(0, 0, range, 1, 10, QPoint(103*ratio, 70*ratio), this, hex1, hex2, hex3);
 }
 
 void stompBox::setButton(QString hex1, QString hex2, QString hex3)
 {
-    button = new customButton(false, QPoint(4, 110), this, hex1, hex2, hex3);
-    led = new customLed(false, QPoint(41, 4), this);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    button = new customButton(false, QPoint(4*ratio, 110*ratio), this, hex1, hex2, hex3);
+    led = new customLed(false, QPoint(41*ratio, 4*ratio), this);
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
@@ -356,8 +402,12 @@ void stompBox::setButton(QString hex1, QString hex2, QString hex3)
 
 void stompBox::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, QString imagePath)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     button = new customButton(false, pos, this, hex1, hex2, hex3, imagePath);
-    led = new customLed(false, QPoint(41, 4), this);
+    led = new customLed(false, QPoint(41*ratio, 4*ratio), this);
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
@@ -365,8 +415,12 @@ void stompBox::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, Q
 
 void stompBox::setSwitch(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
-    switchbutton->move(QPoint(9, 12));
+    switchbutton->move(QPoint(9*ratio, 12*ratio));
 }
 
 void stompBox::updateComboBox(QString hex1, QString hex2, QString hex3)

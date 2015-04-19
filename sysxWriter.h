@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -32,27 +32,27 @@ class sysxWriter
 {
 
 public:
-	sysxWriter();
-	~sysxWriter();
-	void setFile(QString fileName);
-	bool readFile();
-	SysxData getFileSource();
-	SysxData getSystemSource();
-	void writeFile(QString fileName);
-	void writeSystemFile(QString fileName);
-	void writeSMF(QString fileName);
-	void writeG5L(QString fileName);
-	QString getFileName();
-	QList<QString> patchList;	
-  int index;
-	
+    sysxWriter();
+    ~sysxWriter();
+    void setFile(QString fileName);
+    bool readFile();
+    SysxData getFileSource();
+    SysxData getSystemSource();
+    void writeFile(QString fileName);
+    void writeSystemFile(QString fileName);
+    void writeSMF(QString fileName);
+    void writeG5L(QString fileName);
+    QString getFileName();
+    QList<QString> patchList;
+    int index;
+
 public slots:
-  void patchIndex(int listIndex);
-	
+    void patchIndex(int listIndex);
+
 private:
-	QString fileName;
-	SysxData fileSource;
-	SysxData systemSource;
+    QString fileName;
+    SysxData fileSource;
+    SysxData systemSource;
 };
 
 #endif // SYSXWRITER_H

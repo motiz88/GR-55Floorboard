@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-100B Fx FloorBoard".
@@ -24,18 +24,23 @@
 #include "customControlParaEQ.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlParaEQ::customControlParaEQ(QWidget *parent, 
                                          QString hex1, QString hex2, QString hex3,
                                          QString background, QString direction, int lenght)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
     this->area = background;
     this->eqType = background;
-    bool ok;
+    //bool ok;
     int addr = hex1.toInt(&ok, 16);
     int x = hex3.toInt(&ok, 16);
 
@@ -128,6 +133,7 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     };
     MidiTable *midiTable = MidiTable::Instance();
     if (this->area != "System") {this->area = "Structure";};
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
 
     Midi items = midiTable->getMidiMap(this->area, addr_1, hex2, hex_1);
     this->label_1 = new customControlLabel(this);
@@ -136,12 +142,12 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->label_1->setAlignment(Qt::AlignCenter);
     this->knob_1 = new customKnob(this, addr_1, hex2, hex_1, background, this->area);
     this->display_1 = new QLineEdit(this);
-    this->display_1->setObjectName("editdisplay");
-    this->display_1->setFixedWidth(lenght);
-    this->display_1->setFixedHeight(15);
+    this->display_1->setObjectName("editdisplay");   
+    this->display_1->setFont(Sfont);
+    this->display_1->setFixedWidth(lenght*ratio);
+    this->display_1->setFixedHeight(15*ratio);
     this->display_1->setAlignment(Qt::AlignCenter);
     this->display_1->setDisabled(true);
-    this->display_1->setFixedWidth(lenght);
 
     QVBoxLayout *knob_1Layout = new QVBoxLayout;
     knob_1Layout->setMargin(0);
@@ -159,11 +165,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_2 = new customKnob(this, addr_2, hex2, hex_2, background, this->area);
     this->display_2 = new QLineEdit(this);
     this->display_2->setObjectName("editdisplay");
-    this->display_2->setFixedWidth(lenght);
-    this->display_2->setFixedHeight(15);
+    this->display_2->setFont(Sfont);
+    this->display_2->setFixedWidth(lenght*ratio);
+    this->display_2->setFixedHeight(15*ratio);
     this->display_2->setAlignment(Qt::AlignCenter);
     this->display_2->setDisabled(true);
-    this->display_2->setFixedWidth(lenght);
 
     QVBoxLayout *knob_2Layout = new QVBoxLayout;
     knob_2Layout->setMargin(0);
@@ -181,11 +187,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_3 = new customKnob(this, addr_3, hex2, hex_3, background, this->area);
     this->display_3 = new QLineEdit(this);
     this->display_3->setObjectName("editdisplay");
-    this->display_3->setFixedWidth(lenght);
-    this->display_3->setFixedHeight(15);
+    this->display_3->setFont(Sfont);
+    this->display_3->setFixedWidth(lenght*ratio);
+    this->display_3->setFixedHeight(15*ratio);
     this->display_3->setAlignment(Qt::AlignCenter);
     this->display_3->setDisabled(true);
-    this->display_3->setFixedWidth(lenght);
 
     QVBoxLayout *knob_3Layout = new QVBoxLayout;
     knob_3Layout->setMargin(0);
@@ -203,11 +209,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_4 = new customKnob(this, addr_4, hex2, hex_4, background, this->area);
     this->display_4 = new QLineEdit(this);
     this->display_4->setObjectName("editdisplay");
-    this->display_4->setFixedWidth(lenght);
-    this->display_4->setFixedHeight(15);
+    this->display_4->setFont(Sfont);
+    this->display_4->setFixedWidth(lenght*ratio);
+    this->display_4->setFixedHeight(15*ratio);
     this->display_4->setAlignment(Qt::AlignCenter);
     this->display_4->setDisabled(true);
-    this->display_4->setFixedWidth(lenght);
 
     QVBoxLayout *knob_4Layout = new QVBoxLayout;
     knob_4Layout->setMargin(0);
@@ -225,11 +231,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_5 = new customKnob(this, addr_5, hex2, hex_5, background, this->area);
     this->display_5 = new QLineEdit(this);
     this->display_5->setObjectName("editdisplay");
-    this->display_5->setFixedWidth(lenght);
-    this->display_5->setFixedHeight(15);
+    this->display_5->setFont(Sfont);
+    this->display_5->setFixedWidth(lenght*ratio);
+    this->display_5->setFixedHeight(15*ratio);
     this->display_5->setAlignment(Qt::AlignCenter);
     this->display_5->setDisabled(true);
-    this->display_5->setFixedWidth(lenght);
 
     QVBoxLayout *knob_5Layout = new QVBoxLayout;
     knob_5Layout->setMargin(0);
@@ -247,11 +253,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_6 = new customKnob(this, addr_6, hex2, hex_6, background, this->area);
     this->display_6 = new QLineEdit(this);
     this->display_6->setObjectName("editdisplay");
-    this->display_6->setFixedWidth(lenght);
-    this->display_6->setFixedHeight(15);
+    this->display_6->setFont(Sfont);
+    this->display_6->setFixedWidth(lenght*ratio);
+    this->display_6->setFixedHeight(15*ratio);
     this->display_6->setAlignment(Qt::AlignCenter);
     this->display_6->setDisabled(true);
-    this->display_6->setFixedWidth(lenght);
 
     QVBoxLayout *knob_6Layout = new QVBoxLayout;
     knob_6Layout->setMargin(0);
@@ -269,11 +275,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_7 = new customKnob(this, addr_7, hex2, hex_7, background, this->area);
     this->display_7 = new QLineEdit(this);
     this->display_7->setObjectName("editdisplay");
-    this->display_7->setFixedWidth(lenght);
-    this->display_7->setFixedHeight(15);
+    this->display_7->setFont(Sfont);
+    this->display_7->setFixedWidth(lenght*ratio);
+    this->display_7->setFixedHeight(15*ratio);
     this->display_7->setAlignment(Qt::AlignCenter);
     this->display_7->setDisabled(true);
-    this->display_7->setFixedWidth(lenght);
 
     QVBoxLayout *knob_7Layout = new QVBoxLayout;
     knob_7Layout->setMargin(0);
@@ -291,11 +297,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_8 = new customKnob(this, addr_8, hex2, hex_8, background, this->area);
     this->display_8 = new QLineEdit(this);
     this->display_8->setObjectName("editdisplay");
-    this->display_8->setFixedWidth(lenght);
-    this->display_8->setFixedHeight(15);
+    this->display_8->setFont(Sfont);
+    this->display_8->setFixedWidth(lenght*ratio);
+    this->display_8->setFixedHeight(15*ratio);
     this->display_8->setAlignment(Qt::AlignCenter);
     this->display_8->setDisabled(true);
-    this->display_8->setFixedWidth(lenght);
 
     QVBoxLayout *knob_8Layout = new QVBoxLayout;
     knob_8Layout->setMargin(0);
@@ -313,11 +319,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_9 = new customKnob(this, addr_9, hex2, hex_9, background, this->area);
     this->display_9 = new QLineEdit(this);
     this->display_9->setObjectName("editdisplay");
-    this->display_9->setFixedWidth(lenght);
-    this->display_9->setFixedHeight(15);
+    this->display_9->setFont(Sfont);
+    this->display_9->setFixedWidth(lenght*ratio);
+    this->display_9->setFixedHeight(15*ratio);
     this->display_9->setAlignment(Qt::AlignCenter);
     this->display_9->setDisabled(true);
-    this->display_9->setFixedWidth(lenght);
 
     QVBoxLayout *knob_9Layout = new QVBoxLayout;
     knob_9Layout->setMargin(0);
@@ -335,11 +341,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_10 = new customKnob(this, addr_10, hex2, hex_10, background, this->area);
     this->display_10 = new QLineEdit(this);
     this->display_10->setObjectName("editdisplay");
-    this->display_10->setFixedWidth(lenght);
-    this->display_10->setFixedHeight(15);
+    this->display_10->setFont(Sfont);
+    this->display_10->setFixedWidth(lenght*ratio);
+    this->display_10->setFixedHeight(15*ratio);
     this->display_10->setAlignment(Qt::AlignCenter);
     this->display_10->setDisabled(true);
-    this->display_10->setFixedWidth(lenght);
 
     QVBoxLayout *knob_10Layout = new QVBoxLayout;
     knob_10Layout->setMargin(0);
@@ -357,11 +363,11 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
     this->knob_11 = new customKnob(this, addr_11, hex2, hex_11, background, this->area);
     this->display_11 = new QLineEdit(this);
     this->display_11->setObjectName("editdisplay");
-    this->display_11->setFixedWidth(lenght);
-    this->display_11->setFixedHeight(15);
+    this->display_11->setFont(Sfont);
+    this->display_11->setFixedWidth(lenght*ratio);
+    this->display_11->setFixedHeight(15*ratio);
     this->display_11->setAlignment(Qt::AlignCenter);
     this->display_11->setDisabled(true);
-    this->display_11->setFixedWidth(lenght);
 
     QVBoxLayout *knob_11Layout = new QVBoxLayout;
     knob_11Layout->setMargin(0);
@@ -387,27 +393,27 @@ customControlParaEQ::customControlParaEQ(QWidget *parent,
 
     QHBoxLayout *knobLayout = new QHBoxLayout;
     knobLayout->setMargin(0);
-    knobLayout->setSpacing(10);
+    knobLayout->setSpacing(10*ratio);
     knobLayout->addLayout(knob_1Layout);  //LowCut
     knobLayout->addLayout(knob_2Layout);  //LowGain
-    knobLayout->addSpacing(40);
+    knobLayout->addSpacing(40*ratio);
     knobLayout->addLayout(lowMidLayout);
-    knobLayout->addSpacing(40);
+    knobLayout->addSpacing(40*ratio);
     knobLayout->addLayout(highMidLayout);
-    knobLayout->addSpacing(40);
+    knobLayout->addSpacing(40*ratio);
     knobLayout->addLayout(knob_9Layout);  //HighGain
     knobLayout->addLayout(knob_10Layout); //HighCut
-    knobLayout->addSpacing(40);
+    knobLayout->addSpacing(40*ratio);
     knobLayout->addLayout(knob_11Layout); //Level
     knobLayout->addStretch(0);
 
 
     this->frame = new customParaEQGraph(this);
-    this->frame->setMinimumSize(QSize(700, 160));
+    this->frame->setMinimumSize(QSize(700*ratio, 160*ratio));
 
     QVBoxLayout *frameLayout = new QVBoxLayout;
     frameLayout->setMargin(0);
-    frameLayout->setSpacing(10);
+    frameLayout->setSpacing(10*ratio);
     frameLayout->addWidget(this->frame, 0, Qt::AlignCenter);
     frameLayout->addLayout(knobLayout);
 

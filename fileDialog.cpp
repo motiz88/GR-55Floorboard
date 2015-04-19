@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -104,8 +104,8 @@ void fileDialog::highlighted(int value)
         default_data.replace(11, 128, temp);      //address "00"
         temp = fileData.mid(a+128, 114);
         default_data.replace(152, 114, temp);     //address "01-A"
-        temp = fileData.mid(a+268, 12);
-        default_data.replace(252, 12, temp);     //address "01-B"
+        temp = fileData.mid(a+266, 14);
+        default_data.replace(250, 14, temp);     //address "01-B"
         temp = fileData.mid(a+264, 78);
         default_data.replace(293, 78, temp);     //address "02" +
         temp = fileData.mid(a+350, 128);

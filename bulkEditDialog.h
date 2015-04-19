@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks. 
+** Copyright (C) 2007~2015 Colin Willcocks. 
 ** All rights reserved.
 **
 ** This file is part of "GR-55 FloorBoard".

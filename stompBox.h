@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -49,8 +49,6 @@ public:
     void setImage(QString imagePath);
     void setSize(QSize newSize);
     void setId(unsigned int id);
-
-
     void setComboBox(QString hex1, QString hex2, QString hex3,
                      QRect geometry = QRect(11, 37, 105, 15));
     void setComboBox2(QString hex1, QString hex2, QString hex3,
@@ -77,14 +75,12 @@ public:
     void updateComboBox(QString hex1, QString hex2, QString hex3);
     void updateButton(QString hex1, QString hex2, QString hex3);
     void updateSwitch(QString hex1, QString hex2, QString hex3);
-
     void setComboBoxCurrentIndex(int index);
     unsigned int getId();
     virtual void setEditPages() {}
     editWindow* editDetails();
     void getStompOrder();
     unsigned int id;
-
 
 public slots:
     void updatePos(signed int offsetDif);
@@ -129,17 +125,13 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event);
 
 private:
-
     void emitValueChanged(QString hex1, QString hex2, QString hex3, QString valueHex);
-
     editWindow *editDialog;
     QString imagePath;
     QSize stompSize;
     QPoint stompPos;
-
     QPoint dragStartPosition;
     QPixmap image;
-
     customDial *knob1;
     customDial *knob2;
     customSlider *slider1;
@@ -151,7 +143,6 @@ private:
     customLed *led;
     customSwitch *switchbutton;
     customComboBox *stompComboBox;
-
     QString combo_hex1;
     QString combo_hex2;
     QString combo_hex3;

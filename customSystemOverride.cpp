@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,12 +24,18 @@
 #include "customSystemOverride.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customSystemOverride::customSystemOverride(QWidget *parent,
                                            QString hex1, QString hex2, QString hex3,
                                            QString index, int rowSpan, int columnSpan)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Sfont( "Arial", 8*ratio, QFont::Bold);
+
     this->label = new customControlLabel(this);
     this->label2 = new customControlLabel(this);
     this->hex1 = hex1;
@@ -38,20 +44,21 @@ customSystemOverride::customSystemOverride(QWidget *parent,
     this->index = index;
     this->rowSpan =rowSpan;
     this->columnSpan = columnSpan;
-
     this->label->setText("OVERRIDE BY");
     this->label2->setText("SYSTEM SETTING");
+    this->label->setFont(Sfont);
+    this->label2->setFont(Sfont);
 
     this->label->setAlignment(Qt::AlignTop);
     this->label2->setAlignment(Qt::AlignTop);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->setMargin(20);
+    mainLayout->setMargin(20*ratio);
     mainLayout->setSpacing(0);
     mainLayout->addStretch(0);
     mainLayout->addWidget(this->label, 0, Qt::AlignTop);
     mainLayout->addWidget(this->label2, 0, Qt::AlignTop);
-    mainLayout->setSpacing(20);
+    mainLayout->setSpacing(20*ratio);
 
     this->setLayout(mainLayout);
 
@@ -68,10 +75,14 @@ customSystemOverride::customSystemOverride(QWidget *parent,
 
 void customSystemOverride::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     /*DRAWS BLACK BACKGROUND FOR MASKING */
     QPixmap image(":images/override.png");
 
-    QRectF target(0.0, 0.0, (this->width()*this->columnSpan)/2, (this->height()*this->rowSpan)/2);
+    QRectF target(0.0, 0.0, (this->width()*(this->columnSpan))*ratio, (this->height()*(this->rowSpan))*ratio);
     QRectF source(0.0, 0.0, this->width(), this->height());
 
     QPainter painter(this);

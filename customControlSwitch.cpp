@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,12 +24,17 @@
 #include "customControlSwitch.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlSwitch::customControlSwitch(QWidget *parent, 
                                          QString hex1, QString hex2, QString hex3,
                                          QString direction)
                                              : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->label = new customControlLabel(this);
     this->hex1 = hex1;
     this->hex2 = hex2;
@@ -63,7 +68,7 @@ customControlSwitch::customControlSwitch(QWidget *parent,
         this->label->setAlignment(Qt::AlignCenter);
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->setMargin(0);
-        mainLayout->setSpacing(5);
+        mainLayout->setSpacing(5*ratio);
         mainLayout->addWidget(this->label, 0, Qt::AlignCenter);
         mainLayout->addWidget(this->switchbutton, 0, Qt::AlignCenter);
         mainLayout->addStretch(0);
@@ -91,7 +96,7 @@ customControlSwitch::customControlSwitch(QWidget *parent,
 
     QObject::connect(this, SIGNAL( updateSignal() ),
                      this->parent(), SIGNAL( updateSignal() ));
-};
+}
 
 void customControlSwitch::paintEvent(QPaintEvent *)
 {
@@ -103,7 +108,7 @@ void customControlSwitch::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customControlSwitch::valueChanged(bool value, QString hex1, QString hex2, QString hex3)
 {
@@ -122,7 +127,7 @@ void customControlSwitch::valueChanged(bool value, QString hex1, QString hex2, Q
 
     //emit updateDisplay(valueStr);
     emit updateSignal();
-};
+}
 
 void customControlSwitch::dialogUpdateSignal()
 {
@@ -137,4 +142,4 @@ void customControlSwitch::dialogUpdateSignal()
         this->switchbutton->setValue(true);
     };
     //this->valueChanged(value, this->hex1, this->hex2, this->hex3);
-};
+}

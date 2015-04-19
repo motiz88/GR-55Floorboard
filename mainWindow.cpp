@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -23,7 +23,6 @@
 
 #include <QtWidgets>
 #include <QWhatsThis>
-//#include <QWebPage>
 #include "mainWindow.h"
 #include "Preferences.h"
 #include "preferencesDialog.h"
@@ -31,6 +30,7 @@
 #include "SysxIO.h"
 #include "bulkSaveDialog.h"
 #include "bulkLoadDialog.h"
+#include "notesDialog.h"
 #include "summaryDialog.h"
 #include "summaryDialogPatchList.h"
 #include "summaryDialogSystem.h"
@@ -41,6 +41,8 @@ mainWindow::mainWindow()
 {
     Preferences *preferences = Preferences::Instance();
     bool ok;
+    //const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     /*int current_version = preferences->getPreferences("General", "Application", "version").toInt(&ok, 10);
     QDate date = QDate::currentDate();
     text = date.toString("yyyyMMdd");
@@ -56,12 +58,12 @@ mainWindow::mainWindow()
     msgBox->setStandardButtons(QMessageBox::Ok);
     msgBox->exec();
     msgBox->deleteLater();*/
-#ifdef Q_PROCESSOR_ARM
-    this->setMinimumSize(1210, 691);
-#endif
+//#ifdef Q_PROCESSOR_ARM
+    //this->setMinimumSize(1210, 691);
+//#endif
 
     floorBoard *fxsBoard = new floorBoard(this);
-    fxsBoard->scroll(600, 300);
+    //fxsBoard->scroll(600, 300);
 
     QString setting = preferences->getPreferences("Scheme", "Style", "select");
     int choice = setting.toInt(&ok, 16);
@@ -103,25 +105,28 @@ mainWindow::mainWindow()
 mainWindow::~mainWindow()
 {
     Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
     if(preferences->getPreferences("Window", "Restore", "window")=="true")
     {
         QString posx, width;
         if(preferences->getPreferences("Window", "Restore", "sidepanel")=="true" &&
            preferences->getPreferences("Window", "Collapsed", "bool")=="true")
         {
-            width = QString::number(this->geometry().width(), 10);
+            int Wcalc = this->geometry().width()/ratio;
+            width = QString::number(Wcalc, 10);
             posx = QString::number(this->geometry().x()-8, 10);
         }
         else
-        {
-            bool ok;
+        {           
             width = preferences->getPreferences("Window", "Size", "minwidth");
             posx = QString::number(this->geometry().x()+((this->geometry().width()-width.toInt(&ok,10))/2), 10);
         };
         preferences->setPreferences("Window", "Position", "x", posx);
         preferences->setPreferences("Window", "Position", "y", QString::number(this->geometry().y()-30, 10));
         preferences->setPreferences("Window", "Size", "width", width);
-        preferences->setPreferences("Window", "Size", "height", QString::number(this->geometry().height(), 10));
+        int Hcalc = this->geometry().height()/ratio;
+        preferences->setPreferences("Window", "Size", "height", QString::number(Hcalc, 10));
     }
     else
     {
@@ -135,7 +140,11 @@ mainWindow::~mainWindow()
 
 void mainWindow::updateSize(QSize floorSize, QSize oldFloorSize)
 {
-    this->setFixedWidth(floorSize.width());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    this->setFixedWidth(floorSize.width()*ratio);
     int x = this->geometry().x() - ((floorSize.width() - oldFloorSize.width()) / 2);
     int y = this->geometry().y();
     this->setGeometry(x, y, floorSize.width(), this->geometry().height());
@@ -221,10 +230,16 @@ void mainWindow::createActions()
     bassModeAct->setWhatsThis(tr("Force to Bass Mode<br>Force editor to Bass Mode modeling to edit/convert Guitar mode patches"));
     connect(bassModeAct, SIGNAL(triggered()), this, SLOT(bassMode()));
 
+    notesAct = new QAction(QIcon(":/images/bass_icon.png"), tr("&Text notes for Patch"), this);
+    /*notesAct->setShortcut(tr("Shift+N"));
+    notesAct->setStatusTip(tr("Write Text notes for saved Patch file - only saves in *.G5L file type"));
+    notesAct->setWhatsThis(tr("Write Text notes for saved Patch file - only saves in *.G5L file type"));
+    */connect(notesAct, SIGNAL(triggered()), this, SLOT(notes()));
 
-    uploadAct = new QAction(QIcon(":/images/upload.png"), tr("Upload patch to V-Guitar Forums"), this);
-    uploadAct->setStatusTip(tr("Upload any saved patch file to a shared patch library via the internet."));
-    uploadAct->setWhatsThis(tr("Upload any saved patch file to a shared patch library<br>via the internet."));
+
+    uploadAct = new QAction(QIcon(":/images/upload.png"), tr("Patch Repository at V-Guitar Forums"), this);
+    uploadAct->setStatusTip(tr("Exchange patch files with a shared patch library via the internet."));
+    uploadAct->setWhatsThis(tr("Exchange patch files with a shared patch library<br>via the internet."));
     connect(uploadAct, SIGNAL(triggered()), this, SLOT(upload()));
 
     summaryAct = new QAction(QIcon(":/images/copy.png"), tr("Patch Text Summary"), this);
@@ -237,9 +252,9 @@ void mainWindow::createActions()
     summarySystemAct->setWhatsThis(tr("Display the current System and Global parameters<br>in a readable text format, which<br>can be printed or saved to file."));
     connect(summarySystemAct, SIGNAL(triggered()), this, SLOT(summarySystemPage()));
 
-    summaryPatchListAct = new QAction(QIcon(":/images/copy.png"), tr("GR-55 Patch List Summary"), this);
-    summaryPatchListAct->setStatusTip(tr("Display the GR-55 patch listing names in a readable text format, which can be printed or saved to file."));
-    summaryPatchListAct->setWhatsThis(tr("Display the GR-55 patch listing names<br>in a readable text format, which<br>can be printed or saved to file."));
+    summaryPatchListAct = new QAction(QIcon(":/images/copy.png"), tr("GR-55 User Patch List Summary"), this);
+    summaryPatchListAct->setStatusTip(tr("Display the GR-55 User patch listing names in a readable text format, which can be printed or saved to file."));
+    summaryPatchListAct->setWhatsThis(tr("Display the GR-55 User patch listing names<br>in a readable text format, which<br>can be printed or saved to file."));
     connect(summaryPatchListAct, SIGNAL(triggered()), this, SLOT(summaryPatchList()));
 
     helpAct = new QAction(QIcon(":/images/help.png"), tr("GR-55 FloorBoard &Help"), this);
@@ -329,6 +344,9 @@ void mainWindow::createMenus()
     modeMenu = menuBar()->addMenu(tr("&Mode"));
     modeMenu->addAction(guitarModeAct);
     modeMenu->addAction(bassModeAct);
+
+    notesMenu = menuBar()->addMenu(tr("&Notes"));
+    notesMenu->addAction(notesAct);
 }
 
 void mainWindow::createStatusBar()
@@ -730,13 +748,14 @@ void mainWindow::settings()
         QString sidepanel = (dialog->windowSettings->sidepanelCheckBox->checkState())?QString("true"):QString("false");
         QString window = (dialog->windowSettings->windowCheckBox->checkState())?QString("true"):QString("false");
         QString singleWindow = (dialog->windowSettings->singleWindowCheckBox->checkState())?QString("true"):QString("false");
-        QString widgetHelp = (dialog->windowSettings->widgetsCheckBox->checkState())?QString("true"):QString("false");
+        QString autoScale = (dialog->windowSettings->autoRatioCheckBox->checkState())?QString("true"):QString("false");
+        QString scaleRatio =QString::number(dialog->windowSettings->ratioSpinBox->value());
         QString splash = (dialog->windowSettings->splashCheckBox->checkState())?QString("true"):QString("false");
         QString dBug = (dialog->midiSettings->dBugCheckBox->checkState())?QString("true"):QString("false");
         QString midiIn = QString::number(dialog->midiSettings->midiInCombo->currentIndex() - 1, 10); // -1 because there is a default entry at index 0
         QString midiOut = QString::number(dialog->midiSettings->midiOutCombo->currentIndex() - 1, 10);
         QString midiTxChSet =QString::number(dialog->midiSettings->midiTxChSpinBox->value());
-        QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
+       // QString receiveTimeout =QString::number(dialog->midiSettings->midiDelaySpinBox->value());
         QString lang;
         if (dialog->languageSettings->chineseButton->isChecked() ) {lang="6"; }
         else if (dialog->languageSettings->japaneseButton->isChecked() ) {lang="5"; }
@@ -767,12 +786,14 @@ void mainWindow::settings()
         preferences->setPreferences("Midi", "MidiOut", "device", midiOut);
         preferences->setPreferences("Midi", "DBug", "bool", dBug);
         preferences->setPreferences("Midi", "TxCh", "set", midiTxChSet);
-        preferences->setPreferences("Midi", "Delay", "set", receiveTimeout);
+        //preferences->setPreferences("Midi", "Delay", "set", receiveTimeout);
+        preferences->setPreferences("Window", "AutoScale", "bool", autoScale);
         preferences->setPreferences("Window", "Restore", "sidepanel", sidepanel);
         preferences->setPreferences("Window", "Restore", "window", window);
-        preferences->setPreferences("Window", "Single", "bool", singleWindow);
-        preferences->setPreferences("Window", "Widgets", "bool", widgetHelp);
+        preferences->setPreferences("Window", "Scale", "ratio", scaleRatio);
+        preferences->setPreferences("Window", "Single", "bool", singleWindow);  
         preferences->setPreferences("Window", "Splash", "bool", splash);
+
         preferences->savePreferences();
     };
     dialog->deleteLater();
@@ -829,6 +850,17 @@ void mainWindow::bassMode()
         msgBox->show();
         QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
     };
+}
+
+void mainWindow::notes()
+{
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    notesDialog *notes = new notesDialog();
+    notes->setMinimumWidth(900*ratio);
+    notes->setMinimumHeight(700*ratio);
+    notes->show();
 }
 
 /* HELP MENU */

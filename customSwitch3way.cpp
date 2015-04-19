@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -22,60 +22,68 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
 #include "customSwitch3way.h"
+#include "Preferences.h"
 
 customSwitch3way::customSwitch3way(int active, QPoint switch3wayPos, QWidget *parent,
-					 QString imagePath)
+                     QString imagePath)
     : QWidget(parent)
 {
-	this->active = active;
-	this->imagePath = imagePath;
-	QSize imageSize = QPixmap(imagePath).size();
-	this->switch3waySize = QSize(imageSize.width(), imageSize.height()/4);
-	this->switch3wayPos = switch3wayPos;
+    //Preferences *preferences = Preferences::Instance();
+    //bool ok;
+    //const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
-	setOffset(0);
-	setGeometry(switch3wayPos.x(), switch3wayPos.y(), switch3waySize.width(), switch3waySize.height());
+    this->active = active;
+    this->imagePath = imagePath;
+    QSize imageSize = QPixmap(imagePath).size();
+    this->switch3waySize = QSize(imageSize.width(), imageSize.height()/4);
+    this->switch3wayPos = switch3wayPos;
+
+    setOffset(0);
+    setGeometry(switch3wayPos.x(), switch3wayPos.y(), switch3waySize.width(), switch3waySize.height());
 
 }
 
 void customSwitch3way::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, switch3waySize.width(), switch3waySize.height());
-	QRectF source(0.0, yOffset, switch3waySize.width(), switch3waySize.height());
-	QPixmap image(imagePath);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, switch3waySize.width()*ratio, switch3waySize.height()*ratio);
+    QRectF source(0.0, yOffset, switch3waySize.width(), switch3waySize.height());
+    QPixmap image(imagePath);
     //image.setMask(image.mask());
 
-	QPainter painter(this);
+    QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing, true);
-	painter.drawPixmap(target, image, source);
+    painter.drawPixmap(target, image, source);
 }
 
 void customSwitch3way::setOffset(signed int imageNr)
 {
-	this->yOffset = imageNr*switch3waySize.height();
-	this->update();
+    this->yOffset = imageNr*switch3waySize.height();
+    this->update();
 }
 
 void customSwitch3way::setValue(int value)
 {
-	this->active = value;
-	if(active == 2)
-	{
+    this->active = value;
+    if(active == 2)
+    {
                 setOffset(2);
-	}
-	else if(active == 1)
-	{
+    }
+    else if(active == 1)
+    {
                 setOffset(1);
-	}
-	else
-	{
+    }
+    else
+    {
                 setOffset(0);
-	};
+    };
 }
 
 void customSwitch3way::changeValue(int value)
 {
-	setValue(value);
+    setValue(value);
 }

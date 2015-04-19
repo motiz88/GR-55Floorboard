@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2012 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -40,7 +40,7 @@ border-color: rgb(150,150,150);
 }
 QTreeWidget#banklist QHeaderView::section:only-one {
 font-family: Arial;
-font-size: 9px;
+/*font-size: 9px;*/
 font-weight: bold;
 /*padding-top: 15px;*/
 border-style: solid;
@@ -69,7 +69,7 @@ image: url(":/images/collapse.png") 1;
 
 QComboBox#smallcombo {
 font-family: Arial;
-font-size: 10px;
+/*font-size: 10px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 background-color: rgb(0,0,0);
@@ -91,7 +91,7 @@ image-position: center right;
 }
 QComboBox#smallcombo QFrame {
 font-family: Arial;
-font-size: 10px;
+/*font-size: 10px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 background-color: rgb(0,0,0);
@@ -245,37 +245,37 @@ border-color: rgb(150,150,150);
 }
 QLabel#bankMain {
 font-family: Arial;
-font-size: 11px;
+/*font-size: 11px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
 QLabel#bankSub {
 font-family: Arial;
-font-size: 9px;
+/*font-size: 9px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
 QLabel#nameMain {
 font-family: Arial;
-font-size: 11px;
+/*font-size: 11px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
 QLabel#nameSub {
 font-family: Arial;
-font-size: 10px;
+/*font-size: 10px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
 QLabel#valueMain {
 font-family: Arial;
-font-size: 11px;
+/*font-size: 11px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
 QLabel#valueSub {
 font-family: Arial;
-font-size: 10px;
+/*font-size: 10px;*/
 font-weight: bold;
 color: rgb(185,224,243);
 }
@@ -305,14 +305,14 @@ color: rgb(255,255,255);
 
 QLabel#button {
 font-family: Arial;
-font-size: 9px;
+/*font-size: 9px;*/
 font-weight: bold;
 color: rgb(250,250,255);
 }
 
 QLabel#panelButton {
 font-family: Arial;
-font-size: 9px;
+/*font-size: 9px;*/
 font-weight: bold;
 color: rgb(255,255,255);
 }
@@ -330,7 +330,7 @@ left: 5px;
 }
 QGroupBox#groupbox {
 font-family: Arial;
-font-size: 12px;
+/*font-size: 12px;*/
 font-weight: bold;
 color: rgb(255,255,255);
 border-width: 1px;
@@ -346,7 +346,7 @@ background-color: rgb(1,35,182);
 
 QLabel#customlabel {
 font-family: Arial;
-font-size: 9px;
+/*font-size: 9px;*/
 font-weight: bold;
 color: rgb(255,255,255);
 }
@@ -355,7 +355,7 @@ color: rgb(255,255,255);
 
 QLineEdit#editdisplay {
 font-family: Arial;
-font-size: 12px;    
+/*font-size: 12px;*/    
 font-weight: normal;
 color: rgb(185,224,243);
 background-color: rgb(0,0,0);

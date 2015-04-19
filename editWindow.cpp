@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -31,9 +31,12 @@
 editWindow::editWindow(QWidget *parent)
     : QDialog(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    Preferences *preferences = Preferences::Instance();
+    //Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
         QString setting = preferences->getPreferences("Scheme", "Colour", "select");
@@ -46,7 +49,7 @@ editWindow::editWindow(QWidget *parent)
         else if(choice == 1) { mesh = "images/editwindow_black.png"; }
         else { mesh = ":images/editwindow_blue.png"; };
         this->image = QPixmap(mesh);
-        this->setFixedSize(image.width(), image.height());
+        this->setFixedSize(image.width()*ratio, image.height()*ratio);
         this->setWindowFlags(Qt::WindowStaysOnTopHint);
     }
     else
@@ -205,14 +208,14 @@ editWindow::editWindow(QWidget *parent)
     pastebuttonLayout->addWidget(this->temp5_Button);
 
     QHBoxLayout *top4buttonLayout = new QHBoxLayout;
-    top4buttonLayout->addSpacing(170);
+    top4buttonLayout->addSpacing(170*ratio);
     top4buttonLayout->addWidget(this->assign1_Button);
     top4buttonLayout->addWidget(this->assign2_Button);
     top4buttonLayout->addWidget(this->assign3_Button);
     top4buttonLayout->addWidget(this->assign4_Button);
 
     QHBoxLayout *bottom4buttonLayout = new QHBoxLayout;
-    bottom4buttonLayout->addSpacing(170);
+    bottom4buttonLayout->addSpacing(170*ratio);
     bottom4buttonLayout->addWidget(this->assign5_Button);
     bottom4buttonLayout->addWidget(this->assign6_Button);
     bottom4buttonLayout->addWidget(this->assign7_Button);
@@ -220,7 +223,7 @@ editWindow::editWindow(QWidget *parent)
 
     QVBoxLayout *buttonLayout = new QVBoxLayout;
     buttonLayout->addLayout(pastebuttonLayout);
-    buttonLayout->addSpacing(10);
+    buttonLayout->addSpacing(10*ratio);
     buttonLayout->addLayout(top4buttonLayout);
     buttonLayout->addLayout(bottom4buttonLayout);
 
@@ -281,7 +284,11 @@ editWindow::editWindow(QWidget *parent)
 
 void editWindow::paintEvent(QPaintEvent *)
 {
-    QRectF target(0.0, 0.0, image.width(), image.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0, 0.0, image.width()*ratio, image.height()*ratio);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
     QPainter painter(this);

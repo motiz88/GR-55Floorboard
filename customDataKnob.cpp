@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,9 +24,14 @@
 #include "customDataKnob.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QString hex3, QString background, QString direction) : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -52,25 +57,25 @@ customDataKnob::customDataKnob(QWidget *parent, QString hex1, QString hex2, QStr
     int range = midiTable->getRange("Tables", hex_a, hex_b, hex_c);
     int rangeMin = midiTable->getRangeMinimum("Tables", hex_a, hex_b, hex_c);
 
-    QPoint bgPos = QPoint(0, -3); // Correction needed y-3.
-    QPoint knobPos = QPoint(5, 4); // Correction needed y+1 x-1.
+    QPoint bgPos = QPoint((5*ratio)-(6*ratio), (4*ratio)-(7*ratio)); // Correction needed y-3.
+    QPoint knobPos = QPoint(5*ratio, 4*ratio); // Correction needed y+1 x-1.
 
     QLabel *newBackGround = new QLabel(this);
-    newBackGround->setPixmap(QPixmap(":/images/knobbgn.png"));
+    newBackGround->setPixmap(QPixmap(":/images/knobbgn.png").scaled(49*ratio,50*ratio));
 
     newBackGround->move(bgPos);
     QString imagePath_knob(":/images/knob.png");
 
     unsigned int imageRange = 100;
     this->knob = new customDial(0, rangeMin, range, 1, 10, knobPos, this, hex1, hex2, hex3, imagePath_knob, imageRange);
-    this->setFixedSize(newBackGround->pixmap()->size() - QSize(0, 4)); // Correction needed h-4.
+    this->setFixedSize(newBackGround->pixmap()->size() - QSize(0, 4)); // Correction needed h-4 - space between knob and bottom label.
 
     QObject::connect(this, SIGNAL( updateSignal() ),
                      this->parent(), SIGNAL( updateSignal() ));
 
     QObject::connect(this, SIGNAL( updateDisplay(QString) ),
                      this->parent(), SIGNAL( updateDisplay(QString) ));
-};
+}
 
 void customDataKnob::paintEvent(QPaintEvent *)
 {
@@ -82,12 +87,12 @@ void customDataKnob::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customDataKnob::setValue(int value)
 {
     this->knob->setValue(value);
-};
+}
 
 void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString hex3)
 {
@@ -118,4 +123,4 @@ void customDataKnob::valueChanged(int value, QString hex1, QString hex2, QString
 
     emit updateDisplay(valueStr);
     emit updateSignal();
-};
+}

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-10 Fx FloorBoard".
@@ -22,8 +22,8 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
 #include "customLed.h"
+#include "Preferences.h"
 
 customLed::customLed(bool active, QPoint ledPos, QWidget *parent,
 					 QString imagePath)
@@ -41,7 +41,11 @@ customLed::customLed(bool active, QPoint ledPos, QWidget *parent,
 
 void customLed::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, ledSize.width(), ledSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, ledSize.width()*ratio, ledSize.height()*ratio);
 	QRectF source(0.0, yOffset, ledSize.width(), ledSize.height());
 	QPixmap image(imagePath);
     //image.setMask(image.mask());
