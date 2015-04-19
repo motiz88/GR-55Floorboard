@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -28,9 +28,13 @@
 statusBarWidget::statusBarWidget(QWidget *parent)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->progressBar = new QProgressBar(this);
     this->progressBar->setTextVisible(false);
-    this->progressBar->setFixedSize(80, 13);
+    this->progressBar->setFixedSize(80*ratio, 13*ratio);
     this->progressBar->setRange(0, 100);
     this->progressBar->setValue(0);
 
@@ -39,15 +43,15 @@ statusBarWidget::statusBarWidget(QWidget *parent)
 
     QFont labelFont;
     labelFont.setFamily("Arial");
-    labelFont.setPixelSize(11);
+    labelFont.setPixelSize(11*ratio);
 
     this->label = new QLabel(this);
-    this->label->setFixedWidth(150);
+    this->label->setFixedWidth(150*ratio);
     this->label->setText("");
     this->label->setFont(labelFont);
 
     this->dBuglabel = new QStatusBar(this);
-    this->dBuglabel->setFixedWidth(950);
+    this->dBuglabel->setFixedWidth(950*ratio);
     this->dBuglabel->showMessage(tr(""));
     this->dBuglabel->setFont(labelFont);
 

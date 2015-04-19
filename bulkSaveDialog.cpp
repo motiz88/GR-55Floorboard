@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -400,7 +400,7 @@ void bulkSaveDialog::writeG5L()         // ************************************ 
                 int a = 172;          // distance from start of single *.g5l file to patch data start.
                 G5L_default.replace(a, 128, out.mid(b+11, 128));          //address "00"
                 G5L_default.replace(a+128, 114, out.mid(b+152, 114));     //address "01"
-                G5L_default.replace(a+252, 12, out.mid(b+268, 12));       //address "01 B"
+                G5L_default.replace(a+250, 14, out.mid(b+266, 14));       //address "01 B"
                 G5L_default.replace(a+264, 78, out.mid(b+293, 78));       //address "02"
                 G5L_default.replace(a+350, 128, out.mid(b+384, 128));     //address "03"
                 G5L_default.replace(a+478, 72, out.mid(b+525, 72));       //address "04"

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -36,6 +36,13 @@ customLabelDisplay::customLabelDisplay(QRect geometry, QWidget *parent)
 
 void customLabelDisplay::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QFont Sfont( "Arial", 10*ratio, QFont::Bold);
+    this->font = Sfont;
+    this->mainLabel->setFont(Sfont);
     /* Set the default font. */
     if(this->font.family() == "void")
     {
@@ -70,9 +77,9 @@ void customLabelDisplay::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(border);
-    Preferences *preferences = Preferences::Instance();
+    //Preferences *preferences = Preferences::Instance();
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
-    bool ok;
+    //bool ok;
     int choice = setting.toInt(&ok, 16);
     if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //white
     else if(choice == 3) {painter.setBrush(QColor(0,62,5)); }  //green
@@ -97,28 +104,38 @@ void customLabelDisplay::paintEvent(QPaintEvent *)
 
 void customLabelDisplay::setLabelPosition(bool invert)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     int height = this->geometry.height();
     int width = this->geometry.width();
-    int marginWidth = 5;
-    int marginHeight = 2;
+    int marginWidth = 5*ratio;
+    int marginHeight = 2*ratio;
 
-    QRect subGeometry, mainGeometry, htmlGeometry;
+    QRect subGeometry, mainGeometry;
 
     subGeometry = QRect(marginWidth, marginHeight, width - (marginWidth * 2), (height / 2) - marginHeight);
     mainGeometry = QRect(marginWidth, 0, width - (marginWidth * 2), height - marginHeight);
 
     this->mainLabel = new QLabel(this);
     this->mainLabel->setObjectName("displaySmall");
+    QFont Mfont( "Arial", 10*ratio, QFont::Bold);
+    this->mainLabel->setFont(Mfont);
     this->mainLabel->setAlignment(Qt::AlignCenter);
     this->mainLabel->setGeometry(mainGeometry);
 
     this->subLabelLeft = new QLabel(this);
     this->subLabelLeft->setObjectName("displaySmall");
+    QFont SLfont( "Arial", 10*ratio, QFont::Bold);
+    this->subLabelLeft->setFont(SLfont);
     this->subLabelLeft->setAlignment(Qt::AlignLeft);
     this->subLabelLeft->setGeometry(subGeometry);
 
     this->subLabelRight = new QLabel(this);
     this->subLabelRight->setObjectName("displaySmall");
+    QFont SRfont( "Arial", 10*ratio, QFont::Bold);
+    this->subLabelRight->setFont(SRfont);
     this->subLabelRight->setAlignment(Qt::AlignRight);
     this->subLabelRight->setGeometry(subGeometry);
 }

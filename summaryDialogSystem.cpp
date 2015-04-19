@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -417,8 +417,8 @@ void summaryDialogSystem::cancel()
 
 void summaryDialogSystem::printFile()
 {
-#ifdef  Q_PROCESSOR_ARM
-#elif QT_NO_PRINTER
+//#ifdef  Q_PROCESSOR_ARM
+//#elif QT_NO_PRINTER
 
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
@@ -427,7 +427,7 @@ void summaryDialogSystem::printFile()
     if (dialog->exec() != QDialog::Accepted) { return; }
     else { textDialog->print(&printer); };
     dialog->deleteLater();
-#endif
+//#endif
 }
 
 void summaryDialogSystem::saveAs()

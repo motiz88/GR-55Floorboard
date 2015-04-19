@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,12 +24,18 @@
 #include "customControlRange.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlRange::customControlRange(QWidget *parent,
                                        QString hex1, QString hex2, QString hex3,
                                        QString area)
                                            : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+
     this->displayMin = new QLineEdit(this);
     this->labelMin = new customControlLabel(this);
     this->displayMax = new QLineEdit(this);
@@ -39,12 +45,12 @@ customControlRange::customControlRange(QWidget *parent,
     this->hex3 = hex3;
     this->area = area;
 
-    MidiTable *midiTable = MidiTable::Instance();
+    //MidiTable *midiTable = MidiTable::Instance();
     if (this->area != "System") {this->area = "Structure";};
 
-    Midi items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
+    //Midi items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
 
-    bool ok;
+    //bool ok;
     QString hexTemp;
     this->hexMin = hex3;
     hexTemp = QString::number((hex3.toInt(&ok, 16) + 1), 16).toUpper();    // go forward 2 to select range Max address
@@ -55,8 +61,9 @@ customControlRange::customControlRange(QWidget *parent,
     this->labelMin->setUpperCase(true);
     this->knobMin = new customKnobRange(this, this->area, hex1, hex2, this->hexMin, this->hexMax, "Min");
     this->displayMin->setObjectName("editdisplay");
-    this->displayMin->setFixedWidth(45);
-    this->displayMin->setFixedHeight(13);
+    this->displayMin->setFont(Sfont);
+    this->displayMin->setFixedWidth(45*ratio);
+    this->displayMin->setFixedHeight(13*ratio);
     this->displayMin->setAlignment(Qt::AlignCenter);
     this->displayMin->setDisabled(true);
 
@@ -65,8 +72,9 @@ customControlRange::customControlRange(QWidget *parent,
     this->labelMax->setUpperCase(true);
     this->knobMax = new customKnobRange(this, this->area, hex1, hex2, this->hexMin, this->hexMax, "Max");
     this->displayMax->setObjectName("editdisplay");
-    this->displayMax->setFixedWidth(45);
-    this->displayMax->setFixedHeight(13);
+    this->displayMax->setFont(Sfont);
+    this->displayMax->setFixedWidth(45*ratio);
+    this->displayMax->setFixedHeight(13*ratio);
     this->displayMax->setAlignment(Qt::AlignCenter);
     this->displayMax->setDisabled(true);
 
@@ -91,13 +99,13 @@ customControlRange::customControlRange(QWidget *parent,
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
     mainLayout->addLayout(minLayout);
-    mainLayout->setSpacing(10);
+    mainLayout->setSpacing(10*ratio);
     mainLayout->addLayout(maxLayout);
     mainLayout->addStretch(0);
 
     this->setLayout(mainLayout);
-    this->setFixedHeight(this->knobMin->height() + 13 + 12);
-    this->setFixedHeight(this->knobMax->height() + 13 + 12);
+    this->setFixedHeight((this->knobMin->height() + 13 + 12)*ratio);
+    this->setFixedHeight((this->knobMax->height() + 13 + 12)*ratio);
 
 
 
@@ -114,7 +122,7 @@ customControlRange::customControlRange(QWidget *parent,
 
     QObject::connect(this, SIGNAL( updateDisplayMax(QString) ),
                      this->displayMax, SLOT( setText(QString) ));
-};
+}
 
 void customControlRange::paintEvent(QPaintEvent *)
 {
@@ -126,7 +134,7 @@ void customControlRange::paintEvent(QPaintEvent *)
 
         QPainter painter(this);
         painter.drawPixmap(target, image, source);*/
-};
+}
 
 void customControlRange::dialogUpdateSignal()
 {
@@ -147,4 +155,4 @@ void customControlRange::dialogUpdateSignal()
     if(valueHex.length() < 2) valueHex.prepend("0");
     valueStr = midiTable->getValue(this->area, hex1, hex2, this->hexMax, valueHex);
     emit updateDisplayMax(valueStr);
-};
+}

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -73,8 +73,11 @@ floorBoard::floorBoard(QWidget *parent,
                            : QWidget(parent)
 {
     Preferences *preferences = Preferences::Instance();
-    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+    //bool ok;
     int choice = setting.toInt(&ok, 16);
     if(choice == 4) { imagePathFloor = "images/floor_white.png"; }
     else if(choice == 3) { imagePathFloor = "images/floor_green.png"; }
@@ -83,6 +86,12 @@ floorBoard::floorBoard(QWidget *parent,
     else { imagePathFloor = ":images/floor_blue.png"; };
     this->imagePathFloor = imagePathFloor;
     this->imagePathStompBG = imagePathStompBG;
+
+    marginStompBoxesTop = 135*ratio;
+    marginStompBoxesBottom = 72*ratio;
+    marginStompBoxesWidth = 25*ratio;
+    panelBarOffset = 10*ratio;
+    borderWidth = 3*ratio;
 
     this->marginStompBoxesTop = marginStompBoxesTop;
     this->marginStompBoxesBottom = marginStompBoxesBottom;
@@ -102,9 +111,9 @@ floorBoard::floorBoard(QWidget *parent,
     panelBar->setPos(panelBarPos);
 
     dragBar *bar = new dragBar(this);
-    bar->setDragBarSize(QSize(4, panelBar->height() ));
-    bar->setDragBarMinOffset(2, 8);
-    bar->setDragBarMaxOffset(offset - panelBarOffset + 5);
+    bar->setDragBarSize(QSize(4*ratio, panelBar->height()*ratio ));
+    bar->setDragBarMinOffset(2*ratio, 8*ratio);
+    bar->setDragBarMaxOffset(offset - panelBarOffset + (5*ratio));
 
     initSoundSource();
     initStomps();
@@ -185,7 +194,11 @@ floorBoard::~floorBoard()
 
 void floorBoard::paintEvent(QPaintEvent *)
 {
-    QRectF target(pos.x(), pos.y(), floorSize.width(), floorSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(pos.x(), pos.y(), floorSize.width()*ratio, floorSize.height()*ratio);
     QRectF source(0.0, 0.0, floorSize.width(), floorSize.height());
 
     QPainter painter(this);
@@ -194,15 +207,20 @@ void floorBoard::paintEvent(QPaintEvent *)
 }
 
 void floorBoard::setFloorBoard() {
+
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     QPixmap imageFloor(imagePathFloor);
     QPixmap imagestompBG(imagePathStompBG);
     QPixmap buffer = imageFloor;
     QPainter painter(&buffer);
 
-    this->offset = imageFloor.width() - 997;
-    this->structureWidth = 997;
-    this->stompSize = imagestompBG.size();
-    this->structureHeight = 44;
+    this->offset = imageFloor.width()*ratio - (997*ratio);
+    this->structureWidth = 997*ratio;
+    this->stompSize = imagestompBG.size()*ratio;
+    this->structureHeight = 44*ratio;
 
     initSize(imageFloor.size());
     this->maxSize = floorSize;
@@ -211,7 +229,7 @@ void floorBoard::setFloorBoard() {
     // Draw Structure 2
     structure_state = false;
     this->structure_2 = new customStructure(structure_state, QPoint(0, 0), this);
-    this->structure_2->move(offset + 132, 144);
+    this->structure_2->move(offset + (132*ratio), 144*ratio);
     QObject::connect(this, SIGNAL( structure_1_buttonSignal(bool)), this, SLOT( structure(bool) ) );
     QObject::connect(this, SIGNAL( structure_2_buttonSignal(bool)), this, SLOT( structure(bool) ) );
 
@@ -219,7 +237,7 @@ void floorBoard::setFloorBoard() {
 
     this->baseImage = buffer;
     this->image = buffer;
-    this->floorHeight = imageFloor.height();
+    this->floorHeight = imageFloor.height()*ratio;
 
     QPoint newPanelBarPos = QPoint(offset - panelBarOffset, borderWidth);
     this->panelBarPos = newPanelBarPos;
@@ -235,8 +253,7 @@ void floorBoard::initSize(QSize floorSize)
 {
     this->floorSize = floorSize;
     this->l_floorSize = floorSize;
-    QList<QPoint> fxPos;
-    this->setFixedSize(floorSize);
+    //this->setFixedSize(floorSize);
 }
 
 QPoint floorBoard::getStompPos(int id)
@@ -263,8 +280,12 @@ void floorBoard::setCollapse()
 
 void floorBoard::setSize(QSize newSize)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     unsigned int oldOffset = offset;
-    this->offset = newSize.width() - 997;
+    this->offset = newSize.width()*ratio - (997*ratio);
     QSize oldFloorSize = this->floorSize;
     this->floorSize = newSize;
 
@@ -293,13 +314,14 @@ void floorBoard::setSize(QSize newSize)
     painter.end();
 
     this->image = buffer;
-    this->setFixedSize(floorSize);
+    //this->setFixedSize(floorSize);
 
     QRect newBankListRect = QRect(borderWidth, borderWidth, offset - panelBarOffset - (borderWidth*2), floorHeight - (borderWidth*2));
     emit resizeSignal(newBankListRect);
 
     emit sizeChanged(floorSize, oldFloorSize);
     this->centerEditDialog();
+    update_structure();
 }
 
 void floorBoard::setWidth(int dist)
@@ -331,6 +353,10 @@ void floorBoard::setWidth(int dist)
 
 void floorBoard::initSoundSource()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 
     QVector<soundSource *> initSoundSources(5);
     this->soundSources = initSoundSources.toList();;
@@ -338,33 +364,37 @@ void floorBoard::initSoundSource()
     //Analog Pick Up
     soundSource *analogPU = new soundsource_analogPU(this);
     analogPU->setId(0);
-    analogPU->setPos(QPoint(offset+20, 480));
+    analogPU->setPos(QPoint(offset+(20*ratio), 480*ratio));
 
     //Guitar Modeling
     this->modeling = new soundsource_modeling(this);
     modeling->setId(1);
-    modeling->setPos(QPoint(offset+20, 370));
+    modeling->setPos(QPoint(offset+(20*ratio), 370*ratio));
 
     //Bass Modeling
     this->modeling_bass = new soundsource_modeling_bass(this);
     modeling_bass->setId(25);
-    modeling_bass->setPos(QPoint(offset+20, 370));
+    modeling_bass->setPos(QPoint(offset+(20*ratio), 370*ratio));
     modeling_bass->hide();
 
     //Synth A
     soundSource *synth_a = new soundsource_synth_a(this);
     synth_a->setId(2);
-    synth_a->setPos(QPoint(offset+20, 150));
+    synth_a->setPos(QPoint(offset+(20*ratio), 150*ratio));
 
     //Synth B
     soundSource *synth_b = new soundsource_synth_b(this);
     synth_b->setId(3);
-    synth_b->setPos(QPoint(offset+20, 260));
+    synth_b->setPos(QPoint(offset+(20*ratio), 260*ratio));
 
 }
 
 void floorBoard::initStomps()
 {
+
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
     QList<signed int> fx;
     fx << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7;
@@ -373,42 +403,42 @@ void floorBoard::initStomps()
     //Amp
     stompBox *amp = new stompbox_amp(this);
     amp->setId(4);
-    amp->setPos(QPoint(offset + 370, 410));
+    amp->setPos(QPoint(offset + (370*ratio), 410*ratio));
 
     //Noise suppressor
     stompBox *ns = new stompbox_ns(this);
     ns->setId(5);
-    ns->setPos(QPoint(offset + 516, 410));
+    ns->setPos(QPoint(offset + (516*ratio), 410*ratio));
 
     //MOD
     stompBox *mod = new stompbox_mod(this);
     mod->setId(6);
-    mod->setPos(QPoint(offset + 663, 410));
+    mod->setPos(QPoint(offset + (663*ratio), 410*ratio));
 
     //MFX
     stompBox *mfx = new stompbox_mfx(this);
     mfx->setId(7);
-    mfx->setPos(QPoint(offset + 370, 180));
+    mfx->setPos(QPoint(offset + (370*ratio), 180*ratio));
 
     //Chorus
     stompBox *ce = new stompbox_ce(this);
     ce->setId(8);
-    ce->setPos(QPoint(offset + 695, 180));
+    ce->setPos(QPoint(offset + (695*ratio), 180*ratio));
 
     //Reverb
     stompBox *rv = new stompbox_rv(this);
     rv->setId(9);
-    rv->setPos(QPoint(offset + 840, 180));
+    rv->setPos(QPoint(offset + (840*ratio), 180*ratio));
 
     // Delay
     stompBox *dd = new stompbox_dd(this);
     dd->setId(10);
-    dd->setPos(QPoint(offset + 550, 180));
+    dd->setPos(QPoint(offset + (550*ratio), 180*ratio));
 
     //Equalizer
     stompBox *eq = new stompbox_eq(this);
     eq->setId(11);
-    eq->setPos(QPoint(offset + 840, 410));
+    eq->setPos(QPoint(offset + (840*ratio), 410*ratio));
 
 }
 
@@ -436,10 +466,14 @@ void floorBoard::setEditDialog(editWindow* editDialog)
 void floorBoard::centerEditDialog()
 {
     Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    //Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
-    int x = this->displayPos.x() + (((this->floorSize.width() - this->displayPos.x()) - this->editDialog->width()) / 2);
-        int y = this->pos.y() + (((this->floorSize.height() +40) - this->editDialog->height()) / 2);
+    int x = this->displayPos.x() + (((this->floorSize.width()*ratio - this->displayPos.x()) - this->editDialog->width()) / 2);
+        int y = this->pos.y() + ((((this->floorSize.height()*ratio) + (40*ratio)) - this->editDialog->height()) / 2);
         this->editDialog->move(x, y);
     };
 }
@@ -518,7 +552,11 @@ void floorBoard::structure(bool value)
 
 void floorBoard::update_structure()
 {
-    this->structure_2->move(offset + 421, 144);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    this->structure_2->move(offset + (421*ratio), 144*ratio);
     SysxIO *sysxIO = SysxIO::Instance();
     int value2 = sysxIO->getSourceValue("Structure", "02", "00", "2C");
     this->structure_2->changeValue((value2==0)?true:false);

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -24,14 +24,22 @@
 #include "customTargetListMenu.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customTargetListMenu::customTargetListMenu(QWidget *parent,
                                            QString hex1, QString hex2, QString hex3, QString hexMsb,
                                            QString hexLsb, QString direction)
-                                               : QWidget(parent)
+    : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+
     this->controlListComboBox = new customComboBox(this);
     this->controlListComboBox->setObjectName("smallcombo");
+    this->controlListComboBox->setFont(Sfont);
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -44,9 +52,9 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
     Midi items;
     QString hex0 = area;
     if (!area.contains("System")){
-	items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
+        items = midiTable->getMidiMap(this->area, hex1, hex2, hex3);
     } else {
-	hex0.remove("System");
+        hex0.remove("System");
         items = midiTable->getMidiMap("System", hex0, hex1, hex2, hex3);
     };
 
@@ -73,7 +81,7 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
         mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignCenter);
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(15);
+        this->setFixedHeight(15*ratio);
 
     }
     else
@@ -85,7 +93,7 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
         mainLayout->addWidget(this->controlListComboBox, 0, Qt::AlignCenter);
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(15);
+        this->setFixedHeight(15*ratio);
 
     };
 
@@ -101,6 +109,10 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
 
 void customTargetListMenu::setComboBox()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -179,8 +191,8 @@ void customTargetListMenu::setComboBox()
     };
 
     itemTotal = itemTotal + itemcount;
-    this->controlListComboBox->setFixedWidth(250);
-    this->controlListComboBox->setFixedHeight(15);
+    this->controlListComboBox->setFixedWidth(250*ratio);
+    this->controlListComboBox->setFixedHeight(15*ratio);
     this->controlListComboBox->setEditable(false);
     this->controlListComboBox->setFrame(false);
     this->controlListComboBox->setMaxVisibleItems(itemTotal);
@@ -217,7 +229,14 @@ void customTargetListMenu::valueChanged(int index)
     QString lsb_c = valueHex.at(2);
     lsb_c.prepend("0");
     valueString.append(lsb_c);
-    sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString);
+    if(this->hex3=="7F")
+    {
+        sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, lsb_a);
+        QList<QString> byte; byte.append(lsb_b); byte.append(lsb_c);
+        sysxIO->setFileSource(this->area, "02", "00", "00", byte);
+    }else{
+        sysxIO->setFileSource(this->area, this->hex1, this->hex2, this->hex3, valueString);
+    };
 
     bool ok;
     QString hex3_msb = QString::number((hex3.toInt(&ok, 16) + 1), 16).toUpper();                // go forward 1 to select target MSB address
@@ -252,7 +271,7 @@ void customTargetListMenu::valueChanged(int index)
     this->hexLsb = items.customdesc;
 
     emit updateTarget(hexMsb, hex2, hexLsb);                                                    // hexMsb & hexLsb are lookup address for label value
-   // emit updateTarget(hexMsb, hex2, hexLsb);
+    // emit updateTarget(hexMsb, hex2, hexLsb);
 
     QObject::connect(this->controlListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(valueChanged(int)));
 }

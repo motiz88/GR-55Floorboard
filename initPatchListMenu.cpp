@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -79,6 +79,10 @@ QDir initPatchListMenu::getInitPatchDir()
 
 void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	QDir initPatchesDir = getInitPatchDir();
 	if(initPatchesDir.exists())
 	{	/* If the "Init Pathces" directory exists. */
@@ -91,6 +95,8 @@ void initPatchListMenu::setInitPatchComboBox(QRect geometry)
 			this->initPatchComboBox = new customComboBox(this);
 			this->available = true;
 			this->initPatchComboBox->setObjectName("smallcombo");
+            QFont Sfont( "Arial", 8*ratio, QFont::Bold);
+            this->initPatchComboBox->setFont(Sfont);
             initPatchComboBox->addItem(tr("[ init_patches ]"));
 			
 			int itemcount;

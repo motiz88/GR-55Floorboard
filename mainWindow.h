@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -61,6 +61,7 @@ public slots:
         void settings();
         void guitarMode();
         void bassMode();
+        void notes();
         void upload();
         void summaryPage();       
         void summarySystemPage();
@@ -77,13 +78,12 @@ private:
         void createActions();
         void createMenus();
         void createStatusBar();
-        //QMenuBar *menuBar;
-        //QStatusBar *statusBar;
         QMenu *fileMenu;
         QMenu *toolsMenu;
         QMenu *settingsMenu;
         QMenu *modeMenu;
         QMenu *helpMenu;
+        QMenu *notesMenu;
         QAction *openAct;
         QAction *saveAct;
         QAction *saveAsAct;
@@ -99,6 +99,7 @@ private:
         QAction *settingsAct;
         QAction *guitarModeAct;
         QAction *bassModeAct;
+        QAction *notesAct;
         QAction *uploadAct;
         QAction *summaryAct;       
         QAction *summarySystemAct;

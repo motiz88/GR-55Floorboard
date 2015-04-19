@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
 **
@@ -31,9 +31,13 @@
 soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QPoint stompPos)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->id = id;
     this->imagePath = imagePath;
-    this->stompSize = QPixmap(":/images/sourceBG.png").size();
+    this->stompSize = QPixmap(":/images/sourceBG.png").size()*ratio;
     this->stompPos = stompPos;
     this->setFixedSize(stompSize);
     this->editDialog = new editWindow();
@@ -79,9 +83,12 @@ soundSource::soundSource(QWidget *parent, unsigned int id, QString imagePath, QP
 
 void soundSource::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
     setImage(imagePath);
     QPixmap image(imagePath);
-    QRectF target(0.0, 0.0, image.width(), image.height());
+    QRectF target(0.0, 0.0, image.width()*ratio, image.height()*ratio);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
 
@@ -201,6 +208,10 @@ void soundSource::setLSB(QString hex1, QString hex2)
 
 void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect geometry)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);\
+
     QString type = hex2;
     this->hex1 = hex1;
     if (type == "routeSwitch") { this->hex2 = "00"; } else { this->hex2 = hex2; };
@@ -211,7 +222,8 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
 
     this->stompComboBox = new customComboBox(this);
     this->stompComboBox->setObjectName("smallcombo");
-
+    QFont Mfont( "Arial", 8*ratio, QFont::Bold);
+    this->stompComboBox->setFont(Mfont);
     int itemcount = 0;
     for(itemcount=0;itemcount<items.level.size();itemcount++ )
     {
@@ -229,7 +241,7 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
         this->stompComboBox->addItem(item);
     };
 
-    this->stompComboBox->setGeometry(geometry);
+    this->stompComboBox->setGeometry(QRect(143*ratio, 42*ratio, 70*ratio, 20*ratio));
     this->stompComboBox->setEditable(false);
     this->stompComboBox->setFrame(false);
     this->stompComboBox->setMaxVisibleItems(itemcount);
@@ -237,7 +249,7 @@ void soundSource::setComboBox(QString hex1, QString hex2, QString hex3, QRect ge
     QObject::connect(this->stompComboBox, SIGNAL(currentIndexChanged(int)),
                      this, SLOT(valueChanged(int)));
     if (type == "routeSwitch") {
-        switch3way = new customSwitch3way(0, QPoint(260, 10), this);
+        switch3way = new customSwitch3way(0, QPoint(260*ratio, 10*ratio), this);
 
         QObject::connect(this->stompComboBox, SIGNAL(currentIndexChanged(int)),
                          switch3way, SLOT(changeValue(int)));
@@ -254,11 +266,15 @@ void soundSource::setComboBoxCurrentIndex(int index)
 
 void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 {
-    stompDisplay = new customDisplay(QRect(17, 41, 120, 25), this);
-    this->stompDisplay->setSubObjectName("nameSub");
     Preferences *preferences = Preferences::Instance();
-    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
     bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    stompDisplay = new customDisplay(QRect(17*ratio, 41*ratio, 120*ratio, 25*ratio), this);
+    this->stompDisplay->setSubObjectName("nameSub");
+    //Preferences *preferences = Preferences::Instance();
+    QString setting = preferences->getPreferences("Scheme", "Colour", "select");
+    //bool ok;
     int choice = setting.toInt(&ok, 16);
     if(choice == 4) { this->stompDisplay->setAllColor(QColor(0,0,0)); } //white
     else if(choice == 3) {this->stompDisplay->setAllColor(QColor(185,224,243)); }   // green
@@ -269,17 +285,25 @@ void soundSource::setKnob1(QString hex1, QString hex2, QString hex3)
 
 void soundSource::setKnob2(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     MidiTable *midiTable = MidiTable::Instance();
     int range = midiTable->getRange("Structure", hex1, hex2, hex3);
-    knob2 = new customDial(0, 0, range, 1, 10, QPoint(213, 13), this, hex1, hex2, hex3);
+    knob2 = new customDial(0, 0, range, 1, 10, QPoint(213*ratio, 13*ratio), this, hex1, hex2, hex3);
     this->knob2->setWhatsThis(tr("hold down mouse button and drag up/down for quick adjustment")
                              + "<br>" + tr("use scroll wheel or up/down arrow keys for fine adjustment"));
 }
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3)
 {
-    button = new customButton(false, QPoint(4, 102), this, hex1, hex2, hex3);
-    led = new customLed(false, QPoint(41, 4), this);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    button = new customButton(false, QPoint(4*ratio, 102*ratio), this, hex1, hex2, hex3);
+    led = new customLed(false, QPoint(41*ratio, 4*ratio), this);
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
@@ -288,8 +312,12 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3)
 
 void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos, QString imagePath)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     button = new customButton(false, pos, this, hex1, hex2, hex3, imagePath);
-    led = new customLed(false, QPoint(38, 4), this);
+    led = new customLed(false, QPoint(38*ratio, 4*ratio), this);
 
     QObject::connect(button, SIGNAL(valueChanged(bool, QString, QString, QString)),
                      led, SLOT(changeValue(bool)));
@@ -298,8 +326,12 @@ void soundSource::setButton(QString hex1, QString hex2, QString hex3, QPoint pos
 
 void soundSource::setSwitch(QString hex1, QString hex2, QString hex3)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     switchbutton = new customSwitch(false, this, hex1, hex2, hex3);
-    switchbutton->move(QPoint(17, 16));
+    switchbutton->move(QPoint(17*ratio, 16*ratio));
     this->switchbutton->setWhatsThis(tr("press with mouse button to toggle tone switch off/on"));
 }
 

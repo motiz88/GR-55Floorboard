@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -35,7 +35,7 @@ class floorPanelBarButton : public QWidget
 public:
 	floorPanelBarButton(
 		bool collapsed = false,
-		QPoint buttonPos = QPoint(0, 0),
+        QPoint buttonPos = QPoint(0, 0),
 		QWidget *parent = 0,
 		QString imagePath = ":/images/panelbarbutton.png",
 		QSize buttonSize = QSize(17, 36),

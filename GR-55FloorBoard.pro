@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## Copyright (C) 2007~2013 Colin Willcocks.
+## Copyright (C) 2007~2015 Colin Willcocks.
 ## Copyright (C) 2005~2007 Uco Mesdag. 
 ## All rights reserved.
 ##
@@ -23,7 +23,7 @@
 #############################################################################
 
 TEMPLATE = app
-CONFIG += static
+##CONFIG += static
 CONFIG += embed_manifest_exe
 #ifdef Q_OS_MAC
 CONFIG += release
@@ -35,7 +35,7 @@ TARGET = "GR-55FloorBoard"
 DESTDIR = ./packager
 #endif
 #ifdef Q_PROCESSOR_ARM
-DESTDIR = ./
+DESTDIR = ./packager
 #endif
 
 	OBJECTS_DIR += release

@@ -1,9 +1,9 @@
 GR-55FloorBoard 
 current version:
 [PLATFORM]           [VERSION]]   [VERSION DATE]
-Windows xp~win10     20150201    (01st Feb 2015)   [GR-55FloorBoard_Setup.exe]
+Windows xp~win10     20150417    (17th Apr 2015)   [GR-55FloorBoard_Setup.exe]
 
-Mac-OsX 10.7~10.10   20150201    (01st Feb 2015)   [GR-55FloorBoard_mac-64bit] i_64bit Lion~Yosemite.
+Mac-OsX 10.7~10.10   20150417    (17th Apr 2015)   [GR-55FloorBoard_mac-64bit] i_64bit Lion~Yosemite.
 
 Mac-OsX 10.4~10.6    20120221    (21st Feb 2012)   [GR-55FloorBoard.dmg] universal 32bit Tiger~Leopard
 

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -153,7 +153,6 @@ MidiPage::MidiPage(QWidget *parent)
 
     QCheckBox *dBugCheckBox = new QCheckBox(QObject::tr("deBug Mode"));
     QSpinBox *midiTxChSpinBox = new QSpinBox;
-    QSpinBox *midiDelaySpinBox = new QSpinBox;
 
     this->dBugCheckBox = dBugCheckBox;
     if(dBugScreen=="true")
@@ -166,14 +165,6 @@ MidiPage::MidiPage(QWidget *parent)
     midiTxChSpinBox->setValue(tempDataWrite);
     midiTxChSpinBox->setRange(1, 16);
     midiTxChSpinBox->setPrefix("Channel ");
-
-    this->midiDelaySpinBox = midiDelaySpinBox;
-    const int minWait = preferences->getPreferences("Midi", "Delay", "set").toInt(&ok, 10);
-    midiDelaySpinBox->setValue(minWait);
-    midiDelaySpinBox->setRange(1, 20);
-    midiDelaySpinBox->setPrefix("= ");
-    midiDelaySpinBox->setSuffix(QObject::tr(" times/second"));
-
 
     QVBoxLayout *dBugLabelLayout = new QVBoxLayout;
     dBugLabelLayout->addWidget(dBugDescriptionLabel);
@@ -211,7 +202,7 @@ WindowPage::WindowPage(QWidget *parent)
     QString sidepanelRestore = preferences->getPreferences("Window", "Restore", "sidepanel");
     QString splashScreen = preferences->getPreferences("Window", "Splash", "bool");
     QString SingleWindow = preferences->getPreferences("Window", "Single", "bool");
-    QString WidgetsUse = preferences->getPreferences("Window", "Widgets", "bool");
+    QString WidgetsUse = preferences->getPreferences("Window", "AutoScale", "bool");
 
     QGroupBox *windowGroup = new QGroupBox(QObject::tr("Window settings"));
 
@@ -219,16 +210,27 @@ WindowPage::WindowPage(QWidget *parent)
     QCheckBox *windowCheckBox = new QCheckBox(QObject::tr("Restore window"));
     QCheckBox *sidepanelCheckBox = new QCheckBox(QObject::tr("Restore sidepanel"));
     QCheckBox *singleWindowCheckBox = new QCheckBox(QObject::tr("Single Window Layout"));
-    QCheckBox *widgetsCheckBox = new QCheckBox(QObject::tr("Graphical Assistance"));
+    QCheckBox *autoRatioCheckBox = new QCheckBox(QObject::tr("Auto Window Scaling"));
     this->windowCheckBox = windowCheckBox;
     this->sidepanelCheckBox = sidepanelCheckBox;
     this->singleWindowCheckBox = singleWindowCheckBox;
-    this->widgetsCheckBox = widgetsCheckBox;
+    this->autoRatioCheckBox = autoRatioCheckBox;
 
     if(windowRestore=="true") { windowCheckBox->setChecked(true); };
     if(sidepanelRestore=="true") { sidepanelCheckBox->setChecked(true); };
     if(SingleWindow=="true") { singleWindowCheckBox->setChecked(true); };
-    if(WidgetsUse=="true") { widgetsCheckBox->setChecked(true); };
+    if(WidgetsUse=="true") { autoRatioCheckBox->setChecked(true); };
+
+    QDoubleSpinBox *ratioSpinBox = new QDoubleSpinBox;
+    bool ok;
+    this->ratioSpinBox = ratioSpinBox;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    ratioSpinBox->setDecimals(2);
+    ratioSpinBox->setValue(ratio);
+    ratioSpinBox->setRange(0.5, 10.0);
+    ratioSpinBox->setSingleStep(0.01);
+    ratioSpinBox->setPrefix("Resizing Scale = ");
+    ratioSpinBox->setSuffix(QObject::tr(" :1"));
 
     QVBoxLayout *restoreLayout = new QVBoxLayout;
     restoreLayout->addWidget(restoreDescriptionLabel);
@@ -236,7 +238,8 @@ WindowPage::WindowPage(QWidget *parent)
     restoreLayout->addWidget(windowCheckBox);
     restoreLayout->addWidget(sidepanelCheckBox);
     restoreLayout->addWidget(singleWindowCheckBox);
-    restoreLayout->addWidget(widgetsCheckBox);
+    restoreLayout->addWidget(autoRatioCheckBox);
+    restoreLayout->addWidget(ratioSpinBox);
 
     QVBoxLayout *windowLayout = new QVBoxLayout;
     windowLayout->addLayout(restoreLayout);

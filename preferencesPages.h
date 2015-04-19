@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -49,7 +49,6 @@ public:
     QComboBox* midiOutCombo;
     QCheckBox* dBugCheckBox;
     QSpinBox* midiTxChSpinBox;
-    QSpinBox* midiDelaySpinBox;
 };
 
 class WindowPage : public QWidget
@@ -59,8 +58,9 @@ public:
     QCheckBox* windowCheckBox;
     QCheckBox* sidepanelCheckBox;
     QCheckBox* singleWindowCheckBox;
-    QCheckBox* widgetsCheckBox;
+    QCheckBox* autoRatioCheckBox;
     QCheckBox* splashCheckBox;
+    QDoubleSpinBox* ratioSpinBox;
 };
 
 class LanguagePage : public QWidget

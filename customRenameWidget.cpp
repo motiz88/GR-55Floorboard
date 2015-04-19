@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -27,11 +27,16 @@
 #include "SysxIO.h"
 #include "MidiTable.h"
 #include "globalVariables.h"
+#include "Preferences.h"
 
 customRenameWidget::customRenameWidget(QWidget *parent, QString hex1, QString hex2, QString hex3, QString area, QString length)
     : QWidget(parent)
 
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -42,13 +47,13 @@ customRenameWidget::customRenameWidget(QWidget *parent, QString hex1, QString he
     
     this->catagoryDisplay->setObjectName("catalogdisplay");
     if (this->length == "80")
-    {this->catagoryDisplay->setFixedWidth(980);}
+    {this->catagoryDisplay->setFixedWidth(980*ratio);}
     else if (this->length == "20")
-    {this->catagoryDisplay->setFixedWidth(262);}
+    {this->catagoryDisplay->setFixedWidth(262*ratio);}
     else
-    {this->catagoryDisplay->setFixedWidth(80);
+    {this->catagoryDisplay->setFixedWidth(80*ratio);
     };
-    this->catagoryDisplay->setFixedHeight(25);
+    this->catagoryDisplay->setFixedHeight(25*ratio);
     this->catagoryDisplay->setAlignment(Qt::AlignCenter);
     this->catagoryDisplay->setDisabled(true);
     if (this->area == "System"){
@@ -67,7 +72,7 @@ customRenameWidget::customRenameWidget(QWidget *parent, QString hex1, QString he
     Layout->addStretch(0);
 
     this->setLayout(Layout);
-    this->setFixedHeight(40);
+    this->setFixedHeight(40*ratio);
     
 
     if (this->area != "System")

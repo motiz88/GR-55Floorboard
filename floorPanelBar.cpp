@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -23,24 +23,33 @@
 
 #include "floorPanelBar.h"
 #include "floorPanelBarButton.h"
+#include "Preferences.h"
 
 floorPanelBar::floorPanelBar(QWidget *parent, QString imagePathPanelBar, QSize panelBarSize)
     : QWidget(parent)
 {
-	this->imagePathPanelBar = imagePathPanelBar;
-	this->image = QPixmap(imagePathPanelBar);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
-	int yPos =  panelBarSize.height()/2;
-        floorPanelBarButton *button = new floorPanelBarButton(false, QPoint(0, yPos - 35), this);
+	this->imagePathPanelBar = imagePathPanelBar;
+    this->image = QPixmap(imagePathPanelBar).scaled(17*ratio, 640*ratio);
+    panelBarSize = QSize(17*ratio, 640*ratio);
+    int yPos =  panelBarSize.height()/2;
+        floorPanelBarButton *button = new floorPanelBarButton(false, QPoint(0, yPos - (30*ratio)), this);
   button = button;
 
-	this->setFixedSize(panelBarSize);
+    this->setFixedSize(panelBarSize);
 	this->setCursor(Qt::SplitHCursor);
 }
 
 void floorPanelBar::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0, 0.0, panelBarSize.width(), panelBarSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0, 0.0, panelBarSize.width()*ratio, panelBarSize.height()*ratio);
 	QRectF source(0.0, 0.0, panelBarSize.width(), panelBarSize.height());
 
 	QPainter painter(this);
@@ -92,6 +101,6 @@ void floorPanelBar::setValue(int value)
 {
     if (value != r_value) {
         this->r_value = value;
-		emit resizeSignal((int)(value));
+        emit resizeSignal((int)(value));
     };
 }

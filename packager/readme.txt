@@ -4,7 +4,7 @@ GR-55FloorBoard Copyright (C) 2015 Colin Willcocks (gumtownbassman@yahoo.com).
 =======
 
 
-GR-55FloorBoard version 20150201: 01 Febuary 2015
+GR-55FloorBoard version 20150417: 17 April 2015
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -18,6 +18,12 @@ for inclusion in a later release.
  ********* LATEST FEATURES ADDED****************************************************
   
  Here is an update on "where it's at"...
+ 
+ ** Fixed Assign 7 Target combobox and added scaling for System/menu Fonts.
+ *** GUI window graphics fully scalable- auto/manual scaling.
+ *** Added MEMO Text editing.
+ *** Fixed single instance for Midi interface I/O.
+ **** Fixed broke Assign 6 file loading.   
  
 *** Added system override interlock on patch pedal parameters
 *** Changed dialog popup messages to self closing
@@ -115,7 +121,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 LEGAL:
 ------
 
-GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2011 Colin Willcocks <gumtownbassman@yahoo.com>.
+GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2015 Colin Willcocks <gumtownbassman@yahoo.com>.
 based on the GT8 FxFloorBoard Copyright (C)2005~2007 Uco Mesdag.
 
 Windows(TM), Windows 95(TM), Windows 98(TM), Windows ME(TM), Windows NT(TM), 

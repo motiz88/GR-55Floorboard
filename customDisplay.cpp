@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -37,23 +37,34 @@ customDisplay::customDisplay(QRect geometry, QWidget *parent)
 
 void customDisplay::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QFont Sfont( "Arial", 11*ratio, QFont::Bold);
+    this->font = Sfont;
+    this->mainLabel->setFont(Sfont);
     /* Set the default font. */
     if(this->font.family() == "void")
     {
-        this->font = this->mainLabel->font();
         this->mainPal = this->mainLabel->palette();
         this->subPal = this->subLabelLeft->palette();
     }
     else
     {
-        this->mainLabel->setFont(this->font);
+        //this->mainLabel->setFont(Sfont);
+        this->mainLabel->font();
     };
 
     while(this->mainLabel->geometry().width() < QFontMetrics(this->mainLabel->font()).width(this->mainLabel->text()))
     {
+        Preferences *preferences = Preferences::Instance();
+        bool ok;
+        const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
         /* Change the font size to make it fit... */
         QFont tmpfont = this->mainLabel->font();
-        int fontSize = tmpfont.pixelSize();
+        int fontSize = tmpfont.pixelSize()*ratio;
         if (fontSize <= 1)
         {
             break;
@@ -73,9 +84,9 @@ void customDisplay::paintEvent(QPaintEvent *)
     painter.setPen(border);
 
 
-    Preferences *preferences = Preferences::Instance();
+    //Preferences *preferences = Preferences::Instance();
     QString setting = preferences->getPreferences("Scheme", "Colour", "select");
-    bool ok;
+    //bool ok;
     int choice = setting.toInt(&ok, 16);
     if(choice == 4) { painter.setBrush(QColor(255,255,255)); } //white
     else if(choice == 3) {painter.setBrush(QColor(0,62,5)); }   // green
@@ -101,15 +112,18 @@ void customDisplay::paintEvent(QPaintEvent *)
 
 void customDisplay::setLabelPosition(bool invert)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     int height = this->geometry.height();
     int width = this->geometry.width();
 
+    int mainExtra = 3*ratio;
+    int marginWidth = 5*ratio;
+    int marginHeight = 2*ratio;
 
-    int mainExtra = 3;
-    int marginWidth = 5;
-    int marginHeight = 2;
-
-    QRect subGeometry, mainGeometry, htmlGeometry;
+    QRect subGeometry, mainGeometry;
     if(invert)
     {
         subGeometry = QRect(marginWidth, marginHeight, width - (marginWidth * 2), (height / 2) - marginHeight);
@@ -123,16 +137,22 @@ void customDisplay::setLabelPosition(bool invert)
 
     this->mainLabel = new QLabel(this);
     this->mainLabel->setObjectName("displayLarge");
+    QFont Mfont( "Arial", 10*ratio, QFont::Bold);
+    this->mainLabel->setFont(Mfont);
     this->mainLabel->setAlignment(Qt::AlignLeft);
     this->mainLabel->setGeometry(mainGeometry);
 
     this->subLabelLeft = new QLabel(this);
     this->subLabelLeft->setObjectName("displaySmall");
+    QFont SLfont( "Arial", 9*ratio, QFont::Bold);
+    this->subLabelLeft->setFont(SLfont);
     this->subLabelLeft->setAlignment(Qt::AlignLeft);
     this->subLabelLeft->setGeometry(subGeometry);
 
     this->subLabelRight = new QLabel(this);
     this->subLabelRight->setObjectName("displaySmall");
+    QFont SRfont( "Arial", 9*ratio, QFont::Bold);
+    this->subLabelRight->setFont(SRfont);
     this->subLabelRight->setAlignment(Qt::AlignRight);
     this->subLabelRight->setGeometry(subGeometry);
 }
@@ -140,6 +160,10 @@ void customDisplay::setLabelPosition(bool invert)
 
 void customDisplay::setMainText(QString mainText, Qt::Alignment alignment)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->mainLabel->setText(mainText);
     this->mainLabel->setAlignment(alignment);
     if(alignment==Qt::AlignCenter)
@@ -147,7 +171,7 @@ void customDisplay::setMainText(QString mainText, Qt::Alignment alignment)
         QFont splashFont;
         splashFont.setFamily("Arial");
         splashFont.setBold(true);
-        splashFont.setPixelSize(13);
+        splashFont.setPixelSize(13*ratio);
         splashFont.setStretch(90);
         this->mainLabel->setFont(splashFont);
     };

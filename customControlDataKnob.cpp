@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,12 +24,17 @@
 #include "customControlDataKnob.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlDataKnob::customControlDataKnob(QWidget *parent,
                                              QString hex1, QString hex2, QString hex3,
                                              QString background, QString direction, int lenght)
                                                  : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->display = new QLineEdit(this);
     this->label = new customControlLabel(this);
     this->hex1 = hex1;
@@ -62,8 +67,10 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
     this->knob = new customDataKnob(this, hex1, hex2, hex3, background, this->area);
 
     this->display->setObjectName("editdisplay");
-    this->display->setFixedWidth(lenght);
-    this->display->setFixedHeight(16);
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
+    this->display->setFont(Sfont);
+    this->display->setFixedWidth(lenght*ratio);
+    this->display->setFixedHeight(16*ratio);
     this->display->setAlignment(Qt::AlignCenter);
     this->display->setDisabled(true);
 
@@ -74,7 +81,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
     else if(direction == "right")
     {
         this->label->setAlignment(Qt::AlignLeft);
-        this->display->setFixedWidth(lenght);
+        this->display->setFixedWidth(lenght*ratio);
 
         QVBoxLayout *displayLayout = new QVBoxLayout;
         displayLayout->setMargin(0);
@@ -92,7 +99,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
 
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(this->knob->height());
+        this->setFixedHeight(this->knob->height()*ratio);
 
     }
     else if(direction == "top")
@@ -102,7 +109,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
     else if(direction == "bottom")
     {
         this->label->setAlignment(Qt::AlignCenter);
-        this->display->setFixedWidth(lenght);
+        this->display->setFixedWidth(lenght*ratio);
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->setMargin(0);
@@ -113,13 +120,13 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
         mainLayout->addStretch(0);
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(this->knob->height() + 16 + 12);
+        this->setFixedHeight((this->knob->height() + 16 + 12)*ratio);
 
     }
     else if(direction == "System")
     {
         this->label->setAlignment(Qt::AlignCenter);
-        this->display->setFixedWidth(lenght);
+        this->display->setFixedWidth(lenght*ratio);
 
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->setMargin(0);
@@ -130,7 +137,7 @@ customControlDataKnob::customControlDataKnob(QWidget *parent,
         mainLayout->addStretch(0);
 
         this->setLayout(mainLayout);
-        this->setFixedHeight(this->knob->height() + 16 + 12);
+        this->setFixedHeight((this->knob->height() + 16 + 12)*ratio);
         //this->area = "System";
     };
 

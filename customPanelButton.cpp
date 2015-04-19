@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -24,11 +24,16 @@
 #include <QtWidgets>
 #include "customPanelButton.h"
 #include "globalVariables.h"
+#include "Preferences.h"
 
 customPanelButton::customPanelButton(bool active, QPoint buttonPos, QWidget *parent, QString hex1, QString hex2, QString hex3,
                                      QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -38,18 +43,22 @@ customPanelButton::customPanelButton(bool active, QPoint buttonPos, QWidget *par
     this->buttonSize =  QSize(imageSize.width(), imageSize.height()/4);
     this->buttonPos = buttonPos;
     setOffset(0);
-    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width(), buttonSize.height());
+    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width()*ratio, buttonSize.height()*ratio);
 
     timer = new QTimer(this);
     QObject::connect(this, SIGNAL( valueChanged(bool, QString, QString, QString) ),
                      this->parent(), SLOT( valueChanged(bool, QString, QString, QString) ));
 
-};
+}
 
 customPanelButton::customPanelButton(QString text, bool active, QPoint buttonPos, QWidget *parent,
                                      QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -60,7 +69,7 @@ customPanelButton::customPanelButton(QString text, bool active, QPoint buttonPos
     this->buttonSize =  QSize(imageSize.width(), imageSize.height()/2);
     this->buttonPos = buttonPos;
     setOffset(0);
-    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width(), buttonSize.height());
+    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width()*ratio, buttonSize.height()*ratio);
 
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(blink()) );
@@ -72,7 +81,11 @@ customPanelButton::customPanelButton(QString text, bool active, QPoint buttonPos
 void customPanelButton::paintEvent(QPaintEvent *)
 {
 
-    QRectF target(0.0 , 0.0, buttonSize.width(), buttonSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, buttonSize.width()*ratio, buttonSize.height()*ratio);
     QRectF source(0.0, yOffset, buttonSize.width(), buttonSize.height());
     QPixmap image(imagePath);
 

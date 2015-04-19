@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -38,6 +38,7 @@
 #include "customMultiComboBox.h"
 #include "customSystemOverride.h"
 #include "customRenameWidget.h"
+#include "Preferences.h"
 
 editPage::editPage(QWidget *parent)
     : QWidget(parent)
@@ -384,6 +385,11 @@ void editPage::valueChanged(bool value, QString hex1, QString hex2, QString hex3
 
 void editPage::newGroupBox(QString title, Qt::Alignment alignment)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QFont Sfont( "Arial", 8*ratio, QFont::Bold);
+
     if(this->groupBoxMode)
     {
         if(this->groupBoxIndex == 0 && this->groupBoxLevel != 0)
@@ -405,8 +411,8 @@ void editPage::newGroupBox(QString title, Qt::Alignment alignment)
     this->groupBoxes.append(this->groupBox);
 
     this->groupBoxLayout = new QGridLayout;
-    this->groupBoxLayout->setMargin(5);
-    this->groupBoxLayout->setSpacing(5);
+    this->groupBoxLayout->setMargin(5*ratio);
+    this->groupBoxLayout->setSpacing(5*ratio);
     this->groupBoxLayout->setRowStretch(0, 0);
     this->groupBoxLayout->setRowStretch(1, 1);
     this->groupBoxLayout->setRowStretch(2, 2);
@@ -416,6 +422,7 @@ void editPage::newGroupBox(QString title, Qt::Alignment alignment)
 
     this->groupBox->setTitle(title);
     this->groupBox->setObjectName("groupbox");
+    this->groupBox->setFont(Sfont);
     this->groupBoxMode = true;
 }
 

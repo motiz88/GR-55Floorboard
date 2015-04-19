@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55FloorBoard".
@@ -24,12 +24,17 @@
 #include "customControlEZ_amp.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 customControlEZ_amp::customControlEZ_amp(QWidget *parent,
                                          QString hex1, QString hex2, QString hex3,
                                          QString background, QString direction, int lenght)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
         this->hex1 = hex1;
         this->hex2 = hex2;
         this->hex3 = hex3;
@@ -50,7 +55,7 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     this->label_4 = new customControlLabel(this);
     this->label_4->setAlignment(Qt::AlignCenter);
 
-    bool ok;
+    //bool ok;
     int x = hex3.toInt(&ok, 16);
     if (this->use == ("Preamp"))
     {
@@ -99,27 +104,27 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     this->v_slider = new QSlider(Qt::Vertical, this);
     this->v_slider->setMinimum(0);
     this->v_slider->setMaximum(100);
-    this->v_slider->setMinimumHeight(260);
-    this->v_slider->setMinimumWidth(30);
+    this->v_slider->setMinimumHeight(260*ratio);
+    this->v_slider->setMinimumWidth(30*ratio);
 
     this->h_slider = new QSlider(Qt::Horizontal, this);
     this->h_slider->setMinimum(0);
     this->h_slider->setMaximum(100);
-    this->h_slider->setMinimumWidth(260);
-    this->h_slider->setMinimumHeight(30);
+    this->h_slider->setMinimumWidth(260*ratio);
+    this->h_slider->setMinimumHeight(30*ratio);
 
     QHBoxLayout *h_slider_Layout = new QHBoxLayout;
     h_slider_Layout->setMargin(0);
-    h_slider_Layout->addSpacing(100);
+    h_slider_Layout->addSpacing(100*ratio);
     h_slider_Layout->addWidget(this->h_slider, 0, Qt::AlignCenter);
     h_slider_Layout->addStretch(0);
 
     this->frame = new customEZ_amp(this);
-    this->frame->setMinimumSize(QSize(300, 300));
+    this->frame->setMinimumSize(QSize(300*ratio, 300*ratio));
 
     QHBoxLayout *knobLayout = new QHBoxLayout;
     knobLayout->setMargin(0);
-    knobLayout->setSpacing(10);
+    knobLayout->setSpacing(10*ratio);
     knobLayout->addWidget(this->v_slider, 0, Qt::AlignCenter);
     knobLayout->addWidget(this->label_3, 0, Qt::AlignCenter);
     knobLayout->setMargin(0);
@@ -133,7 +138,7 @@ customControlEZ_amp::customControlEZ_amp(QWidget *parent,
     frameLayout->addWidget(this->label_2, 0, Qt::AlignCenter);
     frameLayout->addLayout(knobLayout);
     frameLayout->addWidget(this->label_1, 0, Qt::AlignCenter);
-    frameLayout->setSpacing(10);
+    frameLayout->setSpacing(10*ratio);
     frameLayout->addLayout(h_slider_Layout);
 
     this->setLayout(frameLayout);

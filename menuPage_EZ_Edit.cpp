@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
@@ -62,11 +62,12 @@ void menuPage_ez_edit::setEditPages()
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "03", "Tables");
 
-    editDetails()->page()->newGroupBox("PCM Tone");
+    /*editDetails()->page()->newGroupBox("PCM Tone");
     editDetails()->page()->addEZ_Patch(0, 0, 1, 1, "00", "00", "1B", "middle", Qt::AlignCenter);
     editDetails()->page()->addGroupBox(0, 0, 1, 1);
+
     editDetails()->page()->newGroupBox("Synth");
     editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "02", "Preamp");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
-    editDetails()->addPage("00", "00", "1A", "04", "Tables");
+    editDetails()->addPage("00", "00", "1A", "04", "Tables");*/
 }

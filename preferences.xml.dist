@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by x (x) -->
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="20150201"/>
+		<Application version="20150417"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="http:GR-55-Help-HTML/GR-55_HTML_Help.html"/>
@@ -31,11 +31,11 @@
 	<Window>
 		<Collapsed width="1235" defaultwidth="1235" bool="true"/>
 		<Position x="-8" y="14"/>
-		<Ratio size="10"/>
+		<Scale ratio="1.0"/>
 		<Restore sidepanel="true" window="true"/>
 		<Single bool="true"/>
-		<Size height="690" width="1235" minwidth="1014" minheight="548"/>
+		<Size height="690" width="1235" minwidth="1014" minheight="690"/>
 		<Splash bool="true"/>
-		<Widgets bool="true"/>
+		<AutoScale bool="true"/>
 	</Window>
 </Preferences>

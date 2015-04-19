@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## Copyright (C) 2007~2013 Colin Willcocks.
+## Copyright (C) 2007~2015 Colin Willcocks.
 ## Copyright (C) 2005~2007 Uco Mesdag. 
 ## All rights reserved.
 ##
@@ -88,6 +88,7 @@ HEADERS += ./editPage.h \
     ./menuPage_master.h \
     ./menuPage_pdl.h \
     ./menuPage_system.h \
+    ./notesDialog.h \
     ./renameDialog.h \
     ./renameWidget.h \
     ./statusBarSymbol.h \
@@ -191,6 +192,7 @@ SOURCES += ./editPage.cpp \
     ./menuPage_master.cpp \
     ./menuPage_pdl.cpp \
     ./menuPage_system.cpp \
+    ./notesDialog.cpp \
     ./renameDialog.cpp \
     ./renameWidget.cpp \
     ./RtMidi.cpp \

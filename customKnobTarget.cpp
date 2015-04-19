@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -24,6 +24,7 @@
 #include "customKnobTarget.h"
 #include "MidiTable.h"
 #include "SysxIO.h"
+#include "Preferences.h"
 
 
 customKnobTarget::customKnobTarget(QWidget *parent, 
@@ -31,6 +32,10 @@ customKnobTarget::customKnobTarget(QWidget *parent,
                                    QString hexMsb, QString hexLsb, QString background)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -45,8 +50,8 @@ customKnobTarget::customKnobTarget(QWidget *parent,
 
     MidiTable *midiTable = MidiTable::Instance();
 
-    QPoint bgPos = QPoint(0, -3); // Correction needed y-3.
-    QPoint knobPos = QPoint(5, 4); // Correction needed y+1 x-1.
+    QPoint bgPos = QPoint((5*ratio)-(6*ratio), (4*ratio)-(7*ratio)); // Correction needed y-3.
+    QPoint knobPos = QPoint(5*ratio, 4*ratio); // Correction needed y+1 x-1.
     QLabel *newBackGround = new QLabel(this);
     if (this->background == "target")
     {
@@ -59,7 +64,7 @@ customKnobTarget::customKnobTarget(QWidget *parent,
         this->rangeMin = midiTable->getRangeMinimum("Tables", "00", "00", hexLsb);
     };
 
-    newBackGround->setPixmap(QPixmap(":/images/knobbgn.png"));
+    newBackGround->setPixmap(QPixmap(":/images/knobbgn.png").scaled(49*ratio,50*ratio));
     newBackGround->move(bgPos);
 
     QString imagePath(":/images/knob.png");

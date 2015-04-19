@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -33,30 +33,30 @@ class customKnob : public QWidget
     Q_OBJECT
 
 public:
-    customKnob(QWidget *parent = 0, 
-		QString hex1 = "void",
-		QString hex2 = "void",
-		QString hex3 = "void",
-		QString background = "normal",
-    QString direction = "Structure");
-	void setValue(int value);
+    customKnob(QWidget *parent = 0,
+               QString hex1 = "void",
+               QString hex2 = "void",
+               QString hex3 = "void",
+               QString background = "normal",
+               QString direction = "Structure");
+    void setValue(int value);
 
 public slots:
-	void valueChanged(int, QString, QString, QString);
+    void valueChanged(int, QString, QString, QString);
 
 signals:
-	void updateSignal();
-	void updateDisplay(QString text);
+    void updateSignal();
+    void updateDisplay(QString text);
 
 protected:
-	void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
-	customDial* knob;
-	QString hex1;
-	QString hex2;
-	QString hex3;
-	QString area;
+    customDial* knob;
+    QString hex1;
+    QString hex2;
+    QString hex3;
+    QString area;
 };
 
 #endif // CUSTOMKNOB_H

@@ -586,7 +586,7 @@ class MidiInCore: public MidiInApi
  public:
   MidiInCore( const std::string clientName, unsigned int queueSizeLimit );
   ~MidiInCore( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::MACOSX_CORE; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::MACOSX_CORE; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -602,7 +602,7 @@ class MidiOutCore: public MidiOutApi
  public:
   MidiOutCore( const std::string clientName );
   ~MidiOutCore( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::MACOSX_CORE; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::MACOSX_CORE; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -623,7 +623,7 @@ class MidiInJack: public MidiInApi
  public:
   MidiInJack( const std::string clientName, unsigned int queueSizeLimit );
   ~MidiInJack( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::UNIX_JACK; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::UNIX_JACK; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -642,7 +642,7 @@ class MidiOutJack: public MidiOutApi
  public:
   MidiOutJack( const std::string clientName );
   ~MidiOutJack( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::UNIX_JACK; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::UNIX_JACK; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -666,7 +666,7 @@ class MidiInAlsa: public MidiInApi
  public:
   MidiInAlsa( const std::string clientName, unsigned int queueSizeLimit );
   ~MidiInAlsa( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::LINUX_ALSA; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::LINUX_ALSA; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -682,7 +682,7 @@ class MidiOutAlsa: public MidiOutApi
  public:
   MidiOutAlsa( const std::string clientName );
   ~MidiOutAlsa( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::LINUX_ALSA; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::LINUX_ALSA; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -703,7 +703,7 @@ class MidiInWinMM: public MidiInApi
  public:
   MidiInWinMM( const std::string clientName, unsigned int queueSizeLimit );
   ~MidiInWinMM( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::WINDOWS_MM; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::WINDOWS_MM; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );
@@ -719,7 +719,7 @@ class MidiOutWinMM: public MidiOutApi
  public:
   MidiOutWinMM( const std::string clientName );
   ~MidiOutWinMM( void );
-  RtMidi::Api getCurrentApi( void ) { return RtMidi::WINDOWS_MM; };
+  RtMidi::Api getCurrentApi( void ) { return RtMidi::WINDOWS_MM; }
   void openPort( unsigned int portNumber, const std::string portName );
   void openVirtualPort( const std::string portName );
   void closePort( void );

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -22,14 +22,18 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
 #include "customDial.h"
+#include "Preferences.h"
 
 customDial::customDial(double value, double min, double max, double single, double page, 
                        QPoint dialPos, QWidget *parent, QString hex1, QString hex2, QString hex3,
                        QString imagePath, unsigned int imageRange)
                            : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
@@ -45,7 +49,7 @@ customDial::customDial(double value, double min, double max, double single, doub
     this->dialPos = dialPos;
 
     setOffset(value);
-    setGeometry(dialPos.x(), dialPos.y(), dialSize.width(), dialSize.height());
+    setGeometry(dialPos.x(), dialPos.y(), dialSize.width()*ratio, dialSize.height()*ratio);
 
     QObject::connect(this, SIGNAL( valueChanged(int, QString, QString, QString) ),
                      this->parent(), SLOT( valueChanged(int, QString, QString, QString) ));
@@ -53,13 +57,17 @@ customDial::customDial(double value, double min, double max, double single, doub
 
 void customDial::paintEvent(QPaintEvent *)
 {
-    QRectF target(0.0 , 0.0, dialSize.width(), dialSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, dialSize.width()*ratio, dialSize.height()*ratio);
     QRectF source(xOffset, 0.0, dialSize.width(), dialSize.height());
     QPixmap image(imagePath);
     //image.setMask(image.mask());
 
     QPainter painter(this);
-    //painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawPixmap(target, image, source);
 }
 

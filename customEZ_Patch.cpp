@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
@@ -23,17 +23,22 @@
 
 #include <QtWidgets>
 #include "customEZ_Patch.h"
+#include "Preferences.h"
 
 customEZ_Patch::customEZ_Patch(bool active, QWidget *parent, QString hex1, QString hex2, QString hex3,
                                QString imagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     this->hex1 = hex1;
     this->hex2 = hex2;
     this->hex3 = hex3;
     this->active = active;
     this->imagePath = imagePath;
-    QSize imageSize = QPixmap(imagePath).size();
+    QSize imageSize = QPixmap(imagePath).size()*ratio;
     this->switchSize = QSize(imageSize.width()/4, imageSize.height()/15);
     this->imageRange = 1;
     this->switchPos = switchPos;
@@ -47,7 +52,11 @@ customEZ_Patch::customEZ_Patch(bool active, QWidget *parent, QString hex1, QStri
 
 void customEZ_Patch::paintEvent(QPaintEvent *)
 {
-    QRectF target(0.0 , 0.0, switchSize.width(), switchSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QRectF target(0.0 , 0.0, switchSize.width()*ratio, switchSize.height()*ratio);
     QRectF source(xOffset, yOffset, switchSize.width(), switchSize.height());
     QPixmap image(imagePath);
 
@@ -57,13 +66,19 @@ void customEZ_Patch::paintEvent(QPaintEvent *)
 
 void customEZ_Patch::setOffset(signed int imageNr)
 {
-    this->yOffset = imageNr*switchSize.height();
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    this->yOffset = imageNr*switchSize.height()/ratio;
     this->update();
 }
 
 void customEZ_Patch::setxOffset(signed int imageNr)
 {
-    this->xOffset = imageNr*switchSize.width();
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    this->xOffset = imageNr*switchSize.width()/ratio;
     this->update();
 }
 

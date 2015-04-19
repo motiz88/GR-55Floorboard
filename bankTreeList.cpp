@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -37,11 +37,16 @@
 bankTreeList::bankTreeList(QWidget *parent)
     : QWidget(parent)
 {
-    QFont font;
-    font.setStretch(85);
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
+    QFont font( "Arial", 9*ratio, QFont::Bold);
+    font.setStretch(90);
     this->treeList = newTreeList();
     this->treeList->setObjectName("banklist");
+    this->treeList->setFont(font);
+
     QObject::connect(treeList, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(setOpenItems(QTreeWidgetItem*)));
 
     QObject::connect(treeList, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(setClosedItems(QTreeWidgetItem*)));
@@ -54,6 +59,8 @@ bankTreeList::bankTreeList(QWidget *parent)
 
     this->treeListBass = newTreeList_Bass();
     this->treeListBass->setObjectName("banklist");
+    this->treeListBass->setFont(font);
+
     QObject::connect(treeListBass, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(setOpenItems(QTreeWidgetItem*)));
 
     QObject::connect(treeListBass, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(setClosedItems(QTreeWidgetItem*)));
@@ -317,6 +324,13 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
 
 QTreeWidget* bankTreeList::newTreeList()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QFont Tfont( "Arial", 11*ratio, QFont::Bold);
+    QFont Lfont( "Arial", 9*ratio, QFont::Bold);
+
     QTreeWidget *newTreeList = new QTreeWidget();
     newTreeList->setColumnCount(1);
     newTreeList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -327,29 +341,34 @@ QTreeWidget* bankTreeList::newTreeList()
     newTreeList->setHeaderLabels(headers);
 
     QTreeWidgetItem *temp = new QTreeWidgetItem(newTreeList);
-    temp->setText(0, "Temp");
+    temp->setFont(0, Tfont);
+    temp->setText(0, "Temp (current patch)");
     temp->setWhatsThis(0, tr("Temporary Buffer.<br>a single mouse click will set the Write/Sync button to send to the buffer only,<br>a double click will load the current GR-55 patch data."));
 
     QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList);
     user->setText(0, "User");
+    user->setFont(0, Tfont);
     user->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Banks."));
 
     QList<QTreeWidgetItem *> userBankRanges;
     for (int a=1; a<=bankTotalUser; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank U").append(QString::number(a, 10)).append("-U").append(QString::number(a+8, 10)) );
         bankRange->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+8); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b, 10)));
             bank->setWhatsThis(0, tr("User Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
                 patch->setWhatsThis(0, tr("User Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             };
@@ -370,6 +389,7 @@ QTreeWidget* bankTreeList::newTreeList()
         list.append(item);
        };
     QTreeWidgetItem *lead = new QTreeWidgetItem(newTreeList);
+    lead->setFont(0, Tfont);
     lead->setText(0, "Lead");
     lead->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
 
@@ -377,18 +397,21 @@ QTreeWidget* bankTreeList::newTreeList()
     for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+9); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
                 ++x;
@@ -408,24 +431,28 @@ QTreeWidget* bankTreeList::newTreeList()
        };
     x=0;
     QTreeWidgetItem *rhythm = new QTreeWidgetItem(newTreeList);
+    rhythm->setFont(0, Tfont);
     rhythm->setText(0, "Rhythm");
     rhythm->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
     QList<QTreeWidgetItem *> rhythmBankRanges;
     for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+9); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
                 ++x;
@@ -445,24 +472,28 @@ QTreeWidget* bankTreeList::newTreeList()
        };
     x=0;
     QTreeWidgetItem *other = new QTreeWidgetItem(newTreeList);
+    other->setFont(0, Tfont);
     other->setText(0, "Other");
     other->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
     QList<QTreeWidgetItem *> otherBankRanges;
     for (int a=(bankTotalUser+1); a<=bankTotalUser+40; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-90, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+9); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
                 ++x;
@@ -482,6 +513,13 @@ QTreeWidget* bankTreeList::newTreeList()
 
 QTreeWidget* bankTreeList::newTreeList_Bass()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
+    QFont Tfont( "Arial", 11*ratio, QFont::Bold);
+    QFont Lfont( "Arial", 9*ratio, QFont::Bold);
+
     QTreeWidget *newTreeList_Bass = new QTreeWidget();
     newTreeList_Bass->setColumnCount(1);
     newTreeList_Bass->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -492,10 +530,12 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     newTreeList_Bass->setHeaderLabels(headers);
 
     QTreeWidgetItem *temp = new QTreeWidgetItem(newTreeList_Bass);
-    temp->setText(0, "Temp");
+    temp->setFont(0, Tfont);
+    temp->setText(0, "Temp (current patch)");
     temp->setWhatsThis(0, tr("Temporary Buffer.<br>a single mouse click will set the Write/Sync button to send to the buffer only,<br>a double click will load the current GR-55 patch data."));
 
     QTreeWidgetItem *user = new QTreeWidgetItem(newTreeList_Bass);
+    user->setFont(0, Tfont);
     user->setText(0, "User");
     user->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Banks."));
 
@@ -503,18 +543,21 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     for (int a=1; a<=bankTotalUser; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank U").append(QString::number(a, 10)).append("-U").append(QString::number(a+8, 10)) );
         bankRange->setWhatsThis(0, tr("User Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+8); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b, 10)));
             bank->setWhatsThis(0, tr("User Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString("Patch ").append(QString::number(c, 10)));
                 patch->setWhatsThis(0, tr("User Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             };
@@ -535,6 +578,7 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
         list.append(item);
        };
     QTreeWidgetItem *lead = new QTreeWidgetItem(newTreeList_Bass);
+    lead->setFont(0, Tfont);
     lead->setText(0, "Lead");
     lead->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
 
@@ -542,18 +586,21 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
     for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+5); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             ++x;
@@ -573,24 +620,28 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
        };
     x=0;
     QTreeWidgetItem *rhythm = new QTreeWidgetItem(newTreeList_Bass);
+    rhythm->setFont(0, Tfont);
     rhythm->setText(0, "Rhythm");
     rhythm->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
     QList<QTreeWidgetItem *> rhythmBankRanges;
     for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+5); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
             ++x;
@@ -611,24 +662,28 @@ QTreeWidget* bankTreeList::newTreeList_Bass()
        };
     x=0;
     QTreeWidgetItem *other = new QTreeWidgetItem(newTreeList_Bass);
+    other->setFont(0, Tfont);
     other->setText(0, "Other");
     other->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Banks."));
     QList<QTreeWidgetItem *> otherBankRanges;
     for (int a=(bankTotalUser+1); a<=bankTotalUser+12; a++)
     {
         QTreeWidgetItem* bankRange = new QTreeWidgetItem; // don't pass a parent here!
+        bankRange->setFont(0, Lfont);
         bankRange->setText(0, QString("Bank P").append(QString::number(a-99, 10)).append("-P").append(QString::number(a-94, 10)) );
         bankRange->setWhatsThis(0, tr("Preset Banks.<br>expand the Bank to view a section of Patch Banks"));
 
         for (int b=a; b<=(a+5); b++)
         {
             QTreeWidgetItem* bank = new QTreeWidgetItem(bankRange);
+            bank->setFont(0, Lfont);
             bank->setText(0, QString("Bank ").append(QString::number(b-99, 10)));
             bank->setWhatsThis(0, tr("Preset Bank.<br>expand the Bank to view the Patches"));
 
             for (int c=1; c<=3; c++)
             {
                 QTreeWidgetItem* patch = new QTreeWidgetItem(bank);
+                patch->setFont(0, Lfont);
                 patch->setText(0, QString(list.at(x)));
                 patch->setWhatsThis(0, tr("Preset Patches.<br>a single mouse click will only change patch<br>a double mouse click will load the select patch from the GR-55."));
                 ++x;
@@ -654,7 +709,7 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
     int bank = 0;
     int patch = 0;
     SysxIO *sysxIO = SysxIO::Instance();
-    if(item->childCount() != 0 && item->text(0) != "Temp")
+    if(item->childCount() != 0 && !item->text(0).contains("Temp"))
     {
         if(item->isExpanded())
         {
@@ -667,7 +722,7 @@ void bankTreeList::setItemClicked(QTreeWidgetItem *item, int column)
     }
     else if (item->childCount() == 0 && sysxIO->isConnected() && sysxIO->deviceReady())
     {
-        if (item->text(0) != ("Temp"))
+        if (!item->text(0).contains("Temp"))
         {
             bool ok;
             bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10);
@@ -708,7 +763,7 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
 
         sysxIO->setDeviceReady(false);
         sysxIO->setRequestName(item->text(0));	// Set the name of the patch we are going to load, so we can check if we have loaded the correct patch at the end.
-        if (item->text(0) != "Temp")
+        if (!item->text(0).contains("Temp"))
         {
             bool ok;
             bank = item->parent()->text(0).section(" ", 1, 1).trimmed().toInt(&ok, 10); // Get the bank
@@ -730,7 +785,7 @@ void bankTreeList::setItemDoubleClicked(QTreeWidgetItem *item, int column)
             requestPatch(bank, patch);
 
         }
-        else if(item->text(0) == "Temp")
+        else if(item->text(0).contains("Temp"))
         {
             requestPatch();
         }

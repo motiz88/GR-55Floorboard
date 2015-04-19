@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -22,14 +22,18 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
 #include "customSlider.h"
+#include "Preferences.h"
 
 customSlider::customSlider(double value, double min, double max, double single, double page, 
 						QPoint sliderPos, QWidget *parent, QString hex1, QString hex2, QString hex3, 
 						QString slideImagePath, QString sliderButtonImagePath)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	this->hex1 = hex1;
 	this->hex2 = hex2;
 	this->hex3 = hex3;	
@@ -40,12 +44,12 @@ customSlider::customSlider(double value, double min, double max, double single, 
 	this->page = page;
 	this->slideImagePath = slideImagePath;
 	this->sliderButtonImagePath = sliderButtonImagePath;
-	this->slideSize = QPixmap(slideImagePath).size();
-	this->sliderButtonSize = QPixmap(sliderButtonImagePath).size();
+    this->slideSize = QPixmap(slideImagePath).size()*ratio;
+    this->sliderButtonSize = QPixmap(sliderButtonImagePath).size()*ratio;
 	this->sliderPos = sliderPos;
 
 	setOffset(value);
-    setGeometry(sliderPos.x(), sliderPos.y(), slideSize.width(), slideSize.height());
+    setGeometry(sliderPos.x(), sliderPos.y(), slideSize.width()*ratio, slideSize.height()*ratio);
 
 	QObject::connect(this, SIGNAL( valueChanged(int, QString, QString, QString) ),
                 this->parent(), SLOT( valueChanged(int, QString, QString, QString) ));
@@ -53,12 +57,16 @@ customSlider::customSlider(double value, double min, double max, double single, 
 
 void customSlider::paintEvent(QPaintEvent *)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
 	QPixmap slide(slideImagePath);
 	QPixmap sliderButton(sliderButtonImagePath);
 
-	QRectF target(0.0 , yOffset, sliderButtonSize.width(), sliderButtonSize.height());
+    QRectF target(0.0 , yOffset*ratio, sliderButtonSize.width()*ratio, sliderButtonSize.height()*ratio);
 	QRectF source(0.0 , 0.0, sliderButtonSize.width(), sliderButtonSize.height());
-	QRectF screen(0.0 , 0.0, slideSize.width(), slideSize.height());
+    QRectF screen(0.0 , 0.0, slideSize.width(), slideSize.height());
 
 	QPixmap buffer = slide;
 	QPainter painterBuffer(&buffer);

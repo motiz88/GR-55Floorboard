@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -23,6 +23,7 @@
 
 #include "customComboBox.h"
 #include <QScrollBar>
+#include "Preferences.h"
  
 customComboBox::customComboBox(QWidget *parent)	: QComboBox(parent)
  {
@@ -31,6 +32,10 @@ customComboBox::customComboBox(QWidget *parent)	: QComboBox(parent)
 
 void customComboBox::showPopup()
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok)*40;
+
 	QString longestItem = "";
  	for(int i=0;i<this->count();i++)
  	{
@@ -43,16 +48,16 @@ void customComboBox::showPopup()
  	if( this->view()->verticalScrollBar()->isVisible() )
  	{
  		this->setMaxVisibleItems(this->maxVisibleItems() - 1);
-                popupWidth = popupWidth + 40;
+                popupWidth = popupWidth + ratio;
  	};
 
  	if( this->view()->verticalScrollBar()->isVisibleTo(this) )
  	{
  		this->setMaxVisibleItems(this->maxVisibleItems() - 1);
-                popupWidth = popupWidth + 40;
+                popupWidth = popupWidth + ratio;
  	};
                                                                         
-   if(popupWidth < 40) { popupWidth = 40; };
+   if(popupWidth < ratio) { popupWidth = ratio; };
  	this->view()->setMinimumWidth(popupWidth);
   QComboBox::showPopup();
 }

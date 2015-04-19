@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -102,6 +102,10 @@ public:
     QString temp5_sysxMsg;
     QString bulk;
     QList<QString> sendSpooler;
+    QByteArray memo1Array;
+    QByteArray memo2Array;
+    QByteArray memo3Array;
+    QByteArray memo4Array;
     //QList<QString> getMPTitems(QString hex1, QString hex2, QString hex3);
     //void MPTDataRequest(QString hex1, QString hex2, QString hex3);
 

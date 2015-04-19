@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2013 Colin Willcocks.
+** Copyright (C) 2007~2015 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -22,18 +22,22 @@
 ****************************************************************************/
 
 #include "floorPanelBarButton.h"
+#include "Preferences.h"
 
 floorPanelBarButton::floorPanelBarButton(bool collapsed, QPoint buttonPos, QWidget *parent,
 						   QString imagePath, QSize buttonSize, unsigned int imageRange)
     : QWidget(parent)
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 	this->collapsed = collapsed;
 	this->imagePath = imagePath;
 	this->buttonSize = buttonSize;
 	this->imageRange = imageRange;
 	this->buttonPos = buttonPos;
 	setOffset(0);
-    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width(), buttonSize.height());
+    setGeometry(buttonPos.x(), buttonPos.y(), buttonSize.width()*ratio, buttonSize.height()*ratio);
 
 	QObject::connect(this, SIGNAL( collapseSignal() ),
                 this->parent(), SIGNAL( collapseSignal() ) );
@@ -46,7 +50,10 @@ floorPanelBarButton::floorPanelBarButton(bool collapsed, QPoint buttonPos, QWidg
 
 void floorPanelBarButton::paintEvent(QPaintEvent *)
 {
-	QRectF target(0.0 , 0.0, buttonSize.width(), buttonSize.height());
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+    QRectF target(0.0 , 0.0, buttonSize.width()*ratio, buttonSize.height()*ratio);
 	QRectF source(xOffset, 0.0, buttonSize.width(), buttonSize.height());
 	QPixmap image(imagePath);
 
