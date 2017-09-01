@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -36,32 +36,19 @@ bool midiIO::dataReceive = false;
 QString midiIO::sysxBuffer;
 QString midiIO::msgType = "name";
 const std::string clientName = "FloorBoard";
-RtMidiOut *midiout;
-RtMidiIn *midiin;
+//RtMidiOut *midiout;
+//RtMidiIn *midiin;
 
 midiIO* midiIO::_instance = 0;// initialize pointer
 midiIODestroyer midiIO::_destroyer;
 
 midiIO::midiIO()
 {
-    if (!midiin){
-#ifdef Q_OS_WIN
-        midiout = new RtMidiOut();
-        midiin = new RtMidiIn();
-#endif
-#ifdef Q_OS_MAC
-        midiout = new RtMidiOut();
-        midiin = new RtMidiIn();
-#endif
-#if defined(Q_OS_LINUX) && !defined(Q_PROCESSOR_ARM)
-        midiout = new RtMidiOut();
-        midiin = new RtMidiIn();
-#endif
-#ifdef Q_PROCESSOR_ARM
-        midiout = new RtMidiOut();
-        midiin = new RtMidiIn();
-#endif
-    };
+   // if (!midiin)
+    //{
+        //midiout = new RtMidiOut();
+        //midiin = new RtMidiIn();
+   // };
     this->midi = false; // Set this to false until required;
     /* Connect signals */
     SysxIO *sysxIO = SysxIO::Instance();
@@ -92,15 +79,22 @@ midiIO* midiIO::Instance()
  *************************************************************************/
 void midiIO::queryMidiOutDevices()
 {
+    RtMidiOut *midiout = new RtMidiOut();
     std::string portName;
     unsigned int outPorts;
     try
     {
+        //midiout = new RtMidiOut();
         outPorts = midiout->getPortCount();      /* Check outputs. */
         for ( unsigned int i=0; i<outPorts; i++ )
         {
             portName = midiout->getPortName(i);
-            this->midiOutDevices.append(QString::fromStdString(portName));
+            QString name = QString::fromStdString(portName);
+            if(name.contains("GR-55")) { name.remove(0, name.indexOf("GR-55")); };
+#if !defined(Q_OS_WIN)
+            name.chop(2);
+#endif
+            this->midiOutDevices.append(name);
         };
     }
     catch (RtMidiError &error)
@@ -114,6 +108,7 @@ void midiIO::queryMidiOutDevices()
     /* Clean up */
 cleanup:
     outPorts = outPorts;
+    delete midiout;
 }
 
 QList<QString> midiIO::getMidiOutDevices()
@@ -128,15 +123,22 @@ QList<QString> midiIO::getMidiOutDevices()
  *************************************************************************/
 void midiIO::queryMidiInDevices()
 {
+    RtMidiIn *midiin = new RtMidiIn();
     std::string portName;
     unsigned int inPorts;
     try
     {
+        //midiin = new RtMidiIn();
         inPorts = midiin->getPortCount();      /* Check inputs. */
         for ( unsigned int i=0; i<inPorts; i++ )
         {
             portName = midiin->getPortName(i);
-            this->midiInDevices.append(QString::fromStdString(portName));
+            QString name = QString::fromStdString(portName);
+            if(name.contains("GR-55")) { name.remove(0, name.indexOf("GR-55")); };
+#if !defined(Q_OS_LINUX)     
+            name.chop(2);
+#endif 
+            this->midiInDevices.append(name);
         };
     }
     catch (RtMidiError &error)
@@ -151,6 +153,7 @@ void midiIO::queryMidiInDevices()
     // Clean up
 cleanup:
     inPorts = inPorts;
+    delete midiin;
 }
 
 QList<QString> midiIO::getMidiInDevices()
@@ -166,6 +169,7 @@ QList<QString> midiIO::getMidiInDevices()
  *************************************************************************/
 void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
 {
+    RtMidiOut *midiout = new RtMidiOut();
     QString hex;
     int wait = 0;
     int close = 20;
@@ -181,7 +185,8 @@ void midiIO::sendSyxMsg(QString sysxOutMsg, int midiOutPort)
     if ( nPorts < 1 ) { goto cleanup; };
 RETRY:
     try {
-        if(!midiout->isPortOpen()) { midiout->openPort(midiOutPort, clientName); };	// Open selected port.
+        //midiout = new RtMidiOut();
+        midiout->openPort(midiOutPort); 	// Open selected port.
         for(int i=0;i<msgLength*2;++i)
         {
             unsigned int n;
@@ -194,8 +199,13 @@ RETRY:
             p=p+s;
             emit setStatusProgress(wait);
             ptr++; i++;
+            if(hex=="F7")
+                {
+                  midiout->sendMessage(&message);
+                  message.clear();
+                  msleep(5);
+                };
         };
-        midiout->sendMessage(&message);
         goto cleanup;
     }
     catch (RtMidiError &error)
@@ -211,15 +221,18 @@ RETRY:
 cleanup:
     if(midiout->isPortOpen()){ midiout->closePort(); };
     msleep(close);						// wait as long as the message is sending.
+    delete midiout;
 }
 
 /*********** send midi messages *******************************/
 void midiIO::sendMidiMsg(QString sysxOutMsg, int midiOutPort)
 {
+    RtMidiOut *midiout = new RtMidiOut();
     unsigned int nPorts = midiout->getPortCount();   // Check available ports.
     if ( nPorts < 1 ){ goto cleanup; }
     try {
-        if(!midiout->isPortOpen()) { midiout->openPort(midiOutPort, clientName); };	// Open selected port.
+        //midiout = new RtMidiOut();
+        midiout->openPort(midiOutPort); 	// Open selected port.
         std::vector<unsigned char> message;
         int msgLength = sysxOutMsg.length()/2;
         char *ptr  = new char[msgLength];		// Convert QString to char* (hex value)
@@ -245,6 +258,7 @@ void midiIO::sendMidiMsg(QString sysxOutMsg, int midiOutPort)
     /* Clean up*/
 cleanup:
     if(midiout->isPortOpen()){ midiout->closePort(); };
+    delete midiout;
 }
 
 /*********************** receiveMsg() **********************************
@@ -275,6 +289,8 @@ void midiIO::callbackMsg(QString rxData)
 
 void midiIO::receiveMsg(int midiInPort)
 {
+    RtMidiIn *midiin = new RtMidiIn();
+   // dataReceive = false;
     int retry_count = 10;
  REC_RETRY:
     count = 0;
@@ -296,9 +312,12 @@ void midiIO::receiveMsg(int midiInPort)
     unsigned int nPorts = midiin->getPortCount();	   // check we have a midiIn port
     if ( nPorts < 1 ) { goto cleanup; };
     try {
+         // midiin = new RtMidiIn();
         midiin->ignoreTypes(false, true, true);  //don,t ignore sysex messages, but ignore other crap like active-sensing
         if(!midiin->isPortOpen())
-        { midiin->openPort(midiInPort, clientName);             // open the midi in port
+        {
+
+            midiin->openPort(midiInPort);             // open the midi in port
             midiin->setCallback(&midicallback);    // set the callback
             sendSyxMsg(sysxOutMsg, midiOutPort);      // send the data request message out
             int x = 0;
@@ -325,12 +344,23 @@ void midiIO::receiveMsg(int midiInPort)
     /*Clean up */
 cleanup:
     emit setStatusProgress(100);
-    if(midiin->isPortOpen())
-    {  midiin->cancelCallback();
-        this->sysxInMsg = this->sysxBuffer;		   //get the returning data string
-        dataReceive = true;
-        midiin->closePort();            // close the midi in port
-    } else {dataReceive = false; };
+    if(midiin->isPortOpen() /*|| midiInCheck==midiInPort*/)
+    {
+        try{
+                this->sysxInMsg = this->sysxBuffer;		   //get the returning data string
+                dataReceive = true;
+                midiin->cancelCallback();
+                midiin->closePort();
+            }
+        catch (RtMidiError &error)
+            {
+                emit errorSignal(tr("Midi Input Error"), tr("callback cancel"));
+                emit setStatusdBugMessage(QString::fromStdString( error.getMessage()));
+            };
+        delete midiin;
+    };             // close the midi in port
+    //msleep(25);
+
 }
 
 /**************************** run() **************************************

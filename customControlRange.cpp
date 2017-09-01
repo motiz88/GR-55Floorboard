@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -34,7 +34,7 @@ customControlRange::customControlRange(QWidget *parent,
     Preferences *preferences = Preferences::Instance();
     bool ok;
     const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
-    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
 
     this->displayMin = new QLineEdit(this);
     this->labelMin = new customControlLabel(this);
@@ -63,7 +63,7 @@ customControlRange::customControlRange(QWidget *parent,
     this->displayMin->setObjectName("editdisplay");
     this->displayMin->setFont(Sfont);
     this->displayMin->setFixedWidth(45*ratio);
-    this->displayMin->setFixedHeight(13*ratio);
+    this->displayMin->setFixedHeight(15*ratio);
     this->displayMin->setAlignment(Qt::AlignCenter);
     this->displayMin->setDisabled(true);
 
@@ -74,7 +74,7 @@ customControlRange::customControlRange(QWidget *parent,
     this->displayMax->setObjectName("editdisplay");
     this->displayMax->setFont(Sfont);
     this->displayMax->setFixedWidth(45*ratio);
-    this->displayMax->setFixedHeight(13*ratio);
+    this->displayMax->setFixedHeight(15*ratio);
     this->displayMax->setAlignment(Qt::AlignCenter);
     this->displayMax->setDisabled(true);
 

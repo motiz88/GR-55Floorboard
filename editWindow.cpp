@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -36,7 +36,6 @@ editWindow::editWindow(QWidget *parent)
     const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    //Preferences *preferences = Preferences::Instance();
     if(preferences->getPreferences("Window", "Single", "bool")=="true")
     {
         QString setting = preferences->getPreferences("Scheme", "Colour", "select");

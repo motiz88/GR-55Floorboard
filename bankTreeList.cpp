@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -508,6 +508,7 @@ QTreeWidget* bankTreeList::newTreeList()
     newTreeList->setExpanded(newTreeList->model()->index(2, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(3, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(4, 0), true);
+    //newTreeList->expandAll();
     return newTreeList;
 }
 

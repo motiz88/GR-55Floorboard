@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
 **

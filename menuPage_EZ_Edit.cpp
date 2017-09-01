@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GT-100 Fx FloorBoard".
@@ -52,14 +52,30 @@ void menuPage_ez_edit::setEditPages()
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "01", "Tables");
 
+    editDetails()->page()->newGroupBox("Distortion Select");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "07", "00", "15", "middle", Qt::AlignCenter);
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "07", "00", "18");
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
     editDetails()->page()->newGroupBox("OD/DS Customiser");
     editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "18", "Distortion");
     editDetails()->page()->addGroupBox(0, 1, 1, 1);
     editDetails()->addPage("00", "00", "1A", "02", "Tables");
 
+    editDetails()->page()->newGroupBox(tr("Chorus Select"));
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "00", "middle", Qt::AlignCenter); //sw
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "06", "00", "01");                          //type
+    editDetails()->page()->addGroupBox(0, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Reverb Select");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "0C", "middle", Qt::AlignCenter); //sw
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "06", "00", "0D");   //type
+    editDetails()->page()->addGroupBox(1, 0, 1, 1);
+    editDetails()->page()->newGroupBox("Delay Select");
+    editDetails()->page()->addSwitch(0, 0, 1, 1, "06", "00", "05", "middle", Qt::AlignCenter); //sw
+    editDetails()->page()->addComboBox(1, 0, 1, 1, "06", "00", "06"); //type
+    editDetails()->page()->addGroupBox(2, 0, 1, 1);
     editDetails()->page()->newGroupBox("Ambience");
-    editDetails()->page()->addEZ_amp(1, 0, 1, 1, "07", "00", "11", "Ambience");
-    editDetails()->page()->addGroupBox(0, 1, 1, 1);
+    editDetails()->page()->addEZ_amp(0, 0, 1, 1, "07", "00", "11", "Ambience");
+    editDetails()->page()->addGroupBox(0, 1, 3, 1);
     editDetails()->addPage("00", "00", "1A", "03", "Tables");
 
     /*editDetails()->page()->newGroupBox("PCM Tone");

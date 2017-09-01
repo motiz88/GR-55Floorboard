@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -34,7 +34,7 @@ customControlTarget::customControlTarget(QWidget *parent,
     Preferences *preferences = Preferences::Instance();
     bool ok;
     const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
-    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
 
     this->displayMin = new QLineEdit(this);
     this->displayMax = new QLineEdit(this);
@@ -154,9 +154,9 @@ customControlTarget::customControlTarget(QWidget *parent,
     mainLayout->addStretch(0);
 
     this->setLayout(mainLayout);
-    this->setFixedHeight((this->knobTarget->height() + 13 + 12)*ratio);
-    this->setFixedHeight((this->knobMin->height() + 13 + 12)*ratio);
-    this->setFixedHeight((this->knobMax->height() + 13 + 12)*ratio);
+    this->setFixedHeight((this->knobTarget->height() + 15 + 12)*ratio);
+    this->setFixedHeight((this->knobMin->height() + 15 + 12)*ratio);
+    this->setFixedHeight((this->knobMax->height() + 15 + 12)*ratio);
 
     QObject::connect(this->parent(), SIGNAL( dialogUpdateSignal() ),
                      this, SLOT( dialogUpdateSignal() ));

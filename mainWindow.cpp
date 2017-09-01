@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -328,6 +328,13 @@ void mainWindow::createMenus()
     settingsMenu = menuBar()->addMenu(tr("&Settings"));
     settingsMenu->addAction(settingsAct);
 
+    modeMenu = menuBar()->addMenu(tr("&Mode"));
+    modeMenu->addAction(guitarModeAct);
+    modeMenu->addAction(bassModeAct);
+
+    notesMenu = menuBar()->addMenu(tr("&Notes"));
+    notesMenu->addAction(notesAct);
+
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(helpAct);
     helpMenu->addAction(whatsThisAct);
@@ -340,13 +347,6 @@ void mainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
-
-    modeMenu = menuBar()->addMenu(tr("&Mode"));
-    modeMenu->addAction(guitarModeAct);
-    modeMenu->addAction(bassModeAct);
-
-    notesMenu = menuBar()->addMenu(tr("&Notes"));
-    notesMenu->addAction(notesAct);
 }
 
 void mainWindow::createStatusBar()
@@ -752,6 +752,7 @@ void mainWindow::settings()
         QString scaleRatio =QString::number(dialog->windowSettings->ratioSpinBox->value());
         QString splash = (dialog->windowSettings->splashCheckBox->checkState())?QString("true"):QString("false");
         QString dBug = (dialog->midiSettings->dBugCheckBox->checkState())?QString("true"):QString("false");
+        QString auto_device = (dialog->midiSettings->autoCheckBox->checkState())?QString("true"):QString("false");
         QString midiIn = QString::number(dialog->midiSettings->midiInCombo->currentIndex() - 1, 10); // -1 because there is a default entry at index 0
         QString midiOut = QString::number(dialog->midiSettings->midiOutCombo->currentIndex() - 1, 10);
         QString midiTxChSet =QString::number(dialog->midiSettings->midiTxChSpinBox->value());
@@ -785,6 +786,7 @@ void mainWindow::settings()
         preferences->setPreferences("Midi", "MidiIn", "device", midiIn);
         preferences->setPreferences("Midi", "MidiOut", "device", midiOut);
         preferences->setPreferences("Midi", "DBug", "bool", dBug);
+        preferences->setPreferences("Midi", "Device", "bool", auto_device);
         preferences->setPreferences("Midi", "TxCh", "set", midiTxChSet);
         //preferences->setPreferences("Midi", "Delay", "set", receiveTimeout);
         preferences->setPreferences("Window", "AutoScale", "bool", autoScale);

@@ -1,10 +1,10 @@
 
-GR-55FloorBoard Copyright (C) 2015 Colin Willcocks (gumtownbassman@yahoo.com).
+GR-55FloorBoard Copyright (C) 2017 Colin Willcocks (gumtownbassman@yahoo.com).
  All rights reserved.
 =======
 
 
-GR-55FloorBoard version 20150417: 17 April 2015
+GR-55FloorBoard version 20170409: 09 April 2017
 *****************************************************
 IF YOU DO APPRECIATE THIS SOFTWARE, PLEASE FEEL FREE TO DONATE, 
 YOU MAY FREELY USE THIS SOFTWARE, 
@@ -121,10 +121,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 LEGAL:
 ------
 
-GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2015 Colin Willcocks <gumtownbassman@yahoo.com>.
+GT10-FxFloorBoard/GR-55FloorBoard/ME-Edit Copyright (C)2007~2017 Colin Willcocks <gumtownbassman@yahoo.com>.
 based on the GT8 FxFloorBoard Copyright (C)2005~2007 Uco Mesdag.
 
-Windows(TM), Windows 95(TM), Windows 98(TM), Windows ME(TM), Windows NT(TM), 
-Windows 2000(TM), Windows XP(TM), Windows Vista(TM) and Windows 7(TM) are Copyright (C)Microsoft Corporation. 
+Windows(TM) are Copyright (C)Microsoft Corporation. 
 All rights reserved.
 

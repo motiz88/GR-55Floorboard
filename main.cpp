@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -31,9 +31,12 @@
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("2"));
     QApplication app(argc, argv);
     app.setOrganizationName("Gumtown");
     app.setApplicationName("GR-55FloorBoard");
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps, false);
+
 
 #ifdef Q_OS_MAC
     QDir().setCurrent(QCoreApplication::applicationDirPath());
@@ -139,9 +142,12 @@ int main(int argc, char *argv[])
 
     splash->showStatusMessage(QObject::tr("Initializing main window..."));
     splash->progressBar->setValue(60);
-   // window.setWindowFlags( Qt::WindowTitleHint
-     //                      | Qt::WindowMinimizeButtonHint
-     //                      | Qt::MSWindowsFixedSizeDialogHint );
+    window.setWindowFlags(
+                            Qt::WindowTitleHint
+                            | Qt::WindowMinimizeButtonHint
+                            | Qt::WindowCloseButtonHint
+                            //| Qt::MSWindowsFixedSizeDialogHint
+                );
     window.setWindowIcon(QIcon(":/images/windowicon.png"));
 
 

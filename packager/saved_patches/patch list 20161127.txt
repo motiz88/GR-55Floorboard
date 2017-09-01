@@ -1,0 +1,398 @@
+ROLAND GR-55 Patch List 
+Sun Nov 27 23:52:37 2016
+
+[U01:1] ext VT-Bass pre 
+[U01:2] Comfortably Numb
+[U01:3] Whole lotta @$#%
+
+[U02:1] FreeBird        
+[U02:2] Bass Chorus     
+[U02:3] Dakota          
+
+[U03:1] Better-Man      
+[U03:2] Super Synth     
+[U03:3] Venus Synth     
+
+[U04:1] Dani California 
+[U04:2] Super Synth     
+[U04:3] bagpipes + bass 
+
+[U05:1] WoWoWoW exp sw  
+[U05:2] Venus Synth     
+[U05:3] Ricknbacker+Rain
+
+[U06:1] General Electric
+[U06:2] bagpipes + bass 
+[U06:3] KillerKillers+VT
+
+[U07:1] Double String Bs
+[U07:2] Super Saw Bass  
+[U07:3] Ultimate Pulse  
+
+[U08:1] Oct Unison Lead 
+[U08:2] M-Man Brass     
+[U08:3] Ambient Sparkle 
+
+[U09:1] Cotton Harp     
+[U09:2] Fat Upright     
+[U09:3] Auto Groove     
+
+[U10:1] Jazz Trio       
+[U10:2] Organ ViolinBass
+[U10:3] Avalon          
+
+[U11:1] Mond MG Lead    
+[U11:2] Bell Sweep Bass 
+[U11:3] Bollywood Stack 
+
+[U12:1] Pipe & Organ    
+[U12:2] Heavy E.Piano   
+[U12:3] Gel Sequence    
+
+[U13:1] Indian Fretless 
+[U13:2] Shaker Synth    
+[U13:3] Seq.Str.Hit     
+
+[U14:1] EP Unison       
+[U14:2] FilterBassSynth 
+[U14:3] Vint Seq.Bass   
+
+[U15:1] Mellow Fretless 
+[U15:2] MM & Fat Poly   
+[U15:3] Techno Sequence 
+
+[U16:1] AnalogBass+Pedal
+[U16:2] FastTrackin'Bass
+[U16:3] Tubular Strings 
+
+[U17:1] OrgBass+PedalSyn
+[U17:2] Soft Bass       
+[U17:3] TIME>TRAVELER   
+
+[U18:1] ModBass+PedalSyn
+[U18:2] BrightJB+SynBass
+[U18:3] STRINGTHEORY    
+
+[U19:1] Deep Ensemble   
+[U19:2] Fat Synth Bass  
+[U19:3] Ambient Organ   
+
+[U20:1] Rock Organic    
+[U20:2] Big Synth       
+[U20:3] RingLoop&E.Piano
+
+[U21:1] Pedal Synth Bend
+[U21:2] DecayFilterBass 
+[U21:3] Unknown Kingdom 
+
+[U22:1] Soft Lead       
+[U22:2] Bass Synth      
+[U22:3] Arrival Of King 
+
+[U23:1] 70s Mond Org    
+[U23:2] Reso Fuzz Bass  
+[U23:3] Ringing Bell    
+
+[U24:1] Flange GR-500   
+[U24:2] ACID CLAV       
+[U24:3] TOKYO LIGHTS    
+
+[U25:1] Solo Cello      
+[U25:2] Space Funk      
+[U25:3] Sad Memory      
+
+[U26:1] Trumpet&Strings 
+[U26:2] Trem E.Piano    
+[U26:3] Wandering Pipe  
+
+[U27:1] OctaPiano       
+[U27:2] Bass + Clav     
+[U27:3] LUNAR LANDING   
+
+[U28:1] Strings&FL Sound
+[U28:2] OctaClavz       
+[U28:3] Techno Opening  
+
+[U29:1] Ska Melody      
+[U29:2] High Strings    
+[U29:3] Inner Journey   
+
+[U30:1] Spacy Jazz Bass 
+[U30:2] Brass Mix       
+[U30:3] HOUSE PARTY     
+
+[U31:1] ext VT-   P-Bass
+[U31:2] ext VT-Bass pre 
+[U31:3] Bass<>Guitar    
+
+[U32:1] WoWoWoW exp sw  
+[U32:2] Super Synth     
+[U32:3] Whole lotta @$#%
+
+[U33:1] ext VT-Bass pre 
+[U33:2] KillerKillers+VT
+[U33:3] Venus Synth     
+
+[U34:1] FreeBird        
+[U34:2] Bohemian like   
+[U34:3] GR-300 bass     
+
+[U35:1] In the Flesh?   
+[U35:2] Comfortably Numb
+[U35:3] Time            
+
+[U36:1] Saints Piano    
+[U36:2] Prog Experiance 
+[U36:3] Modern  P-Bass  
+
+[U37:1] Saxy Bass       
+[U37:2] Rhds Piano Bass 
+[U37:3] WINE-N-BASSDELAY
+
+[U38:1] Fat SynthBass 8+
+[U38:2] Analog-y        
+[U38:3] AEROPLANESUSTAIN
+
+[U39:1] SINE UNISON BASS
+[U39:2] Fat Alpha Bass  
+[U39:3] Space SAW       
+
+[U40:1] COOL JUMP BASS  
+[U40:2] Synth Reso Bass 
+[U40:3] Gtr Hi/Bass Lo  
+
+[U41:1] LOW OCT SAW     
+[U41:2] MONSTER BASS SAW
+[U41:3] CompuRhythm     
+
+[U42:1] Heavy Dst Organ 
+[U42:2] SlapSynthCTL+EXP
+[U42:3] S&H Groove/CTL  
+
+[U43:1] Double String Bs
+[U43:2] Super Saw Bass  
+[U43:3] Ultimate Pulse  
+
+[U44:1] Oct Unison Lead 
+[U44:2] M-Man Brass     
+[U44:3] Ambient Sparkle 
+
+[U45:1] Cotton Harp     
+[U45:2] Fat Upright     
+[U45:3] Auto Groove     
+
+[U46:1] Jazz Trio       
+[U46:2] Organ ViolinBass
+[U46:3] Avalon          
+
+[U47:1] Mond MG Lead    
+[U47:2] Bell Sweep Bass 
+[U47:3] Bollywood Stack 
+
+[U48:1] Pipe & Organ    
+[U48:2] Heavy E.Piano   
+[U48:3] Gel Sequence    
+
+[U49:1] Indian Fretless 
+[U49:2] Shaker Synth    
+[U49:3] Seq.Str.Hit     
+
+[U50:1] EP Unison       
+[U50:2] FilterBassSynth 
+[U50:3] Vint Seq.Bass   
+
+[U51:1] Mellow Fretless 
+[U51:2] MM & Fat Poly   
+[U51:3] Techno Sequence 
+
+[U52:1] AnalogBass+Pedal
+[U52:2] FastTrackin'Bass
+[U52:3] Tubular Strings 
+
+[U53:1] OrgBass+PedalSyn
+[U53:2] Soft Bass       
+[U53:3] TIME>TRAVELER   
+
+[U54:1] ModBass+PedalSyn
+[U54:2] BrightJB+SynBass
+[U54:3] STRINGTHEORY    
+
+[U55:1] Deep Ensemble   
+[U55:2] Fat Synth Bass  
+[U55:3] Ambient Organ   
+
+[U56:1] Rock Organic    
+[U56:2] Big Synth       
+[U56:3] RingLoop&E.Piano
+
+[U57:1] Pedal Synth Bend
+[U57:2] DecayFilterBass 
+[U57:3] Unknown Kingdom 
+
+[U58:1] Soft Lead       
+[U58:2] Bass Synth      
+[U58:3] Arrival Of King 
+
+[U59:1] 70s Mond Org    
+[U59:2] Reso Fuzz Bass  
+[U59:3] Ringing Bell    
+
+[U60:1] Flange GR-500   
+[U60:2] ACID CLAV       
+[U60:3] TOKYO LIGHTS    
+
+[U61:1] Solo Cello      
+[U61:2] Space Funk      
+[U61:3] Sad Memory      
+
+[U62:1] Trumpet&Strings 
+[U62:2] Trem E.Piano    
+[U62:3] Wandering Pipe  
+
+[U63:1] OctaPiano       
+[U63:2] Bass + Clav     
+[U63:3] LUNAR LANDING   
+
+[U64:1] Strings&FL Sound
+[U64:2] OctaClavz       
+[U64:3] Techno Opening  
+
+[U65:1] Ska Melody      
+[U65:2] High Strings    
+[U65:3] Inner Journey   
+
+[U66:1] Spacy Jazz Bass 
+[U66:2] Brass Mix       
+[U66:3] HOUSE PARTY     
+
+[U67:1] Delayed Nylon   
+[U67:2] Organ Bass      
+[U67:3] Compu-Strings   
+
+[U68:1] Experience      
+[U68:2] Octave M-Man    
+[U68:3] 5th & Groovin'  
+
+[U69:1] Extreme Dist    
+[U69:2] P-Bass Crunch   
+[U69:3] Shamisen Beat   
+
+[U70:1] for Normal PU L1
+[U70:2] for Normal PU R1
+[U70:3] for Normal PU O1
+
+[U71:1] for Normal PU L2
+[U71:2] for Normal PU R2
+[U71:3] for Normal PU O2
+
+[U72:1] for Normal PU L3
+[U72:2] for Normal PU R3
+[U72:3] for Normal PU O3
+
+[U73:1] Saxy Bass       
+[U73:2] Rhds Piano Bass 
+[U73:3] WINE-N-BASSDELAY
+
+[U74:1] Fat SynthBass 8+
+[U74:2] Analog-y        
+[U74:3] AEROPLANESUSTAIN
+
+[U75:1] SINE UNISON BASS
+[U75:2] Fat Alpha Bass  
+[U75:3] Space SAW       
+
+[U76:1] COOL JUMP BASS  
+[U76:2] Synth Reso Bass 
+[U76:3] Gtr Hi/Bass Lo  
+
+[U77:1] LOW OCT SAW     
+[U77:2] MONSTER BASS SAW
+[U77:3] CompuRhythm     
+
+[U78:1] Heavy Dst Organ 
+[U78:2] SlapSynthCTL+EXP
+[U78:3] S&H Groove/CTL  
+
+[U79:1] Double String Bs
+[U79:2] Super Saw Bass  
+[U79:3] Ultimate Pulse  
+
+[U80:1] Oct Unison Lead 
+[U80:2] M-Man Brass     
+[U80:3] Ambient Sparkle 
+
+[U81:1] Cotton Harp     
+[U81:2] Fat Upright     
+[U81:3] Auto Groove     
+
+[U82:1] Jazz Trio       
+[U82:2] Organ ViolinBass
+[U82:3] Avalon          
+
+[U83:1] Mond MG Lead    
+[U83:2] Bell Sweep Bass 
+[U83:3] Bollywood Stack 
+
+[U84:1] Pipe & Organ    
+[U84:2] Heavy E.Piano   
+[U84:3] Gel Sequence    
+
+[U85:1] Indian Fretless 
+[U85:2] Shaker Synth    
+[U85:3] Seq.Str.Hit     
+
+[U86:1] EP Unison       
+[U86:2] FilterBassSynth 
+[U86:3] Vint Seq.Bass   
+
+[U87:1] Mellow Fretless 
+[U87:2] MM & Fat Poly   
+[U87:3] Techno Sequence 
+
+[U88:1] AnalogBass+Pedal
+[U88:2] FastTrackin'Bass
+[U88:3] Tubular Strings 
+
+[U89:1] OrgBass+PedalSyn
+[U89:2] Soft Bass       
+[U89:3] TIME>TRAVELER   
+
+[U90:1] ModBass+PedalSyn
+[U90:2] BrightJB+SynBass
+[U90:3] STRINGTHEORY    
+
+[U91:1] Deep Ensemble   
+[U91:2] Fat Synth Bass  
+[U91:3] Ambient Organ   
+
+[U92:1] Rock Organic    
+[U92:2] Big Synth       
+[U92:3] RingLoop&E.Piano
+
+[U93:1] Pedal Synth Bend
+[U93:2] DecayFilterBass 
+[U93:3] Unknown Kingdom 
+
+[U94:1] Soft Lead       
+[U94:2] Bass Synth      
+[U94:3] Arrival Of King 
+
+[U95:1] 70s Mond Org    
+[U95:2] Reso Fuzz Bass  
+[U95:3] Ringing Bell    
+
+[U96:1] Flange GR-500   
+[U96:2] ACID CLAV       
+[U96:3] TOKYO LIGHTS    
+
+[U97:1] Solo Cello      
+[U97:2] Space Funk      
+[U97:3] Sad Memory      
+
+[U98:1] Trumpet&Strings 
+[U98:2] Trem E.Piano    
+[U98:3] Super Synth     
+
+[U99:1] Dani California 
+[U99:2] FreeBird        
+[U99:3] J Bass + gat out
