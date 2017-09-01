@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55B FloorBoard".
@@ -35,7 +35,7 @@ customTargetListMenu::customTargetListMenu(QWidget *parent,
     bool ok;
     const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
 
-    QFont Sfont( "Arial", 7*ratio, QFont::Bold);
+    QFont Sfont( "Arial", 9*ratio, QFont::Bold);
 
     this->controlListComboBox = new customComboBox(this);
     this->controlListComboBox->setObjectName("smallcombo");
@@ -191,7 +191,7 @@ void customTargetListMenu::setComboBox()
     };
 
     itemTotal = itemTotal + itemcount;
-    this->controlListComboBox->setFixedWidth(250*ratio);
+    this->controlListComboBox->setFixedWidth(300*ratio);
     this->controlListComboBox->setFixedHeight(15*ratio);
     this->controlListComboBox->setEditable(false);
     this->controlListComboBox->setFrame(false);

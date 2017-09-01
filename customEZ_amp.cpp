@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag.
 ** All rights reserved.
 ** This file is part of "GT-100B Fx FloorBoard".
@@ -24,6 +24,7 @@
 #include "customEZ_amp.h"
 #include "SysxIO.h"
 #include "globalVariables.h"
+#include "Preferences.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QGraphicsPathItem>
@@ -72,8 +73,12 @@ int customEZ_amp::X_axis (void) const
 
 void customEZ_amp::paintEvent ( QPaintEvent *pPaintEvent )
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     QPixmap image = QPixmap(":images/EZ_Tone.png");
-    QRectF target(0.0, 0.0, image.width(), image.height());
+    QRectF target(0.0, 0.0, image.width()*ratio, image.height()*ratio);
     QRectF source(0.0, 0.0, image.width(), image.height());
 
     QPainter painter(this);
@@ -81,8 +86,8 @@ void customEZ_amp::paintEvent ( QPaintEvent *pPaintEvent )
 
     int h   =     height();
     int w   =     width();
-    int ver =     20+(100-m_iy_axis)*260/100;
-    int hor  =    20+(m_ix_axis*260/100);
+    int ver =     (20*ratio)+(100-m_iy_axis)*260/100*ratio;
+    int hor  =    (20*ratio)+(m_ix_axis*260/100)*ratio;
 
     QLinearGradient grad(0, 0, w << 1, h << 1);
     grad.setColorAt(0.0f, Qt::yellow);
@@ -168,8 +173,12 @@ void customEZ_amp::mouseReleaseEvent ( QMouseEvent *pMouseEvent )
 // Draw rectangular point.
 QRect customEZ_amp::nodeRect ( int iNode ) const
 {
+    Preferences *preferences = Preferences::Instance();
+    bool ok;
+    const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
+
     const QPoint& pos = poly.at(8);
-    return QRect(pos.x() - 8, pos.y() - 8, 16, 16);
+    return QRect(pos.x() - 8*ratio, pos.y() - 8*ratio, 16*ratio, 16*ratio);
 }
 
 int customEZ_amp::nodeIndex ( const QPoint& pos ) const

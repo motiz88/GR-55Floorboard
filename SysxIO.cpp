@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -458,19 +458,19 @@ int SysxIO::getSourceValue(QString area, QString hex1, QString hex2, QString hex
         if (area != "System")  { area = "Structure"; };
 
 
-    QList<QString> items = this->getSourceItems(area, hex1, hex2);
-    if(midiTable->isData(area, hex1, hex2, hex3))
-    {
-        int maxRange = QString("7F").toInt(&ok, 16) + 1;
-        int listindex = sysxDataOffset + QString(hex3).toInt(&ok, 16);
-        int valueData1 = items.at(listindex).toInt(&ok, 16);
-        int valueData2 = items.at(listindex + 1).toInt(&ok, 16);
-        value = (valueData1 * maxRange) + valueData2;
-    }
-    else
-    {
-        value = items.at(sysxDataOffset + QString(hex3).toInt(&ok, 16)).toInt(&ok, 16);
-    };
+        QList<QString> items = this->getSourceItems(area, hex1, hex2);
+        if(midiTable->isData(area, hex1, hex2, hex3))
+        {
+            int maxRange = QString("7F").toInt(&ok, 16) + 1;
+            int listindex = sysxDataOffset + QString(hex3).toInt(&ok, 16);
+            int valueData1 = items.at(listindex).toInt(&ok, 16);
+            int valueData2 = items.at(listindex + 1).toInt(&ok, 16);
+            value = (valueData1 * maxRange) + valueData2;
+        }
+        else
+        {
+            value = items.at(sysxDataOffset + QString(hex3).toInt(&ok, 16)).toInt(&ok, 16);
+        };
     };
     return value;
 }
@@ -741,15 +741,18 @@ void SysxIO::sendMidi(QString midiMsg)
 {
     if(isConnected())
     {
-       		Preferences *preferences = Preferences::Instance(); bool ok;
-		int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
-		
-		midiIO *midi = new midiIO();
-		QList<QString> midiOutDevices = midi->getMidiOutDevices();
-	  if ( midiOutDevices.contains("GR-55") )
-    {
-      midiOutPort = midiOutDevices.indexOf("GR-55");
-    }; 
+        Preferences *preferences = Preferences::Instance(); bool ok;
+        int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
+
+        midiIO *midi = new midiIO();
+        if(preferences->getPreferences("Midi", "Device", "bool")=="true")
+        {
+            QList<QString> midiOutDevices = midi->getMidiOutDevices();
+            if ( midiOutDevices.contains("GR-55") )
+            {
+                midiOutPort = midiOutDevices.indexOf("GR-55");
+            };
+        };
         midi->sendMidi(midiMsg, midiOutPort);
         /*DeBugGING OUTPUT */
         if(preferences->getPreferences("Midi", "DBug", "bool")=="true")
@@ -819,20 +822,23 @@ void SysxIO::checkPatchChange(QString name)
 void SysxIO::sendSysx(QString sysxMsg)
 {
     Preferences *preferences = Preferences::Instance();  bool ok;
-	int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
-	int midiInPort = preferences->getPreferences("Midi", "MidiIn", "device").toInt(&ok, 10);	// Get midi in device from preferences.
-	
-	midiIO *midi = new midiIO();
-    /*QList<QString> midiInDevices = midi->getMidiInDevices();
-	  QList<QString> midiOutDevices = midi->getMidiOutDevices();
-      if ( midiInDevices.contains("GR-55") )
+    int midiOutPort = preferences->getPreferences("Midi", "MidiOut", "device").toInt(&ok, 10);	// Get midi out device from preferences.
+    int midiInPort = preferences->getPreferences("Midi", "MidiIn", "device").toInt(&ok, 10);	// Get midi in device from preferences.
+
+    midiIO *midi = new midiIO();
+    if(preferences->getPreferences("Midi", "Device", "bool")=="true")
     {
-      midiInPort = midiInDevices.indexOf("GR-55");
+        QList<QString> midiInDevices = midi->getMidiInDevices();
+        QList<QString> midiOutDevices = midi->getMidiOutDevices();
+        if ( midiInDevices.contains("GR-55") )
+        {
+            midiInPort = midiInDevices.indexOf("GR-55");
+        };
+        if ( midiOutDevices.contains("GR-55") )
+        {
+            midiOutPort = midiOutDevices.indexOf("GR-55");
+        };
     };
-	  if ( midiOutDevices.contains("GR-55") )
-    {
-      midiOutPort = midiOutDevices.indexOf("GR-55");
-    };  */
     midi->sendSysxMsg(sysxMsg, midiOutPort, midiInPort);
 }
 
@@ -1091,7 +1097,7 @@ void SysxIO::systemReply(QString replyMsg)
             msgText.append(tr("and the GR-55 system data might not be in sync<br>"));
             msgBox->setText(msgText);
             msgBox->show();
-             QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
+            QTimer::singleShot(3000, msgBox, SLOT(deleteLater()));
         };
     };
     emit setStatusMessage(tr("Ready"));

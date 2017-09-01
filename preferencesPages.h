@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -47,6 +47,7 @@ public:
     MidiPage(QWidget *parent = 0);
     QComboBox* midiInCombo;
     QComboBox* midiOutCombo;
+    QCheckBox* autoCheckBox;
     QCheckBox* dBugCheckBox;
     QSpinBox* midiTxChSpinBox;
 };

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007~2015 Colin Willcocks.
+** Copyright (C) 2007~2016 Colin Willcocks.
 ** Copyright (C) 2005~2007 Uco Mesdag. 
 ** All rights reserved.
 ** This file is part of "GR-55 FloorBoard".
@@ -72,9 +72,12 @@ MidiPage::MidiPage(QWidget *parent)
     QString midiInDevice = preferences->getPreferences("Midi", "MidiIn", "device");
     QString midiOutDevice = preferences->getPreferences("Midi", "MidiOut", "device");
     QString dBugScreen = preferences->getPreferences("Midi", "DBug", "bool");
-    QString midiTxChSet = preferences->getPreferences("Midi", "TxCh", "set");
-    QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
+    QString device = preferences->getPreferences("Midi", "Device", "bool");
+    //QString midiTxChSet = preferences->getPreferences("Midi", "TxCh", "set");
+    //QString midiDelaySet = preferences->getPreferences("Midi", "Delay", "set");
 
+    int midiInDeviceID = midiInDevice.toInt(&ok, 10);
+    int midiOutDeviceID = midiOutDevice.toInt(&ok, 10);
     QList<QString> midiInDevices = midi->getMidiInDevices();
     QList<QString> midiOutDevices = midi->getMidiOutDevices();
 
@@ -85,50 +88,61 @@ MidiPage::MidiPage(QWidget *parent)
     QLabel *midiOutLabel = new QLabel(QObject::tr("Midi out:"));
 
     QComboBox *midiInCombo = new QComboBox;
-    this->midiInCombo = midiInCombo;
-    midiInCombo->addItem(QObject::tr("Select midi-in device"));
-    id = midiInDevices.count();
-    midiInCombo->setCurrentIndex(0);
-
-    for(int x=0; x<id; ++x)
-    {
-        midiInCombo->addItem(midiInDevices.at(x).toLatin1());
-        /*QString item = midiInDevices.at(x).toLatin1();
-        if ( item == midiInDevice )
+        this->midiInCombo = midiInCombo;
+        midiInCombo->addItem(QObject::tr("Select midi-in device"));
+        id = 0;
+        for (QList<QString>::iterator dev = midiInDevices.begin(); dev != midiInDevices.end(); ++dev)
         {
-            midiInCombo->setCurrentIndex(x+1);
-        };*/
-    };
-    int device_count = midiInDevice.toInt(&ok, 10)+1;
-    if(device_count>id) midiInCombo->addItem("last used device missing");
-    midiInCombo->setCurrentIndex(device_count);
-
-    QComboBox *midiOutCombo = new QComboBox;
-    this->midiOutCombo = midiOutCombo;
-    midiOutCombo->addItem(QObject::tr("Select midi-out device"));
-    id = midiOutDevices.count();
-    midiOutCombo->setCurrentIndex(0);
-
-    for(int x=0; x<id; ++x)
-    {
-        midiOutCombo->addItem(midiOutDevices.at(x).toLatin1());
-       /* QString item = midiOutDevices.at(x).toLatin1();
-        if ( item == midiOutDevice )
+            QString str(*dev);
+            midiInCombo->addItem(str.toLatin1().data());
+            id++;
+        };
+        if(!midiInDevice.isEmpty())
         {
-            midiOutCombo->setCurrentIndex(x+1);
-        };*/
+            midiInCombo->setCurrentIndex(midiInDeviceID + 1); // +1 because there is a default entry at 0
+        };
+        if ( midiInDevices.contains("GR-55")  && device=="true")
+        {
+            int inputDevice = midiInDevices.indexOf("GR-55") + 1;
+            midiInCombo->setCurrentIndex(inputDevice);
+        };
+
+        QComboBox *midiOutCombo = new QComboBox;
+        this->midiOutCombo = midiOutCombo;
+        midiOutCombo->addItem(QObject::tr("Select midi-out device"));
+        id = 0;
+        for (QList<QString>::iterator dev = midiOutDevices.begin(); dev != midiOutDevices.end(); ++dev)
+        {
+            QString str(*dev);
+            midiOutCombo->addItem(str.toLatin1().data());
+            id++;
+        };
+        if(!midiOutDevice.isEmpty())
+        {
+            midiOutCombo->setCurrentIndex(midiOutDeviceID + 1); // +1 because there is a default entry at 0
+        };
+        if ( midiOutDevices.contains("GR-55") && device=="true" )
+        {
+            int outputDevice = midiOutDevices.indexOf("GR-55") + 1;
+            midiOutCombo->setCurrentIndex(outputDevice);
+        };
+
+    QCheckBox *autoCheckBox = new QCheckBox(QObject::tr("Auto select GR-55 USB"));
+    this->autoCheckBox = autoCheckBox;
+    if(device=="true")
+    {
+        autoCheckBox->setChecked(true);
     };
-    device_count = midiOutDevice.toInt(&ok, 10)+1;
-    if(device_count>id) midiOutCombo->addItem("last used device missing");
-    midiOutCombo->setCurrentIndex(device_count);
 
     QVBoxLayout *midiLabelLayout = new QVBoxLayout;
     midiLabelLayout->addWidget(midiInLabel);
     midiLabelLayout->addWidget(midiOutLabel);
+    midiLabelLayout->addStretch();
 
     QVBoxLayout *midiComboLayout = new QVBoxLayout;
     midiComboLayout->addWidget(midiInCombo);
     midiComboLayout->addWidget(midiOutCombo);
+    midiComboLayout->addWidget(autoCheckBox);
 
     QHBoxLayout *midiSelectLayout = new QHBoxLayout;
     midiSelectLayout->addLayout(midiLabelLayout);
@@ -145,14 +159,13 @@ MidiPage::MidiPage(QWidget *parent)
 
 
 
-    QGroupBox *dBugScreenGroup = new QGroupBox(QObject::tr("Advanced settings"));
+    QGroupBox *advancedSettingsGroup = new QGroupBox(QObject::tr("Advanced settings"));
 
-    QLabel *dBugDescriptionLabel = new QLabel(QObject::tr("Debug mode."));
     QLabel *midiTxChDescriptionLabel = new QLabel(tr("Midi Tx Channel:"));
-    QLabel *midiDelayDescriptionLabel = new QLabel(tr("Realtime edit send rate."));
 
     QCheckBox *dBugCheckBox = new QCheckBox(QObject::tr("deBug Mode"));
     QSpinBox *midiTxChSpinBox = new QSpinBox;
+    midiTxChSpinBox->setMaximumWidth(100);
 
     this->dBugCheckBox = dBugCheckBox;
     if(dBugScreen=="true")
@@ -166,30 +179,21 @@ MidiPage::MidiPage(QWidget *parent)
     midiTxChSpinBox->setRange(1, 16);
     midiTxChSpinBox->setPrefix("Channel ");
 
-    QVBoxLayout *dBugLabelLayout = new QVBoxLayout;
-    dBugLabelLayout->addWidget(dBugDescriptionLabel);
-    dBugLabelLayout->addWidget(midiTxChDescriptionLabel);
-    dBugLabelLayout->addWidget(midiDelayDescriptionLabel);
+    QVBoxLayout *advancedBoxLayout = new QVBoxLayout;
+    advancedBoxLayout->addWidget(midiTxChDescriptionLabel);
+    advancedBoxLayout->addWidget(midiTxChSpinBox);
+    advancedBoxLayout->addSpacing(20);
+    advancedBoxLayout->addWidget(dBugCheckBox);
 
-    QVBoxLayout *dBugTimeBoxLayout = new QVBoxLayout;
-    dBugTimeBoxLayout->addWidget(dBugCheckBox);
-    dBugTimeBoxLayout->addWidget(midiTxChSpinBox);
-    //dBugTimeBoxLayout->addWidget(midiDelaySpinBox);
+    QHBoxLayout *advancedLayout = new QHBoxLayout;
+    advancedLayout->addLayout(advancedBoxLayout);
 
-    QHBoxLayout *dBugSelectLayout = new QHBoxLayout;
-    dBugSelectLayout->addLayout(dBugLabelLayout);
-    dBugSelectLayout->addLayout(dBugTimeBoxLayout);
-
-    QVBoxLayout *dBugScreenLayout = new QVBoxLayout;
-    dBugScreenLayout->addWidget(dBugDescriptionLabel);
-    dBugScreenLayout->addLayout(dBugSelectLayout);
-
-    dBugScreenGroup->setLayout(dBugScreenLayout);
+    advancedSettingsGroup->setLayout(advancedLayout);
 
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(midiGroup);
-    mainLayout->addWidget(dBugScreenGroup);
+    mainLayout->addWidget(advancedSettingsGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -225,10 +229,10 @@ WindowPage::WindowPage(QWidget *parent)
     bool ok;
     this->ratioSpinBox = ratioSpinBox;
     const double ratio = preferences->getPreferences("Window", "Scale", "ratio").toDouble(&ok);
-    ratioSpinBox->setDecimals(2);
+    ratioSpinBox->setDecimals(1);
     ratioSpinBox->setValue(ratio);
     ratioSpinBox->setRange(0.5, 10.0);
-    ratioSpinBox->setSingleStep(0.01);
+    ratioSpinBox->setSingleStep(0.1);
     ratioSpinBox->setPrefix("Resizing Scale = ");
     ratioSpinBox->setSuffix(QObject::tr(" :1"));
 

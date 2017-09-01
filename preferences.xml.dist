@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by x (x) -->
 <!-- Preferences of the GR-55 FloorBoard application. -->
 <Preferences>
 	<General>
-		<Application version="20150417"/>
+		<Application version="20170409"/>
 		<Donate url=""/>
 		<Files dir=""/>
 		<Help url="http:GR-55-Help-HTML/GR-55_HTML_Help.html"/>
@@ -19,6 +18,7 @@
 		<BulkFinish patch="297"/>
 		<BulkStart patch="1"/>
 		<DBug bool="false"/>
+    <Device bool="true"/>
 		<Delay set="20"/>
 		<MidiIn device="0"/>
 		<MidiOut device="0"/>
@@ -36,6 +36,6 @@
 		<Single bool="true"/>
 		<Size height="690" width="1235" minwidth="1014" minheight="690"/>
 		<Splash bool="true"/>
-		<AutoScale bool="true"/>
+		<AutoScale bool="false"/>
 	</Window>
 </Preferences>

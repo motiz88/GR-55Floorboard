@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## Copyright (C) 2007~2015 Colin Willcocks.
+## Copyright (C) 2007~2016 Colin Willcocks.
 ## Copyright (C) 2005~2007 Uco Mesdag. 
 ## All rights reserved.
 ##
@@ -62,9 +62,9 @@ QT += printsupport
 
 #Platform dependent file(s)
 win32{
-        exists("C:/SDK/Lib/WinMM.Lib")
+        exists("C:\Qt\grfloorboard\windows\WinMM.Lib")
                 {	# <-- Change the path to WinMM.Lib here!
-                    LIBS += C:/SDK/Lib/WinMM.Lib	# <-- Change the path here also!
+                    LIBS += C:\Qt\grfloorboard\windows\WinMM.Lib	# <-- Change the path here also!
                 }
 	message(Including Windows specific headers and sources...)
 }
@@ -137,5 +137,14 @@ include(GR-55FloorBoard.pri)
 win32:RC_FILE = GR-55FloorBoard.rc
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+DISTFILES += \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/AndroidManifest.xml \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew \
+    android/gradlew.bat
 
 

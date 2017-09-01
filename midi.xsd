@@ -2672,7 +2672,6 @@
 						<xs:enumeration value="Bass Amp with horn"/>
 						<xs:enumeration value="Bass Mode"/>
 						<xs:enumeration value="Bass Mode - GK setup"/>
-						<xs:enumeration value="Bass Mode - Midi Program Table"/>
 						<xs:enumeration value="Bi-Phase"/>
 						<xs:enumeration value="Blues OD"/>
 						<xs:enumeration value="Both"/>
@@ -2689,6 +2688,7 @@
 						<xs:enumeration value="CHORUS BYPASS Send"/>
 						<xs:enumeration value="CHORUS Depth"/>
 						<xs:enumeration value="CHORUS Effect Level"/>
+						<xs:enumeration value="CHORUS Effect Switch"/>
 						<xs:enumeration value="CHORUS MFX Send"/>
 						<xs:enumeration value="CHORUS MOD Send"/>
 						<xs:enumeration value="CHORUS Rate"/>
@@ -2718,6 +2718,7 @@
 						<xs:enumeration value="D-Modal"/>
 						<xs:enumeration value="DELAY BYPASS Send"/>
 						<xs:enumeration value="DELAY Effect Level"/>
+						<xs:enumeration value="DELAY Effect Switch"/>
 						<xs:enumeration value="DELAY Feedback"/>
 						<xs:enumeration value="DELAY MFX Send"/>
 						<xs:enumeration value="DELAY MOD Send"/>
@@ -2759,6 +2760,7 @@
 						<xs:enumeration value="E.Guitar-Telecaster"/>
 						<xs:enumeration value="EOX"/>
 						<xs:enumeration value="EQ Character"/>
+						<xs:enumeration value="EQ Effect Switch"/>
 						<xs:enumeration value="EQ High Cut"/>
 						<xs:enumeration value="EQ High Gain"/>
 						<xs:enumeration value="EQ High-Mid Frequency"/>
@@ -2784,7 +2786,6 @@
 						<xs:enumeration value="EXP1 PDL On Mid"/>
 						<xs:enumeration value="EZ Amp and Cabinet"/>
 						<xs:enumeration value="EZ Patch Style"/>
-						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="Electric Bass"/>
 						<xs:enumeration value="Electric Guitar"/>
@@ -2954,7 +2955,6 @@
 						<xs:enumeration value="Guitar Mode - Lead 40:1"/>
 						<xs:enumeration value="Guitar Mode - Lead 40:2"/>
 						<xs:enumeration value="Guitar Mode - Lead 40:3"/>
-						<xs:enumeration value="Guitar Mode - Midi Program Table"/>
 						<xs:enumeration value="Guitar Mode - Other 01:1"/>
 						<xs:enumeration value="Guitar Mode - Other 01:2"/>
 						<xs:enumeration value="Guitar Mode - Other 01:3"/>
@@ -3521,6 +3521,7 @@
 						<xs:enumeration value="MFX EQ Mid 2 Frequency"/>
 						<xs:enumeration value="MFX EQ Mid 2 Gain"/>
 						<xs:enumeration value="MFX EQ Mid 2 Q"/>
+						<xs:enumeration value="MFX Effect Switch"/>
 						<xs:enumeration value="MFX FILTER Attack"/>
 						<xs:enumeration value="MFX FILTER Cutoff"/>
 						<xs:enumeration value="MFX FILTER Depth"/>
@@ -3632,7 +3633,6 @@
 						<xs:enumeration value="MFX STEP-FLANGER Rate"/>
 						<xs:enumeration value="MFX STEP-FLANGER Step Rate"/>
 						<xs:enumeration value="MFX Sw"/>
-						<xs:enumeration value="MFX Switch"/>
 						<xs:enumeration value="MFX TIME DELAY Acceleration"/>
 						<xs:enumeration value="MFX TIME DELAY Balance"/>
 						<xs:enumeration value="MFX TIME DELAY Delay Time"/>
@@ -4314,6 +4314,7 @@
 						<xs:enumeration value="R 9"/>
 						<xs:enumeration value="REVERB BYPASS Send"/>
 						<xs:enumeration value="REVERB Effect Level"/>
+						<xs:enumeration value="REVERB Effect Switch"/>
 						<xs:enumeration value="REVERB High Cut"/>
 						<xs:enumeration value="REVERB MFX Send"/>
 						<xs:enumeration value="REVERB MOD Send"/>
@@ -6031,7 +6032,6 @@
 						<xs:enumeration value="Bass Amp with horn"/>
 						<xs:enumeration value="Bass Mode"/>
 						<xs:enumeration value="Bass Mode - GK setup"/>
-						<xs:enumeration value="Bass Mode - Midi Program Table"/>
 						<xs:enumeration value="BassFluteSaxTrio"/>
 						<xs:enumeration value="Beat Provider"/>
 						<xs:enumeration value="Bell Clean"/>
@@ -6178,7 +6178,6 @@
 						<xs:enumeration value="EXP: TONE VOLUME"/>
 						<xs:enumeration value="EZ Amp and Cabinet"/>
 						<xs:enumeration value="EZ Patch Style"/>
-						<xs:enumeration value="EZ Synth"/>
 						<xs:enumeration value="EZ-Distortion"/>
 						<xs:enumeration value="EasternFluteGT"/>
 						<xs:enumeration value="Edge Brass"/>
@@ -6285,7 +6284,6 @@
 						<xs:enumeration value="Guitar Midi Out On"/>
 						<xs:enumeration value="Guitar Mode"/>
 						<xs:enumeration value="Guitar Mode - GK setup"/>
-						<xs:enumeration value="Guitar Mode - Midi Program Table"/>
 						<xs:enumeration value="Guitar+SaxUnison"/>
 						<xs:enumeration value="Guitar/Bass Mode"/>
 						<xs:enumeration value="HI-Gain"/>

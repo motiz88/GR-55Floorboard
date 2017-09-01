@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Preferences of the GR-55 FloorBoard application. -->
+<Preferences>
+	<General>
+		<Application version="20170409"/>
+		<Donate url=""/>
+		<Files dir=""/>
+		<Help url="http:GR-55-Help-HTML/GR-55_HTML_Help.html"/>
+		<Language code="en"/>
+		<Manual url="http://www.roland.com/products/en/_support/om.cfm?PRODUCT=GR-55"/>
+		<Upload url="http://www.vguitarforums.com/smf/index.php"/>
+		<Webpage url="http://sourceforge.net/projects/grfloorboard/"/>
+	</General>
+	<Language>
+		<Locale select="0"/>
+	</Language>
+	<Midi>
+		<BulkFinish patch="297"/>
+		<BulkStart patch="1"/>
+		<DBug bool="false"/>
+		<Delay set="20"/>
+		<Device bool="true"/>
+		<MidiIn device="0"/>
+		<MidiOut device="0"/>
+		<TxCh set="1"/>
+	</Midi>
+	<Scheme>
+		<Colour select="0"/>
+		<Style select="1"/>
+	</Scheme>
+	<Window>
+		<AutoScale bool="false"/>
+		<Collapsed bool="true" width="1235" defaultwidth="1235"/>
+		<Position x="4" y="-6"/>
+		<Restore sidepanel="true" window="true"/>
+		<Scale ratio="1.0"/>
+		<Single bool="true"/>
+		<Size height="371" minwidth="1014" minheight="690" width="681"/>
+		<Splash bool="true"/>
+	</Window>
+</Preferences>
