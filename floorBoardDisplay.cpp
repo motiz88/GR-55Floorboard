@@ -1236,6 +1236,9 @@ void floorBoardDisplay::writeToMemory()
 {
     SysxIO *sysxIO = SysxIO::Instance();
 
+    qApp->setOverrideCursor(Qt::WaitCursor);
+    qApp->processEvents();
+
     QString sysxMsg; bool ok;
     QList< QList<QString> > patchData = sysxIO->getFileSource().hex; // Get the loaded patch data.
     emit setStatusSymbol(2);
@@ -1461,6 +1464,7 @@ void floorBoardDisplay::resetDevice(QString sysxMsg)
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
     emit connectedSignal();		// Emit this signal to tell we are still connected and to update the patch names in case they have changed.
     sysxIO->setDeviceReady(true);	// Free the device after finishing interaction.
+    qApp->restoreOverrideCursor ();
 }
 
 void floorBoardDisplay::patchSelectSignal(int bank, int patch)

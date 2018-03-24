@@ -24,6 +24,7 @@
 #ifndef BANKTREELIST_H
 #define BANKTREELIST_H
 
+#include <QtWidgets>
 #include <QWidget>
 #include <QList>
 #include <QTreeWidget>
