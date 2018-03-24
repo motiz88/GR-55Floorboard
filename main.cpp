@@ -31,7 +31,7 @@
 
 int main(int argc, char *argv[])
 {
-    qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("2"));
+    qputenv ("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
     QApplication app(argc, argv);
     app.setOrganizationName("Gumtown");
     app.setApplicationName("GR-55FloorBoard");

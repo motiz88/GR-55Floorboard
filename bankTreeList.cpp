@@ -128,7 +128,7 @@ void bankTreeList::closeChildren(QTreeWidgetItem *item)
 
 void bankTreeList::setOpenItems(QTreeWidgetItem *item)
 {
-    QString type = "root";
+  /*  QString type = "root";
     if(item->childCount() == patchPerBank)
     {
         openPatchTreeItems.append(item);
@@ -319,7 +319,7 @@ void bankTreeList::setOpenItems(QTreeWidgetItem *item)
         {
             openPatchTreeItems.first()->setExpanded(true);//false);
         };
-    };
+    };*/
 }
 
 QTreeWidget* bankTreeList::newTreeList()
@@ -508,7 +508,7 @@ QTreeWidget* bankTreeList::newTreeList()
     newTreeList->setExpanded(newTreeList->model()->index(2, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(3, 0), true);
     newTreeList->setExpanded(newTreeList->model()->index(4, 0), true);
-    //newTreeList->expandAll();
+    newTreeList->expandAll();
     return newTreeList;
 }
 
@@ -1035,7 +1035,10 @@ void bankTreeList::updateTree(QTreeWidgetItem *item)
 * done when a bank is expanded or when we (re)connect to a device.
 *********************************************************************************/
 void bankTreeList::updatePatchNames(QString name)
-{		SysxIO *sysxIO = SysxIO::Instance();
+{
+    SysxIO *sysxIO = SysxIO::Instance();
+    qApp->setOverrideCursor(Qt::WaitCursor);
+    qApp->processEvents();
         if(!name.isEmpty() && sysxIO->isConnected()) //  If not empty we can assume that we did receive a patch name.
         {
             this->currentPatchTreeItems.at(listIndex)->child(itemIndex)->setText(0, name); // Set the patch name of the item in the tree list.
@@ -1088,6 +1091,7 @@ void bankTreeList::updatePatchNames(QString name)
                                     this, SLOT(updatePatchNames(QString)));
                 if(this->systemRequested==false) {QTimer::singleShot(2000, this, SLOT(systemRequest())); };
             };
+   qApp->restoreOverrideCursor ();
 }
 
 void bankTreeList::updateTreeMode()
